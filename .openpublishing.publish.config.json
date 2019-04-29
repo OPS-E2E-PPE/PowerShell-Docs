@@ -47,7 +47,7 @@
             "version": 0
         },
         {
-            "docset_name": "PowerShell_PowerShell-docs_jea",
+            "docset_name": "e2eppe-PowerShell_PowerShell-docs_jea",
             "build_source_folder": "jea",
             "build_output_subfolder": "jea",
             "locale": "en-us",
