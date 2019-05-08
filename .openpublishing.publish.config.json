@@ -74,7 +74,7 @@
     {
       "docset_name": "e2eppe-PowerShell_PowerShell-docs_wmf",
       "build_source_folder": "wmf",
-      "build_output_subfolder": "e2eppe-PowerShell_PowerShell-docs_wmf",
+      "build_output_subfolder": "wmf",
       "locale": "en-us",
       "monikers": [],
       "moniker_ranges": [],
