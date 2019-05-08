@@ -70,11 +70,31 @@
       },
       "build_entry_point": "docs",
       "template_folder": "_themes"
+    },
+    {
+      "docset_name": "e2eppe-PowerShell_PowerShell-docs_wmf",
+      "build_source_folder": "wmf",
+      "build_output_subfolder": "e2eppe-PowerShell_PowerShell-docs_wmf",
+      "locale": "en-us",
+      "monikers": [],
+      "moniker_ranges": [],
+      "open_to_public_contributors": true,
+      "type_mapping": {
+        "Conceptual": "Content"
+      },
+      "build_entry_point": "docs",
+      "template_folder": "_themes"
     }
   ],
   "notification_subscribers": [],
   "sync_notification_subscribers": [],
-  "branches_to_filter": ["master-sync-work","live-sync-work","repo_sync_novalidation_prtest_branch","repo_sync_novalidation_live_branch","repo_sync_novalidation_master_branch"],
+  "branches_to_filter": [
+    "master-sync-work",
+    "live-sync-work",
+    "repo_sync_novalidation_prtest_branch",
+    "repo_sync_novalidation_live_branch",
+    "repo_sync_novalidation_master_branch"
+  ],
   "git_repository_url_open_to_public_contributors": "https://github.com/MicrosoftDocs/PowerShell-Docs",
   "git_repository_branch_open_to_public_contributors": "staging",
   "skip_source_output_uploading": false,
