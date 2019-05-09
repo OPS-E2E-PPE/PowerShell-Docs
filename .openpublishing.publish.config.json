@@ -104,8 +104,7 @@
             "version": 0
         }
     ],
-    "notification_subscribers": [],
-    "enable_custom_metadata_validation": false,    
+    "notification_subscribers": [],  
     "sync_notification_subscribers": [],
     "branches_to_filter": ["master-sync-work","live-sync-work","repo_sync_novalidation_prtest_branch","repo_sync_novalidation_live_branch","repo_sync_novalidation_master_branch"],
     "git_repository_url_open_to_public_contributors": "https://github.com/MicrosoftDocs/PowerShell-Docs",
