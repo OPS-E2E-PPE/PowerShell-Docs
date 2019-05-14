@@ -4,7 +4,7 @@ One of the easiest ways to contribute to PowerShell is by helping to write and e
 All of our documentation hosted on GitHub is written using *Markdown*. Markdown is a lightweight
 markup language with plain text formatting syntax. Markdown forms the basis of our documentation's
 conceptual authoring language. Creating new articles is as easy as writing a simple text file by
-using your favorite text editor.
+using your favorite text editor.a
 
 ## Markdown editors
 
