@@ -18,7 +18,7 @@
             "template_folder": "_themes"
         },
         {
-            "docset_name": "e2eppe-PowerShell_PowerShell-docs_dsc",
+            "docset_name": "PowerShell_PowerShell-docs_dsc",
             "build_source_folder": "dsc",
             "build_output_subfolder": "dsc",
             "locale": "en-us",
@@ -48,7 +48,7 @@
             "version": 0
         },
         {
-            "docset_name": "e2eppe-PowerShell_PowerShell-docs_jea",
+            "docset_name": "PowerShell_PowerShell-docs_jea",
             "build_source_folder": "jea",
             "build_output_subfolder": "jea",
             "locale": "en-us",
@@ -90,7 +90,7 @@
             ]
         },
         {
-            "docset_name": "e2eppe-PowerShell_PowerShell-docs_wmf",
+            "docset_name": "e2eppe2-PowerShell_PowerShell-docs_wmf",
             "build_source_folder": "wmf",
             "build_output_subfolder": "wmf",
             "locale": "en-us",
