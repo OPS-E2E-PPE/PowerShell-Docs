@@ -114,7 +114,6 @@
     "need_preview_pull_request": true,
     "need_generate_pdf_url_template": false,
     "contribution_branch_mappings": {},
-    "branches_to_filter": [],
     "branch_target_mapping": {},
     "targets": {},
     "dependent_repositories": [{
