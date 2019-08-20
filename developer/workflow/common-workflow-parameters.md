@@ -32,4 +32,5 @@ The common workflow parameters are grouped into several categories as follows.
 |PSAuthentication|[System.Management.Automation.Runspaces.Authenticationmechanism](/dotnet/api/System.Management.Automation.Runspaces.AuthenticationMechanism)|A value of the [System.Management.Automation.Runspaces.Authenticationmechanism](/dotnet/api/System.Management.Automation.Runspaces.AuthenticationMechanism) enumeration that specifies the authentication mechanism used to authenticate the user's credentials.|Yes|Yes|Yes|
 |PSCertificateThumbprint|String|The digital public key certificate (X509) of a user account that has permission to run the workflow.|Yes|Yes|Yes|
 
+edit for testing
 ### Behavior Parameters
