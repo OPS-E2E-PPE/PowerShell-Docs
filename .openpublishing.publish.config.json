@@ -144,5 +144,9 @@
     "notification_subscribers": [],
     "skip_source_output_uploading": false,
     "sync_notification_subscribers": [],
-    "targets": {}
+    "targets": {},
+    "docs_build_engine":
+    {
+    "name": "docfx_v3"
+    }
 }
