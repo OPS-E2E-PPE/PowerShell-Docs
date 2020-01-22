@@ -1,7 +1,6 @@
 {
   "build_entry_point": "docs",
-  "docsets_to_publish": [
-    {
+  "docsets_to_publish": [{
       "docset_name": "e2eppe-PowerShell_PowerShell-docs_reference",
       "build_source_folder": "reference",
       "build_output_subfolder": "reference",
@@ -29,26 +28,16 @@
         "mapping/monikerMapping.json"
       ],
       "version": 0
-    }
-  ],
+  }],
   "notification_subscribers": [],
   "sync_notification_subscribers": [],
-  "branches_to_filter": [
-    "prtest",
-    "prtest-nometavalidation",
-    "from-prod-staging",
-    "from-prod-live",
-    "repo_sync_novalidation_prtest_branch",
-    "repo_sync_novalidation_live_branch",
-    "repo_sync_novalidation_master_branch"
-  ],
+  "branches_to_filter": ["prtest","prtest-nometavalidation","from-prod-staging","from-prod-live","repo_sync_novalidation_prtest_branch","repo_sync_novalidation_live_branch","repo_sync_novalidation_master_branch"],
   "git_repository_url_open_to_public_contributors": "https://github.com/MicrosoftDocs/PowerShell-Docs",
   "git_repository_branch_open_to_public_contributors": "staging",
   "skip_source_output_uploading": false,
   "need_preview_pull_request": true,
   "contribution_branch_mappings": {},
-  "dependent_repositories": [
-    {
+  "dependent_repositories": [{
       "path_to_root": "_themes",
       "url": "https://github.com/Microsoft/templates.docs.msft",
       "branch": "master",
@@ -64,8 +53,7 @@
   "branch_target_mapping": {},
   "need_generate_pdf_url_template": false,
   "targets": {},
-  "dependent_packages": [
-    {
+  "dependent_packages": [{
       "id": "opbuild.templates.azurecli",
       "nuget_feed": "https://www.myget.org/F/op/api/v2",
       "path_to_root": "_dependentPackages/azurecli.plugins",
