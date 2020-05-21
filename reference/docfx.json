@@ -190,6 +190,8 @@
             }
         },
         "template": [],
+        "exportRawModel": "true",
+        "exportViewModel": "true",
         "dest": "pscore-reference",
         "markdownEngineName": "markdig"
     }
