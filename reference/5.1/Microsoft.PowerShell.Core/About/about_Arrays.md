@@ -1,7 +1,8 @@
 ---
 keywords: powershell,cmdlet
 Locale: en-US
-ms.date: 05/11/2020
+ms.locale: en-US
+ms.date: 05/10/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_arrays?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Arrays
