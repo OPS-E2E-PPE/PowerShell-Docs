@@ -27,7 +27,16 @@ the OS in separate steps.
 
 <!-- TODO: Update for supported releases v7.0 & v7.1 -->
 
-Officially supported releases
+Officially supported platform releases for PowerShell 7.1
+
+- Ubuntu 16.04/18.04/20.04 (including ARM64)
+- Ubuntu 19.10 (via Snap package)
+- Debian 9/10
+- CentOS and RHEL 7/8
+- Fedora 30
+- Alpine 3.11+ (including ARM64)
+
+Officially supported platform releases for PowerShell 7.0
 
 - Ubuntu 16.04
 - Ubuntu 18.04 and 20.04
@@ -87,13 +96,13 @@ PowerShell with `sudo apt-get install powershell`.
 
 ### Installation via Direct Download - Ubuntu 16.04
 
-Download the Debian package `powershell-lts_7.1.0-1.ubuntu.16.04_amd64.deb` from the [releases][] page
+Download the Debian package `powershell_7.1.0-1.ubuntu.16.04_amd64.deb` from the [releases][] page
 onto the Ubuntu machine.
 
 Then, in the terminal, execute the following commands:
 
 ```sh
-sudo dpkg -i powershell-lts_7.1.0-1.ubuntu.16.04_amd64.deb
+sudo dpkg -i powershell_7.1.0-1.ubuntu.16.04_amd64.deb
 sudo apt-get install -f
 ```
 
@@ -139,13 +148,13 @@ PowerShell with `sudo apt-get install powershell`.
 
 ### Installation via Direct Download - Ubuntu 18.04
 
-Download the Debian package `powershell-lts_7.1.0-1.ubuntu.18.04_amd64.deb` from the [releases][] page
+Download the Debian package `powershell_7.1.0-1.ubuntu.18.04_amd64.deb` from the [releases][] page
 onto the Ubuntu machine.
 
 Then, in the terminal, execute the following commands:
 
 ```sh
-sudo dpkg -i powershell-lts_7.1.0-1.ubuntu.18.04_amd64.deb
+sudo dpkg -i powershell_7.1.0-1.ubuntu.18.04_amd64.deb
 sudo apt-get install -f
 ```
 
@@ -191,13 +200,13 @@ PowerShell with `sudo apt-get install powershell`.
 
 ### Installation via Direct Download - Ubuntu 20.04
 
-Download the Debian package `powershell-lts_7.1.0-1.ubuntu.20.04_amd64.deb` from the [releases][] page
+Download the Debian package `powershell_7.1.0-1.ubuntu.20.04_amd64.deb` from the [releases][] page
 onto the Ubuntu machine.
 
 Then, in the terminal, execute the following commands:
 
 ```sh
-sudo dpkg -i powershell-lts_7.1.0-1.ubuntu.18.04_amd64.deb
+sudo dpkg -i powershell_7.1.0-1.ubuntu.20.04_amd64.deb
 sudo apt-get install -f
 ```
 
@@ -293,13 +302,13 @@ with `sudo apt-get install powershell`.
 
 ### Installation via Direct Download - Debian 9
 
-Download the Debian package `powershell-lts_7.1.0-1.debian.9_amd64.deb` from the [releases][] page
+Download the Debian package `powershell_7.1.0-1.debian.9_amd64.deb` from the [releases][] page
 onto the Debian machine.
 
 Then, in the terminal, execute the following commands:
 
 ```sh
-sudo dpkg -i powershell-lts_7.1.0-1.debian.9_amd64.deb
+sudo dpkg -i powershell_7.1.0-1.debian.9_amd64.deb
 sudo apt-get install -f
 ```
 
@@ -457,19 +466,19 @@ with `sudo yum update powershell`.
 
 ### Installation via Direct Download - CentOS 7
 
-Using [CentOS 7][], download the RPM package `powershell-lts-7.1.0-1.rhel.7.x86_64.rpm` from the [releases][]
+Using [CentOS 7][], download the RPM package `powershell-7.1.0-1.rhel.7.x86_64.rpm` from the [releases][]
 page onto the CentOS machine.
 
 Then, in the terminal, execute the following commands:
 
 ```sh
-sudo yum install powershell-lts-7.1.0-1.rhel.7.x86_64.rpm
+sudo yum install powershell-7.1.0-1.rhel.7.x86_64.rpm
 ```
 
 You can install the RPM without the intermediate step of downloading it:
 
 ```sh
-sudo yum install https://github.com/PowerShell/PowerShell/releases/download/v7.1.0/powershell-lts-7.1.0-1.rhel.7.x86_64.rpm
+sudo yum install https://github.com/PowerShell/PowerShell/releases/download/v7.1.0/powershell-7.1.0-1.rhel.7.x86_64.rpm
 ```
 
 ### Uninstallation - CentOS 7
@@ -503,19 +512,19 @@ with `sudo yum update powershell`.
 
 ### Installation via Direct Download - Red Hat Enterprise Linux (RHEL) 7
 
-Download the RPM package `powershell-lts-7.1.0-1.rhel.7.x86_64.rpm` from the [releases][] page onto
+Download the RPM package `powershell-7.1.0-1.rhel.7.x86_64.rpm` from the [releases][] page onto
 the Red Hat Enterprise Linux machine.
 
 Then, in the terminal, execute the following commands:
 
 ```sh
-sudo yum install powershell-lts-7.1.0-1.rhel.7.x86_64.rpm
+sudo yum install powershell-7.1.0-1.rhel.7.x86_64.rpm
 ```
 
 You can install the RPM without the intermediate step of downloading it:
 
 ```sh
-sudo yum install https://github.com/PowerShell/PowerShell/releases/download/v7.1.0/powershell-lts-7.1.0-1.rhel.7.x86_64.rpm
+sudo yum install https://github.com/PowerShell/PowerShell/releases/download/v7.1.0/powershell-7.1.0-1.rhel.7.x86_64.rpm
 ```
 
 ### Uninstallation - Red Hat Enterprise Linux (RHEL) 7

@@ -17,13 +17,21 @@ a stable and performant platform.
 
 PowerShell 7.1 currently supports the following operating systems on x64, including:
 
-- Windows 8.1, and 10
-- Windows Server 2012 R2, 2016, and 2019
+- Windows 8.1/10 (including ARM64)
+- Windows Server 2012 R2, 2016, 2019, and Semi-Annual Channel (SAC)
+- Ubuntu 16.04/18.04/20.04 (including ARM64)
+- Ubuntu 19.10 (via Snap package)
+- Debian 9/10
+- CentOS and RHEL 7/8
+- Fedora 30
+- Alpine 3.11+ (including ARM64)
 - macOS 10.13+
-- Red Hat Enterprise Linux (RHEL) / CentOS 7 and 8
-- Debian 9, and 10
-- Ubuntu 18.04, and 20.04
-- Alpine Linux 3.10, and 3.11+
+
+We also have community support for:
+
+- Arch Linux
+- Raspbian Linux
+- Kali Linux
 
 For more up-to-date information about supported operating systems and support lifecycle, see the
 [PowerShell Support Lifecycle](/powershell/scripting/powershell-support-lifecycle)
@@ -131,7 +139,6 @@ repository.
 - Fix error message from new symbolic link missing target (#13085) (Thanks @yecril71pl!)
 - Make the parameter `args` non-nullable in the public `ConsoleHost` APIs (#13429)
 - Add missing dispose for `CancellationTokenSource` (#13420) (Thanks @Youssef1313!)
-- Add the parameter `-Paged` to `Get-Help` to support paging (#13374)
 - Fix `Get-Help` not properly displaying if parameter supports wildcards (#13353) (Thanks @ThomasNieto!)
 - Update `pwsh` help for `-InputFormat` parameter (#13355) (Thanks @sethvs!)
 - Declare MIT license for files copied from Roslyn (#13305) (Thanks @xtqqczze!)
@@ -163,7 +170,7 @@ repository.
 - Change `CimCmdlets` to use `AliasAttribute` (#12617) (Thanks @thlac!)
 - Fix incorrect index in format string in ParameterBinderBase (#12630) (Thanks @powercode!)
 - Copy the `CommandInfo` property in `Command.Clone()` (#12301) (Thanks @TylerLeonhardt!)
-- Apply `-IncludeEqual` in `Compa-Object` when `-ExcludeDifferent` is specified (#12317) (Thanks @davidseibel!)
+- Apply `-IncludeEqual` in `Compare-Object` when `-ExcludeDifferent` is specified (#12317) (Thanks @davidseibel!)
 - Change `Get-FileHash` to close file handles before writing output (#12474) (Thanks @HumanEquivalentUnit!)
 - Fix inconsistent exception message in `-replace` operator (#12388) (Thanks @jackdcasey!)
 - Fix `WinCompat` module loading to treat PowerShell 7 modules with higher priority (#12269)
