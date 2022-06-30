@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 11/11/2020
+ms.date: 09/20/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/start-process?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Start-Process
@@ -69,14 +68,22 @@ Start-Process -FilePath "myfile.txt" -WorkingDirectory "C:\PS-Test" -Verb Print
 ### Example 3: Start a process to sort items to a new file
 
 This example starts a process that sorts items in the `Testsort.txt` file and returns the sorted
-items in the `Sorted.txt` files. Any errors are written to the `SortError.txt` file.
+items in the `Sorted.txt` files. Any errors are written to the `SortError.txt` file. The
+**UseNewEnvironment** parameter specifies that the process runs with its own environment variables.
 
 ```powershell
-Start-Process -FilePath "Sort.exe" -RedirectStandardInput "Testsort.txt" -RedirectStandardOutput "Sorted.txt" -RedirectStandardError "SortError.txt" -UseNewEnvironment
+$processOptions = @{
+    FilePath = "sort.exe"
+    RedirectStandardInput = "TestSort.txt"
+    RedirectStandardOutput = "Sorted.txt"
+    RedirectStandardError = "SortError.txt"
+    UseNewEnvironment = $true
+}
+Start-Process @processOptions
 ```
 
-The **UseNewEnvironment** parameter specifies that the process runs with its own environment
-variables.
+This example uses splatting to pass parameters to the cmdlet. For more information, see
+[about_Splatting](../microsoft.powershell.core/about/about_splatting.md).
 
 ### Example 4: Start a process in a maximized window
 
@@ -154,10 +161,16 @@ detached process. For more information, see the man page for
 
 Specifies parameters or parameter values to use when this cmdlet starts the process. Arguments can
 be accepted as a single string with the arguments separated by spaces, or as an array of strings
-separated by commas.
+separated by commas. The cmdlet joins the array into a single string with each element of the array
+separated by a single space.
 
-If parameters or parameter values contain a space, they need to be surrounded with escaped double
-quotes. For more information, see [about_Quoting_Rules](../Microsoft.PowerShell.Core/About/about_Quoting_Rules.md).
+The outer quotes of the PowerShell strings are not included when the **ArgumentList** values are
+passed to the new process. If parameters or parameter values contain a space or quotes, they need to
+be surrounded with escaped double quotes. For more information, see
+[about_Quoting_Rules](../Microsoft.PowerShell.Core/About/about_Quoting_Rules.md).
+
+For the best results, use a single **ArgumentList** value containing all of the arguments and any
+needed quote characters.
 
 ```yaml
 Type: System.String[]
@@ -242,7 +255,7 @@ Accept wildcard characters: False
 ### -NoNewWindow
 
 Start the new process in the current console window. By default on Windows, PowerShell opens a new
-window. On non-Windows systems, you never get a new terminal window.
+window. On non-Windows systems, you never get a new window.
 
 You cannot use the **NoNewWindow** and **WindowStyle** parameters in the same command.
 
@@ -403,7 +416,8 @@ parameter are: **Normal**, **Hidden**, **Minimized**, and **Maximized**. The def
 
 You cannot use the **WindowStyle** and **NoNewWindow** parameters in the same command.
 
-The parameter does not apply for non-Windows systems.
+The parameter does not apply for non-Windows systems. When using on non-Windows systems, you never
+get a new window.
 
 ```yaml
 Type: System.Diagnostics.ProcessWindowStyle
@@ -492,19 +506,28 @@ parameter. Otherwise, this cmdlet does not return any output.
 
 ## NOTES
 
-- This cmdlet is implemented by using the **Start** method of the **System.Diagnostics.Process**
-  class. For more information about this method, see
-  [Process.Start Method](/dotnet/api/system.diagnostics.process.start#overloads).
+By default, `Start-Process` launches a process _asynchronously_. Control is instantly returned to
+PowerShell even if the new process is still running.
 
-- On Windows, when you use **UseNewEnvironment**, the new process starts only containing the default
-  environment variables defined for the **Machine** scope. This has the side affect that the
-  `$env:USERNAME` is set to **SYSTEM**. None of the variables from the **User** scope are included.
+- On the local system, the launched process lives on independent from the calling process.
+- On a remote system, the new process is terminated when the remote session ends, immediately
+  following the `Start-Process` command. Therefore, you cannot use `Start-Process` in a remote session
+  expecting the launched process to outlive the session.
 
-- On Windows, the most common use case for `Start-Process` is to use the **Wait** parameter to block
-  progress until the new process exits. On non-Windows system, this is rarely needed since the
-  default behavior for command-line applications is equivalent to `Start-Process -Wait`.
+If you do need to use `Start-Process` in a remote session, invoke it with the **Wait** parameter. Or
+you could use other methods to create a new process on the remote system.
 
-- When using `Start-Process` on non-Windows systems, you never get a new terminal window.
+When using the **Wait** parameter, `Start-Process` waits for the process tree (the process and all
+its descendants) to exit before returning control. This is different than the behavior of the
+`Wait-Process` cmdlet, which only waits for the specified processes to exit.
+
+On Windows, the most common use case for `Start-Process` is to use the **Wait** parameter to block
+progress until the new process exits. On non-Windows system, this is rarely needed since the default
+behavior for command-line applications is equivalent to `Start-Process -Wait`.
+
+This cmdlet is implemented by using the **Start** method of the **System.Diagnostics.Process**
+class. For more information about this method, see
+[Process.Start Method](/dotnet/api/system.diagnostics.process.start#overloads).
 
 ## RELATED LINKS
 

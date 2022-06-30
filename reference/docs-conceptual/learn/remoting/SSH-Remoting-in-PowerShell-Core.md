@@ -1,7 +1,7 @@
 ---
-title: PowerShell Remoting Over SSH
-ms.date: 10/19/2020
 description: Explains how to set up the SSH protocol for PowerShell remoting.
+ms.date: 10/22/2021
+title: PowerShell Remoting Over SSH
 ---
 
 # PowerShell remoting over SSH
@@ -42,10 +42,10 @@ PowerShell from GitHub to get the SSH remoting feature. The SSH server must be c
 an SSH subsystem to host a PowerShell process on the remote computer. And, you must enable
 **password** or **key-based** authentication.
 
-## Set up on a Windows computer
+## Install the SSH service on a Windows computer
 
 1. Install the latest version of PowerShell. For more information, see
-   [Installing PowerShell Core on Windows](../../install/installing-powershell-core-on-windows.md#msi).
+   [Installing PowerShell on Windows](../../install/installing-powershell-on-windows.md#msi).
 
    You can confirm that PowerShell has SSH remoting support by listing the `New-PSSession` parameter
    sets. You'll notice there are parameter set names that begin with **SSH**. Those parameter sets
@@ -122,11 +122,11 @@ an SSH subsystem to host a PowerShell process on the remote computer. And, you m
 1. Add the path where OpenSSH is installed to your Path environment variable. For example,
    `C:\Program Files\OpenSSH\`. This entry allows for the `ssh.exe` to be found.
 
-## Set up on an Ubuntu 16.04 Linux computer
+## Install the SSH service on an Ubuntu Linux computer
 
 1. Install the latest version of PowerShell, see
-   [Installing PowerShell Core on Linux](../../install/installing-powershell-core-on-linux.md#ubuntu-1604).
-1. Install [Ubuntu OpenSSH Server](https://help.ubuntu.com/lts/serverguide/openssh-server.html).
+   [Installing PowerShell on Ubuntu](../../install/install-ubuntu.md).
+1. Install [Ubuntu OpenSSH Server](https://ubuntu.com/server/docs/service-openssh).
 
    ```bash
    sudo apt install openssh-client
@@ -160,22 +160,16 @@ an SSH subsystem to host a PowerShell process on the remote computer. And, you m
    > The default location of the PowerShell executable is `/usr/bin/pwsh`. The location can vary
    > depending on how you installed PowerShell.
 
-   Optionally, enable key authentication:
-
-   ```
-   PubkeyAuthentication yes
-   ```
-
 1. Restart the **ssh** service.
 
    ```bash
-   sudo service ssh restart
+   sudo systemctl restart sshd.service
    ```
 
-## Set up on a macOS computer
+## Install the SSH service on a macOS computer
 
 1. Install the latest version of PowerShell. For more information,
-   [Installing PowerShell Core on macOS](../../install/installing-powershell-core-on-macos.md).
+   [Installing PowerShell on macOS](../../install/installing-powershell-on-macos.md).
 
    Make sure SSH Remoting is enabled by following these steps:
 
@@ -381,14 +375,14 @@ GitCommitId                    v6.0.0-alpha.17
 
 ## See also
 
-[Installing PowerShell Core on Linux](../../install/installing-powershell-core-on-linux.md#ubuntu-1604)
+[Installing PowerShell on Linux](../../install/install-ubuntu.md)
 
-[Installing PowerShell Core on macOS](../../install/installing-powershell-core-on-macos.md)
+[Installing PowerShell on macOS](../../install/installing-powershell-on-macos.md)
 
-[Installing PowerShell Core on Windows](../../install/installing-powershell-core-on-windows.md#msi)
+[Installing PowerShell on Windows](../../install/installing-powershell-on-windows.md#msi)
 
 [Manage Windows with OpenSSH](/windows-server/administration/openssh/openssh_overview)
 
 [Managing OpenSSH Keys](/windows-server/administration/openssh/openssh_keymanagement)
 
-[Ubuntu SSH](https://help.ubuntu.com/lts/serverguide/openssh-server.html)
+[Ubuntu SSH](https://ubuntu.com/server/docs/service-openssh)

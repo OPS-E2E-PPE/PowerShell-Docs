@@ -1,12 +1,12 @@
 ---
 description: WSMan
 Locale: en-US
-ms.date: 10/18/2018
+ms.date: 03/07/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.wsman.management/about/about_wsman_provider?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: WSMan Provider
+title: about WSMan Provider
 ---
-# WSMan Provider
+# about_WSMan_Provider
 
 ## Provider name
 
@@ -22,6 +22,8 @@ Provides access to Web Services for Management (WS-Management) configuration
 information.
 
 ## Detailed description
+
+> This information only applies to PowerShell running on Windows.
 
 The **WSMan** provider for PowerShell lets you add, change, clear, and
 delete WS-Management configuration data on local or remote computers.
@@ -595,5 +597,4 @@ Get-Help Get-ChildItem -Path wsman:
 
 ## See also
 
-[about_Providers](../../Microsoft.PowerShell.Core/About/about_Providers.md)
-
+- [about_Providers](../../Microsoft.PowerShell.Core/About/about_Providers.md)

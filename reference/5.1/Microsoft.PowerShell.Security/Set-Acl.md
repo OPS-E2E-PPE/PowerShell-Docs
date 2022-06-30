@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Security
-ms.date: 06/09/2017
+ms.date: 01/31/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/set-acl?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-Acl
@@ -126,16 +125,17 @@ $NewAcl.SetAccessRuleProtection($isProtected, $preserveInheritance)
 Set-Acl -Path "C:\Pets\Dog.txt" -AclObject $NewAcl
 ```
 
-These commands is will disable access inheritance from parent folders, while still preserving the
-existing inherited access rules.
+These commands disable access inheritance from parent folders, while still preserving the existing
+inherited access rules.
 
 The first command uses the `Get-Acl` cmdlet to get the security descriptor of the Dog.txt file.
 
 Next, variables are created to convert the inherited access rules to explicit access rules. To
 protect the access rules associated with this from inheritance, set the `$isProtected` variable to
-`$true`.to allow inheritance, set `$isProtected` to `$false`. For more information, see
+`$true`. To allow inheritance, set `$isProtected` to `$false`. For more information, see
 [set access rule protection](/dotnet/api/system.security.accesscontrol.objectsecurity.setaccessruleprotection).
-The `$preserveInheritance` variable set to `$true` to preserve inherited access rules; false to
+
+Set the `$preserveInheritance` variable to `$true` to preserve inherited access rules or `$false` to
 remove inherited access rules. Then the access rule protection is updated using the
 **SetAccessRuleProtection()** method.
 
@@ -378,14 +378,16 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: True
 ```
 
-### -Confirm
+### -UseTransaction
 
-Prompts you for confirmation before running the cmdlet.
+Includes the command in the active transaction.
+This parameter is valid only when a transaction is in progress.
+For more information, see [about_Transactions](../Microsoft.PowerShell.Core/About/about_Transactions.md).
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: cf
+Aliases: usetx
 
 Required: False
 Position: Named
@@ -394,16 +396,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UseTransaction
+### -Confirm
 
-Includes the command in the active transaction.
-This parameter is valid only when a transaction is in progress.
-For more information, see about_Transactions.
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: usetx
+Aliases: cf
 
 Required: False
 Position: Named

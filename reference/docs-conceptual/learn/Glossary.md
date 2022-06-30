@@ -1,8 +1,7 @@
 ---
-ms.date: 06/11/2020
-keywords:  powershell,cmdlet
-title:  PowerShell Glossary
 description: A glossary of PowerShell-related terminology.
+ms.date: 06/11/2020
+title: PowerShell Glossary
 ---
 
 # PowerShell Glossary
@@ -20,6 +19,7 @@ description: A glossary of PowerShell-related terminology.
 | host application            | A program that loads the PowerShell engine into its process and uses it to perform operations. |
 | input processing method     | A method that a cmdlet can use to process the records it receives as input. The input processing methods include the BeginProcessing method, the ProcessRecord method, the EndProcessing method, and the StopProcessing method. |
 | manifest module             | A PowerShell module that has a manifest and whose RootModule key is empty. |
+| member-access enumeration   | A PowerShell convenience feature to automatically enumerate items in a collection list object when using the member-access operator (`.`) on the list object. |
 | module                      | A self-contained reusable unit that allows you to partition, organize, and abstract your PowerShell  code. A module can contain cmdlets, providers, functions, variables, and other types of resources that can be imported as a single unit. |
 | module manifest             | A PowerShell data file (`.psd1`) that describes the contents of a module and that controls how a module is processed. |
 | module session state        | The session state that contains the public and private data of a PowerShell module. The private data in this session state is not available to the user of a PowerShell session. |

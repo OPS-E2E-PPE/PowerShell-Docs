@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 03/27/2020
+ms.date: 12/16/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/get-childitem?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-ChildItem
@@ -352,7 +351,7 @@ In PowerShell 6.2, an alternate view was added to get hard link information.
 Get-ChildItem -Path C:\PathContainingHardLink | Format-Table -View childrenWithHardLink
 ```
 
-### Example 9: Output for experimental feature PSUnixFileStat
+### Example 10: Output for experimental feature PSUnixFileStat
 
 In PowerShell 7 on Unix systems, the experimental feature **PSUnixFileStat** provides Unix-like output:
 
@@ -384,7 +383,30 @@ The new properties that are now part of the output are:
 - **Group** is the group owner
 - **Size** is the size of the file or directory as represented on a Unix system
 
-## Parameters
+### Example 11 - Get the link target for a junction point
+
+The `dir` command in the Windows Command Shell shows the target location of a filesystem junction
+point. In PowerShell, this information is available from the **LinkTarget** property of the
+filesystem object returned by `Get-ChildItem` and is displayed in the default output.
+
+```powershell
+PS D:\> New-Item -ItemType Junction -Name tmp -Target $env:TEMP
+PS D:\> Get-ChildItem | select name,LinkTarget
+
+Name     LinkTarget
+----     ----------
+tmp      C:\Users\user1\AppData\Local\Temp
+
+PS D:\> Get-ChildItem
+
+    Directory: D:\
+
+Mode          LastWriteTime    Length Name
+----          -------------    ------ ----
+l----   12/16/2021  9:29 AM           tmp -> C:\Users\user1\AppData\Local\Temp
+```
+
+## PARAMETERS
 
 ### -Attributes
 
@@ -493,14 +515,17 @@ Accept wildcard characters: False
 
 ### -Exclude
 
-Specifies, as a string array, a property or property that this cmdlet excludes from the operation.
-The value of this parameter qualifies the **Path** parameter. Enter a path element or pattern, such
-as `*.txt` or `A*`. Wildcard characters are accepted.
+Specifies an array of one or more string patterns to be matched as the cmdlet gets child items. Any
+matching item is excluded from the output. Enter a path element or pattern, such as `*.txt` or `A*`.
+Wildcard characters are accepted.
 
 A trailing asterisk (`*`) in the **Path** parameter is optional. For example, `-Path C:\Test\Logs`
 or `-Path C:\Test\Logs\*`. If a trailing asterisk (`*`) is included, the command recurses into the
 **Path** parameter's subdirectories. Without the asterisk (`*`), the contents of the **Path**
 parameter are displayed. More details are included in Example 5 and the Notes section.
+
+The **Include** and **Exclude** parameters can be used together. However, the exclusions are applied
+after the inclusions, which can affect the final output.
 
 ```yaml
 Type: System.String[]
@@ -610,11 +635,14 @@ Accept wildcard characters: False
 
 ### -Include
 
-Specifies, as a string array, an item or items that this cmdlet includes in the operation. The value
-of this parameter qualifies the **Path** parameter. Enter a path element or pattern, such as
-`"*.txt"`. Wildcard characters are permitted. The **Include** parameter is effective only when the
-command includes the contents of an item, such as `C:\Windows\*`, where the wildcard character
-specifies the contents of the `C:\Windows` directory.
+Specifies an array of one or more string patterns to be matched as the cmdlet gets child items. Any
+matching item is included in the output. Enter a path element or pattern, such as `"*.txt"`.
+Wildcard characters are permitted. The **Include** parameter is effective only when the command
+includes the contents of an item, such as `C:\Windows\*`, where the wildcard character specifies the
+contents of the `C:\Windows` directory.
+
+The **Include** and **Exclude** parameters can be used together. However, the exclusions are applied
+after the inclusions, which can affect the final output.
 
 ```yaml
 Type: System.String[]

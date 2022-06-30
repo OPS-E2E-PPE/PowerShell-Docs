@@ -1,19 +1,19 @@
 ---
-description:  PowerShell provides the ability to dynamically add new properties and alter the formatting of objects output to the pipeline.
+description: PowerShell provides the ability to dynamically add new properties and alter the formatting of objects output to the pipeline.
 Locale: en-US
 ms.date: 10/09/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_calculated_properties?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Calculated_Properties
+title: about Calculated Properties
 ---
-# About calculated properties
+# about_Calculated_Properties
 
-## Short Description
+## Short description
 
 PowerShell provides the ability to dynamically add new properties and alter
 the formatting of objects output to the pipeline.
 
-## Long Description
+## Long description
 
 A number of PowerShell cmdlets transform, aggregate, or process input objects
 into output objects using parameters that allow the addition of new properties
@@ -468,28 +468,17 @@ Date       Salesperson UnitsSold
   For `Sort-Object`, statement-terminating and script-terminating errors are
   _output_ but they do not terminate the statement.
 
-## See Also
+## See also
 
-[about_Hash_Tables](about_hash_tables.md)
-
-[Compare-Object](xref:Microsoft.PowerShell.Utility.Compare-Object)
-
-[ConvertTo-Html](xref:Microsoft.PowerShell.Utility.ConvertTo-Html)
-
-[Format-Custom](xref:Microsoft.PowerShell.Utility.Format-Custom)
-
-[Format-List](xref:Microsoft.PowerShell.Utility.Format-List)
-
-[Format-Table](xref:Microsoft.PowerShell.Utility.Format-Table)
-
-[Format-Wide](xref:Microsoft.PowerShell.Utility.Format-Wide)
-
-[Group-Object](xref:Microsoft.PowerShell.Utility.Group-Object)
-
-[Measure-Object](xref:Microsoft.PowerShell.Utility.Measure-Object)
-
-[Select-Object](xref:Microsoft.PowerShell.Utility.Select-Object)
-
-[Sort-Object](xref:Microsoft.PowerShell.Utility.Sort-Object)
-
-[Format types in .NET](/dotnet/standard/base-types/formatting-types)
+- [about_Hash_Tables](about_hash_tables.md)
+- [ConvertTo-Html](xref:Microsoft.PowerShell.Utility.ConvertTo-Html)
+- [Format-Custom](xref:Microsoft.PowerShell.Utility.Format-Custom)
+- [Format-List](xref:Microsoft.PowerShell.Utility.Format-List)
+- [Format-Table](xref:Microsoft.PowerShell.Utility.Format-Table)
+- [Format-Wide](xref:Microsoft.PowerShell.Utility.Format-Wide)
+- [Compare-Object](xref:Microsoft.PowerShell.Utility.Compare-Object)
+- [Group-Object](xref:Microsoft.PowerShell.Utility.Group-Object)
+- [Measure-Object](xref:Microsoft.PowerShell.Utility.Measure-Object)
+- [Select-Object](xref:Microsoft.PowerShell.Utility.Select-Object)
+- [Sort-Object](xref:Microsoft.PowerShell.Utility.Sort-Object)
+- [Format types in .NET](/dotnet/standard/base-types/formatting-types)

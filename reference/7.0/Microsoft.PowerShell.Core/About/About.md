@@ -1,13 +1,8 @@
 ---
-description:  About topics cover a ranges of concepts about PowerShell. 
-Download Help Link: https://Please-enter-FwLink-manually
+description: About topics cover a ranges of concepts about PowerShell.
 Help Version: 6.0
-keywords: powershell,cmdlet
 Locale: en-US
-Module Guid: 00000000-0000-0000-0000-000000000000
-Module Name: About
-ms.date: 02/25/2019
-schema: 2.0.0
+ms.date: 10/22/2021
 title: About topics
 ---
 # About topics
@@ -205,7 +200,7 @@ Describes the full and relative path name formats in PowerShell.
 Combining commands into pipelines in the PowerShell.
 
 ### [about_PowerShell_Config](about_PowerShell_Config.md)
-Configuration files for PowerShell Core, replacing Registry configuration.
+Configuration files for PowerShell, replacing Registry configuration.
 
 ### [about_PowerShell_Editions](about_PowerShell_Editions.md)
 Different editions of PowerShell run on different underlying runtimes.
@@ -257,9 +252,6 @@ Describes how to run remote commands in PowerShell.
 
 ### [about_Remote_Disconnected_Sessions](about_Remote_Disconnected_Sessions.md)
 Explains how to disconnect from and reconnect to a PSSession.
-
-### [about_Remote_FAQ](about_Remote_FAQ.md)
-Contains questions and answers about running remote commands in PowerShell.
 
 ### [about_Remote_Jobs](about_Remote_Jobs.md)
 Describes how to run background jobs on remote computers.

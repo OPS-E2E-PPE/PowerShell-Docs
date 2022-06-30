@@ -1,13 +1,13 @@
 ---
 description: Prevents a script from running without the required elements.
 Locale: en-US
-ms.date: 12/14/2020
+ms.date: 05/24/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_requires?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Requires
+title: about Requires
 ---
 
-# About Requires
+# about_Requires
 
 ## Short description
 Prevents a script from running without the required elements.
@@ -17,7 +17,7 @@ Prevents a script from running without the required elements.
 The `#Requires` statement prevents a script from running unless the PowerShell
 version, modules (and version), or snap-ins (and version), and edition
 prerequisites are met. If the prerequisites aren't met, PowerShell doesn't run
-the script.
+the script or provide other runtime features, such as tab completion.
 
 ### Syntax
 
@@ -179,7 +179,7 @@ The following example fails because **2.0.0** doesn't exactly match
 #### -PSEdition \<PSEdition-Name\>
 
 Specifies a PowerShell edition that the script requires. Valid values are
-**Core** for PowerShell Core and **Desktop** for Windows PowerShell.
+**Core** for PowerShell and **Desktop** for Windows PowerShell.
 
 For example:
 
@@ -237,10 +237,7 @@ Param
 
 ## See also
 
-[about_Automatic_Variables](about_Automatic_Variables.md)
-
-[about_Language_Keywords](about_Language_Keywords.md)
-
-[about_PSSnapins](about_PSSnapins.md)
-
-[Get-PSSnapin](xref:Microsoft.PowerShell.Core.Get-PSSnapin)
+- [about_Automatic_Variables](about_Automatic_Variables.md)
+- [about_Language_Keywords](about_Language_Keywords.md)
+- [about_PSSnapins](about_PSSnapins.md)
+- [Get-PSSnapin](xref:Microsoft.PowerShell.Core.Get-PSSnapin)

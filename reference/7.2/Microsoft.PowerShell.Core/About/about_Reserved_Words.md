@@ -4,15 +4,15 @@ Locale: en-US
 ms.date: 07/23/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_reserved_words?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Reserved_Words
+title: about Reserved Words
 ---
-# About Reserved Words
+# about_Reserved_Words
 
-## SHORT DESCRIPTION
+## Short description
 Lists the reserved words that cannot be used as identifiers because they
 have a special meaning in PowerShell.
 
-## LONG DESCRIPTION
+## Long description
 
 There are certain words that have special meaning in PowerShell. When these
 words appear without quotation marks, PowerShell attempts to apply their
@@ -74,7 +74,7 @@ Get-Help <Reserved_Word>
 > Get-Help <Reserved_Word> -Category:HelpFile
 > ```
 
-## SEE ALSO
+## See also
 
 - [about_Command_Syntax](about_Command_Syntax.md)
 - [about_Language_Keywords](about_Language_Keywords.md)

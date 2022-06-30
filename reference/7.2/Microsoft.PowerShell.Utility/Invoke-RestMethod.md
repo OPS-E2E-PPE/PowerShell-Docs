@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 09/03/2020
+ms.date: 03/25/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/invoke-restmethod?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Invoke-RestMethod
@@ -81,14 +81,19 @@ Invoke-RestMethod -CustomMethod <String> [-FollowRelLink] [-MaximumFollowRelLink
  [-SkipHeaderValidation] [<CommonParameters>]
 ```
 
-## Description
+## DESCRIPTION
 
 The `Invoke-RestMethod` cmdlet sends HTTP and HTTPS requests to Representational State Transfer
 (REST) web services that return richly structured data.
 
 PowerShell formats the response based to the data type. For an RSS or ATOM feed, PowerShell returns
 the Item or Entry XML nodes. For JavaScript Object Notation (JSON) or XML, PowerShell converts, or
-deserializes, the content into objects.
+deserializes, the content into `[PSCustomObject]` objects.
+
+> [!NOTE]
+> When the REST endpoint returns multiple objects, the objects are received as an array. If you pipe
+> the output from `Invoke-RestMethod` to another command, it is sent as a single `[Object[]]`
+> object. The contents of that array are not enumerated for the next command on the pipeline.
 
 This cmdlet is introduced in Windows PowerShell 3.0.
 
@@ -209,7 +214,34 @@ $headers = @{
 Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -Body $body
 ```
 
-## Parameters
+### Example 6: Enumerate returned items on the pipeline
+
+GitHub returns multiple objects an array. If you pipe the output to another command, it is sent as a
+single `[Object[]]`object.
+
+To enumerate the objects into the pipeline, pipe the results to `Write-Output` or wrap the cmdlet in
+parentheses. The following example counts the number of objects returned by GitHub. Then counts the
+number of objects enumerated to the pipeline.
+
+```powershell
+$uri = 'https://api.github.com/repos/microsoftdocs/powershell-docs/issues'
+$x = 0
+Invoke-RestMethod -Uri $uri | ForEach-Object { $x++ }
+$x
+1
+
+$x = 0
+(Invoke-RestMethod -Uri $uri) | ForEach-Object { $x++ }
+$x
+30
+
+$x = 0
+Invoke-RestMethod -Uri $uri | Write-Output | ForEach-Object { $x++ }
+$x
+30
+```
+
+## PARAMETERS
 
 ### -AllowUnencryptedAuthentication
 
@@ -232,7 +264,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -240,20 +272,20 @@ Accept wildcard characters: False
 ### -Authentication
 
 Specifies the explicit authentication type to use for the request. The default is **None**.
-**Authentication** can't be used with **UseDefaultCredentials**.
+The **Authentication** parameter can't be used with the **UseDefaultCredentials** parameter.
 
 Available Authentication Options:
 
-- **None**: This is the default option when **Authentication** is not supplied. No explicit
+- `None`: This is the default option when **Authentication** is not supplied. No explicit
   authentication will be used.
-- **Basic**: Requires **Credential**. The credentials will be used to send an RFC 7617 Basic
+- `Basic`: Requires **Credential**. The credentials will be used to send an RFC 7617 Basic
   Authentication `Authorization: Basic` header in the format of `base64(user:password)`.
-- **Bearer**: Requires **Token**. Will send and RFC 6750 `Authorization: Bearer` header with the
-  supplied token. This is an alias for **OAuth**
-- **OAuth**: Requires **Token**. Will send an RFC 6750 `Authorization: Bearer` header with the
-  supplied token. This is an alias for **Bearer**
+- `Bearer`: Requires the **Token** parameter. Sends an RFC 6750 `Authorization: Bearer` header with
+  the supplied token.
+- `OAuth`: Requires the **Token** parameter. Sends an RFC 6750 `Authorization: Bearer` header with
+  the supplied token.
 
-Supplying **Authentication** will override any `Authorization` headers supplied to **Headers** or
+Supplying **Authentication** overrides any `Authorization` headers supplied to **Headers** or
 included in **WebSession**.
 
 This feature was added in PowerShell 6.0.0.
@@ -444,7 +476,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -470,7 +502,7 @@ Aliases: FL
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -623,16 +655,16 @@ Accept wildcard characters: False
 
 Specifies the method used for the web request. The acceptable values for this parameter are:
 
-- Default
-- Delete
-- Get
-- Head
-- Merge
-- Options
-- Patch
-- Post
-- Put
-- Trace
+- `Default`
+- `Delete`
+- `Get`
+- `Head`
+- `Merge`
+- `Options`
+- `Patch`
+- `Post`
+- `Put`
+- `Trace`
 
 The **CustomMethod** parameter can be used for Request Methods not listed above.
 
@@ -665,7 +697,7 @@ Aliases:
 
 Required: True
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -676,8 +708,7 @@ Saves the response body in the specified output file. Enter a path and file name
 path, the default is the current location. The name is treated as a literal path. Names that contain
 brackets (`[]`) must be enclosed in single quotes (`'`).
 
-By default, `Invoke-RestMethod` returns the results to the pipeline. To send the results to a file
-and to the pipeline, use the **Passthru** parameter.
+By default, `Invoke-RestMethod` returns the results to the pipeline.
 
 ```yaml
 Type: System.String
@@ -693,8 +724,13 @@ Accept wildcard characters: False
 
 ### -PassThru
 
-Returns the results, in addition to writing them to a file. This parameter is valid only when the
-**OutFile** parameter is also used in the command.
+This parameter is valid only when the **OutFile** parameter is also used in the command. The intent
+is to have the results written to the file and to the pipeline.
+
+> [!NOTE]
+> When you use the **PassThru** parameter, the output is written to the pipeline but the file is not
+> created. For more information, see
+> [PowerShell Issue #15409](https://github.com/PowerShell/PowerShell/issues/15409).
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -725,7 +761,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -787,16 +823,16 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -ResponseHeadersVariable
 
-Creates a Response Headers Dictionary and saves it in the value of the specified variable. The keys
-of the dictionary will contain the field names of the Response Header returned by the web server and
-the values will be the respective field values.
+Creates a variable containing a Response Headers Dictionary. Enter a variable name without the
+dollar sign (`$`) symbol. The keys of the dictionary contain the field names and values of the
+Response Header returned by the web server.
 
 This feature was added in PowerShell 6.0.0.
 
@@ -846,7 +882,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -871,8 +907,8 @@ Accept wildcard characters: False
 
 ### -SessionVariable
 
-Specifies a variable for which this cmdlet creates a web request session and saves it in the value.
-Enter a variable name without the dollar sign (`$`) symbol.
+Creates a variable containing the web request session. Enter a variable name without the dollar sign
+(`$`) symbol.
 
 When you specify a session variable, `Invoke-RestMethod` creates a web request session object and
 assigns it to a variable with the specified name in your PowerShell session. You can use the
@@ -921,7 +957,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -946,7 +982,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -976,9 +1012,12 @@ Sets the SSL/TLS protocols that are permissible for the web request. By default 
 protocols supported by the system are allowed. **SslProtocol** allows for limiting to specific
 protocols for compliance purposes.
 
-**SslProtocol** uses the `WebSslProtocol` Flag Enum. It is possible to supply more than one protocol
-using flag notation or combining multiple `WebSslProtocol` options with `-bor`, however supplying
-multiple protocols is not supported on all platforms.
+These values are defined as a flag-based enumeration. You can combine multiple values together to
+set multiple flags using this parameter. The values can be passed to the **SslProtocol** parameter
+as an array of values or as a comma-separated string of those values. The cmdlet will combine the
+values using a binary-OR operation. Passing values as an array is the simplest option and also
+allows you to use tab-completion on the values. You may not be able to supply multiple values on all
+platforms.
 
 > [!NOTE]
 > On non-Windows platforms it may not be possible to supply `Tls` or `Tls12` as an option. Support
@@ -1002,8 +1041,11 @@ Accept wildcard characters: False
 
 ### -StatusCodeVariable
 
-This parameter specifies a variable that's assigned a status code's integer value. The parameter can
-identify success messages or failure messages when used with the **SkipHttpErrorCheck** parameter.
+Creates a variable containing a HTTP status code result of the request. Enter a variable name
+without the dollar sign (`$`) symbol.
+
+The parameter can identify success messages or failure messages when used with the
+**SkipHttpErrorCheck** parameter.
 
 Input the parameter's variable name as a string such as `-StatusCodeVariable "scv"`.
 
@@ -1124,7 +1166,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -1141,7 +1183,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -1233,7 +1275,7 @@ Some features may not be available on all platforms.
 
 Because of changes in .NET Core 3.1, PowerShell 7.0 and higher use the
 [HttpClient.DefaultProxy](/dotnet/api/system.net.http.httpclient.defaultproxy?view=netcore-3.1)
-Property to determine the proxy configuration.
+property to determine the proxy configuration.
 
 The value of this property is different rules depending on your platform:
 
@@ -1247,7 +1289,7 @@ The value of this property is different rules depending on your platform:
 The environment variables used for `DefaultProxy` initialization on Windows and Unix-based platforms
 are:
 
-- ` HTTP_PROXY`: the hostname or IP address of the proxy server used on HTTP requests.
+- `HTTP_PROXY`: the hostname or IP address of the proxy server used on HTTP requests.
 - `HTTPS_PROXY`: the hostname or IP address of the proxy server used on HTTPS requests.
 - `ALL_PROXY`: the hostname or IP address of the proxy server used on HTTP and HTTPS requests in
   case `HTTP_PROXY` or `HTTPS_PROXY` are not defined.

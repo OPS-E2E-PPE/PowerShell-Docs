@@ -1,21 +1,20 @@
 ---
-description:  Provides background information about Windows Management Instrumentation (WMI) and Windows PowerShell. 
-keywords: powershell,cmdlet
+description: Provides background information about Windows Management Instrumentation (WMI) and Windows PowerShell.
 Locale: en-US
 ms.date: 12/01/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_wmi_cmdlets?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_WMI_Cmdlets
+title: about WMI Cmdlets
 ---
 
-# About WMI Cmdlets
+# about_WMI_Cmdlets
 
-## SHORT DESCRIPTION
+## Short description
 
 Provides background information about Windows Management Instrumentation (WMI)
 and Windows PowerShell.
 
-## LONG DESCRIPTION
+## Long description
 
 This topic provides information about WMI technology, the WMI cmdlets for
 Windows PowerShell, WMI-based remoting, WMI accelerators, and WMI
@@ -200,18 +199,12 @@ incoming WMI request, and you receive the following error message:
 Remote server machine does not exist or is unavailable
 ```
 
-## SEE ALSO
+## See also
 
-[About WMI](/windows/win32/wmisdk/about-wmi)
-
-[WMI Troubleshooting](/windows/win32/wmisdk/wmi-troubleshooting)
-
-[Get-WmiObject](xref:Microsoft.PowerShell.Management.Get-WmiObject)
-
-[Invoke-WmiMethod](xref:Microsoft.PowerShell.Management.Invoke-WmiMethod)
-
-[Register-WmiEvent](xref:Microsoft.PowerShell.Management.Register-WmiEvent)
-
-[Remove-WmiObject](xref:Microsoft.PowerShell.Management.Remove-WmiObject)
-
-[Set-WmiInstance](xref:Microsoft.PowerShell.Management.Set-WmiInstance)
+- [Register-WmiEvent](xref:Microsoft.PowerShell.Management.Register-WmiEvent)
+- [Set-WmiInstance](xref:Microsoft.PowerShell.Management.Set-WmiInstance)
+- [Invoke-WmiMethod](xref:Microsoft.PowerShell.Management.Invoke-WmiMethod)
+- [Get-WmiObject](xref:Microsoft.PowerShell.Management.Get-WmiObject)
+- [Remove-WmiObject](xref:Microsoft.PowerShell.Management.Remove-WmiObject)
+- [About WMI](/windows/win32/wmisdk/about-wmi)
+- [WMI Troubleshooting](/windows/win32/wmisdk/wmi-troubleshooting)

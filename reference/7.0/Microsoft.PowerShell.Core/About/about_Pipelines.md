@@ -1,13 +1,12 @@
 ---
-description:  Combining commands into pipelines in the PowerShell 
-keywords: powershell,cmdlet
+description: Combining commands into pipelines in the PowerShell
 Locale: en-US
-ms.date: 09/27/2019
+ms.date: 01/27/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_pipelines?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Pipelines
+title: about Pipelines
 ---
-# About Pipelines
+# about_Pipelines
 
 ## Short description
 
@@ -139,6 +138,23 @@ properties for a process object.
 ```powershell
 Get-Process winlogon | Format-List -Property *
 ```
+
+You can also pipe the output of native commands to PowerShell cmdlets. For
+example:
+
+```powershell
+PS> ipconfig.exe | Select-String -Pattern 'IPv4'
+
+   IPv4 Address. . . . . . . . . . . : 172.24.80.1
+   IPv4 Address. . . . . . . . . . . : 192.168.1.45
+   IPv4 Address. . . . . . . . . . . : 100.64.108.37
+```
+
+> [!IMPORTANT]
+> The **Success** and **Error** streams are similar to the stdin and stderr
+> streams of other shells. However, stdin is not connected to the PowerShell
+> pipeline for input. For more information, see
+> [about_Redirection](about_Redirection.md).
 
 With a bit of practice, you'll find that combining simple commands into
 pipelines saves time and typing, and makes your scripting more efficient.
@@ -374,6 +390,19 @@ For example,
 It's important to remember that objects sent down the pipeline are delivered
 one at a time.
 
+## Using native commands in the pipeline
+
+PowerShell allows you to include native external commands in the pipeline.
+However, it is important to note that PowerShell's pipeline is object-oriented
+and does not support raw byte data.
+
+Piping or redirecting output from a native program that outputs raw byte data
+converts the output to .NET strings. This conversion can cause corruption of
+the raw data output.
+
+As a workaround, call the native commands using `cmd.exe /c` or `sh -c` and use
+of the `|` and `>` operators provided by the native shell.
+
 ## Investigating pipeline errors
 
 When PowerShell can't associate the piped objects with a parameter of the
@@ -547,14 +576,10 @@ Get-Process | Where-Object CPU | Where-Object Path
 > does not end with a pipeline character, PowerShell considers the input to be
 > complete and executes that line as entered.
 
-## See Also
+## See also
 
-[about_PSReadLine](../../PSReadLine/About/about_PSReadLine.md)
-
-[about_Objects](about_objects.md)
-
-[about_Parameters](about_parameters.md)
-
-[about_Command_Syntax](about_command_syntax.md)
-
-[about_ForEach](about_foreach.md)
+- [about_PSReadLine](../../PSReadLine/About/about_PSReadLine.md)
+- [about_Objects](about_objects.md)
+- [about_Parameters](about_parameters.md)
+- [about_Command_Syntax](about_command_syntax.md)
+- [about_ForEach](about_foreach.md)

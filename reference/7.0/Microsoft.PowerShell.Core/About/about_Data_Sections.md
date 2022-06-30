@@ -1,19 +1,18 @@
 ---
-description: Explains Data sections, which isolate text strings and other read-only data from script logic. 
-keywords: powershell,cmdlet
+description: Explains Data sections, which isolate text strings and other read-only data from script logic.
 Locale: en-US
 ms.date: 04/23/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_data_sections?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Data_Sections
+title: about Data Sections
 ---
-# About Data Sections
+# about_Data_Sections
 
-## Short Description
+## Short description
 Explains Data sections, which isolate text strings and other read-only
 data from script logic.
 
-## Long Description
+## Long description
 
 Scripts that are designed for PowerShell can have one or more Data sections
 that contain only data. You can include one or more Data sections in any
@@ -199,22 +198,14 @@ DATA -supportedCommand Format-XML {
 }
 ```
 
-## See Also
+## See also
 
-[about_Automatic_Variables](about_Automatic_Variables.md)
-
-[about_Comparison_Operators](about_Comparison_Operators.md)
-
-[about_Hash_Tables](about_Hash_Tables.md)
-
-[about_If](about_If.md)
-
-[about_Operators](about_Operators.md)
-
-[about_Quoting_Rules](about_Quoting_Rules.md)
-
-[about_Script_Internationalization](about_Script_Internationalization.md)
-
-[ConvertFrom-StringData](xref:Microsoft.PowerShell.Utility.ConvertFrom-StringData)
-
-[Import-LocalizedData](xref:Microsoft.PowerShell.Utility.Import-LocalizedData)
+- [about_Automatic_Variables](about_Automatic_Variables.md)
+- [about_Comparison_Operators](about_Comparison_Operators.md)
+- [about_Hash_Tables](about_Hash_Tables.md)
+- [about_If](about_If.md)
+- [about_Operators](about_Operators.md)
+- [about_Quoting_Rules](about_Quoting_Rules.md)
+- [about_Script_Internationalization](about_Script_Internationalization.md)
+- [ConvertFrom-StringData](xref:Microsoft.PowerShell.Utility.ConvertFrom-StringData)
+- [Import-LocalizedData](xref:Microsoft.PowerShell.Utility.Import-LocalizedData)

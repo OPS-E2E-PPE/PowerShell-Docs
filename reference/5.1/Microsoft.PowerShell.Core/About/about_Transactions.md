@@ -1,20 +1,19 @@
 ---
-description:  Describes how to manage transacted operations in PowerShell. 
-keywords: powershell,cmdlet
+description: Describes how to manage transacted operations in PowerShell.
 Locale: en-US
 ms.date: 01/03/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_transactions?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Transactions
+title: about Transactions
 ---
 
-# About Transactions
+# about_Transactions
 
-## SHORT DESCRIPTION
+## Short description
 
 Describes how to manage transacted operations in PowerShell.
 
-## LONG DESCRIPTION
+## Long description
 
 Transactions are supported in PowerShell beginning in PowerShell 2.0. This
 feature enables you to start a transaction, to indicate which commands are
@@ -212,7 +211,7 @@ However, the lock is a feature of the database. It is not related to
 transactions. If you are working in a transaction-enabled file system or other
 data store, the data can be changed while the transaction is in progress.
 
-## EXAMPLES
+## Examples
 
 The examples in this section use the PowerShell Registry provider and assume
 that you are familiar with it. For information about the Registry provider,
@@ -834,20 +833,13 @@ SKC  VC Name                           Property
   0   0 MyCompany                      {}
 ```
 
-## SEE ALSO
+## See also
 
-[Start-Transaction](xref:Microsoft.PowerShell.Management.Start-Transaction)
-
-[Get-Transaction](xref:Microsoft.PowerShell.Management.Get-Transaction)
-
-[Complete-Transaction](xref:Microsoft.PowerShell.Management.Complete-Transaction)
-
-[Undo-Transaction](xref:Microsoft.PowerShell.Management.Undo-Transaction)
-
-[Use-Transaction](xref:Microsoft.PowerShell.Management.Use-Transaction)
-
-[Get-PSProvider](xref:Microsoft.PowerShell.Management.Get-PSProvider)
-
-[Get-ChildItem](xref:Microsoft.PowerShell.Management.Get-ChildItem)
-
-[about_Providers](about_Providers.md)
+- [about_Providers](about_Providers.md)
+- [Get-ChildItem](xref:Microsoft.PowerShell.Management.Get-ChildItem)
+- [Get-PSProvider](xref:Microsoft.PowerShell.Management.Get-PSProvider)
+- [Complete-Transaction](xref:Microsoft.PowerShell.Management.Complete-Transaction)
+- [Get-Transaction](xref:Microsoft.PowerShell.Management.Get-Transaction)
+- [Start-Transaction](xref:Microsoft.PowerShell.Management.Start-Transaction)
+- [Undo-Transaction](xref:Microsoft.PowerShell.Management.Undo-Transaction)
+- [Use-Transaction](xref:Microsoft.PowerShell.Management.Use-Transaction)

@@ -1,18 +1,18 @@
 ---
 description: Provides detailed information about PowerShell sessions and the role they play in remote commands.
 Locale: en-US
-ms.date: 06/09/2017
+ms.date: 03/07/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_pssession_details?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_PSSession_Details
+title: about PSSession Details
 ---
-# About PSSession Details
+# about_PSSession_Details
 
-## Short Description
+## Short description
 Provides detailed information about PowerShell sessions and the
 role they play in remote commands.
 
-## Long Description
+## Long description
 
 A session is an environment in which PowerShell runs. A session is
 created for you whenever you start PowerShell. You can create
@@ -150,13 +150,13 @@ and manage only the PSSessions that you created.
 
 ## Can I Connect to a PSSession From a Different Computer?
 
-Beginning in Windows PowerShell 3.0, PSSessions are independent
-of the sessions in which they were created. Active PSSessions
+Beginning in Windows PowerShell 3.0, PSSessions on Windows computers are
+independent of the sessions in which they were created. Active PSSessions
 are maintained on the computer at the remote or "server-side" of
 a connection.
 
-You can use the `Disconnect-PSSession` cmdlet to disconnect
-from a PSSession. The PSSession is disconnected from the
+On a Windows computer, you can use the `Disconnect-PSSession` cmdlet to
+disconnect from a PSSession. The PSSession is disconnected from the
 local session, but is maintained on the remote computer.
 Commands continue to run in the disconnected PSSession. You
 can close PowerShell and shut down the originating computer
@@ -164,7 +164,7 @@ without interrupting the PSSession.
 
 Then, even hours later, you can use the `Get-PSSession` cmdlet to
 get the PSSession and the `Connect-PSSession` cmdlet to connect to the
-PSSession from a new session on a different computer.
+PSSession from a new session on a different Windows computer.
 
 For more information, see [about_Remote_Disconnected_Sessions](about_Remote_Disconnected_Sessions.md).
 
@@ -257,27 +257,16 @@ No. Developers can create custom sessions that include only selected
 providers and cmdlets. If a command works in one session but not in
 another, it might be because the session is restricted.
 
-## See Also
+## See also
 
-[about_Jobs](about_Jobs.md)
-
-[about_PSSessions](about_PSSessions.md)
-
-[about_Remote](about_Remote.md)
-
-[about_Remote_Disconnected_Sessions](about_Remote_Disconnected_Sessions.md)
-
-[about_Remote_Requirements](about_Remote_Requirements.md)
-
-[Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
-
-[Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
-
-[Exit-PSSession](xref:Microsoft.PowerShell.Core.Exit-PSSession)
-
-[Get-PSSession](xref:Microsoft.PowerShell.Core.Get-PSSession)
-
-[New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
-
-[Remove-PSSession](xref:Microsoft.PowerShell.Core.Remove-PSSession)
-
+- [about_Jobs](about_Jobs.md)
+- [about_PSSessions](about_PSSessions.md)
+- [about_Remote](about_Remote.md)
+- [about_Remote_Disconnected_Sessions](about_Remote_Disconnected_Sessions.md)
+- [about_Remote_Requirements](about_Remote_Requirements.md)
+- [Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
+- [Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
+- [Exit-PSSession](xref:Microsoft.PowerShell.Core.Exit-PSSession)
+- [Get-PSSession](xref:Microsoft.PowerShell.Core.Get-PSSession)
+- [New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
+- [Remove-PSSession](xref:Microsoft.PowerShell.Core.Remove-PSSession)

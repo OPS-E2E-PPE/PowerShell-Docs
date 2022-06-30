@@ -1,18 +1,17 @@
 ---
 description: Describes the operators that work with Microsoft .NET types.
-keywords: powershell,cmdlet
 Locale: en-US
 ms.date: 10/15/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_type_operators?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Type_Operators
+title: about Type Operators
 ---
-# About Type Operators
+# about_Type_Operators
 
-## SHORT DESCRIPTION
+## Short description
 Describes the operators that work with Microsoft .NET types.
 
-## LONG DESCRIPTION
+## Long description
 
 The Boolean type operators (`-is` and `-isNot`) tell whether an object is an
 instance of a specified .NET type. The `-is` operator returns a value of
@@ -136,7 +135,7 @@ PS> (Get-Culture).GetType().FullName
 System.Globalization.CultureInfo
 ```
 
-## EXAMPLES
+## Examples
 
 The following examples show some uses of the Type operators:
 
@@ -223,6 +222,6 @@ PS> 1031 -as [System.Diagnostics.Process]
 PS>
 ```
 
-## SEE ALSO
+## See also
 
-[about_Operators](about_Operators.md)
+- [about_Operators](about_Operators.md)

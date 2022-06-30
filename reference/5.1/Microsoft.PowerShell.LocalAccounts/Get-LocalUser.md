@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Powershell.LocalAccounts.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.LocalAccounts
 ms.date: 02/10/2020
@@ -69,7 +68,7 @@ Name                                    Enabled  Description
 MicrosoftAccount\username@outlook.com  True     Description of this account.
 ```
 
-### Example 3: Get an account that is connected to a Microsoft account
+### Example 3: Get an account that has the specified SID
 
 This example gets a local user account that has the specified SID.
 

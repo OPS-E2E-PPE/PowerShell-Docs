@@ -1,13 +1,12 @@
 ---
-description: Describes the `ForEach -Parallel` language construct in Windows PowerShell Workflow. 
-keywords: powershell,cmdlet
+description: Describes the `ForEach -Parallel` language construct in Windows PowerShell Workflow.
 Locale: en-US
-ms.date: 07/10/2019
+ms.date: 09/10/2021
 online version: https://docs.microsoft.com/powershell/module/psworkflow/about/about_foreach-parallel?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Foreach Parallel
+title: about Foreach-Parallel
 ---
-# About Foreach-Parallel
+# about_Foreach-Parallel
 
 ## SHORT DESCRIPTION
 Describes the `ForEach -Parallel` language construct in Windows PowerShell
@@ -73,7 +72,15 @@ workflow Test-Workflow
         Set-Disk -Path $DiskPath
     }
 }
+```
 
+In this version of the workflow, the `Get-Process` and `Get-Service` commands
+are run in parallel. The workflow function continues to the `ForEach -Parallel`
+loop where the commands are run sequentially, but they run on the disks in
+parallel. The parallel commands and the `ForEach -Parallel` loop run
+concurrently.
+
+```powershell
 workflow Test-Workflow
 {
     #Run commands in parallel.
@@ -98,14 +105,10 @@ workflow Test-Workflow
 }
 ```
 
-## SEE ALSO
+## See Also
 
-[Writing a Script Workflow](/previous-versions/powershell/scripting/developer/workflow/creating-a-workflow-by-using-a-windows-powershell-script)
-
-[about_ForEach](../../Microsoft.PowerShell.Core/About/about_ForEach.md)
-
-[about_Language_Keywords](../../Microsoft.PowerShell.Core/About/about_Language_Keywords.md)
-
-[about_Parallel](about_Parallel.md)
-
-[about_Workflows](about_Workflows.md)
+- [about_ForEach](../../Microsoft.PowerShell.Core/About/about_ForEach.md)
+- [about_Language_Keywords](../../Microsoft.PowerShell.Core/About/about_Language_Keywords.md)
+- [about_Parallel](about_Parallel.md)
+- [about_Workflows](about_Workflows.md)
+- [Writing a Script Workflow](/previous-versions/powershell/scripting/developer/workflow/creating-a-workflow-by-using-a-windows-powershell-script)

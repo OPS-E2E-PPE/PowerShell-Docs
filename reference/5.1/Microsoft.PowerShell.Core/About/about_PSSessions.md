@@ -1,21 +1,20 @@
 ---
-description:  Describes Windows PowerShell sessions (PSSessions) and explains how to establish a persistent connection to a remote computer. 
-keywords: powershell,cmdlet
+description: Describes Windows PowerShell sessions (PSSessions) and explains how to establish a persistent connection to a remote computer.
 Locale: en-US
 ms.date: 01/03/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_pssessions?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_PSSessions
+title: about PSSessions
 ---
 
-# About PSSessions
+# about_PSSessions
 
-## Short Description
+## Short description
 
 Describes Windows PowerShell sessions (PSSessions) and explains how to
 establish a persistent connection to a remote computer.
 
-## Long Description
+## Long description
 
 To run Windows PowerShell commands on a remote computer, you can use the
 **ComputerName** parameter of a cmdlet, or you can create a Windows PowerShell
@@ -264,26 +263,16 @@ Get-Help *-PSSession
 
 For more information about PSSessions, see [about_PSSession_Details](about_PSSession_Details.md).
 
-## See Also
+## See also
 
-[about_Remote](about_Remote.md)
-
-[about_Remote_Disconnected_Sessions](about_Remote_Disconnected_Sessions.md)
-
-[about_Remote_Requirements](about_Remote_Requirements.md)
-
-[Connect-PSSession](xref:Microsoft.PowerShell.Core.Connect-PSSession)
-
-[Disconnect-PSSession](xref:Microsoft.PowerShell.Core.Disconnect-PSSession)
-
-[Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
-
-[Exit-PSSession](xref:Microsoft.PowerShell.Core.Exit-PSSession)
-
-[Get-PSSession](xref:Microsoft.PowerShell.Core.Get-PSSession)
-
-[Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
-
-[New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
-
-[Remove-PSSession](xref:Microsoft.PowerShell.Core.Remove-PSSession)
+- [about_Remote](about_Remote.md)
+- [about_Remote_Disconnected_Sessions](about_Remote_Disconnected_Sessions.md)
+- [about_Remote_Requirements](about_Remote_Requirements.md)
+- [Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
+- [Connect-PSSession](xref:Microsoft.PowerShell.Core.Connect-PSSession)
+- [Disconnect-PSSession](xref:Microsoft.PowerShell.Core.Disconnect-PSSession)
+- [Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
+- [Exit-PSSession](xref:Microsoft.PowerShell.Core.Exit-PSSession)
+- [Get-PSSession](xref:Microsoft.PowerShell.Core.Get-PSSession)
+- [New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
+- [Remove-PSSession](xref:Microsoft.PowerShell.Core.Remove-PSSession)

@@ -1,20 +1,21 @@
 ---
-description: Describes session configuration files, which are used in a session configuration (also known as an "endpoint") to define the environment of sessions that use the session configuration. 
-keywords: powershell,cmdlet
+description: Describes session configuration files, which are used in a session configuration (also known as an endpoint) to define the environment of sessions that use the session configuration.
 Locale: en-US
-ms.date: 01/03/2018
+ms.date: 03/07/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_session_configuration_files?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Session_Configuration_Files
+title: about Session Configuration Files
 ---
-# About Session Configuration Files
+# about_Session_Configuration_Files
 
-## SHORT DESCRIPTION
+## Short description
 Describes session configuration files, which are used in a session
 configuration (also known as an "endpoint") to define the environment of
 sessions that use the session configuration.
 
-## LONG DESCRIPTION
+## Long description
+
+> This information only applies to PowerShell running on Windows.
 
 A "session configuration file" is a text file with a .pssc file name extension
 that contains a hash table of session configuration properties and values. You
@@ -367,7 +368,7 @@ use the Get-PSSessionCapability cmdlet. This cmdlet enables you to determine
 the commands and environment available to specific users in specific
 endpoints.
 
-## NOTES
+## Notes
 
 Session configurations also support a type of session known as an "empty"
 session. An Empty session type enables you to create custom sessions with
@@ -376,28 +377,17 @@ empty session, the session is limited to expressions and might not be of any
 practical use. The SessionType property tells you whether or not you are
 working with an empty session.
 
-## SEE ALSO
+## See also
 
-[about_Session_Configurations](about_Session_Configurations.md)
-
-[New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
-
-[Disable-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Disable-PSSessionConfiguration)
-
-[Enable-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Enable-PSSessionConfiguration)
-
-[Get-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Get-PSSessionConfiguration)
-
-[New-PSSessionConfigurationFile](xref:Microsoft.PowerShell.Core.New-PSSessionConfigurationFile)
-
-[Register-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Register-PSSessionConfiguration)
-
-[Set-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Set-PSSessionConfiguration)
-
-[Test-PSSessionConfigurationFile](xref:Microsoft.PowerShell.Core.Test-PSSessionConfigurationFile)
-
-[Unregister-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Unregister-PSSessionConfiguration)
-
-[Get-PSSessionCapability](xref:Microsoft.PowerShell.Core.Get-PSSessionCapability)
-
-[New-PSRoleCapabilityFile](xref:Microsoft.PowerShell.Core.New-PSRoleCapabilityFile)
+- [about_Session_Configurations](about_Session_Configurations.md)
+- [New-PSRoleCapabilityFile](xref:Microsoft.PowerShell.Core.New-PSRoleCapabilityFile)
+- [New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
+- [Get-PSSessionCapability](xref:Microsoft.PowerShell.Core.Get-PSSessionCapability)
+- [Disable-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Disable-PSSessionConfiguration)
+- [Enable-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Enable-PSSessionConfiguration)
+- [Get-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Get-PSSessionConfiguration)
+- [Register-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Register-PSSessionConfiguration)
+- [Set-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Set-PSSessionConfiguration)
+- [Unregister-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Unregister-PSSessionConfiguration)
+- [New-PSSessionConfigurationFile](xref:Microsoft.PowerShell.Core.New-PSSessionConfigurationFile)
+- [Test-PSSessionConfigurationFile](xref:Microsoft.PowerShell.Core.Test-PSSessionConfigurationFile)

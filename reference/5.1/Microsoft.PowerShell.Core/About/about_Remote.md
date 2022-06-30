@@ -1,20 +1,17 @@
 ---
-description:  Describes how to run remote commands in Windows PowerShell. 
-keywords: powershell,cmdlet
+description: Describes how to run remote commands in PowerShell.
 Locale: en-US
 ms.date: 01/03/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_remote?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Remote
+title: about Remote
 ---
+# about_Remote
 
-# About Remote
+## Short description
+Describes how to run remote commands in PowerShell.
 
-## SHORT DESCRIPTION
-
-Describes how to run remote commands in Windows PowerShell.
-
-## LONG DESCRIPTION
+## Long description
 
 You can run remote commands on a single computer or on multiple computers by
 using a temporary or persistent connection. You can also start an interactive
@@ -26,7 +23,7 @@ topics that describe each cmdlet that is used in these commands. The topics
 provide the details and explain how you can modify the commands to meet your
 needs.
 
-Note: To use Windows PowerShell remoting, the local and remote computers must
+Note: To use PowerShell remoting, the local and remote computers must
 be configured for remoting. For more information, see
 [about_Remote_Requirements](about_Remote_Requirements.md).
 
@@ -68,10 +65,10 @@ For more information, see Enter-PSSession.
 Several cmdlets have a ComputerName parameter that lets you get objects from
 remote computers.
 
-Because these cmdlets do not use WS-Management-based Windows PowerShell
+Because these cmdlets do not use WS-Management-based PowerShell
 remoting, you can use the ComputerName parameter of these cmdlets on any
-computer that is running Windows PowerShell. The computers do not have to be
-configured for Windows PowerShell remoting, and the computers do not have to
+computer that is running PowerShell. The computers do not have to be
+configured for PowerShell remoting, and the computers do not have to
 meet the system requirements for remoting.
 
 The following cmdlets have a ComputerName parameter:
@@ -219,35 +216,27 @@ remote computer where it terminates the remote command.
 
 - For information about how remoting works, how to manage remote data, special
   configurations, security issues, and other frequently asked questions, see
-  [about_Remote_FAQ](about_Remote_FAQ.md).
+  [PowerShell Remoting FAQ](/powershell/scripting/learn/remoting/powershell-remoting-faq).
 
-- For help in resolving remoting errors, see about_Remote_Troubleshooting.
+- For help in resolving remoting errors, see [about_Remote_Troubleshooting](about_Remote_Troubleshooting.md).
 
 - For information about PSSessions and persistent connections, see
   [about_PSSessions](about_PSSessions.md).
 
-- For information about Windows PowerShell background jobs, see [about_Jobs](about_Jobs.md).
+- For information about PowerShell background jobs, see [about_Jobs](about_Jobs.md).
 
 ## KEYWORDS
 
 about_Remoting
 
-## SEE ALSO
+## See also
 
-[about_PSSessions](about_PSSessions.md)
-
-[about_Remote_Disconnected_Sessions](about_Remote_Disconnected_Sessions.md)
-
-[about_Remote_Requirements](about_Remote_Requirements.md)
-
-[about_Remote_FAQ](about_Remote_FAQ.md)
-
-[about_Remote_TroubleShooting](about_Remote_TroubleShooting.md)
-
-[about_Remote_Variables](about_Remote_Variables.md)
-
-[Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
-
-[Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
-
-[New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
+- [about_PSSessions](about_PSSessions.md)
+- [about_Remote_Disconnected_Sessions](about_Remote_Disconnected_Sessions.md)
+- [about_Remote_Requirements](about_Remote_Requirements.md)
+- [about_Remote_TroubleShooting](about_Remote_TroubleShooting.md)
+- [about_Remote_Variables](about_Remote_Variables.md)
+- [Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
+- [Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
+- [New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
+- [PowerShell Remoting FAQ](/powershell/scripting/learn/remoting/powershell-remoting-faq)

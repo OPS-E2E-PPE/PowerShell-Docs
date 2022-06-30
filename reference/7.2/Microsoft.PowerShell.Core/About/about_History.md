@@ -4,14 +4,14 @@ Locale: en-US
 ms.date: 05/13/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_history?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_History
+title: about History
 ---
-# About History
+# about_History
 
-## Short Description
+## Short description
 Describes how to get and run commands in the command history.
 
-## Long Description
+## Long description
 
 When you enter a command at the command prompt, PowerShell saves the command in
 the command history. You can use the commands in the history as a record of
@@ -103,11 +103,10 @@ commands are executing in a nested prompt, the commands might appear to be out
 of order in the history. Commands that are executing in a nested prompt are
 completed only when you exit the prompt level.
 
-## See Also
+## See also
 
 - [about_Line_Editing](about_Line_Editing.md)
 - [about_Preference_Variables](about_Preference_Variables.md)
 - [about_Profiles](about_Profiles.md)
-- [about_Variables](about_Variables.md)
 - [about_PSReadLine](../../PSReadLine/About/about_PSReadLine.md)
-
+- [about_Variables](about_Variables.md)

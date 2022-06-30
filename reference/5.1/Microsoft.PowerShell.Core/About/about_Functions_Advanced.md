@@ -1,18 +1,17 @@
 ---
-description: Introduces advanced functions that are a way to create cmdlets using scripts. 
-keywords: powershell,cmdlet
+description: Introduces advanced functions that are a way to create cmdlets using scripts.
 Locale: en-US
 ms.date: 06/11/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_functions_advanced?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Functions_Advanced
+title: about Functions Advanced
 ---
-# About Functions Advanced
+# about_Functions_Advanced
 
-## SHORT DESCRIPTION
+## Short description
 Introduces advanced functions that are a way to create cmdlets using scripts.
 
-## LONG DESCRIPTION
+## Long description
 
 A cmdlet is a single command that participates in the pipeline semantics of
 PowerShell. This includes binary cmdlets, advanced script functions, CDXML, and
@@ -72,14 +71,10 @@ Advanced functions differ from compiled cmdlets in the following ways:
   parameters.
 - Advanced functions cannot be used in transactions.
 
-## SEE ALSO
+## See also
 
-[about_Functions](about_Functions.md)
-
-[about_Functions_Advanced_Methods](about_Functions_Advanced_Methods.md)
-
-[about_Functions_Advanced_Parameters](about_Functions_Advanced_Parameters.md)
-
-[about_Functions_CmdletBindingAttribute](about_Functions_CmdletBindingAttribute.md)
-
-[about_Functions_OutputTypeAttribute](about_Functions_OutputTypeAttribute.md)
+- [about_Functions](about_Functions.md)
+- [about_Functions_Advanced_Methods](about_Functions_Advanced_Methods.md)
+- [about_Functions_Advanced_Parameters](about_Functions_Advanced_Parameters.md)
+- [about_Functions_CmdletBindingAttribute](about_Functions_CmdletBindingAttribute.md)
+- [about_Functions_OutputTypeAttribute](about_Functions_OutputTypeAttribute.md)

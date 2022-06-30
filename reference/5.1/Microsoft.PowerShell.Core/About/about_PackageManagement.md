@@ -1,18 +1,17 @@
 ---
-description: PackageManagement is an aggregator for software package managers. 
-keywords: powershell,cmdlet
+description: PackageManagement is an aggregator for software package managers.
 Locale: en-US
 ms.date: 03/30/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_packagemanagement?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_PackageManagement
+title: about PackageManagement
 ---
-# About PackageManagement
+# about_PackageManagement
 
-## SHORT DESCRIPTION
+## Short description
 PackageManagement is an aggregator for software package managers.
 
-## LONG DESCRIPTION
+## Long description
 
 PackageManagement functionality was introduced in Windows PowerShell 5.0.
 
@@ -103,24 +102,15 @@ For more information about the PackageManagement open development project,
 including how to create a PackageManagement package provider, see the
 PackageManagement project on GitHub at https://oneget.org.
 
-## SEE ALSO
+## See also
 
-[Get-PackageProvider](xref:PackageManagement.Get-PackageProvider)
-
-[Get-PackageSource](xref:PackageManagement.Get-PackageSource)
-
-[Register-PackageSource](xref:PackageManagement.Register-PackageSource)
-
-[Set-PackageSource](xref:PackageManagement.Set-PackageSource)
-
-[Unregister-PackageSource](xref:PackageManagement.Unregister-PackageSource)
-
-[Get-Package](xref:PackageManagement.Get-Package)
-
-[Find-Package](xref:PackageManagement.Find-Package)
-
-[Install-Package](xref:PackageManagement.Install-Package)
-
-[Save-Package](xref:PackageManagement.Save-Package)
-
-[Uninstall-Package](xref:PackageManagement.Uninstall-Package)
+- [Find-Package](xref:PackageManagement.Find-Package)
+- [Get-Package](xref:PackageManagement.Get-Package)
+- [Install-Package](xref:PackageManagement.Install-Package)
+- [Save-Package](xref:PackageManagement.Save-Package)
+- [Uninstall-Package](xref:PackageManagement.Uninstall-Package)
+- [Get-PackageProvider](xref:PackageManagement.Get-PackageProvider)
+- [Get-PackageSource](xref:PackageManagement.Get-PackageSource)
+- [Register-PackageSource](xref:PackageManagement.Register-PackageSource)
+- [Set-PackageSource](xref:PackageManagement.Set-PackageSource)
+- [Unregister-PackageSource](xref:PackageManagement.Unregister-PackageSource)

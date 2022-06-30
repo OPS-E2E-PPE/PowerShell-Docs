@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Security
-ms.date: 04/10/2020
+ms.date: 05/10/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/set-authenticodesignature?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-AuthenticodeSignature
@@ -41,6 +40,8 @@ Set-AuthenticodeSignature [-Certificate] <X509Certificate2> [-IncludeChain <Stri
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `Set-AuthenticodeSignature` cmdlet adds an Authenticode signature to any file that supports
 Subject Interface Package (SIP).
@@ -133,6 +134,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Content
+
+This parameter appears in the syntax listing because it is defined in the base class that
+`Set-AuthenticodeSignature` is derived from. However, support for this parameter is not implemented
+in `Set-AuthenticodeSignature`.
+
+```yaml
+Type: System.Byte[]
+Parameter Sets: ByContent
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
 ### -FilePath
 
 Specifies the path to a file that is being signed.
@@ -212,27 +231,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TimestampServer
-
-Uses the specified time stamp server to add a time stamp to the signature. Type the URL of the time
-stamp server as a string.
-
-The time stamp represents the exact time that the certificate was added to the file. A time stamp
-prevents the script from failing if the certificate expires because users and programs can verify
-that the certificate was valid at the time of signing.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -LiteralPath
 
 Specifies the path to a file that is being signed. Unlike **FilePath**, the value of the
@@ -254,8 +252,9 @@ Accept wildcard characters: False
 
 ### -SourcePathOrExtension
 
-Path to the file or file type of the content for which the digital signature is added. This
-parameter is used with **Content** where file content is passed as a byte array.
+This parameter appears in the syntax listing because it is defined in the base class that
+`Set-AuthenticodeSignature` is derived from. However, support for this parameter is not implemented
+in `Set-AuthenticodeSignature`.
 
 ```yaml
 Type: System.String[]
@@ -269,21 +268,24 @@ Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
-### -Content
+### -TimestampServer
 
-Contents of a file as a byte array for which the digital signature is added. This parameter must be
-used with **SourcePathOrExtension** parameter. The contents of the file must be in Unicode
-(UTF-16LE) format.
+Uses the specified time stamp server to add a time stamp to the signature. Type the URL of the time
+stamp server as a string.
+
+The time stamp represents the exact time that the certificate was added to the file. A time stamp
+prevents the script from failing if the certificate expires because users and programs can verify
+that the certificate was valid at the time of signing.
 
 ```yaml
-Type: System.Byte[]
-Parameter Sets: ByContent
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
-Accept pipeline input: True (ByPropertyName)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

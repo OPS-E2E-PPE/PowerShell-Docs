@@ -1,10 +1,10 @@
 ---
 description: Describes how PowerShell uses character encoding for input and output of string data.
 Locale: en-US
-ms.date: 10/21/2020
+ms.date: 10/22/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_character_encoding?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Character_Encoding
+title: about Character Encoding
 ---
 # about_Character_Encoding
 
@@ -53,7 +53,7 @@ more information, see the
 [Byte order mark](/globalization/encoding/byte-order-mark) documentation.
 
 In Windows PowerShell, any Unicode encoding, except `UTF7`, always creates a
-BOM. PowerShell Core defaults to `utf8NoBOM` for all text output.
+BOM. PowerShell (v6 and higher) defaults to `utf8NoBOM` for all text output.
 
 For best overall compatibility, avoid using BOMs in UTF-8 files. Unix platforms
 and Unix-heritage utilities also used on Windows Platforms don't support BOMs.
@@ -63,7 +63,7 @@ encoding and is written without a BOM in all versions of PowerShell.
 
 Creating PowerShell scripts on a Unix-like platform or using a cross-platform
 editor on Windows, such as Visual Studio Code, results in a file encoded using
-`UTF8NoBOM`. These files work fine on PowerShell Core, but may break in Windows
+`UTF8NoBOM`. These files work fine in PowerShell, but may break in Windows
 PowerShell if the file contains non-Ascii characters.
 
 If you need to use non-Ascii characters in your scripts, save them as UTF-8
@@ -132,8 +132,8 @@ For commands that append to an existing file:
 - In the absence of an explicit **Encoding** parameter, `Add-Content` detects
   the existing encoding and automatically applies it to the new content. If the
   existing content has no BOM, `Default` ANSI encoding is used. The behavior of
-  `Add-Content` is the same in PowerShell Core (v6 and higher) except the
-  default encoding is `Utf8`.
+  `Add-Content` is the same in PowerShell (v6 and higher) except the default
+  encoding is `Utf8`.
 
 - `Export-Csv -Append` matches the existing encoding when the target file
   contains a BOM. In the absence of a BOM, it uses `Utf8` encoding.
@@ -152,9 +152,9 @@ For cmdlets that read string data in the absence of a BOM:
 - `Import-Csv`, `Import-CliXml`, and `Select-String` assume `Utf8` in the
   absence of a BOM.
 
-## Character encoding in PowerShell Core
+## Character encoding in PowerShell
 
-In PowerShell Core (v6 and higher), the **Encoding** parameter supports the
+In PowerShell (v6 and higher), the **Encoding** parameter supports the
 following values:
 
 - `ascii`: Uses the encoding for the ASCII (7-bit) character set.
@@ -167,7 +167,7 @@ following values:
 - `utf8NoBOM`: Encodes in UTF-8 format without Byte Order Mark (BOM)
 - `utf32`: Encodes in UTF-32 format.
 
-PowerShell Core defaults to `utf8NoBOM` for all output.
+PowerShell defaults to `utf8NoBOM` for all output.
 
 Beginning with PowerShell 6.2, the **Encoding** parameter also allows numeric
 IDs of registered code pages (like `-Encoding 1251`) or string names of
@@ -217,10 +217,10 @@ the output redirection operators and PowerShell cmdlets use to save to files.
 
 ## See also
 
-- [Introduction to character encoding in .NET](/dotnet/standard/base-types/character-encoding-introduction)
-- [Code Pages - Win32 apps](/windows/win32/intl/code-pages)
-- [The Unicode Standard](https://www.unicode.org/standard/standard.html)
-- [Encoding.CodePage](/dotnet/api/system.text.encoding.codepage)
-- [UTF-16LE](https://wikipedia.org/wiki/UTF-16)
-- [Byte order mark](https://wikipedia.org/wiki/Byte_order_mark)
 - [about_Preference_Variables](about_Preference_Variables.md)
+- [Byte order mark](https://wikipedia.org/wiki/Byte_order_mark)
+- [Code Pages - Win32 apps](/windows/win32/intl/code-pages)
+- [Encoding.CodePage](/dotnet/api/system.text.encoding.codepage)
+- [Introduction to character encoding in .NET](/dotnet/standard/base-types/character-encoding-introduction)
+- [The Unicode Standard](https://www.unicode.org/standard/standard.html)
+- [UTF-16LE](https://wikipedia.org/wiki/UTF-16)

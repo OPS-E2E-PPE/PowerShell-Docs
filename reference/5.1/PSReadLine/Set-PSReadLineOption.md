@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.PowerShell.PSReadLine2.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: PSReadline
 ms.date: 06/30/2020
@@ -10,10 +9,10 @@ title: Set-PSReadLineOption
 ---
 # Set-PSReadLineOption
 
-## Synopsis
+## SYNOPSIS
 Customizes the behavior of command line editing in **PSReadLine**.
 
-## Syntax
+## SYNTAX
 
 ```
 Set-PSReadLineOption [-EditMode <EditMode>] [-ContinuationPrompt <String>] [-HistoryNoDuplicates]
@@ -27,12 +26,12 @@ Set-PSReadLineOption [-EditMode <EditMode>] [-ContinuationPrompt <String>] [-His
  [-ViModeChangeHandler <ScriptBlock>] [-Colors <Hashtable>] [<CommonParameters>]
 ```
 
-## Description
+## DESCRIPTION
 
 The `Set-PSReadLineOption` cmdlet customizes the behavior of the **PSReadLine** module when you're
 editing the command line. To view the **PSReadLine** settings, use `Get-PSReadLineOption`.
 
-## Examples
+## EXAMPLES
 
 ### Example 1: Set foreground and background colors
 
@@ -141,7 +140,7 @@ block object.
 For more information, see
 [about_Providers](/powershell/module/microsoft.powershell.core/about/about_providers).
 
-## Parameters
+## PARAMETERS
 
 ### -AddToHistoryHandler
 
@@ -432,17 +431,9 @@ Specifies the path to the file where history is saved. Computers running Windows
 platforms store the file in different locations. The filename is stored in a variable
 `$($host.Name)_history.txt`, for example `ConsoleHost_history.txt`.
 
-If you don't use this parameter, the default path is as follows:
-
-**Windows**
+If you don't use this parameter, the default path is:
 
 `$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\$($host.Name)_history.txt`
-
-**non-Windows**
-
-`$env:XDG_DATA_HOME/powershell/PSReadLine\$($host.Name)_history.txt`
-
-`$env:HOME/.local/share/powershell/PSReadLine\$($host.Name)_history.txt`
 
 ```yaml
 Type: System.String
@@ -689,21 +680,21 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 -WarningAction, and -WarningVariable. For more information, see
 [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
-## Inputs
+## INPUTS
 
 ### None
 
 You cannot pipe objects to `Set-PSReadLineOption.`
 
-## Outputs
+## OUTPUTS
 
 ### None
 
 This cmdlet does not generate any output.
 
-## Notes
+## NOTES
 
-## Related links
+## RELATED LINKS
 
 [about_PSReadLine](./About/about_PSReadLine.md)
 

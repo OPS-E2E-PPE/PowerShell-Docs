@@ -4,14 +4,14 @@ Locale: en-US
 ms.date: 12/03/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_modules?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Modules
+title: about Modules
 ---
-# About Modules
+# about_Modules
 
-## Short Description
+## Short description
 Explains how to install, import, and use PowerShell modules.
 
-## Long Description
+## Long description
 
 A module is a package that contains PowerShell members, such as cmdlets,
 providers, functions, workflows, variables, and aliases.
@@ -312,7 +312,7 @@ By default, the effective locations assigned to `$env:PSModulePath` are:
   and whether or not you are using folder redirection. Microsoft OneDrive can
   also change the location of your **Documents** folder.
 
-  By default, on Windows 10, that location is
+  By default, on Windows 10 and higher, that location is
   `$HOME\Documents\PowerShell\Modules`. On Linux or Mac, the **CurrentUser**
   location is `$HOME/.local/share/powershell/Modules`.
 
@@ -519,20 +519,13 @@ module logging in all PowerShell sessions. For more information, see
 [about_EventLogs](about_EventLogs.md) and
 [about_Group_Policy_Settings](about_Group_Policy_Settings.md).
 
-## See Also
+## See also
 
-[about_Command_Precedence](about_Command_Precedence.md)
-
-[about_Group_Policy_Settings](about_Group_Policy_Settings.md)
-
-[about_PSSnapins](about_PSSnapins.md)
-
-[Get-Command](xref:Microsoft.PowerShell.Core.Get-Command)
-
-[Get-Help](xref:Microsoft.PowerShell.Core.Get-Help)
-
-[Get-Module](xref:Microsoft.PowerShell.Core.Get-Module)
-
-[Import-Module](xref:Microsoft.PowerShell.Core.Import-Module)
-
-[Remove-Module](xref:Microsoft.PowerShell.Core.Remove-Module)
+- [about_Command_Precedence](about_Command_Precedence.md)
+- [about_Group_Policy_Settings](about_Group_Policy_Settings.md)
+- [about_PSSnapins](about_PSSnapins.md)
+- [Get-Command](xref:Microsoft.PowerShell.Core.Get-Command)
+- [Get-Help](xref:Microsoft.PowerShell.Core.Get-Help)
+- [Get-Module](xref:Microsoft.PowerShell.Core.Get-Module)
+- [Import-Module](xref:Microsoft.PowerShell.Core.Import-Module)
+- [Remove-Module](xref:Microsoft.PowerShell.Core.Remove-Module)

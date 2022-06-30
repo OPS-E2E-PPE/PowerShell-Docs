@@ -1,21 +1,20 @@
 ---
-description:  Provides detailed information about Windows PowerShell sessions and the role they play in remote commands. 
-keywords: powershell,cmdlet
+description: Provides detailed information about Windows PowerShell sessions and the role they play in remote commands.
 Locale: en-US
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_pssession_details?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_PSSession_Details
+title: about PSSession Details
 ---
 
-# About PSSession Details
+# about_PSSession_Details
 
-## Short Description
+## Short description
 
 Provides detailed information about Windows PowerShell sessions and the
 role they play in remote commands.
 
-## Long Description
+## Long description
 
 A session is an environment in which Windows PowerShell runs. A session is
 created for you whenever you start Windows PowerShell. You can create
@@ -262,26 +261,16 @@ No. Developers can create custom sessions that include only selected
 providers and cmdlets. If a command works in one session but not in
 another, it might be because the session is restricted.
 
-## See Also
+## See also
 
-[about_Jobs](about_Jobs.md)
-
-[about_PSSessions](about_PSSessions.md)
-
-[about_Remote](about_Remote.md)
-
-[about_Remote_Disconnected_Sessions](about_Remote_Disconnected_Sessions.md)
-
-[about_Remote_Requirements](about_Remote_Requirements.md)
-
-[Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
-
-[Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
-
-[Exit-PSSession](xref:Microsoft.PowerShell.Core.Exit-PSSession)
-
-[Get-PSSession](xref:Microsoft.PowerShell.Core.Get-PSSession)
-
-[New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
-
-[Remove-PSSession](xref:Microsoft.PowerShell.Core.Remove-PSSession)
+- [about_Jobs](about_Jobs.md)
+- [about_PSSessions](about_PSSessions.md)
+- [about_Remote](about_Remote.md)
+- [about_Remote_Disconnected_Sessions](about_Remote_Disconnected_Sessions.md)
+- [about_Remote_Requirements](about_Remote_Requirements.md)
+- [Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
+- [Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
+- [Exit-PSSession](xref:Microsoft.PowerShell.Core.Exit-PSSession)
+- [Get-PSSession](xref:Microsoft.PowerShell.Core.Get-PSSession)
+- [New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
+- [Remove-PSSession](xref:Microsoft.PowerShell.Core.Remove-PSSession)

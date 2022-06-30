@@ -1,8 +1,7 @@
 ---
-ms.date: 05/14/2020
-keywords:  powershell,cmdlet
-title:  Making the second hop in PowerShell Remoting
 description: This article explains the various methods for configuring second-hop authentication for PowerShell remoting, including the security implications and recommendations.
+ms.date: 10/11/2021
+title: Making the second hop in PowerShell Remoting
 ---
 
 # Making the second hop in PowerShell Remoting
@@ -10,10 +9,10 @@ description: This article explains the various methods for configuring second-ho
 The "second hop problem" refers to a situation like the following:
 
 1. You are logged in to _ServerA_.
-2. From _ServerA_, you start a remote PowerShell session to connect to _ServerB_.
-3. A command you run on _ServerB_ via your PowerShell Remoting session attempts to access a resource
+1. From _ServerA_, you start a remote PowerShell session to connect to _ServerB_.
+1. A command you run on _ServerB_ via your PowerShell Remoting session attempts to access a resource
    on _ServerC_.
-4. Access to the resource on _ServerC_ is denied, because the credentials you used to create the
+1. Access to the resource on _ServerC_ is denied, because the credentials you used to create the
    PowerShell Remoting session are not passed from _ServerB_ to _ServerC_.
 
 There are several ways to address this problem. The following table lists the methods in order of
@@ -47,11 +46,11 @@ For more information about credential theft attacks, see
 For an example of how to enable and use CredSSP for PowerShell remoting, see
 [Enable PowerShell "Second-Hop" Functionality with CredSSP][credssp-psblog].
 
-**Pros**
+### Pros
 
 - It works for all servers with Windows Server 2008 or later.
 
-**Cons**
+### Cons
 
 - Has security vulnerabilities.
 - Requires configuration of both client and server roles.
@@ -64,12 +63,12 @@ You can use legacy constrained delegation (not resource-based) to make the secon
 Kerberos constrained delegation with the option "Use any authentication protocol" to allow protocol
 transition.
 
-**Pros**
+### Pros
 
 - Requires no special coding
 - Credentials are not stored.
 
-**Cons**
+### Cons
 
 - Does not support the second hop for WinRM.
 - Requires Domain Administrator access to configure.
@@ -92,14 +91,14 @@ configure credential delegation on the server object where resources reside. In 
 scenario described above, you configure _ServerC_ to specify from where it accepts delegated
 credentials.
 
-**Pros**
+### Pros
 
 - Credentials are not stored.
 - Configured using PowerShell cmdlets. No special coding required.
 - Does not require Domain Administrator access to configure.
 - Works across domains and forests.
 
-**Cons**
+### Cons
 
 - Requires Windows Server 2012 or later.
 - Does not support the second hop for WinRM.
@@ -223,13 +222,19 @@ $ServerB2 = Get-ADComputer -Identity ServerB2
 $ServerB3 = Get-ADComputer -Identity ServerB3
 $ServerC  = Get-ADComputer -Identity ServerC
 
+$servers = @(
+    $ServerB1,
+    $ServerB2,
+    $ServerB3
+)
+
 # Grant resource-based Kerberos constrained delegation
-Set-ADComputer -Identity $ServerC `
-    -PrincipalsAllowedToDelegateToAccount @($ServerB1,$ServerB2,$ServerB3)
+Set-ADComputer -Identity $ServerC -PrincipalsAllowedToDelegateToAccount $servers
 ```
 
-If you want to make the second hop across domains, add fully-qualified domain name (FQDN) of the
-domain controller of the domain to which _ServerB_ belongs:
+If you want to make the second hop across domains, use the **Server** parameter to specify
+fully-qualified domain name (FQDN) of the domain controller of the domain to which _ServerB_
+belongs:
 
 ```powershell
 # For ServerC in Contoso domain and ServerB in other domain
@@ -257,7 +262,7 @@ Set-ADComputer -Identity $ServerC -PrincipalsAllowedToDelegateToAccount $null
 
 ## Kerberos delegation (unconstrained)
 
-You can also used Kerberos unconstrained delegation to make the second hop. Like all Kerberos
+You can also use Kerberos unconstrained delegation to make the second hop. Like all Kerberos
 scenarios, credentials are not stored. This method does not support the second hop for WinRM.
 
 > [!WARNING]
@@ -271,11 +276,11 @@ can be used to solve the second hop problem.
 
 For information about JEA, see [Just Enough Administration](/powershell/scripting/learn/remoting/jea/overview).
 
-**Pros**
+### Pros
 
 - No password maintenance when using a virtual account.
 
-**Cons**
+### Cons
 
 - Requires WMF 5.0 or later.
 - Requires configuration on every intermediate server (_ServerB_).
@@ -287,11 +292,11 @@ You can create a session configuration on _ServerB_ and set its **RunAsCredentia
 For information about using **PSSessionConfiguration** and **RunAs** to solve the second hop
 problem, see [Another solution to multi-hop PowerShell remoting][pssessionconfig].
 
-**Pros**
+### Pros
 
 - Works with any server with WMF 3.0 or later.
 
-**Cons**
+### Cons
 
 - Requires configuration of **PSSessionConfiguration** and **RunAs** on every intermediate server
   (_ServerB_).
@@ -302,19 +307,19 @@ problem, see [Another solution to multi-hop PowerShell remoting][pssessionconfig
 You can pass credentials inside the **ScriptBlock** parameter of a call to the
 [Invoke-Command](/powershell/module/microsoft.powershell.core/invoke-command) cmdlet.
 
-**Pros**
+### Pros
 
 - Does not require special server configuration.
 - Works on any server running WMF 2.0 or later.
 
-**Cons**
+### Cons
 
 - Requires an awkward code technique.
 - If running WMF 2.0, requires different syntax for passing arguments to a remote session.
 
 ### Example
 
-The following example shows how to pass credentials in an **Invoke-Command** script block:
+The following example shows how to pass credentials in an  script block:
 
 ```powershell
 # This works without delegation, passing fresh creds

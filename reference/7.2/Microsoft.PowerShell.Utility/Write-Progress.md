@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 10/14/2020
+ms.date: 09/10/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/write-progress?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Write-Progress
@@ -26,6 +26,20 @@ The `Write-Progress` cmdlet displays a progress bar in a PowerShell command wind
 status of a running command or script. You can select the indicators that the bar reflects and the
 text that appears above and below the progress bar.
 
+PowerShell 7.2 added the `$PSStyle` automatic variable that is used to control how PowerShell
+displays certain information using ANSI escape sequences. The `$PSStyle.Progress` member allows
+you to control progress view bar rendering.
+
+- `$PSStyle.Progress.Style` - An ANSI string setting the rendering style.
+- `$PSStyle.Progress.MaxWidth` - Sets the max width of the view. Set to `0` for console width.
+  Defaults to `120`
+- `$PSStyle.Progress.View` - An enum with values, `Minimal` and `Classic`. `Classic` is the existing
+  rendering with no changes. `Minimal` is a single line minimal rendering. `Minimal` is the default.
+
+> [!NOTE]
+> If the host doesn't support Virtual Terminal, `$PSStyle.Progress.View` is automatically set to
+> `Classic`.
+
 ## EXAMPLES
 
 ### Example 1: Display the progress of a For loop
@@ -33,7 +47,8 @@ text that appears above and below the progress bar.
 ```powershell
 for ($i = 1; $i -le 100; $i++ )
 {
-    Write-Progress -Activity "Search in Progress" -Status "$i% Complete:" -PercentComplete $i;
+    Write-Progress -Activity "Search in Progress" -Status "$i% Complete:" -PercentComplete $i
+    Start-Sleep -Milliseconds 250
 }
 ```
 
@@ -78,8 +93,8 @@ displayed one below the other.
 ### Example 3: Display the progress while searching for a string
 
 ```powershell
-# Use Get-EventLog to get the events in the System log and store them in the $Events variable.
-$Events = Get-EventLog -LogName system
+# Use Get-WinEvent to get the events in the System log and store them in the $Events variable.
+$Events = Get-WinEvent -LogName system
 # Pipe the events to the ForEach-Object cmdlet.
 $Events | ForEach-Object -Begin {
     # In the Begin block, use Clear-Host to clear the screen.
@@ -195,7 +210,8 @@ Accept wildcard characters: False
 
 Specifies an ID that distinguishes each progress bar from the others. Use this parameter when you
 are creating more than one progress bar in a single command. If the progress bars do not have
-different IDs, they are superimposed instead of being displayed in a series.
+different IDs, they are superimposed instead of being displayed in a series. Negative values are
+not allowed.
 
 ```yaml
 Type: System.Int32

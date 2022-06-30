@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.PackageManagement.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: PackageManagement
-ms.date: 05/24/2019
+ms.date: 06/04/2021
 online version: https://docs.microsoft.com/powershell/module/packagemanagement/uninstall-package?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Uninstall-Package
@@ -110,7 +109,7 @@ PS> Uninstall-Package -Name NuGet.Core
 ### Example 2: Use the pipeline to uninstall a package
 
 `Get-Package` locates a specific package and sends the **SoftwareIdentity** object down the pipeline
-to the `Uninsall-Package` cmdlet.
+to the `Uninstall-Package` cmdlet.
 
 ```
 PS> Get-Package -Name NuGet.Core -RequiredVersion 2.14.0 | Uninstall-Package
@@ -126,6 +125,22 @@ parameter:
 `Uninstall-Package -InputObject ( Get-Package -Name NuGet.Core -RequiredVersion 2.14.0 )`
 
 ## PARAMETERS
+
+### -AdditionalArguments
+
+Specifies additional arguments.
+
+```yaml
+Type: System.String[]
+Parameter Sets: msi:PackageByInputObject, msi:PackageBySearch
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -AllowClobber
 
@@ -232,6 +247,38 @@ package.
 ```yaml
 Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -IncludeSystemComponent
+
+Specifies that this cmdlet uninstalls system components.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: Programs:PackageByInputObject, Programs:PackageBySearch
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -IncludeWindowsInstaller
+
+Indicates that this cmdlet uninstalls the package through Windows Installer.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: Programs:PackageByInputObject, Programs:PackageBySearch
 Aliases:
 
 Required: False
@@ -504,54 +551,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -AdditionalArguments
-
-Specifies additional arguments.
-
-```yaml
-Type: System.String[]
-Parameter Sets: msi:PackageByInputObject, msi:PackageBySearch
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -IncludeSystemComponent
-
-Specifies that this cmdlet uninstalls system components.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: Programs:PackageByInputObject, Programs:PackageBySearch
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -IncludeWindowsInstaller
-
-Indicates that this cmdlet uninstalls the package through Windows Installer.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: Programs:PackageByInputObject, Programs:PackageBySearch
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
@@ -560,11 +559,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### `Uninstall-Package` accepts **SoftwareIdentity** objects from the pipeline as input.
+### SoftwareIdentity
+
+`Uninstall-Package` accepts **SoftwareIdentity** objects from the pipeline as input.
 
 ## OUTPUTS
 
-### `Uninstall-Package` doesn't generate any output.
+### SoftwareIdentity
+
+`Uninstall-Package` returns a **SoftwareIdentity** object for each package uninstalled.
 
 ## NOTES
 

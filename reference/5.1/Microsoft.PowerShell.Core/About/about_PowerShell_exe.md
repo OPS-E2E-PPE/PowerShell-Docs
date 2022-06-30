@@ -1,19 +1,19 @@
 ---
 description: Explains how to use the `powershell.exe` command-line interface. Displays the command-line parameters and describes the syntax.
-keywords: powershell,cmdlet
 Locale: en-US
-ms.date: 10/05/2020
+ms.date: 05/25/2022
+no-no-loc: [-Command, -ConfigurationName , -EncodedCommand, -ExecutionPolicy, -File, -Help, -InputFormat, -Mta, -NoExit, -NoLogo, -NonInteractive, -NoProfile, -OutputFormat, -PSConsoleFile, -Sta, -Version, -WindowStyle]
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_powershell_exe?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_PowerShell_exe
+title: about PowerShell exe
 ---
-# About PowerShell.exe
+# about_PowerShell_exe
 
-## Short Description
+## Short description
 Explains how to use the `powershell.exe` command-line interface. Displays the
 command-line parameters and describes the syntax.
 
-## Long Description
+## Long description
 
 ### SYNTAX
 
@@ -157,6 +157,13 @@ It is not possible to pass an explicit boolean value for a switch parameter
 when running a script in this way. This limitation was removed in PowerShell 6
 (`pwsh.exe`).
 
+> [!NOTE]
+> The **File** parameter cannot support scripts using a parameter that expects
+> an array of argument values. This, unfortunately, is a limitation of how a
+> native command gets argument values. When you call a native executable (such
+> as `powershell` or `pwsh`), it does not know what to do with an array, so
+> it's passed as a string.
+
 #### -ExecutionPolicy \<ExecutionPolicy\>
 
 Sets the default execution policy for the current session and saves it in the
@@ -198,7 +205,7 @@ string, the [call operator](about_operators.md#special-operators) `&` can be
 used:
 
 ```cmd
-pwsh -Command "& {Get-WinEvent -LogName security}"
+powershell.exe -Command "& {Get-WinEvent -LogName security}"
 ```
 
 If the value of **Command** is a string, **Command** must be the last parameter
@@ -242,27 +249,6 @@ add `exit $LASTEXITCODE` to your command string or script block.
 Similarly, the value 1 is returned when a script-terminating
 (runspace-terminating) error, such as a `throw` or `-ErrorAction Stop`, occurs
 or when execution is interrupted with <kbd>Ctrl</kbd>-<kbd>C</kbd>.
-
-_only_ possible when running **PowerShell.exe** from another PowerShell host.
-The **ScriptBlock** type may be contained in an existing variable, returned
-from an expression, or parsed by the PowerShell host as a literal script block
-enclosed in curly braces `{}`, before being passed to **PowerShell.exe**.
-
-In **cmd.exe**, there is no such thing as a script block (or **ScriptBlock**
-type), so the value passed to **Command** will _always_ be a string. You can
-write a script block inside the string, but instead of being executed it will
-behave exactly as though you typed it at a typical PowerShell prompt, printing
-the contents of the script block back out to you.
-
-A string passed to **Command** will still be executed as PowerShell, so the
-script block curly braces are often not required in the first place when
-running from **cmd.exe**. To execute an inline script block defined inside a
-string, the [call operator](about_operators.md#special-operators)
-`&` can be used:
-
-```console
-"& {<command>}"
-```
 
 #### -Help, -?, /?
 

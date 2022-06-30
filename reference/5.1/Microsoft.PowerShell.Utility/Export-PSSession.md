@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 04/08/2020
+ms.date: 04/05/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/export-pssession?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Export-PSSession
@@ -252,18 +251,24 @@ Exports only the specified types of command objects. Use **CommandType** or its 
 
 The acceptable values for this parameter are as follows:
 
-- Alias. All PowerShell aliases in the current session.
-- All. All command types. It is the equivalent of `Get-Command -Name *`.
-- Application. All files other than PowerShell files in paths listed in the Path environment
+- `Alias`: All PowerShell aliases in the current session.
+- `All`: All command types. It is the equivalent of `Get-Command -Name *`.
+- `Application`: All files other than PowerShell files in paths listed in the Path environment
   variable (`$env:path`), including .txt, .exe, and .dll files.
-- Cmdlet. The cmdlets in the current session. Cmdlet is the default.
-- Configuration. A PowerShell configuration. For more information, see
+- `Cmdlet`: The cmdlets in the current session. Cmdlet is the default.
+- `Configuration`: A PowerShell configuration. For more information, see
   [about_Session_Configurations](../Microsoft.PowerShell.Core/About/about_Session_Configurations.md).
-- ExternalScript. All .ps1 files in the paths listed in the Path environment variable
+- `ExternalScript`: All .ps1 files in the paths listed in the Path environment variable
   (`$env:path`).
-- Filter and Function. All PowerShell functions.
-- Script. Script blocks in the current session.
-- Workflow. A PowerShell workflow. For more information, see [about_Workflows](../PSWorkflow/About/about_Workflows.md).
+- `Filter` and `Function`: All PowerShell functions.
+- `Script` Script blocks in the current session.
+- `Workflow` A PowerShell workflow. For more information, see [about_Workflows](../PSWorkflow/About/about_Workflows.md).
+
+These values are defined as a flag-based enumeration. You can combine multiple values together to
+set multiple flags using this parameter. The values can be passed to the **CommandType** parameter
+as an array of values or as a comma-separated string of those values. The cmdlet will combine the
+values using a binary-OR operation. Passing values as an array is the simplest option and also
+allows you to use tab-completion on the values.
 
 ```yaml
 Type: System.Management.Automation.CommandTypes
@@ -284,14 +289,14 @@ Specifies the type of encoding for the target file. The default value is `UTF8`.
 
 The acceptable values for this parameter are as follows:
 
-- `ASCII` Uses ASCII (7-bit) character set.
-- `BigEndianUnicode` Uses UTF-16 with the big-endian byte order.
-- `Default` Uses the encoding that corresponds to the system's active code page.
-- `OEM` Uses the encoding that corresponds to the system's current OEM code page.
-- `Unicode` Uses UTF-16 with the little-endian byte order.
-- `UTF7` Uses UTF-7.
-- `UTF8` Uses UTF-8.
-- `UTF32` Uses UTF-32 with the little-endian byte order.
+- `ASCII`: Uses ASCII (7-bit) character set.
+- `BigEndianUnicode`: Uses UTF-16 with the big-endian byte order.
+- `Default`; Uses the encoding that corresponds to the system's active code page.
+- `OEM`: Uses the encoding that corresponds to the system's current OEM code page.
+- `Unicode`: Uses UTF-16 with the little-endian byte order.
+- `UTF7`: Uses UTF-7.
+- `UTF8`: Uses UTF-8.
+- `UTF32`: Uses UTF-32 with the little-endian byte order.
 
 ```yaml
 Type: System.String

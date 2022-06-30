@@ -1,14 +1,13 @@
 ---
-description:  Explains how to disconnect and reconnect to a PowerShell Session (PSSession). 
-keywords: powershell,cmdlet
+description: Explains how to disconnect and reconnect to a PowerShell Session (PSSession).
 Locale: en-US
 ms.date: 12/01/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_remote_disconnected_sessions?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Remote_Disconnected_Sessions
+title: about Remote Disconnected Sessions
 ---
 
-# About Remote Disconnected Sessions
+# about_Remote_Disconnected_Sessions
 
 ## Short description
 
@@ -673,22 +672,13 @@ PowerShell doesn't attempt to maintain the PSSession.
 
 ## See also
 
-[about_Jobs](about_Jobs.md)
-
-[about_Remote](about_Remote.md)
-
-[about_Remote_Variables](about_Remote_Variables.md)
-
-[about_PSSessions](about_PSSessions.md)
-
-[about_Session_Configurations](about_Session_Configurations.md)
-
-[Connect-PSSession](xref:Microsoft.PowerShell.Core.Connect-PSSession)
-
-[Disconnect-PSSession](xref:Microsoft.PowerShell.Core.Disconnect-PSSession)
-
-[Get-PSSession](xref:Microsoft.PowerShell.Core.Get-PSSession)
-
-[Receive-PSSession](xref:Microsoft.PowerShell.Core.Receive-PSSession)
-
-[Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
+- [about_Jobs](about_Jobs.md)
+- [about_Remote](about_Remote.md)
+- [about_Remote_Variables](about_Remote_Variables.md)
+- [about_PSSessions](about_PSSessions.md)
+- [about_Session_Configurations](about_Session_Configurations.md)
+- [Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
+- [Connect-PSSession](xref:Microsoft.PowerShell.Core.Connect-PSSession)
+- [Disconnect-PSSession](xref:Microsoft.PowerShell.Core.Disconnect-PSSession)
+- [Get-PSSession](xref:Microsoft.PowerShell.Core.Get-PSSession)
+- [Receive-PSSession](xref:Microsoft.PowerShell.Core.Receive-PSSession)

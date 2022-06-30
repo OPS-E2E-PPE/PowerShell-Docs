@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 05/11/2020
+ms.date: 06/03/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/send-mailmessage?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Send-MailMessage
@@ -220,6 +220,12 @@ The acceptable values for this parameter are as follows:
 - `Delay`: Notify if the delivery is delayed.
 - `Never`: Never notify.
 
+These values are defined as a flag-based enumeration. You can combine multiple values together to
+set multiple flags using this parameter. The values can be passed to the **DeliveryNotification**
+parameter as an array of values or as a comma-separated string of those values. The cmdlet will
+combine the values using a binary-OR operation. Passing values as an array is the simplest option
+and also allows you to use tab-completion on the values.
+
 ```yaml
 Type: System.Net.Mail.DeliveryNotificationOptions
 Parameter Sets: (All)
@@ -376,9 +382,8 @@ Accept wildcard characters: False
 
 ### -To
 
-The **To** parameter is required. This parameter specifies the recipient's email address. If there
-are multiple recipients, separate their addresses with a comma (`,`). Enter names (optional) and the
-email address, such as `Name <someone@fabrikam.com>`.
+The **To** parameter is required. This parameter specifies the recipient's email address. Enter
+names (optional) and the email address, such as `Name <someone@fabrikam.com>`.
 
 ```yaml
 Type: System.String[]
@@ -434,4 +439,3 @@ This cmdlet does not generate any output.
 [about_Preference_Variables](../Microsoft.PowerShell.Core/About/about_Preference_Variables.md)
 
 [Get-Credential](../Microsoft.PowerShell.Security/Get-Credential.md)
-

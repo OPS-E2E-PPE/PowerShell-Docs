@@ -1,20 +1,19 @@
 ---
-description:  Explains limitations of  Windows PowerShell 4.0 on Windows RT 8.1. 
-keywords: powershell,cmdlet
+description: Explains limitations of  Windows PowerShell 4.0 on Windows RT 8.1.
 Locale: en-US
 ms.date: 01/03/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_windows_rt?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Windows_RT
+title: about Windows RT
 ---
 
-# About Windows RT
+# about_Windows_RT
 
-## SHORT DESCRIPTION
+## Short description
 
 Explains limitations of  Windows PowerShell 4.0 on Windows RT 8.1.
 
-## LONG DESCRIPTION
+## Long description
 
 The Windows RT 8.1 operating system is installed on computers and devices
 (such as Microsoft Surface 2, on which it is the operating system that ships
@@ -64,10 +63,8 @@ devices. The following list explains the differences.
 For more information about ConstrainedLanguage language mode, see
 [about_Language_Modes](about_Language_Modes.md).
 
-## SEE ALSO
+## See also
 
-[about_Language_Modes](about_Language_Modes.md)
-
-[about_Remote](about_Remote.md)
-
-[about_Windows_PowerShell_ISE](about_Windows_PowerShell_ISE.md)
+- [about_Language_Modes](about_Language_Modes.md)
+- [about_Remote](about_Remote.md)
+- [about_Windows_PowerShell_ISE](about_Windows_PowerShell_ISE.md)

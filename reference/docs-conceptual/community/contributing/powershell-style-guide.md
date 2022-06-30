@@ -1,8 +1,8 @@
 ---
-title: PowerShell-Docs style guide
 description: This article provides the rules of style for writing PowerShell documentation.
-ms.date: 12/09/2020
+ms.date: 11/01/2021
 ms.topic: conceptual
+title: PowerShell-Docs style guide
 ---
 # PowerShell-Docs style guide
 
@@ -37,9 +37,9 @@ Related products
 
 ## Markdown specifics
 
-The Microsoft Open Publishing System (OPS) that builds our documentation uses [markdig][] to process
-the Markdown documents. Markdig parses the documents based on the rules of the latest [CommonMark][]
-specification.
+The Microsoft Open Publishing System (OPS) that builds our documentation uses [markdig][markdig] to
+process the Markdown documents. Markdig parses the documents based on the rules of the latest
+[CommonMark][CommonMark] specification.
 
 The new CommonMark spec is much stricter about the construction of some Markdown elements. Pay close
 attention to the details provided in this document.
@@ -268,8 +268,8 @@ Warning block
     location
 
   If you need to link to a specific version of a document, then you need to add the
-  `&preserve_view=true` parameter to the query string. For example:
-  `?view=powershell-5.1&preserve_view=true`
+  `&preserve-view=true` parameter to the query string. For example:
+  `?view=powershell-5.1&preserve-view=true`
 
 - A **file link** is used to link from one reference article to another, or from one conceptual
   article to another. If you need to link to a reference article for a specific version of
@@ -321,6 +321,10 @@ For more information, see [Use links in documentation](/contribute/how-to-write-
   $files = Get-ChildItem C:\Windows
   ```
   ~~~
+
+  - PowerShell keywords and operators should be all lowercase
+
+  - Use proper (Pascal) casing for cmdlet names and parameters
 
   - When referring to a parameter by name, the name should be **bold**. When illustrating the use of
     a parameter with the hyphen prefix, the parameter should be wrapped in backticks. For example:
@@ -526,7 +530,7 @@ GameConfigStore        GameDVR_Enabled                       : 1
 ### Don't use aliases in examples
 
 Use the full name of all cmdlets and parameters unless you're specifically documenting the alias.
-Cmdlet and parameter names must use the proper [Pascal-cased][] names.
+Cmdlet and parameter names must use the proper [Pascal-cased][Pascal-cased] names.
 
 ### Using parameters in examples
 
@@ -535,13 +539,14 @@ example, even if the parameter is positional. This reduces the chance of confusi
 
 ## Formatting cmdlet reference articles
 
-Cmdlet reference articles have a specific structure. This structure is defined by [PlatyPS][].
-PlatyPS generates the cmdlet help for PowerShell modules in Markdown. After editing the Markdown
-files, PlatyPS is used create the MAML help files used by the `Get-Help` cmdlet.
+Cmdlet reference articles have a specific structure. This structure is defined by
+[PlatyPS][PlatyPS]. PlatyPS generates the cmdlet help for PowerShell modules in Markdown. After
+editing the Markdown files, PlatyPS is used create the MAML help files used by the `Get-Help`
+cmdlet.
 
 PlatyPS has a hard-coded schema for cmdlet reference that is written into the code. The
-[platyPS.schema.md][] document attempts to describe this structure. Schema violations cause build
-errors that must be fixed before we can accept your contribution.
+[platyPS.schema.md][platyPS.schema.md] document attempts to describe this structure. Schema
+violations cause build errors that must be fixed before we can accept your contribution.
 
 - Don't remove any of the ATX header structures. PlatyPS expects a specific set of headers.
 - The **Input type** and **Output type** headers must have a type. If the cmdlet doesn't take input
@@ -584,9 +589,9 @@ Get-Command -ListImported
 
 ## Formatting About_ files
 
-`About_*` files are written in Markdown but are shipped as plain text files. We use [Pandoc][] to
-convert the Markdown to plain text. `About_*` files are formatted for the best compatibility across
-all versions of PowerShell and with the publishing tools.
+`About_*` files are written in Markdown but are shipped as plain text files. We use
+[Pandoc][Pandoc] to convert the Markdown to plain text. `About_*` files are formatted for the best
+compatibility across all versions of PowerShell and with the publishing tools.
 
 Basic formatting guidelines:
 

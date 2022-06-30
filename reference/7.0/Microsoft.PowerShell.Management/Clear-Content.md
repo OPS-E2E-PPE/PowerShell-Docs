@@ -52,7 +52,7 @@ Clear-Content -Path "*" -Filter "*.log" -Force
 ```
 
 This command deletes the contents of all files in the current directory with the ".log" file name
-extension, including files with the read-only attribute. The asterisk (\*) in the path represents
+extension, including files with the read-only attribute. The asterisk (`*`) in the path represents
 all items in the current directory. The **Force** parameter makes the command effective on read-only
 files. Using a filter to restrict the command to files with the .log file name extension instead of
 specifying \*.log in the path makes the operation faster.
@@ -87,34 +87,6 @@ PS C:\>
 ```
 
 ## PARAMETERS
-
-### -Stream
-
-> [!NOTE]
-> This Parameter is only available on Windows.
-
-Specifies an alternative data stream for content. If the stream does not exist, this cmdlet creates
-it. Wildcard characters are not supported.
-
-Stream is a dynamic parameter that the FileSystem provider adds to `Clear-Content`.
-This parameter works only in file system drives.
-
-You can use the `Clear-Content` cmdlet to change the content of amy alternate data stream, such as
-`Zone.Identifier`. However, we do not recommend this as a way to eliminate security checks that
-block files that are downloaded from the Internet. If you verify that a downloaded file is safe, use
-the `Unblock-File` cmdlet.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Credential
 
@@ -240,6 +212,34 @@ Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: True
+```
+
+### -Stream
+
+> [!NOTE]
+> This Parameter is only available on Windows.
+
+Specifies an alternative data stream for content. If the stream does not exist, this cmdlet creates
+it. Wildcard characters are not supported.
+
+Stream is a dynamic parameter that the FileSystem provider adds to `Clear-Content`.
+This parameter works only in file system drives.
+
+You can use the `Clear-Content` cmdlet to change the content of amy alternate data stream, such as
+`Zone.Identifier`. However, we do not recommend this as a way to eliminate security checks that
+block files that are downloaded from the Internet. If you verify that a downloaded file is safe, use
+the `Unblock-File` cmdlet.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
 ### -Confirm

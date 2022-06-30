@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 03/27/2020
+ms.date: 12/16/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/get-childitem?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-ChildItem
@@ -345,7 +344,22 @@ The `Get-ChildItem` cmdlet uses the **Path** parameter to specify **C:\Parent**.
 parameter specifies two levels of recursion. `Get-ChildItem` displays the contents of the directory
 specified by the **Path** parameter and the two levels of subdirectories.
 
-## Parameters
+### Example 9 - Get the link target for a junction point
+
+The `dir` command in the Windows Command Shell shows the target location of a filesystem junction
+point. In PowerShell, this information is available from the **Target** property of the filesystem
+object returned by `Get-ChildItem`.
+
+```powershell
+PS D:\> New-Item -ItemType Junction -Name tmp -Target $env:TEMP
+PS D:\> Get-ChildItem | select name,*target
+
+Name     Target
+----     ------
+tmp      {C:\Users\user1\AppData\Local\Temp}
+```
+
+## PARAMETERS
 
 ### -Attributes
 
@@ -454,14 +468,17 @@ Accept wildcard characters: False
 
 ### -Exclude
 
-Specifies, as a string array, a property or property that this cmdlet excludes from the operation.
-The value of this parameter qualifies the **Path** parameter. Enter a path element or pattern, such
-as `*.txt` or `A*`. Wildcard characters are accepted.
+Specifies an array of one or more string patterns to be matched as the cmdlet gets child items. Any
+matching item is excluded from the output. Enter a path element or pattern, such as `*.txt` or `A*`.
+Wildcard characters are accepted.
 
 A trailing asterisk (`*`) in the **Path** parameter is optional. For example, `-Path C:\Test\Logs`
 or `-Path C:\Test\Logs\*`. If a trailing asterisk (`*`) is included, the command recurses into the
 **Path** parameter's subdirectories. Without the asterisk (`*`), the contents of the **Path**
 parameter are displayed. More details are included in Example 5 and the Notes section.
+
+The **Include** and **Exclude** parameters can be used together. However, the exclusions are applied
+after the inclusions, which can affect the final output.
 
 ```yaml
 Type: System.String[]
@@ -550,11 +567,14 @@ Accept wildcard characters: False
 
 ### -Include
 
-Specifies, as a string array, an item or items that this cmdlet includes in the operation. The value
-of this parameter qualifies the **Path** parameter. Enter a path element or pattern, such as
-`"*.txt"`. Wildcard characters are permitted. The **Include** parameter is effective only when the
-command includes the contents of an item, such as `C:\Windows\*`, where the wildcard character
-specifies the contents of the `C:\Windows` directory.
+Specifies an array of one or more string patterns to be matched as the cmdlet gets child items. Any
+matching item is included in the output. Enter a path element or pattern, such as `"*.txt"`.
+Wildcard characters are permitted. The **Include** parameter is effective only when the command
+includes the contents of an item, such as `C:\Windows\*`, where the wildcard character specifies the
+contents of the `C:\Windows` directory.
+
+The **Include** and **Exclude** parameters can be used together. However, the exclusions are applied
+after the inclusions, which can affect the final output.
 
 ```yaml
 Type: System.String[]

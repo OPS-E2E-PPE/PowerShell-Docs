@@ -1,19 +1,18 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 08/10/2020
+ms.date: 01/25/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/compare-object?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Compare-Object
 ---
 # Compare-Object
 
-## Synopsis
+## SYNOPSIS
 Compares two sets of objects.
 
-## Syntax
+## SYNTAX
 
 ```
 Compare-Object [-ReferenceObject] <PSObject[]> [-DifferenceObject] <PSObject[]>
@@ -21,7 +20,7 @@ Compare-Object [-ReferenceObject] <PSObject[]> [-DifferenceObject] <PSObject[]>
  [-Culture <String>] [-CaseSensitive] [<CommonParameters>]
 ```
 
-## Description
+## DESCRIPTION
 
 The `Compare-Object` cmdlet compares two sets of objects. One set of objects is the **reference**,
 and the other set of objects is the **difference**.
@@ -41,7 +40,7 @@ terminating error.
 Some examples use splatting to reduce the line length of the code samples. For more information, see
 [about_Splatting](../Microsoft.PowerShell.Core/About/about_Splatting.md).
 
-## Examples
+## EXAMPLES
 
 ### Example 1 - Compare the content of two text files
 
@@ -254,7 +253,7 @@ InputObject SideIndicator
 
 In the second case, the **TimeSpan** is converted to a string so the object are different.
 
-## Parameters
+## PARAMETERS
 
 ### -CaseSensitive
 
@@ -409,6 +408,10 @@ a collection of objects. `Compare-Object` examines adjacent objects when it does
 in the same position in a collection. The default value is `[Int32]::MaxValue`, which means that
 `Compare-Object` examines the entire object collection.
 
+When working with large collections, the default value might not be efficient but is accurate.
+Specifying a smaller value for **SyncWindow** can increase performance but could have lower
+accuracy.
+
 ```yaml
 Type: System.Int32
 Parameter Sets: (All)
@@ -428,13 +431,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 -WarningAction, and -WarningVariable. For more information, see
 [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
-## Inputs
+## INPUTS
 
 ### System.Management.Automation.PSObject
 
 You can send an object down the pipeline to the **DifferenceObject** parameter.
 
-## Outputs
+## OUTPUTS
 
 ### None
 
@@ -450,14 +453,14 @@ When you use the **PassThru** parameter, the **Type** of the object is not chang
 of the object returned has an added **NoteProperty** named **SideIndicator**. **SideIndicator**
 shows which input object the output belongs to.
 
-## Notes
+## NOTES
 
 When using the **PassThru** parameter, the output displayed in the console may not include the
-**SideIndicator** property. The default format view of the for the object type output by
-`Compare-Object` does not include the **SideIndicator** property. For more information see
-[Example 3](#ex3) in this article.
+**SideIndicator** property. The default format view for the object type output by `Compare-Object`
+does not include the **SideIndicator** property. For more information see [Example 3](#ex3) in this
+article.
 
-## Related links
+## RELATED LINKS
 
 [about_Calculated_Properties](../Microsoft.PowerShell.Core/About/about_Calculated_Properties.md)
 

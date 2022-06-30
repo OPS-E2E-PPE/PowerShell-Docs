@@ -1,14 +1,13 @@
 ---
-description:  Explains how to resolve problems with scheduled jobs 
-keywords: powershell,cmdlet
+description: Explains how to resolve problems with scheduled jobs
 Locale: en-US
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/psscheduledjob/about/about_scheduled_jobs_troubleshooting?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Scheduled_Jobs_Troubleshooting
+title: about Scheduled Jobs Troubleshooting
 ---
 
-# About Scheduled Jobs Troubleshooting
+# about_Scheduled_Jobs_Troubleshooting
 
 ## Short description
 
@@ -538,12 +537,8 @@ imports the **PSScheduledJob** module, and then runs the command.
 
 ## See also
 
-[about_Scheduled_Jobs_Basics](about_Scheduled_Jobs_Basics.md)
-
-[about_Scheduled_Jobs_Advanced](about_Scheduled_Jobs_Advanced.md)
-
-[about_Scheduled_Jobs](about_Scheduled_Jobs.md)
-
-[PSScheduledJob](xref:PSScheduledJob) module cmdlets
-
-[Task Scheduler](/windows/desktop/TaskSchd/task-scheduler-reference)
+- [about_Scheduled_Jobs](about_Scheduled_Jobs.md)
+- [about_Scheduled_Jobs_Basics](about_Scheduled_Jobs_Basics.md)
+- [about_Scheduled_Jobs_Advanced](about_Scheduled_Jobs_Advanced.md)
+- [PSScheduledJob](xref:PSScheduledJob) module cmdlets
+- [Task Scheduler](/windows/desktop/TaskSchd/task-scheduler-reference)

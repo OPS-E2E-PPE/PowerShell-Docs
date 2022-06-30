@@ -1,8 +1,8 @@
 ---
 author: sdwheeler
-ms.author: sewhee
-ms.date: 02/14/2020
 description: Download PowerShell related artwork and posters
+ms.author: sewhee
+ms.date: 05/05/2022
 title: PowerShell Digital Art
 ---
 # PowerShell Digital Art
@@ -14,7 +14,7 @@ entrusted with the Scrolls of Monad!*
 
 ## PowerShell Infographic
 
-- [PowerShell Infographic](https://github.com/MicrosoftDocs/PowerShell-Docs/blob/staging/assets/PowerShell_7_Infographic.pdf)
+- [PowerShell Infographic](https://github.com/MicrosoftDocs/PowerShell-Docs/blob/main/assets/PowerShell_7_Infographic.pdf)
 
 ## Comic
 

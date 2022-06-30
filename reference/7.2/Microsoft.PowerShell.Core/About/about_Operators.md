@@ -1,12 +1,12 @@
 ---
 description: Describes the operators that are supported by PowerShell.
 Locale: en-US
-ms.date: 10/28/2020
+ms.date: 03/16/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Operators
+title: about Operators
 ---
-# About Operators
+# about_Operators
 
 ## Short description
 Describes the operators that are supported by PowerShell.
@@ -16,7 +16,7 @@ Describes the operators that are supported by PowerShell.
 An operator is a language element that you can use in a command or expression.
 PowerShell supports several types of operators to help you manipulate values.
 
-### Arithmetic Operators
+## Arithmetic Operators
 
 Use arithmetic operators (`+`, `-`, `*`, `/`, `%`) to calculate values in a
 command or expression. With these operators, you can add, subtract, multiply,
@@ -34,7 +34,7 @@ manipulate the bit patterns in values.
 For more information, see
 [about_Arithmetic_Operators](about_Arithmetic_Operators.md).
 
-### Assignment Operators
+## Assignment Operators
 
 Use assignment operators (`=`, `+=`, `-=`, `*=`, `/=`, `%=`) to assign, change,
 or append values to variables. You can combine arithmetic operators with
@@ -43,7 +43,7 @@ assignment to assign the result of the arithmetic operation to a variable.
 For more information, see
 [about_Assignment_Operators](about_Assignment_Operators.md).
 
-### Comparison Operators
+## Comparison Operators
 
 Use comparison operators (`-eq`, `-ne`, `-gt`, `-lt`, `-le`, `-ge`) to compare
 values and test conditions. For example, you can compare two string values to
@@ -62,7 +62,7 @@ given type.
 For more information, see
 [about_Comparison_Operators](about_Comparison_Operators.md).
 
-### Logical Operators
+## Logical Operators
 
 Use logical operators (`-and`, `-or`, `-xor`, `-not`, `!`) to connect
 conditional statements into a single complex conditional. For example, you can
@@ -71,7 +71,7 @@ conditions.
 
 For more information, see [about_Logical_Operators](about_logical_operators.md).
 
-### Redirection Operators
+## Redirection Operators
 
 Use redirection operators (`>`, `>>`, `2>`, `2>>`, and `2>&1`) to send the
 output of a command or expression to a text file. The redirection operators
@@ -81,7 +81,7 @@ cmdlet to redirect output.
 
 For more information, see [about_Redirection](about_Redirection.md)
 
-### Split and Join Operators
+## Split and Join Operators
 
 The `-split` and `-join` operators divide and combine substrings. The `-split`
 operator splits a string into substrings. The `-join` operator concatenates
@@ -90,26 +90,28 @@ multiple strings into a single string.
 For more information, see [about_Split](about_Split.md) and
 [about_Join](about_Join.md).
 
-### Type Operators
+## Type Operators
 
 Use the type operators (`-is`, `-isnot`, `-as`) to find or change the .NET
 Framework type of an object.
 
 For more information, see [about_Type_Operators](about_Type_Operators.md).
 
-### Unary Operators
+## Unary Operators
 
-Use unary operators to increment or decrement variables or object properties
-and to set integers to positive or negative numbers. For example, to increment
-the variable `$a` from `9` to `10`, you type `$a++`.
+Use the unary `++`  and `--` operators to increment or decrement values and
+`-` for negation. For example, to increment the variable `$a` from `9` to
+`10`, you type `$a++`.
 
-### Special Operators
+For more information, see [about_Arithmetic_Operators](about_Arithmetic_Operators.md).
+
+## Special Operators
 
 Special operators have specific use-cases that do not fit into any other
 operator group. For example, special operators allow you to run commands,
 change a value's data type, or retrieve elements from an array.
 
-#### Grouping operator `( )`
+### Grouping operator `( )`
 
 As in other languages, `(...)` serves to override operator precedence in
 expressions. For example: `(1 + 2) / 3`
@@ -130,7 +132,7 @@ However, in PowerShell, there are additional behaviors.
   output _collected in memory_ before the results are sent through the
   pipeline.
 
-#### Subexpression operator `$( )`
+### Subexpression operator `$( )`
 
 Returns the result of one or more statements. For a single result, returns a
 scalar. For multiple results, returns an array. Use this when you want to use
@@ -145,21 +147,38 @@ PS> "Folder list: $((dir c:\ -dir).Name -join ', ')"
 Folder list: Program Files, Program Files (x86), Users, Windows
 ```
 
-#### Array subexpression operator `@( )`
+### Array subexpression operator `@( )`
 
-Returns the result of one or more statements as an array. If there is only one
-item, the array has only one member.
+Returns the result of one or more statements as an array. The result is always
+an array of 0 or more objects.
 
 ```powershell
-@(Get-CimInstance win32_logicalDisk)
+PS> $list = @(Get-Process | Select-Object -First 10; Get-Service | Select-Object -First 10 )
+PS> $list.GetType()
+
+IsPublic IsSerial Name                                     BaseType
+-------- -------- ----                                     --------
+True     True     Object[]                                 System.Array
+
+PS> $list.Count
+20
+PS> $list = @(Get-Service | Where-Object Status -eq Starting )
+PS> $list.GetType()
+
+IsPublic IsSerial Name                                     BaseType
+-------- -------- ----                                     --------
+True     True     Object[]                                 System.Array
+
+PS> $list.Count
+0
 ```
 
-#### Hash table literal syntax `@{}`
+### Hash table literal syntax `@{}`
 
 Similar to the array subexpression, this syntax is used to declare a hash table.
 For more information, see [about_Hash_Tables](about_Hash_Tables.md).
 
-#### Call operator `&`
+### Call operator `&`
 
 Runs a command, script, or script block. The call operator, also known as the
 "invocation operator", lets you run commands that are stored in variables and
@@ -233,7 +252,7 @@ Hello World!
 
 For more about script blocks, see [about_Script_Blocks](about_Script_Blocks.md).
 
-#### Background operator `&`
+### Background operator `&`
 
 Runs the pipeline before it in the background, in a PowerShell job. This
 operator acts similarly to the UNIX control operator ampersand (`&`), which
@@ -312,22 +331,19 @@ Get-Process -Name pwsh & Get-Service -Name BITS & Get-CimInstance -ClassName Win
 
 For more information on PowerShell jobs, see [about_Jobs](about_Jobs.md).
 
-#### Cast operator `[ ]`
+### Cast operator `[ ]`
 
 Converts or limits objects to the specified type. If the objects cannot be
 converted, PowerShell generates an error.
 
 ```powershell
-[DateTime]"2/20/88" - [DateTime]"1/20/88"
-[Int] (7/2)
-[String] 1 + 0
-[Int] '1' + 0
+[DateTime] '2/20/88' - [DateTime] '1/20/88' -eq [TimeSpan] '31'
 ```
 
 A cast can also be performed when a variable is assigned to using
 [cast notation](about_Variables.md).
 
-#### Comma operator `,`
+### Comma operator `,`
 
 As a binary operator, the comma creates an array or appends to the array being
 created. In expression mode, as a unary operator, the comma creates an array
@@ -342,7 +358,7 @@ Write-Output (,1)
 Since `Write-Object` expects an argument, you must put the expression in
 parentheses.
 
-#### Dot sourcing operator `.`
+### Dot sourcing operator `.`
 
 Runs a script in the current scope so that any functions, aliases, and
 variables that the script creates are added to the current scope, overriding
@@ -366,7 +382,7 @@ automatic variable `$args` is preserved.
 > . .\sample.ps1
 > ```
 
-#### Format operator `-f`
+### Format operator `-f`
 
 Formats strings by using the format method of string objects. Enter the format
 string on the left side of the operator and the objects to be formatted on the
@@ -394,12 +410,15 @@ foo vs. {0}
 For more information, see the [String.Format](/dotnet/api/system.string.format)
 method and [Composite Formatting](/dotnet/standard/base-types/composite-formatting).
 
-#### Index operator `[ ]`
+### Index operator `[ ]`
 
 Selects objects from indexed collections, such as arrays and hash tables. Array
-indexes are zero-based, so the first object is indexed as `[0]`. For arrays
-(only), you can also use negative indexes to get the last values. Hash tables
-are indexed by key value.
+indexes are zero-based, so the first object is indexed as `[0]`. You can also
+use negative indexes to get the last values. Hash tables are indexed by key
+value.
+
+Given a list of indices, the index operator returns a list of members
+corresponding to those indices.
 
 ```
 PS> $a = 1, 2, 3
@@ -407,6 +426,10 @@ PS> $a[0]
 1
 PS> $a[-1]
 3
+PS> $a[2, 1, 0]
+3
+2
+1
 ```
 
 ```powershell
@@ -433,7 +456,22 @@ intro
 Once upon a time...
 ```
 
-#### Pipeline operator `|`
+When an object is not an indexed collection, using the index operator to access
+the first element returns the object itself. Index values beyond the first
+element return `$null`.
+
+```
+PS> (2)[0]
+2
+PS> (2)[-1]
+2
+PS> (2)[1] -eq $null
+True
+PS> (2)[0,0] -eq $null
+True
+```
+
+### Pipeline operator `|`
 
 Sends ("pipes") the output of the command that precedes it to the command that
 follows it. When the output includes more than one object (a "collection"), the
@@ -444,7 +482,7 @@ Get-Process | Get-Member
 Get-Service | Where-Object {$_.StartType -eq 'Automatic'}
 ```
 
-#### Pipeline chain operators `&&` and `||`
+### Pipeline chain operators `&&` and `||`
 
 Conditionally execute the right-hand side pipeline based on the success of the
 left-hand side pipeline.
@@ -462,7 +500,7 @@ npm install || Remove-Item -Recurse ./node_modules
 
 For more information, see [About_Pipeline_Chain_Operators](About_Pipeline_Chain_Operators.md).
 
-#### Range operator `..`
+### Range operator `..`
 
 Represents the sequential integers in an integer array, given an upper, and
 lower boundary.
@@ -504,7 +542,7 @@ B
 A
 ```
 
-#### Member access operator `.`
+### Member-access operator `.`
 
 Accesses the properties and methods of an object. The member name may be an
 expression.
@@ -515,7 +553,12 @@ $myProcess.peakWorkingSet
 'OS', 'Platform' | Foreach-Object { $PSVersionTable. $_ }
 ```
 
-#### Static member operator `::`
+Starting PowerShell 3.0, when you use the operator on a list collection object
+that does not have the member, PowerShell automatically enumerates the items in
+that collection and uses the operator on each of them. For more information, see
+[about_Member-Access_Enumeration](about_Member-Access_Enumeration.md).
+
+### Static member operator `::`
 
 Calls the static properties and methods of a .NET Framework class. To
 find the static properties and methods of an object, use the Static parameter
@@ -526,14 +569,14 @@ of the `Get-Member` cmdlet.  The member name may be an expression.
 'MinValue', 'MaxValue' | Foreach-Object { [int]:: $_ }
 ```
 
-#### Ternary operator `? <if-true> : <if-false>`
+### Ternary operator `? <if-true> : <if-false>`
 
 You can use the ternary operator as a replacement for the `if-else` statement
 in simple conditional cases.
 
 For more information, see [about_If](about_If.md).
 
-#### Null-coalescing operator `??`
+### Null-coalescing operator `??`
 
 The null-coalescing operator `??` returns the value of its left-hand operand if
 it isn't null. Otherwise, it evaluates the right-hand operand and returns its
@@ -560,7 +603,7 @@ $todaysDate ?? (Get-Date).ToShortDateString()
 1/10/2020
 ```
 
-#### Null-coalescing assignment operator `??=`
+### Null-coalescing assignment operator `??=`
 
 The null-coalescing assignment operator `??=` assigns the value of its
 right-hand operand to its left-hand operand only if the left-hand operand
@@ -588,7 +631,7 @@ $todaysDate ??= (Get-Date).ToShortDateString()
 1/10/2020
 ```
 
-#### Null-conditional operators `?.` and `?[]`
+### Null-conditional operators `?.` and `?[]`
 
 > [!NOTE]
 > This feature was moved from experimental to mainstream in PowerShell 7.1.
@@ -651,22 +694,13 @@ ${a}?[0]
 
 ## See also
 
-[about_Arithmetic_Operators](about_Arithmetic_Operators.md)
-
-[about_Assignment_Operators](about_Assignment_Operators.md)
-
-[about_Comparison_Operators](about_Comparison_Operators.md)
-
-[about_Logical_Operators](about_logical_operators.md)
-
-[about_Operator_Precedence](about_operator_precedence.md)
-
-[about_Type_Operators](about_Type_Operators.md)
-
-[about_Pipeline_Chain_Operators](about_Pipeline_Chain_Operators.md)
-
-[about_Split](about_Split.md)
-
-[about_Join](about_Join.md)
-
-[about_Redirection](about_Redirection.md)
+- [about_Arithmetic_Operators](about_Arithmetic_Operators.md)
+- [about_Assignment_Operators](about_Assignment_Operators.md)
+- [about_Comparison_Operators](about_Comparison_Operators.md)
+- [about_Logical_Operators](about_logical_operators.md)
+- [about_Operator_Precedence](about_operator_precedence.md)
+- [about_Member-Access_Enumeration](about_Member-Access_Enumeration.md)
+- [about_Type_Operators](about_Type_Operators.md)
+- [about_Split](about_Split.md)
+- [about_Join](about_Join.md)
+- [about_Redirection](about_Redirection.md)

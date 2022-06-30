@@ -4,15 +4,15 @@ Locale: en-US
 ms.date: 01/03/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_functions_outputtypeattribute?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Functions_OutputTypeAttribute
+title: about Functions OutputTypeAttribute
 ---
-# About Functions OutputTypeAttribute
+# about_Functions_OutputTypeAttribute
 
-## SHORT DESCRIPTION
+## Short description
 Describes an attribute that reports the type of object that the function
 returns.
 
-## LONG DESCRIPTION
+## Long description
 
 The OutputType attribute lists the .NET types of objects that the functions
 returns. You can use its optional ParameterSetName parameter to list different
@@ -29,7 +29,7 @@ The OutputType attribute value is only a documentation note. It is not derived
 from the function code or compared to the actual function output. As such, the
 value might be inaccurate.
 
-## SYNTAX
+## Syntax
 
 The OutputType attribute of functions has the following syntax:
 
@@ -100,7 +100,7 @@ function AdvancedFunction2
 }
 ```
 
-## EXAMPLES
+## Examples
 
 ### Example 1: Create a function that has the OutputType of String
 
@@ -213,7 +213,7 @@ function Invoke-Notepad
 }
 ```
 
-## NOTES
+## Notes
 
 The value of the OutputType property of a **FunctionInfo** object is an array of
 **System.Management.Automation.PSTypeName** objects, each of which have Name and
@@ -230,15 +230,10 @@ The value of the OutputType property can be null. Use a null value when
 the output is a not a .NET type, such as a **WMI** object or a formatted view
 of an object.
 
-## SEE ALSO
+## See also
 
-[about_Functions](about_Functions.md)
-
-[about_Functions_Advanced](about_Functions_Advanced.md)
-
-[about_Functions_Advanced_Methods](about_Functions_Advanced_Methods.md)
-
-[about_Functions_Advanced_Parameters](about_Functions_Advanced_Parameters.md)
-
-[about_Functions_CmdletBindingAttribute](about_Functions_CmdletBindingAttribute.md)
-
+- [about_Functions](about_Functions.md)
+- [about_Functions_Advanced](about_Functions_Advanced.md)
+- [about_Functions_Advanced_Methods](about_Functions_Advanced_Methods.md)
+- [about_Functions_Advanced_Parameters](about_Functions_Advanced_Parameters.md)
+- [about_Functions_CmdletBindingAttribute](about_Functions_CmdletBindingAttribute.md)

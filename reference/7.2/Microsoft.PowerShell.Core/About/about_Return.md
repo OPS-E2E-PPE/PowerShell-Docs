@@ -4,9 +4,9 @@ Locale: en-US
 ms.date: 01/03/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_return?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Return
+title: about Return
 ---
-# About Return
+# about_Return
 
 ## Short description
 
@@ -228,15 +228,9 @@ object to the pipeline, use one of the following two methods:
 
 ## See also
 
-[about_Language_Keywords](about_Language_Keywords.md)
-
-[about_Functions](about_Functions.md)
-
-[about_Scopes](about_Scopes.md)
-
-[about_Classes](about_Classes.md)
-
-[Write-Information](xref:Microsoft.PowerShell.Utility.Write-Information)
-
-[about_Script_Blocks](about_Script_Blocks.md)
-
+- [about_Classes](about_Classes.md)
+- [about_Functions](about_Functions.md)
+- [about_Language_Keywords](about_Language_Keywords.md)
+- [about_Scopes](about_Scopes.md)
+- [about_Script_Blocks](about_Script_Blocks.md)
+- [Write-Information](xref:Microsoft.PowerShell.Utility.Write-Information)

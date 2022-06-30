@@ -1,9 +1,9 @@
 ---
-title: Using PowerShell in Docker
 description: How to use PowerShell that is preinstalled in a Docker image.
+ms.date: 05/31/2022
 ms.devlang: powershell
 ms.topic: conceptual
-ms.date: 03/03/2020
+title: Using PowerShell in Docker
 ---
 
 # Using PowerShell in Docker
@@ -17,8 +17,8 @@ The released images require Docker 17.05 or newer. It is also expected that you 
 Docker without `sudo` or local administrative rights. Please follow Docker's official
 [instructions][install] to install `docker` correctly.
 
-The release containers derive from the official distribution image, such as `centos:7`, then install
-dependencies, and finally install the PowerShell package.
+The release containers derive from the official distribution image, then install dependencies, and
+finally install the PowerShell package.
 
 These containers live at [hub.docker.com/r/microsoft/powershell][docker-release].
 
@@ -44,7 +44,7 @@ docker rmi mcr.microsoft.com/powershell
 
 ## Legal and Licensing
 
-PowerShell is licensed under the [MIT license][].
+PowerShell is licensed under the [MIT license][mit].
 
 ### Windows Docker File and Image Licenses
 
@@ -66,7 +66,7 @@ PowerShell from the installed location. The telemetry we collect falls under the
 [install]: https://docs.docker.com/engine/installation/
 [docker-release]: https://hub.docker.com/r/microsoft/powershell/
 [appinsights]: https://azure.microsoft.com/services/application-insights/
-[MIT license]: https://github.com/PowerShell/PowerShell/tree/master/LICENSE.txt
+[mit]: https://github.com/PowerShell/PowerShell/tree/master/LICENSE.txt
 [PowerShell-Docker]: https://github.com/PowerShell/PowerShell-Docker
 [Window Server Core]: https://hub.docker.com/r/microsoft/windowsservercore/
 [Nano Server]: https://hub.docker.com/r/microsoft/nanoserver/

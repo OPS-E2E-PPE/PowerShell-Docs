@@ -1,14 +1,13 @@
 ---
-description:  The `Format.ps1xml` files in PowerShell define the default display of objects in the PowerShell console. You can create your own `Format.ps1xml` files to change the display of objects or to define default displays for new object types that you create in PowerShell. 
-keywords: powershell,cmdlet
+description: The `Format.ps1xml` files in PowerShell define the default display of objects in the PowerShell console. You can create your own `Format.ps1xml` files to change the display of objects or to define default displays for new object types that you create in PowerShell.
 Locale: en-US
-ms.date: 11/27/2019
+ms.date: 04/25/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_format.ps1xml?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Format.ps1xml
+title: about Format.ps1xml
 ---
 
-# About Format.ps1xml
+# about_Format.ps1xml
 
 ## Short description
 
@@ -377,11 +376,16 @@ that the `<ListControl>` tag is intended to display.
 ### WideControl tag
 
 The `<WideControl>` tag typically contains a `<WideEntries>` tag. The
-`<WideEntries>` tag contains one or more `<WideEntry>` tags. A `<WideEntry>`
-tag typically contains a `<PropertyName>` tag that specifies the property to be
-displayed at the specified location in the view. The `<PropertyName>` tag can
-contain a `<FormatString>` tag that specifies how the property is to be
-displayed.
+`<WideEntries>` tag contains one or more `<WideEntry>` tags. A `<WideEntry>` tag
+contains one `<WideItem>` tag.
+
+A `<WideItem>` tag must include either a `<PropertyName>` tag or a
+`<ScriptBlock>` tag. A `<PropertyName>` tag specifies the property to display at
+the specified location in the view. A `<ScriptBlock>` tag specifies a script to
+evaluate and display at the specified location in the view.
+
+A `<WideItem>` tag can contain a `<FormatString>` tag that specifies how to
+display the property.
 
 ### CustomControl tag
 
@@ -566,16 +570,10 @@ Update-FormatData -PrependPath $PSHOME\Format\MyFileSystem.Format.ps1xml
 
 ## See also
 
-[Export-FormatData](xref:Microsoft.PowerShell.Utility.Export-FormatData)
-
-[Get-FormatData](xref:Microsoft.PowerShell.Utility.Get-FormatData)
-
-[Get-TraceSource](xref:Microsoft.PowerShell.Utility.Get-TraceSource)
-
-[Format Schema XML Reference](/powershell/scripting/developer/format/format-schema-xml-reference)
-
-[Trace-Command](xref:Microsoft.PowerShell.Utility.Trace-Command)
-
-[Update-FormatData](xref:Microsoft.PowerShell.Utility.Update-FormatData)
-
-[Writing a PowerShell Formatting File](/powershell/scripting/developer/format/writing-a-powershell-formatting-file)
+- [Trace-Command](xref:Microsoft.PowerShell.Utility.Trace-Command)
+- [Export-FormatData](xref:Microsoft.PowerShell.Utility.Export-FormatData)
+- [Get-FormatData](xref:Microsoft.PowerShell.Utility.Get-FormatData)
+- [Update-FormatData](xref:Microsoft.PowerShell.Utility.Update-FormatData)
+- [Get-TraceSource](xref:Microsoft.PowerShell.Utility.Get-TraceSource)
+- [Format Schema XML Reference](/powershell/scripting/developer/format/format-schema-xml-reference)
+- [Writing a PowerShell Formatting File](/powershell/scripting/developer/format/writing-a-powershell-formatting-file)

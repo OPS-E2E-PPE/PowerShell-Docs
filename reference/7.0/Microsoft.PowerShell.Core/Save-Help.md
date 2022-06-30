@@ -1,9 +1,8 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 06/09/2017
+ms.date: 10/22/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/save-help?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Save-Help
@@ -180,7 +179,7 @@ information about the location of the newest help files.
 Save-Help -Module Microsoft.PowerShell* -UICulture de-DE, en-US, fr-FR, ja-JP -DestinationPath "D:\Help"
 ```
 
-This command saves help for the PowerShell Core modules in four different UI cultures. The language
+This command saves help for the core PowerShell modules in four different UI cultures. The language
 packs for these locales do not have to be installed on the computer.
 
 `Save-Help` can download help files for modules in different UI cultures only when the module owner
@@ -372,6 +371,22 @@ Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: True
 ```
 
+### -Scope
+
+This paramater does nothing in this cmdlet.
+
+```yaml
+Type: Microsoft.PowerShell.Commands.UpdateHelpScope
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
 ### -UICulture
 
 Specifies UI culture values for which this cmdlet gets updated help files. Enter one or more
@@ -416,22 +431,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Scope
-
-This paramater does nothing in this cmdlet.
-
-```yaml
-Type: Microsoft.PowerShell.Commands.UpdateHelpScope
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
@@ -471,7 +470,7 @@ This cmdlet does not generate any output.
   only for all cmdlets in module. To find the module that contains a particular cmdlet, use the
   **ModuleName** property together with the `Get-Command` cmdlet, for example,
   `(Get-Command \<cmdlet-name\>).ModuleName`
-- `Save-Help` supports all modules and the PowerShell Core snap-ins. It does not support any other
+- `Save-Help` supports all modules and the core PowerShell snap-ins. It does not support any other
   snap-ins.
 - The `Update-Help` and `Save-Help` cmdlets use the following ports to download help files: Port 80
   for HTTP and port 443 for HTTPS.

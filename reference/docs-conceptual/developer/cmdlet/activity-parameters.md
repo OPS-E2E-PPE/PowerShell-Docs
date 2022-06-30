@@ -1,8 +1,9 @@
 ---
-ms.date: 09/13/2016
-ms.topic: reference
-title: Activity Parameters
 description: Activity Parameters
+ms.date: 02/03/2022
+ms.topic: reference
+no-loc: [Append, Command, String, System.Version, Compress, Keyword, Continuous, Create, Delete, array, Drain, Erase, Include, Incremental, Insert, Interval, Notify, Object, Prompt, Quiet, Retry, Select, Strict, Truncate, Verify]
+title: Activity Parameters
 ---
 # Activity Parameters
 

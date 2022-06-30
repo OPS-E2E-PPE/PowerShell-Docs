@@ -2,18 +2,17 @@
 external help file: Microsoft.PowerShell.PSReadLine2.dll-Help.xml
 Locale: en-US
 Module Name: PSReadLine
-ms.date: 11/23/2020
+ms.date: 12/17/2021
 online version: https://docs.microsoft.com/powershell/module/psreadline/set-psreadlineoption?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-PSReadLineOption
 ---
-
 # Set-PSReadLineOption
 
-## Synopsis
+## SYNOPSIS
 Customizes the behavior of command line editing in **PSReadLine**.
 
-## Syntax
+## SYNTAX
 
 ```
 Set-PSReadLineOption [-EditMode <EditMode>] [-ContinuationPrompt <String>] [-HistoryNoDuplicates]
@@ -28,12 +27,12 @@ Set-PSReadLineOption [-EditMode <EditMode>] [-ContinuationPrompt <String>] [-His
  [-PredictionViewStyle <PredictionViewStyle>] [-Colors <Hashtable>] [<CommonParameters>]
 ```
 
-## Description
+## DESCRIPTION
 
 The `Set-PSReadLineOption` cmdlet customizes the behavior of the **PSReadLine** module when you're
 editing the command line. To view the **PSReadLine** settings, use `Get-PSReadLineOption`.
 
-## Examples
+## EXAMPLES
 
 ### Example 1: Set foreground and background colors
 
@@ -142,7 +141,7 @@ block object.
 For more information, see
 [about_Providers](/powershell/module/microsoft.powershell.core/about/about_providers).
 
-## Parameters
+## PARAMETERS
 
 ### -AddToHistoryHandler
 
@@ -445,13 +444,12 @@ If you don't use this parameter, the default path is as follows:
 
 **Windows**
 
-`$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\$($host.Name)_history.txt`
+- `$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\$($host.Name)_history.txt`
 
 **non-Windows**
 
-`$env:XDG_DATA_HOME/powershell/PSReadLine\$($host.Name)_history.txt`
-
-`$env:HOME/.local/share/powershell/PSReadLine\$($host.Name)_history.txt`
+- `$env:XDG_DATA_HOME/powershell/PSReadLine/$($host.Name)_history.txt`
+- `$env:HOME/.local/share/powershell/PSReadLine/$($host.Name)_history.txt`
 
 ```yaml
 Type: System.String
@@ -575,6 +573,54 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -PredictionSource
+
+Specifies the source for PSReadLine to get predictive suggestions.
+
+Valid values are:
+
+- **None** - disable the predictive IntelliSense feature (default).
+- **History** - enable the predictive IntelliSense feature and use the PSReadLine history as the
+  only source.
+- **Plugin** - enable the predictive IntelliSense feature and use the plugins (`CommandPrediction`)
+  as the only source. This value was added in PSReadLine 2.2.0
+- **HistoryAndPlugin** - enable the predictive IntelliSense feature and use both history and plugin
+  as the sources. This value was added in PSReadLine 2.2.0
+
+```yaml
+Type: Microsoft.PowerShell.PredictionSource
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PredictionViewStyle
+
+Sets the style for the display of the predictive text. The default is **InlineView**.
+
+- **InlineView** - the style as existing today, similar as in fish shell and zsh. (default)
+- **ListView** - suggestions are rendered in a drop down list, and users can select using
+  <kbd>UpArrow</kbd> and <kbd>DownArrow</kbd>.
+
+This parameter was added in PSReadLine 2.2.0
+
+```yaml
+Type: Microsoft.PowerShell.PredictionViewStyle
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: InlineView
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -PromptText
 
 When there's a parse error, **PSReadLine** changes a part of the prompt red. **PSReadLine** analyzes
@@ -691,76 +737,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PredictionSource
-
-Specifies the source for PSReadLine to get predictive suggestions.
-
-Valid values are:
-
-- **None** - disable the predictive IntelliSense feature (default).
--`**History** - enable the predictive IntelliSense feature and use the PSReadLine history as the
-  only source.
-- **Plugin** - enable the predictive IntelliSense feature and use the plugins (`CommandPrediction`)
-  as the only source. This value was added in PSReadLine 2.2.0
-- **HistoryAndPlugin** - enable the predictive IntelliSense feature and use both history and plugin
-  as the sources. This value was added in PSReadLine 2.2.0
-
-```yaml
-Type: Microsoft.PowerShell.PredictionSource
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PredictionViewStyle
-
-Sets the style for the display of the predictive text. The default is **InlineView**.
-
-- **InlineView** - the style as existing today, similar as in fish shell and zsh. (default)
-- **ListView** - suggestions are rendered in a drop down list, and users can select using
-  <kbd>UpArrow</kbd> and <kbd>DownArrow</kbd>.
-
-This parameter was added in PSReadLine 2.2.0
-
-```yaml
-Type: Microsoft.PowerShell.PredictionViewStyle
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: InlineView
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
 -WarningAction, and -WarningVariable. For more information, see
-[about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
-## Inputs
+## INPUTS
 
 ### None
 
 You cannot pipe objects to `Set-PSReadLineOption.`
 
-## Outputs
+## OUTPUTS
 
 ### None
 
 This cmdlet does not generate any output.
 
-## Notes
+## NOTES
 
-## Related links
+## RELATED LINKS
 
 [about_PSReadLine](./About/about_PSReadLine.md)
 

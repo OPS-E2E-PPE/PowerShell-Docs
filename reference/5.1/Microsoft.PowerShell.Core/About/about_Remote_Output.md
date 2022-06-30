@@ -1,20 +1,19 @@
 ---
-description:  Describes how to interpret and format the output of remote commands. 
-keywords: powershell,cmdlet
+description: Describes how to interpret and format the output of remote commands.
 Locale: en-US
 ms.date: 12/01/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_remote_output?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Remote_Output
+title: about Remote Output
 ---
 
-# About Remote Output
+# about_Remote_Output
 
-## SHORT DESCRIPTION
+## Short description
 
 Describes how to interpret and format the output of remote commands.
 
-## LONG DESCRIPTION
+## Long description
 
 The output of a command that was run on a remote computer might look
 like output of the same command run on a local computer, but there are
@@ -203,24 +202,15 @@ sort on the PSComputerName or MachineName property. You can also sort on
 another property of the object so that the results from different
 computers are interspersed.
 
-## SEE ALSO
+## See also
 
-[about_Remote](about_Remote.md)
-
-[about_Remote_Variables](about_Remote_Variables.md)
-
-[Format-Table](xref:Microsoft.PowerShell.Utility.Format-Table)
-
-[Get-EventLog](xref:Microsoft.PowerShell.Management.Get-EventLog)
-
-[Get-Process](xref:Microsoft.PowerShell.Management.Get-Process)
-
-[Get-Service](xref:Microsoft.PowerShell.Management.Get-Service)
-
-[Get-WmiObject](xref:Microsoft.PowerShell.Management.Get-WmiObject)
-
-[Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
-
-[Out-GridView](xref:Microsoft.PowerShell.Utility.Out-GridView)
-
-[Select-Object](xref:Microsoft.PowerShell.Utility.Select-Object)
+- [about_Remote](about_Remote.md)
+- [about_Remote_Variables](about_Remote_Variables.md)
+- [Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
+- [Get-EventLog](xref:Microsoft.PowerShell.Management.Get-EventLog)
+- [Out-GridView](xref:Microsoft.PowerShell.Utility.Out-GridView)
+- [Select-Object](xref:Microsoft.PowerShell.Utility.Select-Object)
+- [Get-Process](xref:Microsoft.PowerShell.Management.Get-Process)
+- [Get-Service](xref:Microsoft.PowerShell.Management.Get-Service)
+- [Format-Table](xref:Microsoft.PowerShell.Utility.Format-Table)
+- [Get-WmiObject](xref:Microsoft.PowerShell.Management.Get-WmiObject)

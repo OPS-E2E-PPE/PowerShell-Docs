@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 09/19/2019
+ms.date: 05/16/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/test-json?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Test-Json
@@ -128,9 +127,9 @@ Accept wildcard characters: False
 
 ### -Schema
 
-Specifies a Schema to validate the JSON input against. If passed `Test-Json` will validate that the
-Json input conforms to the spec specified by the **Schema** parameter and return `$True` only if the
-input conforms to the provided Schema.
+Specifies a schema to validate the JSON input against. If passed, `Test-Json` will validate that the
+JSON input conforms to the spec specified by the **Schema** parameter and return `$true` only if the
+input conforms to the provided schema.
 
 For more information, see [JSON Schema](https://json-schema.org/).
 
@@ -148,9 +147,10 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction,
--InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and
--WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -164,7 +164,13 @@ You can pipe a JSON string to `Test-Json`.
 
 ## NOTES
 
-The `Test-Json` cmdlet is implemented by using the [NJsonSchema Class](https://github.com/RSuter/NJsonSchema).
+The `Test-Json` cmdlet is implemented by using the
+[NJsonSchema Class](https://github.com/RSuter/NJsonSchema).
+
+Since PowerShell 6, PowerShell uses the Newtonsoft.Json assemblies for all JSON functions.
+Newtonsoft's implementation includes several extensions to the JSON standard, such as support for
+comments and use of single quotes. For a full list of features, see the Newtonsoft documentation at
+[https://www.newtonsoft.com/json](https://www.newtonsoft.com/json).
 
 ## RELATED LINKS
 

@@ -1,9 +1,8 @@
 ---
 external help file: PSModule-help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: PowerShellGet
-ms.date: 06/09/2017
+ms.date: 06/23/2021
 online version: https://docs.microsoft.com/powershell/module/powershellget/install-script?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Install-Script
@@ -243,22 +242,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Credential
 
 Specifies a user account that has rights to install a script for a specified package provider or
@@ -294,7 +277,8 @@ Accept wildcard characters: False
 
 ### -InputObject
 
-Used for pipeline input.
+Used for pipeline input. An error is thrown if a value supplied directly to **InputObject**.
+Use the pipeline to pass objects with the **InputObject** parameter.
 
 ```yaml
 Type: System.Management.Automation.PSObject[]
@@ -483,6 +467,22 @@ Accepted values: CurrentUser, AllUsers
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

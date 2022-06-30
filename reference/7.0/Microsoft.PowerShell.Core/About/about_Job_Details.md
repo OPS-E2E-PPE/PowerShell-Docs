@@ -1,13 +1,12 @@
 ---
 description: Provides details about background jobs on local and remote computers.
-keywords: powershell,cmdlet
 Locale: en-US
 ms.date: 10/16/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_job_details?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Job_Details
+title: about Job Details
 ---
-# About Job Details
+# about_Job_Details
 
 ## Short description
 Provides details about background jobs on local and remote computers.
@@ -352,15 +351,15 @@ Id         Name            JobTriggers     Command       Enabled
 ## See also
 
 - [about_Jobs](about_Jobs.md)
-- [about_Remote_Jobs](about_Remote_Jobs.md)
-- [about_Thread_Jobs](about_Thread_Jobs.md)
 - [about_Remote](about_Remote.md)
+- [about_Remote_Jobs](about_Remote_Jobs.md)
+- [about_Thread_Jobs](/powershell/module/microsoft.powershell.core/about/about_Thread_Jobs)
 - [Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
-- [Start-Job](xref:Microsoft.PowerShell.Core.Start-Job)
 - [Get-Job](xref:Microsoft.PowerShell.Core.Get-Job)
-- [Wait-Job](xref:Microsoft.PowerShell.Core.Wait-Job)
-- [Stop-Job](xref:Microsoft.PowerShell.Core.Stop-Job)
 - [Remove-Job](xref:Microsoft.PowerShell.Core.Remove-Job)
-- [New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
+- [Start-Job](xref:Microsoft.PowerShell.Core.Start-Job)
+- [Stop-Job](xref:Microsoft.PowerShell.Core.Stop-Job)
+- [Wait-Job](xref:Microsoft.PowerShell.Core.Wait-Job)
 - [Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
 - [Exit-PSSession](xref:Microsoft.PowerShell.Core.Exit-PSSession)
+- [New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)

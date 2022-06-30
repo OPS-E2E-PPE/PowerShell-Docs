@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Security
-ms.date: 3/22/2019
+ms.date: 03/22/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-ExecutionPolicy
@@ -261,7 +260,7 @@ The acceptable execution policy values are as follows:
   **RemoteSigned** for Windows servers.
 - **RemoteSigned**. Requires that all scripts and configuration files downloaded from the Internet
   are signed by a trusted publisher. The default execution policy for Windows server computers.
-- **Restricted**. Doesn't load configuration files or run scripts. The default execution policy
+- **Restricted**. Doesn't load configuration files or run scripts. The default execution policy for
   Windows client computers.
 - **Undefined**. No execution policy is set for the scope. Removes an assigned execution policy from
   a scope that is not set by a Group Policy. If the execution policy in all scopes is **Undefined**,

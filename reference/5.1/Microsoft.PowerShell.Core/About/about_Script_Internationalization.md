@@ -1,20 +1,19 @@
 ---
-description: Describes the script internationalization features that make it easy for scripts to display messages and instructions to users in their user interface (UI) language. 
-keywords: powershell,cmdlet
+description: Describes the script internationalization features that make it easy for scripts to display messages and instructions to users in their user interface (UI) language.
 Locale: en-US
 ms.date: 03/20/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_script_internationalization?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Script_Internationalization
+title: about Script Internationalization
 ---
-# About Script Internationalization
+# about_Script_Internationalization
 
-## Short Description
+## Short description
 Describes the script internationalization features that make it easy for
 scripts to display messages and instructions to users in their user interface
 (UI) language.
 
-## Long Description
+## Long description
 
 The PowerShell script internationalization features allow you to better serve
 users throughout the world by displaying help and user messages in the user's
@@ -246,5 +245,5 @@ Heute ist Freitag
 - [about_Automatic_Variables](about_Automatic_Variables.md)
 - [about_Hash_Tables](about_Hash_Tables.md)
 - [about_Quoting_Rules](about_Quoting_Rules.md)
-- [ConvertFrom-StringData](xref:Microsoft.PowerShell.Utility.ConvertFrom-StringData)
 - [Import-LocalizedData](xref:Microsoft.PowerShell.Utility.Import-LocalizedData)
+- [ConvertFrom-StringData](xref:Microsoft.PowerShell.Utility.ConvertFrom-StringData)

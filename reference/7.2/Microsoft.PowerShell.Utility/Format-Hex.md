@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 08/19/2020
+ms.date: 06/22/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/format-hex?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Format-Hex
@@ -156,6 +156,24 @@ data, and the adjacent object is also numeric, it will group them into a single 
 
 ## PARAMETERS
 
+### -Count
+
+This represents the number of bytes to include in the hex output.
+
+This parameter was introduced in PowerShell 6.2.
+
+```yaml
+Type: System.Int64
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: Int64.MaxValue
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Encoding
 
 Specifies the encoding of the input strings. This only applies to `[string]` input. The parameter
@@ -180,7 +198,7 @@ pages (like `-Encoding 1251`) or string names of registered code pages (like
 [Encoding.CodePage](/dotnet/api/system.text.encoding.codepage?view=netcore-2.2).
 
 > [!NOTE]
-> **UTF-7*** is no longer recommended to use. In PowerShell 7.1, a warning is written if you
+> **UTF-7*** is no longer recommended to use. As of PowerShell 7.1, a warning is written if you
 > specify `utf7` for the **Encoding** parameter.
 
 ```yaml
@@ -198,8 +216,10 @@ Accept wildcard characters: False
 
 ### -InputObject
 
-Used for pipeline input. Pipeline input supports only certain scalar types and `[system.io.fileinfo]`
-instances for piping from `Get-ChildItem`.
+Specifies the objects to be formatted. Enter a variable that contains the objects or type a command
+or expression that gets the objects.
+
+Only certain scalar types and `[system.io.fileinfo]` are supported.
 
 The supported scalar types are:
 
@@ -247,6 +267,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Offset
+
+This represents the number of bytes to skip from being part of the hex output.
+
+This parameter was introduced in PowerShell 6.2.
+
+```yaml
+Type: System.Int64
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Path
 
 Specifies the path to files. Use a dot (`.`) to specify the current location. The wildcard character
@@ -278,42 +316,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Offset
-
-This represents the number of bytes to skip from being part of the hex output.
-
-This parameter was introduced in PowerShell 6.2.
-
-```yaml
-Type: System.Int64
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Count
-
-This represents the number of bytes to include in the hex output.
-
-This parameter was introduced in PowerShell 6.2.
-
-```yaml
-Type: System.Int64
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: Int64.MaxValue
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

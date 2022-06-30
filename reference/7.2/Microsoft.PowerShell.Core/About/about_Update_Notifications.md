@@ -4,17 +4,17 @@ Locale: en-US
 ms.date: 01/10/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_update_notifications?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Update_Notifications
+title: about Update Notifications
 ---
 
-# About Update Notifications
+# about_Update_Notifications
 
-## SHORT DESCRIPTION
+## Short description
 
 Notifies users on startup of PowerShell that a new version of PowerShell has
 been released.
 
-## LONG DESCRIPTION
+## Long description
 
 Beginning with PowerShell 7.0, PowerShell uses update notifications to alert
 users to the existence of updates to PowerShell. Once per day, PowerShell
@@ -53,4 +53,3 @@ The update notification doesn't provide any way to automatically update
 PowerShell. In the future, there may be more instructions or capabilities to
 update from within PowerShell, but today, you should use the same install
 mechanism you used to install PowerShell to update it.
-

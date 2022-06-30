@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 04/24/2019
+ms.date: 08/19/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/set-psbreakpoint?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-PSBreakpoint
@@ -59,7 +58,8 @@ you can use the **Action** parameter to specify an alternate response, such as c
 breakpoint or instructions to perform additional tasks such as logging or diagnostics.
 
 The `Set-PSBreakpoint` cmdlet is one of several cmdlets designed for debugging PowerShell scripts.
-For more information about the PowerShell debugger, see [about_Debuggers](../Microsoft.PowerShell.Core/About/about_Debuggers.md).
+For more information about the PowerShell debugger, see
+[about_Debuggers](../Microsoft.PowerShell.Core/About/about_Debuggers.md).
 
 ## EXAMPLES
 
@@ -130,8 +130,8 @@ Set-PSBreakpoint -Script Sample.ps1 -Command "write*"
 
 ### Example 5: Set a breakpoint depending on the value of a variable
 
-This example stops execution at the `DiskTest` function in the Test.ps1 script only when the value of
-the `$Disk` variable is greater than 2.
+This example stops execution at the `DiskTest` function in the `Test.ps1` script only when the value
+of the `$Disk` variable is greater than 2.
 
 ```powershell
 Set-PSBreakpoint -Script "test.ps1" -Command "DiskTest" -Action { if ($Disk -gt 2) { break } }
@@ -244,10 +244,10 @@ Accept wildcard characters: False
 Specifies the column number of the column in the script file on which execution stops. Enter only
 one column number. The default is column 1.
 
-The Column value is used with the value of the **Line** parameter to specify the breakpoint. If the **Line**
-parameter specifies multiple lines, the **Column** parameter sets a breakpoint at the specified column
-on each of the specified lines. PowerShell stops executing before the statement or expression that
-includes the character at the specified line and column position.
+The Column value is used with the value of the **Line** parameter to specify the breakpoint. If the
+**Line** parameter specifies multiple lines, the **Column** parameter sets a breakpoint at the
+specified column on each of the specified lines. PowerShell stops executing before the statement or
+expression that includes the character at the specified line and column position.
 
 Columns are counted from the top left margin beginning with column number 1 (not 0). If you specify
 a column that does not exist in the script, an error is not declared, but the breakpoint is never
@@ -377,7 +377,8 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -386,7 +387,11 @@ You cannot pipe input to `Set-PSBreakpoint`.
 
 ## OUTPUTS
 
-### Breakpoint object (System.Management.Automation.LineBreakpoint, System.Management.Automation.VariableBreakpoint, System.Management.Automation.CommandBreakpoint)
+### System.Management.Automation.CommandBreakpoint
+
+### System.Management.Automation.LineBreakpoint
+
+### System.Management.Automation.VariableBreakpoint
 
 `Set-PSBreakpoint` returns an object that represents each breakpoint that it sets.
 

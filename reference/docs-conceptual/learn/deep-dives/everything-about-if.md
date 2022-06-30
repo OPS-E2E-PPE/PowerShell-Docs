@@ -1,19 +1,19 @@
 ---
-title: Everything you wanted to know about the if statement
 description: Like many other languages, PowerShell has statements for conditionally executing code in your scripts.
-ms.date: 05/23/2020
 ms.custom: contributor-KevinMarquette
+ms.date: 10/05/2021
+title: Everything you wanted to know about the if statement
 ---
 # Everything you wanted to know about the `if` statement
 
 Like many other languages, PowerShell has statements for conditionally executing code in your
-scripts. One of those statements is the [If][] statement. Today we will take a deep dive into one of
+scripts. One of those statements is the [If][If] statement. Today we will take a deep dive into one of
 the most fundamental commands in PowerShell.
 
 > [!NOTE]
-> The [original version][] of this article appeared on the blog written by [@KevinMarquette][]. The
+> The [original version][original version] of this article appeared on the blog written by [@KevinMarquette][@KevinMarquette]. The
 > PowerShell team thanks Kevin for sharing this content with us. Please check out his blog at
-> [PowerShellExplained.com][].
+> [PowerShellExplained.com][PowerShellExplained.com].
 
 ## Conditional execution
 
@@ -195,7 +195,7 @@ if ( $value -match 'SQL')
 ```
 
 Regex is a complex language of its own and worth looking into. I talk more about `-match` and
-[the many ways to use regex][] in another article.
+[the many ways to use regex][the many ways to use regex] in another article.
 
 **Variations:**
 
@@ -397,7 +397,7 @@ why I would ever use it.
 ## Bitwise operators
 
 Bitwise operators perform calculations on the bits within the values and produce a new value as the
-result. Teaching [bitwise operators][] is beyond the scope of this article, but here is the list the
+result. Teaching [bitwise operators][bitwise operators] is beyond the scope of this article, but here is the list the
 them.
 
 - `-band` binary AND
@@ -446,11 +446,11 @@ if ( $null -eq $value )
 ```
 
 There are quite a few nuances when dealing with `$null` values in PowerShell. If you're interested
-in diving deeper, I have an article about [everything you wanted to know about $null][].
+in diving deeper, I have an article about [everything you wanted to know about $null][everything you wanted to know about $null].
 
-### Variable assignment
+### Variable assignment within the condition
 
-I almost forgot to add this one until [Prasoon Karunan V][] reminded me of it.
+I almost forgot to add this one until [Prasoon Karunan V][Prasoon Karunan V] reminded me of it.
 
 ```powershell
 if ($process=Get-Process notepad -ErrorAction ignore) {$process} else {$false}
@@ -481,6 +481,30 @@ If `$process` gets assigned a value, then the statement is `$true` and `$process
 
 Make sure you don't confuse this with `-eq` because this isn't an equality check. This is a more
 obscure feature that most people don't realize works this way.
+
+## Variable assignment from the scriptblock
+
+You can also use the `if` statement scriptblock to assign a value to a variable.
+
+```powershell
+$discount = if ( $age -ge 55 )
+{
+    Get-SeniorDiscount
+}
+elseif ( $age -le 13 )
+{
+    Get-ChildDiscount
+}
+else
+{
+    0.00
+}
+```
+
+Each script block is writing the results of the commands, or the value, as output. We can assign the
+result of the `if` statement to the `$discount` variable. That example could have just as easily
+assigned those values to the `$discount` variable directly in each scriptblock. I can't say that I
+use this with the `if` statement often, but I do have an example where I used this recently.
 
 ## Alternate execution path
 
@@ -583,37 +607,11 @@ switch ( $itemType )
 
 There three possible values that can match the `$itemType`. In this case, it matches with `Role`. I
 used a simple example just to give you some exposure to the `switch` operator. I talk more
-about [everything you ever wanted to know about the switch statement][] in another article.
-
-## Pipeline
-
-The pipeline is a unique and important feature of PowerShell. Any value that isn't suppressed
-or assigned to a variable gets placed in the pipeline. The `if` provides us a way to take advantage
-of the pipeline in a way that isn't always obvious.
-
-```powershell
-$discount = if ( $age -ge 55 )
-{
-    Get-SeniorDiscount
-}
-elseif ( $age -le 13 )
-{
-    Get-ChildDiscount
-}
-else
-{
-    0.00
-}
-```
-
-Each script block is placing the results the commands or the value into the pipeline. Then we assign
-the result of the `if` statement to the `$discount` variable. That example could have just as easily
-assigned those values to the `$discount` variable directly in each scriptblock. I can't say that I
-use this with the `if` statement often, but I do have an example where I used this recently.
+about [everything you ever wanted to know about the switch statement][everything you ever wanted to know about the switch statement] in another article.
 
 ### Array inline
 
-I have a function called [Invoke-SnowSql][] that launches an executable with several command-line
+I have a function called [Invoke-SnowSql][Invoke-SnowSql] that launches an executable with several command-line
 arguments. Here is a clip from that function where I build the array of arguments.
 
 ```powershell
@@ -783,7 +781,7 @@ I like to say that if you expect an exception to happen, then it's not really an
 your values and validate your conditions where you can.
 
 If you want to dive a little more into actual exception handling, I have an article on
-[everything you ever wanted to know about exceptions][].
+[everything you ever wanted to know about exceptions][everything you ever wanted to know about exceptions].
 
 ## Final words
 

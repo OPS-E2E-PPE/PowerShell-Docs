@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 04/08/2020
+ms.date: 08/10/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/invoke-expression?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Invoke-Expression
@@ -98,7 +98,7 @@ would be replaced by its value before it was saved in the `$Command` variable.
 ### Example 4: Get and run a cmdlet Help example
 
 ```powershell
-$Cmdlet_name = "Get-EventLog"
+$Cmdlet_name = "Get-ComputerInfo"
 $Example_number = 1
 $Example_code = (Get-Help $Cmdlet_name).examples.example[($Example_number-1)].code
 Invoke-Expression $Example_code
@@ -109,6 +109,10 @@ This command retrieves and runs the first example in the `Get-EventLog` cmdlet H
 To run an example of a different cmdlet, change the value of the `$Cmdlet_name` variable to the name
 of the cmdlet. And, change the `$Example_number` variable to the example number you want to run. The
 command fails if the example number is not valid.
+
+> [!NOTE]
+> If the example code from the help file has output in the example, PowerShell attempts to run the
+> output along with the code and an error will be thrown.
 
 ## PARAMETERS
 

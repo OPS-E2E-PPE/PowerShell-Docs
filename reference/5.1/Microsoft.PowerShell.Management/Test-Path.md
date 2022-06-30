@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 10/18/2018
+ms.date: 12/13/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/test-path?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Test-Path
@@ -35,9 +34,9 @@ Test-Path -LiteralPath <String[]> [-Filter <String>] [-Include <String[]>] [-Exc
 
 The `Test-Path` cmdlet determines whether all elements of the path exist. It returns `$True` if all
 elements exist and `$False` if any are missing. It can also tell whether the path syntax is valid
-and whether the path leads to a container or a terminal or leaf element. If the `Path` is
-whitespace, then `$False` is returned. If the `Path` is an empty string, `$null`, array of `$null`
-or empty array, a non-terminating error is returned.
+and whether the path leads to a container or a terminal or leaf element. If the **Path** is a
+whitespace string, then `$False` is returned. If the `Path` is an empty string, `$null`, array of
+`$null` or empty array, a non-terminating error is returned.
 
 ## EXAMPLES
 
@@ -51,9 +50,9 @@ Test-Path -Path "C:\Documents and Settings\DavidC"
 True
 ```
 
-This command checks whether all elements in the path exist, that is, the C: directory, the Documents
-and Settings directory, and the DavidC directory. If any are missing, the cmdlet returns `$False`.
-Otherwise, it returns `$True`.
+This command checks whether all elements in the path exist, that is, the `C:` directory, the
+`Documents and Settings` directory, and the `DavidC` directory. If any are missing, the cmdlet
+returns `$False`. Otherwise, it returns `$True`.
 
 ### Example 2: Test the path of a profile
 
@@ -80,7 +79,7 @@ whether the syntax of the path is correct. In this case, the path is `$False`, b
 correct `$True`. These commands use `$profile`, the automatic variable that points to the location
 for the profile, even if the profile does not exist.
 
-For more information about automatic variables, see about_Automatic_Variables.
+For more information about automatic variables, see [about_Automatic_Variables](../Microsoft.PowerShell.Core/About/about_Automatic_Variables.md).
 
 ### Example 3: Check whether there are any files besides a specified type
 
@@ -184,7 +183,7 @@ At line:1 char:11
 
 ### Example 8: Test a path with whitespace as the value
 
-When a whitespace string is provided for the the `-Path` parameter, it returns **True**. When an
+When a whitespace string is provided for the the **Path** parameter, it returns **True**. When an
 empty string is provided, `Test-Path` returns an error. The following example shows whitespace and
 empty string.
 
@@ -443,9 +442,8 @@ in programs and scripts where you want to display all or part of a path name in 
 Use them as you would use **Dirname**, **Normpath**, **Realpath**, **Join**, or other path
 manipulators.
 
-The `Test-Path` is designed to work with the data exposed by any provider.
-To list the providers available in your session, type `Get-PSProvider`.
-For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
+The `Test-Path` is designed to work with the data exposed by any provider. To list the providers
+available in your session, type `Get-PSProvider`. For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
 ## RELATED LINKS
 

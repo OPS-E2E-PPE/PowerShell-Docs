@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.ScheduledJob.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: PSScheduledJob
-ms.date: 10/25/2019
+ms.date: 10/05/2021
 online version: https://docs.microsoft.com/powershell/module/psscheduledjob/register-scheduledjob?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Register-ScheduledJob
@@ -90,7 +89,7 @@ Register-ScheduledJob -Name "Archive-Scripts" -ScriptBlock {
 }
 ```
 
-`Register-ScheduledJob` uses the **Name** parameter to create the **Archive-Scripts** scheduled job.
+`Register-ScheduledJob` uses the **Name** parameter to create the `Archive-Scripts` scheduled job.
 The **ScriptBlock** parameter runs `Get-ChildItem` that searches the `$home` directory recursively
 for `.ps1` files. The `Copy-Item` cmdlet copies the files to a directory specified by the
 **Destination** parameter.
@@ -176,7 +175,7 @@ The **ScriptBlock** parameter runs a `Register-ScheduledJob` command on the comp
 `Servers.txt` file.
 
 The parameters for `Register-ScheduledJob` are defined by `$params`. The **Name** parameters
-specifies the job is named **Get-EnergyData** on each remote computer. **FilePath** provides the
+specifies the job is named `Get-EnergyData` on each remote computer. **FilePath** provides the
 location of the `EnergyData.ps1` script. The script is located on a file server that is available to
 all participating computers.The job runs on the schedule specified by the job triggers in `$T` and
 the job options in `$O`.
@@ -246,13 +245,13 @@ Default.
 
 The acceptable values for this parameter are:
 
-- Default
-- Basic
-- Credssp
-- Digest
-- Kerberos
-- Negotiate
-- NegotiateWithImplicitCredential
+- `Default`
+- `Basic`
+- `Credssp`
+- `Digest`
+- `Kerberos`
+- `Negotiate`
+- `NegotiateWithImplicitCredential`
 
 For more information about the values of this parameter, see
 [AuthenticationMechanism](/dotnet/api/system.management.automation.runspaces.authenticationmechanism).
@@ -273,22 +272,6 @@ Accepted values: Default, Basic, Negotiate, NegotiateWithImplicitCredential, Cre
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -555,6 +538,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WhatIf
 
 Shows what would happen if the cmdlet runs. The cmdlet isn't run.
@@ -600,7 +599,7 @@ Scheduled jobs that you create in Windows PowerShell appear in Task Scheduler in
 `Library\Microsoft\Windows\PowerShell\ScheduledJobs` folder. You can use Task Scheduler to view and
 edit the scheduled job.
 
-You can use Task Scheduler, the **schtasks.exe** command-line tool, and the Task Scheduler cmdlets
+You can use Task Scheduler, the `schtasks.exe` command-line tool, and the Task Scheduler cmdlets
 to manage scheduled jobs that you create with the Scheduled Job cmdlets. However, you can't use the
 Scheduled Job cmdlets to manage tasks that you create in Task Scheduler.
 

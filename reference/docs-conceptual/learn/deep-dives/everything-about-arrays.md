@@ -1,19 +1,19 @@
 ---
-title: Everything you wanted to know about arrays
 description: Arrays are a fundamental language feature of most programming languages.
-ms.date: 10/08/2020
 ms.custom: contributor-KevinMarquette
+ms.date: 10/05/2021
+title: Everything you wanted to know about arrays
 ---
 # Everything you wanted to know about arrays
 
-[Arrays][] are a fundamental language feature of most programming languages. They're a collection of
-values or objects that are difficult to avoid. Let's take a close look at arrays and everything they
-have to offer.
+[Arrays][Arrays] are a fundamental language feature of most programming languages. They're a
+collection of values or objects that are difficult to avoid. Let's take a close look at arrays and
+everything they have to offer.
 
 > [!NOTE]
-> The [original version][] of this article appeared on the blog written by [@KevinMarquette][]. The
-> PowerShell team thanks Kevin for sharing this content with us. Please check out his blog at
-> [PowerShellExplained.com][].
+> The [original version][original version] of this article appeared on the blog written by
+> [@KevinMarquette][@KevinMarquette]. The PowerShell team thanks Kevin for sharing this content with
+> us. Please check out his blog at [PowerShellExplained.com][PowerShellExplained.com].
 
 ## What is an array?
 
@@ -184,7 +184,26 @@ Three
 One word of caution here with the `..` operator. The sequence `0..-1` and `-1..0` evaluate to the
 values `0,-1` and `-1,0`. It's easy to see `$data[0..-1]` and think it would enumerate all items if
 you forget this detail. `$data[0..-1]` gives you the same value as `$data[0,-1]` by giving you the
-first and last item in the array (and none of the other values).
+first and last item in the array (and none of the other values). Here is a larger example:
+
+```powershell
+PS> $a = 1,2,3,4,5,6,7,8
+PS> $a[2..-1]
+3
+2
+1
+8
+```
+
+This is the same as:
+
+```powershell
+PS> $a[2,1,0,-1]
+3
+2
+1
+8
+```
 
 #### Out of bounds
 
@@ -204,7 +223,7 @@ If your variable is `$null` and you try to index it like an array, you get a
 
 ```powershell
 PS> $empty = $null
-SP> $empty[0]
+PS> $empty[0]
 Error: Cannot index into a null array.
 ```
 
@@ -376,7 +395,9 @@ for ( $index = 0; $index -lt $data.count; $index++)
 
 The first thing we do is initialize an `$index` to `0`. Then we add the condition that `$index` must
 be less than `$data.count`. Finally, we specify that every time we loop that me must increase the
-index by `1`. In this case `$index++` is short for `$index = $index + 1`.
+index by `1`. In this case `$index++` is short for `$index = $index + 1`. The
+[format operator](/powershell/module/microsoft.powershell.core/about/about_operators#format-operator--f)
+(`-f`) is used to insert the value of `$data[$index]` in the output string.
 
 Whenever you're using a `for` loop, pay special attention to the condition. I used
 `$index -lt $data.count` here. It's easy to get the condition slightly wrong to get an off-by-one
@@ -386,7 +407,7 @@ classic off-by-one error.
 
 #### Switch loop
 
-This is one that is easy to overlook. If you provide an array to a [switch statement][], it
+This is one that is easy to overlook. If you provide an array to a [switch statement][switch statement], it
 checks each item in the array.
 
 ```powershell
@@ -744,7 +765,7 @@ $servers | Select-String SQL
 ```
 
 I take a closer look at `Select-String`,`-match` and the `$matches` variable in another post called
-[The many ways to use regex][].
+[The many ways to use regex][The many ways to use regex].
 
 ### $null or empty
 
@@ -821,8 +842,8 @@ if ( $null -ne $array -and @($array).count -gt 0 )
 
 ### All -eq
 
-I recently saw someone ask [how to verify that every value in an array matches a given value][].
-Reddit user **/u/bis** had this clever [solution][] that checks for any incorrect values and then
+I recently saw someone ask [how to verify that every value in an array matches a given value][how to verify that every value in an array matches a given value].
+Reddit user **/u/bis** had this clever [solution][solution] that checks for any incorrect values and then
 flips the result.
 
 ```powershell
@@ -951,7 +972,7 @@ The reason I'm using `[void]` at the beginning of the line is to suppress the re
 .NET calls do this and can create unexpected output.
 
 If the only data that you have in your array is strings, then also take a look at using
-[StringBuilder][]. It's almost the same thing but has some methods that are just for dealing with
+[StringBuilder][StringBuilder]. It's almost the same thing but has some methods that are just for dealing with
 strings. The `StringBuilder` is specially designed for performance.
 
 It's common to see people move to `ArrayList` from arrays. But it comes from a time where C# didn't
@@ -1170,7 +1191,7 @@ TypeName: System.String
 ...
 ```
 
-To prevent that unwrap of the array, you can use `Write-Object -NoEnumerate`.
+To prevent that unwrap of the array, you can use `Write-Output -NoEnumerate`.
 
 ```powershell
 PS> Write-Output -NoEnumerate $data | Get-Member
@@ -1202,7 +1223,7 @@ every time you read it and that it turns out to be a good reference for you for 
 come. If you found this to be helpful, please share it with others you think may get value out
 of it.
 
-From here, I would recommend you check out a similar post that I wrote about [hashtables][].
+From here, I would recommend you check out a similar post that I wrote about [hashtables][hashtables].
 
 <!-- link references -->
 [original version]: https://powershellexplained.com/2018-10-15-Powershell-arrays-Everything-you-wanted-to-know/

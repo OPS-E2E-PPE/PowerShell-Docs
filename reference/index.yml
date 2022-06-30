@@ -10,7 +10,7 @@ metadata:
   ms.collection: collection
   author: sdwheeler
   ms.author: sewhee
-  ms.date: 09/04/2019
+  ms.date: 10/01/2021
 
 # highlightedContent section (optional)
 # Maximum of 8 items
@@ -51,14 +51,14 @@ productDirectory:
     - title: PowerShell
       imageSrc: ./media/index/ps_black_128.svg
       links:
-        - url: /powershell/scripting/install/installing-powershell-core-on-windows
+        - url: /powershell/scripting/install/installing-powershell-on-windows
           text: Install PowerShell on Windows
-        - url: /powershell/scripting/install/installing-powershell-core-on-linux
+        - url: /powershell/scripting/install/installing-powershell-on-linux
           text: Install PowerShell on Linux
-        - url: /powershell/scripting/install/installing-powershell-core-on-macos
+        - url: /powershell/scripting/install/installing-powershell-on-macos
           text: Install PowerShell on macOS
-        - url: /powershell/scripting/whats-new/what-s-new-in-powershell-70
-          text: What's new in PowerShell 7.0
+        - url: /powershell/scripting/whats-new/what-s-new-in-powershell-72
+          text: What's new in PowerShell 7.2
     # Card 2
     - title: Windows PowerShell 5.1
       # imageSrc should be square in ratio with no whitespace
@@ -84,10 +84,14 @@ productDirectory:
     - title: PowerShell DSC
       imageSrc: /media/common/i_config-tools.svg
       links:
-        - url: /powershell/scripting/dsc/overview/overview
+        - url: /powershell/scripting/dsc/overview
           text: DSC Overview
-        - url: /powershell/scripting/dsc/getting-started/lnxgettingstarted
-          text: Get started with DSC for Linux
+        - url: /powershell/dsc/overview?view=dsc-1.1
+          text: DSC 1.1 in Windows PowerShell
+        - url: /powershell/dsc/overview?view=dsc-2.0
+          text: DSC 2.0
+        - url: /powershell/dsc/overview?view=dsc-3.0
+          text: DSC 3.0 (preview)
         - url: https://dsccommunity.org/
           text: DSC Community
     # Card 5
@@ -186,8 +190,4 @@ additionalContent:
         - title: GitHub Issues
           summary: The place for bugs in the current release
           url: https://github.com/powershell/powershell/issues
-        # Card 5
-        - title: PowerShell UserVoice
-          summary: The place for bugs in Windows PowerShell
-          url: https://windowsserver.uservoice.com/forums/301869-powershell
 

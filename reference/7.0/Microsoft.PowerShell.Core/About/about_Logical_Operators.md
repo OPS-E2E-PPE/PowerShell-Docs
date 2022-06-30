@@ -1,18 +1,17 @@
 ---
-description: Describes the operators that connect statements in PowerShell. 
-keywords: powershell,cmdlet
+description: Describes the operators that connect statements in PowerShell.
 Locale: en-US
 ms.date: 01/03/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_logical_operators?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Logical_Operators
+title: about Logical Operators
 ---
 # about_Logical_Operators
 
-## SHORT DESCRIPTION
+## Short description
 Describes the operators that connect statements in PowerShell.
 
-## LONG DESCRIPTION
+## Long description
 
 The PowerShell logical operators connect expressions and statements, allowing
 you to use a single expression to test for multiple conditions.
@@ -66,12 +65,9 @@ If the left operand in a statement that contains the or statement is TRUE, the
 right operand is not evaluated. As a result, you can use these statements in
 the same way that you would use the `If` statement.
 
-## SEE ALSO
+## See also
 
-[about_Operators](about_Operators.md)
-
-[Compare-Object](xref:Microsoft.PowerShell.Utility.Compare-Object)
-
-[about_Comparison_operators](about_Comparison_Operators.md)
-
-[about_If](about_If.md)
+- [about_Operators](about_Operators.md)
+- [about_Comparison_operators](about_Comparison_Operators.md)
+- [about_If](about_If.md)
+- [Compare-Object](xref:Microsoft.PowerShell.Utility.Compare-Object)

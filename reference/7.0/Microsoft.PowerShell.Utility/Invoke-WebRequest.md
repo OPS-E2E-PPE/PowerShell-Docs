@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 01/26/2021
+ms.date: 03/25/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/invoke-webrequest?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Invoke-WebRequest
@@ -86,6 +86,12 @@ This cmdlet was introduced in PowerShell 3.0.
 
 Beginning in PowerShell 7.0, `Invoke-WebRequest` supports proxy configuration defined by environment
 variables. See the [Notes](#notes) section of this article.
+
+> [!IMPORTANT]
+> The examples in this article reference hosts in the `contoso.com` domain. This is a fictitious
+> domain used by Microsoft for examples. The examples are designed to show how to use the cmdlets.
+> However, since the `contoso.com` sites do not exist, the examples do not work. Adapt the examples
+> to hosts in your environment.
 
 ## EXAMPLES
 
@@ -296,18 +302,18 @@ Accept wildcard characters: False
 ### -Authentication
 
 Specifies the explicit authentication type to use for the request. The default is **None**.
-**Authentication** cannot be used with **UseDefaultCredentials**.
+The **Authentication** parameter can't be used with the **UseDefaultCredentials** parameter.
 
 Available Authentication Options:
 
-- **None**: This is the default option when **Authentication** isn't supplied; no explicit
-  authentication is used.
-- **Basic**: Requires **Credential**. The credentials are sent in an RFC 7617 Basic Authentication
-  header in the format of `base64(user:password)`.
-- **Bearer**: Requires **Token**. Sends an RFC 6750 `Authorization: Bearer` header with the supplied
-  token. This is an alias for **OAuth**
-- **OAuth**: Requires **Token**. Sends an RFC 6750 `Authorization: Bearer` header with the supplied
-  token. This is an alias for **Bearer**
+- `None`: This is the default option when **Authentication** is not supplied. No explicit
+  authentication will be used.
+- `Basic`: Requires **Credential**. The credentials will be used to send an RFC 7617 Basic
+  Authentication `Authorization: Basic` header in the format of `base64(user:password)`.
+- `Bearer`: Requires the **Token** parameter. Sends an RFC 6750 `Authorization: Bearer` header with
+  the supplied token.
+- `OAuth`: Requires the **Token** parameter. Sends an RFC 6750 `Authorization: Bearer` header with
+  the supplied token.
 
 Supplying **Authentication** overrides any `Authorization` headers supplied to **Headers** or
 included in **WebSession**.
@@ -626,16 +632,16 @@ Accept wildcard characters: False
 
 Specifies the method used for the web request. The acceptable values for this parameter are:
 
-- Default
-- Delete
-- Get
-- Head
-- Merge
-- Options
-- Patch
-- Post
-- Put
-- Trace
+- `Default`
+- `Delete`
+- `Get`
+- `Head`
+- `Merge`
+- `Options`
+- `Patch`
+- `Post`
+- `Put`
+- `Trace`
 
 The **CustomMethod** parameter can be used for Request Methods not listed above.
 
@@ -953,9 +959,12 @@ Sets the SSL/TLS protocols that are permissible for the web request. By default 
 protocols supported by the system are allowed. **SslProtocol** allows for limiting to specific
 protocols for compliance purposes.
 
-**SslProtocol** uses the **WebSslProtocol** Flag Enum. It is possible to supply more than one
-protocol using flag notation or combining multiple **WebSslProtocol** options with **bor**, however
-supplying multiple protocols is not supported on all platforms.
+These values are defined as a flag-based enumeration. You can combine multiple values together to
+set multiple flags using this parameter. The values can be passed to the **SslProtocol** parameter
+as an array of values or as a comma-separated string of those values. The cmdlet will combine the
+values using a binary-OR operation. Passing values as an array is the simplest option and also
+allows you to use tab-completion on the values. You may not be able to define multiple options on
+all platforms.
 
 > [!NOTE]
 > On non-Windows platforms it may not be possible to supply `Tls` or `Tls12` as an option.
@@ -1112,10 +1121,7 @@ the properties of the [PSUserAgent](/dotnet/api/microsoft.powershell.commands.ps
 such as Chrome, FireFox, InternetExplorer, Opera, and Safari.
 
 For example, the following command uses the user agent string for Internet Explorer:
-
-```powershell
-Invoke-WebRequest -Uri https://website.com/ -UserAgent ([Microsoft.PowerShell.Commands.PSUserAgent]::InternetExplorer)
-```
+`Invoke-WebRequest -Uri https://website.com/ -UserAgent ([Microsoft.PowerShell.Commands.PSUserAgent]::InternetExplorer)`
 
 ```yaml
 Type: System.String
@@ -1202,7 +1208,7 @@ The value of this property is determined by your platform:
 The environment variables used for `DefaultProxy` initialization on Windows and Unix-based platforms
 are:
 
-- ` HTTP_PROXY`: the hostname or IP address of the proxy server used on HTTP requests.
+- `HTTP_PROXY`: the hostname or IP address of the proxy server used on HTTP requests.
 - `HTTPS_PROXY`: the hostname or IP address of the proxy server used on HTTPS requests.
 - `ALL_PROXY`: the hostname or IP address of the proxy server used on HTTP and HTTPS requests in
   case `HTTP_PROXY` or `HTTPS_PROXY` are not defined.

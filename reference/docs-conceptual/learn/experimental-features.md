@@ -1,7 +1,7 @@
 ---
-ms.date: 12/14/2020
-title: Using Experimental Features in PowerShell
 description: Lists the currently available experimental features and how to use them.
+ms.date: 03/04/2022
+title: Using Experimental Features in PowerShell
 ---
 # Using Experimental Features in PowerShell
 
@@ -25,24 +25,38 @@ For more information about enabling or disabling these features, see
 
 This article describes the experimental features that are available and how to use the feature.
 
-|                            Name                            |   6.2   |   7.0   |   7.1   |   7.2   |
-| ---------------------------------------------------------- | :-----: | :-----: | :-----: | :-----: |
-| PSTempDrive (mainstream in PS 7.0+)                        | &check; |         |         |         |
-| PSUseAbbreviationExpansion (mainstream in PS 7.0+)         | &check; |         |         |         |
-| PSNullConditionalOperators (mainstream in PS 7.1+)         |         | &check; |         |         |
-| PSUnixFileStat (non-Windows only - mainstream in PS 7.1+)  |         | &check; |         |         |
-| PSCommandNotFoundSuggestion                                | &check; | &check; | &check; | &check; |
-| PSImplicitRemotingBatching                                 | &check; | &check; | &check; | &check; |
-| Microsoft.PowerShell.Utility.PSManageBreakpointsInRunspace |         | &check; | &check; | &check; |
-| PSDesiredStateConfiguration.InvokeDscResource              |         | &check; | &check; | &check; |
-| PSNativePSPathResolution                                   |         |         | &check; | &check; |
-| PSCultureInvariantReplaceOperator                          |         |         | &check; | &check; |
-| PSNotApplyErrorActionToStderr                              |         |         | &check; | &check; |
-| PSSubsystemPluginModel                                     |         |         | &check; | &check; |
-| PSAnsiProgress                                             |         |         |         | &check; |
-| PSAnsiRendering                                            |         |         |         | &check; |
+Legend
+
+- &#x2714;&#xfe0f; - indicates that the experimental feature is available in the version of
+  PowerShell
+- &#x2705; - indicates the version of PowerShell where the experimental feature became mainstream
+- &#x274c; - indicates the version of PowerShell where the experimental feature was removed
+
+|                            Name                            |       7.0        |       7.1        |       7.2        |       7.3        |
+| ---------------------------------------------------------- | :--------------: | :--------------: | :--------------: | :--------------: |
+| PSNullConditionalOperators                                 | &#x2714;&#xfe0f; |     &#x2705;     |                  |                  |
+| PSUnixFileStat (non-Windows only)                          | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |     &#x2705;     |                  |
+| Microsoft.PowerShell.Utility.PSManageBreakpointsInRunspace | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |     &#x2705;     |                  |
+| PSCultureInvariantReplaceOperator                          |                  | &#x2714;&#xfe0f; |     &#x2705;     |                  |
+| PSNotApplyErrorActionToStderr                              |                  | &#x2714;&#xfe0f; |     &#x2705;     |                  |
+| PSImplicitRemotingBatching                                 | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |     &#x274c;     |                  |
+| PSCommandNotFoundSuggestion                                | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |
+| PSDesiredStateConfiguration.InvokeDscResource              | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |
+| PSNativePSPathResolution                                   |                  | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |
+| PSSubsystemPluginModel                                     |                  | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |
+| PSNativeCommandArgumentPassing                             |                  |                  | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |
+| PSAnsiRenderingFileInfo                                    |                  |                  | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |
+| PSLoadAssemblyFromNativeCode                               |                  |                  | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |
+| PSCleanBlock                                               |                  |                  |                  | &#x2714;&#xfe0f; |
+| PSExec                                                     |                  |                  |                  | &#x2714;&#xfe0f; |
+| PSNativeCommandErrorActionPreference                       |                  |                  |                  | &#x2714;&#xfe0f; |
+| PSStrictModeAssignment                                     |                  |                  |                  | &#x2714;&#xfe0f; |
+| PSAMSIMethodInvocationLogging                              |                  |                  |                  | &#x2714;&#xfe0f; |
 
 ## Microsoft.PowerShell.Utility.PSManageBreakpointsInRunspace
+
+> [!NOTE]
+> This feature became mainstream in PowerShell 7.2.
 
 In PowerShell 7.0, the experiment enables the **BreakAll** parameter on the `Debug-Runspace` and
 `Debug-Job` cmdlets to allow users to decide if they want PowerShell to break immediately in the
@@ -75,98 +89,59 @@ In this example, a job is started and a breakpoint is set to break when the `Set
 run. The runspace is stored in a variable and passed to the `Get-PSBreakPoint` command with the
 **Runspace** parameter. You can then inspect the breakpoint in the `$breakpoint` variable.
 
-## PSAnsiRendering
+## PSAMSIMethodInvocationLogging
 
-This experiment was added in PowerShell 7.2. The feature enables changes how the PowerShell engine
-outputs text and add the `$PSStyle` automatic variable to control ANSI rendering of string output.
+The Windows Antimalware Scan Interface (AMSI) is an API that allows applications to pass actions to
+an antimalware scanner, such as Windows Defender, for detecting malicious payloads. Beginning with
+PowerShell 5.1, PowerShell running on Windows 10 (and higher) passes all script blocks to AMSI.
 
-```powershell
-PS> $PSStyle | Get-Member
+This experimental feature extends the data that is sent to AMSI for inspection. With this feature
+enabled, PowerShell adds all invocations of .NET method members.
 
-   TypeName: System.Management.Automation.PSStyle
+This experiment was added in PowerShell 7.3.
 
-Name             MemberType Definition
-----             ---------- ----------
-Equals           Method     bool Equals(System.Object obj)
-FormatHyperlink  Method     string FormatHyperlink(string text, uri link)
-GetHashCode      Method     int GetHashCode()
-GetType          Method     type GetType()
-ToString         Method     string ToString()
-Background       Property   System.Management.Automation.PSStyle+BackgroundColor Background {get;}
-Blink            Property   string Blink {get;}
-BlinkOff         Property   string BlinkOff {get;}
-Bold             Property   string Bold {get;}
-BoldOff          Property   string BoldOff {get;}
-Foreground       Property   System.Management.Automation.PSStyle+ForegroundColor Foreground {get;}
-Formatting       Property   System.Management.Automation.PSStyle+FormattingData Formatting {get;}
-Hidden           Property   string Hidden {get;}
-HiddenOff        Property   string HiddenOff {get;}
-Italic           Property   string Italic {get;}
-ItalicOff        Property   string ItalicOff {get;}
-OutputRendering  Property   System.Management.Automation.OutputRendering OutputRendering {get;set;}
-Progress         Property   System.Management.Automation.PSStyle+ProgressConfiguration Progress {get;}
-Reset            Property   string Reset {get;}
-Reverse          Property   string Reverse {get;}
-ReverseOff       Property   string ReverseOff {get;}
-Strikethrough    Property   string Strikethrough {get;}
-StrikethroughOff Property   string StrikethroughOff {get;}
-Underline        Property   string Underline {get;}
-UnderlineOff     Property   string UnderlineOff {get;}
-```
+For more information about AMSI, see [How AMSI helps](/windows/win32/amsi/how-amsi-helps).
 
-The base members return strings of ANSI escape sequences mapped to their names. The values are
-settable to allow customization.
+## PSAnsiRenderingFileInfo
 
-For more information, see [about_Automatic_Variables](/reference/7.2/Microsoft.PowerShell.Core/About/about_Automatic_Variables.md)
+This experiment was added in PowerShell 7.2. This feature adds the $PSStyle.FileInfo member and
+enables coloring of specific file types.
+
+- `$PSStyle.FileInfo.Directory` - Built-in member to specify color for directories
+- `$PSStyle.FileInfo.SymbolicLink` - Built-in member to specify color for symbolic links
+- `$PSStyle.FileInfo.Executable` - Built-in member to specify color for executables.
+- `$PSStyle.FileInfo.Extension` - Use this member to define colors for different file extensions.
+  The **Extension** member pre-includes extensions for archive and PowerShell files.
+
+For more information, see
+[about_Automatic_Variables](/powershell/module/Microsoft.PowerShell.Core/About/about_Automatic_Variables).
 
 > [!NOTE]
-> For C# developers, you can access `PSStyle` as a singleton. Usage will look like this:
->
-> ```csharp
-> string output = $"{PSStyle.Instance.Foreground.Red}{PSStyle.Instance.Bold}Hello{PSStyle.Instance.Reset}";
-> ```
->
-> `PSStyle` exists in the System.Management.Automation namespace.
+> This feature is dependent on the **PSAnsiRendering** feature that is now a standard feature.
 
-Along with access to `$PSStyle`, this introduces changes to the PowerShell engine. The PowerShell
-formatting system is updated to respect `$PSStyle.OutputRendering`.
+## PSCleanBlock
 
-- `StringDecorated` type is added to handle ANSI escaped strings.
-- `string IsDecorated` boolean property is added to return if the string contains ANSI escape
-  sequences based on if the string contains ESC or C1 CSI.
-- The `Length` property returns _only_ the length for the text without the ANSI escape sequences.
-- `StringDecorated Substring(int contentLength)` method returns a substring starting at index 0 up
-  to the content length that is not a part of ANSI escape sequences. This is needed for table
-  formatting to truncate strings and preserve ANSI escape sequences that don't take up printable
-  character space.
-- `string ToString()` method stays the same and returns the plaintext version of the string.
-- `string ToString(bool Ansi)` method returns the raw ANSI embedded string if the `Ansi` parameter
-  is true. Otherwise, a plaintext version with ANSI escape sequences removed is returned.
+The `clean` block is a convenient way for users to clean up resources that span
+across the `begin`, `process`, and `end` blocks. It's semantically similar to a
+`finally` block that covers all other named blocks of a script function or a
+script cmdlet. Resource cleanup is enforced for the following scenarios:
 
-The `FormatHyperlink(string text, uri link)` returns a string containing ANSI escape sequence used
-to decorate hyperlinks. Some terminal hosts, like the
-[Windows Terminal](https://www.microsoft.com/p/windows-terminal/9n0dx20hk701), support this markup,
-which makes the rendered text clickable in the terminal.
+1. when the pipeline execution finishes normally without terminating error
+1. when the pipeline execution is interrupted due to terminating error
+1. when the pipeline is halted by `Select-Object -First`
+1. when the pipeline is being stopped by <kbd>Ctrl+c</kbd> or
+   `StopProcessing()`
 
-## PSAnsiProgress
+> [!CAUTION]
+> Adding the `clean` block is a breaking change. Because `clean` is parsed as a
+> keyword, it prevents users from directly calling a command named `clean` as
+> the first statement in a script block. However, it's likely a non-issue in
+> most practical cases, and when it is, the command can still be invoked with
+> the call operator (`& clean`).
 
-This experiment was added in PowerShell 7.2. The feature adds the `$PSStyle.Progress` member and
-allows you to control progress view bar rendering.
-
-- `$PSStyle.Progress.Style` - An ANSI string setting the rendering style.
-- `$PSStyle.Progress.MaxWidth` - Sets the max width of the view. Set to `0` for console width.
-  Defaults to `120`
-- `$PSStyle.Progress.View` - An enum with values, `Minimal` and `Classic`. `Classic` is the existing
-  rendering with no changes. `Minimal` is a single line minimal rendering. `Minimal` is the default.
-
-The following example updates the rendering style to a minimal progress bar.
-
-```powershell
-$PSStyle.Progress.View.Minimal
-```
-
-> [!NOTE]
-> You must have the **PSAnsiRendering** experimental feature enabled to use this feature.
+For more information about this experimental feature, see
+[RFC0059](https://github.com/PowerShell/PowerShell-RFC/blob/master/Archive/Experimental/RFC0059-Cleanup-Script-Block.md)
+in the PowerShell/PowerShell-RFC repository.
 
 ## PSCommandNotFoundSuggestion
 
@@ -216,7 +191,28 @@ PS> 1.2 -replace ','
 Enables compilation to MOF on non-Windows systems and enables the use of `Invoke-DSCResource`
 without an LCM.
 
+In earlier previews of PowerShell 7.2, this feature was enabled by default. Beginning with
+PowerShell 7.2-preview7, the **PSDesiredStateConfiguration** module was removed and this feature is
+disabled by default. To enable this feature you must install the **PSDesiredStateConfiguration**
+v2.0.5 module from the PowerShell Gallery and enable the feature using `Enable-ExperimentalFeature`.
+
+## PSExec
+
+Some native Unix commands shell out to run something (like ssh) and use the `bash` built-in command
+`exec` to spawn a new process that replaces the current one. By default, `exec` is not a valid
+command in PowerShell. This is affecting some known scripts like `copy-ssh-id` and some subcommands
+of AzCLI.
+
+The `PSExec` experimental feature adds a new `Switch-Process` cmdlet aliased to `exec`. The cmdlet
+calls `execv()` function to provide similar behavior as POSIX shells.
+
+The `PSExec` experimental feature must be enabled for this cmdlet to be available. This cmdlet is
+only available for non-Windows systems.
+
 ## PSImplicitRemotingBatching
+
+> [!NOTE]
+> This experimental feature was removed in PowerShell 7.2 and is no longer supported.
 
 This feature examines the command typed in the shell, and if all the commands are implicit remoting
 proxy commands that form a simple pipeline, then the commands are batched together and invoked as a
@@ -256,6 +252,149 @@ the pipeline is the only data returned to the client. This decreases the amount 
 and forth between client and remote session, and also reduces the amount of object serialization and
 de-serialization.
 
+## PSLoadAssemblyFromNativeCode
+
+Exposes an API to allow assembly loading from native code.
+
+## PSNativeCommandArgumentPassing
+
+When this experimental feature is enabled PowerShell uses the `ArgumentList` property of the
+`StartProcessInfo` object rather than our current mechanism of reconstructing a string when invoking
+a native executable.
+
+> [!CAUTION]
+> The new behavior is a **breaking change** from current behavior. This may break scripts and
+> automation that work around the various issues when invoking native applications. Historically,
+> quotes must be escaped and it is not possible to provide empty arguments to a native application.
+
+This feature adds a new automatic variable `$PSNativeCommandArgumentPassing` that allows you to
+select the behavior at runtime. The valid values are `Legacy`, `Standard`, and `Windows`. `Legacy`
+is the historic behavior. The default when the experimental feature is enabled is the new `Standard`
+behavior.
+
+When the preference variable is set to `Windows`, invocations of the following files automatically
+use the `Legacy` style argument passing.
+
+- `cmd.exe`
+- `cscript.exe`
+- `wscript.exe`
+- ending with `.bat`
+- ending with `.cmd`
+- ending with `.js`
+- ending with `.vbs`
+- ending with `.wsf`
+
+If the `$PSNativeArgumentPassing` is set to either `Legacy` or `Standard`, the check for these files
+do not occur. The default behavior is platform specific. On Windows platforms, the default setting
+is `Windows` and non-Windows platforms is `Standard`.
+
+New behaviors made available by this change:
+
+- Literal or expandable strings with embedded quotes the quotes are now preserved:
+
+  ```powershell
+  PS > $a = 'a" "b'
+  PS > $PSNativeCommandArgumentPassing = "Legacy"
+  PS > testexe -echoargs $a 'a" "b' a" "b
+  Arg 0 is <a b>
+  Arg 1 is <a b>
+  Arg 2 is <a b>
+  PS > $PSNativeCommandArgumentPassing = "Standard"
+  PS > testexe -echoargs $a 'a" "b' a" "b
+  Arg 0 is <a" "b>
+  Arg 1 is <a" "b>
+  Arg 2 is <a b>
+  ```
+
+- Empty strings as arguments are now preserved:
+
+  ```powershell
+  PS>  $PSNativeCommandArgumentPassing = "Legacy"
+  PS> testexe -echoargs '' a b ''
+  Arg 0 is <a>
+  Arg 1 is <b>
+  PS> $PSNativeCommandArgumentPassing = "Standard"
+  PS> testexe -echoargs '' a b ''
+  Arg 0 is <>
+  Arg 1 is <a>
+  Arg 2 is <b>
+  Arg 3 is <>
+  ```
+
+The new behavior does not change invocations that look like this:
+
+```powershell
+PS> $PSNativeCommandArgumentPassing = "Legacy"
+PS> testexe -echoargs -k com:port=\\devbox\pipe\debug,pipe,resets=0,reconnect
+Arg 0 is <-k>
+Arg 1 is <com:port=\\devbox\pipe\debug,pipe,resets=0,reconnect>
+PS> $PSNativeCommandArgumentPassing = "Standard"
+PS> testexe -echoargs -k com:port=\\devbox\pipe\debug,pipe,resets=0,reconnect
+Arg 0 is <-k>
+Arg 1 is <com:port=\\devbox\pipe\debug,pipe,resets=0,reconnect>
+```
+
+Additionally, parameter tracing is now provided so `Trace-Command` provides useful information
+for debugging.
+
+```powershell
+PS> $PSNativeCommandArgumentPassing = "Legacy"
+PS> trace-command -PSHOST -Name ParameterBinding { testexe -echoargs $a 'a" "b' a" "b }
+DEBUG: 2021-02-01 17:19:53.6438 ParameterBinding Information: 0 : BIND NAMED native application line args [/Users/james/src/github/forks/jameswtruher/PowerShell-1/test/tools/TestExe/bin/testexe]
+DEBUG: 2021-02-01 17:19:53.6440 ParameterBinding Information: 0 :     BIND argument [-echoargs a" "b a" "b "a b"]
+DEBUG: 2021-02-01 17:19:53.6522 ParameterBinding Information: 0 : CALLING BeginProcessing
+Arg 0 is <a b>
+Arg 1 is <a b>
+Arg 2 is <a b>
+PS> $PSNativeCommandArgumentPassing = "Standard"
+PS> trace-command -PSHOST -Name ParameterBinding { testexe -echoargs $a 'a" "b' a" "b }
+DEBUG: 2021-02-01 17:20:01.9829 ParameterBinding Information: 0 : BIND NAMED native application line args [/Users/james/src/github/forks/jameswtruher/PowerShell-1/test/tools/TestExe/bin/testexe]
+DEBUG: 2021-02-01 17:20:01.9829 ParameterBinding Information: 0 :     BIND cmd line arg [-echoargs] to position [0]
+DEBUG: 2021-02-01 17:20:01.9830 ParameterBinding Information: 0 :     BIND cmd line arg [a" "b] to position [1]
+DEBUG: 2021-02-01 17:20:01.9830 ParameterBinding Information: 0 :     BIND cmd line arg [a" "b] to position [2]
+DEBUG: 2021-02-01 17:20:01.9831 ParameterBinding Information: 0 :     BIND cmd line arg [a b] to position [3]
+DEBUG: 2021-02-01 17:20:01.9908 ParameterBinding Information: 0 : CALLING BeginProcessing
+Arg 0 is <a" "b>
+Arg 1 is <a" "b>
+Arg 2 is <a b>
+```
+
+## PSNativeCommandErrorActionPreference
+
+Native commands usually return an exit code to the calling application that is zero for success or
+non-zero for failure. However, native commands currently do not participate in the PowerShell error
+stream. Redirected **stderr** output is not interpreted the same as the PowerShell error stream.
+Many native commands use stderr as an information or verbose stream, thus only the exit code
+matters. Users working with native commands in their scripts need to check the exit status after
+each call using similar to the following example:
+
+```powershell
+if ($LASTEXITCODE -ne 0) {
+    throw "Command failed. See above errors for details"
+}
+```
+
+Simply relaying the errors through the error stream isn't the solution. The example itself doesn't
+support all cases where `$?` can be false from a cmdlet or function error, making `$LASTEXITCODE`
+stale.
+
+This feature implements a preference variable to enable errors produced by native commands to be
+PowerShell errors. This allows native command failures to produce error objects that are added to
+the PowerShell error stream that may terminate execution of the script without extra handling.
+
+To enable this feature, run the following commands:
+
+```powershell
+Enable-ExperimentalFeature PSNativeCommandErrorActionPreference
+```
+
+You must start a new PowerShell session for this change to be in effect. In the new session, you
+must set the new preference variable:
+
+```powershell
+$PSNativeCommandUseErrorActionPreference = $true
+```
+
 ## PSNativePSPathResolution
 
 If a PSDrive path that uses the FileSystem provider is passed to a native command, the resolved file
@@ -285,8 +424,8 @@ When a native command has a non-zero exit code, `$?` is set to `$false`. If the 
 ## PSNullConditionalOperators
 
 Introduces new operators for Null conditional member access operators - `?.` and `?[]`. Null member
-access operators can be used on scalar types and array types. Return the value of the accessed member
-if the variable is not null. If the value of the variable is null, then return null.
+access operators can be used on scalar types and array types. Return the value of the accessed
+member if the variable is not null. If the value of the variable is null, then return null.
 
 ```powershell
 $x = $null
@@ -313,20 +452,20 @@ variables must use `{}` around the variable name like: `${x?}?.propertyName` or 
 > This feature has moved out of the experimental phase and is a mainstream feature in PowerShell 7.1
 > and higher.
 
-## PSTempDrive
+## PSStrictModeAssignment
 
-Creates the `TEMP:` PSDrive mapped to user's temporary directory path.
+PowerShell 7.3-preview.2 adds the **StrictMode** parameter to `Invoke-Command` to allow specifying
+strict mode when invoking command locally. The **StrictMode** parameter sets the provided version
+for the process. Once the process completes, the **StrictMode** version is set back to what it was
+before the `Invoke-Command`.
 
-> [!NOTE]
-> This feature has moved out of the experimental phase and is a mainstream feature in PowerShell 7
-> and higher.
+This feature does not support asynchronous jobs on remote machines.
 
 ## PSUnixFileStat
 
-This feature provides new behavior to include data from the Unix **stat** API in the output of the
-file system provider to facilitate a more Unix-like file listing. It adds a new note property in the
-filesystem provider named **UnixStat** that includes a common expression of the `stat(2)` API from
-the underlying Unix type system.
+This feature provides more Unix-like file listings by including data from the Unix **stat** API. It
+adds a new note property in the filesystem provider named **UnixStat** that includes a rendering of
+information from the Unix `stat(2)` API.
 
 The output from `Get-ChildItem` should look something like this:
 
@@ -346,22 +485,6 @@ drwxr-xr-x jimtru    staff         11/8/2019 10:37         896 tools
 
 > [!NOTE]
 > This feature has moved out of the experimental phase and is a mainstream feature in PowerShell 7.1
-> and higher.
-
-## PSUseAbbreviationExpansion
-
-This feature enables tab-completion of abbreviated cmdlets and functions:
-
-For example:
-
-- `i-psdf<tab>` returns `Import-PowerShellDataFile`.
-- `u-akvmssdr<tab>` returns `Undo-AzKeyVaultManagedStorageSasDefinitionRemoval`
-
-This only works for tab completion (interactive use), so `i-psdf` is not a valid cmdlet name in a
-script.
-
-> [!NOTE]
-> This feature has moved out of the experimental phase and is a mainstream feature in PowerShell 7
 > and higher.
 
 ## PSSubsystemPluginModel

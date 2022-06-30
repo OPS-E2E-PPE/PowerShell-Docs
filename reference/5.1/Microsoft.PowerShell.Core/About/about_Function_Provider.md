@@ -1,13 +1,12 @@
 ---
-description:  Function 
-keywords: powershell,cmdlet
+description: Function
 Locale: en-US
 ms.date: 10/18/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_function_provider?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: Function Provider
+title: about Function Provider
 ---
-# Function provider
+# about_Function_Provider
 
 ## Provider name
 
@@ -247,6 +246,5 @@ Get-Help Get-ChildItem -Path function:
 
 ## See also
 
-[about_Functions](../About/about_Functions.md)
-
-[about_Providers](../About/about_Providers.md)
+- [about_Functions](about_Functions.md)
+- [about_Providers](about_Providers.md)

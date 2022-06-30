@@ -1,7 +1,7 @@
 ---
-title: What's New in PowerShell Docs for 2020-Q4
-description: List of changes to the PowerShell documentation for Q4 of 2020
-ms.date: 01/05/2021
+description: List of changes to the PowerShell documentation for 2020
+ms.date: 05/05/2022
+title: What's New in PowerShell Docs for 2020
 ---
 
 # What's new in PowerShell Docs for 2020
@@ -380,13 +380,11 @@ issues. Thank you!
 
 ## 2020-March
 
-###
-
 - New documents
   - The PowerShell Docs community pages
     - [Community resources](/powershell/scripting/community/community-support) page
     - [What's new in PowerShell Docs](#2020-march) page (this page)
-    - [PowerShell Infographic](https://github.com/MicrosoftDocs/PowerShell-Docs/blob/staging/assets/PowerShell_7_Infographic.pdf)
+    - [PowerShell Infographic](https://github.com/MicrosoftDocs/PowerShell-Docs/blob/main/assets/PowerShell_7_Infographic.pdf)
       added to the Digital Art page
     - [PowerShell-Doc contributor guide](/powershell/scripting/community/contributing/overview)
   - New PowerShell content
@@ -421,8 +419,6 @@ issues. Thank you!
 
 ## 2020-February
 
-###
-
 - New documents
   - [about_Parameter_Sets](/powershell/module/microsoft.powershell.core/about/about_parameter_sets)
   - [Release history of modules and cmdlets](/powershell/scripting/whats-new/cmdlet-versions)
@@ -447,8 +443,6 @@ issues. Thank you!
 - metablaster - 2 issues
 
 ## 2020-January
-
-###
 
 - New documents
   - [about_Windows_PowerShell_Compatibility](/powershell/module/microsoft.powershell.core/about/about_Windows_PowerShell_Compatibility)

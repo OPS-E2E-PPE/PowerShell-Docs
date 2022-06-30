@@ -1,14 +1,13 @@
 ---
-description:  Describes the `Sequence` keyword that runs selected activities sequentially. 
-keywords: powershell,cmdlet
+description: Describes the `Sequence` keyword that runs selected activities sequentially.
 Locale: en-US
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/psworkflow/about/about_sequence?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Sequence
+title: about Sequence
 ---
 
-# About Sequence
+# about_Sequence
 
 ## Short description
 
@@ -111,14 +110,9 @@ workflow Test-Workflow
 
 ## See also
 
-[about_ForEach](../../Microsoft.PowerShell.Core/About/about_Foreach.md)
-
-[about_ForEach-Parallel](about_ForEach-Parallel.md)
-
-[about_Language_Keywords](../../Microsoft.PowerShell.Core/About/about_Language_Keywords.md)
-
-[about_Parallel](about_Parallel.md)
-
-[about_Workflows](about_Workflows.md)
-
-[Creating a Workflow by Using a Windows PowerShell Script](/previous-versions/powershell/scripting/developer/workflow/creating-a-workflow-by-using-a-windows-powershell-script)
+- [about_ForEach](../../Microsoft.PowerShell.Core/About/about_Foreach.md)
+- [about_ForEach-Parallel](about_ForEach-Parallel.md)
+- [about_Language_Keywords](../../Microsoft.PowerShell.Core/About/about_Language_Keywords.md)
+- [about_Parallel](about_Parallel.md)
+- [about_Workflows](about_Workflows.md)
+- [Creating a Workflow by Using a Windows PowerShell Script](/previous-versions/powershell/scripting/developer/workflow/creating-a-workflow-by-using-a-windows-powershell-script)

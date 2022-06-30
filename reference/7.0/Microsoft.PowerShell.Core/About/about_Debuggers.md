@@ -1,18 +1,17 @@
 ---
-description: Describes the PowerShell debugger. 
-keywords: powershell,cmdlet
+description: Describes the PowerShell debugger.
 Locale: en-US
 ms.date: 08/06/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_debuggers?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Debuggers
+title: about Debuggers
 ---
-# About Debuggers
+# about_Debuggers
 
-## SHORT DESCRIPTION
+## Short description
 Describes the PowerShell debugger.
 
-## LONG DESCRIPTION
+## Long description
 
 Debugging is the process of examining a script while it is running to identify
 and correct errors in the script instructions. The PowerShell debugger can help
@@ -653,8 +652,8 @@ PS C:\ps-test>
 Now, create a new command breakpoint with an action. The following command sets
 a command breakpoint with an action that logs the value of the `$scriptName`
 variable when the function is called. Because the Break keyword is not used in
-the action, execution does not stop. (The backtick (`) is the line-continuation
-character.)
+the action, execution does not stop. (The backtick (`` ` ``) is the
+line-continuation character.)
 
 ```powershell
 PS C:\ps-test> Set-PSBreakpoint -command psversion -script test.ps1  `
@@ -665,7 +664,7 @@ PS C:\ps-test> Set-PSBreakpoint -command psversion -script test.ps1  `
 You can also add actions that set conditions for the breakpoint. In the
 following command, the command breakpoint is executed only if the execution
 policy is set to RemoteSigned, the most restrictive policy that still permits
-you to run scripts. (The backtick (`) is the continuation character.)
+you to run scripts. (The backtick (`` ` ``) is the continuation character.)
 
 ```powershell
 PS C:\ps-test> Set-PSBreakpoint -script test.ps1 -command psversion `
@@ -736,13 +735,13 @@ features that you can use to debug scripts and functions.
   the Write verb for this task, such as `Write-Host`, `Write-Debug`,
   `Write-Warning`, and `Write-Verbose`.
 
-## SEE ALSO
+## See also
 
-- [Disable-PsBreakpoint](xref:Microsoft.PowerShell.Utility.Disable-PSBreakpoint)
-- [Enable-PsBreakpoint](xref:Microsoft.PowerShell.Utility.Enable-PSBreakpoint)
-- [Get-PsBreakpoint](xref:Microsoft.PowerShell.Utility.Get-PSBreakpoint)
-- [Get-PsCallStack](xref:Microsoft.PowerShell.Utility.Get-PSCallStack)
-- [Remove-PsBreakpoint](xref:Microsoft.PowerShell.Utility.Remove-PSBreakpoint)
+- [Disable-PSBreakpoint](xref:Microsoft.PowerShell.Utility.Disable-PSBreakpoint)
+- [Enable-PSBreakpoint](xref:Microsoft.PowerShell.Utility.Enable-PSBreakpoint)
+- [Get-PSBreakpoint](xref:Microsoft.PowerShell.Utility.Get-PSBreakpoint)
+- [Remove-PSBreakpoint](xref:Microsoft.PowerShell.Utility.Remove-PSBreakpoint)
 - [Set-PSBreakpoint](xref:Microsoft.PowerShell.Utility.Set-PSBreakpoint)
+- [Get-PSCallStack](xref:Microsoft.PowerShell.Utility.Get-PSCallStack)
 - [Write-Debug](xref:Microsoft.PowerShell.Utility.Write-Debug)
 - [Write-Verbose](xref:Microsoft.PowerShell.Utility.Write-Verbose)

@@ -1,20 +1,19 @@
 ---
-description:  Describes new features that are included in Windows PowerShell 5.1. 
-keywords: powershell,cmdlet
+description: Describes new features that are included in Windows PowerShell 5.1.
 Locale: en-US
 ms.date: 01/17/2018
-online version: https://docs.microsoft.com/powershell/module/?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://docs.microsoft.com/powershell/module/about_windows_powershell_5.1?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Windows_PowerShell_5.1
+title: about Windows Powershell 5.1
 ---
 
-# about_Windows_PowerShell_5.1
+# about_Windows_Powershell_5.1
 
-## SHORT DESCRIPTION
+## Short description
 
 Describes new features that are included in Windows PowerShell 5.1.
 
-## LONG DESCRIPTION
+## Long description
 
 Windows PowerShell 5.1 includes significant new features that extend its use,
 improve its usability, and allow you to control and manage Windows-based
@@ -35,12 +34,13 @@ work in Windows PowerShell 5.1 without changes.
   from the Pull Server and when using PowerShellGet cmdlets
 - Responses to a number of user requests and issues
 
-Windows PowerShell 5.1 is installed by default on Windows Server 2016 and
-Windows 10. To install Windows PowerShell 5.1 on Windows Server 2012 R2,
-Windows 8.1 Enterprise, or Windows 8.1 Pro, see
-[Install and Configure WMF 5.1](/powershell/scripting/wmf/setup/install-configure).
-Be sure to read the download details, and meet all system requirements, before
-you install Windows Management Framework 5.1.
+Windows PowerShell 5.1 is installed by default on Windows Server version 2016 and higher and Windows
+client version 10 and higher.
+
+To install Windows PowerShell 5.1 on Windows Server 2012 R2, Windows 8.1 Enterprise, or Windows 8.1
+Pro, see [Install and Configure WMF 5.1](/powershell/scripting/wmf/setup/install-configure). Be sure
+to read the download details, and meet all system requirements, before you install Windows
+Management Framework 5.1.
 
 You can also read about changes to Windows PowerShell 5.1 in
 [What's New in Windows PowerShell](/powershell/scripting/windows-powershell/whats-new/what-s-new-in-windows-powershell-50).
@@ -181,8 +181,7 @@ from 3.3.5 to 3.4.0, with the addition of GitHub [PR# 484](https://github.com/pe
 which enables better behavior for Pester on Nano Server.
 
 You can review the changes in versions 3.3.5 to 3.4.0 by inspecting the
-ChangeLog.md file at:
-https://github.com/pester/Pester/blob/master/CHANGELOG.md
+[CHANGELOG](https://github.com/pester/Pester/blob/main/docs/CHANGELOG.md) in the GitHub repository.
 
 ## KEYWORDS
 

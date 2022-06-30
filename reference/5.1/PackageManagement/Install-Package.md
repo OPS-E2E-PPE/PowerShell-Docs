@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.PowerShell.PackageManagement.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: PackageManagement
 ms.date: 05/23/2019
@@ -163,6 +162,22 @@ highest version in the range is installed.
 ```yaml
 Type: System.Management.Automation.SwitchParameter
 Parameter Sets: PowerShellGet:PackageBySearch, PowerShellGet:PackageByInputObject
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AdditionalArguments
+
+Specifies one or more additional arguments for installation.
+
+```yaml
+Type: System.String[]
+Parameter Sets: msi:PackageBySearch, msi:PackageByInputObject
 Aliases:
 
 Required: False
@@ -438,6 +453,38 @@ Type: System.String[]
 Parameter Sets: PowerShellGet:PackageBySearch, PowerShellGet:PackageByInputObject
 Aliases:
 Accepted values: Cmdlet, DscResource, Function, RoleCapability, Workflow
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -IncludeSystemComponent
+
+Indicates that this cmdlet includes system components in the results.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: Programs:PackageBySearch, Programs:PackageByInputObject
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -IncludeWindowsInstaller
+
+Indicates that this cmdlet includes the Windows installer in the results.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: Programs:PackageBySearch, Programs:PackageByInputObject
+Aliases:
 
 Required: False
 Position: Named
@@ -850,54 +897,6 @@ Aliases: wi
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AdditionalArguments
-
-Specifies one or more additional arguments for installation.
-
-```yaml
-Type: System.String[]
-Parameter Sets: msi:PackageBySearch, msi:PackageByInputObject
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -IncludeSystemComponent
-
-Indicates that this cmdlet includes system components in the results.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: Programs:PackageBySearch, Programs:PackageByInputObject
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -IncludeWindowsInstaller
-
-Indicates that this cmdlet includes the Windows installer in the results.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: Programs:PackageBySearch, Programs:PackageByInputObject
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

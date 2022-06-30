@@ -1,6 +1,6 @@
 # Microsoft Open Source Code of Conduct
 
-> Updated: 11/02/2020
+> Updated: 05/18/2022
 
 This project has adopted the
 [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more
@@ -9,13 +9,17 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 comments.
 
 [live-badge]: https://powershell.visualstudio.com/PowerShell-Docs/_apis/build/status/PowerShell-Docs-CI?branchName=live
-[staging-badge]: https://powershell.visualstudio.com/PowerShell-Docs/_apis/build/status/PowerShell-Docs-CI?branchName=staging
+[main-badge]: https://powershell.visualstudio.com/PowerShell-Docs/_apis/build/status/PowerShell-Docs-CI?branchName=main
 
 ## Build Status
 
-|          Live Branch          |           Staging Branch            |
+|          live branch          |           main branch            |
 | :---------------------------- | :---------------------------------- |
-| [![live-badge][]][live-badge] | [![staging-badge][]][staging-badge] |
+| [![live-badge][]][live-badge] | [![main-badge][]][main-badge] |
+
+## PowerShell Updatable Help (CabGen) CI Build Status
+
+[![Build Status](https://apidrop.visualstudio.com/Content%20CI/_apis/build/status/PROD/CabGen(PowerShell_Updatable_Help)/GitHub_MicrosoftDocs_PowerShell-Docs/6ff7e8c3-dfc6-3ebd-da5a-d5e2ff43de8f_cabgen_Publish-Updatable-Help?repoName=MicrosoftDocs%2FPowerShell-Docs&branchName=live)](https://apidrop.visualstudio.com/Content%20CI/_build/latest?definitionId=5076&repoName=MicrosoftDocs%2FPowerShell-Docs&branchName=live)
 
 ## PowerShell Documentation
 
@@ -34,11 +38,12 @@ The following list describes the main folders in this repository.
   reference and conceptual content.
   - `5.1` - contains the cmdlet reference and about topics for PowerShell 5.1
   - `7.0` - contains the cmdlet reference and about topics for PowerShell 7.0
-  - `7.1` - contains the cmdlet reference and about topics for PowerShell 7.1
-  - `7.2` - contains the cmdlet reference and about topics for PowerShell 7.2 (preview)
+  - `7.2` - contains the cmdlet reference and about topics for PowerShell 7.2
+  - `7.3` - contains the cmdlet reference and about topics for PowerShell 7.3 preview
   - `bread` - contains the TOC used for breadcrumb navigation
   - `docs-conceptual` - contains the conceptual articles that are published to the Docs site. In
     general, the folder structure mirrors the Table of Contents (TOC).
+  - `includes` - contains markdown include files
   - `mapping` - contains the version mapping configuration used by the build system
   - `media` - contains image files used in documentation. There are media folders throughout the
     `docs-conceptual` content. See the Contributor Guide for information on using images in
@@ -47,15 +52,13 @@ The following list describes the main folders in this repository.
 - `tests` - contains the Pester tests used by the build system
 - `tools` - contains other tools used by the build system
 
-> NOTE: The reference content (in the numbered folders) is used to create the
-> webpages on the Docs site as well as the updateable help used by PowerShell.
-> The articles in the `docs-conceptual` folder are only published to the Docs
-> website.
+> NOTE: The reference content (in the numbered folders) is used to create the webpages on the Docs
+> site as well as the updateable help used by PowerShell. The articles in the `docs-conceptual`
+> folder are only published to the Docs website.
 
 ## Contributing
 
-We welcome public contributions into this repository via
-[pull requests](https://help.github.com/articles/using-pull-requests/) into the _staging_ branch.
+We welcome public contributions into this repository via pull requests into the _main_ branch.
 Please note that before we can accept your pull request you must sign our
 [Contribution License Agreement](https://cla.microsoft.com/). This is a one-time requirement.
 

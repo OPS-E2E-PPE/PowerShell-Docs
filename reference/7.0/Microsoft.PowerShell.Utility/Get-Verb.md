@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
 ms.date: 09/07/2018
@@ -33,10 +32,10 @@ warning message.
 > [!NOTE]
 > The verb list that `Get-Verb` returns might not be complete. For an updated list of approved
 > PowerShell verbs with descriptions, see
-> [Approved Verbs](../../docs-conceptual/developer/cmdlet/approved-verbs-for-windows-powershell-commands.md) in
-> the Microsoft Docs.
+> [Approved Verbs](/powershell/scripting/docs-conceptual/developer/cmdlet/approved-verbs-for-windows-powershell-commands)
+> in the Microsoft Docs.
 
-## Examples
+## EXAMPLES
 
 ### Example 1 - Get a list of all verbs
 
@@ -94,23 +93,6 @@ Cmdlet          Tee-Object      3.1.0.0    Microsoft.PowerShell.Utility
 
 ## PARAMETERS
 
-### -Verb
-
-Gets only the specified verbs. Enter the name of a verb or a name pattern. Wildcards are allowed.
-
-```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-Accepted values: Common, Communications, Data, Diagnostic, Lifecycle, Other, Security
-
-Required: False
-Position: 1
-Default value: All groups
-Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: True
-```
-
 ### -Group
 
 Gets only the specified groups. Enter the name of a group. Wildcards are not allowed.
@@ -127,6 +109,23 @@ Position: 0
 Default value: All verbs
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
+```
+
+### -Verb
+
+Gets only the specified verbs. Enter the name of a verb or a name pattern. Wildcards are allowed.
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+Accepted values: Common, Communications, Data, Diagnostic, Lifecycle, Other, Security
+
+Required: False
+Position: 1
+Default value: All groups
+Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: True
 ```
 
 ### CommonParameters

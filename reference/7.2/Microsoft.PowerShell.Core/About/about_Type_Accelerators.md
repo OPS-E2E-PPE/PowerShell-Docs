@@ -4,14 +4,14 @@ Locale: en-US
 ms.date: 05/01/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_type_accelerators?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Type_Accelerators
+title: about Type Accelerators
 ---
-# About Type Accelerators
+# about_Type_Accelerators
 
 ## SHORT DESRIPTION
 Describes the Type accelerators available for .NET framework classes
 
-## LONG DESCRIPTION
+## Long description
 
 Type accelerators are aliases for .NET framework classes. They allow you to
 access specific .NET framework classes without having to explicitly type the
@@ -129,4 +129,3 @@ class from `[System.Management.Automation.AliasAttribute]` to `[Alias]`.
 |X500DistinguishedName        | System.Security.Cryptography.X509Certificates.X500DistinguishedName |
 |X509Certificate              | System.Security.Cryptography.X509Certificates.X509Certificate       |
 |xml                          | System.Xml.XmlDocument                                              |
-

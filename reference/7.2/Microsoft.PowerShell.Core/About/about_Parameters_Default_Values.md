@@ -4,9 +4,9 @@ Locale: en-US
 ms.date: 05/31/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_parameters_default_values?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Parameters_Default_Values
+title: about Parameters Default Values
 ---
-# About Parameters Default Values
+# about_Parameters_Default_Values
 
 ## Short description
 
@@ -400,17 +400,10 @@ Send-MailMessage:SmtpServer    ServerXYZ
 
 ## See also
 
-[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216)
-
-[about_Functions_Advanced](about_Functions_Advanced.md)
-
-[about_Functions_CmdletBindingAttribute](about_Functions_CmdletBindingAttribute.md)
-
-[about_Hash_Tables](about_Hash_Tables.md)
-
-[about_Preference_Variables](about_Preference_Variables.md)
-
-[about_Profiles](about_Profiles.md)
-
-[about_Script_Blocks](about_Script_Blocks.md)
-
+- [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216)
+- [about_Functions_Advanced](about_Functions_Advanced.md)
+- [about_Functions_CmdletBindingAttribute](about_Functions_CmdletBindingAttribute.md)
+- [about_Hash_Tables](about_Hash_Tables.md)
+- [about_Preference_Variables](about_Preference_Variables.md)
+- [about_Profiles](about_Profiles.md)
+- [about_Script_Blocks](about_Script_Blocks.md)

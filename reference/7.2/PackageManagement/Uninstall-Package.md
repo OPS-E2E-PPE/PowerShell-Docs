@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.PackageManagement.dll-Help.xml
 Locale: en-US
 Module Name: PackageManagement
-ms.date: 05/24/2019
+ms.date: 06/04/2021
 online version: https://docs.microsoft.com/powershell/module/packagemanagement/uninstall-package?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Uninstall-Package
@@ -81,7 +81,7 @@ PS> Uninstall-Package -Name NuGet.Core
 ### Example 2: Use the pipeline to uninstall a package
 
 `Get-Package` locates a specific package and sends the **SoftwareIdentity** object down the pipeline
-to the `Uninsall-Package` cmdlet.
+to the `Uninstall-Package` cmdlet.
 
 ```
 PS> Get-Package -Name NuGet.Core -RequiredVersion 2.14.0 | Uninstall-Package
@@ -483,11 +483,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### `Uninstall-Package` accepts **SoftwareIdentity** objects from the pipeline as input.
+### SoftwareIdentity
+
+`Uninstall-Package` accepts **SoftwareIdentity** objects from the pipeline as input.
 
 ## OUTPUTS
 
-### `Uninstall-Package` doesn't generate any output.
+### SoftwareIdentity
+
+`Uninstall-Package` returns a **SoftwareIdentity** object for each package uninstalled.
 
 ## NOTES
 
@@ -508,4 +512,3 @@ and includes the provider's parameter set. For example, `Uninstall-Package` has 
 [Install-Package](Install-Package.md)
 
 [Save-Package](Save-Package.md)
-

@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Security
-ms.date: 06/09/2017
+ms.date: 01/31/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/set-acl?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-Acl
@@ -37,6 +36,8 @@ Set-Acl -LiteralPath <String[]> [-AclObject] <Object> [-ClearCentralAccessPolicy
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `Set-Acl` cmdlet changes the security descriptor of a specified item, such as a file or a
 registry key, to match the values in a security descriptor that you supply.
@@ -124,16 +125,17 @@ $NewAcl.SetAccessRuleProtection($isProtected, $preserveInheritance)
 Set-Acl -Path "C:\Pets\Dog.txt" -AclObject $NewAcl
 ```
 
-These commands is will disable access inheritance from parent folders, while still preserving the
-existing inherited access rules.
+These commands disable access inheritance from parent folders, while still preserving the existing
+inherited access rules.
 
 The first command uses the `Get-Acl` cmdlet to get the security descriptor of the Dog.txt file.
 
 Next, variables are created to convert the inherited access rules to explicit access rules. To
 protect the access rules associated with this from inheritance, set the `$isProtected` variable to
-`$true`.to allow inheritance, set `$isProtected` to `$false`. For more information, see
+`$true`. To allow inheritance, set `$isProtected` to `$false`. For more information, see
 [set access rule protection](/dotnet/api/system.security.accesscontrol.objectsecurity.setaccessruleprotection).
-The `$preserveInheritance` variable set to `$true` to preserve inherited access rules; false to
+
+Set the `$preserveInheritance` variable to `$true` to preserve inherited access rules or `$false` to
 remove inherited access rules. Then the access rule protection is updated using the
 **SetAccessRuleProtection()** method.
 

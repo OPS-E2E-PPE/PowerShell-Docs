@@ -1,14 +1,13 @@
 ---
-description:  PowerShell logs internal operations from the engine, providers, and cmdlets. 
-keywords: powershell
+description: PowerShell logs internal operations from the engine, providers, and cmdlets.
 Locale: en-US
 ms.date: 12/14/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_logging?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Logging
+title: about Logging
 ---
 
-# About Logging
+# about_Logging
 
 ## Short description
 
@@ -23,7 +22,7 @@ stopping the engine and providers, and executing PowerShell commands.
 > Windows PowerShell versions 3.0, 4.0, 5.0, and 5.1 include **EventLog**
 > cmdlets for the Windows event logs. In those versions, to display the list of
 > **EventLog** cmdlets type: `Get-Command -Noun EventLog`. For more
-> information, see the cmdlet documentation and about_EventLogs for your
+> information, see the cmdlet documentation and [about_EventLogs](about_Eventlogs.md) for your
 > version of Windows PowerShell.
 
 ## Viewing the PowerShell event log entries on Windows
@@ -107,7 +106,7 @@ more information about Public Key Cryptography, see
 To enable a Protected Event Logging policy, deploy a public key to all machines
 that have event log data to protect. The corresponding private key is used to
 post-process the event logs at a more secure location such as a central event
-log collector, or [SIEM][] aggregator. You can set up SIEM in Azure. For more
+log collector, or [SIEM][SIEM] aggregator. You can set up SIEM in Azure. For more
 information, see [Generic SIEM integration](/cloud-app-security/siem).
 
 ### Enabling Protected Event Logging via Group Policy
@@ -147,9 +146,8 @@ Get-WinEvent Microsoft-Windows-PowerShell/Operational |
 
 ## See also
 
-[PowerShell the Blue Team](https://devblogs.microsoft.com/powershell/powershell-the-blue-team/)
-
-[Generic SIEM integration](/cloud-app-security/siem)
+- [Generic SIEM integration](/cloud-app-security/siem)
+- [PowerShell the Blue Team](https://devblogs.microsoft.com/powershell/powershell-the-blue-team/)
 
 <!-- link references -->
 [SIEM]: https://wikipedia.org/wiki/Security_information_and_event_management

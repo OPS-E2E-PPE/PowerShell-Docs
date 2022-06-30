@@ -1,47 +1,35 @@
 # PR Summary
-<!-- Summarize your changes and list related issues here -->
 
-## PR Context
 <!--
-There is a numbered folder for each version of the PowerShell cmdlet content.
-Changes to cmdlet reference should be made to all versions where applicable.
-The /docs-conceptual folder tree does not have version folders.
+    Delete this comment block and summarize your changes and list
+    related issues here. For example:
+
+    This changes fixes problem X in the documentation for Y.
+
+    - Fixes #1234
+    - Resolves #1235
 -->
-
-Select the area of the Table of Contents containing the documents being changed.
-
-**Conceptual content**
-- [ ] Overview and Install
-- [ ] Learning PowerShell
-  - [ ] PowerShell 101
-  - [ ] Deep dives
-  - [ ] Remoting
-- [ ] Release notes (What's New)
-- [ ] Windows PowerShell
-  - WMF, ISE, release notes, etc.
-- [ ] DSC articles
-- [ ] Community resources
-- [ ] Sample scripts
-- [ ] Gallery articles
-- [ ] Scripting and development
-  - [ ] Legacy SDK
-
-**Cmdlet reference & about_ topics**
-- [ ] Preview content
-- [ ] Version 7.1 content
-- [ ] Version 7.0 content
-- [ ] Version 5.1 content
 
 ## PR Checklist
 
-- [ ] I have read the [contributors guide][contrib] and followed the style and process guidelines
-- [ ] PR has a meaningful title
-- [ ] PR is targeted at the _staging_ branch
-- [ ] All relevant versions updated
-- [ ] Includes content related to issues and PRs - see [Closing issues using keywords][key].
-- [ ] This PR is ready to merge and is not **Work in Progress**
-  - If the PR is work in progress, please add the prefix `WIP:` or `[WIP]` to the beginning of the
-    title and remove the prefix when the PR is ready.
+<!--
+    These items are mandatory. For your PR to be reviewed and merged,
+    ensure you have followed these steps. As you complete the steps,
+    check each box by replacing the space between the brackets with an
+    x or by clicking on the box in the UI after your PR is submitted.
+-->
+
+- [ ] **Descriptive Title:** This PR's title is a synopsis of the changes it proposes.
+- [ ] **Summary:** This PR's summary describes the scope and intent of the change.
+- [ ] **Contributor's Guide:** I have read the [contributors guide][contrib].
+- [ ] **Style:** This PR adheres to the [style guide][style].
+
+<!--
+    If your PR is a work in progress, please mark it as a draft or
+    prefix it with "(WIP)" or "WIP:"
+
+    This helps us understand whether or not your PR is ready to review.
+-->
 
 [contrib]: https://docs.microsoft.com/powershell/scripting/community/contributing/overview
-[key]: https://help.github.com/en/articles/closing-issues-using-keywords
+[style]: https://docs.microsoft.com/powershell/scripting/community/contributing/powershell-style-guide

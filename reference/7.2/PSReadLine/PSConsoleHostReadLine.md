@@ -2,7 +2,7 @@
 external help file: PSReadLine-help.xml
 Locale: en-US
 Module Name: PSReadLine
-ms.date: 12/07/2018
+ms.date: 04/25/2022
 online version: https://docs.microsoft.com/powershell/module/psreadline/psconsolehostreadline?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: PSConsoleHostReadLine
@@ -50,4 +50,3 @@ This function is not intended to be used from the command line.
 ## RELATED LINKS
 
 [about_PSReadLine](./About/about_PSReadLine.md)
-

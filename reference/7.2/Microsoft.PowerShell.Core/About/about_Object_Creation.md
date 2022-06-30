@@ -4,9 +4,9 @@ Locale: en-US
 ms.date: 09/22/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_object_creation?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Object_Creation
+title: about Object Creation
 ---
-# About Object Creation
+# about_Object_Creation
 
 ## Short description
 
@@ -296,12 +296,8 @@ For more information on Generics, see [Generics in .NET](/dotnet/standard/generi
 
 ## See also
 
-[about_Objects](about_Objects.md)
-
-[about_Methods](about_Methods.md)
-
-[about_Properties](about_Properties.md)
-
-[about_Pipelines](about_Pipelines.md)
-
-[about_Types.ps1xml](about_Types.ps1xml.md)
+- [about_Methods](about_Methods.md)
+- [about_Objects](about_Objects.md)
+- [about_Pipelines](about_Pipelines.md)
+- [about_Properties](about_Properties.md)
+- [about_Types.ps1xml](about_Types.ps1xml.md)
