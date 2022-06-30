@@ -66,6 +66,7 @@
       ]
     }
   ],
+  "xref_endpoint": "https://xref.docs.microsoft.com",
   "git_repository_branch_open_to_public_contributors": "main",
   "git_repository_url_open_to_public_contributors": "https://github.com/MicrosoftDocs/PowerShell-Docs",
   "need_generate_pdf_url_template": false,
