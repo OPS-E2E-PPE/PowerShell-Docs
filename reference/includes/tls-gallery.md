@@ -2,8 +2,8 @@
 author: sdwheeler
 ms.author: sewhee
 ms.date: 11/18/2020
-ms.topic: include
 ms.prod: powershell
+ms.topic: include
 ---
 > [!IMPORTANT]
 > As of April 2020, the PowerShell Gallery no longer supports Transport Layer Security (TLS)
@@ -12,7 +12,7 @@ ms.prod: powershell
 > 1.2:
 >
 > ```powershell
-> [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+> [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 > ```
 >
 > For more information, see the

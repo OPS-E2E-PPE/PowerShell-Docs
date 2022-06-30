@@ -1,14 +1,13 @@
 ---
-description:  Describes scheduled jobs and explains how to use and manage scheduled jobs in PowerShell and in Task Scheduler. 
-keywords: powershell,cmdlet
+description: Describes scheduled jobs and explains how to use and manage scheduled jobs in PowerShell and in Task Scheduler.
 Locale: en-US
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/psscheduledjob/about/about_scheduled_jobs?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Scheduled_Jobs
+title: about Scheduled Jobs
 ---
 
-# About Scheduled Jobs
+# about_Scheduled_Jobs
 
 ## Short description
 
@@ -236,12 +235,8 @@ job to which any job trigger or job option is associated.
 
 ## See also
 
-[about_Scheduled_Jobs_Basics](about_Scheduled_Jobs_Basics.md)
-
-[about_Scheduled_Jobs_Advanced](about_Scheduled_Jobs_Advanced.md)
-
-[about_Scheduled_Jobs_Troubleshooting](about_Scheduled_Jobs_Troubleshooting.md)
-
-[PSScheduledJob](xref:PSScheduledJob) module cmdlets
-
-[Task Scheduler](/windows/desktop/TaskSchd/task-scheduler-reference)
+- [about_Scheduled_Jobs_Basics](about_Scheduled_Jobs_Basics.md)
+- [about_Scheduled_Jobs_Advanced](about_Scheduled_Jobs_Advanced.md)
+- [about_Scheduled_Jobs_Troubleshooting](about_Scheduled_Jobs_Troubleshooting.md)
+- [PSScheduledJob](xref:PSScheduledJob) module cmdlets
+- [Task Scheduler](/windows/desktop/TaskSchd/task-scheduler-reference)

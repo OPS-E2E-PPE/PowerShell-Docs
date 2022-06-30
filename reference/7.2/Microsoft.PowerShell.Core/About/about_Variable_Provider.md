@@ -4,9 +4,9 @@ Locale: en-US
 ms.date: 10/18/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_variable_provider?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: Variable Provider
+title: about Variable Provider
 ---
-# Variable provider
+# about_Variable_Provider
 
 ## Provider name
 Variable
@@ -279,9 +279,6 @@ Get-Help Get-ChildItem -Path variable:
 
 ## See also
 
-[about_Variables](../About/about_Variables.md)
-
-[about_Automatic_Variables](../About/about_Automatic_Variables.md)
-
-[about_Providers](../About/about_Providers.md)
-
+- [about_Automatic_Variables](about_Automatic_Variables.md)
+- [about_Providers](about_Providers.md)
+- [about_Variables](about_Variables.md)

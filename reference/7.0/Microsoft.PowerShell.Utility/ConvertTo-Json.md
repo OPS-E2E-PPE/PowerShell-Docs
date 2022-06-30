@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 06/09/2017
+ms.date: 05/04/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/convertto-json?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: ConvertTo-Json
@@ -17,15 +16,15 @@ Converts an object to a JSON-formatted string.
 
 ```
 ConvertTo-Json [-InputObject] <Object> [-Depth <Int32>] [-Compress]
-[-EnumsAsStrings] [-AsArray] [-EscapeHandling <StringEscapeHandling>]
-[<CommonParameters>]
+ [-EnumsAsStrings] [-AsArray] [-EscapeHandling <StringEscapeHandling>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-The `ConvertTo-Json` cmdlet converts any .NET object to a string in JavaScript Object Notation (JSON)
-format. The properties are converted to field names, the field values are converted to property
-values, and the methods are removed.
+The `ConvertTo-Json` cmdlet converts any .NET object to a string in JavaScript Object Notation
+(JSON) format. The properties are converted to field names, the field values are converted to
+property values, and the methods are removed.
 
 You can then use the `ConvertFrom-Json` cmdlet to convert a JSON-formatted string to a JSON
 object, which is easily managed in PowerShell.
@@ -205,8 +204,9 @@ Accept wildcard characters: False
 
 ### -Depth
 
-Specifies how many levels of contained objects are included in the JSON representation. The default
-value is 2.
+Specifies how many levels of contained objects are included in the JSON representation. The value
+can be any number from `1` to `100`. The default value is `2`. `ConvertTo-Json` emits a
+warning if the number of levels in an input object exceeds this number.
 
 ```yaml
 Type: System.Int32
@@ -267,8 +267,9 @@ Specifies the objects to convert to JSON format. Enter a variable that contains 
 a command or expression that gets the objects. You can also pipe an object to `ConvertTo-Json`.
 
 The **InputObject** parameter is required, but its value can be null (`$null`) or an empty string.
-When the input object is `$null`, `ConvertTo-Json` does not generate any output. When the input
-object is an empty string, `ConvertTo-Json` returns an empty string.
+When the input object is `$null`, `ConvertTo-Json` returns the JSON representation of `null`. When
+the input object is an empty string, `ConvertTo-Json` returns the JSON representation of an empty
+string.
 
 ```yaml
 Type: System.Object

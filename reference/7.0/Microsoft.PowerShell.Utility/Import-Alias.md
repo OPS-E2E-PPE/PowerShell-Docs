@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
 ms.date: 06/09/2017
@@ -133,7 +132,7 @@ The acceptable values for this parameter are:
 - A number relative to the current scope (0 through the number of scopes, where 0 is the current scope and 1 is its parent)
 
 The default is Local.
-For more information, see about_Scopes.
+For more information, see [about_Scopes](../Microsoft.PowerShell.Core/About/about_Scopes.md).
 
 ```yaml
 Type: System.String

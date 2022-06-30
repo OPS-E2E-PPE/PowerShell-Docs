@@ -2,7 +2,8 @@
 external help file: System.Management.Automation.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 12/03/2020
+ms.date: 05/05/2022
+no-loc: [Import-Module, -Scope]
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/import-module?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Import-Module
@@ -1041,7 +1042,7 @@ in the background by PowerShell.
 This parameter uses the Implicit Remoting feature of PowerShell. It is equivalent to using the
 `Import-PSSession` cmdlet to import particular modules from a session.
 
-`Import-Module` cannot import PowerShell Core modules from another session. The PowerShell Core
+`Import-Module` cannot import core PowerShell modules from another session. The core PowerShell
 modules have names that begin with Microsoft.PowerShell.
 
 This parameter was introduced in Windows PowerShell 3.0.
@@ -1124,26 +1125,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Variable
-
-Specifies an array of variables that this cmdlet imports from the module into the current session.
-Enter a list of variables. Wildcard characters are permitted.
-
-Some modules automatically export selected variables into your session when you import the module.
-This parameter lets you select from among the exported variables.
-
-```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: True
-```
-
 ### -SkipEditionCheck
 
 Skips the check on the `CompatiblePSEditions` field.
@@ -1190,6 +1171,26 @@ Position: Named
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
+```
+
+### -Variable
+
+Specifies an array of variables that this cmdlet imports from the module into the current session.
+Enter a list of variables. Wildcard characters are permitted.
+
+Some modules automatically export selected variables into your session when you import the module.
+This parameter lets you select from among the exported variables.
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: True
 ```
 
 ### CommonParameters

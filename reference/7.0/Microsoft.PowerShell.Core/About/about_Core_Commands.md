@@ -1,18 +1,17 @@
 ---
-description: Lists the cmdlets that are designed for use with PowerShell providers. 
-keywords: powershell,cmdlet
+description: Lists the cmdlets that are designed for use with PowerShell providers.
 Locale: en-US
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_core_commands?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Core_Commands
+title: about Core Commands
 ---
-# About Core Commands
+# about_Core_Commands
 
-## SHORT DESCRIPTION
+## Short description
 Lists the cmdlets that are designed for use with PowerShell providers.
 
-## LONG DESCRIPTION
+## Long description
 
 PowerShell includes a set of cmdlets that are specifically designed to manage
 the items in the data stores that are exposed by PowerShell providers.
@@ -88,6 +87,6 @@ PSProvider cmdlets
 
 For more information about a cmdlet, type `get-help <cmdlet-name>`.
 
-## SEE ALSO
+## See also
 
-[about_Providers](about_Providers.md)
+- [about_Providers](about_Providers.md)

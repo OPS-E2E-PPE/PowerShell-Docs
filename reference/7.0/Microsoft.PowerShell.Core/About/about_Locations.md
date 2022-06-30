@@ -4,7 +4,7 @@ Locale: en-US
 ms.date: 03/15/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_locations?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Locations
+title: about Locations
 ---
 # about_Locations
 
@@ -128,8 +128,6 @@ location).
 
 ## See also
 
-[Set-Location](xref:Microsoft.PowerShell.Management.Set-Location)
-
-[about_Providers](about_Providers.md)
-
-[about_Path_Syntax](about_Path_Syntax.md)
+- [about_Path_Syntax](about_Path_Syntax.md)
+- [about_Providers](about_Providers.md)
+- [Set-Location](xref:Microsoft.PowerShell.Management.Set-Location)

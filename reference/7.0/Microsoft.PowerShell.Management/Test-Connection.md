@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
 ms.date: 12/12/2019
@@ -224,23 +223,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Repeat
-
-Causes the cmdlet to send ping requests continuously. This parameter can't be used with the
-**Count** parameter.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: RepeatPing
-Aliases: Continuous
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Count
 
 Specifies the number of echo requests to send. The default value is 4.
@@ -326,7 +308,7 @@ Accept wildcard characters: False
 ### -MaxHops
 
 Sets the maximum number of hops that an ICMP request message can be sent. The default value is
-controlled by the operating system. The default value for Windows 10 is 128 hops.
+controlled by the operating system. The default value for Windows 10 and higher is 128 hops.
 
 ```yaml
 Type: System.Int32
@@ -335,7 +317,25 @@ Aliases: Ttl, TimeToLive, Hops
 
 Required: False
 Position: Named
-Default value: 128 hops in Windows 10
+Default value: 128
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MtuSize
+
+This parameter is used to discover the Path MTU size. The cmdlet returns a **PingReply#MTUSize**
+object that contains the Path MTU size to the target. For more information about Path MTU, see the
+[Path MTU Discovery](https://wikipedia.org/wiki/Path_MTU_Discovery) article in wikipedia.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: MtuSizeDetect
+Aliases: MtuSizeDetect
+
+Required: True
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -380,6 +380,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Repeat
+
+Causes the cmdlet to send ping requests continuously. This parameter can't be used with the
+**Count** parameter.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: RepeatPing
+Aliases: Continuous
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ResolveDestination
 
 Causes the cmdlet to attempt to resolve the DNS name of the target. When used in conjunction
@@ -403,8 +420,9 @@ Accept wildcard characters: False
 Specifies the names of the computers where the ping originates. Enter a comma-separated list of
 computer names. The default is the local computer.
 
-**NOTE:** This parameter is not functional in PowerShell versions 6 and up.
-Supplying this parameter will have no effect on the command.
+> [!NOTE]
+> This parameter is not supported in PowerShell versions 6 and up. Supplying this parameter
+> causes an error.
 
 ```yaml
 Type: System.String
@@ -432,6 +450,27 @@ Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -TcpPort
+
+Specifies the TCP port number on the target to be used in the TCP connection test. The cmdlet will
+attempt to make a TCP connection to the specified port on the target.
+
+If a connection can be made, `$True` will be returned.
+
+If a connection cannot be made, `$False` will be returned.
+
+```yaml
+Type: System.Int32
+Parameter Sets: TcpPort
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -467,45 +506,6 @@ Aliases:
 Required: True
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -MtuSize
-
-This parameter is used to discover the Path MTU size. The cmdlet returns a **PingReply#MTUSize**
-object that contains the Path MTU size to the target. For more information about Path MTU, see the
-[Path MTU Discovery](https://wikipedia.org/wiki/Path_MTU_Discovery) article in wikipedia.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: MtuSizeDetect
-Aliases: MtuSizeDetect
-
-Required: True
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -TcpPort
-
-Specifies the TCP port number on the target to be used in the TCP connection test. The cmdlet will
-attempt to make a TCP connection to the specified port on the target.
-
-If a connection can be made, `$True` will be returned.
-
-If a connection cannot be made, `$False` will be returned.
-
-```yaml
-Type: System.Int32
-Parameter Sets: TcpPort
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

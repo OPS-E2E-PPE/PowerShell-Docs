@@ -1,6 +1,5 @@
 ---
 external help file: PSModule-help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: PowerShellGet
 ms.date: 07/08/2019
@@ -164,22 +163,6 @@ Accepted values: Desktop, Core
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-
-Prompts you for confirmation before running `Update-ModuleManifest`.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -828,6 +811,22 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+
+Prompts you for confirmation before running `Update-ModuleManifest`.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

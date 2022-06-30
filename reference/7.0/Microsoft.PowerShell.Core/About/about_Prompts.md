@@ -1,13 +1,12 @@
 ---
-description: Describes the `Prompt` function and demonstrates how to create a custom `Prompt` function. 
-keywords: powershell,cmdlet
+description: Describes the `Prompt` function and demonstrates how to create a custom `Prompt` function.
 Locale: en-US
-ms.date: 04/15/2020
+ms.date: 01/26/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_prompts?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Prompts
+title: about Prompts
 ---
-# About Prompts
+# about_Prompts
 
 ## Short description
 Describes the `Prompt` function and demonstrates how to create a custom
@@ -142,8 +141,8 @@ PS C:\ps-test>
 ```
 
 If you are in a nested prompt, the function adds two angle brackets (`>>`) to
-the prompt. (You are in a nested prompt if the value of the
-`$NestedPromptLevel` automatic variable is greater than 1.)
+the prompt. You are in a nested prompt if the value of the `$NestedPromptLevel`
+automatic variable is greater than 0.
 
 For example, when you are debugging in a nested prompt, the prompt resembles
 the following prompt:
@@ -276,22 +275,13 @@ profiles. For more information about profiles, see [about_Profiles](about_Profil
 
 ## See also
 
-[Get-Location](xref:Microsoft.PowerShell.Management.Get-Location)
-
-[Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
-
-[Get-History](xref:Microsoft.PowerShell.Core.Get-History)
-
-[Get-Random](xref:Microsoft.PowerShell.Utility.Get-Random)
-
-[Write-Host](xref:Microsoft.PowerShell.Utility.Write-Host)
-
-[about_Profiles](about_Profiles.md)
-
-[about_Functions](about_Functions.md)
-
-[about_Scopes](about_Scopes.md)
-
-[about_Debuggers](about_Debuggers.md)
-
-[about_Automatic_Variables](about_Automatic_Variables.md)
+- [about_Automatic_Variables](about_Automatic_Variables.md)
+- [about_Debuggers](about_Debuggers.md)
+- [about_Functions](about_Functions.md)
+- [about_Profiles](about_Profiles.md)
+- [about_Scopes](about_Scopes.md)
+- [Get-History](xref:Microsoft.PowerShell.Core.Get-History)
+- [Write-Host](xref:Microsoft.PowerShell.Utility.Write-Host)
+- [Get-Location](xref:Microsoft.PowerShell.Management.Get-Location)
+- [Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
+- [Get-Random](xref:Microsoft.PowerShell.Utility.Get-Random)

@@ -1,8 +1,8 @@
 ---
-title: Everything you wanted to know about $null
 description: The PowerShell $null often appears to be simple but it has a lot of nuances. Let's take a close look at $null so you know what happens when you unexpectedly run into a null value.
-ms.date: 05/23/2020
 ms.custom: contributor-KevinMarquette
+ms.date: 10/05/2021
+title: Everything you wanted to know about $null
 ---
 # Everything you wanted to know about $null
 
@@ -10,9 +10,9 @@ The PowerShell `$null` often appears to be simple but it has a lot of nuances. L
 look at `$null` so you know what happens when you unexpectedly run into a `$null` value.
 
 > [!NOTE]
-> The [original version][] of this article appeared on the blog written by [@KevinMarquette][]. The
+> The [original version][original version] of this article appeared on the blog written by [@KevinMarquette][@KevinMarquette]. The
 > PowerShell team thanks Kevin for sharing this content with us. Please check out his blog at
-> [PowerShellExplained.com][].
+> [PowerShellExplained.com][PowerShellExplained.com].
 
 ## What is NULL?
 
@@ -96,7 +96,7 @@ False
 
 ### In place of a collection
 
-A collection allow you use an index to access values. If you try to index into a collection that is
+A collection allows you use an index to access values. If you try to index into a collection that is
 actually `null`, you get this error: `Cannot index into a null array`.
 
 ```powershell
@@ -187,11 +187,11 @@ everything that doesn't match `$null` and in this case there are no results (Thi
 
 Not only can we create a value that makes both of them evaluate to `$false`, it's possible to
 create a value where they both evaluate to `$true`. Mathias Jessen (@IISResetMe) has a
-[good post][] that dives into that scenario.
+[good post][good post] that dives into that scenario.
 
 ### PSScriptAnalyzer and VSCode
 
-The [PSScriptAnalyzer][] module has a rule that checks for this issue called
+The [PSScriptAnalyzer][PSScriptAnalyzer] module has a rule that checks for this issue called
 `PSPossibleIncorrectComparisonWithNull`.
 
 ```powershell
@@ -224,7 +224,7 @@ looking for exactly what you're expecting it to look for. I read that line of co
 
 But that's not the whole story. That line is actually saying:
 
-> If `$value` is not `$null` or `0` or `$false` or an `empty string`
+> If `$value` is not `$null` or `0` or `$false` or an empty string or an empty array.
 
 Here is a more complete sample of that statement.
 
@@ -232,6 +232,7 @@ Here is a more complete sample of that statement.
 if ( $null -ne $value -and
         $value -ne 0 -and
         $value -ne '' -and
+        ($value -isnot [array] -or $value.Length -ne 0) -and
         $value -ne $false )
 {
     Do-Something
@@ -300,7 +301,7 @@ if ( $value.count -eq 1 )
 ## Empty null
 
 There is one special type of `$null` that acts differently than the others. I am going to call it
-the empty `$null` but it's really a [System.Management.Automation.Internal.AutomationNull][]. This
+the empty `$null` but it's really a [System.Management.Automation.Internal.AutomationNull][System.Management.Automation.Internal.AutomationNull]. This
 empty `$null` is the one you get as the result of a function or script block that returns nothing (a
 void result).
 
@@ -332,6 +333,10 @@ You can have an array that contains one `$null` value and its `count` is `1`. Bu
 an empty result inside an array then it's not counted as an item. The count is `0`.
 
 If you treat the empty `$null` like a collection, then it's empty.
+
+If you pass in an empty value to a function parameter that isn't strongly typed, PowerShell coerces
+the nothing value into a `$null` value by default. This means inside the function, the value will be
+treated as `$null` instead of the **System.Management.Automation.Internal.AutomationNull** type.
 
 ### Pipeline
 

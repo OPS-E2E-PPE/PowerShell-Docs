@@ -1,6 +1,5 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
 ms.date: 03/28/2019
@@ -52,6 +51,8 @@ Register-PSSessionConfiguration [-ProcessorArchitecture <String>] [-Name] <Strin
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `Register-PSSessionConfiguration` cmdlet creates and registers a new session configuration on
 the local computer. This is an advanced cmdlet that you can use to create custom sessions for remote
@@ -588,6 +589,26 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ThreadApartmentState
+
+Specifies the apartment state of the threading module to be used. Acceptable values are:
+
+- Unknown
+- MTA
+- STA
+
+```yaml
+Type: System.Threading.ApartmentState
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ThreadOptions
 
 Specifies how threads are created and used when a command runs in the session. The acceptable values
@@ -680,26 +701,6 @@ Aliases: wi
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ThreadApartmentState
-
-Specifies the apartment state of the threading module to be used. Acceptable values are:
-
-- Unknown
-- MTA
-- STA
-
-```yaml
-Type: System.Threading.ApartmentState
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

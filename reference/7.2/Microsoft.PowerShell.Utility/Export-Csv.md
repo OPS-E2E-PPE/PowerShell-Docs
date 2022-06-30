@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 12/08/2020
+ms.date: 10/22/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/export-csv?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Export-Csv
@@ -179,7 +179,7 @@ $AppService = (Get-Service -DisplayName *Application* | Select-Object -Property 
 $AppService | Export-Csv -Path .\Services.Csv -NoTypeInformation
 Get-Content -Path .\Services.Csv
 $WinService = (Get-Service -DisplayName *Windows* | Select-Object -Property DisplayName, Status)
-$WinService | Export-Csv -Path ./Services.csv -NoTypeInformation -Append
+$WinService | Export-Csv -Path .\Services.csv -NoTypeInformation -Append
 Get-Content -Path .\Services.Csv
 ```
 
@@ -303,7 +303,7 @@ This example shows how to use the **Force** and **Append** parameters. When thes
 combined, mismatched object properties can be written to a CSV file.
 
 ```powershell
-$Content = [PSCustomObject]@{Name = 'PowerShell Core'; Version = '6.0'}
+$Content = [PSCustomObject]@{Name = 'PowerShell'; Version = '7.0'}
 $Content | Export-Csv -Path .\ParmFile.csv -NoTypeInformation
 $AdditionalContent = [PSCustomObject]@{Name = 'Windows PowerShell'; Edition = 'Desktop'}
 $AdditionalContent | Export-Csv -Path .\ParmFile.csv -NoTypeInformation -Append
@@ -329,7 +329,7 @@ Import-Csv -Path .\ParmFile.csv
 ```Output
 Name               Version
 ----               -------
-PowerShell Core    6.0
+PowerShell         7.0
 Windows PowerShell
 ```
 
@@ -376,6 +376,59 @@ Get-Content -Path .\FTDateTime.csv
 DisplayHint,DateTime,Date,Day,DayOfWeek,DayOfYear,Hour,Kind,Millisecond,Minute,Month,Second,Ticks,TimeOfDay,Year
 DateTime,"Thursday, August 22, 2019 11:31:00 AM",8/22/2019 12:00:00 AM,22,Thursday,234,11,Local,713,31,8,0,637020702607132640,11:31:00.7132640,2019
 ```
+
+### Example 12: Convert hashtables to CSV
+
+In PowerShell 7.2 and above, when you export hashtables to CSV, the keys of the first hashtable are
+serialized and used as headers in the csv file output.
+
+```powershell
+$person1 = @{
+    Name = 'John Smith'
+    Number = 1
+}
+
+$person2 = @{
+    Name = 'Jane Smith'
+    Number = 1
+}
+
+$allPeople = $person1, $person2
+$allPeople | Export-Csv -Path .\People.csv
+
+Get-Content -Path .\People.csv
+```
+
+```Output
+"Name","Number"
+"John Smith","1"
+"Jane Smith","2"
+```
+
+### Example 13: Converting hashtables to CSV with additional properties
+
+In PowerShell 7.2 and above, when you export a hashtable that has additional properties added with
+`Add-Member` or `Select-Object` the additional properties are also added as a header in the CSV
+file.
+
+```powershell
+$allPeople | Add-Member -Name ExtraProp -Value 42
+$allPeople | Export-Csv
+
+Get-Content -Path .\People.csv -Path .\People.csv
+```
+
+```Output
+"Name","Number","ExtraProp"
+"John Smith","1","42"
+"Jane Smith","2","42"
+```
+
+Each hashtable has a property named `ExtraProp` added by `Add-Member` and then exported to CSV. You
+can see `ExtraProp` is now a header in the CSV file output.
+
+If an added property has the _same_ name as a key from the hashtable, the key takes precedence and
+only the key is exported to CSV.
 
 ## PARAMETERS
 
@@ -438,7 +491,7 @@ pages (like `-Encoding 1251`) or string names of registered code pages (like
 [Encoding.CodePage](/dotnet/api/system.text.encoding.codepage?view=netcore-2.2).
 
 > [!NOTE]
-> **UTF-7*** is no longer recommended to use. In PowerShell 7.1, a warning is written if you
+> **UTF-7*** is no longer recommended to use. As of PowerShell 7.1, a warning is written if you
 > specify `utf7` for the **Encoding** parameter.
 
 ```yaml
@@ -579,6 +632,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -QuoteFields
+
+Specifies the names of the columns that should be quoted. When this parameter is used, only the
+specified columns are quoted. This parameter was added in PowerShell 7.0.
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases: QF
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -UseCulture
 
 Uses the list separator for the current culture as the item delimiter. To find the list separator
@@ -592,6 +662,29 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UseQuotes
+
+Specifies when quotes are used in the CSV files. Possible values are:
+
+- Never - don't quote anything
+- Always - quote everything (default behavior)
+- AsNeeded - only quote fields that contain a delimiter character, double-quote, or newline
+  character
+
+This parameter was added in PowerShell 7.0.
+
+```yaml
+Type: Microsoft.PowerShell.Commands.BaseCsvWritingCommand+QuoteKind
+Parameter Sets: (All)
+Aliases: UQ
+
+Required: False
+Position: Named
+Default value: Always
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -625,45 +718,6 @@ Aliases: wi
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -QuoteFields
-
-Specifies the names of the columns that should be quoted. When this parameter is used, only the
-specified columns are quoted. This parameter was added in PowerShell 7.0.
-
-```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases: QF
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UseQuotes
-
-Specifies when quotes are used in the CSV files. Possible values are:
-
-- Never - don't quote anything
-- Always - quote everything (default behavior)
-- AsNeeded - only quote fields that contain a delimiter character
-
-This parameter was added in PowerShell 7.0.
-
-```yaml
-Type: Microsoft.PowerShell.Commands.BaseCsvWritingCommand+QuoteKind
-Parameter Sets: (All)
-Aliases: UQ
-
-Required: False
-Position: Named
-Default value: Always
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

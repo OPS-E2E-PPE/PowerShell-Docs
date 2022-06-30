@@ -33,6 +33,8 @@ Set-Service [-InputObject] <ServiceController> [-DisplayName <String>] [-Credent
 
 ## DESCRIPTION
 
+> **This cmdlet is only available on the Windows platform.**
+
 The `Set-Service` cmdlet changes the properties of a service such as the **Status**,
 **Description**, **DisplayName**, and **StartupType**. `Set-Service` can start, stop, suspend, or
 pause a service. To identify a service, enter its service name or submit a service object. Or, send
@@ -202,22 +204,6 @@ parameter to specify the **BITS** service. The **SecurityDescriptorSddl** parame
 
 ## PARAMETERS
 
-### -Confirm
-
-Prompts you for confirmation before running `Set-Service`.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Credential
 
 Specifies the account used by the service as the [Service Logon Account](/windows/desktop/ad/about-service-logon-accounts).
@@ -353,6 +339,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SecurityDescriptorSddl
+
+Specifies the **SecurityDescriptor** for the service in **Sddl** format.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases: sd
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -StartupType
 
 Specifies the start mode of the service.
@@ -405,18 +407,18 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SecurityDescriptorSddl
+### -Confirm
 
-Specifies the **SecurityDescriptor** for the service in **Sddl** format.
+Prompts you for confirmation before running `Set-Service`.
 
 ```yaml
-Type: System.String
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: sd
+Aliases: cf
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -1,8 +1,8 @@
 ---
+description: How to Create the Cmdlet Help File
 ms.date: 09/13/2016
 ms.topic: reference
 title: How to Create the Cmdlet Help File
-description: How to Create the Cmdlet Help File
 ---
 # How to Create the Cmdlet Help File
 
@@ -57,7 +57,7 @@ headers, and how to add nodes that will contain the different sections of the cm
   xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10"
   xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
   <command:details>
-    <!--Add name an synopsis here-->
+    <!--Add name and synopsis here-->
   </command:details>
   <maml:description>
     <!--Add detailed description here-->

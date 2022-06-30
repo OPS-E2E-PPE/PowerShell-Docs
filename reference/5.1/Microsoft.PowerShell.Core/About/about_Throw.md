@@ -4,16 +4,16 @@ Locale: en-US
 ms.date: 12/01/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_throw?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Throw
+title: about Throw
 ---
 
-# About Throw
+# about_Throw
 
-## SHORT DESCRIPTION
+## Short description
 
 Describes the Throw keyword, which generates a terminating error.
 
-## LONG DESCRIPTION
+## Long description
 
 The Throw keyword causes a terminating error. You can use the Throw keyword to
 stop the processing of a command, function, or script.
@@ -26,7 +26,7 @@ declaration to make a function parameter mandatory.
 The Throw keyword can throw any object, such as a user message string or the
 object that caused the error.
 
-## SYNTAX
+## Syntax
 
 The syntax of the Throw keyword is as follows:
 
@@ -150,14 +150,10 @@ function Get-XMLFiles
 }
 ```
 
-## SEE ALSO
+## See also
 
-[about_Break](about_Break.md)
-
-[about_Continue](about_Continue.md)
-
-[about_Scopes](about_Scopes.md)
-
-[about_Trap](about_Trap.md)
-
-[about_Try_Catch_Finally](about_Try_Catch_Finally.md)
+- [about_Break](about_Break.md)
+- [about_Continue](about_Continue.md)
+- [about_Scopes](about_Scopes.md)
+- [about_Trap](about_Trap.md)
+- [about_Try_Catch_Finally](about_Try_Catch_Finally.md)

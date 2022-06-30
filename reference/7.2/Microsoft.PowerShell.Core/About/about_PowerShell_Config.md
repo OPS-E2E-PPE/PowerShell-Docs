@@ -1,21 +1,21 @@
 ---
 description: Configuration files for PowerShell, replacing Registry configuration.
 Locale: en-US
-ms.date: 03/12/2021
+ms.date: 10/22/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_powershell_config?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_PowerShell_Config
+title: about PowerShell Config
 ---
-# About PowerShell Config
+# about_PowerShell_Config
 
-## SHORT DESCRIPTION
-Configuration files for PowerShell Core, replacing Registry configuration.
+## Short description
+Configuration files for PowerShell, replacing Registry configuration.
 
-## LONG DESCRIPTION
+## Long description
 
 The `powershell.config.json` file contains configuration settings for
-PowerShell Core. PowerShell loads this configuration at startup. The settings
-can also be modified at runtime. Previously, these settings were stored in the
+PowerShell. PowerShell loads this configuration at startup. The settings can
+also be modified at runtime. Previously, these settings were stored in the
 Windows Registry for PowerShell, but are now contained in a file to enable
 configuration on macOS and Linux.
 
@@ -28,8 +28,8 @@ configuration on macOS and Linux.
 ### AllUsers (shared) configuration
 
 A `powershell.config.json` file in the `$PSHOME` directory defines the
-configuration for all PowerShell Core sessions running from that PowerShell
-Core installation.
+configuration for all PowerShell sessions running from that PowerShell
+installation.
 
 > [!NOTE]
 > The `$PSHOME` location is defined as the same directory as the executing
@@ -70,8 +70,8 @@ For CurrentUser configurations, this sets the **CurrentUser** execution policy.
 Where:
 
 - `<shell-id>` refers to the ID of the current PowerShell host. For normal
-  PowerShell Core, this is `Microsoft.PowerShell`. In any PowerShell session,
-  you can discover it with `$ShellId`.
+  PowerShell, this is `Microsoft.PowerShell`. In any PowerShell session, you
+  can discover it with `$ShellId`.
 - `<execution-policy>` refers to a valid execution policy name.
 
 The following example sets the execution policy of PowerShell to `RemoteSigned`.
@@ -392,6 +392,5 @@ This configuration sets a number of options that only work in macOS or Linux:
 
 ## See also
 
-[About Execution Policies](./about_Execution_Policies.md)
-
-[About Automatic Variables](./about_Automatic_Variables.md)
+- [About Automatic Variables](./about_Automatic_Variables.md)
+- [About Execution Policies](./about_Execution_Policies.md)

@@ -1,28 +1,32 @@
 ---
 description: Describes how to define and use parameter sets in advanced functions.
-title: about_Parameter_Sets
 Locale: en-US
-ms.date: 01/05/2021
-schema: 2.0.0
+ms.date: 03/11/2022
+online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_parameter_sets?view=powershell-7&WT.mc_id=ps-gethelp
+title: about Parameter Sets
 ---
-# About parameter sets
+# about_Parameter_Sets
 
-## SHORT DESCRIPTION
+## Short description
 Describes how to define and use parameter sets in advanced functions.
 
-## LONG DESCRIPTION
+## Long description
 
 PowerShell uses parameter sets to enable you to write a single function that
 can do different actions for different scenarios. Parameter sets enable you to
 expose different parameters to the user. And, to return different information
-based on the parameters specified by the user.
+based on the parameters specified by the user. You can only use one parameter
+set at a time.
 
 ## Parameter set requirements
 
 The following requirements apply to all parameter sets.
 
+- If no parameter set is specified for a parameter, the parameter belongs to
+  all parameter sets.
+
 - Each parameter set must have a unique combination of parameters. If possible,
-   at least one of the unique parameters should be a mandatory parameter.
+  at least one of the unique parameters should be a mandatory parameter.
 
 - A parameter set that contains multiple positional parameters must define
   unique positions for each parameter. No two positional parameters can specify
@@ -31,9 +35,6 @@ The following requirements apply to all parameter sets.
 - Only one parameter in a set can declare the `ValueFromPipeline` keyword with
   a value of `true`. Multiple parameters can define the
   `ValueFromPipelineByPropertyName` keyword with a value of `true`.
-
-- If no parameter set is specified for a parameter, the parameter belongs to
-  all parameter sets.
 
 > [!NOTE]
 > There is a limit of 32 parameter sets.
@@ -199,3 +200,22 @@ C:\temp\test\test.md          30  1527       3224
 C:\temp\test\test.ps1          3     3         79
 C:\temp\test\test[1].txt      31   562       2059
 ```
+
+### Error using parameters from multiple sets
+
+In this example, unique parameters from different parameter sets are used.
+
+```powershell
+Get-ChildItem -Path $PSHOME -LiteralPath $PSHOME
+```
+
+```Output
+Get-ChildItem: Parameter set cannot be resolved using the specified named
+parameters. One or more parameters issued cannot be used together or an
+insufficient number of parameters were provided.
+```
+
+The **Path** and **LiteralPath** parameters are unique to different parameter
+sets of the `Get-ChildItem` cmdlet. When the parameters are run together in the
+same cmdlet, an error is thrown. Only one parameter set can be used per cmdlet
+call at a time.

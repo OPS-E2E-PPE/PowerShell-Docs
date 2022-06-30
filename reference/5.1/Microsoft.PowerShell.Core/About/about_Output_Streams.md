@@ -1,13 +1,12 @@
 ---
 description: Explains the availability and purpose of output streams in PowerShell.
-keywords: PowerShell,cmdlet
 Locale: en-US
-ms.date: 10/13/2020
+ms.date: 12/13/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_output_streams?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Output_Streams
+title: about Output Streams
 ---
-# About output streams
+# about_Output_Streams
 
 ## Short description
 Explains the availability and purpose of output streams in PowerShell.
@@ -25,11 +24,11 @@ PowerShell supports the following output streams.
 | -------- | ---------------------- | -------------- | ------------------- |
 | 1        | **Success** stream     | PowerShell 2.0 | `Write-Output`      |
 | 2        | **Error** stream       | PowerShell 2.0 | `Write-Error`       |
-| 3        | **Warning** stream     | PowerShell 3.0 | `Write-Warning`     |
-| 4        | **Verbose** stream     | PowerShell 3.0 | `Write-Verbose`     |
-| 5        | **Debug** stream       | PowerShell 3.0 | `Write-Debug`       |
+| 3        | **Warning** stream     | PowerShell 2.0 | `Write-Warning`     |
+| 4        | **Verbose** stream     | PowerShell 2.0 | `Write-Verbose`     |
+| 5        | **Debug** stream       | PowerShell 2.0 | `Write-Debug`       |
 | 6        | **Information** stream | PowerShell 5.0 | `Write-Information` |
-| n/a      | **Progress** stream    | PowerShell 3.0 | `Write-Progress`    |
+| n/a      | **Progress** stream    | PowerShell 2.0 | `Write-Progress`    |
 
 > [!NOTE]
 > The **Progress** stream does not support redirection.
@@ -98,6 +97,8 @@ support redirection.
 
 ## See also
 
+- [about_CommonParameters](about_CommonParameters.md)
+- [about_Redirection](about_Redirection.md)
 - [Write-Debug](xref:Microsoft.PowerShell.Utility.Write-Debug)
 - [Write-Error](xref:Microsoft.PowerShell.Utility.Write-Error)
 - [Write-Host](xref:Microsoft.PowerShell.Utility.Write-Host)
@@ -106,5 +107,3 @@ support redirection.
 - [Write-Progress](xref:Microsoft.PowerShell.Utility.Write-Progress)
 - [Write-Verbose](xref:Microsoft.PowerShell.Utility.Write-Verbose)
 - [Write-Warning](xref:Microsoft.PowerShell.Utility.Write-Warning)
-- [about_CommonParameters](about_CommonParameters.md)
-- [about_Redirection](about_Redirection.md)

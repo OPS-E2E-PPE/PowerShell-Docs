@@ -9,7 +9,7 @@ metadata:
   ms.topic: landing-page # Required
   author: sdwheeler #Required; your GitHub user alias, with correct capitalization.
   ms.author: sewhee #Required; microsoft alias of author; optional team alias.
-  ms.date: 09/05/2019 #Required; mm/dd/yyyy format.
+  ms.date: 10/07/2021
 
 # linkListType: architecture | concept | deploy | download | get-started | how-to-guide | learn |
 #               overview | quickstart | reference | tutorial | video | whats-new
@@ -35,6 +35,8 @@ landingContent:
             url: ./using-static-classes-and-methods.md
           - text: Getting WMI objects - Get-CimInstance
             url: ./getting-wmi-objects--get-ciminstance-.md
+          - text: Manipulating items directly
+            url: ./manipulating-items-directly.md
   - title: Managing computers
     linkLists:
       - linkListType: how-to-guide

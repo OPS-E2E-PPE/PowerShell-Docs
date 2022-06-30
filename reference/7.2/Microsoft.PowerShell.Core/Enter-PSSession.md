@@ -27,7 +27,7 @@ Enter-PSSession [-ComputerName] <String> [-EnableNetworkAccess] [[-Credential] <
 
 ```
 Enter-PSSession [-HostName] <String> [-Port <Int32>] [-UserName <String>] [-KeyFilePath <String>]
- [-SSHTransport] [<CommonParameters>]
+ [-SSHTransport] [-ConnectingTimeout <int>] [<CommonParameters>]
 ```
 
 ### Session
@@ -375,6 +375,25 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ConnectingTimeout
+
+Specifies the amount of time in milliseconds allowed for the initial SSH connection to complete. If
+the connection doesn't complete within the specified time, an error is returned.
+
+This parameter was introduced in PowerShell 7.2
+
+```yaml
+Type: System.Int32
+Parameter Sets: SSHHost
+Aliases:
+
+Required: False
+Position: Named
+Default value: unlimited
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

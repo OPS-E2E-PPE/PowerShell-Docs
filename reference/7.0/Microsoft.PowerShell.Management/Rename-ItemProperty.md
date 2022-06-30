@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 5/14/2019
+ms.date: 05/14/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/rename-itemproperty?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Rename-ItemProperty
@@ -149,7 +148,7 @@ Accept wildcard characters: True
 
 ### -LiteralPath
 
-Specifies a path to one or more locations. The value of **LiteralPath** is used exactly as it is
+Specifies a path to the item. The value of **LiteralPath** is used exactly as it is
 typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose
 it in single quotation marks. Single quotation marks tell PowerShell not to interpret any characters
 as escape sequences.
@@ -219,7 +218,7 @@ Accept wildcard characters: False
 
 ### -Path
 
-Specifies the path of the item to rename.
+Specifies a path to the item.
 Wildcard characters are permitted.
 
 ```yaml

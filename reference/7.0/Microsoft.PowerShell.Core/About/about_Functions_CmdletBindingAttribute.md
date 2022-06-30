@@ -1,13 +1,12 @@
 ---
-description: Describes the attribute that makes a function work like a compiled cmdlet. 
-keywords: powershell,cmdlet
+description: Describes the attribute that makes a function work like a compiled cmdlet.
 Locale: en-US
-ms.date: 06/11/2020
+ms.date: 09/23/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_functions_cmdletbindingattribute?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Functions_CmdletBindingAttribute
+title: about Functions CmdletBindingAttribute
 ---
-# About Functions CmdletBindingAttribute
+# about_Functions_CmdletBindingAttribute
 
 ## Short description
 Describes the attribute that makes a function work like a compiled cmdlet.
@@ -45,6 +44,33 @@ each argument follows this example.
     SupportsPaging=<Boolean>,
     SupportsShouldProcess=<Boolean>,
     PositionalBinding=<Boolean>)]
+
+    Param ($Parameter1)
+    Begin{}
+    Process{}
+    End{}
+}
+```
+
+The boolean argument types of the **CmdletBinding** attribute default to
+**False** when omitted from the **CmdletBinding** attribute. Set the argument
+value to `$true` or just list the argument by name. For example, the following
+**CmdletBinding** attributes are equivalent.
+
+```powershell
+{
+    [CmdletBinding(SupportsPaging=$true)]
+
+    Param ($Parameter1)
+    Begin{}
+    Process{}
+    End{}
+}
+
+# Boolean arguments can be defined using this shorthand syntax
+
+{
+    [CmdletBinding(SupportsPaging)]
 
     Param ($Parameter1)
     Begin{}
@@ -117,7 +143,7 @@ parameters to an advanced function.
 
 ```powershell
 function Get-Numbers {
-    [CmdletBinding(SupportsPaging = $true)]
+    [CmdletBinding(SupportsPaging)]
     param()
 
     $FirstNumber = [Math]::Min($PSCmdlet.PagingParameters.Skip, 100)
@@ -183,12 +209,8 @@ about_Functions_CmdletBinding_Attribute
 
 ## See also
 
-[about_Functions](about_Functions.md)
-
-[about_Functions_Advanced](about_Functions_Advanced.md)
-
-[about_Functions_Advanced_Methods](about_Functions_Advanced_Methods.md)
-
-[about_Functions_Advanced_Parameters](about_Functions_Advanced_Parameters.md)
-
-[about_Functions_OutputTypeAttribute](about_Functions_OutputTypeAttribute.md)
+- [about_Functions](about_Functions.md)
+- [about_Functions_Advanced](about_Functions_Advanced.md)
+- [about_Functions_Advanced_Methods](about_Functions_Advanced_Methods.md)
+- [about_Functions_Advanced_Parameters](about_Functions_Advanced_Parameters.md)
+- [about_Functions_OutputTypeAttribute](about_Functions_OutputTypeAttribute.md)

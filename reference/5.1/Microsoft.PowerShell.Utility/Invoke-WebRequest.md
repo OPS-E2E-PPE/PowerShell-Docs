@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 01/26/2021
+ms.date: 10/05/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/invoke-webrequest?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Invoke-WebRequest
@@ -25,15 +25,21 @@ Invoke-WebRequest [-UseBasicParsing] [-Uri] <Uri> [-WebSession <WebRequestSessio
 
 ## DESCRIPTION
 
-The `Invoke-WebRequest` cmdlet sends HTTP, HTTPS, FTP, and FILE requests to a web page or web service.
-It parses the response and returns collections of forms, links, images, and other significant HTML elements.
+The `Invoke-WebRequest` cmdlet sends HTTP, HTTPS, FTP, and FILE requests to a web page or web
+service. It parses the response and returns collections of forms, links, images, and other
+significant HTML elements.
 
 This cmdlet was introduced in Windows PowerShell 3.0.
 
 > [!NOTE]
-> By default,
-> script code in the web page may be run when the page is being parsed to populate the `ParsedHtml` property.
-> Use the `-UseBasicParsing` switch to suppress this.
+> By default, script code in the web page may be run when the page is being parsed to populate the
+> `ParsedHtml` property. Use the `-UseBasicParsing` switch to suppress this.
+
+> [!IMPORTANT]
+> The examples in this article reference hosts in the `contoso.com` domain. This is a fictitious
+> domain used by Microsoft for examples. The examples are designed to show how to use the cmdlets.
+> However, since the `contoso.com` sites do not exist, the examples do not work. Adapt the examples
+> to hosts in your environment.
 
 ## EXAMPLES
 
@@ -349,16 +355,16 @@ Accept wildcard characters: False
 
 Specifies the method used for the web request. The acceptable values for this parameter are:
 
-- Default
-- Delete
-- Get
-- Head
-- Merge
-- Options
-- Patch
-- Post
-- Put
-- Trace
+- `Default`
+- `Delete`
+- `Get`
+- `Head`
+- `Merge`
+- `Options`
+- `Patch`
+- `Post`
+- `Put`
+- `Trace`
 
 ```yaml
 Type: Microsoft.PowerShell.Commands.WebRequestMethod
@@ -531,11 +537,11 @@ Accept wildcard characters: False
 Specifies a value for the transfer-encoding HTTP response header. The acceptable values for this
 parameter are:
 
-- Chunked
-- Compress
-- Deflate
-- GZip
-- Identity
+- `Chunked`
+- `Compress`
+- `Deflate`
+- `GZip`
+- `Identity`
 
 ```yaml
 Type: System.String
@@ -589,7 +595,7 @@ Accept wildcard characters: False
 
 ### -UseDefaultCredentials
 
-Indicates that the cmdet uses the credentials of the current user to send the web request.
+Indicates that the cmdlet uses the credentials of the current user to send the web request.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -612,7 +618,8 @@ each operating system and platform.
 To test a website with the standard user agent string that is used by most Internet browsers, use
 the properties of the [PSUserAgent](/dotnet/api/microsoft.powershell.commands.psuseragent) class,
 such as Chrome, FireFox, InternetExplorer, Opera, and Safari. For example, the following command
-uses the user agent string for Internet Explorer
+uses the user agent string for Internet Explorer:
+`Invoke-WebRequest -Uri https://website.com/ -UserAgent ([Microsoft.PowerShell.Commands.PSUserAgent]::InternetExplorer)`
 
 ```yaml
 Type: System.String

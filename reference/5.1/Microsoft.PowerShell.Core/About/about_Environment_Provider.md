@@ -1,13 +1,12 @@
 ---
-description:  Environment 
-keywords: powershell,cmdlet
+description: Environment
 Locale: en-US
 ms.date: 10/18/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_environment_provider?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: Environment Provider
+title: about Environment Provider
 ---
-# Environment provider
+# about_Environment_Provider
 
 ## Provider name
 
@@ -213,4 +212,4 @@ Get-Help Get-ChildItem -Path env:
 
 ## See also
 
-[about_Providers](../About/about_Providers.md)
+- [about_Providers](about_Providers.md)

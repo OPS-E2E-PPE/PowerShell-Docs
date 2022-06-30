@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 04/07/2020
+ms.date: 09/24/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/remove-item?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Remove-Item
@@ -63,7 +62,7 @@ It uses the wildcard character (`*`) to specify the contents of the current fold
 
 ### Example 3: Delete hidden, read-only files
 
-This command deletes a file that is both *hidden* and *read-only*.
+This command deletes a file that is both _hidden_ and _read-only_.
 
 ```powershell
 Remove-Item -Path C:\Test\hidden-RO-file.txt -Force
@@ -90,6 +89,9 @@ current folder. It uses **Include** to specify the CSV file type, and it uses **
 the retrieval recursive. If you try to specify the file type the path, such as `-Path *.csv`, the
 cmdlet interprets the subject of the search to be a file that has no child items, and **Recurse**
 fails.
+
+> [!NOTE]
+> This behavior was fixed in Windows versions 1909 and up.
 
 ### Example 5: Delete subkeys recursively
 
@@ -180,16 +182,14 @@ Get-Item C:\Test\Copy-Script.ps1 -Stream Zone.Identifier
 Get-Item : Could not open alternate data stream 'Zone.Identifier' of file 'C:\Test\Copy-Script.ps1'.
 At line:1 char:1
 + Get-Item 'C:\Test\Copy-Script.ps1' -Stream Zone.Identifier
-+ [!INCLUDE[]()][!INCLUDE[]()][!INCLUDE[]()][!INCLUDE[]()][!INCLUDE[]()]~~
-    + CategoryInfo          : ObjectNotFound: (C:\Test\Copy-Script.ps1:String) [Get-Item], FileNotFoundE
-   xception
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Test\Copy-Script.ps1:String) [Get-Item], FileNotFoundException
     + FullyQualifiedErrorId : AlternateDataStreamNotFound,Microsoft.PowerShell.Commands.GetItemCommand
-
 ```
 
-The **Stream** parameter `Get-Item` gets the **Zone.Identifier** stream of the `Copy-Script.ps1`
-file. `Remove-Item` uses the **Stream** parameter to remove the **Zone.Identifier** stream of the
-file. Finally, the `Get-Item` cmdlet shows that the **Zone.Identifier** stream was deleted.
+The **Stream** parameter `Get-Item` gets the `Zone.Identifier` stream of the `Copy-Script.ps1`
+file. `Remove-Item` uses the **Stream** parameter to remove the `Zone.Identifier` stream of the
+file. Finally, the `Get-Item` cmdlet shows that the `Zone.Identifier` stream was deleted.
 
 ## PARAMETERS
 
@@ -220,6 +220,10 @@ of this parameter qualifies the **Path** parameter. Enter a path element or patt
 command includes the contents of an item, such as `C:\Windows\*`, where the wildcard character
 specifies the contents of the `C:\Windows` directory.
 
+When using **Recurse** with **Exclude**, **Exclude** only filters results of the current directory.
+If there are files that match the **Exclude** pattern in subfolders, those files are removed along
+with its parent directory.
+
 ```yaml
 Type: System.String[]
 Parameter Sets: (All)
@@ -234,11 +238,13 @@ Accept wildcard characters: True
 
 ### -Filter
 
-Specifies a filter to qualify the **Path** parameter. The [FileSystem](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md)
-provider is the only installed PowerShell provider that supports the use of filters. You can find
-the syntax for the **FileSystem** filter language in [about_Wildcards](../Microsoft.PowerShell.Core/About/about_Wildcards.md).
-Filters are more efficient than other parameters, because the provider applies them when the cmdlet
-gets the objects rather than having PowerShell filter the objects after they are retrieved.
+Specifies a filter to qualify the **Path** parameter. The
+[FileSystem](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md) provider is the only
+installed PowerShell provider that supports the use of filters. You can find the syntax for the
+**FileSystem** filter language in
+[about_Wildcards](../Microsoft.PowerShell.Core/About/about_Wildcards.md). Filters are more efficient
+than other parameters, because the provider applies them when the cmdlet gets the objects rather
+than having PowerShell filter the objects after they are retrieved.
 
 ```yaml
 Type: System.String
@@ -299,7 +305,8 @@ typed. No characters are interpreted as wildcards. If the path includes escape c
 it in single quotation marks. Single quotation marks tell PowerShell not to interpret any characters
 as escape sequences.
 
-For more information, see [about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
+For more information, see
+[about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
 
 ```yaml
 Type: System.String[]
@@ -335,9 +342,10 @@ Accept wildcard characters: True
 Indicates that this cmdlet deletes the items in the specified locations and in all child items of
 the locations.
 
-When it is used with the **Include** parameter, the **Recurse** parameter might not delete all
-subfolders or all child items. This is a known issue. As a workaround, try piping results of the
-`Get-ChildItem -Recurse` command to `Remove-Item`, as described in "Example 4" in this topic.
+The **Recurse** parameter might not delete all subfolders or all child items. This is a known issue.
+
+> [!NOTE]
+> This behavior was fixed in Windows versions 1909 and newer.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -356,9 +364,10 @@ Accept wildcard characters: False
 The **Stream** parameter is a dynamic parameter that the FileSystem provider adds to `Remove-Item`.
 This parameter works only in file system drives.
 
-You can use `Remove-Item` to delete an alternative data stream. However, it is not the recommended
-way to eliminate security checks that block files that are downloaded from the Internet. If you
-verify that a downloaded file is safe, use the `Unblock-File` cmdlet.
+You can use `Remove-Item` to delete an alternative data stream, such as `Zone.Identifier`.
+However, it is not the recommended way to eliminate security checks that block files that are
+downloaded from the Internet. If you verify that a downloaded file is safe, use the `Unblock-File`
+cmdlet.
 
 This parameter was introduced in Windows PowerShell 3.0.
 
@@ -376,9 +385,9 @@ Accept wildcard characters: True
 
 ### -UseTransaction
 
-Includes the command in the active transaction.
-This parameter is valid only when a transaction is in progress.
-For more information, see [about_Transactions](../Microsoft.PowerShell.Core/About/about_Transactions.md)
+Includes the command in the active transaction. This parameter is valid only when a transaction is
+in progress. For more information, see
+[about_Transactions](../Microsoft.PowerShell.Core/About/about_Transactions.md)
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -430,10 +439,11 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: `-Debug`, `-ErrorAction`, `-ErrorVariable`,
-`-InformationAction`, `-InformationVariable`, `-OutVariable`, `-OutBuffer`, `-PipelineVariable`,
-`-Verbose`, `-WarningAction`, and `-WarningVariable`. For more information, see
-[about_CommonParameters](../Microsoft.PowerShell.Core/About/about_CommonParameters.md).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+
 
 ## INPUTS
 

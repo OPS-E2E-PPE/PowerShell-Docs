@@ -4,9 +4,9 @@ Locale: en-US
 ms.date: 10/06/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_scripts?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Scripts
+title: about Scripts
 ---
-# About Scripts
+# about_Scripts
 
 ## Short description
 Describes how to run and write scripts in PowerShell.
@@ -352,7 +352,7 @@ C:\PS> $profileName
 Microsoft.PowerShellISE_profile.ps1
 ```
 
-For more information about scope, see about_Scopes.
+For more information about scope, see [about_Scopes](about_Scopes.md).
 
 ## Scripts in modules
 
@@ -374,7 +374,7 @@ PowerShell has many useful features that you can use in scripts.
 
 - `#Requires` - You can use a `#Requires` statement to prevent a script from
   running without specified modules or snap-ins and a specified version of
-  PowerShell. For more information, see about_Requires.
+  PowerShell. For more information, see [about_Requires](about_Requires.md).
 
 - `$PSCommandPath` - Contains the full path and name of the script that is
   being run. This parameter is valid in all scripts. This automatic variable is
@@ -421,26 +421,15 @@ PowerShell has many useful features that you can use in scripts.
 
 ## See also
 
-[about_Command_Precedence](about_Command_Precedence.md)
-
-[about_Comment_Based_Help](about_Comment_Based_Help.md)
-
-[about_Execution_Policies](about_Execution_Policies.md)
-
-[about_Functions](about_Functions.md)
-
-[about_Modules](about_Modules.md)
-
-[about_Profiles](about_Profiles.md)
-
-[about_Requires](about_Requires.md)
-
-[about_Run_With_PowerShell](about_Run_With_PowerShell.md)
-
-[about_Scopes](about_Scopes.md)
-
-[about_Script_Blocks](about_Script_Blocks.md)
-
-[about_Signing](about_Signing.md)
-
-[Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
+- [about_Command_Precedence](about_Command_Precedence.md)
+- [about_Comment_Based_Help](about_Comment_Based_Help.md)
+- [about_Execution_Policies](about_Execution_Policies.md)
+- [about_Functions](about_Functions.md)
+- [about_Modules](about_Modules.md)
+- [about_Profiles](about_Profiles.md)
+- [about_Requires](about_Requires.md)
+- [about_Run_With_PowerShell](about_Run_With_PowerShell.md)
+- [about_Scopes](about_Scopes.md)
+- [about_Script_Blocks](about_Script_Blocks.md)
+- [about_Signing](about_Signing.md)
+- [Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)

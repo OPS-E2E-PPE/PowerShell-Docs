@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 03/12/2020
+ms.date: 05/16/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/resolve-path?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Resolve-Path
@@ -32,13 +31,13 @@ Resolve-Path -LiteralPath <String[]> [-Relative] [-Credential <PSCredential>] [-
 
 The `Resolve-Path` cmdlet displays the items and containers that match the wildcard pattern at the
 location specified. The match can include files, folders, registry keys, or any other object
-accessible from a PSDrive provider.
+accessible from a **PSDrive** provider.
 
 ## EXAMPLES
 
 ### Example 1: Resolve the home folder path
 
-The tilde character (~) is shorthand notation for the current user's home folder. This example
+The tilde character (`~`) is shorthand notation for the current user's home folder. This example
 shows `Resolve-Path` returning the fully qualified path value.
 
 ```powershell
@@ -63,8 +62,8 @@ Path
 C:\Windows
 ```
 
-When run from the root of the C: drive, this command returns the path of the Windows folder in the
-C: drive.
+When run from the root of the `C:` drive, this command returns the path of the `Windows` folder in
+the `C:` drive.
 
 ### Example 3: Get all paths in the Windows folder
 
@@ -72,8 +71,8 @@ C: drive.
 PS C:\> "C:\windows\*" | Resolve-Path
 ```
 
-This command returns all of the folders in the C:\Windows folder. The command uses a pipeline
-operator (|) to send a path string to `Resolve-Path`.
+This command returns all the files and folders in the `C:\Windows` folder. The command uses a
+pipeline operator (`|`) to send a path string to `Resolve-Path`.
 
 ### Example 4: Resolve a UNC path
 
@@ -95,11 +94,11 @@ PS C:\> Resolve-Path -Path "c:\prog*" -Relative
 .\programs.txt
 ```
 
-This command returns relative paths for the directories at the root of the C: drive.
+This command returns relative paths for the directories at the root of the `C:` drive.
 
 ### Example 6: Resolve a path containing brackets
 
-This example uses the **LiteralPath** parameter to resolve the path of the Test\[xml\] subfolder.
+This example uses the **LiteralPath** parameter to resolve the path of the `Test[xml]` subfolder.
 Using **LiteralPath** causes the brackets to be treated as normal characters rather than a regular
 expression.
 
@@ -114,7 +113,7 @@ PS C:\> Resolve-Path -LiteralPath 'test[xml]'
 Specifies a user account that has permission to perform this action. The default is the current
 user.
 
-Type a user name, such as User01 or Domain01\User01, or pass a **PSCredential** object. You can
+Type a user name, such as `User01` or `Domain01\User01`, or pass a **PSCredential** object. You can
 create a **PSCredential** object using the `Get-Credential` cmdlet. If you type a user name, this
 cmdlet prompts you for a password.
 
@@ -136,8 +135,8 @@ Accept wildcard characters: False
 
 Specifies the path to be resolved. The value of the **LiteralPath** parameter is used exactly as
 typed. No characters are interpreted as wildcard characters. If the path includes escape characters,
-enclose it in single quotation marks. Single quotation marks tell PowerShell not to interpret any
-characters as escape sequences.
+enclose it in single quotation marks (`'`). Single quotation marks tell PowerShell not to interpret
+any characters as escape sequences.
 
 ```yaml
 Type: System.String[]
@@ -187,7 +186,7 @@ Accept wildcard characters: False
 ### -UseTransaction
 Includes the command in the active transaction.
 This parameter is valid only when a transaction is in progress.
-For more information, see about_transactions.
+For more information, see [about_transactions](../Microsoft.PowerShell.Core/About/about_Transactions.md).
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -223,7 +222,7 @@ Returns a **PathInfo** object. Returns a string value for the resolved path if y
 
 ## NOTES
 
-The `*-Path` cmdlets work with the FileSystem, Registry, and Certificate providers.
+The `*-Path` cmdlets work with the **FileSystem**, **Registry**, and **Certificate** providers.
 
 `Resolve-Path` is designed to work with any provider. To list the providers available in your
 session, type `Get-PSProvider`. For more information, see

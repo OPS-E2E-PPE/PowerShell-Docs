@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 1/8/2019
+ms.date: 10/22/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/import-csv?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Import-Csv
@@ -188,14 +187,14 @@ Information   : System.Management.Automation.PSDataCollection`1[System.Managemen
 
 The `Start-Job` cmdlet starts a background job that runs `Get-Process`. A job object is sent down
 the pipeline to the `Export-Csv` cmdlet and converted to a CSV string. The **NoTypeInformation**
-parameter removes the type information header from CSV output and is optional in PowerShell Core.
-The `$Header` variable contains a custom header that replaces the following default values:
+parameter removes the type information header from CSV output and is optional in PowerShell v6 and
+higher. The `$Header` variable contains a custom header that replaces the following default values:
 **HasMoreData**, **JobStateInfo**, **PSBeginTime**, **PSEndTime**, and **PSJobTypeName**. The `$A`
 variable uses the `Get-Content` cmdlet to get the CSV string from the Jobs.csv file. The `$A`
 variable is used to remove the default header from the file. The `Out-File` cmdlet saves the new
-version of the Jobs.csv file in the `$A` variable. The `Import-Csv` cmdlet imports the Jobs.csv
-file and uses the **Header** parameter to apply the `$Header` variable. The `$J` variable contains
-the imported **PSCustomObject** and displays the object in the PowerShell console.
+version of the Jobs.csv file in the `$A` variable. The `Import-Csv` cmdlet imports the Jobs.csv file
+and uses the **Header** parameter to apply the `$Header` variable. The `$J` variable contains the
+imported **PSCustomObject** and displays the object in the PowerShell console.
 
 ### Example 5: Create a custom object using a CSV file
 
@@ -311,11 +310,12 @@ displays a warning message because **H1** is a default header name. The `(Import
 
 ### -Delimiter
 
-Specifies the delimiter that separates the property values in the CSV file.
-The default is a comma (,).
+Specifies the delimiter that separates the property values in the CSV file. The default is a comma
+(`,`).
 
-Enter a character, such as a colon (:).
-To specify a semicolon (;) enclose it in single quotation marks.
+Enter a character, such as a colon (`:`). To specify a semicolon (`;`) enclose it in single
+quotation marks. To specify escaped special characters such as tab (`` `t ``), enclose it in double
+quotation marks.
 
 If you specify a character other than the actual string delimiter in the file, `Import-Csv` cannot
 create the objects from the CSV strings and will return the CSV strings.

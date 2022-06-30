@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Utility-help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 06/09/2017
+ms.date: 10/22/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/convertfrom-sddlstring?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: ConvertFrom-SddlString
@@ -21,6 +21,8 @@ ConvertFrom-SddlString [-Sddl] <String> [-Type <AccessRightTypeNames>] [<CommonP
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `ConvertFrom-SddlString` cmdlet converts a Security Descriptor Definition Language string to a
 custom **PSCustomObject** object with the following properties: Owner, Group, DiscretionaryAcl,
@@ -120,7 +122,7 @@ The acceptable values for this parameter are:
 
 By default cmdlet uses file system rights.
 
-CryptoKeyRights and ActiveDirectoryRights are not supported in PowerShell Core.
+**CryptoKeyRights** and **ActiveDirectoryRights** are not supported in PowerShell v6 and higher.
 
 ```yaml
 Type: Microsoft.PowerShell.Commands.ConvertFromSddlStringCommand+AccessRightTypeNames

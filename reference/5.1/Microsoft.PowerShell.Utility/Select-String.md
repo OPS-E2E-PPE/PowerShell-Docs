@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 08/22/2020
+ms.date: 02/07/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/select-string?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Select-String
@@ -42,17 +41,15 @@ Select-String [-Pattern] <String[]> -LiteralPath <String[]> [-SimpleMatch] [-Cas
 
 ## DESCRIPTION
 
-The `Select-String` cmdlet searches for text and text patterns in input strings and files. You can
-use `Select-String` similar to **grep** in UNIX or **findstr.exe** in Windows.
+The `Select-String` cmdlet uses regular expression matching to search for text patterns in input
+strings and files. You can use `Select-String` similar to `grep` in UNIX or `findstr.exe` in
+Windows.
 
 `Select-String` is based on lines of text. By default, `Select-String` finds the first match in each
 line and, for each match, it displays the file name, line number, and all text in the line
 containing the match. You can direct `Select-String` to find multiple matches per line, display text
 before and after the match, or display a Boolean value (True or False) that indicates whether a
 match is found.
-
-`Select-String` uses regular expression matching, but it can also perform a match that searches the
-input for the text that you specify.
 
 `Select-String` can display all the text matches or stop after the first match in each input file.
 `Select-String` can be used to display all text that doesn't match the specified pattern.
@@ -108,7 +105,8 @@ and line number precede each line of content that contains a match for the **Pat
 ### Example 3: Find a pattern match
 
 In this example, multiple files are searched to find matches for the specified pattern. The pattern
-uses a regular expression quantifier. For more information, see [about_Regular_Expressions](../Microsoft.PowerShell.Core/About/About_Regular_Expressions.md).
+uses a regular expression quantifier. For more information, see
+[about_Regular_Expressions](../Microsoft.PowerShell.Core/About/About_Regular_Expressions.md).
 
 ```powershell
 Select-String -Path "$PSHOME\en-US\*.txt" -Pattern '\?'
@@ -131,25 +129,27 @@ number precede each line of content that contains a match for the **Pattern** pa
 
 This example creates a function to search for a pattern in the PowerShell help files. For this
 example, the function only exists in the PowerShell session. When the PowerShell session is closed,
-the function is deleted. For more information, see [about_Functions](../Microsoft.PowerShell.Core/About/about_Functions.md).
+the function is deleted. For more information, see
+[about_Functions](../Microsoft.PowerShell.Core/About/about_Functions.md).
 
+```powershell
+function Search-Help
+{
+    $PSHelp = "$PSHOME\en-US\*.txt"
+    Select-String -Path $PSHelp -Pattern 'About_'
+}
+
+Search-Help
 ```
-PS> Function Search-Help
->> {
->> $PSHelp = "$PSHOME\en-US\*.txt"
->> Select-String -Path $PSHelp -Pattern 'About_'
->> }
-PS>
 
-PS> Search-Help
-
+```Output
 C:\Windows\System32\WindowsPowerShell\v1.0\en-US\about_ActivityCommonParameters.help.txt:2:   about_ActivityCommonParameters
 C:\Windows\System32\WindowsPowerShell\v1.0\en-US\about_ActivityCommonParameters.help.txt:31:  see about_WorkflowCommonParameters.
 C:\Windows\System32\WindowsPowerShell\v1.0\en-US\about_ActivityCommonParameters.help.txt:33:  about_CommonParameters.
 ```
 
 The function is created on the PowerShell command line. The `Function` command uses the name
-**Search-Help**. Press **Enter** to begin adding statements to the function. From the `>>` prompt,
+`Search-Help`. Press **Enter** to begin adding statements to the function. From the `>>` prompt,
 add each statement and press **Enter** as shown in the example. After the closing bracket is added,
 you're returned to a PowerShell prompt.
 
@@ -239,7 +239,7 @@ Select-String -Path .\Command.txt -Pattern 'Get-Computer' -Context 2, 3
 
 The `Get-Command` cmdlet sends objects down the pipeline to the `Out-File` to create the
 **Command.txt** file in the current directory. `Select-String` uses the **Path** parameter to
-specify the **Command.txt** file. The **Pattern** parameter specifies **Get-Computer** as the search
+specify the **Command.txt** file. The **Pattern** parameter specifies `Get-Computer` as the search
 pattern. The **Context** parameter uses two values, before and after, and marks pattern matches in
 the output with an angle bracket (`>`). The **Context** parameter outputs the two lines before the
 first pattern match and three lines after the last pattern match.
@@ -250,16 +250,21 @@ This example shows how the **AllMatches** parameter finds each pattern match in 
 default, `Select-String` only finds the first occurrence of a pattern in a line of text. This
 example uses object properties that are found with the `Get-Member` cmdlet.
 
+```powershell
+$A = Get-ChildItem -Path "$PSHOME\en-US\*.txt" | Select-String -Pattern 'PowerShell'
+$A
 ```
-PS> $A = Get-ChildItem -Path "$PSHOME\en-US\*.txt" | Select-String -Pattern 'PowerShell'
 
-PS> $A
-
+```Output
 C:\Windows\System32\WindowsPowerShell\v1.0\en-US\about_ActivityCommonParameters.help.txt:5:    Describes the parameters that Windows PowerShell
 C:\Windows\System32\WindowsPowerShell\v1.0\en-US\about_ActivityCommonParameters.help.txt:9:    Windows PowerShell Workflow adds the activity common
+```
 
-PS> $A.Matches
+```powershell
+$A.Matches
+```
 
+```Output
 Groups   : {0}
 Success  : True
 Name     : 0
@@ -267,15 +272,22 @@ Captures : {0}
 Index    : 4
 Length   : 10
 Value    : PowerShell
+```
 
-PS> $A.Matches.Length
+```powershell
+$A.Matches.Length
+```
 
+```Output
 2073
+```
 
-PS> $B = Get-ChildItem -Path "$PSHOME\en-US\*.txt" | Select-String -Pattern 'PowerShell' -AllMatches
+```powershell
+$B = Get-ChildItem -Path "$PSHOME\en-US\*.txt" | Select-String -Pattern 'PowerShell' -AllMatches
+$B.Matches.Length
+```
 
-PS> $B.Matches.Length
-
+```Output
 2200
 ```
 
@@ -300,6 +312,40 @@ line. The objects stored in the `$A` and `$B` variables are identical.
 
 The `$B.Matches.Length` property increases because for each line, every occurrence of the pattern
 **PowerShell** is counted.
+
+### Example 10 - Convert pipeline objects to strings using `Out-String`
+
+The `ToString()` result of the piped object isn't the same rich string representation produced by
+PowerShell's formatting system. So, you may need to pipe the objects to `Out-String` first.
+
+Piping to `Out-String` converts the formatted output into a single multi-line string object. This
+means that when `Select-String` finds a match it outputs the whole multiline string.
+
+```powershell
+PS> $hash = @{
+    Name = 'foo'
+    Category = 'bar'
+}
+
+# !! NO output, due to .ToString() conversion
+$hash | Select-String -Pattern 'foo'
+
+# Out-String converts the output to a single multi-line string object
+PS> $hash | Out-String | Select-String -Pattern 'foo'
+
+Name                           Value
+----                           -----
+Name                           foo
+Category                       bar
+
+# Out-String -Stream converts the output to a multiple single-line string objects
+PS> $hash | Out-String -Stream | Select-String -Pattern 'foo'
+
+Name                           foo
+```
+
+Piping to `Out-String -Stream` converts the formatted output into a multiple single-line string
+objects. This means that when `Select-String` finds a match it outputs only the matching line.
 
 ## PARAMETERS
 
@@ -497,7 +543,8 @@ Accept wildcard characters: False
 Specifies the path to the files to be searched. The value of the **LiteralPath** parameter is used
 exactly as it's typed. No characters are interpreted as wildcards. If the path includes escape
 characters, enclose it in single quotation marks. Single quotation marks tell PowerShell not to
-interpret any characters as escape sequences. For more information, see [about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
+interpret any characters as escape sequences. For more information, see
+[about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
 
 ```yaml
 Type: System.String[]
@@ -551,7 +598,8 @@ Accept wildcard characters: True
 
 Specifies the text to find on each line. The pattern value is treated as a regular expression.
 
-To learn about regular expressions, see [about_Regular_Expressions](../Microsoft.PowerShell.Core/About/about_Regular_Expressions.md).
+To learn about regular expressions, see
+[about_Regular_Expressions](../Microsoft.PowerShell.Core/About/about_Regular_Expressions.md).
 
 ```yaml
 Type: System.String[]
@@ -610,7 +658,8 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -627,14 +676,24 @@ the **Quiet** parameter, the output is a Boolean value indicating whether the pa
 
 ## NOTES
 
-`Select-String` is similar to **grep** in UNIX or **findstr.exe** in Windows.
+`Select-String` is similar to `grep` in UNIX or `findstr.exe` in Windows.
 
-The **sls** alias for the `Select-String` cmdlet was introduced in PowerShell 3.0.
+The `sls` alias for the `Select-String` cmdlet was introduced in PowerShell 3.0.
 
 > [!NOTE]
-> According to [Approved Verbs for PowerShell Commands](/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands),
+> According to
+> [Approved Verbs for PowerShell Commands](/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands),
 > the official alias prefix for `Select-*` cmdlets is `sc`, not `sl`. Therefore, the proper alias
 > for `Select-String` should be `scs`, not `sls`. This is an exception to this rule.
+
+When piping objects to `Select-String`:
+
+- **FileInfo** objects are treated as a path to a file. When file paths are specified,
+  `Select-String` searches the contents of the file, not the `ToString()` representation of the
+  object.
+- The `ToString()` result of the piped object isn't the same rich string representation produced by
+  PowerShell's formatting system. So, you may need to pipe the objects to `Out-String` first. For
+  more information, see Example 10.
 
 To use `Select-String`, type the text that you want to find as the value of the **Pattern**
 parameter. To specify the text to be searched, use the following criteria:

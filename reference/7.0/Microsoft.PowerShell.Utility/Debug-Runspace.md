@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 06/09/2017
+ms.date: 08/19/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/debug-runspace?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Debug-Runspace
@@ -18,25 +17,25 @@ Starts an interactive debugging session with a runspace.
 ### RunspaceParameterSet (Default)
 
 ```
-Debug-Runspace [-Runspace] <Runspace> [-WhatIf] [-Confirm] [<CommonParameters>]
+Debug-Runspace [-Runspace] <Runspace> [-BreakAll] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### NameParameterSet
 
 ```
-Debug-Runspace [-Name] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+Debug-Runspace [-Name] <String> [-BreakAll] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### IdParameterSet
 
 ```
-Debug-Runspace [-Id] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
+Debug-Runspace [-Id] <Int32> [-BreakAll] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### InstanceIdParameterSet
 
 ```
-Debug-Runspace [-InstanceId] <Guid> [-WhatIf] [-Confirm] [<CommonParameters>]
+Debug-Runspace [-InstanceId] <Guid> [-BreakAll] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -60,7 +59,12 @@ that is running a different PowerShell session.
 
 ### Example 1: Debug a remote runspace
 
-```
+In this example, you debug a runspace that is open on a remote computer, WS10TestServer. In the
+first line of the command, you run `Get-Process` on the remote computer, and filter for Windows
+PowerShell host processes. In this example, you want to debug process ID 1152, the Windows
+PowerShell ISE host process.
+
+```powershell
 PS C:\> Get-Process -ComputerName "WS10TestServer" -Name "*powershell*"
 
 Handles      WS(K)   VM(M)      CPU(s)    Id  ProcessName
@@ -77,7 +81,7 @@ Id Name            ComputerName    Type          State         Availability
  1 Runspace1       WS10TestServer  Remote        Opened        Available
  2 RemoteHost      WS10TestServer  Remote        Opened        Busy
 
-PS C:\> [WS10TestServer][Process:1152]: PS C:\Users\Test\Documents> Debug-Runspace -Id 2
+[WS10TestServer][Process:1152]: PS C:\Users\Test\Documents> Debug-Runspace -Id 2
 
 Hit Line breakpoint on 'C:\TestWFVar1.ps1:83'
 At C:\TestWFVar1.ps1:83 char:1
@@ -85,11 +89,6 @@ At C:\TestWFVar1.ps1:83 char:1
 + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [Process:1152]: [RSDBG: 2]: PS C:\> >
 ```
-
-In this example, you debug a runspace that is open on a remote computer, WS10TestServer. In the
-first line of the command, you run `Get-Process` on the remote computer, and filter for Windows
-PowerShell host processes. In this example, you want to debug process ID 1152, the Windows
-PowerShell ISE host process.
 
 In the second command, you run `Enter-PSSession` to open a remote session on WS10TestServer. In the
 third command, you attach to the Windows PowerShell ISE host process running on the remote server by
@@ -100,10 +99,29 @@ In the fourth command, you list available runspaces for process ID 1152 by runni
 You note the ID number of the Busy runspace; it is running a script that you want to debug.
 
 In the last command, you start debugging an opened runspace that is running a script,
-TestWFVar1.ps1, by running `Debug-Runspace`, and identifying the runspace by its ID, 2, by adding
+`TestWFVar1.ps1`, by running `Debug-Runspace`, and identifying the runspace by its ID, 2, by adding
 the **Id** parameter. Because there's a breakpoint in the script, the debugger opens.
 
 ## PARAMETERS
+
+### -BreakAll
+
+Allows you to break immediately in the current location when the debugger attaches.
+
+The parameter is only available as an experimental feature. For more information, see
+[Using experimental features](/powershell/scripting/learn/experimental-features#microsoftpowershellutilitypsmanagebreakpointsinrunspace).
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Id
 
@@ -206,7 +224,8 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

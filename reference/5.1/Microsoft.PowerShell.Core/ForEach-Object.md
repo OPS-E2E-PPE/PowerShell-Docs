@@ -1,19 +1,18 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 09/08/2020
+ms.date: 07/27/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/foreach-object?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: ForEach-Object
 ---
 # ForEach-Object
 
-## Synopsis
+## SYNOPSIS
 Performs an operation against each item in a collection of input objects.
 
-## Syntax
+## SYNTAX
 
 ### ScriptBlockSet (Default)
 
@@ -29,12 +28,13 @@ ForEach-Object [-InputObject <PSObject>] [-MemberName] <String> [-ArgumentList <
  [-Confirm] [<CommonParameters>]
 ```
 
-## Description
+## DESCRIPTION
 
 The `ForEach-Object` cmdlet performs an operation on each item in a collection of input objects. The
-input objects can be piped to the cmdlet or specified by using the **InputObject** parameter.
+input objects can be piped to the cmdlet or specified using the **InputObject** parameter.
 
-Starting in Windows PowerShell 3.0, there are two different ways to construct a `ForEach-Object` command.
+Starting in Windows PowerShell 3.0, there are two different ways to construct a `ForEach-Object`
+command.
 
 - **Script block**. You can use a script block to specify the operation. Within the script block,
   use the `$_` variable to represent the current object. The script block is the value of the
@@ -61,7 +61,7 @@ Starting in Windows PowerShell 3.0, there are two different ways to construct a 
 
   `Get-Process | ForEach-Object ProcessName`
 
-## Examples
+## EXAMPLES
 
 ### Example 1: Divide integers in an array
 
@@ -92,8 +92,8 @@ cmdlet uses the **PSISContainer** property to determine whether an object is a d
 
 ### Example 3: Operate on the most recent System events
 
-This example write the 1000 most recent events from the System event log to a text file. The current
-time is displayed before and after processing the events.
+This example writes the 1000 most recent events from the System event log to a text file. The
+current time is displayed before and after processing the events.
 
 ```powershell
 $Events = Get-EventLog -LogName System -Newest 1000
@@ -104,12 +104,12 @@ $events | ForEach-Object -Begin {Get-Date} -Process {Out-File -FilePath Events.t
 `$Events` variable. `$Events` is then piped to the `ForEach-Object` cmdlet. The **Begin** parameter
 displays the current date and time. Next, the **Process** parameter uses the `Out-File` cmdlet to
 create a text file that is named events.txt and stores the message property of each of the events in
-that file. Last, the **End** parameter is used to display the date and time after all of the
-processing has completed.
+that file. Last, the **End** parameter is used to display the date and time after all the processing
+has completed.
 
 ### Example 4: Change the value of a Registry key
 
-This example changes the value of the **RemotePath** registry entry in all of the subkeys under the
+This example changes the value of the **RemotePath** registry entry in all the subkeys under the
 `HKCU:\Network` key to uppercase text.
 
 ```powershell
@@ -119,14 +119,14 @@ Get-ItemProperty -Path HKCU:\Network\* |
 
 You can use this format to change the form or content of a registry entry value.
 
-Each subkey in the **Network** key represents a mapped network drive that will reconnect at logon.
-The **RemotePath** entry contains the UNC path of the connected drive. For example, if you map the
-E: drive to `\\Server\Share`, there will be an **E** subkey of `HKCU:\Network` and the value of the
-**RemotePath** registry entry in the **E** subkey is `\\Server\Share`.
+Each subkey in the **Network** key represents a mapped network drive that reconnects at sign on. The
+**RemotePath** entry contains the UNC path of the connected drive. For example, if you map the E:
+drive to `\\Server\Share`, an **E** subkey is created in `HKCU:\Network` with the **RemotePath**
+registry value set to `\\Server\Share`.
 
-The command uses the `Get-ItemProperty` cmdlet to get all of the subkeys of the **Network** key and
-the `Set-ItemProperty` cmdlet to change the value of the **RemotePath** registry entry in each key.
-In the `Set-ItemProperty` command, the path is the value of the **PSPath** property of the registry
+The command uses the `Get-ItemProperty` cmdlet to get all the subkeys of the **Network** key and the
+`Set-ItemProperty` cmdlet to change the value of the **RemotePath** registry entry in each key. In
+the `Set-ItemProperty` command, the path is the value of the **PSPath** property of the registry
 key. This is a property of the Microsoft .NET Framework object that represents the registry key, not
 a registry entry. The command uses the **ToUpper()** method of the **RemotePath** value, which is a
 string (REG_SZ).
@@ -134,9 +134,10 @@ string (REG_SZ).
 Because `Set-ItemProperty` is changing the property of each key, the `ForEach-Object` cmdlet is
 required to access the property.
 
-### Example 5: Use the $Null automatic variable
+### Example 5: Use the $null automatic variable
 
-This example shows the effect of piping the `$Null` automatic variable to the `ForEach-Object` cmdlet.
+This example shows the effect of piping the `$null` automatic variable to the `ForEach-Object`
+cmdlet.
 
 ```powershell
 1, 2, $null, 4 | ForEach-Object {"Hello"}
@@ -149,8 +150,8 @@ Hello
 Hello
 ```
 
-Because PowerShell treats null as an explicit placeholder, the `ForEach-Object` cmdlet generates a
-value for `$Null`, just as it does for other objects that you pipe to it.
+Because PowerShell treats `$null` as an explicit placeholder, the `ForEach-Object` cmdlet generates
+a value for `$null` as it does for other objects piped to it.
 
 ### Example 6: Get property values
 
@@ -165,13 +166,15 @@ Get-Module -ListAvailable | Foreach Path
 The second command is equivalent to the first. It uses the `Foreach` alias of the `ForEach-Object`
 cmdlet and omits the name of the **MemberName** parameter, which is optional.
 
-The `ForEach-Object` cmdlet is very useful for getting property values, because it gets the value
-without changing the type, unlike the **Format** cmdlets or the `Select-Object` cmdlet, which change
-the property value type.
+The `ForEach-Object` cmdlet is useful for getting property values, because it gets the value without
+changing the type, unlike the **Format** cmdlets or the `Select-Object` cmdlet, which change the
+property value type.
 
 ### Example 7: Split module names into component names
 
-This examples shows three ways to split two dot-separated module names into their component names.
+This example shows three ways to split two dot-separated module names into their component names.
+The commands call the **Split** method of strings. The three commands use different syntax, but they
+are equivalent and interchangeable. The output is the same for all three cases.
 
 ```powershell
 "Microsoft.PowerShell.Core", "Microsoft.PowerShell.Host" | ForEach-Object {$_.Split(".")}
@@ -188,22 +191,19 @@ PowerShell
 Host
 ```
 
-The commands call the **Split** method of strings. The three commands use different syntax, but they
-are equivalent and interchangeable.
-
 The first command uses the traditional syntax, which includes a script block and the current object
 operator `$_`. It uses the dot syntax to specify the method and parentheses to enclose the delimiter
 argument.
 
 The second command uses the **MemberName** parameter to specify the **Split** method and the
-**ArgumentName** parameter to identify the dot (".") as the split delimiter.
+**ArgumentList** parameter to identify the dot (`.`) as the split delimiter.
 
 The third command uses the **Foreach** alias of the `ForEach-Object` cmdlet and omits the names of
 the **MemberName** and **ArgumentList** parameters, which are optional.
 
 ### Example 8: Using ForEach-Object with two script blocks
 
-In this example we pass two script blocks positionally. All the script blocks bind to the
+In this example, we pass two script blocks positionally. All the script blocks bind to the
 **Process** parameter. However, they are treated as if they had been passed to the **Begin** and
 **Process** parameters.
 
@@ -219,7 +219,7 @@ process
 
 ### Example 9: Using ForEach-Object with more than two script blocks
 
-In this example we pass two script blocks positionally. All the script blocks bind to the
+In this example, we pass two script blocks positionally. All the script blocks bind to the
 **Process** parameter. However, they are treated as if they had been passed to the **Begin**,
 **Process**, and **End** parameters.
 
@@ -259,7 +259,7 @@ two
 three
 ```
 
-## Parameters
+## PARAMETERS
 
 ### -ArgumentList
 
@@ -347,9 +347,8 @@ Accept wildcard characters: False
 Specifies the property to get or the method to call.
 
 Wildcard characters are permitted, but work only if the resulting string resolves to a unique value.
-If, for example, you run `Get-Process | ForEach -MemberName *Name`, and more than one member exists
-with a name that contains the string Name, such as the **ProcessName** and **Name** properties, the
-command fails.
+For example, if you run `Get-Process | ForEach -MemberName *Name`, the wildcard pattern matches more
+than one member causing the command to fail.
 
 This parameter was introduced in Windows PowerShell 3.0.
 
@@ -446,28 +445,28 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 -WarningAction, and -WarningVariable. For more information, see
 [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
-## Inputs
+## INPUTS
 
 ### System.Management.Automation.PSObject
 
 You can pipe any object to this cmdlet.
 
-## Outputs
+## OUTPUTS
 
 ### System.Management.Automation.PSObject
 
 This cmdlet returns objects that are determined by the input.
 
-## Notes
+## NOTES
 
-- The `ForEach-Object` cmdlet works much like the **Foreach** statement, except that you cannot pipe
-  input to a **Foreach** statement. For more information about the **Foreach** statement, see
-  [about_Foreach](./About/about_Foreach.md).
+The `ForEach-Object` cmdlet works much like the **Foreach** statement, except that you cannot pipe
+input to a **Foreach** statement. For more information about the **Foreach** statement, see
+[about_Foreach](./About/about_Foreach.md).
 
-- Starting in PowerShell 4.0, `Where` and `ForEach` methods were added for use with collections. You
-  can read more about these new methods here [about_arrays](./About/about_Arrays.md)
+Starting in PowerShell 4.0, `Where` and `ForEach` methods were added for use with collections. You
+can read more about these new methods here [about_arrays](./About/about_Arrays.md)
 
-## Related links
+## RELATED LINKS
 
 [Compare-Object](../Microsoft.PowerShell.Utility/Compare-Object.md)
 

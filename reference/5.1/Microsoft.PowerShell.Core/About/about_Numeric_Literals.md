@@ -1,12 +1,12 @@
 ---
 description: Both integer and real numeric literals can have type and multiplier suffixes.
 Locale: en-US
-ms.date: 04/09/2018
+ms.date: 11/15/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_numeric_literals?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: About numeric literals
+title: about Numeric Literals
 ---
-# About numeric literals
+# about_Numeric_Literals
 
 There are two kinds of numeric literals: integer and real. Both can have type
 and multiplier suffixes.
@@ -179,6 +179,17 @@ their type and value:
 |     482D | Decimal |          482 |
 |    482gb | Int64   | 517543559168 |
 | 0x1e2lgb | Int64   | 517543559168 |
+
+### Numeric type conversion
+
+When strings are converted to numbers, additional hexadecimal format indicators are
+supported. Those additional formats are not recognized as literals.
+
+```powershell
+[int] '0xF' -eq 0xF
+[int] '&hF' -eq 0xF
+[int] '#F' -eq 0xF
+```
 
 ### Commands that look like numeric literals
 

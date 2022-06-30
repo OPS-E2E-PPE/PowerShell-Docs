@@ -1,19 +1,18 @@
 ---
-description:  Describes  Windows PowerShell snap-ins and shows how to use and manage them.
-keywords: powershell,cmdlet
+description: Describes  Windows PowerShell snap-ins and shows how to use and manage them.
 Locale: en-US
 ms.date: 01/03/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_pssnapins?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_PSSnapins
+title: about PSSnapins
 ---
-# About PSSnapins
+# about_PSSnapins
 
-## SHORT DESCRIPTION
+## Short description
 
 Describes  Windows PowerShell snap-ins and shows how to use and manage them.
 
-## LONG DESCRIPTION
+## Long description
 
 A Windows PowerShell snap-in is a Microsoft .NET Framework assembly that
 contains Windows PowerShell providers and\/or cmdlets. Windows PowerShell
@@ -108,7 +107,7 @@ your session, you can use the export file only when you need the snap-ins.
 
 To add the Add-PsSnapin command to your Windows PowerShell profile, open your
 profile, paste or type the command, and then save the profile. For more
-information, see about_Profiles.
+information, see [about_Profiles](about_Profiles.md).
 
 To save the snap-ins from a session in console file (.psc1), use the
 Export-Console cmdlet. For example, to save the snap-ins in the current
@@ -197,22 +196,18 @@ cmdlets in Windows PowerShell modules and snap-ins by setting the
 LogPipelineExecutionDetails property of modules and snap-ins to TRUE. For more
 information, see [about_EventLogs](about_EventLogs.md).
 
-## SEE ALSO
+## See also
 
-[Add-PsSnapin](xref:Microsoft.PowerShell.Core.Add-PSSnapin)
-
-[Get-PsSnapin](xref:Microsoft.PowerShell.Core.Get-PSSnapin)
-
-[Remove-PsSnapin](xref:Microsoft.PowerShell.Core.Remove-PSSnapin)
-
-[Export-Console](xref:Microsoft.PowerShell.Core.Export-Console)
-
-[Get-Command](xref:Microsoft.PowerShell.Core.Get-Command)
-
-[about_Profiles](about_Profiles.md)
-
-[about_Modules](about_Modules.md)
+- [about_Modules](about_Modules.md)
+- [about_Profiles](about_Profiles.md)
+- [Get-Command](xref:Microsoft.PowerShell.Core.Get-Command)
+- [Export-Console](xref:Microsoft.PowerShell.Core.Export-Console)
+- [Add-PsSnapin](xref:Microsoft.PowerShell.Core.Add-PSSnapin)
+- [Get-PsSnapin](xref:Microsoft.PowerShell.Core.Get-PSSnapin)
+- [Remove-PsSnapin](xref:Microsoft.PowerShell.Core.Remove-PSSnapin)
 
 ## KEYWORDS
 
-about_Snapins, about_Snap_ins, about_Snap-ins
+about_Snapins
+about_Snap_ins
+about_Snap-ins

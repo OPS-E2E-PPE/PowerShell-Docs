@@ -4,14 +4,14 @@ Locale: en-US
 ms.date: 06/27/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_command_syntax?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Command_Syntax
+title: about Command Syntax
 ---
-# About Command Syntax
+# about_Command_Syntax
 
-## SHORT DESCRIPTION
+## Short description
 Describes the syntax diagrams that are used in PowerShell.
 
-## LONG DESCRIPTION
+## Long description
 
 The [Get-Help](xref:Microsoft.PowerShell.Core.Get-Help) and
 [Get-Command](xref:Microsoft.PowerShell.Core.Get-Command) cmdlets display
@@ -310,9 +310,8 @@ In syntax examples, brackets are also used in naming and casting to .NET
 Framework types. In this context, brackets do not indicate an element is
 optional.
 
-## SEE ALSO
+## See also
 
 - [about_Parameters](about_Parameters.md)
 - [Get-Command](xref:Microsoft.PowerShell.Core.Get-Command)
 - [Get-Help](xref:Microsoft.PowerShell.Core.Get-Help)
-

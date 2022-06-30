@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 4/26/2019
+ms.date: 04/26/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/add-member?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Add-Member
@@ -161,29 +160,7 @@ $A.SizeInMB()
 0.43
 ```
 
-### Example 5: Copy all properties of an object to another
-
-This function copies all of the properties of one object to another object.
-
-The `foreach` loop uses the `Get-Member` cmdlet to get each of the properties of the **From**
-object. The commands within the `foreach` loop are performed in series on each of the properties.
-
-The `Add-Member` command adds the property of the **From** object to the **To** object as a
-**NoteProperty**. The value is copied using the **Value** parameter. It uses the **Force** parameter
-to add members with the same member name.
-
-```powershell
-function Copy-Property ($From, $To)
-{
-    $properties = Get-Member -InputObject $From -MemberType Property
-    foreach ($p in $properties)
-    {
-        $To | Add-Member -MemberType NoteProperty -Name $p.Name -Value $From.$($p.Name) -Force
-    }
-}
-```
-
-### Example 6: Create a custom object
+### Example 5: Create a custom object
 
 This example creates an **Asset** custom object.
 
@@ -427,24 +404,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Value
-
-Specifies the initial value of the added member.
-If you add an **AliasProperty**, **CodeProperty**, **ScriptProperty** or **CodeMethod** member, you
-can supply optional, additional information by using the **SecondValue** parameter.
-
-```yaml
-Type: System.Object
-Parameter Sets: MemberSet
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -TypeName
 
 Specifies a name for the type.
@@ -462,6 +421,24 @@ Aliases:
 
 Required: True (TypeNameSet), False (NotePropertyMultiMemberSet, NotePropertySingleMemberSet, MemberSet)
 Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Value
+
+Specifies the initial value of the added member.
+If you add an **AliasProperty**, **CodeProperty**, **ScriptProperty** or **CodeMethod** member, you
+can supply optional, additional information by using the **SecondValue** parameter.
+
+```yaml
+Type: System.Object
+Parameter Sets: MemberSet
+Aliases:
+
+Required: False
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

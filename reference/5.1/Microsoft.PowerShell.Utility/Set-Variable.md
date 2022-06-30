@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 06/09/2017
+ms.date: 10/04/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/set-variable?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-Variable
@@ -60,20 +59,27 @@ to pass the object to the `Format-List` cmdlet. It uses the **Property** paramet
 with a value of all (`*`) to display all properties of the newly created variable.
 
 The value, `(Get-Process)`, is enclosed in parentheses to ensure that it is executed before being
-stored in the variable. Otherwise, the variable contains the words "**Get-Process**".
+stored in the variable. Otherwise, the variable contains the words `Get-Process`.
 
 ### Example 3: Understand public vs. private variables
 
 This example shows how to change the visibility of a variable to `Private`. This variable can be
 read and changed by scripts with the required permissions, but it is not visible to the user.
 
+```powershell
+New-Variable -Name "counter" -Visibility Public -Value 26
+$Counter
 ```
-PS C:\> New-Variable -Name "counter" -Visibility Public -Value 26
-PS C:\> $Counter
+
+```Output
 26
+```
 
-PS C:\> Get-Variable c*
+```powershell
+Get-Variable c*
+```
 
+```Output
 Name                  Value
 ----                  -----
 Culture               en-US
@@ -81,21 +87,32 @@ ConsoleFileName
 ConfirmPreference     High
 CommandLineParameters {}
 Counter               26
+```
 
-PS C:\> Set-Variable -Name "counter" -Visibility Private
-PS C:\> Get-Variable c*
+```powershell
+Set-Variable -Name "counter" -Visibility Private
+Get-Variable c*
+```
 
+```output
 Name                  Value
 ----                  -----
 Culture               en-US
 ConsoleFileName
 ConfirmPreference     High
 CommandLineParameters {}
+```
 
-PS C:\> $counter
+```powershell
+$counter
+```
+
+```Output
 "Cannot access the variable '$counter' because it is a private variable"
+```
 
-PS C:\> .\use-counter.ps1
+```powershell
+.\use-counter.ps1
 #Commands completed successfully.
 ```
 
@@ -199,12 +216,18 @@ Specifies the value of the **Options** property of the variable.
 
 Valid values are:
 
-- `None`: Sets no options. ("None" is the default.)
+- `None`: Sets no options. (`None` is the default.)
 - `ReadOnly`: Can be deleted. Cannot be changed, except by using the Force parameter.
 - `Constant`: Cannot be deleted or changed. `Constant` is valid only when you are creating a
   variable. You cannot change the options of an existing variable to `Constant`.
 - `Private`: The variable is available only in the current scope.
 - `AllScope`: The variable is copied to any new scopes that are created.
+
+These values are defined as a flag-based enumeration. You can combine multiple values together to
+set multiple flags using this parameter. The values can be passed to the **Option** parameter as an
+array of values or as a comma-separated string of those values. The cmdlet will combine the values
+using a binary-OR operation. Passing values as an array is the simplest option and also allows you
+to use tab-completion on the values.
 
 ```yaml
 Type: System.Management.Automation.ScopedItemOptions
@@ -240,14 +263,14 @@ Accept wildcard characters: False
 
 Specifies the scope of the variable.The acceptable values for this parameter are:
 
-- Global
-- Local
-- Script
-- Private
+- `Global`
+- `Local`
+- `Script`
+- `Private`
 - A number relative to the current scope (0 through the number of scopes, where 0 is the current
   scope and 1 is its parent).
 
-Local is the default.
+`Local` is the default.
 
 For more information, see [about_Scopes](../Microsoft.PowerShell.Core/About/about_scopes.md).
 
@@ -286,8 +309,8 @@ parameter is designed for use in scripts and commands that will be delivered to 
 
 Valid values are:
 
-- Public:  The variable is visible. ("Public" is the default.)
-- Private: The variable is not visible.
+- `Public`:  The variable is visible. (`Public` is the default.)
+- `Private`: The variable is not visible.
 
 When a variable is private, it does not appear in lists of variables, such as those returned by
 `Get-Variable`, or in displays of the **Variable:** drive. Commands to read or change the value of a

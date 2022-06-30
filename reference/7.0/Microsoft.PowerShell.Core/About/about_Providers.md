@@ -1,13 +1,12 @@
 ---
-description: Describes how PowerShell providers provide access to data and components that wouldn't otherwise be easily accessible at the command line. The data is presented in a consistent format that resembles a file system drive. 
-keywords: powershell,cmdlet
+description: Describes how PowerShell providers provide access to data and components that wouldn't otherwise be easily accessible at the command line. The data is presented in a consistent format that resembles a file system drive.
 Locale: en-US
-ms.date: 03/27/2020
+ms.date: 03/07/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_providers?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Providers
+title: about Providers
 ---
-# About Providers
+# about_Providers
 
 ## Short description
 Describes how PowerShell providers provide access to data and
@@ -54,6 +53,10 @@ your session, type:
 ```powershell
 Get-PSProvider
 ```
+
+> [!NOTE]
+> The **Certificate**, **Registry**, and **WSMan** providers are only
+> available on the Windows platform.
 
 ## Installing and removing providers
 
@@ -353,6 +356,5 @@ Get-Help * -Category Provider
 
 ## See also
 
-[about_Locations](about_Locations.md)
-
-[about_Path_Syntax](about_Path_Syntax.md)
+- [about_Locations](about_Locations.md)
+- [about_Path_Syntax](about_Path_Syntax.md)

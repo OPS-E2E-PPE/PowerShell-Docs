@@ -1,14 +1,13 @@
 ---
-description:  Explains how to create and manage scheduled jobs. 
-keywords: powershell,cmdlet
+description: Explains how to create and manage scheduled jobs.
 Locale: en-US
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/psscheduledjob/about/about_scheduled_jobs_basics?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Scheduled_Jobs_Basics
+title: about Scheduled Jobs Basics
 ---
 
-# About Scheduled Jobs Basics
+# about_Scheduled_Jobs_Basics
 
 ## Short description
 
@@ -306,14 +305,9 @@ window.
 
 ## See also
 
-[about_Scheduled_Jobs_Advanced](about_Scheduled_Jobs_Advanced.md)
-
-[about_Scheduled_Jobs_Troubleshooting](about_Scheduled_Jobs_Troubleshooting.md)
-
-[about_Scheduled_Jobs](about_Scheduled_Jobs.md)
-
-[about_Splatting.md](../../Microsoft.PowerShell.Core/About/about_Splatting.md)
-
-[PSScheduledJob](xref:PSScheduledJob) module cmdlets
-
-[Task Scheduler](/windows/desktop/TaskSchd/task-scheduler-reference)
+- [about_Scheduled_Jobs](about_Scheduled_Jobs.md)
+- [about_Scheduled_Jobs_Advanced](about_Scheduled_Jobs_Advanced.md)
+- [about_Scheduled_Jobs_Troubleshooting](about_Scheduled_Jobs_Troubleshooting.md)
+- [about_Splatting.md](../../Microsoft.PowerShell.Core/About/about_Splatting.md)
+- [PSScheduledJob](xref:PSScheduledJob) module cmdlets
+- [Task Scheduler](/windows/desktop/TaskSchd/task-scheduler-reference)

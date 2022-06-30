@@ -1,21 +1,20 @@
 ---
-description:  Describes WMI Query Language (WQL), which can be used to get WMI objects in Windows PowerShell. 
-keywords: powershell,cmdlet
+description: Describes WMI Query Language (WQL), which can be used to get WMI objects in Windows PowerShell.
 Locale: en-US
-ms.date: 01/03/2018
+ms.date: 03/04/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_wql?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_WQL
+title: about WQL
 ---
 
-# About WQL
+# about_WQL
 
-## SHORT DESCRIPTION
+## Short description
 
 Describes WMI Query Language (WQL), which can be used to get WMI objects in
 Windows PowerShell.
 
-## LONG DESCRIPTION
+## Long description
 
 WQL is the Windows Management Instrumentation (WMI) query language, which is
 the language used to get information from WMI.
@@ -46,7 +45,7 @@ slowly.
 
 A typical WMI query begins with a Select statement that gets all properties or
 particular properties of a WMI class. To select all properties of a WMI class,
-use an asterisk (\*). The From keyword specifies the WMI class.
+use an asterisk (`*`). The From keyword specifies the WMI class.
 
 A Select statement has the following format:
 
@@ -501,7 +500,7 @@ Sort-Object -Property Name
 #### EXAMPLE 4: Any characters -- or none (%)
 
 The following commands get processes that have names that begin with "calc".
-The % symbol in WQL is equivalent to the asterisk (\*) symbol in regular
+The % symbol in WQL is equivalent to the asterisk (`*`) symbol in regular
 expressions.
 
 ```powershell
@@ -612,8 +611,8 @@ All operators, including the Like operators are valid with the Or and And
 operators. And, you can combine the Or and And operators in a single query
 with parentheses that tell Windows PowerShell which clauses to process first.
 
-This command uses the Windows PowerShell continuation character (`) divide the
-command into two lines.
+This command uses the Windows PowerShell continuation character (`` ` ``) divide
+the command into two lines.
 
 ```powershell
 $q = "Select * from Win32_Process `
@@ -686,8 +685,8 @@ Get-CimInstance -Query $q
 
 ## USING THE ESCAPE CHARACTER
 
-WQL uses the backslash (\) as its escape character. This is different from
-Windows PowerShell, which uses the backtick character (`).
+WQL uses the backslash (`\`) as its escape character. This is different from
+Windows PowerShell, which uses the backtick character (`` ` ``).
 
 Quotation marks, and the characters used for quotation marks, often need to be
 escaped so that they are not misinterpreted.
@@ -732,12 +731,9 @@ $q = "Select * from Win32_UserAccount where Caption = 'Fabrikam\\TimO'"
 Get-CimInstance -Query $q
 ```
 
-## SEE ALSO
+## See also
 
-[about_Special_Characters](about_Special_Characters.md)
-
-[about_Quoting_Rules](about_Quoting_Rules.md)
-
-[about_WMI](about_WMI.md)
-
-[about_WMI_Cmdlets](about_WMI_Cmdlets.md)
+- [about_Special_Characters](about_Special_Characters.md)
+- [about_Quoting_Rules](about_Quoting_Rules.md)
+- [about_WMI](about_WMI.md)
+- [about_WMI_Cmdlets](about_WMI_Cmdlets.md)

@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 10/14/2020
+ms.date: 09/10/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/write-progress?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Write-Progress
@@ -34,7 +33,8 @@ text that appears above and below the progress bar.
 ```powershell
 for ($i = 1; $i -le 100; $i++ )
 {
-    Write-Progress -Activity "Search in Progress" -Status "$i% Complete:" -PercentComplete $i;
+    Write-Progress -Activity "Search in Progress" -Status "$i% Complete:" -PercentComplete $i
+    Start-Sleep -Milliseconds 250
 }
 ```
 
@@ -196,7 +196,8 @@ Accept wildcard characters: False
 
 Specifies an ID that distinguishes each progress bar from the others. Use this parameter when you
 are creating more than one progress bar in a single command. If the progress bars do not have
-different IDs, they are superimposed instead of being displayed in a series.
+different IDs, they are superimposed instead of being displayed in a series. Negative values are
+not allowed.
 
 ```yaml
 Type: System.Int32

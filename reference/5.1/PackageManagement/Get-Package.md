@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.PackageManagement.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: PackageManagement
-ms.date: 05/22/2019
+ms.date: 10/04/2021
 online version: https://docs.microsoft.com/powershell/module/packagemanagement/get-package?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Package
@@ -104,7 +103,7 @@ PowerShellGet         2.0.1        https://www.powershellgallery.com/api/v2   Po
 ```
 
 `Get-Package` uses the **ProviderName** parameter to specify a specific provider, **PowerShellGet**.
-The **All-Versions** parameter displays each version that is installed.
+The **AllVersions** parameter displays each version that is installed.
 
 ### Example 4: Get an exact version of a specific package
 
@@ -122,7 +121,7 @@ PackageManagement     1.3.1        https://www.powershellgallery.com/api/v2   Po
 ```
 
 `Get-Package` uses **Name** parameter to specify the package name, **PackageManagement**. The
-**ProviderName** parameter specifies the provider, **PowerShellGet**. The **Required-Version**
+**ProviderName** parameter specifies the provider, **PowerShellGet**. The **RequiredVersion**
 parameter specifies an installed version.
 
 ### Example 5: Uninstall a package
@@ -138,6 +137,22 @@ Get-Package -Name posh-git -RequiredVersion 0.7.3 | Uninstall-Package
 pipeline to the `Uninstall-Package` cmdlet. `Uninstall-Package` removes the package.
 
 ## PARAMETERS
+
+### -AdditionalArguments
+
+Specifies additional arguments.
+
+```yaml
+Type: System.String[]
+Parameter Sets: msi
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -AllowClobber
 
@@ -245,6 +260,38 @@ provider.
 ```yaml
 Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -IncludeSystemComponent
+
+Indicates that this cmdlet includes system components in the results.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: Programs
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -IncludeWindowsInstaller
+
+Indicates that this cmdlet includes the Windows Installer in the results.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: Programs
 Aliases:
 
 Required: False
@@ -447,54 +494,6 @@ Type: System.String
 Parameter Sets: PowerShellGet
 Aliases:
 Accepted values: Module, Script, All
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AdditionalArguments
-
-Specifies additional arguments.
-
-```yaml
-Type: System.String[]
-Parameter Sets: msi
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -IncludeSystemComponent
-
-Indicates that this cmdlet includes system components in the results.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: Programs
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -IncludeWindowsInstaller
-
-Indicates that this cmdlet includes the Windows Installer in the results.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: Programs
-Aliases:
 
 Required: False
 Position: Named

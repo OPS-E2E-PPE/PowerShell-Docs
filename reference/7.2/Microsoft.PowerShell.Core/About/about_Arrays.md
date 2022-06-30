@@ -1,18 +1,19 @@
 ---
 description: Describes arrays, which are data structures designed to store collections of items.
 Locale: en-US
-ms.date: 08/26/2020
+ms.date: 06/06/2022
+no-loc: [Count, Length, LongLength, Rank, ForEach, Clear, Default, First, Last, SkipUntil, Until, Split, Tuple]
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_arrays?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Arrays
+title: about Arrays
 ---
-# About Arrays
+# about_Arrays
 
-## Short Description
-Describes arrays, which are data structures designed to store
-collections of items.
+## Short description
+Describes arrays, which are data structures designed to store collections of
+items.
 
-## Long Description
+## Long description
 
 An array is a data structure that is designed to store a collection of items.
 The items can be the same type or different types.
@@ -74,10 +75,10 @@ and 4000), type:
 
 As a result, the `$ia` array can contain only integers.
 
-You can create arrays that are cast to any supported type in the Microsoft
-.NET Framework. For example, the objects that `Get-Process` retrieves to
-represent processes are of the **System.Diagnostics.Process** type. To create a
-strongly typed array of process objects, enter the following command:
+You can create arrays that are cast to any supported type in the .NET. For
+example, the objects that `Get-Process` retrieves to represent processes are of
+the **System.Diagnostics.Process** type. To create a strongly typed array of
+process objects, enter the following command:
 
 ```powershell
 [Diagnostics.Process[]]$zz = Get-Process
@@ -274,9 +275,9 @@ $a[+0..2+4..6+8]
 
 ### Iterations over array elements
 
-You can also use looping constructs, such as ForEach, For, and While loops, to
-refer to the elements in an array. For example, to use a ForEach loop to
-display the elements in the `$a` array, type:
+You can also use looping constructs, such as `ForEach`, `For`, and `While`
+loops, to refer to the elements in an array. For example, to use a `ForEach`
+loop to display the elements in the `$a` array, type:
 
 ```powershell
 $a = 0..9
@@ -298,11 +299,11 @@ foreach ($element in $a) {
 9
 ```
 
-The Foreach loop iterates through the array and returns each value in the
+The `Foreach` loop iterates through the array and returns each value in the
 array until reaching the end of the array.
 
-The For loop is useful when you are incrementing counters while examining the
-elements in an array. For example, to use a For loop to return every other
+The `For` loop is useful when you are incrementing counters while examining the
+elements in an array. For example, to use a `For` loop to return every other
 value in an array, type:
 
 ```powershell
@@ -320,7 +321,7 @@ for ($i = 0; $i -le ($a.length - 1); $i += 2) {
 8
 ```
 
-You can use a While loop to display the elements in an array until a defined
+You can use a `While` loop to display the elements in an array until a defined
 condition is no longer true. For example, to display the elements in the `$a`
 array while the array index is less than 4, type:
 
@@ -328,7 +329,7 @@ array while the array index is less than 4, type:
 $a = 0..9
 $i=0
 while($i -lt 4) {
-  $a[$i];
+  $a[$i]
   $i++
 }
 ```
@@ -344,8 +345,8 @@ while($i -lt 4) {
 
 ### Count or Length or LongLength
 
-To determine how many items are in an array, use the `Length` property or its
-`Count` alias. `Longlength` is useful if the array contains more than
+To determine how many items are in an array, use the **Length** property or its
+**Count** alias. **Longlength** is useful if the array contains more than
 2,147,483,647 elements.
 
 ```powershell
@@ -374,7 +375,7 @@ $a = @(
 
 "`$a rank: $($a.Rank)"
 "`$a length: $($a.Length)"
-"`$a length: $($a.Length)"
+"`$a[2] length: $($a[2].Length)"
 "Process `$a[2][1]: $($a[2][1].ProcessName)"
 ```
 
@@ -455,7 +456,7 @@ True
 ### Clear
 
 Sets all element values to the _default value_ of the array's element type.
-The Clear() method does not reset the size of the array.
+The `Clear()` method does not reset the size of the array.
 
 In the following example `$a` is an array of objects.
 
@@ -490,7 +491,7 @@ $intA
 Allows to iterate over all elements in the array and perform a given operation
 for each element of the array.
 
-The ForEach method has several overloads that perform different operations.
+The `ForEach` method has several overloads that perform different operations.
 
 ```
 ForEach(scriptblock expression)
@@ -513,7 +514,7 @@ This method was added in PowerShell v4.
 > the scriptblock is the only parameter. Also, there must not be a space
 > between the method and the opening parenthesis or brace.
 
-The following example shows how use the foreach method. In this case the
+The following example shows how use the `ForEach` method. In this case the
 intent is to generate the square value of the elements in the array.
 
 ```powershell
@@ -587,21 +588,22 @@ TWO
 THREE
 ```
 
-Just like the `-ArgumentList` parameter of `ForEach-Object`, the `arguments`
-parameter allows the passing of an array of arguments to a script block
-configured to accept them.
+Just like the `-ArgumentList` parameter of `ForEach-Object`, the `Arguments`
+parameter allows the passing of an array of values to a script block configured
+to accept them.
 
 > [!NOTE]
 > Starting in Windows PowerShell 3.0 retrieving properties and executing
 > methods for each item in a collection can also be accomplished using "Methods
-> of scalar objects and collections" You can read more about that here
+> of scalar objects and collections". You can read more about that here
 > [about_methods](about_methods.md).
 
 ### Where
 
 Allows to filter or select the elements of the array. The script must evaluate
-to anything different than: zero (0), empty string, `$false` or `$null` for
-the element to show after the `Where`
+to anything different than: zero (0), empty string, `$false` or `$null` for the
+element to show after the `Where`. For more information about boolean
+evaluation, see [about_Booleans](about_Booleans.md).
 
 There is one definition for the `Where` method.
 
@@ -625,8 +627,8 @@ The acceptable values for `mode` are:
 - Default (0) - Return all items
 - First (1) - Return the first item
 - Last (2) - Return the last item
-- SkipUntil (3) - Skip items until condition is true, the return the remaining
-  items
+- SkipUntil (3) - Skip items until condition is true, return all the remaining
+  items (including the first item for which the condition is true)
 - Until (4) - Return all items until condition is true
 - Split (5) - Return an array of two elements
   - The first element contains matching items
@@ -785,6 +787,10 @@ Stopped  AppIDSvc           Application Identity
 ...
 ```
 
+> [!NOTE]
+> Both `foreach` and `where` methods are intrinsic members. For more information
+> about intrinsic members, see [about_Instrinsic_Members](about_Intrinsic_Members.md)
+
 ## Get the members of an array
 
 To get the properties and methods of an array, such as the Length property and
@@ -885,8 +891,8 @@ faster, especially for large arrays.
 
 ## Arrays of zero or one
 
-Beginning in Windows PowerShell 3.0, a collection of zero or one object has
-the Count and Length property. Also, you can index into an array of one
+Beginning in Windows PowerShell 3.0, a collection of zero or one object has the
+**Count** and **Length** properties. Also, you can index into an array of one
 object. This feature helps you to avoid scripting errors that occur when a
 command that expects a collection gets fewer than two items.
 
@@ -946,12 +952,108 @@ arrays of objects.
 
 For more information, see [System.Tuple](/dotnet/api/system.tuple).
 
+## Indexing .NET types that implement `IDictionary<TKey, TValue>`
+
+PowerShell doesn't call a type's true indexer for types that implement the generic
+`IDictionary<TKey, TValue>` interface. Instead, when given a key, PowerShell tests for the existence
+of the key using `TryGetValue()`, which returns `$null` when the key doesn't exist.
+
+By contrast, if you call the type's true indexer using `Item(<key>)`, the method throws an exception
+when the key doesn't exist.
+
+The following example illustrates the difference.
+
+```powershell
+PS> [Collections.Generic.Dictionary[string, int]]::new()['nosuchkey']
+# No output ($null)
+
+PS> [Collections.Generic.Dictionary[string, int]]::new().Item('nosuchkey')
+GetValueInvocationException: Exception getting "Item": "The given key 'nosuchkey' was not present in the dictionary."
+```
+
+## Member-access enumeration
+
+Starting in PowerShell 3.0, when you use the member-access operator to access a
+member that does not exist on a list collection, PowerShell automatically
+enumerates the items in the collection and attempts to access the specified
+member on each item. For more information, see
+[about_Member-Access_Enumeration](about_Member-Access_Enumeration.md).
+
+### Examples
+
+The following example creates two new files and stores the resulting objects in
+the array variable `$files`. Since the array object does not have the
+**LastWriteTime** member, the value of **LastWriteTime** is returned for each
+item in the array.
+
+```powershell
+$files = (New-Item -Type File -Force '/temp/t1.txt'),
+         (New-Item -Force -Type File '/temp/t2.txt')
+$files.LastWriteTime
+```
+
+```Output
+Friday, June 25, 2021 1:21:17 PM
+Friday, June 25, 2021 1:21:17 PM
+```
+
+Member-access enumeration enables you to _get_ values from items in a
+collection, but not to _set_ values on items in a collection. For example:
+
+```powershell
+$files.LastWriteTime = (Get-Date).AddDays(-1)
+```
+
+```Output
+InvalidOperation: The property 'LastWriteTime' cannot be found on this object.
+Verify that the property exists and can be set.
+```
+
+To set the values you must use a method.
+
+```powershell
+$files.set_LastWriteTime((Get-Date).AddDays(-1))
+$files.LastWriteTime
+```
+
+```Output
+Thursday, June 24, 2021 1:23:30 PM
+Thursday, June 24, 2021 1:23:30 PM
+```
+
+The `set_LastWriteTime()` method is a _hidden_ member of the **FileInfo**
+object. The following example shows how to find members that have a _hidden_
+`set` method.
+
+```powershell
+$files | Get-Member | Where-Object Definition -like '*set;*'
+```
+
+```Output
+   TypeName: System.IO.FileInfo
+
+Name              MemberType Definition
+----              ---------- ----------
+Attributes        Property   System.IO.FileAttributes Attributes {get;set;}
+CreationTime      Property   datetime CreationTime {get;set;}
+CreationTimeUtc   Property   datetime CreationTimeUtc {get;set;}
+IsReadOnly        Property   bool IsReadOnly {get;set;}
+LastAccessTime    Property   datetime LastAccessTime {get;set;}
+LastAccessTimeUtc Property   datetime LastAccessTimeUtc {get;set;}
+LastWriteTime     Property   datetime LastWriteTime {get;set;}
+LastWriteTimeUtc  Property   datetime LastWriteTimeUtc {get;set;}
+```
+
+> [!CAUTION]
+> Since the method is executed for each item in the collection, care should be
+> taken when calling methods using member enumeration.
+
 ## See also
 
-- [about_Assignment_Operators](about_Assignment_Operators.md)
-- [about_Hash_Tables](about_Hash_Tables.md)
-- [about_Operators](about_Operators.md)
 - [about_For](about_For.md)
 - [about_Foreach](about_Foreach.md)
+- [about_Hash_Tables](about_Hash_Tables.md)
+- [about_Member-Access_Enumeration](about_Member-Access_Enumeration.md)
+- [about_Operators](about_Operators.md)
+- [about_Assignment_Operators](about_Assignment_Operators.md)
 - [about_While](about_While.md)
-

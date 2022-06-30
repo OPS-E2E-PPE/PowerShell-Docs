@@ -1,13 +1,14 @@
 ---
-description:  Describes variables that store state information for PowerShell. These variables are created and maintained by PowerShell.
+description: Describes variables that store state information for PowerShell. These variables are created and maintained by PowerShell.
 Locale: en-US
-ms.date: 03/15/2021
+ms.date: 10/27/2021
+no-loc: [Reset, Current, Background, Blink, Bold, Foreground, Formatting, Hidden, Italic, Reset, Reverse, Underline]
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Automatic_Variables
+title: about Automatic Variables
 ---
 
-# About Automatic Variables
+# about_Automatic_Variables
 
 ## Short description
 
@@ -28,8 +29,8 @@ Contains the last token in the last line received by the session.
 
 ### $?
 
-Contains the execution status of the last command. It contains **True** if
-the last command succeeded and **False** if it failed.
+Contains the execution status of the last command. It contains **True** if the
+last command succeeded and **False** if it failed.
 
 For cmdlets and advanced functions that are run at multiple stages in a
 pipeline, for example in both `process` and `end` blocks, calling
@@ -69,9 +70,9 @@ Contains the first token in the last line received by the session.
 
 ### $_
 
-Same as `$PSItem`. Contains the current object in the pipeline object. You
-can use this variable in commands that perform an action on every object or
-on selected objects in a pipeline.
+Same as `$PSItem`. Contains the current object in the pipeline object. You can
+use this variable in commands that perform an action on every object or on
+selected objects in a pipeline.
 
 ### $args
 
@@ -80,61 +81,73 @@ function, script, or script block. When you create a function, you can declare
 the parameters by using the `param` keyword or by adding a comma-separated list
 of parameters in parentheses after the function name.
 
-In an event action, the `$Args` variable contains objects that represent the
+In an event action, the `$args` variable contains objects that represent the
 event arguments of the event that is being processed. This variable is
-populated only within the `Action` block of an event registration command.
-The value of this variable can also be found in the **SourceArgs** property of
-the **PSEventArgs** object that `Get-Event` returns.
+populated only within the `Action` block of an event registration command. The
+value of this variable can also be found in the **SourceArgs** property of the
+**PSEventArgs** object that `Get-Event` returns.
 
 ### $ConsoleFileName
 
-Contains the path of the console file (`.psc1`) that was most recently used
-in the session. This variable is populated when you start PowerShell with
-the **PSConsoleFile** parameter or when you use the `Export-Console` cmdlet to
+Contains the path of the console file (`.psc1`) that was most recently used in
+the session. This variable is populated when you start PowerShell with the
+**PSConsoleFile** parameter or when you use the `Export-Console` cmdlet to
 export snap-in names to a console file.
 
 When you use the `Export-Console` cmdlet without parameters, it automatically
-updates the console file that was most recently used in the session. You
-can use this automatic variable to determine which file will be updated.
+updates the console file that was most recently used in the session. You can
+use this automatic variable to determine which file will be updated.
 
 ### $Error
 
-Contains an array of error objects that represent the most recent errors.
-The most recent error is the first error object in the array `$Error[0]`.
+Contains an array of error objects that represent the most recent errors. The
+most recent error is the first error object in the array `$Error[0]`.
 
 To prevent an error from being added to the `$Error` array, use the
 **ErrorAction** common parameter with a value of **Ignore**. For more
 information, see [about_CommonParameters](about_CommonParameters.md).
+
+### $ErrorView
+
+Contains the value controlling the view in which errors are displayed. The
+`$ErrorView` variable accepts strings and has a default value of `NormalView`.
+If a string other than an accepted value is defined, the default is used.
+
+Accepted values:
+
+- `CategoryView` - Only displays the error category information.
+- `NormalView` - Provides a standard PowerShell error view containing the
+  error, line number, category info and more.
 
 ### $Event
 
 Contains a **PSEventArgs** object that represents the event that is being
 processed. This variable is populated only within the `Action` block of an
 event registration command, such as `Register-ObjectEvent`. The value of this
-variable is the same object that the `Get-Event` cmdlet returns. Therefore,
-you can use the properties of the `Event` variable, such as
-`$Event.TimeGenerated`, in an `Action` script block.
+variable is the same object that the `Get-Event` cmdlet returns. Therefore, you
+can use the properties of the `Event` variable, such as `$Event.TimeGenerated`,
+in an `Action` script block.
 
 ### $EventArgs
 
-Contains an object that represents the first event argument that derives
-from **EventArgs** of the event that is being processed. This variable is
-populated only within the `Action` block of an event registration command.
-The value of this variable can also be found in the **SourceEventArgs**
-property of the **PSEventArgs** object that `Get-Event` returns.
+Contains an object that represents the first event argument that derives from
+**EventArgs** of the event that is being processed. This variable is populated
+only within the `Action` block of an event registration command. The value of
+this variable can also be found in the **SourceEventArgs** property of the
+**PSEventArgs** object that `Get-Event` returns.
 
 ### $EventSubscriber
 
 Contains a **PSEventSubscriber** object that represents the event subscriber of
-the event that is being processed. This variable is populated only within
-the `Action` block of an event registration command. The value of this
-variable is the same object that the `Get-EventSubscriber` cmdlet returns.
+the event that is being processed. This variable is populated only within the
+`Action` block of an event registration command. The value of this variable is
+the same object that the `Get-EventSubscriber` cmdlet returns.
 
 ### $ExecutionContext
 
 Contains an **EngineIntrinsics** object that represents the execution context
-of the PowerShell host. You can use this variable to find the execution
-objects that are available to cmdlets.
+of the PowerShell host. You can use this variable to find the execution objects
+that are available to cmdlets.
 
 ### $false
 
@@ -146,8 +159,8 @@ non-zero integer.
 ### $foreach
 
 Contains the enumerator (not the resulting values) of a
-[ForEach](about_ForEach.md) loop. The `$ForEach` variable exists only while
-the `ForEach` loop is running; it's deleted after the loop is completed.
+[ForEach](about_ForEach.md) loop. The `$ForEach` variable exists only while the
+`ForEach` loop is running; it's deleted after the loop is completed.
 
 Enumerators contain properties and methods you can use to retrieve loop values
 and change the current loop iteration. For more information, see
@@ -156,30 +169,29 @@ and change the current loop iteration. For more information, see
 ### $HOME
 
 Contains the full path of the user's home directory. This variable is the
-equivalent of the `"$env:homedrive$env:homepath"` Windows environment variables,
-typically `C:\Users\<UserName>`.
+equivalent of the `"$env:homedrive$env:homepath"` Windows environment
+variables, typically `C:\Users\<UserName>`.
 
 ### $Host
 
-Contains an object that represents the current host application for
-PowerShell. You can use this variable to represent the current host in
-commands or to display or change the properties of the host, such as
-`$Host.version` or `$Host.CurrentCulture`, or
-`$host.ui.rawui.setbackgroundcolor("Red")`.
+Contains an object that represents the current host application for PowerShell.
+You can use this variable to represent the current host in commands or to
+display or change the properties of the host, such as `$Host.version` or
+`$Host.CurrentCulture`, or `$host.ui.rawui.setbackgroundcolor("Red")`.
 
 ### $input
 
-Contains an enumerator that enumerates all input that is passed to a
-function. The `$input` variable is available only to functions and script
-blocks (which are unnamed functions).
+Contains an enumerator that enumerates all input that is passed to a function.
+The `$input` variable is available only to functions and script blocks (which
+are unnamed functions).
 
 - In a function without a `Begin`, `Process`, or `End` block, the `$input`
   variable enumerates the collection of all input to the function.
 
 - In the `Begin` block, the `$input` variable contains no data.
 
-- In the `Process` block, the `$input` variable contains the
-  object that is currently in the pipeline.
+- In the `Process` block, the `$input` variable contains the object that is
+  currently in the pipeline.
 
 - In the `End` block, the `$input` variable enumerates the collection of all
   input to the function.
@@ -188,9 +200,9 @@ blocks (which are unnamed functions).
   > You cannot use the `$input` variable inside both the Process block and the
   > End block in the same function or script block.
 
-Since `$input` is an enumerator, accessing any of it's properties causes
-`$input` to no longer be available. You can store `$input` in another variable to
-reuse the `$input` properties.
+Since `$input` is an enumerator, accessing any of its properties causes
+`$input` to no longer be available. You can store `$input` in another variable
+to reuse the `$input` properties.
 
 Enumerators contain properties and methods you can use to retrieve loop values
 and change the current loop iteration. For more information, see
@@ -210,16 +222,28 @@ Contains the exit code of the last Windows-based program that was run.
 
 ### $Matches
 
-The `Matches` variable works with the `-match` and `-notmatch` operators.
-When you submit scalar input to the `-match` or `-notmatch` operator, and
-either one detects a match, they return a Boolean value and populate the
-`$Matches` automatic variable with a hash table of any string values that
-were matched. The `$Matches` hash table can also be populated with captures
-when you use regular expressions with the `-match` operator.
+The `$Matches` variable works with the `-match` and `-notmatch` operators. When
+you submit scalar input to the `-match` or `-notmatch` operator, and either one
+detects a match, they return a Boolean value and populate the `$Matches`
+automatic variable with a hash table of any string values that were matched.
+The `$Matches` hash table can also be populated with captures when you use
+regular expressions with the `-match` operator.
 
 For more information about the `-match` operator, see
 [about_Comparison_Operators](about_comparison_operators.md). For more
-information on regular expressions, see [about_Regular_Expressions](about_Regular_Expressions.md).
+information on regular expressions, see
+[about_Regular_Expressions](about_Regular_Expressions.md).
+
+The `$Matches` variable also works in a `switch` statement with the `-Regex`
+parameter. It's populated the same way as the `-match` and `-notmatch`
+operators. For more information about the `switch` statement, see
+[about_Switch](about_Switch.md).
+
+> [!NOTE]
+> When `$Matches` is populated in a session, it retains the matched value until
+> it's overwritten by another match. If `-match` is used again and no match is
+> found, it doesn't reset `$Matches` to `$null`. The previously matched value is
+> kept in `$Matches` until another match is found.
 
 ### $MyInvocation
 
@@ -234,39 +258,34 @@ file name of the script (`$MyInvocation.MyCommand.Path`) or the name of a
 function (`$MyInvocation.MyCommand.Name`) to identify the current command. This
 is particularly useful for finding the name of the current script.
 
-Beginning in PowerShell 3.0, `MyInvocation` has the following new
-properties.
+Beginning in PowerShell 3.0, `MyInvocation` has the following new properties.
 
-| Property      | Description                                         |
-| ------------- | --------------------------------------------------- |
-| **PSScriptRoot**  | Contains the full path to the script that invoked   |
-|               | the current command. The value of this property is  |
-|               | populated only when the caller is a script.         |
-| **PSCommandPath** | Contains the full path and file name of the script  |
-|               | that invoked the current command. The value of this |
-|               | property is populated only when the caller is a     |
-|               | script.                                             |
+- **PSScriptRoot** - Contains the full path to the script that invoked the
+  current command. The value of this property is populated only when the caller
+  is a script.
+- **PSCommandPath** - Contains the full path and file name of the script that
+  invoked the current command. The value of this property is populated only
+  when the caller is a script.
 
 Unlike the `$PSScriptRoot` and `$PSCommandPath` automatic variables, the
 **PSScriptRoot** and **PSCommandPath** properties of the `$MyInvocation`
-automatic variable contain information about the invoker or calling script,
-not the current script.
+automatic variable contain information about the invoker or calling script, not
+the current script.
 
 ### $NestedPromptLevel
 
-Contains the current prompt level. A value of 0 indicates the original
-prompt level. The value is incremented when you enter a nested level and
-decremented when you exit it.
+Contains the current prompt level. A value of 0 indicates the original prompt
+level. The value is incremented when you enter a nested level and decremented
+when you exit it.
 
 For example, PowerShell presents a nested command prompt when you use the
 `$Host.EnterNestedPrompt` method. PowerShell also presents a nested command
 prompt when you reach a breakpoint in the PowerShell debugger.
 
-When you enter a nested prompt, PowerShell pauses the current command,
-saves the execution context, and increments the value of the
-`$NestedPromptLevel` variable. To create additional nested command prompts
-(up to 128 levels) or to return to the original command prompt, complete
-the command, or type `exit`.
+When you enter a nested prompt, PowerShell pauses the current command, saves
+the execution context, and increments the value of the `$NestedPromptLevel`
+variable. To create additional nested command prompts (up to 128 levels) or to
+return to the original command prompt, complete the command, or type `exit`.
 
 The `$NestedPromptLevel` variable helps you track the prompt level. You can
 create an alternative PowerShell command prompt that includes this value so
@@ -279,8 +298,8 @@ can use this variable to represent an absent or undefined value in commands and
 scripts.
 
 PowerShell treats `$null` as an object with a value, that is, as an explicit
-placeholder, so you can use `$null` to represent an empty value in a series
-of values.
+placeholder, so you can use `$null` to represent an empty value in a series of
+values.
 
 For example, when `$null` is included in a collection, it's counted as one
 of the objects.
@@ -342,10 +361,10 @@ current PowerShell session.
 
 ### $PROFILE
 
-Contains the full path of the PowerShell profile for the current user and
-the current host application. You can use this variable to represent the
-profile in commands. For example, you can use it in a command to determine
-whether a profile has been created:
+Contains the full path of the PowerShell profile for the current user and the
+current host application. You can use this variable to represent the profile in
+commands. For example, you can use it in a command to determine whether a
+profile has been created:
 
 ```powershell
 Test-Path $PROFILE
@@ -365,11 +384,11 @@ notepad.exe $PROFILE
 
 ### $PSBoundParameters
 
-Contains a dictionary of the parameters that are passed to a script or
-function and their current values. This variable has a value only in a
-scope where parameters are declared, such as a script or function. You can
-use it to display or change the current values of parameters or to pass
-parameter values to another script or function.
+Contains a dictionary of the parameters that are passed to a script or function
+and their current values. This variable has a value only in a scope where
+parameters are declared, such as a script or function. You can use it to
+display or change the current values of parameters or to pass parameter values
+to another script or function.
 
 In this example, the **Test2** function passes the `$PSBoundParameters` to the
 **Test1** function. The `$PSBoundParameters` are displayed in the format of
@@ -404,14 +423,14 @@ b     Shell
 
 ### $PSCmdlet
 
-Contains an object that represents the cmdlet or advanced function that's
-being run.
+Contains an object that represents the cmdlet or advanced function that's being
+run.
 
-You can use the properties and methods of the object in your cmdlet or
-function code to respond to the conditions of use. For example, the
-**ParameterSetName** property contains the name of the parameter set that's
-being used, and the **ShouldProcess** method adds the **WhatIf** and
-**Confirm** parameters to the cmdlet dynamically.
+You can use the properties and methods of the object in your cmdlet or function
+code to respond to the conditions of use. For example, the **ParameterSetName**
+property contains the name of the parameter set that's being used, and the
+**ShouldProcess** method adds the **WhatIf** and **Confirm** parameters to the
+cmdlet dynamically.
 
 For more information about the `$PSCmdlet` automatic variable, see
 [about_Functions_CmdletBindingAttribute](about_Functions_CmdletBindingAttribute.md)
@@ -442,11 +461,10 @@ path of the script that is being debugged.
 
 ### $PSHOME
 
-Contains the full path of the installation directory for PowerShell,
-typically, `$env:windir\System32\PowerShell\v1.0` in Windows systems. You can
-use this variable in the paths of PowerShell files. For example, the
-following command searches the conceptual Help topics for the word
-**variable**:
+Contains the full path of the installation directory for PowerShell, typically,
+`$env:windir\System32\PowerShell\v1.0` in Windows systems. You can use this
+variable in the paths of PowerShell files. For example, the following command
+searches the conceptual Help topics for the word **variable**:
 
 ```powershell
 Select-String -Pattern Variable -Path $pshome\*.txt
@@ -455,21 +473,21 @@ Select-String -Pattern Variable -Path $pshome\*.txt
 ### $PSItem
 
 Same as `$_`. Contains the current object in the pipeline object. You can use
-this variable in commands that perform an action on every object or on
-selected objects in a pipeline.
+this variable in commands that perform an action on every object or on selected
+objects in a pipeline.
 
 ### $PSScriptRoot
 
-Contains the directory from which a script is being run.
+Contains the full path of the executing script's parent directory.
 
 In PowerShell 2.0, this variable is valid only in script modules (`.psm1`).
 Beginning in PowerShell 3.0, it's valid in all scripts.
 
 ### $PSSenderInfo
 
-Contains information about the user who started the PSSession, including
-the user identity and the time zone of the originating computer. This
-variable is available only in PSSessions.
+Contains information about the user who started the PSSession, including the
+user identity and the time zone of the originating computer. This variable is
+available only in PSSessions.
 
 The `$PSSenderInfo` variable includes a user-configurable property,
 **ApplicationArguments**, that by default, contains only the `$PSVersionTable`
@@ -479,10 +497,10 @@ property, use the **ApplicationArguments** parameter of the
 
 ### $PSUICulture
 
-Contains the name of the user interface (UI) culture that's currently in use
-in the operating system. The UI culture determines which text strings are used
-for user interface elements, such as menus and messages. This is the value of
-the **System.Globalization.CultureInfo.CurrentUICulture.Name** property of the
+Contains the name of the user interface (UI) culture that's currently in use in
+the operating system. The UI culture determines which text strings are used for
+user interface elements, such as menus and messages. This is the value of the
+**System.Globalization.CultureInfo.CurrentUICulture.Name** property of the
 system. To get the **System.Globalization.CultureInfo** object for the system,
 use the `Get-UICulture` cmdlet.
 
@@ -492,23 +510,18 @@ Contains a read-only hash table that displays details about the version of
 PowerShell that is running in the current session. The table includes the
 following items:
 
-| Property                  | Description                                   |
-| ------------------------- | --------------------------------------------- |
-| **BuildVersion**          | The build number of the current version       |
-| **CLRVersion**            | The version of the common language runtime    |
-|                           | (CLR)                                         |
-| **PSCompatibleVersions**  | Versions of PowerShell that are compatible    |
-|                           | with the current version                      |
-| **PSEdition**             | This property has the value of 'Desktop', for |
-|                           | Windows Server and Windows client versions.   |
-|                           | This property has the value of 'Core' for     |
-|                           | PowerShell running under Nano Server or       |
-|                           | Windows IOT.                                  |
-| **PSRemotingProtocolVersion** | The version of the PowerShell remote      |
-|                           | management protocol.                          |
-| **PSVersion**             | The PowerShell version number                 |
-| **SerializationVersion**  | The version of the serialization method       |
-| **WSManStackVersion**     | The version number of the WS-Management stack |
+- **BuildVersion** - The build number of the current version
+- **CLRVersion** - The version of the common language runtime (CLR)
+- **PSCompatibleVersions** - Versions of PowerShell that are compatible with
+  the current version
+- **PSEdition** - This property has the value of 'Desktop', for Windows Server
+  and Windows client versions. This property has the value of 'Core' for
+  PowerShell running under Nano Server or Windows IoT.
+- **PSRemotingProtocolVersion** - The version of the PowerShell remote
+  management protocol.
+- **PSVersion** - The PowerShell version number
+- **SerializationVersion** - The version of the serialization method
+- **WSManStackVersion** - The version number of the WS-Management stack
 
 ### $PWD
 
@@ -522,10 +535,10 @@ location for the current PowerShell runspace.
 
 ### $Sender
 
-Contains the object that generated this event. This variable is populated
-only within the Action block of an event registration command. The value of
-this variable can also be found in the Sender property of the **PSEventArgs**
-object that `Get-Event` returns.
+Contains the object that generated this event. This variable is populated only
+within the Action block of an event registration command. The value of this
+variable can also be found in the Sender property of the **PSEventArgs** object
+that `Get-Event` returns.
 
 ### $ShellId
 
@@ -548,11 +561,34 @@ and change the current loop iteration. For more information, see
 
 ### $this
 
-In a script block that defines a script property or script method, the
-`$this` variable refers to the object that is being extended.
+The `$this` variable is used in script blocks that extend classes to refer to
+the instance of the class itself.
 
-In a custom class, the `$this` variable refers to the class object itself
-allowing access to properties and methods defined in the class.
+PowerShell's Extensible Type System (ETS) allows you to add properties to
+classes using script blocks. In a script block that defines a script property
+or script method, the `$this` variable refers to an instance of object of the
+class that is being extended. For example, PowerShell uses ETS to add the
+**BaseName** property to the **FileInfo** class.
+
+```powershell
+PS> Get-ChildItem .\README.md | Get-Member BaseName | Format-List
+
+TypeName   : System.IO.FileInfo
+Name       : BaseName
+MemberType : ScriptProperty
+Definition : System.Object BaseName {get=if ($this.Extension.Length -gt 0){$this.Name.Remove($this.Name.Length -
+             $this.Extension.Length)}else{$this.Name};}
+```
+
+For more information, see [about_Types.ps1xml](./about_Types.ps1xml.md).
+
+In a PowerShell class, the `$this` variable refers to the instance object of
+the class itself, allowing access to properties and methods defined in the
+class. For more information, see [about_Classes](about_Classes.md).
+
+The `$this` variable is also used by .NET event classes that take script blocks
+as delegates for the event handler. In this scenario, `$this` represents the
+object originating the event, known as the event sender.
 
 ### $true
 
@@ -561,30 +597,31 @@ and scripts.
 
 ## Using Enumerators
 
-The `$input`, `$foreach`, and `$switch` variables are all enumerators used
-to iterate through the values processed by their containing code block.
+The `$input`, `$foreach`, and `$switch` variables are all enumerators used to
+iterate through the values processed by their containing code block.
 
 An enumerator contains properties and methods you can use to advance or reset
 iteration, or retrieve iteration values. Directly manipulating enumerators
 isn't considered best practice.
 
-- Within loops, flow control keywords [break](about_Break.md) and [continue](about_Continue.md)
-  should be preferred.
+- Within loops, flow control keywords [break](about_Break.md) and
+  [continue](about_Continue.md) should be preferred.
 - Within functions that accept pipeline input, it's best practice to use
-  Parameters with the **ValueFromPipeline** or
+  parameters with the **ValueFromPipeline** or
   **ValueFromPipelineByPropertyName** attributes.
 
-  For more information, see [about_Functions_Advanced_Parameters](about_Functions_Advanced_Parameters.md).
+  For more information, see
+  [about_Functions_Advanced_Parameters](about_Functions_Advanced_Parameters.md).
 
 ### MoveNext
 
 The [MoveNext](/dotnet/api/system.collections.ienumerator.movenext) method
 advances the enumerator to the next element of the collection. **MoveNext**
-returns **True** if the enumerator was successfully advanced, **False** if
-the enumerator has passed the end of the collection.
+returns `True` if the enumerator was successfully advanced, `False` if the
+enumerator has passed the end of the collection.
 
 > [!NOTE]
-> The **Boolean** value returned my **MoveNext** is sent to the output stream.
+> The **Boolean** value returned by **MoveNext** is sent to the output stream.
 > You can suppress the output by typecasting it to `[void]` or piping it to
 > [Out-Null](xref:Microsoft.PowerShell.Core.Out-Null).
 >
@@ -598,15 +635,15 @@ the enumerator has passed the end of the collection.
 
 ### Reset
 
-The [Reset](/dotnet/api/system.collections.ienumerator.reset) method sets
-the enumerator to its initial position, which is **before** the first element
-in the collection.
+The [Reset](/dotnet/api/system.collections.ienumerator.reset) method sets the
+enumerator to its initial position, which is **before** the first element in
+the collection.
 
 ### Current
 
-The [Current](/dotnet/api/system.collections.ienumerator.current) property
-gets the element in the collection, or pipeline, at the current position of
-the enumerator.
+The [Current](/dotnet/api/system.collections.ienumerator.current) property gets
+the element in the collection, or pipeline, at the current position of the
+enumerator.
 
 The **Current** property continues to return the same property until
 **MoveNext** is called.
@@ -769,8 +806,8 @@ Iteration: 1
 ### Example 4: Using the $foreach variable
 
 Unlike the `$input` variable, the `$foreach` variable always represents all
-items in the collection when accessed directly. Use the **Current** property
-to access the current collection element, and the **Reset** and **MoveNext**
+items in the collection when accessed directly. Use the **Current** property to
+access the current collection element, and the **Reset** and **MoveNext**
 methods to change its value.
 
 > [!NOTE]
@@ -778,8 +815,9 @@ methods to change its value.
 > method.
 
 The following loop only executes twice. In the second iteration, the collection
-is moved to the third element before the iteration is complete. After the second
-iteration, there are now no more values to iterate, and the loop terminates.
+is moved to the third element before the iteration is complete. After the
+second iteration, there are now no more values to iterate, and the loop
+terminates.
 
 The **MoveNext** property doesn't affect the variable chosen to iterate through
 the collection (`$Num`).
@@ -816,9 +854,9 @@ Num has not changed: two
 ```
 
 Using the **Reset** method resets the current element in the collection. The
-following example loops through the first two elements **twice** because the
-**Reset** method is called. After the first two loops, the `if` statement
-fails and the loop iterates through all three elements normally.
+following example loops through the first two elements _twice_ because the
+**Reset** method is called. After the first two loops, the `if` statement fails
+and the loop iterates through all three elements normally.
 
 > [!IMPORTANT]
 > This could result in an infinite loop.
@@ -852,8 +890,8 @@ Reset Loop: 0
 
 ### Example 5: Using the $switch variable
 
-The `$switch` variable has the exact same rules as the `$foreach` variable.
-The following example demonstrates all the enumerator concepts.
+The `$switch` variable has the exact same rules as the `$foreach` variable. The
+following example demonstrates all the enumerator concepts.
 
 > [!NOTE]
 > Note how the **NotEvaluated** case is never executed, even though there's
@@ -902,22 +940,13 @@ Default (Current): End
 
 ## See also
 
-[about_Functions](about_Functions.md)
-
-[about_Functions_Advanced](about_Functions_Advanced.md)
-
-[about_Functions_Advanced_Methods](about_Functions_Advanced_Methods.md)
-
-[about_Functions_Advanced_Parameters](about_Functions_Advanced_Parameters.md)
-
-[about_Functions_OutputTypeAttribute](about_Functions_OutputTypeAttribute.md)
-
-[about_Functions_CmdletBindingAttribute](about_Functions_CmdletBindingAttribute.md)
-
-[about_Hash_Tables](about_Hash_Tables.md)
-
-[about_Preference_Variables](about_Preference_Variables.md)
-
-[about_Splatting](about_Splatting.md)
-
-[about_Variables](about_Variables.md)
+- [about_Functions](about_Functions.md)
+- [about_Functions_Advanced](about_Functions_Advanced.md)
+- [about_Functions_Advanced_Methods](about_Functions_Advanced_Methods.md)
+- [about_Functions_Advanced_Parameters](about_Functions_Advanced_Parameters.md)
+- [about_Functions_OutputTypeAttribute](about_Functions_OutputTypeAttribute.md)
+- [about_Functions_CmdletBindingAttribute](about_Functions_CmdletBindingAttribute.md)
+- [about_Hash_Tables](about_Hash_Tables.md)
+- [about_Preference_Variables](about_Preference_Variables.md)
+- [about_Splatting](about_Splatting.md)
+- [about_Variables](about_Variables.md)

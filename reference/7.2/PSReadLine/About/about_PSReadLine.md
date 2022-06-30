@@ -1,14 +1,12 @@
 ---
 description: PSReadLine provides an improved command-line editing experience in the PowerShell console.
 Locale: en-US
-ms.date: 11/23/2020
+ms.date: 06/28/2022
 online version: https://docs.microsoft.com/powershell/module/psreadline/about/about_psreadline?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: About PSReadLine
+title: about PSReadLine
 ---
-# PSReadLine
-
-## about_PSReadLine
+# about_PSReadLine
 
 ## Short Description
 
@@ -17,7 +15,12 @@ PowerShell console.
 
 ## Long Description
 
-PSReadLine 2.2 provides a powerful command-line editing experience for the
+PowerShell 7.2 ships with PSReadLine 2.1.0. There are newer versions
+available. The current version of PSReadLine can be installed and used on
+Windows PowerShell 5.1 and newer. For some features, you need to be running
+PowerShell 7.2 or higher.
+
+PSReadLine provides a powerful command-line editing experience for the
 PowerShell console. It provides:
 
 - Syntax coloring of the command line
@@ -28,28 +31,20 @@ PowerShell console. It provides:
 - Many configuration options
 - Bash style completion (optional in Cmd mode, default in Emacs mode)
 - Emacs yank/kill-ring
-- PowerShell token based "word" movement and kill
+- PowerShell token based "word" movement and deletion
 - Predictive IntelliSense
+- Dynamic display of Help in the console without losing your place on the
+  command line
 
-PSReadLine 2.2.0 added two new predictive IntelliSense features:
+PSReadLine requires PowerShell 5.1, or newer. PSReadLine works with the default
+Windows console host, Window Terminal, and Visual Studio Code. It does not work
+in the Windows PowerShell ISE.
 
-- Added the **PredictionViewStyle** parameter to allow for the selection of the
-  new `ListView`.
-- Connected PSReadLine to the `CommandPrediction` APIs introduced in PS 7.1 to
-  allow a user can import a predictor module that can render the suggestions
-  from a custom source.
-
-PSReadLine requires PowerShell 3.0, or newer. PSReadLine works with default
-console host, Visual Studio Code, and Window Terminal. It does not work in
-PowerShell ISE.
-
-PSReadLine 2.2.0 ships with PowerShell 7.2 and is supported in all supported
-versions of PowerShell. It is available to install from the PowerShell Gallery.
-To install PSReadLine 2.2.0 in a supported version of PowerShell run the
-following command.
+PSReadLine can be installed from the PowerShell Gallery. To install PSReadLine
+in a supported version of PowerShell run the following command.
 
 ```powershell
-Install-Module -Name PSReadLine -AllowPrerelease
+Install-Module -Name PSReadLine -AllowClobber -Force
 ```
 
 > [!NOTE]
@@ -85,15 +80,17 @@ Set-PSReadLineOption -PredictionSource None
 ```
 
 The following functions are available in the class
-**[Microsoft.PowerShell.PSConsoleReadLine]**.
+**Microsoft.PowerShell.PSConsoleReadLine**.
 
 ## Basic editing functions
 
 ### Abort
 
-Abort current action, e.g. incremental history search.
+Abort current action, for example: incremental history search.
 
 - Emacs: `<Ctrl+g>`
+- Vi insert mode: `<Ctrl+g>`
+- Vi command mode: `<Ctrl+g>`
 
 ### AcceptAndGetNext
 
@@ -105,7 +102,7 @@ then recall the next item from history the next time ReadLine is called.
 ### AcceptLine
 
 Attempt to execute the current input. If the current input is incomplete (for
-example there is a missing closing parenthesis, bracket, or quote, then the
+example there is a missing closing parenthesis, bracket, or quote) then the
 continuation prompt is displayed on the next line and PSReadLine waits for
 keys to edit the current input.
 
@@ -400,7 +397,7 @@ Repeat the last text modification.
 
 ### RevertLine
 
-Reverts all of the input to the current input.
+Reverts all input to the current input.
 
 - Cmd: `<Escape>`
 - Emacs: `<Alt+r>`, `<Escape,r>`
@@ -455,7 +452,7 @@ word to the cursor. The cleared text is placed in the kill-ring.
 ### ValidateAndAcceptLine
 
 Attempt to execute the current input. If the current input is incomplete (for
-example there is a missing closing parenthesis, bracket, or quote, then the
+example there is a missing closing parenthesis, bracket, or quote) then the
 continuation prompt is displayed on the next line and PSReadLine waits for
 keys to edit the current input.
 
@@ -483,14 +480,14 @@ A new line is inserted below the current line.
 
 ### ViBackwardDeleteGlob
 
-Deletes the previous word, using only white space as the word delimiter.
+Deletes the previous word, using only whitespace as the word delimiter.
 
 - Vi command mode: `<d,B>`
 
 ### ViBackwardGlob
 
-Moves the cursor back to the beginning of the previous word, using only white
-space as delimiters.
+Moves the cursor back to the beginning of the previous word, using only
+whitespace as delimiters.
 
 - Vi command mode: `<B>`
 
@@ -509,7 +506,7 @@ Delete to the end of the word.
 
 ### ViDeleteGlob
 
-Delete the next glob (white space delimited word).
+Delete the next glob (whitespace delimited word).
 
 - Vi command mode: `<d,W>`
 
@@ -733,6 +730,13 @@ set of characters.
 - Vi insert mode: `<Ctrl+LeftArrow>`
 - Vi command mode: `<Ctrl+LeftArrow>`
 
+The characters that define word boundaries are configured in the
+[WordDelimiters](/dotnet/api/microsoft.powershell.psconsolereadlineoptions.worddelimiters#microsoft-powershell-psconsolereadlineoptions-worddelimiters)
+property of the **PSConsoleReadLineOptions** object. To view or change the
+**WordDelimiters** property, see
+[Get-PSReadLineOption](xref:PSReadLine.Get-PSReadLineOption) and
+[Set-PSReadLineOption](xref:PSReadLine.Set-PSReadLineOption).
+
 ### BeginningOfLine
 
 If the input has multiple lines, move to the start of the current line, or if
@@ -769,6 +773,13 @@ to the end of the next word. Word boundaries are defined by a configurable set
 of characters.
 
 - Emacs: `<Alt+f>`, `<Escape,f>`
+
+The characters that define word boundaries are configured in the
+[WordDelimiters](/dotnet/api/microsoft.powershell.psconsolereadlineoptions.worddelimiters#microsoft-powershell-psconsolereadlineoptions-worddelimiters)
+property of the **PSConsoleReadLineOptions** object. To view or change the
+**WordDelimiters** property, see
+[Get-PSReadLineOption](xref:PSReadLine.Get-PSReadLineOption) and
+[Set-PSReadLineOption](xref:PSReadLine.Set-PSReadLineOption).
 
 ### GotoBrace
 
@@ -811,6 +822,13 @@ defined by a configurable set of characters.
 - Vi insert mode: `<Ctrl+RightArrow>`
 - Vi command mode: `<Ctrl+RightArrow>`
 
+The characters that define word boundaries are configured in the
+[WordDelimiters](/dotnet/api/microsoft.powershell.psconsolereadlineoptions.worddelimiters#microsoft-powershell-psconsolereadlineoptions-worddelimiters)
+property of the **PSConsoleReadLineOptions** object. To view or change the
+**WordDelimiters** property, see
+[Get-PSReadLineOption](xref:PSReadLine.Get-PSReadLineOption) and
+[Set-PSReadLineOption](xref:PSReadLine.Set-PSReadLineOption).
+
 ### NextWordEnd
 
 Move the cursor forward to the end of the current word, or if between words,
@@ -818,6 +836,13 @@ to the end of the next word. Word boundaries are defined by a configurable set
 of characters.
 
 - Vi command mode: `<e>`
+
+The characters that define word boundaries are configured in the
+[WordDelimiters](/dotnet/api/microsoft.powershell.psconsolereadlineoptions.worddelimiters#microsoft-powershell-psconsolereadlineoptions-worddelimiters)
+property of the **PSConsoleReadLineOptions** object. To view or change the
+**WordDelimiters** property, see
+[Get-PSReadLineOption](xref:PSReadLine.Get-PSReadLineOption) and
+[Set-PSReadLineOption](xref:PSReadLine.Set-PSReadLineOption).
 
 ### PreviousLine
 
@@ -863,6 +888,13 @@ set of characters.
 
 - Vi command mode: `<b>`
 
+The characters that define word boundaries are configured in the
+[WordDelimiters](/dotnet/api/microsoft.powershell.psconsolereadlineoptions.worddelimiters#microsoft-powershell-psconsolereadlineoptions-worddelimiters)
+property of the **PSConsoleReadLineOptions** object. To view or change the
+**WordDelimiters** property, see
+[Get-PSReadLineOption](xref:PSReadLine.Get-PSReadLineOption) and
+[Set-PSReadLineOption](xref:PSReadLine.Set-PSReadLineOption).
+
 ### ViForwardChar
 
 Move the cursor one character to the right in the Vi edit mode. This may move
@@ -873,13 +905,13 @@ the cursor to the next line of multi-line input.
 
 ### ViEndOfGlob
 
-Moves the cursor to the end of the word, using only white space as delimiters.
+Moves the cursor to the end of the word, using only whitespace as delimiters.
 
 - Vi command mode: `<E>`
 
 ### ViEndOfPreviousGlob
 
-Moves to the end of the previous word, using only white space as a word
+Moves to the end of the previous word, using only whitespace as a word
 delimiter.
 
 - Function is unbound.
@@ -892,7 +924,7 @@ Similar to GotoBrace, but is character based instead of token based.
 
 ### ViNextGlob
 
-Moves to the next word, using only white space as a word delimiter.
+Moves to the next word, using only whitespace as a word delimiter.
 
 - Vi command mode: `<W>`
 
@@ -902,6 +934,13 @@ Move the cursor forward to the start of the next word. Word boundaries are
 defined by a configurable set of characters.
 
 - Vi command mode: `<w>`
+
+The characters that define word boundaries are configured in the
+[WordDelimiters](/dotnet/api/microsoft.powershell.psconsolereadlineoptions.worddelimiters#microsoft-powershell-psconsolereadlineoptions-worddelimiters)
+property of the **PSConsoleReadLineOptions** object. To view or change the
+**WordDelimiters** property, see
+[Get-PSReadLineOption](xref:PSReadLine.Get-PSReadLineOption) and
+[Set-PSReadLineOption](xref:PSReadLine.Set-PSReadLineOption).
 
 ## History functions
 
@@ -929,6 +968,8 @@ Perform an incremental forward search through history.
 
 - Cmd: `<Ctrl+s>`
 - Emacs: `<Ctrl+s>`
+- Vi insert mode: `<Ctrl+s>`
+- Vi command mode: `<Ctrl+s>`
 
 ### HistorySearchBackward
 
@@ -968,13 +1009,14 @@ Perform an incremental backward search through history.
 
 - Cmd: `<Ctrl+r>`
 - Emacs: `<Ctrl+r>`
+- Vi insert mode: `<Ctrl+r>`
+- Vi command mode: `<Ctrl+r>`
 
 ### ViSearchHistoryBackward
 
 Prompts for a search string and initiates search upon AcceptLine.
 
-- Vi insert mode: `<Ctrl+r>`
-- Vi command mode: `</>`, `<Ctrl+r>`
+- Vi command mode: `</>`
 
 ## Completion functions
 
@@ -1070,7 +1112,7 @@ Switch the view style for prediction between `InlineView` and `ListView`.
 ### CaptureScreen
 
 Start interactive screen capture - up/down arrows select lines, enter copies
-selected text to clipboard as text and html.
+selected text to clipboard as text and HTML.
 
 - Function is unbound.
 
@@ -1085,7 +1127,12 @@ Clear the screen and draw the current line at the top of the screen.
 
 ### DigitArgument
 
-Start a new digit argument to pass to other functions.
+Start a new digit argument to pass to other functions. You can use this as a
+multiplier for the next function that is invoked by a keypress. For example,
+pressing `<Alt+1>` `<Alt+0>` sets the **digit-argument** value to 10. Then,
+pressing the `#` key sends 10 `#` characters (`##########`) to the input line.
+Similarly, you can use this with other operations, like `<Delete>` or
+`Left-Arrow`.
 
 - Cmd: `<Alt+0>`, `<Alt+1>`, `<Alt+2>`, `<Alt+3>`, `<Alt+4>`, `<Alt+5>`,
   `<Alt+6>`, `<Alt+7>`, `<Alt+8>`, `<Alt+9>`, `<Alt+->`
@@ -1097,8 +1144,8 @@ Start a new digit argument to pass to other functions.
 ### InvokePrompt
 
 Erases the current prompt and calls the prompt function to redisplay the
-prompt. Useful for custom key handlers that change state, e.g. change the
-current directory.
+prompt. Useful for custom key handlers that change state. For example, change
+the current directory.
 
 - Function is unbound.
 
@@ -1427,8 +1474,7 @@ character. This is for 't' functionality.
 
 Prompts for a search string and initiates search upon AcceptLine.
 
-- Vi insert mode: `<Ctrl+s>`
-- Vi command mode: `<?>`, `<Ctrl+s>`
+- Vi command mode: `<?>`
 
 ## Custom Key Bindings
 
@@ -1444,7 +1490,7 @@ You can bind a ScriptBlock to a key. The ScriptBlock can do pretty much
 anything you want. Some useful examples include
 
 - edit the command line
-- opening a new window (e.g. help)
+- opening a new window (for example, help)
 - change directories without changing the command line
 
 The ScriptBlock receives two arguments:
@@ -1553,7 +1599,7 @@ a custom key binding.
 void GetSelectionState([ref] int start, [ref] int length)
 ```
 
-If there is no selection on the command line, -1 will be returned in both
+If there is no selection on the command line, the function returns -1 in both
 start and length. If there is a selection on the command line, the start and
 length of the selection are returned.
 
@@ -1619,15 +1665,126 @@ typical call looks like
 
 ### Command History
 
-PSReadLine maintains a history file containing all the commands and data you have entered from the
-command line. This may contain sensitive data including passwords. For example, if you use the
-`ConvertTo-SecureString` cmdlet the password is logged in the history file as plain text. The
-history files is a file named `$($host.Name)_history.txt`. On Windows systems the history file is
-stored at `$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine`. On non-Windows systems, the
-history files is stored at `$env:XDG_DATA_HOME/powershell/PSReadLine` or
+PSReadLine maintains a history file containing all the commands and data you
+have entered from the command line. The history files is a file named
+`$($host.Name)_history.txt`. On Windows systems the history file is stored at
+`$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine`. On non-Windows systems,
+the history files is stored at `$env:XDG_DATA_HOME/powershell/PSReadLine` or
 `$env:HOME/.local/share/powershell/PSReadLine`.
 
-### Feedback & Contributing To PSReadLine
+The history can contain sensitive data including passwords. PSReadLine attempts
+to filter out sensitive information. Any command lines containing the following
+strings are not written to the history file.
+
+- password
+- asplaintext
+- token
+- apikey
+- secret
+
+PSReadLine 2.2.0 improves the filtering of sensitive data in the following ways:
+
+- Uses the PowerShell Abstract Syntax Tree (AST) of the parsed command line to
+  look for sensitive data.
+- Uses an allowlist of safe cmdlets from the **SecretManagement** module to
+  allow those commands to be added to the history. The allowlist contains:
+  - `Get-Secret`
+  - `Get-SecretInfo`
+  - `Get-SecretVault`
+  - `Register-SecretVault`
+  - `Remove-Secret`
+  - `Set-SecretInfo`
+  - `Set-SecretVaultDefault`
+  - `Test-SecretVault`
+  - `Unlock-SecretVault`
+  - `Unregister-SecretVault`
+
+For example, the following commands are allowed to be written to the history
+file:
+
+```powershell
+Get-Secret PSGalleryApiKey -AsPlainText # Get-Secret is in the allowlist
+$token = Get-Secret -Name github-token -Vault MySecret
+[MyType]::CallRestAPI($token, $url, $args)
+$template -f $token
+```
+
+The following command will not be written to the history file:
+
+```powershell
+$token = 'abcd' # Assign expr-value to sensitive variable name.
+Set-Secret abc $mySecret # Set-Secret is not in the allowlist.
+ConvertTo-SecureString stringValue -AsPlainText # '-AsPlainText' is an alert.
+Invoke-WebRequest -Token xxx # Expr-value as argument to '-Token'.
+Get-ResultFromTwo -Secret1 (Get-Secret -Name blah -AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has expr-value argument.
+```
+
+### Behavior of the OnIdle event
+
+When PSReadLine is in use, the **OnIdle** event is fired when `ReadKey()` times out (no typing in
+300ms). The event could be signaled while the user is in the middle of editing a command line, for
+example, the user is reading help to decide which parameter to use.
+
+Beginning in PSReadLine 2.2.0-beta4, **OnIdle** behavior changed to signal the event only if there
+is a `ReadKey()` timeout and the current editing buffer is empty.
+
+### PSReadLine release history
+
+There have been many updates to PSReadLine since the version that ships in
+Windows PowerShell 5.1.
+
+- PowerShell 7.3-preview.5 ships with PSReadLine 2.2.5
+- PowerShell 7.2.5 ships with PSReadLine 2.1.0
+- PowerShell 7.0.11 ships with PSReadLine 2.0.4
+- PowerShell 5.1 ships with PSReadLine 2.0.0
+
+For a full list of changes, see the PSReadLine
+[ChangeLog](https://github.com/PowerShell/PSReadLine/blob/master/PSReadLine/Changes.txt).
+
+- **PSReadLine 2.2.6**
+
+  In this release, the Predictive IntelliSense feature is enabled by default
+  depending on the following conditions:
+
+  - If Virtual Terminal (VT) is supported and PSReadLine running in PowerShell
+    7.2 or higher, **PredictionSource** is set to `HistoryAndPlugin`
+  - If VT is supported and PSReadLine running in PowerShell prior to 7.2,
+    **PredictionSource** is set to `History`
+  - If VT is not supported, **PredictionSource** is set to `None`
+
+- **PSReadLine 2.2.5**
+
+  This release rolls up the following enhancements added since the 2.1.0
+  release:
+
+  - PSReadLine added two new predictive IntelliSense features:
+    - Added the **PredictionViewStyle** parameter to allow for the selection of
+      the new `ListView`.
+    - Connected PSReadLine to the `CommandPrediction` APIs introduced in
+      PowerShell 7.2 to allow a user can import a predictor module that can
+      render the suggestions from a custom source.
+  - Updated to use the 1.0.0 version of `Microsoft.PowerShell.Pager` for
+    dynamic help
+  - Improved the scrubbing of sensitive history items
+  - Lots of bug fixes and smaller improvements
+
+- **PSReadLine 2.1.0**
+
+  This release rolls up the following enhancements added since the 2.0.4
+  release:
+
+  - Add Predictive IntelliSense suggestions from the command history
+  - Many bug fixes and API enhancements
+
+- **PSReadLine 2.0.4**
+
+  This release rolls up the following enhancements added since the 2.0.0
+  release:
+
+  - Added the `-Chord` parameter to `Get-PSReadLineKeyHandler` to allow
+    searching for specific key bindings
+
+### Feedback & contributing to PSReadLine
 
 [PSReadLine on GitHub](https://github.com/PowerShell/PSReadLine)
 
@@ -1635,5 +1792,5 @@ Feel free to submit a pull request or submit feedback on the GitHub page.
 
 ## See Also
 
-PSReadLine is heavily influenced by the GNU
-[readline](https://tiswww.case.edu/php/chet/readline/rltop.html) library.
+- PSReadLine is heavily influenced by the GNU
+  [readline](https://tiswww.case.edu/php/chet/readline/rltop.html) library.

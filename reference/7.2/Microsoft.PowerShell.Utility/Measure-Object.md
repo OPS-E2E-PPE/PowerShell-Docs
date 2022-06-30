@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 08/10/2020
+ms.date: 07/15/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/measure-object?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Measure-Object
@@ -56,7 +56,7 @@ This command displays the **Minimum**, **Maximum**, and **Sum** of the sizes of 
 current directory, and the average size of a file in the directory.
 
 ```powershell
-Get-ChildItem | Measure-Object -Property length -Minimum -Maximum -Average
+Get-ChildItem | Measure-Object -Property length -Minimum -Maximum -Sum -Average
 ```
 
 ### Example 3: Measure text in a text file
@@ -306,6 +306,22 @@ Property          : PeakPagedMemorySize
 
 ## PARAMETERS
 
+### -AllStats
+
+Indicates that the cmdlet displays all the statistics of the specified properties.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: GenericMeasure
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Average
 
 Indicates that the cmdlet displays the average value of the specified properties.
@@ -474,22 +490,6 @@ Accept wildcard characters: False
 ### -Sum
 
 Indicates that the cmdlet displays the sum of the values of the specified properties.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: GenericMeasure
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AllStats
-
-Indicates that the cmdlet displays all the statistics of the specified properties.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter

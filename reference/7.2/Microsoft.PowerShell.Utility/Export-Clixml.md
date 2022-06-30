@@ -150,22 +150,6 @@ Unicode character array as proven by `Format-Hex`. So the value is encoded but n
 
 ## PARAMETERS
 
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Depth
 
 Specifies how many levels of contained objects are included in the XML representation. The default
@@ -209,7 +193,7 @@ pages (like `-Encoding 1251`) or string names of registered code pages (like
 [Encoding.CodePage](/dotnet/api/system.text.encoding.codepage?view=netcore-2.2).
 
 > [!NOTE]
-> **UTF-7*** is no longer recommended to use. In PowerShell 7.1, a warning is written if you
+> **UTF-7*** is no longer recommended to use. As of PowerShell 7.1, a warning is written if you
 > specify `utf7` for the **Encoding** parameter.
 
 ```yaml
@@ -309,6 +293,22 @@ Aliases:
 Required: True
 Position: 0
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

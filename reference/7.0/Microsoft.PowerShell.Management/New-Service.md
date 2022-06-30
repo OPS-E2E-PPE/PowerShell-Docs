@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 11/18/2020
+ms.date: 10/21/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/new-service?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: New-Service
@@ -21,6 +21,8 @@ New-Service [-Name] <String> [-BinaryPathName] <String> [-DisplayName <String>] 
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `New-Service` cmdlet creates a new entry for a Windows service in the registry and in the
 service database. A new service requires an executable file that runs during the service.
@@ -82,7 +84,7 @@ $SDDL = "D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;C
 $params = @{
   BinaryPathName = '"C:\WINDOWS\System32\svchost.exe -k netsvcs"'
   DependsOn = "NetLogon"
-  DisplayName "Test Service"
+  DisplayName = "Test Service"
   StartupType = "Manual"
   Description = "This is a test service."
   SecurityDescriptorSddl = $SDDL
@@ -214,6 +216,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SecurityDescriptorSddl
+
+Specifies the **SecurityDescriptor** for the service in **Sddl** format.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases: sd
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -StartupType
 
 Sets the startup type of the service. The acceptable values for this parameter are:
@@ -238,22 +256,6 @@ Accepted values: Automatic, Manual, Disabled, AutomaticDelayedStart, InvalidValu
 Required: False
 Position: Named
 Default value: Automatic
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SecurityDescriptorSddl
-
-Specifies the **SecurityDescriptor** for the service in **Sddl** format.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases: sd
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

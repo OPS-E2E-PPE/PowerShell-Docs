@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 09/21/2020
+ms.date: 06/09/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/out-file?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Out-File
@@ -34,7 +34,8 @@ The `Out-File` cmdlet sends output to a file. It implicitly uses PowerShell's fo
 write to the file. The file receives the same display representation as the terminal. This means
 that the output may not be ideal for programmatic processing unless all input objects are strings.
 When you need to specify parameters for the output, use `Out-File` rather than the redirection
-operator (`>`). For more information about redirection, see [about_Redirection](../Microsoft.PowerShell.Core/About/about_Redirection.md).
+operator (`>`). For more information about redirection, see
+[about_Redirection](../Microsoft.PowerShell.Core/About/about_Redirection.md).
 
 ## EXAMPLES
 
@@ -133,6 +134,37 @@ provider `Alias:`. The `Get-Location` cmdlet displays the complete path for `Ali
 **C:\TestDir\AliasNames.txt**. The `Get-Content` cmdlet uses the **Path** parameter and displays the
 file's content in the PowerShell console.
 
+### Example 5: Set file output width for entire scope
+
+This example uses `$PSDefaultParameterValues` to set the `Width` parameter for all invocations of
+`Out-File` and the redirection operartors (`>` and `>>`) to 2000. This ensures that everywhere
+within the current scope that you output table formatted data to file, PowerShell uses a line width
+of 2000 instead of a line width determined by the PowerShell host's console width.
+
+```powershell
+function DemoDefaultOutFileWidth() {
+    try {
+        $PSDefaultParameterValues['out-file:width'] = 2000
+
+        $logFile = "$pwd\logfile.txt"
+
+        Get-ChildItem Env:\ > $logFile
+
+        Get-Service -ErrorAction Ignore | Format-Table -AutoSize | Out-File $logFile -Append
+
+        Get-Process | Format-Table Id,SI,Name,Path,MainWindowTitle >> $logFile
+    }
+    finally {
+        $PSDefaultParameterValues.Remove('out-file:width')
+    }
+}
+
+DemoDefaultOutFileWidth
+```
+
+For more information about `$PSDefaultParameterValues`, see
+[about_Preference_Variables](../Microsoft.Powershell.Core/About/about_preference_variables.md#psdefaultparametervalues).
+
 ## PARAMETERS
 
 ### -Append
@@ -174,7 +206,7 @@ pages (like `-Encoding 1251`) or string names of registered code pages (like
 [Encoding.CodePage](/dotnet/api/system.text.encoding.codepage?view=netcore-2.2).
 
 > [!NOTE]
-> **UTF-7*** is no longer recommended to use. In PowerShell 7.1, a warning is written if you
+> **UTF-7*** is no longer recommended to use. As of PowerShell 7.1, a warning is written if you
 > specify `utf7` for the **Encoding** parameter.
 
 ```yaml
@@ -299,7 +331,9 @@ Accept wildcard characters: False
 
 Specifies the number of characters in each line of output. Any additional characters are truncated,
 not wrapped. If this parameter is not used, the width is determined by the characteristics of the
-host. The default for the PowerShell console is 80 characters.
+host. The default for the PowerShell console is 80 characters. If you want to control the width for
+all invocations of `Out-File` as well as the redirection operators (`>` and `>>`), set
+`$PSDefaultParameterValues['out-file:width'] = 2000` before using `Out-File`.
 
 ```yaml
 Type: System.Int32
@@ -349,7 +383,8 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -375,6 +410,11 @@ cmdlet.
 
 `Out-File` saves data to a file but it does not produce any output objects to the pipeline.
 
+PowerShell 7.2 added the ability to control how ANSI escape sequences are rendered. ANSI-decorated
+output that is passed to `Out-File` can be altered based on the setting of the
+`$PSStyle.OutputRendering` property. For more information, see
+[about_ANSI_Terminals](/powershell/module/microsoft.powershell.core/about/about_ansi_terminals).
+
 ## RELATED LINKS
 
 [about_Providers](../Microsoft.Powershell.Core/About/about_Providers.md)
@@ -390,4 +430,3 @@ cmdlet.
 [Out-String](Out-String.md)
 
 [Tee-Object](Tee-Object.md)
-

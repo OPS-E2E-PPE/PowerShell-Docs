@@ -1,13 +1,12 @@
 ---
-description:  WSMan 
-keywords: powershell,cmdlet
+description: WSMan
 Locale: en-US
 ms.date: 10/18/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.wsman.management/about/about_wsman_provider?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: WSMan Provider
+title: about WSMan Provider
 ---
-# WSMan Provider
+# about_WSMan_Provider
 
 ## Provider name
 
@@ -596,4 +595,4 @@ Get-Help Get-ChildItem -Path wsman:
 
 ## See also
 
-[about_Providers](../../Microsoft.PowerShell.Core/About/about_Providers.md)
+- [about_Providers](../../Microsoft.PowerShell.Core/About/about_Providers.md)

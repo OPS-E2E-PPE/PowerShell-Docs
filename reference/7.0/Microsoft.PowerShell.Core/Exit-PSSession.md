@@ -1,6 +1,5 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
 ms.date: 02/08/2021
@@ -11,7 +10,7 @@ title: Exit-PSSession
 
 # Exit-PSSession
 
-## Synopsis
+## SYNOPSIS
 Ends an interactive session with a remote computer.
 
 ## SYNTAX
@@ -20,7 +19,7 @@ Ends an interactive session with a remote computer.
 Exit-PSSession [<CommonParameters>]
 ```
 
-## Description
+## DESCRIPTION
 
 The `Exit-PSSession` cmdlet ends interactive sessions that you started by using the
 `Enter-PSSession` cmdlet.
@@ -28,7 +27,7 @@ The `Exit-PSSession` cmdlet ends interactive sessions that you started by using 
 You can also use the `exit` keyword to end an interactive session. The effect is the same as using
 `Exit-PSSession`.
 
-## Examples
+## EXAMPLES
 
 ### Example 1: Start and stop an interactive session
 
@@ -81,25 +80,25 @@ PS>
 This example uses the `exit` keyword to stop an interactive session started by using
 `Enter-PSSession`. The `exit` keyword has the same effect as using `Exit-PSSession`.
 
-## Parameters
+## PARAMETERS
 
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
-## Inputs
+## INPUTS
 
 ### None
 
 You cannot pipe objects to this cmdlet.
 
-## Outputs
+## OUTPUTS
 
 ### None
 
 This cmdlet does not return any output.
 
-## Notes
+## NOTES
 
 This cmdlet takes only the common parameters.
 

@@ -2,7 +2,7 @@
 external help file: System.Management.Automation.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 03/19/2020
+ms.date: 05/18/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/where-object?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Where-Object
@@ -250,20 +250,19 @@ command.
   and a property value. `Where-Object` returns all objects for which the script block statement is
   true.
 
-  For example, the following command gets processes in the Normal priority class, that is, processes
-  where the value of the **PriorityClass** property equals Normal.
+  For example, the following command gets processes in the `Normal` priority class, that is,
+  processes where the value of the **PriorityClass** property equals `Normal`.
 
   `Get-Process | Where-Object {$_.PriorityClass -eq "Normal"}`
 
-  All PowerShell comparison operators are valid in the script block format. For more information
-  about comparison operators, see
-  [about_Comparison_Operators](./About/about_Comparison_Operators.md).
+  All PowerShell comparison operators are valid in the script block format. For more information,
+  see [about_Comparison_Operators](./About/about_Comparison_Operators.md).
 
 - **Comparison statement**. You can also write a comparison statement, which is much more like
   natural language. Comparison statements were introduced in Windows PowerShell 3.0.
 
-  For example, the following commands also get processes that have a priority class of Normal. These
-  commands are equivalent and can be used interchangeably.
+  For example, the following commands also get processes that have a priority class of `Normal`.
+  These commands are equivalent and can be used interchangeably.
 
   `Get-Process | Where-Object -Property PriorityClass -eq -Value "Normal"`
 
@@ -276,12 +275,15 @@ command.
 
 When you provide a single **Property** to `Where-Object`, the value of the property is treated as
 a boolean expression. When the value of **Length** is not zero, the expression evaluates to
-**True**. For example: `('hi', '', 'there') | Where-Object Length`
+`$true`. For example: `('hi', '', 'there') | Where-Object Length`
 
 The previous example is functionally equivalent to:
 
 - `('hi', '', 'there') | Where-Object Length -GT 0`
 - `('hi', '', 'there') | Where-Object {$_.Length -gt 0}`
+
+For more information about how booleans are evaluated, see
+[about_Booleans](about/about_Booleans.md).
 
 ## EXAMPLES
 
@@ -300,7 +302,7 @@ Get-Service | where Status -eq "Stopped"
 
 ### Example 2: Get processes based on working set
 
-These commands list processes that have a working set greater than 250 megabytes (KB). The
+These commands list processes that have a working set greater than 250 megabytes (MB). The
 scriptblock and statement syntax are equivalent and can be used interchangeably.
 
 ```powershell
@@ -324,8 +326,8 @@ Get-Process | Where-Object ProcessName -Match "^p.*"
 
 This example shows how to use the new comparison statement format of the `Where-Object` cmdlet.
 
-The first command uses the comparison statement format.
-In this command, no aliases are used and all parameters include the parameter name.
+The first command uses the comparison statement format. In this command, no aliases are used and all
+parameters include the parameter name.
 
 The second command is the more natural use of the comparison command format. The `where` alias is
 substituted for the `Where-Object` cmdlet name and all optional parameter names are omitted.
@@ -343,21 +345,24 @@ for the command.
 
 ```powershell
 # Use Where-Object to get commands that have any value for the OutputType property of the command.
-# This omits commands that do not have an OutputType property and those that have an OutputType property, but no property value.
+# This omits commands that do not have an OutputType property and those that have an OutputType
+# property, but no property value.
 Get-Command | where OutputType
 Get-Command | where {$_.OutputType}
 ```
 
 ```powershell
 # Use Where-Object to get objects that are containers.
-# This gets objects that have the **PSIsContainer** property with a value of $True and excludes all others.
+# This gets objects that have the **PSIsContainer** property with a value of $True and excludes all
+# others.
 Get-ChildItem | where PSIsContainer
 Get-ChildItem | where {$_.PSIsContainer}
 ```
 
 ```powershell
 # Finally, use the Not operator (!) to get objects that are not containers.
-# This gets objects that do have the **PSIsContainer** property and those that have a value of $False for the **PSIsContainer** property.
+# This gets objects that do have the **PSIsContainer** property and those that have a value of
+# $False for the **PSIsContainer** property.
 Get-ChildItem | where {!$_.PSIsContainer}
 # You cannot use the Not operator (!) in the comparison statement format of the command.
 Get-ChildItem | where PSIsContainer -eq $False
@@ -366,7 +371,9 @@ Get-ChildItem | where PSIsContainer -eq $False
 ### Example 6: Use multiple conditions
 
 ```powershell
-Get-Module -ListAvailable | where {($_.Name -notlike "Microsoft*" -and $_.Name -notlike "PS*") -and $_.HelpInfoUri}
+Get-Module -ListAvailable | where {
+    ($_.Name -notlike "Microsoft*" -and $_.Name -notlike "PS*") -and $_.HelpInfoUri
+}
 ```
 
 This example shows how to create a `Where-Object` command with multiple conditions.
@@ -374,16 +381,18 @@ This example shows how to create a `Where-Object` command with multiple conditio
 This command gets non-core modules that support the Updatable Help feature. The command uses the
 **ListAvailable** parameter of the `Get-Module` cmdlet to get all modules on the computer. A
 pipeline operator (`|`) sends the modules to the `Where-Object` cmdlet, which gets modules whose
-names do not begin with Microsoft or PS, and have a value for the **HelpInfoURI** property, which
-tells PowerShell where to find updated help files for the module. The comparison statements are
-connected by the **And** logical operator.
+names do not begin with `Microsoft` or `PS`, and have a value for the **HelpInfoURI** property,
+which tells PowerShell where to find updated help files for the module. The comparison statements
+are connected by the **And** logical operator.
 
 The example uses the script block command format. Logical operators, such as **And** and **Or**, are
 valid only in script blocks. You cannot use them in the comparison statement format of a
 `Where-Object` command.
 
-- For more information about PowerShell logical operators, see [about_Logical_Operators](./About/about_logical_operators.md).
-- For more information about the Updatable Help feature, see [about_Updatable_Help](./About/about_Updatable_Help.md).
+- For more information about PowerShell logical operators, see
+  [about_Logical_Operators](./About/about_logical_operators.md).
+- For more information about the Updatable Help feature, see
+  [about_Updatable_Help](./About/about_Updatable_Help.md).
 
 ## PARAMETERS
 
@@ -519,7 +528,7 @@ Accept wildcard characters: False
 ### -CLike
 
 Indicates that this cmdlet gets objects if the property value matches a value that includes wildcard
-characters. This operation is case-sensitive.
+characters (`*`). This operation is case-sensitive.
 
 For example: `Get-Process | where ProcessName -CLike "*host"`
 
@@ -796,8 +805,8 @@ For example:
 
 `Get-Process | where -Property ProcessName -in -Value "Svchost", "TaskHost", "WsmProvHost"`
 
-If the value of the **Value** parameter is a single object, PowerShell converts it to a collection of
-one object.
+If the value of the **Value** parameter is a single object, PowerShell converts it to a collection
+of one object.
 
 If the property value of an object is an array, PowerShell uses reference equality to determine a
 match. `Where-Object` returns the object only if the value of the **Property** parameter and any
@@ -905,7 +914,7 @@ Accept wildcard characters: False
 ### -Like
 
 Indicates that this cmdlet gets objects if the property value matches a value that includes wildcard
-characters.
+characters (`*`).
 
 For example: `Get-Process | where ProcessName -Like "*host"`
 
@@ -982,8 +991,8 @@ Accept wildcard characters: False
 
 ### -Not
 
-Indicates that this cmdlet gets objects if the property does not exist or has a value of null or
-false.
+Indicates that this cmdlet gets objects if the property does not exist or has a value of `$null` or
+`$false`.
 
 For example: `Get-Service | where -Not "DependentServices"`
 
@@ -1056,7 +1065,7 @@ Accept wildcard characters: False
 ### -NotLike
 
 Indicates that this cmdlet gets objects if the property value does not match a value that includes
-wildcard characters.
+wildcard characters (`*`).
 
 For example: `Get-Process | where ProcessName -NotLike "*host"`
 
@@ -1126,8 +1135,8 @@ wildcard characters when used with the following comparison parameters:
 This parameter was introduced in Windows PowerShell 3.0.
 
 ```yaml
-Type: System.Object
-Parameter Sets: EqualSet, LessOrEqualSet, CaseSensitiveEqualSet, NotEqualSet, CaseSensitiveNotEqualSet, GreaterThanSet, CaseSensitiveGreaterThanSet, LessThanSet, CaseSensitiveLessThanSet, GreaterOrEqualSet, CaseSensitiveGreaterOrEqualSet, CaseSensitiveLessOrEqualSet, LikeSet, CaseSensitiveLikeSet, NotLikeSet, CaseSensitiveNotLikeSet, MatchSet, CaseSensitiveMatchSet, NotMatchSet, CaseSensitiveNotMatchSet, ContainsSet, CaseSensitiveContainsSet, NotContainsSet, CaseSensitiveNotContainsSet, InSet, CaseSensitiveInSet, NotInSet, CaseSensitiveNotInSet, IsSet, IsNotSet
+Type: Object
+Parameter Sets: EqualSet, CaseSensitiveGreaterOrEqualSet, CaseSensitiveEqualSet, NotEqualSet, CaseSensitiveNotEqualSet, GreaterThanSet, CaseSensitiveGreaterThanSet, LessThanSet, CaseSensitiveLessThanSet, GreaterOrEqualSet, LessOrEqualSet, CaseSensitiveLessOrEqualSet, LikeSet, CaseSensitiveLikeSet, NotLikeSet, CaseSensitiveNotLikeSet, MatchSet, CaseSensitiveMatchSet, NotMatchSet, CaseSensitiveNotMatchSet, ContainsSet, CaseSensitiveContainsSet, NotContainsSet, CaseSensitiveNotContainsSet, InSet, CaseSensitiveInSet, NotInSet, CaseSensitiveNotInSet, IsSet, IsNotSet
 Aliases:
 
 Required: False
@@ -1158,9 +1167,10 @@ This cmdlet returns selected items from the input object set.
 
 ## NOTES
 
-Starting in Windows PowerShell 4.0, `Where` and `ForEach` methods were added for use with collections.
+Starting in Windows PowerShell 4.0, `Where` and `ForEach` methods were added for use with
+collections.
 
-You can read more about these new methods here [about_arrays](./About/about_Arrays.md)
+You can read more about these methods here [about_arrays](./About/about_Arrays.md)
 
 ## RELATED LINKS
 
@@ -1180,3 +1190,4 @@ You can read more about these new methods here [about_arrays](./About/about_Arra
 
 [Tee-Object](../Microsoft.PowerShell.Utility/Tee-Object.md)
 
+[about_Booleans](about/about_Booleans.md)

@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 12/03/2020
+ms.date: 08/03/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/set-clipboard?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-Clipboard
@@ -15,7 +15,7 @@ Sets the contents of the clipboard.
 ## SYNTAX
 
 ```
-Set-Clipboard -Value <String[]> [-Append] [-WhatIf] [-Confirm] [<CommonParameters>]
+Set-Clipboard -Value <String[]> [-Append] [-WhatIf] [-Confirm] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -60,6 +60,39 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -PassThru
+
+Returns an object representing the item with which you're working. By default, this cmdlet does not
+generate any output.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Value
+
+The string values to be added to the clipboard.
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
 ### -Confirm
 
 Prompts you for confirmation before running the cmdlet.
@@ -89,22 +122,6 @@ Required: False
 Position: Named
 Default value: False
 Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Value
-
-The string values to be added to the clipboard.
-
-```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 

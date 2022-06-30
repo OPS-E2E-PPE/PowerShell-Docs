@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 05/14/2019
+ms.date: 05/11/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/get-itemproperty?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-ItemProperty
@@ -24,15 +24,15 @@ Get-ItemProperty [-Path] <String[]> [[-Name] <String[]>] [-Filter <String>] [-In
 ### LiteralPath
 
 ```
-Get-ItemProperty -LiteralPath <String[]> [[-Name] <String[]>] [-Filter <String>] [-Include <String[]>]
- [-Exclude <String[]>] [-Credential <PSCredential>] [<CommonParameters>]
+Get-ItemProperty -LiteralPath <String[]> [[-Name] <String[]>] [-Filter <String>]
+ [-Include <String[]>] [-Exclude <String[]>] [-Credential <PSCredential>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-The `Get-ItemProperty` cmdlet gets the properties of the specified items.
-For example, you can use this cmdlet to get the value of the LastAccessTime property of a file
-object. You can also use this cmdlet to view registry entries and their values.
+The `Get-ItemProperty` cmdlet gets the properties of the specified items. For example, you can use
+this cmdlet to get the value of the **LastAccessTime** property of a file object. You can also use
+this cmdlet to view registry entries and their values.
 
 ## EXAMPLES
 
@@ -46,53 +46,43 @@ Get-ItemProperty C:\Windows
 
 ### Example 2: Get the properties of a specific file
 
-This command gets the properties of the `C:\Test\Weather.xls` file.
-The result is piped to the `Format-List` cmdlet to display the output as a list.
+This command gets the properties of the `C:\Test\Weather.xls` file. The result is piped to the
+`Format-List` cmdlet to display the output as a list.
 
 ```powershell
 Get-ItemProperty C:\Test\Weather.xls | Format-List
 ```
 
-### Example 3: Display the value name and data of registry entries in a registry subkey
+### Example 3: Get the value name and data of a registry entry in a registry subkey
 
-This command displays the value name and data of each of the registry entries contained in the
-"CurrentVersion" registry subkey.
-
-```powershell
-Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion
-```
-
-> [!NOTE]
-> This command requires that there is a PowerShell drive named `HKLM:` that is mapped to the
-> "HKEY_LOCAL_MACHINE" hive of the registry.
->
-> A drive with that name and mapping is available in PowerShell by default.
-> Alternatively, the path to this registry subkey can be specified by using the following alternative
-> path that begins with the provider name followed by two colons:
->
-> `Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion`.
-
-### Example 4: Get the value name and data of a registry entry in a registry subkey
-
-This command gets the value name and data of the "ProgramFilesDir" registry entry in the
-"CurrentVersion" registry subkey.
-The **Path** specifies the subkey and the **Name** parameter specifies the
-value name of the entry.
+This command gets the value name and data of the `ProgramFilesDir` registry entry in the
+`CurrentVersion` registry subkey. The **Path** specifies the subkey and the **Name** parameter
+specifies the value name of the entry.
 
 ```powershell
 Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion -Name "ProgramFilesDir"
 ```
 
-### Example 5: Get the value names and data of registry entries in a registry key
+> [!NOTE]
+> This command requires that there is a PowerShell drive named `HKLM:` that is mapped to the
+> `HKEY_LOCAL_MACHINE` hive of the registry.
+>
+> A drive with that name and mapping is available in PowerShell by default. Alternatively, the path
+> to this registry subkey can be specified by using the following alternative path that begins with
+> the provider name followed by two colons:
+>
+> `Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion`.
 
-This command gets the value names and data of the registry entries in the "PowerShellEngine"
+### Example 4: Get the value names and data of registry entries in a registry key
+
+This command gets the value names and data of the registry entries in the `PowerShellEngine`
 registry key. The results are shown in the following sample output.
 
 ```powershell
 Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\PowerShell\1\PowerShellEngine
 ```
 
-```output
+```Output
 ApplicationBase         : C:\Windows\system32\WindowsPowerShell\v1.0\
 ConsoleHostAssemblyName : Microsoft.PowerShell.ConsoleHost, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, ProcessorArchitecture=msil
 PowerShellVersion       : 2.0
@@ -106,9 +96,9 @@ PSCompatibleVersion     : 1.0,2.0
 ### -Credential
 
 > [!NOTE]
-> This parameter is not supported by any providers installed with PowerShell.
-> To impersonate another user, or elevate your credentials when running this cmdlet,
-> use [Invoke-Command](../Microsoft.PowerShell.Core/Invoke-Command.md).
+> This parameter is not supported by any providers installed with PowerShell. To impersonate another
+> user, or elevate your credentials when running this cmdlet, use
+> [Invoke-Command](../Microsoft.PowerShell.Core/Invoke-Command.md).
 
 ```yaml
 Type: System.Management.Automation.PSCredential
@@ -144,11 +134,13 @@ Accept wildcard characters: True
 
 ### -Filter
 
-Specifies a filter to qualify the **Path** parameter. The [FileSystem](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md)
-provider is the only installed PowerShell provider that supports the use of filters. You can find
-the syntax for the **FileSystem** filter language in [about_Wildcards](../Microsoft.PowerShell.Core/About/about_Wildcards.md).
-Filters are more efficient than other parameters, because the provider applies them when the cmdlet
-gets the objects rather than having PowerShell filter the objects after they are retrieved.
+Specifies a filter to qualify the **Path** parameter. The
+[FileSystem](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md) provider is the only
+installed PowerShell provider that supports the use of filters. You can find the syntax for the
+**FileSystem** filter language in
+[about_Wildcards](../Microsoft.PowerShell.Core/About/about_Wildcards.md). Filters are more efficient
+than other parameters, because the provider applies them when the cmdlet gets the objects rather
+than having PowerShell filter the objects after they are retrieved.
 
 ```yaml
 Type: System.String
@@ -166,7 +158,7 @@ Accept wildcard characters: True
 
 Specifies, as a string array, an item or items that this cmdlet includes in the operation. The value
 of this parameter qualifies the **Path** parameter. Enter a path element or pattern, such as
-`"*.txt"`. Wildcard characters are permitted. The **Include** parameter is effective only when the
+`*.txt`. Wildcard characters are permitted. The **Include** parameter is effective only when the
 command includes the contents of an item, such as `C:\Windows\*`, where the wildcard character
 specifies the contents of the `C:\Windows` directory.
 
@@ -189,7 +181,8 @@ typed. No characters are interpreted as wildcards. If the path includes escape c
 it in single quotation marks. Single quotation marks tell PowerShell not to interpret any characters
 as escape sequences.
 
-For more information, see [about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
+For more information, see
+[about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
 
 ```yaml
 Type: System.String[]
@@ -205,8 +198,7 @@ Accept wildcard characters: False
 
 ### -Name
 
-Specifies the name of the property or properties to retrieve.
-Wildcard characters are permitted.
+Specifies the name of the property or properties to retrieve. Wildcard characters are permitted.
 
 ```yaml
 Type: System.String[]
@@ -222,8 +214,7 @@ Accept wildcard characters: True
 
 ### -Path
 
-Specifies the path to the item or items.
-Wildcard characters are permitted.
+Specifies the path to the item or items. Wildcard characters are permitted.
 
 ```yaml
 Type: System.String[]
@@ -280,4 +271,3 @@ providers available in your session, type `Get-PSProvider`. For more information
 [Set-ItemProperty](Set-ItemProperty.md)
 
 [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md)
-

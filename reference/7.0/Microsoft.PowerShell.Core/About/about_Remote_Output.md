@@ -1,18 +1,17 @@
 ---
-description: Describes how to interpret and format the output of remote commands. 
-keywords: powershell,cmdlet
+description: Describes how to interpret and format the output of remote commands.
 Locale: en-US
-ms.date: 12/01/2017
+ms.date: 03/07/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_remote_output?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Remote_Output
+title: about Remote Output
 ---
-# About Remote Output
+# about_Remote_Output
 
-## SHORT DESCRIPTION
+## Short description
 Describes how to interpret and format the output of remote commands.
 
-## LONG DESCRIPTION
+## Long description
 
 The output of a command that was run on a remote computer might look
 like output of the same command run on a local computer, but there are
@@ -176,8 +175,8 @@ in a streaming list.
 
 When objects are not formatted automatically, you can use the formatting
 cmdlets, such as Format-Table or Format-List, to format and display
-selected properties. Or, you can use the Out-GridView cmdlet to display
-the objects in a table.
+selected properties. On a Windows computer, you can use the `Out-GridView`
+cmdlet to display the objects in a table.
 
 Also, if you run a command on a remote computer that uses cmdlets that you
 do not have on your local computer, the objects that the command returns
@@ -201,18 +200,12 @@ sort on the PSComputerName or MachineName property. You can also sort on
 another property of the object so that the results from different
 computers are interspersed.
 
-## SEE ALSO
+## See also
 
-[about_Remote](about_Remote.md)
-
-[about_Remote_Variables](about_Remote_Variables.md)
-
-[Format-Table](xref:Microsoft.PowerShell.Utility.Format-Table)
-
-[Get-Process](xref:Microsoft.PowerShell.Management.Get-Process)
-
-[Get-Service](xref:Microsoft.PowerShell.Management.Get-Service)
-
-[Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
-
-[Select-Object](xref:Microsoft.PowerShell.Utility.Select-Object)
+- [about_Remote](about_Remote.md)
+- [about_Remote_Variables](about_Remote_Variables.md)
+- [Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
+- [Select-Object](xref:Microsoft.PowerShell.Utility.Select-Object)
+- [Get-Process](xref:Microsoft.PowerShell.Management.Get-Process)
+- [Get-Service](xref:Microsoft.PowerShell.Management.Get-Service)
+- [Format-Table](xref:Microsoft.PowerShell.Utility.Format-Table)

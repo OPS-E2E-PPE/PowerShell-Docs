@@ -1,13 +1,12 @@
 ---
 description: Provides information about how PowerShell background jobs run a command or expression in the background without interacting with the current session.
-keywords: powershell,cmdlet
 Locale: en-US
-ms.date: 11/11/2020
+ms.date: 03/26/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_jobs?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Jobs
+title: about Jobs
 ---
-# About Jobs
+# about_Jobs
 
 ## Short description
 Provides information about how PowerShell background jobs run a command or
@@ -24,7 +23,7 @@ jobs types provided by PowerShell to support concurrency.
   machine.
 - `PSTaskJob` or `ThreadJob` - Commands and scripts run in a separate thread
   within the same process on the local machine. For more information, see
-  [about_Thread_Jobs](/powershell/module/ThreadJob/about_Thread_Jobs).
+  [about_Thread_Jobs](/powershell/module/microsoft.powershell.core/about/about_thread_jobs).
 
 Running scripts remotely, on a separate machine or in a separate process,
 provides great isolation. Any errors that occur in the remote job do not affect
@@ -325,15 +324,15 @@ message:
 
 ## See also
 
+- [about_Job_Details](about_Job_Details.md)
+- [about_PSSessions](about_PSSessions.md)
+- [about_Remote](about_Remote.md)
 - [about_Remote_Jobs](about_Remote_Jobs.md)
 - [about_Thread_Jobs](/powershell/module/microsoft.powershell.core/about/about_Thread_Jobs)
-- [about_Job_Details](about_Job_Details.md)
-- [about_Remote](about_Remote.md)
-- [about_PSSessions](about_PSSessions.md)
-- [Start-Job](xref:Microsoft.PowerShell.Core.Start-Job)
+- [Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
 - [Get-Job](xref:Microsoft.PowerShell.Core.Get-Job)
 - [Receive-Job](xref:Microsoft.PowerShell.Core.Receive-Job)
+- [Remove-Job](xref:Microsoft.PowerShell.Core.Remove-Job)
+- [Start-Job](xref:Microsoft.PowerShell.Core.Start-Job)
 - [Stop-Job](xref:Microsoft.PowerShell.Core.Stop-Job)
 - [Wait-Job](xref:Microsoft.PowerShell.Core.Wait-Job)
-- [Remove-Job](xref:Microsoft.PowerShell.Core.Remove-Job)
-- [Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)

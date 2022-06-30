@@ -1,13 +1,12 @@
 ---
 description: Describes how to troubleshoot remote operations in PowerShell.
-keywords: powershell,cmdlet
 Locale: en-US
-ms.date: 10/27/2020
+ms.date: 07/27/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_remote_troubleshooting?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Remote_Troubleshooting
+title: about Remote Troubleshooting
 ---
-# About Remote Troubleshooting
+# about_Remote_Troubleshooting
 
 ## Short description
 Describes how to troubleshoot remote operations in PowerShell.
@@ -176,6 +175,12 @@ Set-NetFirewallRule -Name "WINRM-HTTP-In-TCP-PUBLIC" -RemoteAddress Any
 ```
 
 The `Set-NetFirewallRule` cmdlet is exported by the NetSecurity module.
+
+> [!NOTE]
+> The name of the firewall rule can be different for different versions of
+> Windows. Use `Get-NetFirewallRule` to see a list of rules. Before enabling
+> the firewall rule, view the security settings in the rule to verify that the
+> configuration is appropriate for your environment.
 
 > [!NOTE]
 > In Windows PowerShell 2.0, on computers running server versions of Windows,
@@ -851,16 +856,11 @@ Please see the
 [OMI authentication](https://github.com/PowerShell/psl-omi-provider#connecting-from-linux-to-windows)
 instructions.
 
-## SEE ALSO
+## See also
 
-[Import-PSSession](xref:Microsoft.PowerShell.Utility.Import-PSSession)
-
-[Export-PSSession](xref:Microsoft.PowerShell.Utility.Export-PSSession)
-
-[Import-Module](xref:Microsoft.PowerShell.Core.Import-Module)
-
-[about_Remote](about_Remote.md)
-
-[about_Remote_Requirements](about_Remote_Requirements.md)
-
-[about_Remote_Variables](about_Remote_Variables.md)
+- [about_Remote](about_Remote.md)
+- [about_Remote_Requirements](about_Remote_Requirements.md)
+- [about_Remote_Variables](about_Remote_Variables.md)
+- [Import-Module](xref:Microsoft.PowerShell.Core.Import-Module)
+- [Export-PSSession](xref:Microsoft.PowerShell.Utility.Export-PSSession)
+- [Import-PSSession](xref:Microsoft.PowerShell.Utility.Import-PSSession)

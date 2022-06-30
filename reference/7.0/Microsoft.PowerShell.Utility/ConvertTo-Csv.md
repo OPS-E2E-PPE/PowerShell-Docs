@@ -118,7 +118,7 @@ DisplayHint,"DateTime","Date",Day,DayOfWeek,DayOfYear,Hour,Kind,Millisecond,Minu
 DateTime,"Thursday, August 22, 2019 11:27:34 AM","8/22/2019 12:00:00 AM",22,Thursday,234,11,Local,569,27,8,34,637020700545699784,11:27:34.5699784,2019
 ```
 
-### Example 4: Convert to CSV with quotes only when needed
+### Example 5: Convert to CSV with quotes only when needed
 
 This example converts a **DateTime** object to a CSV string.
 
@@ -205,23 +205,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UseCulture
-
-Uses the list separator for the current culture as the item delimiter. To find the list separator
-for a culture, use the following command: `(Get-Culture).TextInfo.ListSeparator`.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: UseCulture
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -QuoteFields
 
 Specifies the names of the columns that should be quoted. When this parameter is used only the
@@ -231,6 +214,23 @@ specified columns are quoted. This parameter was added in PowerShell 7.0.
 Type: System.String[]
 Parameter Sets: (All)
 Aliases: QF
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UseCulture
+
+Uses the list separator for the current culture as the item delimiter. To find the list separator
+for a culture, use the following command: `(Get-Culture).TextInfo.ListSeparator`.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: UseCulture
+Aliases:
 
 Required: False
 Position: Named

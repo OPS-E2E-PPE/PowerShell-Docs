@@ -1,21 +1,20 @@
 ---
-description:  Describes the features and system requirements of Windows PowerShell Integrated Scripting Environment (ISE).
-keywords: powershell,cmdlet
+description: Describes the features and system requirements of Windows PowerShell Integrated Scripting Environment (ISE).
 Locale: en-US
 ms.date: 01/03/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_windows_powershell_ise?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Windows_PowerShell_ISE
+title: about Windows PowerShell ISE
 ---
 
-# About Windows PowerShell ISE
+# about_Windows_PowerShell_ISE
 
-## SHORT DESCRIPTION
+## Short description
 
 Describes the features and system requirements of Windows PowerShell
 Integrated Scripting Environment (ISE).
 
-## LONG DESCRIPTION
+## Long description
 
 Windows PowerShell ISE is a graphical host application for Windows PowerShell.
 In Windows PowerShell ISE, you can run commands and write, test, and debug
@@ -39,7 +38,7 @@ Windows PowerShell ISE introduces two new features in Windows PowerShell 4.0.
 
 - Windows PowerShell ISE now supports both Windows PowerShell Workflow
   debugging and remote script debugging. For more Information, see
-  about_Debuggers.
+  [about_Debuggers](about_Debuggers.md).
 
 - IntelliSense support has been added for Windows PowerShell Desired State
   Configuration providers and configurations.
@@ -185,9 +184,9 @@ are in any Windows PowerShell host program. However, the items in your Windows
 PowerShell console profiles are not available in Windows PowerShell ISE.
 
 Instructions for moving and reconfiguring your profiles are available in
-Windows PowerShell ISE Help and in about_Profiles.
+Windows PowerShell ISE Help and in [about_Profiles](about_Profiles.md).
 
-## NOTES
+## Notes
 
 Windows PowerShell ISE is an optional Windows Feature that is turned on by
 default on client and server versions of Windows. To enable and disable
@@ -208,24 +207,15 @@ WPF Hardware acceleration" graphics rendering settings on your system. For more
 information, see
 [Graphics Rendering Registry Settings](/dotnet/framework/wpf/graphics-multimedia/graphics-rendering-registry-settings).
 
-## SEE ALSO
+## See also
 
-[about_Debuggers](about_Debuggers.md)
-
-[about_Profiles](about_Profiles.md)
-
-[about_Updatable_Help](about_Updatable_Help.md)
-
-[Get-Help](xref:Microsoft.PowerShell.Core.Get-Help)
-
-[Get-IseSnippet](xref:ISE.Get-IseSnippet)
-
-[Import-IseSnippet](xref:ISE.Import-IseSnippet)
-
-[New-IseSnippet](xref:ISE.New-IseSnippet)
-
-[Save-Help](xref:Microsoft.PowerShell.Core.Save-Help)
-
-[Show-Command](xref:Microsoft.PowerShell.Utility.Show-Command)
-
-[Update-Help](xref:Microsoft.PowerShell.Core.Update-Help)
+- [about_Debuggers](about_Debuggers.md)
+- [about_Profiles](about_Profiles.md)
+- [about_Updatable_Help](about_Updatable_Help.md)
+- [Show-Command](xref:Microsoft.PowerShell.Utility.Show-Command)
+- [Get-Help](xref:Microsoft.PowerShell.Core.Get-Help)
+- [Save-Help](xref:Microsoft.PowerShell.Core.Save-Help)
+- [Update-Help](xref:Microsoft.PowerShell.Core.Update-Help)
+- [Get-IseSnippet](xref:ISE.Get-IseSnippet)
+- [Import-IseSnippet](xref:ISE.Import-IseSnippet)
+- [New-IseSnippet](xref:ISE.New-IseSnippet)

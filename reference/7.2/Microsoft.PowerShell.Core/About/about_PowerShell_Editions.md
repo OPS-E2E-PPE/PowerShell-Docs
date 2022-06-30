@@ -1,17 +1,17 @@
 ---
 description: Different editions of PowerShell run on different underlying runtimes.
 Locale: en-US
-ms.date: 03/28/2019
+ms.date: 03/23/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_powershell_editions?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_PowerShell_Editions
+title: about PowerShell Editions
 ---
-# About PowerShell Editions
+# about_PowerShell_Editions
 
-## Short Description
+## Short description
 Different editions of PowerShell run on different underlying runtimes.
 
-## Long Description
+## Long description
 
 From PowerShell 5.1, there are multiple *editions* of PowerShell that each run on
 a different .NET runtime. As of PowerShell 6.2 there are two editions of PowerShell:
@@ -46,7 +46,7 @@ as the same as having the value `Desktop`.
 
 ### Edition in `$PSVersionTable`
 
-The `$PSVersionTable` automatic variable also has edition information in PowerShell 5.1 and above:
+The `$PSVersionTable` automatic variable also has **PSEdition** property in PowerShell 5.1 and above:
 
 ```powershell
 $PSVersionTable
@@ -55,10 +55,10 @@ $PSVersionTable
 ```Output
 Name                           Value
 ----                           -----
-PSVersion                      6.2.0-rc.1
-PSEdition                      Core           # <-- Edition information
-GitCommitId                    6.2.0-rc.1
-OS                             Microsoft Windows 10.0.18865
+PSVersion                      7.2.2
+PSEdition                      Core
+GitCommitId                    7.2.2
+OS                             Microsoft Windows 10.0.22000
 Platform                       Win32NT
 PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0...}
 PSRemotingProtocolVersion      2.3
@@ -66,7 +66,7 @@ SerializationVersion           1.1.0.1
 WSManStackVersion              3.0
 ```
 
-The `PSEdition` field will have the same value as the `$PSEdition` automatic variable.
+The **PSEdition** field has the same value as the `$PSEdition` automatic variable.
 
 ## The `CompatiblePSEditions` module manifest field
 
@@ -210,7 +210,7 @@ there are things you can do to ensure cross-edition compatibility.
 
 The only true way to confirm and continually validate compatibility however is to write tests for
 your script or module and run them on all versions and editions of PowerShell you need compatibility
-with. A recommended testing framework for this is [Pester][].
+with. A recommended testing framework for this is [Pester][Pester].
 
 ### PowerShell script
 
@@ -220,14 +220,14 @@ you use that are affected by edition compatibility.
 Generally, scripts that work in PowerShell 6.1 and above will work with Windows PowerShell 5.1,
 but there are some exceptions.
 
-Version 1.18.0 [PSScriptAnalyzer][] module has rules like [`PSUseCompatibleCommands`][] and
-[`PSUseCompatibleTypes`][] that are able to detect possibly incompatible usage of commands
-and .NET APIs in PowerShell scripts.
+[PSScriptAnalyzer][pssa] version 1.18+ has rules like [PSUseCompatibleCommands][psucc] and
+[PSUseCompatibleTypes][psuct] that are able to detect possibly incompatible usage of commands and
+.NET APIs in PowerShell scripts.
 
 ### .NET assemblies
 
 If you are writing a binary module or a module that incorporates .NET assemblies (DLLs) generated
-from source code, you should compile against [.NET Standard][] and [PowerShell Standard][]
+from source code, you should compile against [.NET Standard][netstd] and [PowerShell Standard][psstd]
 for compile-time compatibility validation of .NET and PowerShell API compatibility.
 
 Although these libraries are able to check some compatibility at compile time, they won't be able
@@ -236,13 +236,13 @@ to catch possible behavioral differences between editions. For this you must sti
 ## See also
 
 - [about_Automatic_Variables](about_Automatic_Variables.md)
-- [Import-Module](xref:Microsoft.PowerShell.Core.Import-Module)
 - [Get-Module](xref:Microsoft.PowerShell.Core.Get-Module)
+- [Import-Module](xref:Microsoft.PowerShell.Core.Import-Module)
 - [Modules with compatible PowerShell Editions](/powershell/scripting/gallery/concepts/module-psedition-support)
 
 [Pester]: https://github.com/pester/Pester/wiki/Pester
-[PSScriptAnalyzer]: https://github.com/PowerShell/PSScriptAnalyzer
-[`PSUseCompatibleCommands`]: https://github.com/PowerShell/PSScriptAnalyzer/blob/master/RuleDocumentation/UseCompatibleCommands.md
-[`PSUseCompatibleTypes`]: https://github.com/PowerShell/PSScriptAnalyzer/blob/master/RuleDocumentation/UseCompatibleTypes.md
-[.NET Standard]: /dotnet/standard/net-standard
-[PowerShell Standard]: https://devblogs.microsoft.com/powershell/powershell-standard-library-build-single-module-that-works-across-windows-powershell-and-powershell-core/
+[pssa]: https://www.powershellgallery.com/packages/PSScriptAnalyzer/
+[psucc]: /powershell/utility-modules/psscriptanalyzer/rules/usecompatiblecommands
+[psuct]: /powershell/utility-modules/psscriptanalyzer/rules/usecompatibletypes
+[netstd]: /dotnet/standard/net-standard
+[psstd]: https://devblogs.microsoft.com/powershell/powershell-standard-library-build-single-module-that-works-across-windows-powershell-and-powershell-core/

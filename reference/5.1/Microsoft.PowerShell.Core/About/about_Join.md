@@ -1,21 +1,20 @@
 ---
-description:  Describes how the join operator (-join) combines multiple strings into a single string. 
-keywords: powershell,cmdlet
+description: Describes how the join operator (-join) combines multiple strings into a single string.
 Locale: en-US
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_join?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Join
+title: about Join
 ---
 
-# About join
+# about_Join
 
-## SHORT DESCRIPTION
+## Short description
 
 Describes how the join operator (-join) combines multiple strings into a
 single string.
 
-## LONG DESCRIPTION
+## Long description
 
 The join operator concatenates a set of strings into a single string. The
 strings are appended to the resulting string in the order that they appear
@@ -104,10 +103,8 @@ c
 a b c
 ```
 
-## SEE ALSO
+## See also
 
-[about_Operators](about_Operators.md)
-
-[about_Comparison_Operators](about_Comparison_Operators.md)
-
-[about_Split](about_Split.md)
+- [about_Operators](about_Operators.md)
+- [about_Comparison_Operators](about_Comparison_Operators.md)
+- [about_Split](about_Split.md)

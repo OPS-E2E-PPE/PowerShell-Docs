@@ -1,13 +1,12 @@
 ---
-description: Describes the Group Policy settings for PowerShell 
-keywords: powershell,cmdlet
+description: Describes the Group Policy settings for PowerShell
 Locale: en-US
-ms.date: 03/25/2020
+ms.date: 10/22/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_group_policy_settings?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Group_Policy_Settings
+title: about Group Policy Settings
 ---
-# About Group Policy Settings
+# about_Group_Policy_Settings
 
 ## Short description
 Describes the Group Policy settings for PowerShell
@@ -178,7 +177,7 @@ Restricted.
 
 For more information, see [about_Execution_Policies](about_Execution_Policies.md).
 
-## Turn on powershell transcription
+## Turn on PowerShell transcription
 
 The **Turn on PowerShell Transcription** policy setting lets you capture the
 input and output of PowerShell Core commands into text-based transcripts. If
@@ -244,23 +243,14 @@ about_GroupPolicy
 
 ## See also
 
-[PowerShell Core Policy RFC](https://github.com/PowerShell/PowerShell-RFC/blob/master/4-Experimental-Accepted/RFC0041-Policy.md)
-
-[about_Execution_Policies](about_Execution_Policies.md)
-
-[about_Modules](about_Modules.md)
-
-[about_Updatable_Help](about_Updatable_Help.md)
-
-[Get-ExecutionPolicy](xref:Microsoft.PowerShell.Security.Get-ExecutionPolicy)
-
-[Set-ExecutionPolicy](xref:Microsoft.PowerShell.Security.Set-ExecutionPolicy)
-
-[Get-Module](xref:Microsoft.PowerShell.Core.Get-Module)
-
-[Update-Help](xref:Microsoft.PowerShell.Core.Update-Help)
-
-[Save-Help](xref:Microsoft.PowerShell.Core.Save-Help)
+- [about_Execution_Policies](about_Execution_Policies.md)
+- [about_Modules](about_Modules.md)
+- [about_Updatable_Help](about_Updatable_Help.md)
+- [Get-ExecutionPolicy](xref:Microsoft.PowerShell.Security.Get-ExecutionPolicy)
+- [Set-ExecutionPolicy](xref:Microsoft.PowerShell.Security.Set-ExecutionPolicy)
+- [Update-Help](xref:Microsoft.PowerShell.Core.Update-Help)
+- [Save-Help](xref:Microsoft.PowerShell.Core.Save-Help)
+- [Get-Module](xref:Microsoft.PowerShell.Core.Get-Module)
 
 <!-- link references -->
 [gpstore]: https://support.microsoft.com/help/3087759

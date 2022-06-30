@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 10/14/2020
+ms.date: 06/07/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/write-warning?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Write-Warning
@@ -61,10 +60,8 @@ PS> $WarningPreference = "SilentlyContinue"
 PS> Write-Warning "This is only a test warning."
 PS> $WarningPreference = "Stop"
 PS> Write-Warning "This is only a test warning."
-WARNING: This is only a test message.
-Write-Warning : Command execution stopped because the shell variable "WarningPreference" is set to Stop.
-At line:1 char:14
-     + Write-Warning <<<<  "This is only a test message."
+WARNING: This is only a test warning.
+Write-Warning: The running command stopped because the preference variable "WarningPreference" or common parameter is set to Stop: This is only a test warning.
 ```
 
 The first command displays the default value of the `$WarningPreference` variable, which is

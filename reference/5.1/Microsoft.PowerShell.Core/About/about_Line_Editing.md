@@ -1,14 +1,13 @@
 ---
-description:  Describes how to edit commands at the PowerShell command prompt. 
-keywords: powershell,cmdlet
+description: Describes how to edit commands at the PowerShell command prompt.
 Locale: en-US
 ms.date: 07/10/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_line_editing?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Line_Editing
+title: about Line Editing
 ---
 
-# About Line Editing
+# about_Line_Editing
 
 ## Short description
 
@@ -78,8 +77,6 @@ key. To scroll through a list of values, press the <kbd>Tab</kbd> key again.
 
 ## See also
 
-[about_Command_Syntax](about_Command_Syntax.md)
-
-[about_Path_Syntax](about_Path_Syntax.md)
-
-[about_PSReadline](../../PSReadline/About/about_PSReadline.md)
+- [about_Command_Syntax](about_Command_Syntax.md)
+- [about_Path_Syntax](about_Path_Syntax.md)
+- [about_PSReadline](../../PSReadline/About/about_PSReadline.md)

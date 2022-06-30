@@ -1,8 +1,7 @@
 ---
-ms.date: 08/21/2020
-keywords:  powershell,cmdlet
-title:  Running Remote Commands
 description: Explains the methods for running commands on remote systems using PowerShell.
+ms.date: 10/22/2021
+title: Running Remote Commands
 ---
 # Running Remote Commands
 
@@ -10,13 +9,13 @@ You can run commands on one or hundreds of computers with a single PowerShell co
 PowerShell supports remote computing by using various technologies, including WMI, RPC, and
 WS-Management.
 
-PowerShell Core supports WMI, WS-Management, and SSH remoting. In PowerShell 6, RPC is no longer
+PowerShell supports WMI, WS-Management, and SSH remoting. In PowerShell 6, RPC is no longer
 supported. In PowerShell 7 and above, RPC is supported only in Windows.
 
-For more information about remoting in PowerShell Core, see the following articles:
+For more information about remoting in PowerShell, see the following articles:
 
-- [SSH Remoting in PowerShell Core][ssh-remoting]
-- [WSMan Remoting in PowerShell Core][wsman-remoting]
+- [SSH Remoting in PowerShell][ssh-remoting]
+- [WSMan Remoting in PowerShell][wsman-remoting]
 
 ## Windows PowerShell Remoting Without Configuration
 
@@ -51,15 +50,18 @@ command on one or more remote computers. You can establish persistent connection
 sessions, and run scripts on remote computers.
 
 To use Windows PowerShell remoting, the remote computer must be configured for remote management.
-For more information, including instructions, see [About Remote Requirements](/powershell/module/microsoft.powershell.core/about/about_remote_requirements).
+For more information, including instructions, see
+[About Remote Requirements](/powershell/module/microsoft.powershell.core/about/about_remote_requirements).
 
 Once you have configured Windows PowerShell remoting, many remoting strategies are available to you.
-This article lists just a few of them. For more information, see [About Remote](/powershell/module/microsoft.powershell.core/about/about_remote).
+This article lists just a few of them. For more information, see
+[About Remote](/powershell/module/microsoft.powershell.core/about/about_remote).
 
 ### Start an Interactive Session
 
-To start an interactive session with a single remote computer, use the [Enter-PSSession](/powershell/module/microsoft.powershell.core/enter-pssession)
-cmdlet. For example, to start an interactive session with the Server01 remote computer, type:
+To start an interactive session with a single remote computer, use the
+[Enter-PSSession](/powershell/module/microsoft.powershell.core/enter-pssession) cmdlet. For example,
+to start an interactive session with the Server01 remote computer, type:
 
 ```powershell
 Enter-PSSession Server01
@@ -81,9 +83,10 @@ For more information about the Enter-PSSession and Exit-PSSession cmdlets, see:
 
 ### Run a Remote Command
 
-To run a command on one or more computers, use the [Invoke-Command](/powershell/module/microsoft.powershell.core/invoke-command)
-cmdlet. For example, to run a [Get-UICulture](/powershell/module/microsoft.powershell.utility/get-uiculture)
-command on the Server01 and Server02 remote computers, type:
+To run a command on one or more computers, use the
+[Invoke-Command](/powershell/module/microsoft.powershell.core/invoke-command) cmdlet. For example,
+to run a [Get-UICulture](/powershell/module/microsoft.powershell.utility/get-uiculture) command on
+the Server01 and Server02 remote computers, type:
 
 ```powershell
 Invoke-Command -ComputerName Server01, Server02 -ScriptBlock {Get-UICulture}
@@ -136,7 +139,7 @@ Now you can use the data in the `$h` variable with other commands in the same se
 are displayed on the local computer. For example:
 
 ```powershell
-Invoke-Command -Session $s {$h | where {$_.InstalledBy -ne "NTAUTHORITY\SYSTEM"}}
+Invoke-Command -Session $s {$h | where {$_.InstalledBy -ne "NT AUTHORITY\SYSTEM"}}
 ```
 
 ### Advanced Remoting
@@ -157,16 +160,16 @@ or in the Windows PowerShell console, type `Get-Help wsman`.
 
 For more information, see:
 
-- [About Remote FAQ](/powershell/module/microsoft.powershell.core/about/about_remote_faq)
+- [PowerShell Remoting FAQ](powershell-remoting-faq.yml)
 - [Register-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Register-PSSessionConfiguration)
 - [Import-PSSession](xref:Microsoft.PowerShell.Utility.Import-PSSession)
 
-For help with remoting errors, see [about_Remote_Troubleshooting](/powershell/module/microsoft.powershell.core/about/about_Remote_Troubleshooting).
+For help with remoting errors, see
+[about_Remote_Troubleshooting](/powershell/module/microsoft.powershell.core/about/about_Remote_Troubleshooting).
 
 ## See Also
 
 - [about_Remote](/powershell/module/microsoft.powershell.core/about/about_remote_faq)
-- [about_Remote_FAQ](/powershell/module/microsoft.powershell.core/about/about_remote_faq)
 - [about_Remote_Requirements](/powershell/module/microsoft.powershell.core/about/about_remote_requirements)
 - [about_Remote_Troubleshooting](/powershell/module/microsoft.powershell.core/about/about_Remote_Troubleshooting)
 - [about_PSSessions](/powershell/module/microsoft.powershell.core/about/about_PSSessions)

@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 08/10/2020
+ms.date: 07/28/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/sort-object?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Sort-Object
@@ -26,7 +25,7 @@ Sort-Object [[-Property] <Object[]>] [-Descending] [-Unique] [-InputObject <psob
 ## DESCRIPTION
 
 The `Sort-Object` cmdlet sorts objects in ascending or descending order based on object property
-values. If sort properties are not included in a command, PowerShell uses default sort properties 
+values. If sort properties are not included in a command, PowerShell uses default sort properties
 of the first input object. If the type of the input object has no default sort properties,
 PowerShell attempts to compare the objects themselves. For more information, see the [Notes](#notes)
 section.
@@ -40,11 +39,13 @@ from the output.
 
 ### Example 1: Sort the current directory by name
 
-This command sorts the files and subdirectories in a directory.
+This example sorts the files and subdirectories in a directory.
 
+```powershell
+Get-ChildItem -Path C:\Test | Sort-Object
 ```
-PS> Get-ChildItem -Path C:\Test | Sort-Object
 
+```Output
     Directory: C:\Test
 
 Mode                LastWriteTime         Length Name
@@ -60,7 +61,7 @@ d-----        2/25/2019     18:24                Logs
 ```
 
 The `Get-ChildItem` cmdlet gets the files and subdirectories from the directory specified by the
-**Path** parameter, **C:\Test**. The objects are sent down the pipeline to the `Sort-Object` cmdlet.
+**Path** parameter, `C:\Test`. The objects are sent down the pipeline to the `Sort-Object` cmdlet.
 `Sort-Object` does not specify a property so the output is sorted by the default sort property,
 **Name**.
 
@@ -68,9 +69,11 @@ The `Get-ChildItem` cmdlet gets the files and subdirectories from the directory 
 
 This command displays the files in the current directory by length in ascending order.
 
+```powershell
+Get-ChildItem -Path C:\Test -File | Sort-Object -Property Length
 ```
-PS> Get-ChildItem -Path C:\Test -File | Sort-Object -Property Length
 
+```Output
     Directory: C:\Test
 
 Mode                LastWriteTime         Length Name
@@ -92,9 +95,11 @@ the files by length in ascending order.
 
 This example displays processes with the highest memory usage based on their working set (WS) size.
 
+```powershell
+Get-Process | Sort-Object -Property WS | Select-Object -Last 5
 ```
-PS> Get-Process | Sort-Object -Property WS | Select-Object -Last 5
 
+```Output
  NPM(K)    PM(M)      WS(M)     CPU(s)      Id  SI ProcessName
  ------    -----      -----     ------      --  -- -----------
     136   193.92     217.11     889.16   87492   8 OUTLOOK
@@ -115,9 +120,11 @@ with the highest **WS** usage.
 This command sorts the PowerShell session's **HistoryInfo** objects using the **Id** property. Each
 PowerShell session has its own command history.
 
+```powershell
+Get-History | Sort-Object -Property Id -Descending
 ```
-PS> Get-History | Sort-Object -Property Id -Descending
 
+```Output
   Id CommandLine
   -- -----------
   10 Get-Command Sort-Object -Syntax
@@ -139,7 +146,7 @@ newest to oldest.
 
 ### Example 5: Use a hash table to sort properties in ascending and descending order
 
-This command uses two properties to sort the objects, **Status** and **DisplayName**. **Status** is
+This example uses two properties to sort the objects, **Status** and **DisplayName**. **Status** is
 sorted in descending order and **DisplayName** is sorted in ascending order.
 
 A hash table is used to specify the **Property** parameter's value. The hash table uses an
@@ -149,9 +156,13 @@ see [about_Hash_Tables](../Microsoft.PowerShell.Core/About/about_Hash_Tables.md)
 The **Status** property used in the hash table is an enumerated property.
 For more information, see [ServiceControllerStatus](/dotnet/api/system.serviceprocess.servicecontrollerstatus).
 
+```powershell
+Get-Service |
+    Sort-Object -Property @{Expression = "Status"; Descending = $true},
+                          @{Expression = "DisplayName"; Descending = $false}
 ```
-PS C:\> Get-Service | Sort-Object -Property @{Expression = "Status"; Descending = $True}, @{Expression = "DisplayName"; Descending = $False}
 
+```Output
 Status   Name               DisplayName
 ------   ----               -----------
 Running  Appinfo            Application Information
@@ -189,9 +200,13 @@ the display names in alphabetical order.
 This command sorts text files in descending order by the time span between **CreationTime** and
 **LastWriteTime**.
 
+```powershell
+Get-ChildItem -Path C:\Test\*.txt |
+    Sort-Object -Property {$_.CreationTime - $_.LastWriteTime} |
+    Format-Table CreationTime, LastWriteTime, FullName
 ```
-PS> Get-ChildItem -Path C:\Test\*.txt | Sort-Object -Property @{Expression = {$_.CreationTime - $_.LastWriteTime}; Descending = $False} | Format-Table CreationTime, LastWriteTime, FullName
 
+```Output
 CreationTime          LastWriteTime        FullName
 ------------          -------------        --------
 11/21/2018 12:39:01   2/26/2019 08:59:36   C:\Test\test2.txt
@@ -203,14 +218,12 @@ CreationTime          LastWriteTime        FullName
 2/25/2019 18:25:11    2/26/2019 12:08:47   C:\Test\Zsystemlog.txt
 2/25/2019 18:25:11    2/26/2019 08:55:33   C:\Test\Bfile.txt
 2/26/2019 08:46:59    2/26/2019 12:12:19   C:\Test\LogFile3.txt
-
 ```
 
-The `Get-ChildItem` cmdlet uses the **Path** parameter to specify the directory **C:\Test** and all
+The `Get-ChildItem` cmdlet uses the **Path** parameter to specify the directory `C:\Test` and all
 of the `*.txt` files. The objects are sent down the pipeline to the `Sort-Object` cmdlet.
-`Sort-Object` uses the **Property** parameter with a hash table to determine each files time span
-between **CreationTime** and **LastWriteTime**. The **Descending** parameter is set to `$False` to
-sort in the order of longest to shortest time span.
+`Sort-Object` uses the **Property** parameter with a scriptblock to determine each files time span
+between **CreationTime** and **LastWriteTime**.
 
 ### Example 7: Sort names in a text file
 
@@ -218,8 +231,12 @@ This example shows how to sort a list from a text file. The original file is dis
 unsorted list. `Sort-Object` sorts the contents and then sorts the contents with the **Unique**
 parameter that removes duplicates.
 
+```powershell
+# All items unsorted
+Get-Content -Path C:\Test\ServerNames.txt
 ```
-PS> Get-Content -Path C:\Test\ServerNames.txt
+
+```Output
 localhost
 server01
 server25
@@ -227,8 +244,11 @@ LOCALHOST
 Server19
 server3
 localhost
+```
 
-PS> Get-Content -Path C:\Test\ServerNames.txt | Sort-Object
+```powershell
+# All items sorted
+Get-Content -Path C:\Test\ServerNames.txt | Sort-Object
 localhost
 LOCALHOST
 localhost
@@ -236,8 +256,14 @@ server01
 Server19
 server25
 server3
+```
 
-PS> Get-Content -Path C:\Test\ServerNames.txt | Sort-Object -Unique
+```powershell
+# Unique filtered items sorted
+Get-Content -Path C:\Test\ServerNames.txt | Sort-Object -Unique
+```
+
+```Output
 localhost
 server01
 Server19
@@ -246,14 +272,14 @@ server3
 ```
 
 The `Get-Content` cmdlet uses the **Path** parameter to specify the directory and file name. The
-file **ServerNames.txt** contains an unsorted list of computer names.
+file `ServerNames.txt` contains an unsorted list of computer names.
 
 The `Get-Content` cmdlet uses the **Path** parameter to specify the directory and file name. The
-file **ServerNames.txt** contains an unsorted list of computer names. The objects are sent down the
+file `ServerNames.txt` contains an unsorted list of computer names. The objects are sent down the
 pipeline to the `Sort-Object` cmdlet. `Sort-Object` sorts the list in the default order, ascending.
 
 The `Get-Content` cmdlet uses the **Path** parameter to specify the directory and file name. The
-file **ServerNames.txt** contains an unsorted list of computer names. The objects are sent down the
+file `ServerNames.txt` contains an unsorted list of computer names. The objects are sent down the
 pipeline to the `Sort-Object` cmdlet. `Sort-Object` uses the **Unique** parameter to remove
 duplicate computer names. The list is sorted in the default order, ascending.
 
@@ -266,8 +292,12 @@ integers. For these examples, the `ProductId.txt` file contains an unsorted list
 In the first example, `Get-Content` gets the contents of the file and pipes lines to the
 `Sort-Object` cmdlet. `Sort-Object` sorts the string objects in ascending order.
 
+```powershell
+# String sorted
+Get-Content -Path C:\Test\ProductId.txt | Sort-Object
 ```
-PS> Get-Content -Path C:\Test\ProductId.txt | Sort-Object
+
+```Output
 0
 1
 12345
@@ -281,8 +311,14 @@ PS> Get-Content -Path C:\Test\ProductId.txt | Sort-Object
 77
 88
 99999
+```
 
-PS> Get-Content -Path C:\Test\ProductId.txt | Sort-Object {[int]$_}
+```powershell
+# Integer sorted
+Get-Content -Path C:\Test\ProductId.txt | Sort-Object {[int]$_}
+```
+
+```Output
 0
 1
 2
@@ -304,12 +340,29 @@ sample code, `[int]` converts the string to an integer and `$_` represents each 
 down the pipeline. The integer objects are sent down the pipeline to the `Sort-Object` cmdlet.
 `Sort-Object` sorts the integer objects in numeric order.
 
-The `Get-Content` cmdlet uses the **Path** parameter to specify the directory and file name. The
-file **ProductId.txt** contains an unsorted list of product numbers. The string objects are sent
-down the pipeline to the `ForEach-Object` cmdlet. `ForEach-Object` uses a script block to convert
-the strings to integers. In the sample code, `[int]` converts the string to an integer and `$_`
-represents each string as it comes down the pipeline. The integer objects are sent down the pipeline
-to the `Sort-Object` cmdlet. `Sort-Object` sorts the integer objects in numeric order.
+### Example 9: Sort by multiple properties
+
+If you want to sort by multiple properties, separate the properties by commas.
+
+```powershell
+Get-ChildItem -Path C:\Test | Sort-Object Length,Name
+```
+
+```Output
+    Directory: C:\Test
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          13/10/2021    22:16              2 File01.txt
+-a---          13/10/2021    22:16              2 File03.txt
+-a---          13/10/2021    22:18             64 File02.txt
+-a---          13/10/2021    22:18             64 File04.txt
+```
+
+The `Get-ChildItem` cmdlet gets the files from the directory specified by the **Path** parameter. The objects are sent
+down the pipeline to the `Sort-Object` cmdlet. `Sort-Object` uses the **Length** and **Name** parameter to sort
+the files by length in ascending order. Since `File01.txt` and `File03.txt` have the same length, they are further sorted by their property **Name**.
+
 ## PARAMETERS
 
 ### -CaseSensitive
@@ -389,14 +442,14 @@ Specifies the property names that `Sort-Object` uses to sort the objects. Wildca
 Objects are sorted based on the property values. If you do not specify a property, `Sort-Object`
 sorts based on default properties for the object type or the objects themselves.
 
-Multiple properties can be sorted in ascending order, descending order, or a combination of sort
+Use commas to separate multiple properties. Multiple properties can be sorted in ascending order, descending order, or a combination of sort
 orders. When you specify multiple properties, the objects are sorted by the first property. If
 multiple objects have the same value for the first property, those objects are sorted by the second
 property. This process continues until there are no more specified properties or no groups of
 objects.
 
 The **Property** parameter's value can be a calculated property. To create a calculated property,
-use a hash table.
+use a scriptblock or a hashtable.
 
 Valid keys for a hash table are as follows:
 

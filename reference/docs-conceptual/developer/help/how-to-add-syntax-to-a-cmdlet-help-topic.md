@@ -1,8 +1,8 @@
 ---
+description: How to Add Syntax to a Cmdlet Help Topic
 ms.date: 09/12/2016
 ms.topic: reference
 title: How to Add Syntax to a Cmdlet Help Topic
-description: How to Add Syntax to a Cmdlet Help Topic
 ---
 # How to Add Syntax to a Cmdlet Help Topic
 
@@ -173,7 +173,7 @@ The syntax node of the XML begins immediately after the description node, which 
 ### Adding a Syntax Node
 
 The syntax diagram displayed in the cmdlet Help topic is generated from the data in the syntax node
-of the XML. The syntax node is enclosed in a pair if `<command:syntax>` tags. With each parameter
+of the XML. The syntax node is enclosed in a pair of `<command:syntax>` tags. With each parameter
 set of the cmdlet enclosed in a pair of `<command:syntaxitem>` tags. There is no limit to the number
 of `<command:syntaxitem>` tags that you can add.
 

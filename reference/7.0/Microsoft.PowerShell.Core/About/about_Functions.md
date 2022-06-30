@@ -1,14 +1,13 @@
 ---
 description: Describes how to create and use functions in PowerShell.
-keywords: powershell,cmdlet
 Locale: en-US
-ms.date: 2/27/2019
+ms.date: 11/18/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_functions?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Functions
+title: about Functions
 ---
 
-# About Functions
+# about_Functions
 
 ## Short description
 
@@ -48,12 +47,25 @@ Functions can also act like cmdlets. You can create a function that works
 just like a cmdlet without using `C#` programming. For more information,
 see [about_Functions_Advanced](about_Functions_Advanced.md).
 
+> [!IMPORTANT]
+> Within script files and script-based modules, functions must be defined
+> before they can be called.
+
 ## Syntax
 
-The following is the syntax for a function:
+The following are the syntax for a function:
 
-```
+```Syntax
 function [<scope:>]<name> [([type]$parameter1[,[type]$parameter2])]
+{
+  begin {<statement list>}
+  process {<statement list>}
+  end {<statement list>}
+}
+```
+
+```Syntax
+function [<scope:>]<name>
 {
   param([type]$parameter1 [,[type]$parameter2])
   dynamicparam {<statement list>}
@@ -80,7 +92,7 @@ functions, see
 Functions do not have to be complicated to be useful. The simplest functions
 have the following format:
 
-```
+```Syntax
 function <function-name> {statements}
 ```
 
@@ -141,12 +153,12 @@ about dynamic parameters in functions, see
 You can define any number of named parameters. You can include a default value
 for named parameters, as described later in this topic.
 
-You can define parameters inside the braces using the `Param` keyword, as
+You can define parameters inside the braces using the `param` keyword, as
 shown in the following sample syntax:
 
-```
+```Syntax
 function <name> {
-  param ([type]$parameter1[,[type]$parameter2])
+  param ([type]$parameter1 [,[type]$parameter2])
   <statement list>
 }
 ```
@@ -154,7 +166,7 @@ function <name> {
 You can also define parameters outside the braces without the `Param` keyword,
 as shown in the following sample syntax:
 
-```powershell
+```Syntax
 function <name> [([type]$parameter1[,[type]$parameter2])] {
   <statement list>
 }
@@ -163,7 +175,7 @@ function <name> [([type]$parameter1[,[type]$parameter2])] {
 Below is an example of this alternative syntax.
 
 ```powershell
-Function Add-Numbers($one, $two) {
+function Add-Numbers([int]$one, [int]$two) {
     $one + $two
 }
 ```
@@ -363,7 +375,7 @@ Any function can take input from the pipeline. You can control how a function
 processes input from the pipeline using `Begin`, `Process`, and `End`
 keywords. The following sample syntax shows the three keywords:
 
-```
+```Syntax
 function <name> {
   begin {<statement list>}
   process {<statement list>}
@@ -608,26 +620,15 @@ methods:
 
 ## See also
 
-[about_Automatic_Variables](about_Automatic_Variables.md)
-
-[about_Comment_Based_Help](about_Comment_Based_Help.md)
-
-[about_Functions_Advanced](about_Functions_Advanced.md)
-
-[about_Functions_Advanced_Methods](about_Functions_Advanced_Methods.md)
-
-[about_Functions_Advanced_Parameters](about_Functions_Advanced_Parameters.md)
-
-[about_Functions_CmdletBindingAttribute](about_Functions_CmdletBindingAttribute.md)
-
-[about_Functions_OutputTypeAttribute](about_Functions_OutputTypeAttribute.md)
-
-[about_Parameters](about_Parameters.md)
-
-[about_Profiles](about_Profiles.md)
-
-[about_Scopes](about_Scopes.md)
-
-[about_Script_Blocks](about_Script_Blocks.md)
-
-[about_Function_provider](about_Function_provider.md)
+- [about_Automatic_Variables](about_Automatic_Variables.md)
+- [about_Comment_Based_Help](about_Comment_Based_Help.md)
+- [about_Function_Provider](about_Function_provider.md)
+- [about_Functions_Advanced](about_Functions_Advanced.md)
+- [about_Functions_Advanced_Methods](about_Functions_Advanced_Methods.md)
+- [about_Functions_Advanced_Parameters](about_Functions_Advanced_Parameters.md)
+- [about_Functions_CmdletBindingAttribute](about_Functions_CmdletBindingAttribute.md)
+- [about_Functions_OutputTypeAttribute](about_Functions_OutputTypeAttribute.md)
+- [about_Parameters](about_Parameters.md)
+- [about_Profiles](about_Profiles.md)
+- [about_Scopes](about_Scopes.md)
+- [about_Script_Blocks](about_Script_Blocks.md)

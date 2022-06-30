@@ -1,9 +1,9 @@
 ---
-title: Script modules
 description: Script modules are an easy way to package scripts and functions into a reusable tool.
-ms.date: 06/02/2020
 ms.custom: Contributor-mikefrobbins
+ms.date: 10/05/2021
 ms.reviewer: mirobb
+title: Script modules
 ---
 # Chapter 10 - Script modules
 
@@ -354,7 +354,7 @@ It's not necessary to use both `Export-ModuleMember` in the `.PSM1` file and the
 ## Summary
 
 In this chapter you've learned how to turn your functions into a script module in PowerShell. You've
-also leaned some of the best practices for creating script modules such as creating a module
+also learned some of the best practices for creating script modules such as creating a module
 manifest for your script module.
 
 ## Review
@@ -367,10 +367,10 @@ manifest for your script module.
 
 ## Recommended Reading
 
-- [How to Create PowerShell Script Modules and Module Manifests][]
-- [about_Modules][]
-- [New-ModuleManifest][]
-- [Export-ModuleMember][]
+- [How to Create PowerShell Script Modules and Module Manifests][How to Create PowerShell Script Modules and Module Manifests]
+- [about_Modules][about_Modules]
+- [New-ModuleManifest][New-ModuleManifest]
+- [Export-ModuleMember][Export-ModuleMember]
 
 <!-- link references -->
 [How to Create PowerShell Script Modules and Module Manifests]: https://mikefrobbins.com/2013/07/04/how-to-create-powershell-script-modules-and-module-manifests/

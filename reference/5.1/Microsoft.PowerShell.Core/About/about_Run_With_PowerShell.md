@@ -1,21 +1,20 @@
 ---
-description:  Explains how to use the "Run with PowerShell" feature to run a script from a file system drive. 
-keywords: powershell,cmdlet
+description: Explains how to use the Run with PowerShell feature to run a script from a file system drive.
 Locale: en-US
 ms.date: 01/03/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_run_with_powershell?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Run_With_PowerShell
+title: about Run With PowerShell
 ---
 
-# About Run With PowerShell
+# about_Run_With_PowerShell
 
-## SHORT DESCRIPTION
+## Short description
 
 Explains how to use the "Run with PowerShell" feature to run a script from a
 file system drive.
 
-## LONG DESCRIPTION
+## Long description
 
 Beginning in Windows PowerShell 3.0, you can use the "Run with PowerShell"
 feature to run scripts from File Explorer in Windows 8 and Windows Server 2012
@@ -55,10 +54,8 @@ not affected by any other execution policy. For more information, see
 Troubleshooting Note: Run with PowerShell command might prompt you to confirm
 the execution policy change.
 
-## SEE ALSO
+## See also
 
-[about_Execution_Policies](about_Execution_Policies.md)
-
-[about_Group_Policy_Settings](about_Group_Policy_Settings.md)
-
-[about_Scripts](about_Scripts.md)
+- [about_Execution_Policies](about_Execution_Policies.md)
+- [about_Group_Policy_Settings](about_Group_Policy_Settings.md)
+- [about_Scripts](about_Scripts.md)

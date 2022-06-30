@@ -4,10 +4,10 @@ Locale: en-US
 ms.date: 03/30/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_logging_non-windows?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Logging_Non-Windows
+title: about Logging Non-Windows
 ---
 
-# About Logging Non-Windows
+# about_Logging_Non-Windows
 
 ## Short description
 PowerShell logs internal operations from the engine, providers, and cmdlets.
@@ -161,7 +161,7 @@ You can get help for `log` by running `log show --help` for additional details.
 > predicate string.
 
 You may also want to consider saving the event logs to a more secure location
-such as a central event log collector, or [SIEM][] aggregator. You can set up
+such as a central event log collector, or [SIEM][SIEM] aggregator. You can set up
 SIEM in Azure. For more information, see
 [Generic SIEM integration](/cloud-app-security/siem).
 
@@ -265,15 +265,12 @@ default value when no value is provided in the file.
 
 ## See also
 
-For Linux **syslog** and **rsyslog.conf** information, refer to the Linux
+- For Linux **syslog** and **rsyslog.conf** information, refer to the Linux
 computer's local `man` pages.
-
-For macOS **os_log** information, see
+- For macOS **os_log** information, see
 [os_log developer documentation](https://developer.apple.com/documentation/os/os_log).
-
-[about_Logging_Windows](about_Logging_Windows.md)
-
-[Generic SIEM integration](/cloud-app-security/siem)
+- [about_Logging_Windows](about_Logging_Windows.md)
+- [Generic SIEM integration](/cloud-app-security/siem)
 
 <!-- link references -->
 [SIEM]: https://wikipedia.org/wiki/Security_information_and_event_management

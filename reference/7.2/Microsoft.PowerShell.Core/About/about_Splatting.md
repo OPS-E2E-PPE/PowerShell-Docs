@@ -4,10 +4,10 @@ Locale: en-US
 ms.date: 08/11/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_splatting?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Splatting
+title: about Splatting
 ---
 
-# About Splatting
+# about_Splatting
 
 ## Short description
 
@@ -381,10 +381,7 @@ information, see Gael Colas' article [Pseudo-Splatting DSC Resources](https://ga
 
 ## See also
 
-[about_Arrays](about_Arrays.md)
-
-[about_Automatic_Variables](about_Automatic_Variables.md)
-
-[about_Hash_Tables](about_Hash_Tables.md)
-
-[about_Parameters](about_Parameters.md)
+- [about_Arrays](about_Arrays.md)
+- [about_Automatic_Variables](about_Automatic_Variables.md)
+- [about_Hash_Tables](about_Hash_Tables.md)
+- [about_Parameters](about_Parameters.md)

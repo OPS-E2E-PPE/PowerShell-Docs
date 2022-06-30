@@ -1,18 +1,17 @@
 ---
-ms.date:  11/13/2018
-keywords:  powershell,cmdlet
-title:  Decode a PowerShell command from a running process
 author: randomnote1
 description: This article shows how to decode a script block that a PowerShell process is currently running.
+ms.date: 10/07/2021
+title: Decode a PowerShell command from a running process
 ---
 
 # Decode a PowerShell command from a running process
 
 At times, you may have a PowerShell process running that is taking up a large amount of resources.
-This process could be running in the context of a [Task Scheduler][] job or a [SQL Server Agent][]
-job. Where there are multiple PowerShell processes running, it can be difficult to know
-which process represents the problem. This article shows how to decode a script block that a
-PowerShell process is currently running.
+This process could be running in the context of a [Task Scheduler][task] job or a
+[SQL Server Agent][sqlagent] job. Where there are multiple PowerShell processes running, it can be
+difficult to know which process represents the problem. This article shows how to decode a script
+block that a PowerShell process is currently running.
 
 ## Create a long running process
 
@@ -33,10 +32,10 @@ powershell.exe -Command {
 
 ## View the process
 
-The body of the command which PowerShell is executing is stored in the **CommandLine** property
-of the [Win32_Process][] class. If the command is an encoded command, the **CommandLine**
-property contains the string "EncodedCommand". Using this information, the encoded command can
-be de-obfuscated via the following process.
+The body of the command which PowerShell is executing is stored in the **CommandLine** property of
+the [Win32_Process][Win32_Process] class. If the command is an encoded command, the **CommandLine**
+property contains the string "EncodedCommand". Using this information, the encoded command can be
+de-obfuscated via the following process.
 
 Start PowerShell as Administrator. It is vital that PowerShell is running as administrator,
 otherwise no results are returned when querying the running processes.
@@ -81,10 +80,10 @@ $commandDetails | ForEach-Object -Process {
 
     # Add the decoded command back to the object
     $commandDetails |
-        Where-Object -FilterScript { $_.ProcessId -eq $_.ProcessId } |
+        Where-Object -FilterScript { $_.ProcessId -eq $currentProcess.processId } |
         Add-Member -MemberType NoteProperty -Name DecodedCommand -Value $decodedCommand
 }
-$commandDetails[0]
+$commandDetails[0] | Format-List -Property *
 ```
 
 The decoded command can now be reviewed by selecting the decoded command property.
@@ -98,20 +97,14 @@ EncodedCommand : IAAKAAoACgAgAAoAIAAgACAAIAAkAGkAIAA9ACAAMQAgAAoACgAKACAACgAgACA
                  IAAKAAoACgAgAAoAIAAgACAAIAB9ACAACgAKAAoAIAAKAA==
 DecodedCommand :
                      $i = 1
-
                      while ( $i -le 10 )
-
                      {
-
                          Write-Output -InputObject $i
-
                          Start-Sleep -Seconds 60
-
                          $i++
-
                      }
 ```
 
-[Task Scheduler]: /windows/desktop/TaskSchd/task-scheduler-start-page
-[SQL Server Agent]: /sql/ssms/agent/sql-server-agent
+[task]: /windows/desktop/TaskSchd/task-scheduler-start-page
+[sqlagent]: /sql/ssms/agent/sql-server-agent
 [Win32_Process]: /windows/desktop/CIMWin32Prov/win32-process

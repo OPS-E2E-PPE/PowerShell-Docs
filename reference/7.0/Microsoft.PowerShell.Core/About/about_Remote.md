@@ -1,18 +1,17 @@
 ---
-description: Describes how to run remote commands in PowerShell. 
-keywords: powershell,cmdlet
+description: Describes how to run remote commands in PowerShell.
 Locale: en-US
 ms.date: 01/03/2018
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_remote?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Remote
+title: about Remote
 ---
-# About Remote
+# about_Remote
 
-## SHORT DESCRIPTION
+## Short description
 Describes how to run remote commands in PowerShell.
 
-## LONG DESCRIPTION
+## Long description
 
 You can run remote commands on a single computer or on multiple computers by
 using a temporary or persistent connection. You can also start an interactive
@@ -217,9 +216,9 @@ remote computer where it terminates the remote command.
 
 - For information about how remoting works, how to manage remote data, special
   configurations, security issues, and other frequently asked questions, see
-  [about_Remote_FAQ](about_Remote_FAQ.md).
+  [PowerShell Remoting FAQ](/powershell/scripting/learn/remoting/powershell-remoting-faq).
 
-- For help in resolving remoting errors, see about_Remote_Troubleshooting.
+- For help in resolving remoting errors, see [about_Remote_Troubleshooting](about_Remote_Troubleshooting.md).
 
 - For information about PSSessions and persistent connections, see
   [about_PSSessions](about_PSSessions.md).
@@ -230,22 +229,14 @@ remote computer where it terminates the remote command.
 
 about_Remoting
 
-## SEE ALSO
+## See also
 
-[about_PSSessions](about_PSSessions.md)
-
-[about_Remote_Disconnected_Sessions](about_Remote_Disconnected_Sessions.md)
-
-[about_Remote_Requirements](about_Remote_Requirements.md)
-
-[about_Remote_FAQ](about_Remote_FAQ.md)
-
-[about_Remote_TroubleShooting](about_Remote_TroubleShooting.md)
-
-[about_Remote_Variables](about_Remote_Variables.md)
-
-[Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
-
-[Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
-
-[New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
+- [about_PSSessions](about_PSSessions.md)
+- [about_Remote_Disconnected_Sessions](about_Remote_Disconnected_Sessions.md)
+- [about_Remote_Requirements](about_Remote_Requirements.md)
+- [about_Remote_TroubleShooting](about_Remote_TroubleShooting.md)
+- [about_Remote_Variables](about_Remote_Variables.md)
+- [Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
+- [Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
+- [New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
+- [PowerShell Remoting FAQ](/powershell/scripting/learn/remoting/powershell-remoting-faq)

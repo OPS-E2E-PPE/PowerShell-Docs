@@ -2,7 +2,7 @@
 external help file: System.Management.Automation.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 04/08/2020
+ms.date: 11/16/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/invoke-command?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Invoke-Command
@@ -120,7 +120,7 @@ Invoke-Command -Credential <PSCredential> [-ConfigurationName <String>] [-Thrott
 Invoke-Command [-Port <Int32>] [-AsJob] [-HideComputerName] [-JobName <String>]
  [-ScriptBlock] <ScriptBlock> -HostName <String[]> [-UserName <String>] [-KeyFilePath <String>]
  [-SSHTransport] [-RemoteDebug] [-InputObject <PSObject>] [-ArgumentList <Object[]>]
- [-Subsystem <String>] [<CommonParameters>]
+ [-Subsystem <String>] [-ConnectingTimeout <int>] [<CommonParameters>]
 ```
 
 ### ContainerId
@@ -175,7 +175,7 @@ persistent connection) on the remote computer, and then use the **Session** para
 session, use the **InDisconnectedSession** parameter. To run a command in a background job, use the
 **AsJob** parameter.
 
-You can also use `Invoke-Command` on a local computer to a script block as a command. PowerShell
+You can also use `Invoke-Command` on a local computer to a run script block as a command. PowerShell
 runs the script block immediately in a child scope of the current scope.
 
 Before using `Invoke-Command` to run commands on a remote computer, read [about_Remote](./About/about_Remote.md).
@@ -273,10 +273,10 @@ session in the `$s` variable. The `Invoke-Command` lines that follow use the **S
 to run both of the commands in the same session. Since both commands run in the same session, the
 `$p` value remains active.
 
-### Example 5: Enter a command stored in a local variable
+### Example 5: Invoke a command with a script block stored in a variable
 
-This example shows how to create a command that is stored as a script block in a local variable.
-When the script block is saved in a local variable, you can specify the variable as the value of the
+This example shows how to run a command that is stored as a script block in a variable. When the
+script block is saved in a variable, you can specify the variable as the value of the
 **ScriptBlock** parameter.
 
 ```powershell
@@ -605,7 +605,7 @@ Enable-WSManCredSSP -Role Client -DelegateComputer Server02
 $s = New-PSSession Server02
 Invoke-Command -Session $s -ScriptBlock {Enable-WSManCredSSP -Role Server -Force}
 $parameters = @{
-  Session = $s
+  ComputerName = 'Server02'
   ScriptBlock = { Get-Item \\Net03\Scripts\LogFiles.ps1 }
   Authentication = "CredSSP"
   Credential = "Domain01\Admin01"
@@ -744,22 +744,9 @@ Accept wildcard characters: False
 
 ### -ArgumentList
 
-Supplies the values of local variables in the command. The variables in the command are replaced by
-these values before the command is run on the remote computer. Enter the values in a comma-separated
-list. Values are associated with variables in the order that they're listed. The alias for
-**ArgumentList** is Args.
-
-The values in the **ArgumentList** parameter can be actual values, such as 1024, or they can be
-references to local variables, such as `$max`.
-
-To use local variables in a command, use the following command format:
-
-`{param($<name1>[, $<name2>]...) <command-with-local-variables>} -ArgumentList <value>`
--or- `<local-variable>`
-
-The **param** keyword lists the local variables that are used in the command. **ArgumentList**
-supplies the values of the variables, in the order that they're listed. For more information about
-the behavior of **ArgumentList**, see [about_Splatting](about/about_Splatting.md#splatting-with-arrays).
+Supplies the values of parameters for the scriptblock. The parameters in the script block are passed
+by position from the array value supplied to **ArgumentList**. This is known as array splatting. For
+more information about the behavior of **ArgumentList**, see [about_Splatting](about/about_Splatting.md#splatting-with-arrays).
 
 ```yaml
 Type: System.Object[]
@@ -927,6 +914,25 @@ Required: False
 Position: Named
 Default value: $PSSessionConfigurationName if set on the local computer, otherwise Microsoft.PowerShell
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ConnectingTimeout
+
+Specifies the amount of time in milliseconds allowed for the initial SSH connection to complete. If
+the connection doesn't complete within the specified time, an error is returned.
+
+This parameter was introduced in PowerShell 7.2
+
+```yaml
+Type: System.Int32
+Parameter Sets: SSHHost
+Aliases:
+
+Required: False
+Position: Named
+Default value: unlimited
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -1302,11 +1308,14 @@ Accept wildcard characters: False
 
 ### -ScriptBlock
 
-Specifies the commands to run. Enclose the commands in curly braces `{ }` to create a script block.
-This parameter is required.
+Specifies the commands to run. Enclose the commands in braces (`{ }`) to create a script block. When
+using `Invoke-Command` to run a command remotely, any variables in the command are evaluated on the
+remote computer.
 
-By default, any variables in the command are evaluated on the remote computer. To include local
-variables in the command, use **ArgumentList**.
+> [!NOTE]
+> Parameters for the scriptblock can only be passed in from **ArgumentList** by position. Switch
+> parameters cannot be passed by position. If you need a parameter that behaves like a
+> **SwitchParameter** type, use a **Boolean** type instead.
 
 ```yaml
 Type: System.Management.Automation.ScriptBlock
@@ -1444,6 +1453,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Subsystem
+
+Specifies the SSH subsystem used for the new **PSSession**.
+
+This specifies the subsystem to use on the target as defined in sshd_config.
+The subsystem starts a specific version of PowerShell with predefined parameters.
+If the specified subsystem does not exist on the remote computer, the command fails.
+
+If this parameter is not used, the default is the 'powershell' subsystem.
+
+```yaml
+Type: System.String
+Parameter Sets: SSHHost
+Aliases:
+
+Required: False
+Position: Named
+Default value: powershell
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
 ### -ThrottleLimit
 
 Specifies the maximum number of concurrent connections that can be established to run this command.
@@ -1549,28 +1580,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Subsystem
-
-Specifies the SSH subsystem used for the new **PSSession**.
-
-This specifies the subsystem to use on the target as defined in sshd_config.
-The subsystem starts a specific version of PowerShell with predefined parameters.
-If the specified subsystem does not exist on the remote computer, the command fails.
-
-If this parameter is not used, the default is the 'powershell' subsystem.
-
-```yaml
-Type: System.String
-Parameter Sets: SSHHost
-Aliases:
-
-Required: False
-Position: Named
-Default value: powershell
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
@@ -1666,4 +1675,3 @@ PowerShell SSH remoting, see
 [Remove-PSSession](Remove-PSSession.md)
 
 [WSMan Provider](../Microsoft.WsMan.Management/About/about_WSMan_Provider.md)
-

@@ -1,15 +1,14 @@
 ---
 description: Describes how to run jobs on remote computers.
-keywords: powershell,cmdlet
 Locale: en-US
 ms.date: 11/11/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_remote_jobs?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Remote_Jobs
+title: about Remote Jobs
 ---
-# About Remote Jobs
+# about_Remote_Jobs
 
-## Short Description
+## Short description
 Describes how to run jobs on remote computers.
 
 ## Detailed Description
@@ -71,7 +70,7 @@ methods.
 
 You can start an interactive session with a remote computer and then start a
 job during the interactive session. For more information about interactive
-sessions, see about_Remote, and see `Enter-PSSession`.
+sessions, see [about_Remote](about_Remote.md), and see `Enter-PSSession`.
 
 The procedure for starting a job in an interactive session is almost identical
 to the procedure for starting a background job on the local computer. However,
@@ -406,11 +405,11 @@ However, the parent session is not the original PowerShell session where
 - [about_Remote](about_Remote.md)
 - [about_Remote_Variables](about_Remote_Variables.md)
 - [Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
-- [Start-Job](xref:Microsoft.PowerShell.Core.Start-Job)
 - [Get-Job](xref:Microsoft.PowerShell.Core.Get-Job)
-- [Wait-Job](xref:Microsoft.PowerShell.Core.Wait-Job)
-- [Stop-Job](xref:Microsoft.PowerShell.Core.Stop-Job)
 - [Remove-Job](xref:Microsoft.PowerShell.Core.Remove-Job)
-- [New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
+- [Start-Job](xref:Microsoft.PowerShell.Core.Start-Job)
+- [Stop-Job](xref:Microsoft.PowerShell.Core.Stop-Job)
+- [Wait-Job](xref:Microsoft.PowerShell.Core.Wait-Job)
 - [Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
 - [Exit-PSSession](xref:Microsoft.PowerShell.Core.Exit-PSSession)
+- [New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)

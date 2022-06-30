@@ -1,13 +1,12 @@
 ---
-description:  Explains how to use local and remote variables in remote commands. 
-keywords: powershell,cmdlet
+description: Explains how to use local and remote variables in remote commands.
 Locale: en-US
 ms.date: 03/13/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_remote_variables?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Remote_Variables
+title: about Remote Variables
 ---
-# About Remote Variables
+# about_Remote_Variables
 
 ## Short description
 
@@ -171,20 +170,12 @@ Invoke-Command -ComputerName S1 -ScriptBlock {
 
 ## See also
 
-[about_PSSessions](about_PSSessions.md)
-
-[about_Remote](about_Remote.md)
-
-[about_Scopes](about_Scopes.md)
-
-[about_Splatting](about_Splatting.md)
-
-[about_Variables](about_Variables.md)
-
-[Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
-
-[Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
-
-[New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
-
-[Start-ThreadJob](/powershell/module/ThreadJob/Start-ThreadJob)
+- [about_PSSessions](about_PSSessions.md)
+- [about_Remote](about_Remote.md)
+- [about_Scopes](about_Scopes.md)
+- [about_Splatting](about_Splatting.md)
+- [about_Variables](about_Variables.md)
+- [Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
+- [Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
+- [New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
+- [Start-ThreadJob](/powershell/module/ThreadJob/Start-ThreadJob)

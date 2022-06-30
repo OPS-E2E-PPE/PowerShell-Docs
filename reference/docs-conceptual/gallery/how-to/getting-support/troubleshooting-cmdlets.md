@@ -1,7 +1,7 @@
 ---
-ms.date: 01/25/2021
-title:  Troubleshooting cmdlets
 description: This article provide information and steps for troubleshooting errors using the PowerShell Gallery
+ms.date: 01/25/2021
+title: Troubleshooting cmdlets
 ---
 # Troubleshooting cmdlets
 
@@ -21,7 +21,7 @@ Update-Module Azure -Verbose
 
 ## Required network endpoints
 
-The Install and Update cmdlets require internet access to connect to the network endpoints used by
+The Install and Update cmdlets require internet access to connect to the network endpoints used
 by the PowerShell Gallery. Ensure that your network access policies allow you to connect to the
 following endpoints.
 

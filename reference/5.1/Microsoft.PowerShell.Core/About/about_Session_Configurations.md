@@ -1,19 +1,18 @@
 ---
-description: Describes session configurations, which determine the users who can connect to the computer remotely and the commands they can run. 
-keywords: powershell,cmdlet
+description: Describes session configurations, which determine the users who can connect to the computer remotely and the commands they can run.
 Locale: en-US
 ms.date: 12/09/2017
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_session_configurations?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Session_Configurations
+title: about Session Configurations
 ---
-# About Session Configurations
+# about_Session_Configurations
 
-## SHORT DESCRIPTION
+## Short description
 Describes session configurations, which determine the users who can connect to
 the computer remotely and the commands they can run.
 
-## LONG DESCRIPTION
+## Long description
 
 A session configuration, also known as an "endpoint" is a group of settings on
 the local computer that define the environment for the PowerShell sessions that
@@ -328,30 +327,18 @@ about_Preference_Variables.
 about_Endpoints
 about_SessionConfigurations
 
-## SEE ALSO
+## See also
 
-[about_Preference_Variables](about_Preference_Variables.md)
-
-[about_PSSessions](about_PSSessions.md)
-
-[about_Remote](about_Remote.md)
-
-[about_Session_Configuration_Files](about_Session_Configuration_Files.md)
-
-[New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
-
-[Disable-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Disable-PSSessionConfiguration)
-
-[Enable-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Enable-PSSessionConfiguration)
-
-[Get-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Get-PSSessionConfiguration)
-
-[New-PSSessionConfigurationFile](xref:Microsoft.PowerShell.Core.New-PSSessionConfigurationFile)
-
-[Register-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Register-PSSessionConfiguration)
-
-[Set-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Set-PSSessionConfiguration)
-
-[Test-PSSessionConfigurationFile](xref:Microsoft.PowerShell.Core.Test-PSSessionConfigurationFile)
-
-[Unregister-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Unregister-PSSessionConfiguration)
+- [about_Preference_Variables](about_Preference_Variables.md)
+- [about_PSSessions](about_PSSessions.md)
+- [about_Remote](about_Remote.md)
+- [about_Session_Configuration_Files](about_Session_Configuration_Files.md)
+- [New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
+- [Disable-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Disable-PSSessionConfiguration)
+- [Enable-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Enable-PSSessionConfiguration)
+- [Get-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Get-PSSessionConfiguration)
+- [Register-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Register-PSSessionConfiguration)
+- [Set-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Set-PSSessionConfiguration)
+- [Unregister-PSSessionConfiguration](xref:Microsoft.PowerShell.Core.Unregister-PSSessionConfiguration)
+- [New-PSSessionConfigurationFile](xref:Microsoft.PowerShell.Core.New-PSSessionConfigurationFile)
+- [Test-PSSessionConfigurationFile](xref:Microsoft.PowerShell.Core.Test-PSSessionConfigurationFile)

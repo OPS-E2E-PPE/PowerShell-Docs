@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 10/03/2019
+ms.date: 11/18/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/rename-item?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Rename-Item
@@ -52,9 +52,6 @@ You can't use `Rename-Item` to both rename and move an item. Specifically, you c
 for the value of the **NewName** parameter, unless the path is identical to the path specified in
 the **Path** parameter. Otherwise, only a new name is permitted.
 
-This example attempts to rename the `project.txt` file in the current directory to `old-project.txt`
-in the `D:\Archive` directory. The result is the error shown in the output.
-
 ```powershell
 Rename-Item -Path "project.txt" -NewName "d:\archive\old-project.txt"
 ```
@@ -66,6 +63,11 @@ At line:1 char:12
 + CategoryInfo          : InvalidArgument: (:) [Rename-Item], PS>  Move-Item -Path "project.txt" -De
 stination "d:\archive\old-project.txt"
 ```
+
+This example attempts to rename the `project.txt` file in the current directory to `old-project.txt`
+in the `D:\Archive` directory. The result is the error shown in the output.
+
+Use the `Move-Item` cmdlet, instead.
 
 ### Example 3: Rename a registry key
 

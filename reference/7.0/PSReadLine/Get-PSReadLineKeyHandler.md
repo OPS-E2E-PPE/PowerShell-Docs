@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.PSReadLine2.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: PSReadLine
-ms.date: 12/07/2018
+ms.date: 10/04/2021
 online version: https://docs.microsoft.com/powershell/module/psreadline/get-psreadlinekeyhandler?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-PSReadLineKeyHandler
@@ -22,7 +21,7 @@ Get-PSReadLineKeyHandler [-Bound] [-Unbound] [<CommonParameters>]
 
 ## DESCRIPTION
 
-The **Get-PSReadLineKeyHandler** cmdlet returns the currently bound key bindings.
+The `Get-PSReadLineKeyHandler` cmdlet returns the currently bound key bindings.
 
 ## EXAMPLES
 
@@ -140,8 +139,7 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see
-[about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

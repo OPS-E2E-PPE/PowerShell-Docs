@@ -2,11 +2,12 @@
 description: Provides information about PowerShell thread-based jobs. A thread job is a type of background job that runs a command or expression in a separate thread within the current session process.
 Locale: en-US
 ms.date: 11/11/2020
+online version: https://docs.microsoft.com/powershell/module/psscheduledjob/about/about_thread_jobs?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Thread_Jobs
+title: about Thread Jobs
 ---
 
-# About Thread Jobs
+# about_Thread_Jobs
 
 ## Short description
 
@@ -276,14 +277,14 @@ NPM(K)  PM(M)   WS(M) CPU(s)    Id SI ProcessName
 
 ## See also
 
+- [about_Job_Details](about_Job_Details.md)
 - [about_Remote_Jobs](about_Remote_Jobs.md)
 - [about_Thread_Jobs](about_Thread_Jobs.md)
-- [about_Job_Details](about_Job_Details.md)
-- [about_Remote](about_Remote.md)
 - [about_PSSessions](about_PSSessions.md)
-- [Start-Job](xref:Microsoft.PowerShell.Core.Start-Job)
+- [about_Remote](about_Remote.md)
 - [Get-Job](xref:Microsoft.PowerShell.Core.Get-Job)
 - [Receive-Job](xref:Microsoft.PowerShell.Core.Receive-Job)
+- [Remove-Job](xref:Microsoft.PowerShell.Core.Remove-Job)
+- [Start-Job](xref:Microsoft.PowerShell.Core.Start-Job)
 - [Stop-Job](xref:Microsoft.PowerShell.Core.Stop-Job)
 - [Wait-Job](xref:Microsoft.PowerShell.Core.Wait-Job)
-- [Remove-Job](xref:Microsoft.PowerShell.Core.Remove-Job)

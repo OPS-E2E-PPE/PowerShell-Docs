@@ -1,16 +1,15 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 5/14/2019
+ms.date: 05/14/2019
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/move-itemproperty?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Move-ItemProperty
 ---
 # Move-ItemProperty
 
-## Synopsis
+## SYNOPSIS
 Moves a property from one location to another.
 
 ## SYNTAX
@@ -31,7 +30,7 @@ Move-ItemProperty -LiteralPath <String[]> [-Name] <String[]> [-Destination] <Str
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-## Description
+## DESCRIPTION
 
 The `Move-ItemProperty` cmdlet moves a property of an item from one item to another item.
 For instance, it can move a registry entry from one registry key to another registry key.

@@ -1,13 +1,12 @@
 ---
-description:  Defines what a script block is and explains how to use script blocks in the PowerShell programming language. 
-keywords: powershell,cmdlet
+description: Defines what a script block is and explains how to use script blocks in the PowerShell programming language.
 Locale: en-US
 ms.date: 04/08/2020
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_script_blocks?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Script_Blocks
+title: about Script Blocks
 ---
-# About Script Blocks
+# about_Script_Blocks
 
 ## Short description
 
@@ -187,10 +186,8 @@ Notes on **delay-bind** script blocks as parameters:
         Microsoft.PowerShell.Commands.RenameItemCommand
   ```
 
-## See Also
+## See also
 
-[about_Functions](about_Functions.md)
-
-[about_Functions_Advanced](about_Functions_Advanced.md)
-
-[about_Operators](about_Operators.md)
+- [about_Functions](about_Functions.md)
+- [about_Functions_Advanced](about_Functions_Advanced.md)
+- [about_Operators](about_Operators.md)

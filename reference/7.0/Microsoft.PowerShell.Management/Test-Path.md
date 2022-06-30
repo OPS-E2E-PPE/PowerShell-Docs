@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 03/22/2019
+ms.date: 12/13/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/test-path?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Test-Path
@@ -35,9 +34,9 @@ Test-Path -LiteralPath <String[]> [-Filter <String>] [-Include <String[]>] [-Exc
 
 The `Test-Path` cmdlet determines whether all elements of the path exist. It returns `$True` if all
 elements exist and `$False` if any are missing. It can also tell whether the path syntax is valid
-and whether the path leads to a container or a terminal or leaf element. If the `Path` is whitespace
-an empty string, then `$False` is returned. If the `Path` is `$null`, array of `$null` or empty
-array, a non-terminating error is returned.
+and whether the path leads to a container or a terminal or leaf element. If the **Path** is a
+whitespace or empty string, then `$False` is returned. If the **Path** is `$null`, array of `$null`
+or empty array, a non-terminating error is returned.
 
 ## EXAMPLES
 
@@ -51,9 +50,9 @@ Test-Path -Path "C:\Documents and Settings\DavidC"
 True
 ```
 
-This command checks whether all elements in the path exist, that is, the C: directory, the Documents
-and Settings directory, and the DavidC directory. If any are missing, the cmdlet returns `$False`.
-Otherwise, it returns `$True`.
+This command checks whether all elements in the path exist, that is, the `C:` directory, the
+`Documents and Settings` directory, and the `DavidC` directory. If any are missing, the cmdlet
+returns `$False`. Otherwise, it returns `$True`.
 
 ### Example 2: Test the path of a profile
 
@@ -80,7 +79,7 @@ whether the syntax of the path is correct. In this case, the path is `$False`, b
 correct `$True`. These commands use `$profile`, the automatic variable that points to the location
 for the profile, even if the profile does not exist.
 
-For more information about automatic variables, see about_Automatic_Variables.
+For more information about automatic variables, see [about_Automatic_Variables](../Microsoft.PowerShell.Core/About/about_Automatic_Variables.md).
 
 ### Example 3: Check whether there are any files besides a specified type
 
@@ -154,7 +153,7 @@ on the computer is newer than "July 13, 2009".
 The NewerThan parameter works only in file system drives.
 
 ```powershell
-Test-Path $pshome\PowerShell.exe -NewerThan "July 13, 2009"
+Test-Path $pshome\pwsh.exe -NewerThan "July 13, 2009"
 ```
 
 ```Output
@@ -184,8 +183,9 @@ At line:1 char:11
 
 ### Example 8: Test a path with whitespace as the value
 
-When a whitespace or empty string is provided for the the `-Path` parameter, it returns **False**.
-The following example show whitespace and empty string.
+When a whitespace string is provided for the the **Path** parameter, it returns **False**. This is a
+change from Windows PowerShell 5.1. When an empty string is provided, `Test-Path` returns an error.
+The following example shows whitespace and empty string.
 
 ```powershell
 Test-Path ' '
@@ -203,7 +203,8 @@ False
 
 > [!NOTE]
 > This parameter is not supported by any providers installed with PowerShell. To impersonate another
-> user, or elevate your credentials when running this cmdlet, use [Invoke-Command](../Microsoft.PowerShell.Core/Invoke-Command.md).
+> user, or elevate your credentials when running this cmdlet, use
+> [Invoke-Command](../Microsoft.PowerShell.Core/Invoke-Command.md).
 
 ```yaml
 Type: System.Management.Automation.PSCredential

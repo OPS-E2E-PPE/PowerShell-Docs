@@ -1,9 +1,8 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 5/14/2019
+ms.date: 05/16/2022
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/get-psdrive?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-PSDrive
@@ -214,7 +213,7 @@ Accept wildcard characters: False
 ### -Name
 
 Specifies, as a string array, the name or name of drives that this cmdlet gets in the operation.
-Type the drive name or letter without a colon (:).
+Type the drive name or letter without a colon (`:`).
 
 ```yaml
 Type: System.String[]

@@ -1,8 +1,8 @@
 ---
+description: Installing the Windows PowerShell SDK
 ms.date: 03/30/2020
 ms.topic: reference
 title: Installing the Windows PowerShell SDK
-description: Installing the Windows PowerShell SDK
 ---
 # Installing the Windows PowerShell SDK
 
@@ -32,8 +32,7 @@ Windows Server 2008 R2 as described above.
 
 The Windows PowerShell 2.0 SDK provides the reference assemblies needed to write cmdlets, providers,
 and hosting applications, and it provides C# sample code that can be used as the starting point when
-you begin writing code. You can download the code samples from
-[https://www.microsoft.com/download/details.aspx?id=2560](https://www.microsoft.com/download/details.aspx?id=2560).
+you begin writing code.
 
 ### Reference assemblies
 

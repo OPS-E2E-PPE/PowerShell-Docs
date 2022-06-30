@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
 ms.date: 10/18/2018
@@ -10,7 +9,7 @@ title: Move-ItemProperty
 ---
 # Move-ItemProperty
 
-## Synopsis
+## SYNOPSIS
 Moves a property from one location to another.
 
 ## SYNTAX
@@ -31,7 +30,7 @@ Move-ItemProperty -LiteralPath <String[]> [-Name] <String[]> [-Destination] <Str
  [-Confirm] [-UseTransaction] [<CommonParameters>]
 ```
 
-## Description
+## DESCRIPTION
 
 The `Move-ItemProperty` cmdlet moves a property of an item from one item to another item.
 For instance, it can move a registry entry from one registry key to another registry key.
@@ -236,7 +235,7 @@ Accept wildcard characters: True
 
 Includes the command in the active transaction.
 This parameter is valid only when a transaction is in progress.
-For more information, see about_Transactions.
+For more information, see [about_Transactions](../Microsoft.PowerShell.Core/About/about_Transactions.md).
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
 ms.date: 12/11/2019
@@ -128,22 +127,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Credential
 
 Specifies a user account that has permission to do this action. The default is the current user.
@@ -226,6 +209,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WhatIf
 
 Shows what would happen if the cmdlet runs. The cmdlet isn't run.
@@ -260,8 +259,6 @@ You can't pipe input to this cmdlet.
 ### None
 
 ## NOTES
-
-This cmdlet is only available on Windows platforms.
 
 This cmdlet only works on Windows and uses the **Win32Shutdown** method of the
 **Win32_OperatingSystem** WMI class. This method requires the **SeShutdownPrivilege** privilege be

@@ -1,17 +1,17 @@
 ---
 description: Describes how to create and use a PowerShell profile.
 Locale: en-US
-ms.date: 11/30/2017
+ms.date: 08/20/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Profiles
+title: about Profiles
 ---
-# About Profiles
+# about_Profiles
 
-## Short Description
+## Short description
 Describes how to create and use a PowerShell profile.
 
-## Long Description
+## Long description
 
 You can create a PowerShell profile to customize your environment and to add
 session-specific elements to every PowerShell session that you start.
@@ -40,12 +40,12 @@ For example, the PowerShell console supports the following basic
 profile files. The profiles are listed in precedence order. The first
 profile has the highest precedence.
 
-|Description               | Path                                          |
-|--------------------------|-----------------------------------------------|
-|All Users, All Hosts      |$PSHOME\\Profile.ps1                           |
-|All Users, Current Host   |$PSHOME\\Microsoft.PowerShell_profile.ps1      |
-|Current User, All Hosts   |$Home\\[My ]Documents\\PowerShell\\Profile.ps1 |
-|Current user, Current Host|$Home\\[My ]Documents\\PowerShell\\<br>Microsoft.PowerShell_profile.ps1 |
+|        Description         |                                                                                                      Path                                                                                                       |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| All Users, All Hosts       | Windows - $PSHOME\\Profile.ps1<br>Linux - /usr/local/microsoft/powershell/7/profile.ps1<br>macOS - /usr/local/microsoft/powershell/7/profile.ps1                                                                |
+| All Users, Current Host    | Windows - $PSHOME\\Microsoft.PowerShell_profile.ps1<br>Linux - /usr/local/microsoft/powershell/7/Microsoft.Powershell_profile.ps1<br>macOS - /usr/local/microsoft/powershell/7/Microsoft.Powershell_profile.ps1 |
+| Current User, All Hosts    | Windows - $Home\\[My ]Documents\\PowerShell\\Profile.ps1<br>Linux - ~/.config/powershell/profile.ps1<br>macOS - ~/.config/powershell/profile.ps1                                                                |
+| Current user, Current Host | Windows - $Home\\[My ]Documents\\PowerShell\\Microsoft.PowerShell_profile.ps1<br>Linux - ~/.config/powershell/Microsoft.Powershell_profile.ps1<br>macOS - ~/.config/powershell/Microsoft.Powershell_profile.ps1 |
 
 The profile paths include the following variables:
 
@@ -64,6 +64,12 @@ host-specific profiles.
 
 In PowerShell Help, the "CurrentUser, Current Host" profile is the profile
 most often referred to as "your PowerShell profile".
+
+> [!NOTE]
+> In Windows, the location of the Documents folder can be changed by folder
+> redirection or OneDrive. We don’t recommend redirecting the Documents folder
+> to a network share or including it in OneDrive. Redirecting the folder can
+> cause your profile scripts to fail and modules fail to load.
 
 ## The $PROFILE variable
 
@@ -315,21 +321,13 @@ Invoke-Command -Session $s -ScriptBlock {
 After running this command, the commands that the profile adds to the session
 are available in `$s`.
 
-## See Also
+## See also
 
-[about_Automatic_Variables](about_Automatic_Variables.md)
-
-[about_Functions](about_Functions.md)
-
-[about_Prompts](about_Prompts.md)
-
-[about_Execution_Policies](about_Execution_Policies.md)
-
-[about_Signing](about_Signing.md)
-
-[about_Remote](about_Remote.md)
-
-[about_Scopes](about_Scopes.md)
-
-[Set-ExecutionPolicy](xref:Microsoft.PowerShell.Security.Set-ExecutionPolicy)
-
+- [about_Automatic_Variables](about_Automatic_Variables.md)
+- [about_Execution_Policies](about_Execution_Policies.md)
+- [about_Functions](about_Functions.md)
+- [about_Prompts](about_Prompts.md)
+- [about_Remote](about_Remote.md)
+- [about_Scopes](about_Scopes.md)
+- [about_Signing](about_Signing.md)
+- [Set-ExecutionPolicy](xref:Microsoft.PowerShell.Security.Set-ExecutionPolicy)

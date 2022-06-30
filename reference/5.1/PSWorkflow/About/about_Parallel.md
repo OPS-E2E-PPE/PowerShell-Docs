@@ -1,13 +1,12 @@
 ---
-description: Describes the Parallel keyword, which runs the activities in a workflow in parallel. 
-keywords: powershell,cmdlet
+description: Describes the Parallel keyword, which runs the activities in a workflow in parallel.
 Locale: en-US
 ms.date: 06/09/2017
 online version: https://docs.microsoft.com/powershell/module/psworkflow/about/about_parallel?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Parallel
+title: about Parallel
 ---
-# About Parallel
+# about_Parallel
 
 ## SHORT DESCRIPTION
 Describes the Parallel keyword, which runs the activities in a workflow in parallel.
@@ -49,20 +48,15 @@ workflow Test-Workflow
 
 Running commands in parallel is very efficient and reduces the time it takes to complete a workflow significantly.
 
-To run selected commands in a Parallel script block in sequential order, use the Sequence keyword. For more information, see about_Sequence.
+To run selected commands in a Parallel script block in sequential order, use the Sequence keyword. For more information, see [about_Sequence](about_Sequence.md).
 
 To run a Parallel script block on items in a collection, use the ForEach or ForEach -Parallel keywords.
 
-## SEE ALSO
+## See Also
 
-["Writing a Script Workflow"](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/jj574157(v=ws.11))
-
-[about_ForEach](../../Microsoft.PowerShell.Core/About/about_Foreach.md)
-
-[about_ForEach-Parallel](about_ForEach-Parallel.md)
-
-[about_Language_Keywords](../../Microsoft.PowerShell.Core/About/about_Language_Keywords.md)
-
-[about_Sequence](about_Sequence.md)
-
-[about_Workflows](about_workflows.md)
+- [about_ForEach](../../Microsoft.PowerShell.Core/About/about_Foreach.md)
+- [about_ForEach-Parallel](about_ForEach-Parallel.md)
+- [about_Language_Keywords](../../Microsoft.PowerShell.Core/About/about_Language_Keywords.md)
+- [about_Sequence](about_Sequence.md)
+- [about_Workflows](about_workflows.md)
+- ["Writing a Script Workflow"](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/jj574157(v=ws.11))

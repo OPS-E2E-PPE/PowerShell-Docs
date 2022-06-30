@@ -4,14 +4,14 @@ Locale: en-US
 ms.date: 01/19/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_using?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Using
+title: about Using
 ---
-# About Using
+# about_Using
 
-## SHORT DESCRIPTION
+## Short description
 Allows you to indicate which namespaces are used in the session.
 
-## LONG DESCRIPTION
+## Long description
 
 The `using` statement allows you to specify which namespaces are used in the
 session. Adding namespaces simplifies usage of .NET classes and member and

@@ -1,17 +1,46 @@
 ---
-ms.date: 09/12/2016
+description: PropertyCountForTable Element
+ms.date: 08/24/2021
 ms.topic: reference
-title: PropertyCountForTable Element (Format)
-description: PropertyCountForTable Element (Format)
+title: PropertyCountForTable Element
 ---
-# PropertyCountForTable Element (Format)
+# PropertyCountForTable Element
 
-Insert introduction here.
+Optional element. Specifies the minimum number of properties that an object must have to display the
+object in a table view.
 
-## Section Heading
+## Schema
 
-Insert section body here.
+- DefaultSettings Element
+- PropertyCountForTable Element
 
-### Subsection Heading
+## Syntax
 
-Insert subsection body here.
+```xml
+<PropertyCountForTable>NumberOfProperties</PropertyCountFortable>
+```
+
+## Attributes and Elements
+
+The following sections describe attributes, child elements, and the parent element of the
+`PropertyCountForTable` element. The default value for this element is `4`.
+
+### Attributes
+
+None.
+
+### Child Elements
+
+None.
+
+### Parent Elements
+
+|Element|Description|
+|-------------|-----------------|
+|[DefaultSettings Element](./defaultsettings-element-format.md)|Defines common settings that apply to all the views of the formatting file.|
+
+## Remarks
+
+## See Also
+
+[Writing a PowerShell Formatting File](./writing-a-powershell-formatting-file.md)

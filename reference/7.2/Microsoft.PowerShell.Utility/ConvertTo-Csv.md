@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 12/08/2020
+ms.date: 08/11/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/convertto-csv?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: ConvertTo-Csv
@@ -118,7 +118,7 @@ DisplayHint,"DateTime","Date",Day,DayOfWeek,DayOfYear,Hour,Kind,Millisecond,Minu
 DateTime,"Thursday, August 22, 2019 11:27:34 AM","8/22/2019 12:00:00 AM",22,Thursday,234,11,Local,569,27,8,34,637020700545699784,11:27:34.5699784,2019
 ```
 
-### Example 4: Convert to CSV with quotes only when needed
+### Example 5: Convert to CSV with quotes only when needed
 
 This example converts a **DateTime** object to a CSV string.
 
@@ -130,6 +130,55 @@ Get-Date | ConvertTo-Csv -UseQuotes AsNeeded
 DisplayHint,DateTime,Date,Day,DayOfWeek,DayOfYear,Hour,Kind,Millisecond,Minute,Month,Second,Ticks,TimeOfDay,Year
 DateTime,"Thursday, August 22, 2019 11:31:00 AM",8/22/2019 12:00:00 AM,22,Thursday,234,11,Local,713,31,8,0,637020702607132640,11:31:00.7132640,2019
 ```
+
+### Example 6: Convert hashtables to CSV
+
+In PowerShell 7.2 and above, when you convert hashtables to CSV, the keys of the first hashtable are
+serialized and used as headers in the output.
+
+```powershell
+$person1 = @{
+    Name = 'John Smith'
+    Number = 1
+}
+
+$person2 = @{
+    Name = 'Jane Smith'
+    Number = 1
+}
+
+$allPeople = $person1, $person2
+$allPeople | ConvertTo-Csv
+```
+
+```Output
+"Name","Number"
+"John Smith","1"
+"Jane Smith","2"
+```
+
+### Example 7: Converting hashtables to CSV with additional properties
+
+In PowerShell 7.2 and above, when you convert a hashtable that has additional properties added with
+`Add-Member` or `Select-Object` the additional properties are also added as a header in the CSV
+output.
+
+```powershell
+$allPeople | Add-Member -Name ExtraProp -Value 42
+$allPeople | ConvertTo-Csv
+```
+
+```Output
+"Name","Number","ExtraProp"
+"John Smith","1","42"
+"Jane Smith","2","42"
+```
+
+Each hashtable has a property named `ExtraProp` added by `Add-Member` and then converted to CSV. You
+can see `ExtraProp` is now a header in the output.
+
+If an added property has the _same_ name as a key from the hashtable, the key takes precedence and
+only the key is converted to CSV.
 
 ## PARAMETERS
 
@@ -205,23 +254,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UseCulture
-
-Uses the list separator for the current culture as the item delimiter. To find the list separator
-for a culture, use the following command: `(Get-Culture).TextInfo.ListSeparator`.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: UseCulture
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -QuoteFields
 
 Specifies the names of the columns that should be quoted. When this parameter is used only the
@@ -239,13 +271,31 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -UseCulture
+
+Uses the list separator for the current culture as the item delimiter. To find the list separator
+for a culture, use the following command: `(Get-Culture).TextInfo.ListSeparator`.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: UseCulture
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -UseQuotes
 
 Specifies when quotes are used in the CSV files. Possible values are:
 
 - Never - don't quote anything
 - Always - quote everything (default behavior)
-- AsNeeded - only quote fields that contain a delimiter character
+- AsNeeded - only quote fields that contain a delimiter character, double-quote, or newline
+  character
 
 This parameter was added in PowerShell 7.0.
 

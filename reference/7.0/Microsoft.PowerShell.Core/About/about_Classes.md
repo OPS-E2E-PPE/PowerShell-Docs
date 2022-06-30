@@ -4,9 +4,9 @@ Locale: en-US
 ms.date: 01/19/2021
 online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_classes?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: about_Classes
+title: about Classes
 ---
-# About Classes
+# about_Classes
 
 ## Short description
 Describes how you can use classes to create your own custom types.
@@ -39,7 +39,7 @@ properties.
 Classes are declared using the following syntax:
 
 ```syntax
-class <class-name> [: [<base-class>][,<interface-list]] {
+class <class-name> [: [<base-class>][,<interface-list>]] {
     [[<attribute>] [hidden] [static] <property-definition> ...]
     [<class-name>([<constructor-argument-list>])
       {<constructor-statement-list>} ...]
@@ -873,8 +873,8 @@ For more information about the `[ref]` type, see
 
 ## See also
 
-- [About_hidden](About_hidden.md)
 - [about_Enum](about_Enum.md)
+- [About_Hidden](About_Hidden.md)
 - [about_Language_Keywords](about_language_keywords.md)
 - [about_Methods](about_methods.md)
 - [about_Using](about_using.md)
