@@ -2,8 +2,8 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 10/19/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/convertfrom-json?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 08/30/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/convertfrom-json?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: ConvertFrom-Json
 ---
@@ -92,12 +92,12 @@ This example shows how to use the `ConvertFrom-Json` cmdlet to convert a JSON fi
 custom object.
 
 ```powershell
-Get-Content JsonFile.JSON | ConvertFrom-Json
+Get-Content -Raw JsonFile.JSON | ConvertFrom-Json
 ```
 
-The command uses Get-Content cmdlet to get the strings in a JSON file. Then it uses the pipeline
-operator to send the delimited string to the `ConvertFrom-Json` cmdlet, which converts it to a
-custom object.
+The command uses Get-Content cmdlet to get the strings in a JSON file. The **Raw** parameter
+returns the whole file as a single JSON object. Then it uses the pipeline operator to send the
+delimited string to the `ConvertFrom-Json` cmdlet, which converts it to a custom object.
 
 ### Example 4: Convert a JSON string to a hash table
 
@@ -137,11 +137,12 @@ integer.
 Converts the JSON to a hash table object. This switch was introduced in PowerShell 6.0. There are
 several scenarios where it can overcome some limitations of the `ConvertFrom-Json` cmdlet.
 
-- If the JSON contains a list with keys that only differ in casing. Without the switch, those keys
-  would be seen as identical keys and therefore only the last one would get used.
-- If the JSON contains a key that is an empty string. Without the switch, the cmdlet would throw an
-  error since a `PSCustomObject` does not allow for that but a hash table does. An example use case
-  where this can occurs are `project.lock.json` files.
+- Without this switch, when two or more keys in a JSON object are case-insensitively identical, they
+  are treated as identical keys. In that case, only the last of those case-insensitively identical
+  keys is included in the converted object.
+- Without this switch, the cmdlet throws an error whenever the JSON contains a key that is an empty
+  string. **PSCustomObject** can't have property names that are empty strings. For example, this can
+  occur in `project.lock.json` files.
 - Hash tables can be processed faster for certain data structures.
 
 ```yaml

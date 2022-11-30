@@ -1,9 +1,9 @@
 ---
 description: Describes variables that store state information for PowerShell. These variables are created and maintained by PowerShell.
 Locale: en-US
-ms.date: 02/03/2022
+ms.date: 11/21/2022
 no-loc: [Reset, Current, Background, Blink, Bold, Foreground, Formatting, Hidden, Italic, Reset, Reverse, Underline]
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-7.3&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-7.3&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about Automatic Variables
 ---
@@ -34,12 +34,12 @@ last command succeeded and **False** if it failed.
 
 For cmdlets and advanced functions that are run at multiple stages in a
 pipeline, for example in both `process` and `end` blocks, calling
-`this.WriteError()` or `$PSCmdlet.WriteError()` respectively at any point will
-set `$?` to **False**, as will `this.ThrowTerminatingError()` and
+`this.WriteError()` or `$PSCmdlet.WriteError()` respectively at any point sets
+`$?` to **False**, as does `this.ThrowTerminatingError()` and
 `$PSCmdlet.ThrowTerminatingError()`.
 
-The `Write-Error` cmdlet always sets `$?` to **False** immediately after it is
-executed, but will not set `$?` to **False** for a function calling it:
+The `Write-Error` cmdlet always sets `$?` to **False** immediately after it's
+executed, but won't set `$?` to **False** for a function calling it:
 
 ```powershell
 function Test-WriteError
@@ -59,10 +59,10 @@ is 0, and set to **False** when `$LASTEXITCODE` is any other value.
 
 > [!NOTE]
 > Until PowerShell 7, containing a statement within parentheses `(...)`,
-> subexpression syntax `$(...)` or array expression `@(...)` always reset
-> `$?` to **True**, so that `(Write-Error)` shows `$?` as **True**.
-> This has been changed in PowerShell 7, so that `$?` will always reflect
-> the actual success of the last command run in these expressions.
+> subexpression syntax `$(...)` or array expression `@(...)` always reset `$?`
+> to **True**, so that `(Write-Error)` shows `$?` as **True**. This has been
+> changed in PowerShell 7, so that `$?` always reflects the actual success of
+> the last command run in these expressions.
 
 ### $^
 
@@ -78,13 +78,13 @@ selected objects in a pipeline.
 
 Contains an array of values for undeclared parameters that are passed to a
 function, script, or script block. When you create a function, you can declare
-the parameters by using the `param` keyword or by adding a comma-separated list
-of parameters in parentheses after the function name.
+the parameters with the `param` keyword or by adding a comma-separated list of
+parameters in parentheses after the function name.
 
 In an event action, the `$args` variable contains objects that represent the
-event arguments of the event that is being processed. This variable is
-populated only within the `Action` block of an event registration command. The
-value of this variable can also be found in the **SourceArgs** property of the
+event arguments of the event that's being processed. This variable is populated
+only within the `Action` block of an event registration command. The value of
+this variable can also be found in the **SourceArgs** property of the
 **PSEventArgs** object that `Get-Event` returns.
 
 ### $ConsoleFileName
@@ -96,7 +96,7 @@ export snap-in names to a console file.
 
 When you use the `Export-Console` cmdlet without parameters, it automatically
 updates the console file that was most recently used in the session. You can
-use this automatic variable to determine which file will be updated.
+use this automatic variable to determine the file to update.
 
 ### $Error
 
@@ -107,37 +107,19 @@ To prevent an error from being added to the `$Error` array, use the
 **ErrorAction** common parameter with a value of **Ignore**. For more
 information, see [about_CommonParameters](about_CommonParameters.md).
 
-### $ErrorView
-
-Contains the value controlling the view in which errors are displayed. The
-`$ErrorView` variable accepts strings or **ErrorView** objects and has a
-default value of `ConciseView`. If a string other than an accepted value is
-defined, an error is thrown.
-
-Accepted values:
-
-- `CategoryView` - Only displays the error category information.
-- `ConciseView` - Only displays the error message. If the error is a parser
-  error or comes from a script, a location pointer is included. This view was
-  added in PowerShell 7.0
-- `DetailedView` - Displays a verbose error message including all error
-  information. This view was added in PowerShell 7.2
-- `NormalView` - Provides a standard PowerShell error view containing the error
-  message, location, category info and more.
-
 ### $Event
 
-Contains a **PSEventArgs** object that represents the event that is being
+Contains a **PSEventArgs** object that represents the event that's being
 processed. This variable is populated only within the `Action` block of an
 event registration command, such as `Register-ObjectEvent`. The value of this
-variable is the same object that the `Get-Event` cmdlet returns. Therefore, you
-can use the properties of the `Event` variable, such as `$Event.TimeGenerated`,
-in an `Action` script block.
+variable is the same object that the `Get-Event` cmdlet returns. You can use
+the properties of the `Event` variable, such as `$Event.TimeGenerated`, in an
+`Action` script block.
 
 ### $EventArgs
 
 Contains an object that represents the first event argument that derives from
-**EventArgs** of the event that is being processed. This variable is populated
+**EventArgs** of the event that's being processed. This variable is populated
 only within the `Action` block of an event registration command. The value of
 this variable can also be found in the **SourceEventArgs** property of the
 **PSEventArgs** object that `Get-Event` returns.
@@ -145,7 +127,7 @@ this variable can also be found in the **SourceEventArgs** property of the
 ### $EventSubscriber
 
 Contains a **PSEventSubscriber** object that represents the event subscriber of
-the event that is being processed. This variable is populated only within the
+the event that's being processed. This variable is populated only within the
 `Action` block of an event registration command. The value of this variable is
 the same object that the `Get-EventSubscriber` cmdlet returns.
 
@@ -158,7 +140,7 @@ that are available to cmdlets.
 ### $false
 
 Contains **False**. You can use this variable to represent **False** in
-commands and scripts instead of using the string "false". The string can be
+commands and scripts instead of using the string `"false"`. The string can be
 interpreted as **True** if it's converted to a non-empty string or to a
 non-zero integer.
 
@@ -174,37 +156,42 @@ and change the current loop iteration. For more information, see
 
 ### $HOME
 
-Contains the full path of the user's home directory. This variable is the
-equivalent of the `"$env:homedrive$env:homepath"` Windows environment
-variables, typically `C:\Users\<UserName>`.
+Contains the full path of the user's home directory. On Windows, this variable
+uses the value of the `"$env:USERPROFILE"` Windows environment variable,
+typically `C:\Users\<UserName>`. On Unix, this variable uses the value of the
+`HOME` environment variable.
+
+> [!IMPORTANT]
+> Windows can redirect the location of the user's profile. This means that
+> `$HOME` may not have the same value as `$env:HOMEDRIVE$env:HOMEPATH`.
 
 ### $Host
 
 Contains an object that represents the current host application for PowerShell.
 You can use this variable to represent the current host in commands or to
 display or change the properties of the host, such as `$Host.version` or
-`$Host.CurrentCulture`, or `$host.ui.rawui.setbackgroundcolor("Red")`.
+`$Host.CurrentCulture`, or `$host.UI.RawUI.SetBackGroundColor("Red")`.
 
 ### $input
 
-Contains an enumerator that enumerates all input that is passed to a function.
+Contains an enumerator that enumerates all input that's passed to a function.
 The `$input` variable is available only to functions and script blocks (which
 are unnamed functions).
 
-- In a function without a `Begin`, `Process`, or `End` block, the `$input`
+- In a function without a `begin`, `process`, or `end` block, the `$input`
   variable enumerates the collection of all input to the function.
 
-- In the `Begin` block, the `$input` variable contains no data.
+- In the `begin` block, the `$input` variable contains no data.
 
-- In the `Process` block, the `$input` variable contains the object that is
+- In the `process` block, the `$input` variable contains the object that's
   currently in the pipeline.
 
-- In the `End` block, the `$input` variable enumerates the collection of all
+- In the `end` block, the `$input` variable enumerates the collection of all
   input to the function.
 
   > [!NOTE]
-  > You cannot use the `$input` variable inside both the Process block and the
-  > End block in the same function or script block.
+  > You can't use the `$input` variable inside both the `process` block and the
+  > `end` block in the same function or script block.
 
 Since `$input` is an enumerator, accessing any of its properties causes
 `$input` to no longer be available. You can store `$input` in another variable
@@ -242,9 +229,23 @@ Otherwise contains `$False`.
 Contains `$TRUE` if the current session is running on a Windows operating
 system. Otherwise contains `$FALSE`.
 
-### $LastExitCode
+### $LASTEXITCODE
 
-Contains the exit code of the last native program that was run.
+Contains the exit code of the last native program or PowerShell script that was
+run.
+
+For PowerShell scripts, the value of `$LASTEXITCODE` depends on how the script
+was called and whether the `exit` keyword was used:
+
+- When a script uses the `exit` keyword, `$LASTEXITCODE` is set to the
+  specified value, regardless of how the script was called. For more
+  information, see [about_Language_Keywords](about_language_keywords.md#exit).
+- When a script is called directly, like `./Test.ps1`, or with the
+  [call operator](about_operators.md#call-operator-) (`&`) like `& ./Test.ps1`,
+  the value of `$LASTEXITCODE` isn't changed.
+- When a script is called with `pwsh` and the **File** parameter, the value of
+  `$LASTEXITCODE` is set to `1` if the script terminated due to a thrown
+  exception and `0` otherwise.
 
 ### $Matches
 
@@ -268,8 +269,8 @@ operators. For more information about the `switch` statement, see
 > [!NOTE]
 > When `$Matches` is populated in a session, it retains the matched value until
 > it's overwritten by another match. If `-match` is used again and no match is
-> found, it doesn't reset `$Matches` to `$null`. The previously matched value is
-> kept in `$Matches` until another match is found.
+> found, it doesn't reset `$Matches` to `$null`. The previously matched value
+> is kept in `$Matches` until another match is found.
 
 ### $MyInvocation
 
@@ -280,16 +281,16 @@ invoked, such as the name of the script that called the current command.
 `$MyInvocation` is populated only for scripts, function, and script blocks. You
 can use the information in the **System.Management.Automation.InvocationInfo**
 object that `$MyInvocation` returns in the current script, such as the path and
-file name of the script (`$MyInvocation.MyCommand.Path`) or the name of a
+filename of the script (`$MyInvocation.MyCommand.Path`) or the name of a
 function (`$MyInvocation.MyCommand.Name`) to identify the current command. This
-is particularly useful for finding the name of the current script.
+is useful for finding the name of the current script.
 
 Beginning in PowerShell 3.0, `MyInvocation` has the following new properties.
 
 - **PSScriptRoot** - Contains the full path to the script that invoked the
   current command. The value of this property is populated only when the caller
   is a script.
-- **PSCommandPath** - Contains the full path and file name of the script that
+- **PSCommandPath** - Contains the full path and filename of the script that
   invoked the current command. The value of this property is populated only
   when the caller is a script.
 
@@ -327,8 +328,8 @@ PowerShell treats `$null` as an object with a value, that is, as an explicit
 placeholder, so you can use `$null` to represent an empty value in a series of
 values.
 
-For example, when `$null` is included in a collection, it's counted as one
-of the objects.
+For example, when `$null` is included in a collection, it's counted as one of
+the objects.
 
 ```powershell
 $a = "one", $null, "three"
@@ -382,7 +383,7 @@ Appointment on Friday: Team lunch
 
 ### $PID
 
-Contains the process identifier (PID) of the process that is hosting the
+Contains the process identifier (PID) of the process that's hosting the
 current PowerShell session.
 
 ### $PROFILE
@@ -464,7 +465,7 @@ and [about_Functions_Advanced](about_Functions_Advanced.md).
 
 ### $PSCommandPath
 
-Contains the full path and file name of the script that's being run. This
+Contains the full path and filename of the script that's being run. This
 variable is valid in all scripts.
 
 ### $PSCulture
@@ -482,11 +483,11 @@ and dates, and is stored in a **System.Globalization.CultureInfo** object. Use
 
 While debugging, this variable contains information about the debugging
 environment. Otherwise, it contains a **null** value. As a result, you can use
-it to indicate whether the debugger has control. When populated, it contains a
+it to determine whether the debugger has control. When populated, it contains a
 **PsDebugContext** object that has **Breakpoints** and **InvocationInfo**
 properties. The **InvocationInfo** property has several useful properties,
 including the **Location** property. The **Location** property indicates the
-path of the script that is being debugged.
+path of the script that's being debugged.
 
 ### $PSHOME
 
@@ -504,120 +505,6 @@ Select-String -Pattern Variable -Path $pshome\*.txt
 Same as `$_`. Contains the current object in the pipeline object. You can use
 this variable in commands that perform an action on every object or on selected
 objects in a pipeline.
-
-### $PSNativeCommandArgumentPassing
-
-> [!NOTE]
-> `$PSNativeCommandArgumentPassing` is only available when the
-> `PSNativeCommandArgumentPassing` experimental feature is enabled. For more
-> information, see
-> [about_Experimental_Features](about_Experimental_Features.md) and
-> [Using experimental features](/powershell/scripting/learn/experimental-features).
-
-When this experimental feature is enabled PowerShell uses the `ArgumentList`
-property of the `StartProcessInfo` object rather than our current mechanism of
-reconstructing a string when invoking a native executable.
-
-> [!CAUTION]
-> The new behavior is a **breaking change** from current behavior. This may
-> break scripts and automation that work around the various issues when
-> invoking native applications. Historically, quotes must be escaped and it is
-> not possible to provide empty arguments to a native application.
-
-This feature adds a new automatic variable `$PSNativeCommandArgumentPassing`
-that allows you to select the behavior at runtime. The valid values are
-`Legacy`, `Standard`, and `Windows`. `Legacy` is the historic behavior. The
-default when the experimental feature is enabled is the new `Standard`
-behavior.
-
-When the preference variable is set to `Windows` invocations of the following
-files automatically use the `Legacy` style argument passing.
-
-- `cmd.exe`
-- `cscript.exe`
-- `wscript.exe`
-- ending with `.bat`
-- ending with `.cmd`
-- ending with `.js`
-- ending with `.vbs`
-- ending with `.wsf`
-
-If the `$PSNativeArgumentPassing` is set to either `Legacy` or `Standard`, the
-check for these files do not occur. The default behavior is platform specific.
-On Windows platforms, the default setting is `Windows` and non-Windows
-platforms is `Standard`.
-
-New behaviors made available by this change:
-
-- Literal or expandable strings with embedded quotes the quotes are now
-  preserved:
-
-  ```powershell
-  PS > $a = 'a" "b'
-  PS > $PSNativeCommandArgumentPassing = "Legacy"
-  PS > testexe -echoargs $a 'a" "b' a" "b
-  Arg 0 is <a b>
-  Arg 1 is <a b>
-  Arg 2 is <a b>
-  PS > $PSNativeCommandArgumentPassing = "Standard"
-  PS > testexe -echoargs $a 'a" "b' a" "b
-  Arg 0 is <a" "b>
-  Arg 1 is <a" "b>
-  Arg 2 is <a b>
-  ```
-
-- Empty strings as arguments are now preserved:
-
-  ```powershell
-  PS>  $PSNativeCommandArgumentPassing = "Legacy"
-  PS> testexe -echoargs '' a b ''
-  Arg 0 is <a>
-  Arg 1 is <b>
-  PS> $PSNativeCommandArgumentPassing = "Standard"
-  PS> testexe -echoargs '' a b ''
-  Arg 0 is <>
-  Arg 1 is <a>
-  Arg 2 is <b>
-  Arg 3 is <>
-  ```
-
-The new behavior does not change invocations that look like this:
-
-```powershell
-PS> $PSNativeCommandArgumentPassing = "Legacy"
-PS> testexe -echoargs -k com:port=\\devbox\pipe\debug,pipe,resets=0,reconnect
-Arg 0 is <-k>
-Arg 1 is <com:port=\\devbox\pipe\debug,pipe,resets=0,reconnect>
-PS> $PSNativeCommandArgumentPassing = "Standard"
-PS> testexe -echoargs -k com:port=\\devbox\pipe\debug,pipe,resets=0,reconnect
-Arg 0 is <-k>
-Arg 1 is <com:port=\\devbox\pipe\debug,pipe,resets=0,reconnect>
-```
-
-Additionally, parameter tracing is now provided so `Trace-Command` provides
-useful information for debugging.
-
-```powershell
-PS> $PSNativeCommandArgumentPassing = "Legacy"
-PS> trace-command -PSHOST -Name ParameterBinding { testexe -echoargs $a 'a" "b' a" "b }
-DEBUG: 2021-02-01 17:19:53.6438 ParameterBinding Information: 0 : BIND NAMED native application line args [/Users/james/src/github/forks/jameswtruher/PowerShell-1/test/tools/TestExe/bin/testexe]
-DEBUG: 2021-02-01 17:19:53.6440 ParameterBinding Information: 0 :     BIND argument [-echoargs a" "b a" "b "a b"]
-DEBUG: 2021-02-01 17:19:53.6522 ParameterBinding Information: 0 : CALLING BeginProcessing
-Arg 0 is <a b>
-Arg 1 is <a b>
-Arg 2 is <a b>
-PS> $PSNativeCommandArgumentPassing = "Standard"
-PS> trace-command -PSHOST -Name ParameterBinding { testexe -echoargs $a 'a" "b' a" "b }
-DEBUG: 2021-02-01 17:20:01.9829 ParameterBinding Information: 0 : BIND NAMED native application line args [/Users/james/src/github/forks/jameswtruher/PowerShell-1/test/tools/TestExe/bin/testexe]
-DEBUG: 2021-02-01 17:20:01.9829 ParameterBinding Information: 0 :     BIND cmd line arg [-echoargs] to position [0]
-DEBUG: 2021-02-01 17:20:01.9830 ParameterBinding Information: 0 :     BIND cmd line arg [a" "b] to position [1]
-DEBUG: 2021-02-01 17:20:01.9830 ParameterBinding Information: 0 :     BIND cmd line arg [a" "b] to position [2]
-DEBUG: 2021-02-01 17:20:01.9831 ParameterBinding Information: 0 :     BIND cmd line arg [a b] to position [3]
-DEBUG: 2021-02-01 17:20:01.9908 ParameterBinding Information: 0 : CALLING BeginProcessing
-Arg 0 is <a" "b>
-Arg 1 is <a" "b>
-Arg 2 is <a b>
-```
 
 ### $PSScriptRoot
 
@@ -638,141 +525,6 @@ from the originating session. To add data to the **ApplicationArguments**
 property, use the **ApplicationArguments** parameter of the
 `New-PSSessionOption` cmdlet.
 
-### $PSStyle
-
-As of PowerShell 7.2 you can now access the `$PSStyle` automatic variable to
-view and change the rendering of ANSI string output. The variable contains the
-following properties:
-
-- **Reset** - Turns off all decorations
-- **Blink** - Turns Blink on
-- **BlinkOff** - Turns Blink off
-- **Bold** - Turns Bold on
-- **BoldOff** - Turns Bold off
-- **Hidden** - Turns Hidden on
-- **HiddenOff** - Turns Hidden off
-- **Reverse** - Turns Reverse on
-- **ReverseOff** - Turns Reverse off
-- **Italic** - Turns Italic on
-- **ItalicOff** - Turns Italic off
-- **Underline** - Turns underlining on
-- **UnderlineOff** - Turns underlining off
-- **OutputRendering** - Control when output rendering is used
-- **Background** - Nested object to control background coloring
-- **Foreground** - Nested object to control foreground coloring
-- **Formatting** - Nested object that controls default formatting for output
-  streams
-- **Progress** - Nested object that controls the rendering of progress bars
-- **FileInfo** - (experimental) Nested object to control the coloring of
-  **FileInfo** objects.
-
-The base members return strings of ANSI escape sequences mapped to their names.
-The values are settable to allow customization. For example, you could change
-bold to underlined. The property names makes it easier for you to create
-decorated strings using tab completion:
-
-```powershell
-"$($PSStyle.Background.BrightCyan)Power$($PSStyle.Underline)$($PSStyle.Bold)Shell$($PSStyle.Reset)"
-```
-
-The following members control how or when ANSI formatting is used:
-
-- `$PSStyle.OutputRendering` is a
-  `System.Management.Automation.OutputRendering` enum with the values:
-
-  - **ANSI**: This is the default behavior. ANSI is always passed through
-    as-is.
-
-    > [!IMPORTANT]
-    > You should use **ANSI** mode when redirecting output to a file or the
-    > pipeline that is intended to be executed downstream. This ensures that
-    > the output is not altered. Using any other mode alters the output by
-    > removing ANSI escape sequences, which may change the execution behavior.
-
-  - **PlainText**: ANSI escape sequences are always stripped so that it is only
-    plain text.
-  - **Host**: The ANSI escape sequences are removed in redirected or piped
-    output.
-
-- The `$PSStyle.Background` and `$PSStyle.Foreground` members are strings that
-  contain the ANSI escape sequences for the 16 standard console colors.
-
-  - Black
-  - BrightBlack
-  - White
-  - BrightWhite
-  - Red
-  - BrightRed
-  - Magenta
-  - BrightMagenta
-  - Blue
-  - BrightBlue
-  - Cyan
-  - BrightCyan
-  - Green
-  - BrightGreen
-  - Yellow
-  - BrightYellow
-
-  The values are settable and can contain any number of ANSI escape sequences.
-  There is also an `FromRgb()` method to specify 24-bit color. There are two
-  ways to call the `FromRgb()` method.
-
-  - string FromRgb(byte red, byte green, byte blue)
-  - string FromRgb(int rgb)
-
-  Either of the following examples set the background color the 24-bit color
-  **Beige**.
-
-  ```powershell
-  $PSStyle.Background.FromRgb(245, 245, 220)
-  $PSStyle.Background.FromRgb(0xf5f5dc)
-  ```
-
-- `$PSStyle.Formatting` is a nested object to control default formatting of
-  debug, error, verbose, and warning messages. You can also control attributes
-  like bolding and underlining. It replaces `$Host.PrivateData` as the way to
-  manage colors for formatting rendering. `$Host.PrivateData` continues to
-  exist for backwards compatibility but is not connected to
-  `$PSStyle.Formatting`.
-
-- `$PSStyle.Progress` allows you to control progress view bar rendering.
-
-  - **Style** - An ANSI string setting the rendering style.
-  - **MaxWidth** - Sets the max width of the view. Set to `0` for console
-    width. Defaults to `120`
-  - **View** - An enum with values, `Minimal` and `Classic`. `Classic` is the
-    existing rendering with no changes. `Minimal` is a single line minimal
-    rendering. `Minimal` is the default.
-  - **UseOSCIndicator** - Defaults to `$false`. Set this to `$true` for
-    terminals that support OSC indicators.
-
-  > [!NOTE]
-  > If the host doesn't support Virtual Terminal, `$PSStyle.Progress.View` is
-  > automatically set to `Classic`.
-
-  The following example sets the rendering style to a minimal progress bar.
-
-  ```powershell
-  $PSStyle.Progress.View = Minimal
-  ```
-
-`$PSStyle.FileInfo` is a nested object to control the coloring of **FileInfo**
-objects.
-
-- **Directory** - Built-in member to specify color for directories
-- **SymbolicLink** - Built-in member to specify color for symbolic links
-- **Executable** - Built-in member to specify color for executables.
-- **Extension** - Use this member to define colors for different file
-  extensions. The **Extension** member pre-includes extensions for archive and
-  PowerShell files.
-
-> [!NOTE]
-> `$PSStyle.FileInfo` is only available when the `PSAnsiRenderingFileInfo`
-> experimental feature is enabled. For more information, see
-> [about_Experimental_Features](about_Experimental_Features.md) and
-> [Using experimental features](/powershell/scripting/learn/experimental-features).
-
 ### $PSUICulture
 
 Contains the name of the user interface (UI) culture that's currently in use in
@@ -785,15 +537,15 @@ use the `Get-UICulture` cmdlet.
 ### $PSVersionTable
 
 Contains a read-only hash table that displays details about the version of
-PowerShell that is running in the current session. The table includes the
+PowerShell that's running in the current session. The table includes the
 following items:
 
 - **PSVersion** - The PowerShell version number
 - **PSEdition** This property has the value of 'Desktop' for PowerShell 4 and
   below as well as PowerShell 5.1 on full-featured Windows editions. This
-  property has the value of `Core` for PowerShell 6 and above as well as
-  PowerShell PowerShell 5.1 on reduced-footprint editions like Windows Nano
-  Server or Windows IoT.
+  property has the value of `Core` for PowerShell 6 and higher as well as
+  Windows PowerShell 5.1 on reduced-footprint editions like Windows Nano Server
+  or Windows IoT.
 - **GitCommitId** - The commit Id of the source files, in GitHub,
 - **OS** - Description of the operating system that PowerShell is running on.
 - **Platform** - Platform that the operating system is running on. The value on
@@ -812,7 +564,7 @@ location for the current PowerShell runspace.
 
 > [!NOTE]
 > PowerShell supports multiple runspaces per process. Each runspace has its own
-> _current directory_. This is not the same as the current directory of the
+> _current directory_. This isn't the same as the current directory of the
 > process: `[System.Environment]::CurrentDirectory`.
 
 ### $Sender
@@ -849,7 +601,7 @@ the instance of the class itself.
 PowerShell's Extensible Type System (ETS) allows you to add properties to
 classes using script blocks. In a script block that defines a script property
 or script method, the `$this` variable refers to an instance of object of the
-class that is being extended. For example, PowerShell uses ETS to add the
+class that's being extended. For example, PowerShell uses ETS to add the
 **BaseName** property to the **FileInfo** class.
 
 ```powershell
@@ -858,8 +610,9 @@ PS> Get-ChildItem .\README.md | Get-Member BaseName | Format-List
 TypeName   : System.IO.FileInfo
 Name       : BaseName
 MemberType : ScriptProperty
-Definition : System.Object BaseName {get=if ($this.Extension.Length -gt 0){$this.Name.Remove($this.Name.Length -
-             $this.Extension.Length)}else{$this.Name};}
+Definition : System.Object BaseName {get=if ($this.Extension.Length -gt 0)
+             {$this.Name.Remove($this.Name.Length - $this.Extension.Length
+             )}else{$this.Name};}
 ```
 
 For more information, see [about_Types.ps1xml](./about_Types.ps1xml.md).
@@ -1044,11 +797,11 @@ After MoveNext:
 
 ### Example 3: Using the $input.Current property
 
-By using the **Current** property, the current pipeline value can be accessed
+With the **Current** property, the current pipeline value can be accessed
 multiple times without using the **Reset** method. The process block doesn't
 automatically call the **MoveNext** method.
 
-The **Current** property will never be populated unless you explicitly call
+The **Current** property is never populated unless you explicitly call
 **MoveNext**. The **Current** property can be accessed multiple times inside
 the process block without clearing its value.
 
@@ -1093,7 +846,7 @@ access the current collection element, and the **Reset** and **MoveNext**
 methods to change its value.
 
 > [!NOTE]
-> Each iteration of the `foreach` loop will automatically call the **MoveNext**
+> Each iteration of the `foreach` loop automatically calls the **MoveNext**
 > method.
 
 The following loop only executes twice. In the second iteration, the collection

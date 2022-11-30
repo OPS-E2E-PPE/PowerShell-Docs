@@ -3,7 +3,7 @@ external help file: System.Management.Automation.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
 ms.date: 04/08/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/start-job?view=powershell-7.2&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/start-job?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Start-Job
 ---
@@ -444,7 +444,7 @@ qualified path of the job definition. Use this parameter to start custom job typ
 definition path, such as scheduled jobs.
 
 For scheduled jobs, the value of the **DefinitionPath** parameter is
-`$home\AppData\Local\Windows\PowerShell\ScheduledJob`.
+`$HOME\AppData\Local\Windows\PowerShell\ScheduledJob`.
 
 This parameter was introduced in PowerShell 3.0.
 

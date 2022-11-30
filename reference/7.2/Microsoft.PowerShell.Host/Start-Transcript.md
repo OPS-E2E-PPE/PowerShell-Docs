@@ -3,7 +3,7 @@ external help file: Microsoft.PowerShell.ConsoleHost.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Host
 ms.date: 01/26/2021
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.host/start-transcript?view=powershell-7.2&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.host/start-transcript?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Start-Transcript
 ---
@@ -184,7 +184,7 @@ permitted.
 
 If you do not specify a path, `Start-Transcript` uses the path in the value of the `$Transcript`
 global variable. If you have not created this variable, `Start-Transcript` stores the transcripts in
-the `$Home\My Documents directory as \PowerShell_transcript.<time-stamp>.txt` files.
+the `$HOME\My Documents directory as \PowerShell_transcript.<time-stamp>.txt` files.
 
 If any of the directories in the path do not exist, the command fails.
 

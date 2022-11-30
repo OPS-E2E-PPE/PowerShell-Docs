@@ -1,8 +1,8 @@
 ---
 description: Describes an attribute that reports the type of object that the function returns.
 Locale: en-US
-ms.date: 01/03/2018
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_functions_outputtypeattribute?view=powershell-7.3&WT.mc_id=ps-gethelp
+ms.date: 10/27/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_functions_outputtypeattribute?view=powershell-7.3&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about Functions OutputTypeAttribute
 ---
@@ -126,7 +126,7 @@ Name                                               Type
 System.String                                      System.String
 ```
 
-### Example 2: Use the Output attribute to indicate dynamic output types
+### Example 2: Use the OutputType attribute to indicate dynamic output types
 
 The following advanced function uses the OutputType attribute to indicate that
 the function returns different types depending on the parameter set used in the
@@ -201,7 +201,7 @@ System.DateTime                           System.DateTime
 
 ### Example 4: A function  that shouldn't have output
 
-The following example shows a custom function that should perform and action
+The following example shows a custom function that should perform an action
 but not return anything.
 
 ```powershell
@@ -226,8 +226,14 @@ format.
 (Get-Command Get-Time).OutputType | ForEach {$_.Name}
 ```
 
+Or its shorter version.
+
+```powershell
+(Get-Command Get-Time).OutputType.Name
+```
+
 The value of the OutputType property can be null. Use a null value when
-the output is a not a .NET type, such as a **WMI** object or a formatted view
+the output is not a .NET type, such as a **WMI** object or a formatted view
 of an object.
 
 ## See also

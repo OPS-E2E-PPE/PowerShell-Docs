@@ -3,7 +3,7 @@ external help file: ISE-help.xml
 Locale: en-US
 Module Name: ISE
 ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/ise/get-isesnippet?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/ise/get-isesnippet?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-IseSnippet
 ---
@@ -25,7 +25,7 @@ The `Get-IseSnippet` cmdlet gets the PS1XML files that contain reusable text sni
 created. It works only in Windows PowerShell Integrated Scripting Environment (ISE).
 
 When you use the `New-IseSnippet` cmdlet to create a snippet, `New-IseSnippet` creates a
-`<SnippetTitle>.Snippets.ps1xml` file in the `$home\Documents\WindowsPowerShell\Snippets` directory.
+`<SnippetTitle>.Snippets.ps1xml` file in the `$HOME\Documents\WindowsPowerShell\Snippets` directory.
 `Get-IseSnippet` gets the snippet files in the Snippets directory.
 
 This cmdlet does not get built-in snippets or snippets that are imported from modules through the

@@ -3,7 +3,7 @@ external help file: Microsoft.PowerShell.Utility-help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
 ms.date: 05/16/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/get-filehash?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/get-filehash?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-FileHash
 ---
@@ -157,7 +157,7 @@ Accepted values: SHA1, SHA256, SHA384, SHA512, MACTripleDES, MD5, RIPEMD160
 
 Required: False
 Position: Named
-Default value: None
+Default value: SHA256
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -2,7 +2,7 @@
 description: Explains the concept of scope in PowerShell and shows how to set and change the scope of elements.
 Locale: en-US
 ms.date: 06/09/2022
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_scopes?view=powershell-7&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_scopes?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about Scopes
 ---
@@ -419,7 +419,7 @@ placed at the top of the module1 session state. If you use
 `Import-Module -Scope local`, then the exports are placed into the current
 scope object rather than at the top level. If you are _in a module_ and use
 `Import-Module -Scope global` (or `Import-Module -Global`) to load another
-module, that module and it's exports are loaded into the global session state
+module, that module and its exports are loaded into the global session state
 instead of the module's local session state. This feature was designed for
 writing module that manipulate modules. The **WindowsCompatibility** module
 does this to import proxy modules into the global session state.

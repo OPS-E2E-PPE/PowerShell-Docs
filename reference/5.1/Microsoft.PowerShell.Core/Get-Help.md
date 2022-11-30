@@ -3,7 +3,7 @@ external help file: System.Management.Automation.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
 ms.date: 09/28/2021
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/get-help?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/get-help?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Help
 ---
@@ -83,9 +83,9 @@ help files. Beginning in PowerShell 3.0, the modules that come with the Windows 
 don't include help files. To download or update the help files for a module in PowerShell 3.0, use
 the `Update-Help` cmdlet.
 
-You can also view the PowerShell help documents online in the Microsoft Docs. To get the online
+You can also view the PowerShell help documents online on Microsoft Learn. To get the online
 version of a help file, use the **Online** parameter, such as: `Get-Help Get-Process -Online`. To
-read all the PowerShell documentation, see the Microsoft Docs [PowerShell Documentation](/powershell).
+read all the PowerShell documentation, see the published [PowerShell documentation](/powershell).
 
 If you type `Get-Help` followed by the exact name of a help article, or by a word unique to a help
 article, `Get-Help` displays the article's content. If you specify the exact name of a command

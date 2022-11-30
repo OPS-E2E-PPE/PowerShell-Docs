@@ -3,7 +3,7 @@ external help file: PSModule-help.xml
 Locale: en-US
 Module Name: PowerShellGet
 ms.date: 06/23/2021
-online version: https://docs.microsoft.com/powershell/module/powershellget/install-script?view=powershell-7.3&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/powershellget/install-script?view=powershell-7.3&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Install-Script
 ---
@@ -445,7 +445,7 @@ The AllUsers scope lets modules be installed in a location that is accessible to
 computer, that is, `$env:ProgramFiles\WindowsPowerShell\Scripts`.
 
 The CurrentUser scope lets modules be installed only to
-`$home\Documents\WindowsPowerShell\Scripts`, so that the module is available only to the current
+`$HOME\Documents\WindowsPowerShell\Scripts`, so that the module is available only to the current
 user.
 
 When no **Scope** is defined, the default will be set based on the current session:

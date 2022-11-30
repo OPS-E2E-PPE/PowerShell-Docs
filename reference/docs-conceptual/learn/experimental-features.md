@@ -1,6 +1,6 @@
 ---
 description: Lists the currently available experimental features and how to use them.
-ms.date: 03/04/2022
+ms.date: 11/16/2022
 title: Using Experimental Features in PowerShell
 ---
 # Using Experimental Features in PowerShell
@@ -8,18 +8,17 @@ title: Using Experimental Features in PowerShell
 The Experimental Features support in PowerShell provides a mechanism for experimental features to
 coexist with existing stable features in PowerShell or PowerShell modules.
 
-An experimental feature is one where the design is not finalized. The feature is available for users
+An experimental feature is one where the design isn't finalized. The feature is available for users
 to test and provide feedback. Once an experimental feature is finalized, the design changes become
 breaking changes.
 
 > [!CAUTION]
 > Experimental features aren't intended to be used in production since the changes are allowed to be
-> breaking. Experimental features are not officially supported. However, we appreciate any feedback
-> and bug reports. You can file issues in the
-> [GitHub source repository](https://github.com/PowerShell/PowerShell/issues/new/choose).
+> breaking. Experimental features aren't officially supported. However, we appreciate any feedback
+> and bug reports. You can file issues in the [GitHub source repository][01].
 
 For more information about enabling or disabling these features, see
-[about_Experimental_Features](/powershell/module/microsoft.powershell.core/about/about_experimental_features).
+[about_Experimental_Features][02].
 
 ## Available features
 
@@ -27,31 +26,33 @@ This article describes the experimental features that are available and how to u
 
 Legend
 
-- &#x2714;&#xfe0f; - indicates that the experimental feature is available in the version of
-  PowerShell
-- &#x2705; - indicates the version of PowerShell where the experimental feature became mainstream
-- &#x274c; - indicates the version of PowerShell where the experimental feature was removed
+- The ![Experimental][X] icon indicates that the experimental feature is available in the version
+  of PowerShell
+- The ![Mainstream][M] icon indicates the version of PowerShell where the experimental feature
+  became mainstream
+- The ![Discontinued][D] icon indicates the version of PowerShell where the experimental feature was
+  removed
 
-|                            Name                            |       7.0        |       7.1        |       7.2        |       7.3        |
-| ---------------------------------------------------------- | :--------------: | :--------------: | :--------------: | :--------------: |
-| PSNullConditionalOperators                                 | &#x2714;&#xfe0f; |     &#x2705;     |                  |                  |
-| PSUnixFileStat (non-Windows only)                          | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |     &#x2705;     |                  |
-| Microsoft.PowerShell.Utility.PSManageBreakpointsInRunspace | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |     &#x2705;     |                  |
-| PSCultureInvariantReplaceOperator                          |                  | &#x2714;&#xfe0f; |     &#x2705;     |                  |
-| PSNotApplyErrorActionToStderr                              |                  | &#x2714;&#xfe0f; |     &#x2705;     |                  |
-| PSImplicitRemotingBatching                                 | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |     &#x274c;     |                  |
-| PSCommandNotFoundSuggestion                                | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |
-| PSDesiredStateConfiguration.InvokeDscResource              | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |
-| PSNativePSPathResolution                                   |                  | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |
-| PSSubsystemPluginModel                                     |                  | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |
-| PSNativeCommandArgumentPassing                             |                  |                  | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |
-| PSAnsiRenderingFileInfo                                    |                  |                  | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |
-| PSLoadAssemblyFromNativeCode                               |                  |                  | &#x2714;&#xfe0f; | &#x2714;&#xfe0f; |
-| PSCleanBlock                                               |                  |                  |                  | &#x2714;&#xfe0f; |
-| PSExec                                                     |                  |                  |                  | &#x2714;&#xfe0f; |
-| PSNativeCommandErrorActionPreference                       |                  |                  |                  | &#x2714;&#xfe0f; |
-| PSStrictModeAssignment                                     |                  |                  |                  | &#x2714;&#xfe0f; |
-| PSAMSIMethodInvocationLogging                              |                  |                  |                  | &#x2714;&#xfe0f; |
+|                            Name                            |        7.0         |        7.1         |        7.2         |        7.3         |
+| ---------------------------------------------------------- | :----------------: | :----------------: | :----------------: | :----------------: |
+| PSNullConditionalOperators                                 | ![Experimental][X] |  ![Mainstream][M]  |                    |                    |
+| PSUnixFileStat (non-Windows only)                          | ![Experimental][X] |  ![Mainstream][M]  |                    |                    |
+| Microsoft.PowerShell.Utility.PSManageBreakpointsInRunspace | ![Experimental][X] | ![Experimental][X] |  ![Mainstream][M]  |                    |
+| PSCultureInvariantReplaceOperator                          |                    | ![Experimental][X] |  ![Mainstream][M]  |                    |
+| PSNotApplyErrorActionToStderr                              |                    | ![Experimental][X] |  ![Mainstream][M]  |                    |
+| PSImplicitRemotingBatching                                 | ![Experimental][X] | ![Experimental][X] | ![Discontinued][D] |                    |
+| PSCommandNotFoundSuggestion                                | ![Experimental][X] | ![Experimental][X] | ![Experimental][X] | ![Experimental][X] |
+| PSDesiredStateConfiguration.InvokeDscResource (DSC v2)     | ![Experimental][X] | ![Experimental][X] | ![Experimental][X] | ![Experimental][X] |
+| PSNativePSPathResolution                                   |                    | ![Experimental][X] | ![Experimental][X] | ![Discontinued][D] |
+| PSSubsystemPluginModel                                     |                    | ![Experimental][X] | ![Experimental][X] | ![Experimental][X] |
+| PSNativeCommandArgumentPassing                             |                    |                    | ![Experimental][X] |  ![Mainstream][M]  |
+| PSAnsiRenderingFileInfo                                    |                    |                    | ![Experimental][X] |  ![Mainstream][M]  |
+| PSLoadAssemblyFromNativeCode                               |                    |                    | ![Experimental][X] | ![Experimental][X] |
+| PSCleanBlock                                               |                    |                    |                    |  ![Mainstream][M]  |
+| PSExec                                                     |                    |                    |                    |  ![Mainstream][M]  |
+| PSNativeCommandErrorActionPreference                       |                    |                    |                    | ![Experimental][X] |
+| PSStrictModeAssignment                                     |                    |                    |                    | ![Discontinued][D] |
+| PSAMSIMethodInvocationLogging                              |                    |                    |                    |  ![Mainstream][M]  |
 
 ## Microsoft.PowerShell.Utility.PSManageBreakpointsInRunspace
 
@@ -91,18 +92,24 @@ run. The runspace is stored in a variable and passed to the `Get-PSBreakPoint` c
 
 ## PSAMSIMethodInvocationLogging
 
+> [!NOTE]
+> This feature became mainstream in PowerShell 7.3.
+
 The Windows Antimalware Scan Interface (AMSI) is an API that allows applications to pass actions to
 an antimalware scanner, such as Windows Defender, for detecting malicious payloads. Beginning with
 PowerShell 5.1, PowerShell running on Windows 10 (and higher) passes all script blocks to AMSI.
 
-This experimental feature extends the data that is sent to AMSI for inspection. With this feature
+This experimental feature extends the data that's sent to AMSI for inspection. With this feature
 enabled, PowerShell adds all invocations of .NET method members.
 
 This experiment was added in PowerShell 7.3.
 
-For more information about AMSI, see [How AMSI helps](/windows/win32/amsi/how-amsi-helps).
+For more information about AMSI, see [How AMSI helps][03].
 
 ## PSAnsiRenderingFileInfo
+
+> [!NOTE]
+> This feature became mainstream in PowerShell 7.3.
 
 This experiment was added in PowerShell 7.2. This feature adds the $PSStyle.FileInfo member and
 enables coloring of specific file types.
@@ -113,35 +120,34 @@ enables coloring of specific file types.
 - `$PSStyle.FileInfo.Extension` - Use this member to define colors for different file extensions.
   The **Extension** member pre-includes extensions for archive and PowerShell files.
 
-For more information, see
-[about_Automatic_Variables](/powershell/module/Microsoft.PowerShell.Core/About/about_Automatic_Variables).
+For more information, see [about_Automatic_Variables][04].
 
 > [!NOTE]
-> This feature is dependent on the **PSAnsiRendering** feature that is now a standard feature.
+> This feature is dependent on the **PSAnsiRendering** feature that's now a standard feature.
 
 ## PSCleanBlock
 
-The `clean` block is a convenient way for users to clean up resources that span
-across the `begin`, `process`, and `end` blocks. It's semantically similar to a
-`finally` block that covers all other named blocks of a script function or a
-script cmdlet. Resource cleanup is enforced for the following scenarios:
+> [!NOTE]
+> This feature became mainstream in PowerShell 7.3.
+
+The `clean` block is a convenient way for users to clean up resources that span across the `begin`,
+`process`, and `end` blocks. It's semantically similar to a `finally` block that covers all other
+named blocks of a script function or a script cmdlet. Resource cleanup is enforced for the following
+scenarios:
 
 1. when the pipeline execution finishes normally without terminating error
 1. when the pipeline execution is interrupted due to terminating error
 1. when the pipeline is halted by `Select-Object -First`
-1. when the pipeline is being stopped by <kbd>Ctrl+c</kbd> or
-   `StopProcessing()`
+1. when the pipeline is being stopped by <kbd>Ctrl+c</kbd> or `StopProcessing()`
 
 > [!CAUTION]
-> Adding the `clean` block is a breaking change. Because `clean` is parsed as a
-> keyword, it prevents users from directly calling a command named `clean` as
-> the first statement in a script block. However, it's likely a non-issue in
-> most practical cases, and when it is, the command can still be invoked with
-> the call operator (`& clean`).
+> Adding the `clean` block is a breaking change. Because `clean` is parsed as a keyword, it prevents
+> users from directly calling a command named `clean` as the first statement in a script block.
+> However, it's likely a non-issue in most practical cases, and when it's, the command can still be
+> invoked with the call operator (`& clean`).
 
-For more information about this experimental feature, see
-[RFC0059](https://github.com/PowerShell/PowerShell-RFC/blob/master/Archive/Experimental/RFC0059-Cleanup-Script-Block.md)
-in the PowerShell/PowerShell-RFC repository.
+For more information about this experimental feature, see [RFC0059][05] in the
+**PowerShell/PowerShell-RFC** repository.
 
 ## PSCommandNotFoundSuggestion
 
@@ -152,17 +158,20 @@ PS> get
 ```
 
 ```Output
-get: The term 'get' is not recognized as the name of a cmdlet, function, script file, or operable
-program. Check the spelling of the name, or if a path was included, verify that the path is correct
-and try again.
+get: The term 'get' isn't recognized as the name of a cmdlet, function, script file,
+or operable program. Check the spelling of the name, or if a path was included, verify
+that the path is correct and try again.
 
-Suggestion [4,General]: The most similar commands are: set, del, ft, gal, gbp, gc, gci, gcm, gdr,
-gcs.
+Suggestion [4,General]: The most similar commands are: set, del, ft, gal, gbp, gc, gci,
+gcm, gdr, gcs.
 ```
 
 ## PSCultureInvariantReplaceOperator
 
-When the left-hand operand in a `-replace` operator statement is not a string, that operand is
+> [!NOTE]
+> This feature became mainstream in PowerShell 7.2.
+
+When the left-hand operand in a `-replace` operator statement isn't a string, that operand is
 converted to a string.
 
 When this feature is disabled, the `-replace` operator does a culture-sensitive string conversion.
@@ -196,10 +205,17 @@ PowerShell 7.2-preview7, the **PSDesiredStateConfiguration** module was removed 
 disabled by default. To enable this feature you must install the **PSDesiredStateConfiguration**
 v2.0.5 module from the PowerShell Gallery and enable the feature using `Enable-ExperimentalFeature`.
 
+DSC v3 doesn't have this experimental feature. DSC v3 only supports `Invoke-DSCResource` and doesn't
+use or support MOF compilation. For more information, see
+[PowerShell Desired State Configuration v3][06].
+
 ## PSExec
 
+> [!NOTE]
+> This feature became mainstream in PowerShell 7.3.
+
 Some native Unix commands shell out to run something (like ssh) and use the `bash` built-in command
-`exec` to spawn a new process that replaces the current one. By default, `exec` is not a valid
+`exec` to spawn a new process that replaces the current one. By default, `exec` isn't a valid
 command in PowerShell. This is affecting some known scripts like `copy-ssh-id` and some subcommands
 of AzCLI.
 
@@ -258,6 +274,9 @@ Exposes an API to allow assembly loading from native code.
 
 ## PSNativeCommandArgumentPassing
 
+> [!NOTE]
+> This feature became mainstream in PowerShell 7.3.
+
 When this experimental feature is enabled PowerShell uses the `ArgumentList` property of the
 `StartProcessInfo` object rather than our current mechanism of reconstructing a string when invoking
 a native executable.
@@ -265,7 +284,10 @@ a native executable.
 > [!CAUTION]
 > The new behavior is a **breaking change** from current behavior. This may break scripts and
 > automation that work around the various issues when invoking native applications. Historically,
-> quotes must be escaped and it is not possible to provide empty arguments to a native application.
+> quotes must be escaped and it isn't possible to provide empty arguments to a native application.
+>
+> Use the [stop-parsing token][08] (`--%`) or the [`Start-Process`][09] cmdlet to sidestep native
+> argument passing when needed.
 
 This feature adds a new automatic variable `$PSNativeCommandArgumentPassing` that allows you to
 select the behavior at runtime. The valid values are `Legacy`, `Standard`, and `Windows`. `Legacy`
@@ -276,6 +298,7 @@ When the preference variable is set to `Windows`, invocations of the following f
 use the `Legacy` style argument passing.
 
 - `cmd.exe`
+- `find.exe`
 - `cscript.exe`
 - `wscript.exe`
 - ending with `.bat`
@@ -285,7 +308,7 @@ use the `Legacy` style argument passing.
 - ending with `.wsf`
 
 If the `$PSNativeArgumentPassing` is set to either `Legacy` or `Standard`, the check for these files
-do not occur. The default behavior is platform specific. On Windows platforms, the default setting
+doesn't occur. The default behavior is platform specific. On Windows platforms, the default setting
 is `Windows` and non-Windows platforms is `Standard`.
 
 New behaviors made available by this change:
@@ -321,7 +344,7 @@ New behaviors made available by this change:
   Arg 3 is <>
   ```
 
-The new behavior does not change invocations that look like this:
+The new behavior doesn't change invocations that look like this:
 
 ```powershell
 PS> $PSNativeCommandArgumentPassing = "Legacy"
@@ -361,12 +384,12 @@ Arg 2 is <a b>
 
 ## PSNativeCommandErrorActionPreference
 
-Native commands usually return an exit code to the calling application that is zero for success or
-non-zero for failure. However, native commands currently do not participate in the PowerShell error
-stream. Redirected **stderr** output is not interpreted the same as the PowerShell error stream.
-Many native commands use stderr as an information or verbose stream, thus only the exit code
-matters. Users working with native commands in their scripts need to check the exit status after
-each call using similar to the following example:
+Native commands usually return an exit code to the calling application that's zero for success or
+non-zero for failure. However, native commands currently don't participate in the PowerShell error
+stream. Redirected **stderr** output isn't interpreted the same as the PowerShell error stream. Many
+native commands use stderr as an information or verbose stream, thus only the exit code matters.
+Users working with native commands in their scripts need to check the exit status after each call
+using similar to the following example:
 
 ```powershell
 if ($LASTEXITCODE -ne 0) {
@@ -397,35 +420,44 @@ $PSNativeCommandUseErrorActionPreference = $true
 
 ## PSNativePSPathResolution
 
+> [!NOTE]
+> This experimental feature was removed in PowerShell 7.3 and is no longer supported.
+
 If a PSDrive path that uses the FileSystem provider is passed to a native command, the resolved file
 path is passed to the native command. This means a command like `code temp:/test.txt` now works as
 expected.
 
-Also, on Windows, if the path starts with `~`, that is resolved to the full path and passed to the
+Also, on Windows, if the path starts with `~`, that's resolved to the full path and passed to the
 native command. In both cases, the path is normalized to the directory separators for the relevant
 operating system.
 
-- If the path is not a PSDrive or `~` (on Windows), then path normalization doesn't occur
+- If the path isn't a PSDrive or `~` (on Windows), then path normalization doesn't occur
 - If the path is in single quotes, then it's not resolved and treated as literal
 
 ## PSNotApplyErrorActionToStderr
 
+> [!NOTE]
+> This feature became mainstream in PowerShell 7.2.
+
 When this experimental feature is enabled, error records redirected from native commands, like when
-using redirection operators (`2>&1`), are not written to the `$Error` variable and the preference
-variable `$ErrorActionPreference` does not affect the redirected output.
+using redirection operators (`2>&1`), aren't written to the `$Error` variable and the preference
+variable `$ErrorActionPreference` doesn't affect the redirected output.
 
 Many native commands write to `stderr` as an alternative stream for additional information. This
-behavior can cause confusion when looking through errors or the additional output information can
-be lost to the user if `$ErrorActionPreference` is set to a state that mutes the output.
+behavior can cause confusion when looking through errors or the additional output information can be
+lost to the user if `$ErrorActionPreference` is set to a state that mutes the output.
 
 When a native command has a non-zero exit code, `$?` is set to `$false`. If the exit code is zero,
 `$?` is set to `$true`.
 
 ## PSNullConditionalOperators
 
+> [!NOTE]
+> This feature became mainstream in PowerShell 7.1.
+
 Introduces new operators for Null conditional member access operators - `?.` and `?[]`. Null member
 access operators can be used on scalar types and array types. Return the value of the accessed
-member if the variable is not null. If the value of the variable is null, then return null.
+member if the variable isn't null. If the value of the variable is null, then return null.
 
 ```powershell
 $x = $null
@@ -438,10 +470,10 @@ ${x?}?[0]
 ${x}?.MyMethod()
 ```
 
-The property `propname` is accessed and it's value is returned only if `$x` is not null. Similarly,
-the indexer is used only if `$x` is not null. If `$x` is null, then null is returned.
+The property `propname` is accessed and it's value is returned only if `$x` isn't null. Similarly,
+the indexer is used only if `$x` isn't null. If `$x` is null, then null is returned.
 
-The `?.` and `?[]` operators are member access operators and do not allow a space in between the
+The `?.` and `?[]` operators are member access operators and don't allow a space in between the
 variable name and the operator.
 
 Since PowerShell allows `?` as part of the variable name, disambiguation is required when the
@@ -454,14 +486,20 @@ variables must use `{}` around the variable name like: `${x?}?.propertyName` or 
 
 ## PSStrictModeAssignment
 
+> [!NOTE]
+> This feature was removed in PowerShell 7.3.
+
 PowerShell 7.3-preview.2 adds the **StrictMode** parameter to `Invoke-Command` to allow specifying
 strict mode when invoking command locally. The **StrictMode** parameter sets the provided version
 for the process. Once the process completes, the **StrictMode** version is set back to what it was
 before the `Invoke-Command`.
 
-This feature does not support asynchronous jobs on remote machines.
+This feature doesn't support asynchronous jobs on remote machines.
 
 ## PSUnixFileStat
+
+> [!NOTE]
+> This feature became mainstream in PowerShell 7.1.
 
 This feature provides more Unix-like file listings by including data from the Unix **stat** API. It
 adds a new note property in the filesystem provider named **UnixStat** that includes a rendering of
@@ -483,10 +521,6 @@ drwxr-xr-x jimtru    staff         11/8/2019 10:37         896 tools
 -rw-r--r-- jimtru    staff         11/8/2019 10:37      201297 CHANGELOG.md
 ```
 
-> [!NOTE]
-> This feature has moved out of the experimental phase and is a mainstream feature in PowerShell 7.1
-> and higher.
-
 ## PSSubsystemPluginModel
 
 This feature enables the subsystem plugin model in PowerShell. The feature makes it possible to
@@ -496,10 +530,23 @@ allows these components to become optional features for a minimal PowerShell ins
 
 Currently, only the **CommandPredictor** subsystem is supported. This subsystem is used along with
 the PSReadLine module to provide custom prediction plugins. In future, **Job**,
-**CommandCompleter**, **Remoting** and other components could be separated into subsystem
-assemblies outside of `System.Management.Automation.dll`.
+**CommandCompleter**, **Remoting** and other components could be separated into subsystem assemblies
+outside of `System.Management.Automation.dll`.
 
-The experimental feature includes a new cmdlet,
-[Get-PSSubsystem](xref:Microsoft.PowerShell.Core.Get-PSSubsystem). This cmdlet is only available
+The experimental feature includes a new cmdlet, [Get-PSSubsystem][07]. This cmdlet is only available
 when the feature is enabled. This cmdlet returns information about the subsystems that are available
 on the system.
+
+<!-- added link references -->
+[01]: https://github.com/PowerShell/PowerShell/issues/new/choose
+[02]: /powershell/module/microsoft.powershell.core/about/about_experimental_features
+[03]: /windows/win32/amsi/how-amsi-helps
+[04]: /powershell/module/Microsoft.PowerShell.Core/About/about_Automatic_Variables
+[05]: https://github.com/PowerShell/PowerShell-RFC/blob/master/Archive/Experimental/RFC0059-Cleanup-Script-Block.md
+[06]: /powershell/dsc/overview?view=dsc-3.0&preserve-view=true
+[07]: xref:Microsoft.PowerShell.Core.Get-PSSubsystem
+[08]: /powershell/module/Microsoft.PowerShell.Core/About/about_Parsing#the-stop-parsing-token
+[09]: xref:Microsoft.PowerShell.Management.Start-Process
+[X]: ../../media/shared/construction-sign_1f6a7.svg
+[M]: ../../media/shared/check-mark-button_2705.svg
+[D]: ../../media/shared/cross-mark_274c.svg

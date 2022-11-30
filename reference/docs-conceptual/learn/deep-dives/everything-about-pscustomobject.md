@@ -1,7 +1,7 @@
 ---
 description: PSCustomObject is a simple way to create structured data.
 ms.custom: contributor-KevinMarquette
-ms.date: 03/30/2022
+ms.date: 11/16/2022
 title: Everything you wanted to know about PSCustomObject
 ---
 # Everything you wanted to know about PSCustomObject
@@ -253,8 +253,8 @@ $fourth.Key = 4
 Clone creates a shallow copy of the object. They have different instances now and `$third.key` is 3
 and `$fourth.Key` is 4 in this example.
 
-I call this a shallow copy because if you have nested objects. (where the properties contain other
-objects). Only the top-level values are copied. The child objects will reference each other.
+I call this a shallow copy because if you have nested objects (objects with properties contain other
+objects), only the top-level values are copied. The child objects will reference each other.
 
 ### PSTypeName for custom object types
 

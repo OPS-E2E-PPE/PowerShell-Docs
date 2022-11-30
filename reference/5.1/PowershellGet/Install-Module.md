@@ -3,7 +3,7 @@ external help file: PSModule-help.xml
 Locale: en-US
 Module Name: PowerShellGet
 ms.date: 06/23/2021
-online version: https://docs.microsoft.com/powershell/module/powershellget/install-module?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/powershellget/install-module?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Install-Module
 ---
@@ -111,7 +111,7 @@ Install-Module -Name PowerShellGet -Scope CurrentUser
 
 The `Install-Module` uses the **Name** parameter to specify the **PowerShellGet** module.
 `Install-Module` downloads and installs the newest version of **PowerShellGet** into the current
-user's directory, `$home\Documents\WindowsPowerShell\Modules`.
+user's directory, `$HOME\Documents\WindowsPowerShell\Modules`.
 
 ## PARAMETERS
 
@@ -373,7 +373,7 @@ computer:
 The **CurrentUser** installs modules in a location that is accessible only to the current user of
 the computer. For example:
 
-`$home\Documents\WindowsPowerShell\Modules`
+`$HOME\Documents\WindowsPowerShell\Modules`
 
 When no **Scope** is defined, the default is set based on the PowerShellGet version.
 

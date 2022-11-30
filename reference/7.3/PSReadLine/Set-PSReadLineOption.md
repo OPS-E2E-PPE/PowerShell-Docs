@@ -3,7 +3,7 @@ external help file: Microsoft.PowerShell.PSReadLine2.dll-Help.xml
 Locale: en-US
 Module Name: PSReadLine
 ms.date: 12/17/2021
-online version: https://docs.microsoft.com/powershell/module/psreadline/set-psreadlineoption?view=powershell-7.3&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/psreadline/set-psreadlineoption?view=powershell-7.3&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-PSReadLineOption
 ---
@@ -438,18 +438,18 @@ Accept wildcard characters: False
 
 Specifies the path to the file where history is saved. Computers running Windows or non-Windows
 platforms store the file in different locations. The filename is stored in a variable
-`$($host.Name)_history.txt`, for example `ConsoleHost_history.txt`.
+`$($Host.Name)_history.txt`, for example `ConsoleHost_history.txt`.
 
 If you don't use this parameter, the default path is as follows:
 
 **Windows**
 
-- `$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\$($host.Name)_history.txt`
+- `$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\$($Host.Name)_history.txt`
 
 **non-Windows**
 
-- `$env:XDG_DATA_HOME/powershell/PSReadLine/$($host.Name)_history.txt`
-- `$env:HOME/.local/share/powershell/PSReadLine/$($host.Name)_history.txt`
+- `$env:XDG_DATA_HOME/powershell/PSReadLine/$($Host.Name)_history.txt`
+- `$HOME/.local/share/powershell/PSReadLine/$($Host.Name)_history.txt`
 
 ```yaml
 Type: System.String
@@ -458,7 +458,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: A file named $($host.Name)_history.txt in $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine on Windows and $env:XDG_DATA_HOME/powershell/PSReadLine or $env:HOME/.local/share/powershell/PSReadLine on non-Windows platforms
+Default value: A file named $($Host.Name)_history.txt in $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine on Windows and $env:XDG_DATA_HOME/powershell/PSReadLine or $HOME/.local/share/powershell/PSReadLine on non-Windows platforms
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -15,7 +15,7 @@ There are three versions of DSC available:
 
 - DSC 2.0 is the version of DSC that shipped in PowerShell 7.
 
-  With the release of PowerShell 7.2, the PSDesiredStateConfiguration module is no longer be
+  With the release of PowerShell 7.2, the PSDesiredStateConfiguration module is no longer
   included in the PowerShell package. Separating DSC into its own module allows us to invest and
   develop DSC independent of PowerShell and reduces the size of the PowerShell package. Users of DSC
   will enjoy the benefit of upgrading DSC without the need to upgrade PowerShell, accelerating time
@@ -31,5 +31,4 @@ There are three versions of DSC available:
 The documentation for DSC has been moved to a new location so that we can manage the DSC
 version-specific information separate from the versions of PowerShell.
 
-See the new documentation at
-[https://docs.microsoft.com/powershell/dsc](/powershell/dsc/overview).
+See the new documentation in [Desired State Configuration 2.0](/powershell/dsc/overview).

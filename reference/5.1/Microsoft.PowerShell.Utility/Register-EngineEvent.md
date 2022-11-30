@@ -3,7 +3,7 @@ external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
 ms.date: 01/04/2022
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/register-engineevent?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/register-engineevent?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Register-EngineEvent
 ---
@@ -63,13 +63,13 @@ This example shows how to run `Register-EngineEvent` to take a specific action w
 
 ```powershell
 Register-EngineEvent -SourceIdentifier PowerShell.Exiting -SupportEvent -Action {
-    Get-History | Export-Clixml $Home\history.clixml
+    Get-History | Export-Clixml $HOME\history.clixml
 }
 ```
 
 The **SupportEvent** parameter is added to hide the event subscription. When PowerShell exits, in
 this case, the command history from the exiting session is exported an XML file in the user's
-`$Home` directory.
+`$HOME` directory.
 
 ### Example 3: Create and subscribe to a user-defined event
 

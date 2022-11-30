@@ -2,8 +2,8 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 03/25/2022
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/invoke-restmethod?view=powershell-7.2&WT.mc_id=ps-gethelp
+ms.date: 11/04/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/invoke-restmethod?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Invoke-RestMethod
 ---
@@ -241,6 +241,49 @@ $x
 30
 ```
 
+### Example 7: Skipping Header Validation
+
+By default, the `Invoke-RestMethod` cmdlet validates the values of well-known headers that have a
+standardards-defined value format. The following example shows how this validation can raise an
+error and how you can use the **SkipHeaderValidation** parameter to avoid validating values for
+endpoints that tolerate invalidly formatted values.
+
+```powershell
+$Uri = 'https://httpbin.org/headers'
+$InvalidHeaders = @{
+    'If-Match' = '12345'
+}
+
+Invoke-RestMethod -Uri $Uri -Headers $InvalidHeaders
+
+Invoke-RestMethod -Uri $Uri -Headers $InvalidHeaders -SkipHeaderValidation |
+    Format-List
+```
+
+```Output
+Invoke-RestMethod: The format of value '12345' is invalid.
+
+headers : @{Host=httpbin.org; If-Match=12345; User-Agent=Mozilla/5.0 (Windows NT 10.0; Microsoft Windows
+          10.0.19044; en-US) PowerShell/7.2.5;  X-Amzn-Trace-Id=Root=1-62f150a6-27754fd4226f31b43a3d2874}
+```
+
+[httpbin.org](https://httpbin.org/) is a service that returns information about web requests and
+responses for troubleshooting. The `$Uri` variable is assigned to the `/headers` endpoint of the
+service, which returns a request's headers as the content in its response.
+
+The `If-Match` request header is defined in
+[RFC-7232 section 3.1](https://www.rfc-editor.org/rfc/rfc7232.html#section-3.1) and requires the
+value for that header to be defined with surrounding quotes. The `$InvalidHeaders` variable is
+assigned a hash table where the value of `If-Match` is invalid because it's defined as `12345`
+instead of `"12345"`.
+
+Calling `Invoke-RestMethod` with the invalid headers returns an error reporting that the formatted
+value is invalid. The request is not sent to the endpoint.
+
+Calling `Invoke-RestMethod` with the **SkipHeaderValidation** parameter ignores the validation
+failure and sends the request to the endpoint. Because the endpoint tolerates non-compliant header
+values, the cmdlet returns the response object without error.
+
 ## PARAMETERS
 
 ### -AllowUnencryptedAuthentication
@@ -311,9 +354,18 @@ You can also pipe a body value to `Invoke-RestMethod`.
 The **Body** parameter can be used to specify a list of query parameters or specify the content of
 the response.
 
-When the input is a GET request, and the body is an `IDictionary` (typically, a hash table), the
-body is added to the Uniform Resource Identifier (URI) as query parameters. For other request types
-(such as POST), the body is set as the value of the request body in the standard name=value format.
+When the input is a POST request and the body is a **String**, the value to the left of the first
+equals sign (`=`) is set as a key in the form data and the remaining text is set as the value. To
+specify multiple keys, use an **IDictionary** object, such as a hash table, for the **Body**.
+
+When the input is a GET request and the body is an **IDictionary** (typically, a hash table), the
+body is added to the URI as query parameters. For other request types (such as PATCH), the body is
+set as the value of the request body in the standard `name=value` format with the values
+URL-encoded.
+
+When the input is a **System.Xml.XmlNode** object and the XML declaration specifies an encoding,
+that encoding is used for the data in the request unless overridden by the **ContentType**
+parameter.
 
 When the body is a form, or it's the output of another `Invoke-WebRequest` call, PowerShell sets the
 request content to the form fields.
@@ -386,6 +438,12 @@ Accept wildcard characters: False
 ### -ContentType
 
 Specifies the content type of the web request.
+
+If the value for **ContentType** contains the encoding format (as `charset`), the cmdlet uses that
+format to encode the body of the web request. If the **ContentType** doesn't specify an encoding
+format, the default encoding format is used instead. An example of a **ContentType** with an
+encoding format is `text/plain; charset=iso-8859-5`, which specifies the
+[Latin/Cyrillic](https://www.iso.org/standard/28249.html) alphabet.
 
 If this parameter is omitted and the request method is POST, `Invoke-RestMethod` sets the content
 type to `application/x-www-form-urlencoded`. Otherwise, the content type isn't specified in the
@@ -891,7 +949,7 @@ Accept wildcard characters: False
 
 Specifies the interval between retries for the connection when a failure code between 400 and 599,
 inclusive or 304 is received. Also see **MaximumRetryCount** parameter for specifying number of
-retries.
+retries. The value must be between `1` and `[int]::MaxValue`.
 
 ```yaml
 Type: System.Int32
@@ -900,7 +958,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: 5
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -970,8 +1028,8 @@ This switch should be used for sites that require header values that do not conf
 Specifying this switch disables validation to allow the value to be passed unchecked. When
 specified, all headers are added without validation.
 
-This will disable validation for values passed to the **ContentType**, **Headers**, and **UserAgent**
-parameters.
+This will disable validation for values passed to the **ContentType**, **Headers**, and
+**UserAgent** parameters.
 
 This feature was added in PowerShell 6.0.0.
 

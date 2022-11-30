@@ -1,8 +1,8 @@
 ---
 description: Describes the operators that are supported by PowerShell.
 Locale: en-US
-ms.date: 03/16/2022
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 10/17/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about Operators
 ---
@@ -288,7 +288,7 @@ $SingleArray = ,1
 Write-Output (,1)
 ```
 
-Since `Write-Object` expects an argument, you must put the expression in
+Since `Write-Output` expects an argument, you must put the expression in
 parentheses.
 
 ### Dot sourcing operator `.`
@@ -327,6 +327,18 @@ right side of the operator.
 
 ```output
 1 hello      3.14
+```
+
+You can zero-pad a numeric value with the ["0" custom specifier][zero-padding].
+The number of zeroes following the `:` indicates the maximum width to pad the
+formatted string to.
+
+```powershell
+"{0:00} {1:000} {2:000000}" -f 7, 24, 365
+```
+
+```output
+07 024 000365
 ```
 
 If you need to keep the curly braces (`{}`) in the formatted string, you can
@@ -417,11 +429,13 @@ Get-Service | Where-Object {$_.StartType -eq 'Automatic'}
 
 ### Range operator `..`
 
-Represents the sequential integers in an integer array, given an upper, and
-lower boundary.
+The range operator can be used to represent an array of sequential integers.
+The values joined by the range operator define the start and end values of the
+range.
 
 ```powershell
 1..10
+$max = 10
 foreach ($a in 1..$max) {Write-Host $a}
 ```
 
@@ -431,6 +445,35 @@ You can also create ranges in reverse order.
 10..1
 5..-5 | ForEach-Object {Write-Output $_}
 ```
+
+The start and end values of the range can be any pair of expressions that
+evaluate to an integer. For example, you could use the members of an
+enumeration for your start and end values.
+
+```powershell
+PS> enum Food {
+      Apple
+      Banana = 3
+      Kiwi = 10
+    }
+PS> [Food]::Apple..[Food]::Kiwi
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
+
+> [!IMPORTANT]
+> The resulting range isn't limited to the values of the enumeration. Instead
+> it represents the range of values between the two values provided. You can't
+> use the range operator to reliably represent the members of an enumeration.
 
 ### Member-access operator `.`
 
@@ -471,3 +514,7 @@ of the `Get-Member` cmdlet.  The member name may be an expression.
 - [about_Split](about_Split.md)
 - [about_Join](about_Join.md)
 - [about_Redirection](about_Redirection.md)
+
+<!-- Reference Links -->
+
+[zero-padding]: /dotnet/standard/base-types/custom-numeric-format-strings#Specifier0

@@ -3,7 +3,7 @@ external help file: Microsoft.Powershell.LocalAccounts.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.LocalAccounts
 ms.date: 09/30/2021
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.localaccounts/set-localuser?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.localaccounts/set-localuser?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-LocalUser
 ---
@@ -181,7 +181,7 @@ Accept wildcard characters: False
 Specifies a password for the user account. If the user account is connected to a Microsoft account,
 do not set a password.
 
-You can use `Read-Host -GetCredential`, `Get-Credential`, or `ConvertTo-SecureString` to create a
+You can use `Read-Host -AsSecureString`, `Get-Credential`, or `ConvertTo-SecureString` to create a
 **SecureString** object for the password.
 
 If you omit the **Password** and **NoPassword** parameters, `Set-LocalUser` prompts you for the

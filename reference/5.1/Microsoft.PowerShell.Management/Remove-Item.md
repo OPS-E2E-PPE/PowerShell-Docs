@@ -2,8 +2,8 @@
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 09/24/2021
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/remove-item?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 11/11/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/remove-item?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Remove-Item
 ---
@@ -86,7 +86,7 @@ Get-ChildItem * -Include *.csv -Recurse | Remove-Item
 
 In the `Get-ChildItem` command, **Path** has a value of (`*`), which represents the contents of the
 current folder. It uses **Include** to specify the CSV file type, and it uses **Recurse** to make
-the retrieval recursive. If you try to specify the file type the path, such as `-Path *.csv`, the
+the retrieval recursive. If you try to specify the file type in the path, such as `-Path *.csv`, the
 cmdlet interprets the subject of the search to be a file that has no child items, and **Recurse**
 fails.
 
@@ -458,6 +458,15 @@ You can pipe a string that contains a path, but not a literal path, to this cmdl
 This cmdlet does not return any output.
 
 ## NOTES
+
+Windows PowerShell includes the following aliases for `Remove-Item`:
+
+- `del`
+- `erase`
+- `rd`
+- `ri`
+- `rm`
+- `rmdir`
 
 The `Remove-Item` cmdlet is designed to work with the data exposed by any provider. To list the
 providers available in your session, type `Get-PsProvider`. For more information, see

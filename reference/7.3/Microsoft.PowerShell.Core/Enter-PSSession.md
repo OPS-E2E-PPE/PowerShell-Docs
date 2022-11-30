@@ -2,8 +2,8 @@
 external help file: System.Management.Automation.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 01/24/2022
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/enter-pssession?view=powershell-7.3&WT.mc_id=ps-gethelp
+ms.date: 08/16/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/enter-pssession?view=powershell-7.3&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Enter-PSSession
 ---
@@ -125,8 +125,8 @@ session as text.
 The first command uses the `Enter-PSSession` cmdlet to start an interactive session with Server01, a
 remote computer. When the session starts, the command prompt changes to include the computer name.
 
-The second command gets the PowerShell process and redirects the output to the Process.txt file. The
-command is submitted to the remote computer, and the file is saved on the remote computer.
+The second command gets the PowerShell process and redirects the output to the `Process.txt` file.
+The command is submitted to the remote computer, and the file is saved on the remote computer.
 
 The third command uses the **Exit** keyword to end the interactive session and close the connection.
 The fourth command confirms that the Process.txt file is on the remote computer. A `Get-ChildItem`
@@ -134,14 +134,14 @@ The fourth command confirms that the Process.txt file is on the remote computer.
 
 ```powershell
 PS C:\> Enter-PSSession -ComputerName Server01
-[Server01]: PS>
+[Server01]: PS C:\>
 [Server01]: PS C:\> Get-Process PowerShell > C:\ps-test\Process.txt
 [Server01]: PS C:\> exit
 PS C:\>
-PS C:\> dir C:\ps-test\process.txt
-Get-ChildItem : Cannot find path 'C:\ps-test\process.txt' because it does not exist.
+PS C:\> dir C:\ps-test\Process.txt
+Get-ChildItem : Cannot find path 'C:\ps-test\Process.txt' because it does not exist.
 At line:1 char:4
-+ dir <<<<  c:\ps-test\process.txt
++ dir <<<<  c:\ps-test\Process.txt
 ```
 
 This command shows how to work in an interactive session with a remote computer.
@@ -189,18 +189,18 @@ PS> Enter-PSSession -HostName UserA@LinuxServer01
 ```
 
 This example shows how to start an interactive session using Secure Shell (SSH). If SSH is
-configured on the remote computer to prompt for passwords then you will get a password prompt.
-Otherwise you will have to use SSH key based user authentication.
+configured on the remote computer to use passwords then you are prompted to enter a password.
+Otherwise, you must use key-based user authentication.
 
-### Example 7: Start an interactive session using SSH and specify the Port and user authentication key
+### Example 7: Start an interactive session using SSH with a port and user authentication key
 
 ```powershell
 PS> Enter-PSSession -HostName UserA@LinuxServer02:22 -KeyFilePath c:\sshkeys\userAKey_rsa
 ```
 
-This example shows how to start an interactive session using SSH. It uses the **Port** parameter to
-specify the port to use and the **KeyFilePath** parameter to specify an RSA key used to authenticate
-the user on the remote computer.
+This example shows how to start an interactive session using SSH. The username and SSH port number
+are specified as parts of the value of the **HostName** parameter. The **KeyFilePath** parameter
+specifies the location of an RSA key used to authenticate the user on the remote computer.
 
 ### Example 8: Start an interactive session using SSH options
 
@@ -292,11 +292,12 @@ of the Windows operating system.
 For more information about the values of this parameter, see
 [AuthenticationMechanism Enum](/dotnet/api/system.management.automation.runspaces.authenticationmechanism).
 
-Caution: Credential Security Support Provider (CredSSP) authentication, in which the user's
-credentials are passed to a remote computer to be authenticated, is designed for commands that
-require authentication on more than one resource, such as accessing a remote network share. This
-mechanism increases the security risk of the remote operation. If the remote computer is
-compromised, the credentials that are passed to it can be used to control the network session.
+> [!CAUTION]
+> Credential Security Support Provider (CredSSP) authentication, in which the user's credentials are
+> passed to a remote computer to be authenticated, is designed for commands that require
+> authentication on more than one resource, such as accessing a remote network share. This mechanism
+> increases the security risk of the remote operation. If the remote computer is compromised, the
+> credentials that are passed to it can be used to control the network session.
 
 ```yaml
 Type: System.Management.Automation.Runspaces.AuthenticationMechanism
@@ -348,9 +349,9 @@ computer. For instructions for adding a computer name to the TrustedHosts list, 
 Computer to the Trusted Host List" in
 [about_Remote_Troubleshooting](About/about_Remote_Troubleshooting.md).
 
-Note: In Windows Vista and later versions of the Windows operating system, to include the local
-computer in the value of the **ComputerName** parameter, you must start PowerShell with the Run as
-administrator option.
+> [!NOTE]
+> On the Windows operating system, to include the local computer in the value of the
+> **ComputerName** parameter, you must start PowerShell with the Run as administrator option.
 
 ```yaml
 Type: System.String
@@ -979,8 +980,6 @@ The following cmdlet parameters get mapped into `ssh` parameters and options:
 Any values explicitly passed by parameters take precedence over values passed in the **Options**
 hashtable. For more information about `ssh_config` files, see
 [ssh_config(5)](https://man.openbsd.org/ssh_config.5).
-
-
 
 ## RELATED LINKS
 

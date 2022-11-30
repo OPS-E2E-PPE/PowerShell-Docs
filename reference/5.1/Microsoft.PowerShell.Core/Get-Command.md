@@ -2,8 +2,8 @@
 external help file: System.Management.Automation.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 04/05/2021
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/get-command?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 10/20/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/get-command?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Command
 ---
@@ -17,17 +17,19 @@ Gets all commands.
 ### CmdletSet (Default)
 
 ```
-Get-Command [-Verb <String[]>] [-Noun <String[]>] [-Module <String[]>] [-FullyQualifiedModule <ModuleSpecification[]>]
- [-TotalCount <Int32>] [-Syntax] [-ShowCommandInfo] [[-ArgumentList] <Object[]>] [-All] [-ListImported]
- [-ParameterName <String[]>] [-ParameterType <PSTypeName[]>] [<CommonParameters>]
+Get-Command [-Verb <String[]>] [-Noun <String[]>] [-Module <String[]>]
+ [-FullyQualifiedModule <ModuleSpecification[]>] [-TotalCount <Int32>] [-Syntax] [-ShowCommandInfo]
+ [[-ArgumentList] <Object[]>] [-All] [-ListImported] [-ParameterName <String[]>]
+ [-ParameterType <PSTypeName[]>] [<CommonParameters>]
 ```
 
 ### AllCommandSet
 
 ```
-Get-Command [[-Name] <String[]>] [-Module <String[]>] [-FullyQualifiedModule <ModuleSpecification[]>]
- [-CommandType <CommandTypes>] [-TotalCount <Int32>] [-Syntax] [-ShowCommandInfo] [[-ArgumentList] <Object[]>]
- [-All] [-ListImported] [-ParameterName <String[]>] [-ParameterType <PSTypeName[]>] [<CommonParameters>]
+Get-Command [[-Name] <String[]>] [-Module <String[]>]
+ [-FullyQualifiedModule <ModuleSpecification[]>] [-CommandType <CommandTypes>] [-TotalCount <Int32>]
+ [-Syntax] [-ShowCommandInfo] [[-ArgumentList] <Object[]>] [-All] [-ListImported]
+ [-ParameterName <String[]>] [-ParameterType <PSTypeName[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -128,9 +130,9 @@ that the Certificate provider adds to the `Get-ChildItem` cmdlet when it is used
 function Get-DynamicParameters
 {
     param ($Cmdlet, $PSDrive)
-    (Get-Command -Name $Cmdlet -ArgumentList $PSDrive).ParameterSets | 
-      ForEach-Object {$_.Parameters} | 
-        Where-Object { $_.IsDynamic } | 
+    (Get-Command -Name $Cmdlet -ArgumentList $PSDrive).ParameterSets |
+      ForEach-Object {$_.Parameters} |
+        Where-Object { $_.IsDynamic } |
           Select-Object -Property Name -Unique
 }
 Get-DynamicParameters -Cmdlet Get-ChildItem -PSDrive Cert:
@@ -341,17 +343,25 @@ aliases.
 
 The acceptable values for this parameter are:
 
-- `Alias`: Gets the aliases of all PowerShell commands. For more information, see [about_Aliases](About/about_Aliases.md).
+- `Alias`: Gets the aliases of all PowerShell commands. For more information, see
+  [about_Aliases](About/about_Aliases.md).
+
 - `All`: Gets all command types. This parameter value is the equivalent of `Get-Command *`.
-- `Application`: Gets non-PowerShell files in paths listed in the **Path** environment
-  variable (`$env:path`), including .txt, .exe, and .dll files. For more information about the
-  **Path** environment variable, see [about_Environment_Variables](About/about_Environment_Variables.md).
+
+- `Application`: Gets non-PowerShell files in paths listed in the **Path** environment variable
+  (`$env:path`), including `.txt`, `.exe`, and `.dll` files. For more information about the **Path**
+  environment variable, see [about_Environment_Variables](About/about_Environment_Variables.md).
+
 - `Cmdlet`: Gets all cmdlets.
-- `ExternalScript`: Gets all .ps1 files in the paths listed in the **Path** environment variable
+
+- `ExternalScript`: Gets all `.ps1` files in the paths listed in the **Path** environment variable
   (`$env:path`).
+
 - `Filter` and `Function`: Gets all PowerShell advanced and simple functions and filters.
-- `Script`: Gets all script blocks. To get PowerShell scripts (.ps1 files), use the `ExternalScript`
-  value.
+
+- `Script`: Gets all script blocks. To get PowerShell scripts (`.ps1 `files), use the
+  `ExternalScript` value.
+
 - `Workflow`: Gets all workflows. For more information about workflows, see Introducing Windows
   PowerShell Workflow.
 
@@ -376,15 +386,28 @@ Accept wildcard characters: False
 
 ### -FullyQualifiedModule
 
-Specifies modules with names that are specified in the form of **ModuleSpecification** objects,
-described in the **Remarks** section of [ModuleSpecification Constructor (Hashtable)](/dotnet/api/microsoft.powershell.commands.modulespecification.-ctor?view=powershellsdk-1.1.0#Microsoft_PowerShell_Commands_ModuleSpecification__ctor_System_Collections_Hashtable_).
-For example, the **FullyQualifiedModule** parameter accepts a module name that is specified in one
-of the following formats:
+The value can be a module name, a full module specification, or a path to a module file.
 
-- `@{ModuleName = "modulename"; ModuleVersion = "version_number"}`
-- `@{ModuleName = "modulename"; ModuleVersion = "version_number"; Guid = "GUID"}`
+When the value is a path, the path can be fully qualified or relative. A relative path is resolved
+relative to the script that contains the using statement.
 
-**ModuleName** and **ModuleVersion** are required, but **Guid** is optional.
+When the value is a name or module specification, PowerShell searches the **PSModulePath** for the
+specified module.
+
+A module specification is a hashtable that has the following keys.
+
+- `ModuleName` - **Required** Specifies the module name.
+
+- `GUID` - **Optional** Specifies the GUID of the module.
+
+- It's also **Required** to specify at least one of the three below keys.
+
+  - `ModuleVersion` - Specifies a minimum acceptable version of the module.
+
+  - `MaximumVersion` - Specifies the maximum acceptable version of the module.
+
+  - `RequiredVersion` - Specifies an exact, required version of the module. This can't be used with
+    the other Version keys.
 
 You cannot specify the **FullyQualifiedModule** parameter in the same command as a **Module**
 parameter. The two parameters are mutually exclusive.

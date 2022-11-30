@@ -3,7 +3,7 @@ external help file: Microsoft.PowerShell.ScheduledJob.dll-Help.xml
 Locale: en-US
 Module Name: PSScheduledJob
 ms.date: 10/05/2021
-online version: https://docs.microsoft.com/powershell/module/psscheduledjob/set-scheduledjob?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/psscheduledjob/set-scheduledjob?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-ScheduledJob
 ---
@@ -127,7 +127,7 @@ For more information about the execution history and saved job results of schedu
 This command changes the initialization script in all scheduled jobs on remote computers.
 
 ```powershell
-Invoke-Command -Computer "Server01, Server02" -ScriptBlock {Get-ScheduledJob | 
+Invoke-Command -Computer "Server01, Server02" -ScriptBlock {Get-ScheduledJob |
     Set-ScheduledJob -InitializationScript \\SrvA\Scripts\SetForRun.ps1}
 ```
 
@@ -198,7 +198,7 @@ Accept wildcard characters: False
 Deletes the current execution history and the saved results of the scheduled job.
 
 The job execution history and job results are saved with the scheduled job in the
-`$home\AppData\Local\Microsoft\Windows\PowerShell\ScheduledJobs` directory on the computer on which
+`$HOME\AppData\Local\Microsoft\Windows\PowerShell\ScheduledJobs` directory on the computer on which
 the job is created. To see the execution history, use the `Get-Job` cmdlet. To get the job results,
 use the `Receive-Job` cmdlet.
 
@@ -314,7 +314,7 @@ Windows PowerShell deletes the results of the oldest job instance to make room f
 the newest job instance.
 
 The job execution history and job results are saved in the
-`$home\AppData\Local\Microsoft\Windows\PowerShell\ScheduledJobs\<JobName>\Output\<Timestamp>`
+`$HOME\AppData\Local\Microsoft\Windows\PowerShell\ScheduledJobs\<JobName>\Output\<Timestamp>`
 directories on the computer on which the job is created. To see the execution history, use the
 `Get-Job` cmdlet. To get the job results, use the `Receive-Job` cmdlet.
 

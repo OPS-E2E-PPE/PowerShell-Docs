@@ -3,7 +3,7 @@ external help file: Microsoft.Management.Infrastructure.CimCmdlets.dll-Help.xml
 Locale: en-US
 Module Name: CimCmdlets
 ms.date: 06/21/2021
-online version: https://docs.microsoft.com/powershell/module/cimcmdlets/set-ciminstance?view=powershell-7.3&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/cimcmdlets/set-ciminstance?view=powershell-7.3&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-CimInstance
 ---
@@ -143,7 +143,7 @@ cmdlet, and retrieves its contents in to a variable `$x`. The variable is then p
 Because the **Passthru** parameter is used, This example returns a modified CIM instance object.
 
 ```powershell
-$x = New-CimInstance -ClassName Win32_Environment -Property @{Name="testvar";UserName="domain\user"} -Keys Name,UserName -ClientOnly
+$x = New-CimInstance -ClassName Win32_Environment -Property @{Name="testvar";UserName="domain\user"} -Key Name,UserName -ClientOnly
 Set-CimInstance -CimInstance $x -Property @{VariableValue="somevalue"} -PassThru
 ```
 

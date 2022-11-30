@@ -2,7 +2,7 @@
 description: Describes the updatable help system in PowerShell.
 Locale: en-US
 ms.date: 08/04/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_updatable_help?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_updatable_help?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about Updatable Help
 ---
@@ -147,8 +147,8 @@ member of the Administrators group on the computer.
 If you are not a member of the Administrators group, you cannot update help for
 these modules; but if you have internet access, you can view help online.
 
-Updating help for modules in the directory `$home/Documents/PowerShell/Modules`
-or modules in other subdirectories of the `$home` directory does not require
+Updating help for modules in the directory `$HOME/Documents/PowerShell/Modules`
+or modules in other subdirectories of the `$HOME` directory does not require
 special permissions.
 
 The `Update-Help` and `Save-Help` cmdlets have a **UseDefaultCredentials**
@@ -419,8 +419,7 @@ name).
 If you author a module, you can support online help and Updatable Help for your
 modules. For more information, see
 [Supporting Updatable Help](/powershell/scripting/developer/help/supporting-updatable-help)
-and [Supporting Online Help](/powershell/scripting/developer/module/supporting-online-help)
-in the Microsoft Docs.
+and [Supporting Online Help](/powershell/scripting/developer/module/supporting-online-help).
 
 Updatable help not available for PowerShell snap-ins or comment-based help.
 

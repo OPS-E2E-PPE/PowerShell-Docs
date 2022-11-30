@@ -1,16 +1,14 @@
 ---
 description: This article is a list of the keyboard shortcuts used in the PowerShell ISE.
-ms.date: 10/07/2021
+ms.date: 10/25/2022
 title: Keyboard Shortcuts for the Windows PowerShell ISE
 ---
 
 # Keyboard Shortcuts for the Windows PowerShell ISE
 
-Use the following keyboard shortcuts to perform actions in Windows PowerShell&reg; Integrated Scripting
+Use the following keyboard shortcuts to perform actions in Windows PowerShell Integrated Scripting
 Environment (ISE). Windows PowerShell ISE is available as part of the Windows Server and Windows
-client operating systems, but can also be installed on some older Windows operating systems as part
-of the
-[Windows Management Framework 4.0 download package](https://www.microsoft.com/download/details.aspx?id=40855).
+client operating systems.
 
 ## Keyboard shortcuts for editing text
 
@@ -18,7 +16,7 @@ You can use the following keyboard shortcuts when you edit text.
 
 |              Action              |              Keyboard Shortcuts               |                                                                                                                                           Use in                                                                                                                                           |
 | -------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Help**                         | <kbd>F1</kbd>                                 | Script Pane **Important:** You can specify that <kbd>F1</kbd> help comes from docs.microsoft.com or downloaded Help (see `Update-Help`). To select, click **Tools**, **Options**, then on the **General Settings** tab, set or clear **Use local help content instead of online content.** |
+| **Help**                         | <kbd>F1</kbd>                                 | Script Pane **Important:** You can specify that <kbd>F1</kbd> help comes from Microsoft Learn or downloaded Help (see `Update-Help`). To select, click **Tools**, **Options**, then on the **General Settings** tab, set or clear **Use local help content instead of online content.** |
 | **Select All**                   | <kbd>CTRL</kbd>+<kbd>A</kbd>                  | Script Pane                                                                                                                                                                                                                                                                                |
 | **Copy**                         | <kbd>CTRL</kbd>+<kbd>C</kbd>                  | Script Pane, Command Pane, Output Pane                                                                                                                                                                                                                                                     |
 | **Cut**                          | <kbd>CTRL</kbd>+<kbd>X</kbd>                  | Script Pane, Command Pane                                                                                                                                                                                                                                                                  |
@@ -128,4 +126,7 @@ You can use the following keyboard shortcuts to start the Windows PowerShell con
 
 ## See Also
 
-- [PowerShell Magazine: The Complete List of Windows PowerShell ISE Keyboard Shortcuts](https://www.powershellmagazine.com/2013/01/29/the-complete-list-of-powershell-ise-3-0-keyboard-shortcuts/)
+- [PowerShell Magazine: The Complete List of Windows PowerShell ISE Keyboard Shortcuts][01]
+
+<!-- link references -->
+[01]: https://www.powershellmagazine.com/2013/01/29/the-complete-list-of-powershell-ise-3-0-keyboard-shortcuts/

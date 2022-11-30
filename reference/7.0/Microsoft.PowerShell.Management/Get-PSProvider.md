@@ -3,7 +3,7 @@ external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
 ms.date: 05/16/2022
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/get-psprovider?view=powershell-7&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-psprovider?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-PSProvider
 ---
@@ -110,7 +110,7 @@ C:\Users\User01
 
 This example shows that the tilde symbol (`~`) represents the value of the **Home** property of the
 FileSystem provider. The **Home** property value is optional, but for the **FileSystem** provider,
-it is defined as `$env:homedrive\$env:homepath` or `$home`.
+it is defined as `$env:HOMEDRIVE\$env:HOMEPATH` or `$HOME`.
 
 ## PARAMETERS
 

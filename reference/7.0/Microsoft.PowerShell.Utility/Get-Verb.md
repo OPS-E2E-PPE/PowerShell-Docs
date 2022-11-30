@@ -3,7 +3,7 @@ external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
 ms.date: 09/07/2018
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/get-verb?view=powershell-7&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/get-verb?view=powershell-7&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Verb
 ---
@@ -32,8 +32,7 @@ warning message.
 > [!NOTE]
 > The verb list that `Get-Verb` returns might not be complete. For an updated list of approved
 > PowerShell verbs with descriptions, see
-> [Approved Verbs](/powershell/scripting/docs-conceptual/developer/cmdlet/approved-verbs-for-windows-powershell-commands)
-> in the Microsoft Docs.
+> [Approved Verbs](/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands).
 
 ## EXAMPLES
 

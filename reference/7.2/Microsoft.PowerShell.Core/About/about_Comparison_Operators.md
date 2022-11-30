@@ -2,7 +2,7 @@
 description: Describes the operators that compare values in PowerShell.
 Locale: en-US
 ms.date: 05/18/2022
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-7.2&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about Comparison Operators
 ---
@@ -22,7 +22,7 @@ specified patterns. PowerShell includes the following comparison operators:
 
 - `-eq`, `-ieq`, `-ceq` - equals
 - `-ne`, `-ine`, `-cne` - not equals
-- `-gt`, `-igt`, `-igt` - greater than
+- `-gt`, `-igt`, `-cgt` - greater than
 - `-ge`, `-ige`, `-cge` - greater than or equal
 - `-lt`, `-ilt`, `-clt` - less than
 - `-le`, `-ile`, `-cle` - less than or equal
@@ -531,7 +531,7 @@ John.Doe@Contoso.local
 ```
 
 > [!WARNING]
-> The `$` character has syntatic roles in both PowerShell and regular
+> The `$` character has syntactic roles in both PowerShell and regular
 > expressions:
 >
 > - In PowerShell, between double quotation marks, it designates variables and

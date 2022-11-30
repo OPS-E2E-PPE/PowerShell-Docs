@@ -2,8 +2,8 @@
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 02/04/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/push-location?view=powershell-7.3&WT.mc_id=ps-gethelp
+ms.date: 11/15/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/push-location?view=powershell-7.3&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Push-Location
 ---
@@ -81,7 +81,7 @@ PS C:\>
 
 The first command pushes the current location onto a new stack named Stack2, and then changes the
 current location to the home directory, represented in the command by the tilde symbol (`~`),
-which when used on a FileSystem provider drives is equivalent to `$HOME` and `$env:USERPROFILE`.
+which when used on a FileSystem provider drives is equivalent to `$HOME`.
 
 If Stack2 does not already exist in the session, `Push-Location` creates it. The second command uses
 the `Pop-Location` cmdlet to pop the original location (`C:\`) from the Stack2 stack. Without the
@@ -192,6 +192,11 @@ This cmdlet returns a **PathInfo** object representing the current path after th
 operation, if you specify the **PassThru** parameter. Otherwise, it does not return any output.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Push-Location`:
+
+- All Platforms:
+  - `pushd`
 
 PowerShell supports multiple runspaces per process. Each runspace has its own _current directory_.
 This is not the same as `[System.Environment]::CurrentDirectory`. This behavior can be an issue

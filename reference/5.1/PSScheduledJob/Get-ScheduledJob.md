@@ -3,7 +3,7 @@ external help file: Microsoft.PowerShell.ScheduledJob.dll-Help.xml
 Locale: en-US
 Module Name: PSScheduledJob
 ms.date: 10/05/2021
-online version: https://docs.microsoft.com/powershell/module/psscheduledjob/get-scheduledjob?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/psscheduledjob/get-scheduledjob?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-ScheduledJob
 ---
@@ -145,7 +145,7 @@ You cannot pipe input to `Get-ScheduledJob`.
 ## NOTES
 
 - Each scheduled job is saved in a subdirectory of the
-  `$home\AppData\Local\Microsoft\Windows\PowerShell\ScheduledJobs` directory on the local computer.
+  `$HOME\AppData\Local\Microsoft\Windows\PowerShell\ScheduledJobs` directory on the local computer.
   The subdirectory is named for the scheduled job and contains the XML file for the scheduled job
   and records of its execution history. For more information about scheduled jobs on disk, see [about_Scheduled_Jobs_Advanced](About/about_Scheduled_Jobs_Advanced.md).
 - Scheduled jobs that you create in Windows PowerShell appear in Task Scheduler in the Task

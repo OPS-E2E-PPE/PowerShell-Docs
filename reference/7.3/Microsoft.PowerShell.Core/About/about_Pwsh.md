@@ -1,9 +1,9 @@
 ---
 description: Explains how to use the `pwsh` command-line interface. Displays the command-line parameters and describes the syntax.
 Locale: en-US
-ms.date: 05/25/2022
+ms.date: 08/23/2022
 no-loc: [-File, -f, -Command, -c, -ConfigurationName, -config, -CustomPipeName, -EncodedCommand, -e, -ec, -ExecutionPolicy, -ex, -ep, -InputFormat, -inp, -if, -Interactive, -i, -Login, -l, -MTA, -NoExit, -noe, -NoLogo, -nol, -NonInteractive, -noni, -NoProfile, -nop, -OutputFormat, -o, -of, -SettingsFile, -settings, -SSHServerMode, -sshs, -STA, -Version, -v, -WindowStyle, -w, -WorkingDirectory, -wd, -Help]
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_pwsh?view=powershell-7.3&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_pwsh?view=powershell-7.3&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about Pwsh
 ---
@@ -18,30 +18,30 @@ command-line parameters and describes the syntax.
 ## Syntax
 
 ```
-pwsh[.exe]
-   [[-File] <filePath> [args]]
-   [-Command { - | <script-block> [-args <arg-array>]
-                 | <string> [<CommandParameters>] } ]
-   [-ConfigurationName <string>]
-   [-ConfigurationFile <string>]
-   [-CustomPipeName <string>]
-   [-EncodedCommand <Base64EncodedCommand>]
-   [-ExecutionPolicy <ExecutionPolicy>]
-   [-InputFormat {Text | XML}]
-   [-Interactive]
-   [-Login]
-   [-MTA]
-   [-NoExit]
-   [-NoLogo]
-   [-NonInteractive]
-   [-NoProfile]
-   [-OutputFormat {Text | XML}]
-   [-SettingsFile <SettingsFilePath>]
-   [-SSHServerMode]
-   [-STA]
-   [-Version]
-   [-WindowStyle <style>]
-   [-WorkingDirectory <directoryPath>]
+Usage: pwsh[.exe]
+    [-Login]
+    [[-File] <filePath> [args]]
+    [-Command { - | <script-block> [-args <arg-array>]
+                  | <string> [<CommandParameters>] } ]
+    [-ConfigurationFile <filePath>]
+    [-ConfigurationName <string>]
+    [-CustomPipeName <string>]
+    [-EncodedCommand <Base64EncodedCommand>]
+    [-ExecutionPolicy <ExecutionPolicy>]
+    [-InputFormat {Text | XML}]
+    [-Interactive]
+    [-MTA]
+    [-NoExit]
+    [-NoLogo]
+    [-NonInteractive]
+    [-NoProfile]
+    [-NoProfileLoadTime]
+    [-OutputFormat {Text | XML}]
+    [-SettingsFile <filePath>]
+    [-SSHServerMode]
+    [-STA]
+    [-Version] [-WindowStyle <style>]
+    [-WorkingDirectory <directoryPath>]
 
 pwsh[.exe] -h | -Help | -? | /?
 ```
@@ -133,10 +133,10 @@ pwsh -Command {Get-WinEvent -LogName security}
 ```
 
 In `cmd.exe`, there is no such thing as a script block (or **ScriptBlock**
-type), so the value passed to **Command** will _always_ be a string. You can
-write a script block inside the string, but instead of being executed it will
-behave exactly as though you typed it at a typical PowerShell prompt, printing
-the contents of the script block back out to you.
+type), so the value passed to **Command** is _always_ a string. You can write a
+script block inside the string, but instead of being executed it behaves
+exactly as though you typed it at a typical PowerShell prompt, printing the
+contents of the script block back out to you.
 
 A string passed to **Command** is still executed as PowerShell code, so the
 script block curly braces are often not required in the first place when
@@ -305,13 +305,19 @@ Hides the banner at startup of interactive sessions.
 
 ### -NonInteractive | -noni
 
-Does not present an interactive prompt to the user. Any attempts to use
-interactive features, like `Read-Host` or confirmation prompts, result in
-statement-terminating errors.
+This switch is used to create sessions that shouldn't require user input. This
+is useful for scripts that run in scheduled tasks or CI/CD pipelines. Any
+attempts to use interactive features, like `Read-Host` or confirmation prompts,
+result in statement terminating errors rather than hanging.
 
 ### -NoProfile | -nop
 
 Does not load the PowerShell profiles.
+
+### -NoProfileLoadTime
+
+Hides the PowerShell profile load time text shown at startup when the load time
+exceeds 500 milliseconds.
 
 ### -OutputFormat | -o | -of
 

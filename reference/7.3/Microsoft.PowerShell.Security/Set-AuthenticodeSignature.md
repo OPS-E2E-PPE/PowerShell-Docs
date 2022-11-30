@@ -2,8 +2,8 @@
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Security
-ms.date: 05/10/2021
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/set-authenticodesignature?view=powershell-7.3&WT.mc_id=ps-gethelp
+ms.date: 08/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.security/set-authenticodesignature?view=powershell-7.3&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-AuthenticodeSignature
 ---
@@ -102,7 +102,7 @@ This command adds a digital signature that includes the root authority in the tr
 signed by a third-party timestamp server.
 
 ```powershell
-Set-AuthenticodeSignature -FilePath c:\scripts\Remodel.ps1 -Certificate $cert -IncludeChain All -TimestampServer "http://timestamp.fabrikam.com/scripts/timstamper.dll"
+Set-AuthenticodeSignature -FilePath c:\scripts\Remodel.ps1 -Certificate $cert -IncludeChain All -TimestampServer "https://timestamp.fabrikam.com/scripts/timstamper.dll"
 ```
 
 The command uses the **FilePath** parameter to specify the script being signed and the
@@ -189,10 +189,10 @@ Accept wildcard characters: False
 
 Specifies the hashing algorithm that Windows uses to compute the digital signature for the file.
 
-For PowerShell 3.0, the default is SHA256, which is the Windows default hashing algorithm. For
-PowerShell 2.0, the default is SHA1. Files that are signed with a different hashing algorithm might
-not be recognized on other systems. Which algorithms are supported depends on the version of the
-operating system.
+For PowerShell 7.3, the default is SHA256, which is the Windows default hashing algorithm. For
+earlier versions, the default is SHA1. Files that are signed with a different hashing algorithm
+might not be recognized on other systems. Which algorithms are supported depends on the version of
+the operating system.
 
 For a list of possible values, see [HashAlgorithmName Struct](/dotnet/api/system.security.cryptography.hashalgorithmname?view=netframework-4.7.2#properties).
 
@@ -271,7 +271,7 @@ Accept wildcard characters: False
 ### -TimestampServer
 
 Uses the specified time stamp server to add a time stamp to the signature. Type the URL of the time
-stamp server as a string.
+stamp server as a string. The URL must start with `https://` or `http://`.
 
 The time stamp represents the exact time that the certificate was added to the file. A time stamp
 prevents the script from failing if the certificate expires because users and programs can verify
