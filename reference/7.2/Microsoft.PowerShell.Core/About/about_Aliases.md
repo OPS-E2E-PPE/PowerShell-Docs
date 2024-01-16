@@ -10,6 +10,7 @@ title: about Aliases
 # about_Aliases
 
 ## Short description
+
 Describes how to use alternate names for cmdlets and commands in PowerShell.
 
 ## Long description
@@ -46,7 +47,7 @@ If you create `word` as the alias for Microsoft Office Word, you can type
 "C:\Program Files\Microsoft Office\Office11\Winword.exe"
 ```
 
-## Built in aliases
+## Built-in aliases
 
 PowerShell includes a set of built-in aliases, including `cd` and `chdir` for
 the `Set-Location` cmdlet, `ls` and `dir` on Windows and `dir` on Linux and
@@ -66,6 +67,7 @@ aliases:
 - `Get-Alias` - Gets all the aliases in the current session.
 - `New-Alias` - Creates a new alias.
 - `Set-Alias` - Creates or changes an alias.
+- `Remove-Alias` - Deletes an alias.
 - `Export-Alias` - Exports one or more aliases to a file.
 - `Import-Alias` - Imports an alias file into PowerShell.
 
@@ -264,6 +266,7 @@ Get-Help Alias
 - [Get-Alias](xref:Microsoft.PowerShell.Utility.Get-Alias)
 - [Import-Alias](xref:Microsoft.PowerShell.Utility.Import-Alias)
 - [New-Alias](xref:Microsoft.PowerShell.Utility.New-Alias)
+- [Remove-Alias](xref:Microsoft.PowerShell.Utility.Remove-Alias)
 - [Set-Alias](xref:Microsoft.PowerShell.Utility.Set-Alias)
 - [Get-PSDrive](xref:Microsoft.PowerShell.Management.Get-PSDrive)
 - [Get-PSProvider](xref:Microsoft.PowerShell.Management.Get-PSProvider)

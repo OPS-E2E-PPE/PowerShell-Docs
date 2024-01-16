@@ -2,11 +2,12 @@
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 10/21/2021
+ms.date: 12/12/2022
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/new-service?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: New-Service
 ---
+
 # New-Service
 
 ## SYNOPSIS
@@ -35,7 +36,7 @@ dependencies of the service.
 ### Example 1: Create a service
 
 ```powershell
-New-Service -Name "TestService" -BinaryPathName '"C:\WINDOWS\System32\svchost.exe -k netsvcs"'
+New-Service -Name "TestService" -BinaryPathName 'C:\WINDOWS\System32\svchost.exe -k netsvcs'
 ```
 
 This command creates a service named TestService.
@@ -45,7 +46,7 @@ This command creates a service named TestService.
 ```powershell
 $params = @{
   Name = "TestService"
-  BinaryPathName = '"C:\WINDOWS\System32\svchost.exe -k netsvcs"'
+  BinaryPathName = 'C:\WINDOWS\System32\svchost.exe -k netsvcs'
   DependsOn = "NetLogon"
   DisplayName = "Test Service"
   StartupType = "Manual"
@@ -82,7 +83,7 @@ This example adds the **SecurityDescriptor** of the service being created.
 ```powershell
 $SDDL = "D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)"
 $params = @{
-  BinaryPathName = '"C:\WINDOWS\System32\svchost.exe -k netsvcs"'
+  BinaryPathName = 'C:\WINDOWS\System32\svchost.exe -k netsvcs'
   DependsOn = "NetLogon"
   DisplayName = "Test Service"
   StartupType = "Manual"
@@ -106,7 +107,7 @@ so that it is correctly interpreted. For example, `d:\my share\myservice.exe` sh
 `'"d:\my share\myservice.exe"'`.
 
 The path can also include arguments for an auto-start service. For example,
-`'"d:\myshare\myservice.exe arg1 arg2"'`. These arguments are passed to the service entry point.
+`'"d:\my share\myservice.exe" arg1 arg2'`. These arguments are passed to the service entry point.
 
 For more information, see the **lpBinaryPathName** parameter of
 [CreateServiceW](/windows/win32/api/winsvc/nf-winsvc-createservicew) API.
@@ -303,13 +304,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You cannot pipe input to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### System.ServiceProcess.ServiceController
 
-This cmdlet returns an object that represents the new service.
+This cmdlet returns an object representing the new service.
 
 ## NOTES
 

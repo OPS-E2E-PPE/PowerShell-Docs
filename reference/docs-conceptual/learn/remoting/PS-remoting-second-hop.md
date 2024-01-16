@@ -1,6 +1,6 @@
 ---
 description: This article explains the various methods for configuring second-hop authentication for PowerShell remoting, including the security implications and recommendations.
-ms.date: 11/16/2022
+ms.date: 10/23/2023
 title: Making the second hop in PowerShell Remoting
 ---
 
@@ -114,8 +114,8 @@ credentials.
 
 Let's look at a PowerShell example that configures resource-based constrained delegation on
 _ServerC_ to allow delegated credentials from a _ServerB_. This example assumes that all servers are
-running Windows Server 2012 or later, and that there is at least one Windows Server 2012 domain
-controller each domain to which any of the servers belong.
+running supported versions of Windows Server, and that there is at least one Windows domain
+controller for each trusted domain.
 
 Before you can configure constrained delegation, you must add the `RSAT-AD-PowerShell` feature to
 install the Active Directory PowerShell module, and then import that module into your session:
@@ -254,7 +254,7 @@ Set-ADComputer -Identity $ServerC -PrincipalsAllowedToDelegateToAccount $null
 - [What's New in Kerberos Authentication][10]
 - [How Windows Server 2012 Eases the Pain of Kerberos Constrained Delegation, Part 1][16]
 - [How Windows Server 2012 Eases the Pain of Kerberos Constrained Delegation, Part 2][17]
-- [Understanding Kerberos Constrained Delegation for Azure Active Directory Application Proxy Deployments with Integrated Windows Authentication][14]
+- [Understanding Kerberos Constrained Delegation for Microsoft Entra application proxy deployments with Integrated Windows Authentication][14]
 - [[MS-ADA2] Active Directory Schema Attributes M2.210 Attribute msDS-AllowedToActOnBehalfOfOtherIdentity][MS-ADA2]
 - [[MS-SFU] Kerberos Protocol Extensions: Service for User and Constrained Delegation Protocol 1.3.2 S4U2proxy][MS-SFU]
 - [Remote Administration Without Constrained Delegation Using PrincipalsAllowedToDelegateToAccount][03]
@@ -318,7 +318,7 @@ You can pass credentials inside the **ScriptBlock** parameter of a call to the
 
 ### Example
 
-The following example shows how to pass credentials in an  script block:
+The following example shows how to pass credentials in a script block:
 
 ```powershell
 # This works without delegation, passing fresh creds
@@ -335,7 +335,7 @@ Invoke-Command -ComputerName ServerB -Credential $cred -ScriptBlock {
 [PowerShell Remoting Security Considerations][20]
 
 <!-- link references -->
-[01]: /archive/blogs/poshchap/security-focus-analysing-account-is-sensitive-and-can't-be-delegated-for-privileged-accounts
+[01]: /archive/blogs/poshchap/security-focus-analysing-account-is-sensitive-and-cannot-be-delegated-for-privileged-accounts
 [02]: /archive/blogs/sergey_babkins_blog/another-solution-to-multi-hop-powershell-remoting
 [03]: /archive/blogs/taylorb/remote-administration-without-constrained-delegation-using-principalsallowedtodelegatetoaccount
 [06]: /powershell/module/Microsoft.PowerShell.Core/About/about_Remote_Variables

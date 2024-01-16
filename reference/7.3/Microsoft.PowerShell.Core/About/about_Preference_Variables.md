@@ -1,7 +1,7 @@
 ---
 description: Variables that customize the behavior of PowerShell.
 Locale: en-US
-ms.date: 09/27/2022
+ms.date: 01/04/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-7.3&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about Preference Variables
@@ -19,43 +19,46 @@ behavior. These preference variables work like the options in GUI-based
 systems.
 
 The preference variables affect the PowerShell operating environment and all
-commands run in the environment. In many cases, the cmdlets have parameters
-that you can use to override the preference behavior for a specific command.
+commands run in the environment. Some cmdlets have parameters that allow you to
+override the preference behavior for a specific command.
 
 The following table lists the preference variables and their default values.
 
-|                Variable                |                          Default Value                           |
-| -------------------------------------- | ---------------------------------------------------------------- |
-| [`$ConfirmPreference`][15]             | [`High`][02]                                                     |
-| [`$DebugPreference`][16]               | [`SilentlyContinue`][01]                                         |
-| [`$ErrorActionPreference`][17]         | [`Continue`][01]                                                 |
-| [`$ErrorView`][18]                     | [`ConciseView`][04]                                              |
-| [`$FormatEnumerationLimit`][19]        | `4`                                                              |
-| [`$InformationPreference`][20]         | [`SilentlyContinue`][01]                                         |
-| [`$LogCommandHealthEvent`][21]         | `$False` (not logged)                                            |
-| [`$LogCommandLifecycleEvent`][21]      | `$False` (not logged)                                            |
-| [`$LogEngineHealthEvent`][21]          | `$True` (logged)                                                 |
-| [`$LogEngineLifecycleEvent`][21]       | `$True` (logged)                                                 |
-| [`$LogProviderLifecycleEvent`][21]     | `$True` (logged)                                                 |
-| [`$LogProviderHealthEvent`][21]        | `$True` (logged)                                                 |
-| [`$MaximumHistoryCount`][22]           | `4096`                                                           |
-| [`$OFS`][23]                           | Space character (`" "`)                                          |
-| [`$OutputEncoding`][24]                | [`UTF8Encoding`][11] object                                      |
-| [`$ProgressPreference`][25]            | [`Continue`][01]                                                 |
-| [`$PSDefaultParameterValues`][26]      | `@{}` (empty hash table)                                         |
-| [`$PSEmailServer`][27]                 | `$Null` (none)                                                   |
-| [`$PSModuleAutoLoadingPreference`][28] | `All`                                                            |
-| [`$PSSessionApplicationName`][29]      | `'wsman'`                                                        |
-| [`$PSSessionConfigurationName`][30]    | `'http://schemas.microsoft.com/powershell/Microsoft.PowerShell'` |
-| [`$PSSessionOption`][31]               | [`PSSessionOption`][06] object                                   |
-| [`$Transcript`][32]                    | `$Null` (none)                                                   |
-| [`$VerbosePreference`][33]             | [`SilentlyContinue`][01]                                         |
-| [`$WarningPreference`][34]             | [`Continue`][01]                                                 |
-| [`$WhatIfPreference`][35]              | `$False`                                                         |
+|                     Variable                     |                          Default Value                           |
+| ------------------------------------------------ | ---------------------------------------------------------------- |
+| [`$ConfirmPreference`][04]                       | [`High`][56]                                                     |
+| [`$DebugPreference`][05]                         | [`SilentlyContinue`][55]                                         |
+| [`$ErrorActionPreference`][06]                   | [`Continue`][55]                                                 |
+| [`$ErrorView`][07]                               | [`ConciseView`][58]                                              |
+| [`$FormatEnumerationLimit`][08]                  | `4`                                                              |
+| [`$InformationPreference`][09]                   | [`SilentlyContinue`][55]                                         |
+| [`$LogCommandHealthEvent`][10]                   | `$False` (not logged)                                            |
+| [`$LogCommandLifecycleEvent`][10]                | `$False` (not logged)                                            |
+| [`$LogEngineHealthEvent`][10]                    | `$True` (logged)                                                 |
+| [`$LogEngineLifecycleEvent`][10]                 | `$True` (logged)                                                 |
+| [`$LogProviderHealthEvent`][10]                  | `$True` (logged)                                                 |
+| [`$LogProviderLifecycleEvent`][10]               | `$True` (logged)                                                 |
+| [`$MaximumHistoryCount`][11]                     | `4096`                                                           |
+| [`$OFS`][12]                                     | Space character (`" "`)                                          |
+| [`$OutputEncoding`][13]                          | [`UTF8Encoding`][66] object                                      |
+| [`$ProgressPreference`][14]                      | [`Continue`][55]                                                 |
+| [`$PSDefaultParameterValues`][15]                | `@{}` (empty hash table)                                         |
+| [`$PSEmailServer`][16]                           | `$Null` (none)                                                   |
+| [`$PSModuleAutoLoadingPreference`][17]           | `All`                                                            |
+| [`$PSNativeCommandArgumentPassing`][18]          | `Windows` on Windows, `Standard` on Non-Windows                  |
+| [`$PSNativeCommandUseErrorActionPreference`][19] | `$True`                                                          |
+| [`$PSSessionApplicationName`][20]                | `'wsman'`                                                        |
+| [`$PSSessionConfigurationName`][21]              | `'http://schemas.microsoft.com/powershell/Microsoft.PowerShell'` |
+| [`$PSSessionOption`][22]                         | [`PSSessionOption`][61] object                                   |
+| [`$PSStyle`][23]                                 | [`PSStyle`][60] object                                           |
+| [`$Transcript`][24]                              | `$Null` (none)                                                   |
+| [`$VerbosePreference`][25]                       | [`SilentlyContinue`][55]                                         |
+| [`$WarningPreference`][26]                       | [`Continue`][55]                                                 |
+| [`$WhatIfPreference`][27]                        | `$False`                                                         |
 
 PowerShell includes the following environment variables that store user
 preferences. For more information about these environment variables, see
-[about_Environment_Variables][38].
+[about_Environment_Variables][31].
 
 - `env:PSExecutionPolicyPreference`
 - `$env:PSModulePath`
@@ -63,7 +66,7 @@ preferences. For more information about these environment variables, see
 > [!NOTE]
 > Changes to preference variable only take effect in scripts and functions if
 > those scripts or functions are defined in the same scope as the scope in
-> which preference was used. For more information, see [about_Scopes][48].
+> which preference was used. For more information, see [about_Scopes][41].
 
 ## Working with preference variables
 
@@ -91,7 +94,7 @@ $ConfirmPreference = "Medium"
 
 The values that you set are specific to the current PowerShell session. To make
 variables effective in all PowerShell sessions, add them to your PowerShell
-profile. For more information, see [about_Profiles][44].
+profile. For more information, see [about_Profiles][37].
 
 ## Working remotely
 
@@ -101,14 +104,14 @@ example, when you run a remote command, the value of the remote computer's
 `$DebugPreference` variable determines how PowerShell responds to debugging
 messages.
 
-For more information about remote commands, see [about_Remote][47].
+For more information about remote commands, see [about_Remote][40].
 
 ## $ConfirmPreference
 
 Determines whether PowerShell automatically prompts you for confirmation before
 running a cmdlet or function.
 
-The `$ConfirmPreference` variable takes one of the [`ConfirmImpact`][02]
+The `$ConfirmPreference` variable takes one of the [`ConfirmImpact`][56]
 enumeration values: **High**, **Medium**, **Low**, or **None**.
 
 Cmdlets and functions are assigned a risk of **High**, **Medium**, or **Low**.
@@ -230,7 +233,7 @@ Remove-Item -Path C:\temp3.txt -Confirm:$false
 Determines how PowerShell responds to debugging messages generated by a script,
 cmdlet or provider, or by a `Write-Debug` command at the command line.
 
-The `$DebugPreference` variable takes one of the [`ActionPreference`][01]
+The `$DebugPreference` variable takes one of the [`ActionPreference`][55]
 enumeration values: **SilentlyContinue**, **Stop**, **Continue**, **Inquire**,
 **Ignore**, **Suspend**, or **Break**.
 
@@ -241,7 +244,7 @@ changing the value of `$DebugPreference`.
 
 You can use the **Debug** common parameter of a cmdlet to display or hide the
 debugging messages for a specific command. For more information, see
-[about_CommonParameters][37].
+[about_CommonParameters][30].
 
 The valid values are as follows:
 
@@ -365,7 +368,7 @@ script, cmdlet, or provider, such as the errors generated by the `Write-Error`
 cmdlet.
 
 The `$ErrorActionPreference` variable takes one of the
-[`ActionPreference`][01] enumeration values: **SilentlyContinue**, **Stop**,
+[`ActionPreference`][55] enumeration values: **SilentlyContinue**, **Stop**,
 **Continue**, **Inquire**, **Ignore**, **Suspend**, or **Break**.
 
 You can use a cmdlet's **ErrorAction** common parameter to override the
@@ -396,7 +399,22 @@ The valid values are as follows:
 `$ErrorActionPreference` and the **ErrorAction** parameter don't affect how
 PowerShell responds to terminating errors that stop cmdlet processing. For more
 information about the **ErrorAction** common parameter, see
-[about_CommonParameters][37].
+[about_CommonParameters][30].
+
+Many native commands write to `stderr` as an alternative stream for additional
+information. This behavior can cause confusion when looking through errors or
+the additional output information can be lost to the user if
+`$ErrorActionPreference` is set to a state that mutes the output.
+
+Beginning in PowerShell 7.2, error records redirected from native commands,
+like when using redirection operators (`2>&1`), aren't written to the `$Error`
+variable and the preference variable `$ErrorActionPreference` doesn't affect
+the redirected output.
+
+PowerShell 7.3 added an experimental feature that allows you to control how
+messages written to `stderr` are handled.
+
+For more information see, [$PSNativeCommandUseErrorActionPreference][19].
 
 ### Examples
 
@@ -489,9 +507,8 @@ Write-Error: Test Error
 
 Determines the display format of error messages in PowerShell.
 
-The `$ErrorView` variable takes one of the
-[`ErrorView`][04] enumeration values:
-**NormalView**, **CategoryView**, or **ConciseView**.
+The `$ErrorView` variable takes one of the [`ErrorView`][58] enumeration
+values: **NormalView**, **CategoryView**, or **ConciseView**.
 
 The valid values are as follows:
 
@@ -517,7 +534,7 @@ The valid values are as follows:
   `{Category}: ({TargetName}:{TargetType}):[{Activity}], {Reason}`
 
 For more information about the fields in **CategoryView**, see
-[ErrorCategoryInfo][03] class.
+[ErrorCategoryInfo][57] class.
 
 ### Examples
 
@@ -574,9 +591,9 @@ ObjectNotFound: (C:\nofile.txt:String) [Get-ChildItem], ItemNotFoundException
 ```
 
 This example demonstrates that the value of `$ErrorView` only affects the error
-display. It doesn't change the structure of the error object that is stored in
+display. It doesn't change the structure of the error object that's stored in
 the `$Error` automatic variable. For information about the `$Error` automatic
-variable, see [about_automatic_variables][36].
+variable, see [about_automatic_variables][29].
 
 The following command takes the **ErrorRecord** object associated with the most
 recent error in the error array, **element 0**, and formats the properties of
@@ -634,8 +651,8 @@ which groups the results by the service status.
 
 The result is a table that lists the status in the **Name** column, and the
 processes in the **Group** column. To change the column labels, use a hash
-table, see [about_Hash_Tables][40]. For more information, see the examples in
-[Format-Table][55].
+table, see [about_Hash_Tables][32]. For more information, see the examples in
+[Format-Table][48].
 
 Find the current value of `$FormatEnumerationLimit`.
 
@@ -714,12 +731,12 @@ Count  Name       Group
 The `$InformationPreference` variable lets you set information stream
 preferences that you want displayed to users. Specifically, informational
 messages that you added to commands or scripts by adding the
-[Write-Information][57] cmdlet. If the **InformationAction** parameter is used,
+[Write-Information][51] cmdlet. If the **InformationAction** parameter is used,
 its value overrides the value of the `$InformationPreference` variable.
 `Write-Information` was introduced in PowerShell 5.0.
 
 The `$InformationPreference` variable takes one of the
-[`ActionPreference`][01] enumeration values: **SilentlyContinue**, **Stop**,
+[`ActionPreference`][55] enumeration values: **SilentlyContinue**, **Stop**,
 **Continue**, **Inquire**, **Ignore**, **Suspend**, or **Break**.
 
 The valid values are as follows:
@@ -757,7 +774,7 @@ The **Log*Event** preference variables are as follows:
   (logged).
 - `$LogProviderLifecycleEvent`: Logs adding and removing of PowerShell
   providers. The default is `$true` (logged). For information about PowerShell
-  providers, see [about_Providers][45].
+  providers, see [about_Providers][38].
 
 To enable a **Log*Event**, type the variable with a value of `$true`, for
 example:
@@ -775,7 +792,7 @@ $LogCommandLifeCycleEvent = $false
 
 The events that you enable are effective only for the current PowerShell
 console. To apply the configuration to all consoles, save the variable settings
-in your PowerShell profile. For more information, see [about_Profiles][44].
+in your PowerShell profile. For more information, see [about_Profiles][37].
 
 ## $MaximumHistoryCount
 
@@ -793,12 +810,12 @@ To determine the number of commands current saved in the command history, type:
 ```
 
 To see the commands saved in your session history, use the `Get-History`
-cmdlet. For more information, see [about_History][41].
+cmdlet. For more information, see [about_History][33].
 
 ## $OFS
 
 The Output Field Separator (OFS) specifies the character that separates the
-elements of an array that is converted to a string.
+elements of an array that's converted to a string.
 
 **Valid values**: Any string.
 
@@ -863,15 +880,15 @@ need to change the value to **UnicodeEncoding** to send the characters
 correctly.
 
 The valid values are as follows: Objects derived from an Encoding class, such
-as [**ASCIIEncoding**][07], [**UTF7Encoding**][10], [**UTF8Encoding**][11],
-[**UTF32Encoding**][09], and [**UnicodeEncoding**][08].
+as [**ASCIIEncoding**][62], [**UTF7Encoding**][65], [**UTF8Encoding**][66],
+[**UTF32Encoding**][64], and [**UnicodeEncoding**][63].
 
-**Default**: [UTF8Encoding][11] object.
+**Default**: [UTF8Encoding][66] object.
 
 ### Examples
 
 This example shows how to make the Windows `findstr.exe` command work in
-PowerShell on a computer that is localized for a language that uses Unicode
+PowerShell on a computer that's localized for a language that uses Unicode
 characters, such as Chinese.
 
 The first command finds the value of `$OutputEncoding`. Because the value is an
@@ -893,7 +910,7 @@ findstr <Unicode-characters>
 ```
 
 To make the command work in PowerShell, set the value of `$OutputEncoding` to
-the value of the **OutputEncoding** property of the console, that is based on
+the value of the **OutputEncoding** property of the console, that's based on
 the locale selected for Windows. Because **OutputEncoding** is a static
 property of the console, use double-colons (`::`) in the command.
 
@@ -921,10 +938,10 @@ test.txt:         <Unicode-characters>
 
 Determines how PowerShell responds to progress updates generated by a script,
 cmdlet, or provider, such as the progress bars generated by the
-[Write-Progress][58] cmdlet. The `Write-Progress` cmdlet creates progress bars
+[Write-Progress][52] cmdlet. The `Write-Progress` cmdlet creates progress bars
 that show a command's status.
 
-The `$ProgressPreference` variable takes one of the [`ActionPreference`][01]
+The `$ProgressPreference` variable takes one of the [`ActionPreference`][55]
 enumeration values: **SilentlyContinue**, **Stop**, **Continue**, **Inquire**,
 **Ignore**, **Suspend**, or **Break**.
 
@@ -949,153 +966,81 @@ a custom default value that you specify.
 `$PSDefaultParameterValues` was introduced in PowerShell 3.0.
 
 For more information about this preference variable, see
-[about_Parameters_Default_Values][43].
+[about_Parameters_Default_Values][35].
 
 ## $PSEmailServer
 
-Specifies the default e-mail server that is used to send email messages. This
+Specifies the default email server that's used to send email messages. This
 preference variable is used by cmdlets that send email, such as the
-[Send-MailMessage][56]
-cmdlet.
+[Send-MailMessage][49] cmdlet.
 
 ## $PSModuleAutoloadingPreference
 
-Enables and disables automatic importing of modules in the session. **All** is
-the default. To import a module, get or use any command in the module. For
-example, use `Get-Command`. The `$PSModuleAutoloadingPreference` variable does
-not exist by default. The default behavior when the variable is not defined is
-the same as `$PSModuleAutoloadingPreference = 'All'`.
+Enables and disables automatic importing of modules in the session. The
+`$PSModuleAutoloadingPreference` variable doesn't exist by default. The default
+behavior when the variable isn't defined is the same as
+`$PSModuleAutoloadingPreference = 'All'`.
 
-Regardless of the variable's value, you can use
-[Import-Module][51] to import a
-module.
+To automatically import a module, get or use a command contained in the module.
 
 The `$PSModuleAutoloadingPreference` variable takes one of the
-[`PSModuleAutoLoadingPreference`][05]
-enumeration values:
-**None**, **ModuleQualified**, or **All**.
+[`PSModuleAutoLoadingPreference`][58] enumeration values:
 
-Valid values are:
-
-- **All**: Modules are imported automatically on first-use.
-- **ModuleQualified**: Modules are imported automatically only when a user uses
+- `All`: Modules are imported automatically on first-use.
+- `ModuleQualified`: Modules are imported automatically only when a user uses
   the module-qualified name of a command in the module. For example, if the
   user types `MyModule\MyCommand`, PowerShell imports the **MyModule** module.
-- **None**: Automatic importing of modules is disabled in the session. To
-  import a module, use the `Import-Module` cmdlet.
+- `None`: Disables the automatic importing of modules. To import a module, use
+  the `Import-Module` cmdlet.
 
 For more information about automatic importing of modules, see
-[about_Modules][42].
+[about_Modules][34].
 
 ## $PSNativeCommandArgumentPassing
 
-> [!NOTE]
-> `$PSNativeCommandArgumentPassing` was an experimental feature that became
-> mainstream in PowerShell 7.3. For more information, see
-> [Using experimental features][12].
-
-PowerShell uses the `ArgumentList` property of the `StartProcessInfo` object
-rather than reconstructing a string when invoking a native executable.
+PowerShell 7.3 changed the way it parses the command line for native commands.
+The new `$PSNativeCommandArgumentPassing` preference variable controls this
+behavior.
 
 > [!CAUTION]
-> The new behavior is a **breaking change** from current behavior. This may
-> break scripts and automation that work around the various issues when
-> invoking native applications. Historically, quotes must be escaped and it is
-> not possible to provide empty arguments to a native application.
+> The new behavior is a **breaking change** from the previous behavior. This
+> may break scripts and automation that work around the various issues when
+> invoking native applications.
 
-The automatic variable `$PSNativeCommandArgumentPassing` allows you to
-select the behavior at runtime. The valid values are `Legacy`, `Standard`, and
-`Windows`. `Legacy` is the historic behavior. The default when the experimental
-feature is enabled is the new `Standard` behavior.
+The automatic variable `$PSNativeCommandArgumentPassing` allows you to select
+the behavior at runtime. The valid values are `Legacy`, `Standard`, and
+`Windows`. `Legacy` is the historic behavior.
 
-When the preference variable is set to `Windows` invocations of the following
-files automatically use the `Legacy` style argument passing.
+The `$PSNativeCommandArgumentPassing` variable is defined by default but the
+value is platform specific.
+
+- On Windows, the preference is set to `Windows`.
+- On non-Windows platforms, the preference is set to `Standard`.
+- If you have removed the `$PSNativeCommandArgumentPassing` variable,
+  PowerShell uses the `Standard` behavior.
+
+The behavior of `Windows` and `Standard` mode are the same except, in `Windows`
+mode, PowerShell uses the `Legacy` behavior of argument passing when you run
+the following files.
 
 - `cmd.exe`
 - `cscript.exe`
+- `find.exe`
+- `sqlcmd.exe`
 - `wscript.exe`
-- ending with `.bat`
-- ending with `.cmd`
-- ending with `.js`
-- ending with `.vbs`
-- ending with `.wsf`
+- Files ending with:
+  - `.bat`
+  - `.cmd`
+  - `.js`
+  - `.vbs`
+  - `.wsf`
 
-If the `$PSNativeArgumentPassing` is set to either `Legacy` or `Standard`, the
-check for these files do not occur. The default behavior is platform specific.
-On Windows platforms, the default setting is `Windows` and non-Windows
-platforms is `Standard`.
+If the `$PSNativeCommandArgumentPassing` is set to either `Legacy` or
+`Standard`, the parser doesn't check for these files. For examples of the new
+behavior, see [about_Parsing][36].
 
-New behaviors made available by this change:
-
-- Literal or expandable strings with embedded quotes the quotes are now
-  preserved:
-
-  ```powershell
-  PS > $a = 'a" "b'
-  PS > $PSNativeCommandArgumentPassing = "Legacy"
-  PS > testexe -echoargs $a 'a" "b' a" "b
-  Arg 0 is <a b>
-  Arg 1 is <a b>
-  Arg 2 is <a b>
-  PS > $PSNativeCommandArgumentPassing = "Standard"
-  PS > testexe -echoargs $a 'a" "b' a" "b
-  Arg 0 is <a" "b>
-  Arg 1 is <a" "b>
-  Arg 2 is <a b>
-  ```
-
-- Empty strings as arguments are now preserved:
-
-  ```powershell
-  PS>  $PSNativeCommandArgumentPassing = "Legacy"
-  PS> testexe -echoargs '' a b ''
-  Arg 0 is <a>
-  Arg 1 is <b>
-  PS> $PSNativeCommandArgumentPassing = "Standard"
-  PS> testexe -echoargs '' a b ''
-  Arg 0 is <>
-  Arg 1 is <a>
-  Arg 2 is <b>
-  Arg 3 is <>
-  ```
-
-The new behavior does not change invocations that look like this:
-
-```powershell
-PS> $PSNativeCommandArgumentPassing = "Legacy"
-PS> testexe -echoargs -k com:port=\\devbox\pipe\debug,pipe,resets=0,reconnect
-Arg 0 is <-k>
-Arg 1 is <com:port=\\devbox\pipe\debug,pipe,resets=0,reconnect>
-PS> $PSNativeCommandArgumentPassing = "Standard"
-PS> testexe -echoargs -k com:port=\\devbox\pipe\debug,pipe,resets=0,reconnect
-Arg 0 is <-k>
-Arg 1 is <com:port=\\devbox\pipe\debug,pipe,resets=0,reconnect>
-```
-
-Additionally, parameter tracing is now provided so `Trace-Command` provides
-useful information for debugging.
-
-```powershell
-PS> $PSNativeCommandArgumentPassing = "Legacy"
-PS> trace-command -PSHOST -Name ParameterBinding { testexe -echoargs $a 'a" "b' a" "b }
-DEBUG: 2021-02-01 17:19:53.6438 ParameterBinding Information: 0 : BIND NAMED native application line args [/Users/james/src/github/forks/jameswtruher/PowerShell-1/test/tools/TestExe/bin/testexe]
-DEBUG: 2021-02-01 17:19:53.6440 ParameterBinding Information: 0 :     BIND argument [-echoargs a" "b a" "b "a b"]
-DEBUG: 2021-02-01 17:19:53.6522 ParameterBinding Information: 0 : CALLING BeginProcessing
-Arg 0 is <a b>
-Arg 1 is <a b>
-Arg 2 is <a b>
-PS> $PSNativeCommandArgumentPassing = "Standard"
-PS> trace-command -PSHOST -Name ParameterBinding { testexe -echoargs $a 'a" "b' a" "b }
-DEBUG: 2021-02-01 17:20:01.9829 ParameterBinding Information: 0 : BIND NAMED native application line args [/Users/james/src/github/forks/jameswtruher/PowerShell-1/test/tools/TestExe/bin/testexe]
-DEBUG: 2021-02-01 17:20:01.9829 ParameterBinding Information: 0 :     BIND cmd line arg [-echoargs] to position [0]
-DEBUG: 2021-02-01 17:20:01.9830 ParameterBinding Information: 0 :     BIND cmd line arg [a" "b] to position [1]
-DEBUG: 2021-02-01 17:20:01.9830 ParameterBinding Information: 0 :     BIND cmd line arg [a" "b] to position [2]
-DEBUG: 2021-02-01 17:20:01.9831 ParameterBinding Information: 0 :     BIND cmd line arg [a b] to position [3]
-DEBUG: 2021-02-01 17:20:01.9908 ParameterBinding Information: 0 : CALLING BeginProcessing
-Arg 0 is <a" "b>
-Arg 1 is <a" "b>
-Arg 2 is <a b>
-```
+PowerShell 7.3 also added the ability to trace parameter binding for native
+commands. For more information, see [Trace-Command][50].
 
 ## $PSNativeCommandUseErrorActionPreference
 
@@ -1108,13 +1053,32 @@ errors according to `$ErrorActionPreference` when
 
 > [!NOTE]
 > `PSNativeCommandUseErrorActionPreference` is an experimental feature added in
-> PowerShell 7.3. For more information, see [Using experimental features][13].
+> PowerShell 7.3. For more information, see [Using experimental features][01].
+
+Some native commands, like [robocopy][02] use non-zero exit codes to represent
+information other than errors. In these cases, you can temporarily disable the
+behavior and prevent non-zero exit codes from issuing errors.
+
+```powershell
+& {
+    # Disable $PSNativeCommandUseErrorActionPreference for this scriptblock
+    $PSNativeCommandUseErrorActionPreference = $false
+    robocopy.exe D:\reports\operational "\\reporting\ops" CY2022Q4.md
+    if ($LASTEXITCODE -gt 8) {
+        throw "robocopy failed with exit code $LASTEXITCODE"
+    }
+}
+```
+
+In this example, the `$PSNativeCommandUseErrorActionPreference` variable is
+changed inside a scriptblock. The change is local to the scriptblock. When the
+scriptblock exits, the variable reverts to its previous value.
 
 ## $PSSessionApplicationName
 
 Specifies the default application name for a remote command that uses Web
 Services for Management (WS-Management) technology. For more information, see
-[About Windows Remote Management][14].
+[About Windows Remote Management][03].
 
 The system default application name is `WSMAN`, but you can use this preference
 variable to change the default.
@@ -1133,8 +1097,8 @@ the connection request. The parameter's value should match the value of the
 
 To override the system default and the value of this variable, and select a
 different application name for a particular session, use the **ConnectionURI**
-or **ApplicationName** parameters of the [New-PSSession][53],
-[Enter-PSSession][50], or [Invoke-Command][52] cmdlets.
+or **ApplicationName** parameters of the [New-PSSession][46],
+[Enter-PSSession][43], or [Invoke-Command][45] cmdlets.
 
 The `$PSSessionApplicationName` preference variable is set on the local
 computer, but it specifies a listener on the remote computer. If the
@@ -1143,8 +1107,8 @@ command to establish the session fails.
 
 ## $PSSessionConfigurationName
 
-Specifies the default session configuration that is used for **PSSessions**
-created in the current session.
+Specifies the default session configuration that's used to create new sessions
+in the current session.
 
 This preference variable is set on the local computer, but it specifies a
 session configuration that's located on the remote computer.
@@ -1182,7 +1146,7 @@ These option preferences override the system default values for session
 options.
 
 The `$PSSessionOption` variable contains a **PSSessionOption** object. For more
-information, see [System.Management.Automation.Remoting.PSSessionOption][06].
+information, see [System.Management.Automation.Remoting.PSSessionOption][61].
 Each property of the object represents a session option. For example, the
 **NoCompression** property turns of data compression during the session.
 
@@ -1215,8 +1179,8 @@ IdleTimeout                       : -00:00:00.0010000
 ```
 
 For descriptions of these options and more information, see
-[New-PSSessionOption][54]. For more information about remote commands and
-sessions, see [about_Remote][47] and [about_PSSessions][46].
+[New-PSSessionOption][47]. For more information about remote commands and
+sessions, see [about_Remote][40] and [about_PSSessions][39].
 
 To change the value of the `$PSSessionOption` preference variable, use the
 `New-PSSessionOption` cmdlet to create a **PSSessionOption** object with the
@@ -1230,7 +1194,7 @@ $PSSessionOption = New-PSSessionOption -NoCompression
 To use the `$PSSessionOption` preference variable in every PowerShell session,
 add a `New-PSSessionOption` command that creates the `$PSSessionOption`
 variable to your PowerShell profile. For more information, see
-[about_Profiles][44].
+[about_Profiles][37].
 
 You can set custom options for a particular remote session. The options that
 you set take precedence over the system defaults and the value of the
@@ -1244,160 +1208,47 @@ as `New-PSSession`, `Enter-PSSession`, and `Invoke-Command`.
 ## $PSStyle
 
 As of PowerShell 7.2 you can now access the `$PSStyle` automatic variable to
-view and change the rendering of ANSI string output. The variable contains the
-following properties:
-
-- **Reset** - Turns off all decorations
-- **Blink** - Turns Blink on
-- **BlinkOff** - Turns Blink off
-- **Bold** - Turns Bold on
-- **BoldOff** - Turns Bold off
-- **Hidden** - Turns Hidden on
-- **HiddenOff** - Turns Hidden off
-- **Reverse** - Turns Reverse on
-- **ReverseOff** - Turns Reverse off
-- **Italic** - Turns Italic on
-- **ItalicOff** - Turns Italic off
-- **Underline** - Turns underlining on
-- **UnderlineOff** - Turns underlining off
-- **OutputRendering** - Control when output rendering is used
-- **Background** - Nested object to control background coloring
-- **Foreground** - Nested object to control foreground coloring
-- **Formatting** - Nested object that controls default formatting for output
-  streams
-- **Progress** - Nested object that controls the rendering of progress bars
-- **FileInfo** - (experimental) Nested object to control the coloring of
-  **FileInfo** objects.
+view and change the rendering of ANSI string output. `$PSStyle` is an instance
+of the **PSStyle** class. The members of this class define strings containing
+ANSI escape sequences that control the rendering of text in the terminal.
 
 The base members return strings of ANSI escape sequences mapped to their names.
-The values are settable to allow customization. For example, you could change
-bold to underlined. The property names makes it easier for you to create
-decorated strings using tab completion:
+The values are settable to allow customization. The property names make it
+easier for you to create decorated strings using tab completion. For example:
 
 ```powershell
 "$($PSStyle.Background.BrightCyan)Power$($PSStyle.Underline)$($PSStyle.Bold)Shell$($PSStyle.Reset)"
 ```
 
-The following members control how or when ANSI formatting is used:
+The **Background** and **Foreground** members also have a `FromRgb()` method to
+specify 24-bit color.
 
-- `$PSStyle.OutputRendering` is a
-  `System.Management.Automation.OutputRendering` enum with the values:
-
-  - **ANSI**: This is the default behavior. ANSI is always passed through
-    as-is.
-
-    > [!IMPORTANT]
-    > You should use **ANSI** mode when redirecting output to a file or the
-    > pipeline that is intended to be executed downstream. This ensures that
-    > the output is not altered. Using any other mode alters the output by
-    > removing ANSI escape sequences, which may change the execution behavior.
-
-  - **PlainText**: ANSI escape sequences are always stripped so that it is only
-    plain text.
-  - **Host**: The ANSI escape sequences are removed in redirected or piped
-    output.
-
-- The `$PSStyle.Background` and `$PSStyle.Foreground` members are strings that
-  contain the ANSI escape sequences for the 16 standard console colors.
-
-  - Black
-  - BrightBlack
-  - White
-  - BrightWhite
-  - Red
-  - BrightRed
-  - Magenta
-  - BrightMagenta
-  - Blue
-  - BrightBlue
-  - Cyan
-  - BrightCyan
-  - Green
-  - BrightGreen
-  - Yellow
-  - BrightYellow
-
-  The values are settable and can contain any number of ANSI escape sequences.
-  There is also an `FromRgb()` method to specify 24-bit color. There are two
-  ways to call the `FromRgb()` method.
-
-  - string FromRgb(byte red, byte green, byte blue)
-  - string FromRgb(int rgb)
-
-  Either of the following examples set the background color the 24-bit color
-  **Beige**.
-
-  ```powershell
-  $PSStyle.Background.FromRgb(245, 245, 220)
-  $PSStyle.Background.FromRgb(0xf5f5dc)
-  ```
-
-- `$PSStyle.Formatting` is a nested object to control default formatting of
-  debug, error, verbose, and warning messages. You can also control attributes
-  like bolding and underlining. It replaces `$Host.PrivateData` as the way to
-  manage colors for formatting rendering. `$Host.PrivateData` continues to
-  exist for backwards compatibility but is not connected to
-  `$PSStyle.Formatting`.
-
-- `$PSStyle.Progress` allows you to control progress view bar rendering.
-
-  - **Style** - An ANSI string setting the rendering style.
-  - **MaxWidth** - Sets the max width of the view. Set to `0` for console
-    width. Defaults to `120`
-  - **View** - An enum with values, `Minimal` and `Classic`. `Classic` is the
-    existing rendering with no changes. `Minimal` is a single line minimal
-    rendering. `Minimal` is the default.
-  - **UseOSCIndicator** - Defaults to `$false`. Set this to `$true` for
-    terminals that support OSC indicators.
-
-  > [!NOTE]
-  > If the host doesn't support Virtual Terminal, `$PSStyle.Progress.View` is
-  > automatically set to `Classic`.
-
-  The following example sets the rendering style to a minimal progress bar.
-
-  ```powershell
-  $PSStyle.Progress.View = Minimal
-  ```
-
-`$PSStyle.FileInfo` is a nested object to control the coloring of **FileInfo**
-objects.
-
-- **Directory** - Built-in member to specify color for directories
-- **SymbolicLink** - Built-in member to specify color for symbolic links
-- **Executable** - Built-in member to specify color for executables.
-- **Extension** - Use this member to define colors for different file
-  extensions. The **Extension** member pre-includes extensions for archive and
-  PowerShell files.
-
-> [!NOTE]
-> `$PSStyle.FileInfo` is only available when the `PSAnsiRenderingFileInfo`
-> experimental feature is enabled. For more information, see
-> [about_Experimental_Features][39] and
-> [Using experimental features][12].
->
-> In PowerShell 7.3, the `PSAnsiRenderingFileInfo` feature became mainstream
-> and available by default.
+For more information about `$PSStyle`, see [about_ANSI_Terminals][28].
 
 ## $Transcript
 
 Used by `Start-Transcript` to specify the name and location of the transcript
-file. If you do not specify a value for the **Path** parameter,
+file. If you don't specify a value for the **Path** parameter,
 `Start-Transcript` uses the path in the value of the `$Transcript` global
-variable. If you have not created this variable, `Start-Transcript` stores the
-transcripts in the `$HOME\My Documents` directory as
-`\PowerShell_transcript.<time-stamp>.txt` files.
+variable. If you haven't created this variable, `Start-Transcript` stores the
+transcripts in the following location using the default name:
+
+- On Windows: `$HOME\Documents`
+- On Linux or macOS: `$HOME`
+
+The default filename is:
+`PowerShell_transcript.<computername>.<random>.<timestamp>.txt`.
 
 ## $VerbosePreference
 
 Determines how PowerShell responds to verbose messages generated by a script,
-cmdlet, or provider, such as the messages generated by the [Write-Verbose][59]
+cmdlet, or provider, such as the messages generated by the [Write-Verbose][53]
 cmdlet. Verbose messages describe the actions performed to execute a command.
 
 By default, verbose messages aren't displayed, but you can change this behavior
 by changing the value of `$VerbosePreference`.
 
-The `$VerbosePreference` variable takes one of the [`ActionPreference`][01]
+The `$VerbosePreference` variable takes one of the [`ActionPreference`][55]
 enumeration values: **SilentlyContinue**, **Stop**, **Continue**, **Inquire**,
 **Ignore**, **Suspend**, or **Break**.
 
@@ -1413,14 +1264,14 @@ The valid values are as follows:
 
 You can use the **Verbose** common parameter of a cmdlet to display or hide the
 verbose messages for a specific command. For more information, see
-[about_CommonParameters][37].
+[about_CommonParameters][30].
 
 ### Examples
 
 These examples show the effect of the different values of `$VerbosePreference`
 and the **Verbose** parameter to override the preference value.
 
-This example shows the effect of the **SilentlyContinue** value, that is the
+This example shows the effect of the **SilentlyContinue** value, that's the
 default. The command uses the **Message** parameter, but doesn't write a
 message to the PowerShell console.
 
@@ -1510,13 +1361,13 @@ Write-Verbose -Message "Verbose message test." -Verbose:$false
 ## $WarningPreference
 
 Determines how PowerShell responds to warning messages generated by a script,
-cmdlet, or provider, such as the messages generated by the [Write-Warning][60]
+cmdlet, or provider, such as the messages generated by the [Write-Warning][54]
 cmdlet.
 
 By default, warning messages are displayed and execution continues, but you can
 change this behavior by changing the value of `$WarningPreference`.
 
-The `$WarningPreference` variable takes one of the [`ActionPreference`][01]
+The `$WarningPreference` variable takes one of the [`ActionPreference`][55]
 enumeration values: **SilentlyContinue**, **Stop**, **Continue**, **Inquire**,
 **Ignore**, **Suspend**, or **Break**.
 
@@ -1533,7 +1384,7 @@ The valid values are as follows:
 
 You can use the **WarningAction** common parameter of a cmdlet to determine how
 PowerShell responds to warnings from a particular command. For more
-information, see [about_CommonParameters][37].
+information, see [about_CommonParameters][30].
 
 ### Examples
 
@@ -1828,72 +1679,76 @@ At line:1 char:1
 
 ## See also
 
-- [about_automatic_variables][36]
-- [about_CommonParameters][37]
-- [about_Environment_Variables][38]
-- [about_Profiles][44]
-- [about_Remote][47]
-- [about_Scopes][48]
-- [about_Variables][49]
+- [about_automatic_variables][29]
+- [about_CommonParameters][30]
+- [about_Environment_Variables][31]
+- [about_Profiles][37]
+- [about_Remote][40]
+- [about_Scopes][41]
+- [about_Variables][42]
 
 <!-- link references -->
-[01]: /dotnet/api/system.management.automation.actionpreference
-[02]: /dotnet/api/system.management.automation.confirmimpact
-[03]: /dotnet/api/system.management.automation.errorcategoryinfo
-[04]: /dotnet/api/system.management.automation.errorview
-[05]: /dotnet/api/system.management.automation.psmoduleautoloadingpreference
-[06]: /dotnet/api/system.management.automation.remoting.pssessionoption
-[07]: /dotnet/api/system.text.asciiencoding
-[08]: /dotnet/api/system.text.unicodeencoding
-[09]: /dotnet/api/system.text.utf32encoding
-[10]: /dotnet/api/system.text.utf7encoding
-[11]: /dotnet/api/system.text.utf8encoding
-[12]: /powershell/scripting/learn/experimental-features
-[13]: /powershell/scripting/learn/experimental-features#psnativecommanderroractionpreference
-[14]: /windows/win32/winrm/about-windows-remote-management
-[15]: #confirmpreference
-[16]: #debugpreference
-[17]: #erroractionpreference
-[18]: #errorview
-[19]: #formatenumerationlimit
-[20]: #informationpreference
-[21]: #logevent
-[22]: #maximumhistorycount
-[23]: #ofs
-[24]: #outputencoding
-[25]: #progresspreference
-[26]: #psdefaultparametervalues
-[27]: #psemailserver
-[28]: #psmoduleautoloadingpreference
-[29]: #pssessionapplicationname
-[30]: #pssessionconfigurationname
-[31]: #pssessionoption
-[32]: #transcript
-[33]: #verbosepreference
-[34]: #warningpreference
-[35]: #whatifpreference
-[36]: about_Automatic_Variables.md
-[37]: about_CommonParameters.md
-[38]: about_Environment_Variables.md
-[39]: about_Experimental_Features.md
-[40]: about_Hash_Tables.md
-[41]: about_History.md
-[42]: about_Modules.md
-[43]: about_Parameters_Default_Values.md
-[44]: about_Profiles.md
-[45]: about_Providers.md
-[46]: about_PSSessions.md
-[47]: about_Remote.md
-[48]: about_Scopes.md
-[49]: about_Variables.md
-[50]: xref:Microsoft.PowerShell.Core.Enter-PSSession
-[51]: xref:Microsoft.PowerShell.Core.Import-Module
-[52]: xref:Microsoft.PowerShell.Core.Invoke-Command
-[53]: xref:Microsoft.PowerShell.Core.New-PSSession
-[54]: xref:Microsoft.PowerShell.Core.New-PSSessionOption
-[55]: xref:Microsoft.PowerShell.Utility.Format-Table
-[56]: xref:Microsoft.PowerShell.Utility.Send-MailMessage
-[57]: xref:Microsoft.PowerShell.Utility.Write-Information
-[58]: xref:Microsoft.PowerShell.Utility.Write-Progress
-[59]: xref:Microsoft.PowerShell.Utility.Write-Verbose
-[60]: xref:Microsoft.PowerShell.Utility.Write-Warning
+[01]: /powershell/scripting/learn/experimental-features#psnativecommanderroractionpreference
+[02]: /windows-server/administration/windows-commands/robocopy#exit-return-codes
+[03]: /windows/win32/winrm/about-windows-remote-management
+[04]: #confirmpreference
+[05]: #debugpreference
+[06]: #erroractionpreference
+[07]: #errorview
+[08]: #formatenumerationlimit
+[09]: #informationpreference
+[10]: #logevent
+[11]: #maximumhistorycount
+[12]: #ofs
+[13]: #outputencoding
+[14]: #progresspreference
+[15]: #psdefaultparametervalues
+[16]: #psemailserver
+[17]: #psmoduleautoloadingpreference
+[18]: #psnativecommandargumentpassing
+[19]: #psnativecommanduseerroractionpreference
+[20]: #pssessionapplicationname
+[21]: #pssessionconfigurationname
+[22]: #pssessionoption
+[23]: #psstyle
+[24]: #transcript
+[25]: #verbosepreference
+[26]: #warningpreference
+[27]: #whatifpreference
+[28]: about_ANSI_Terminals.md
+[29]: about_Automatic_Variables.md
+[30]: about_CommonParameters.md
+[31]: about_Environment_Variables.md
+[32]: about_Hash_Tables.md
+[33]: about_History.md
+[34]: about_Modules.md
+[35]: about_Parameters_Default_Values.md
+[36]: about_parsing.md
+[37]: about_Profiles.md
+[38]: about_Providers.md
+[39]: about_PSSessions.md
+[40]: about_Remote.md
+[41]: about_Scopes.md
+[42]: about_Variables.md
+[43]: xref:Microsoft.PowerShell.Core.Enter-PSSession
+[45]: xref:Microsoft.PowerShell.Core.Invoke-Command
+[46]: xref:Microsoft.PowerShell.Core.New-PSSession
+[47]: xref:Microsoft.PowerShell.Core.New-PSSessionOption
+[48]: xref:Microsoft.PowerShell.Utility.Format-Table
+[49]: xref:Microsoft.PowerShell.Utility.Send-MailMessage
+[50]: xref:Microsoft.PowerShell.Utility.Trace-Command
+[51]: xref:Microsoft.PowerShell.Utility.Write-Information
+[52]: xref:Microsoft.PowerShell.Utility.Write-Progress
+[53]: xref:Microsoft.PowerShell.Utility.Write-Verbose
+[54]: xref:Microsoft.PowerShell.Utility.Write-Warning
+[55]: xref:System.Management.Automation.ActionPreference
+[56]: xref:System.Management.Automation.ConfirmImpact
+[57]: xref:System.Management.Automation.ErrorCategoryInfo
+[58]: xref:System.Management.Automation.ErrorView
+[60]: xref:System.Management.Automation.PSStyle
+[61]: xref:System.Management.Automation.Remoting.PSSessionOption
+[62]: xref:System.Text.ASCIIEncoding
+[63]: xref:System.Text.UnicodeEncoding
+[64]: xref:System.Text.UTF32Encoding
+[65]: xref:System.Text.UTF7Encoding
+[66]: xref:System.Text.UTF8Encoding

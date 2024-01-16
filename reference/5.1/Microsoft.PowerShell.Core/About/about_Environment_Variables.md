@@ -1,7 +1,7 @@
 ---
 description: Describes how to access and manage environment variables in PowerShell.
 Locale: en-US
-ms.date: 11/17/2022
+ms.date: 09/20/2023
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about Environment Variables
@@ -11,12 +11,18 @@ title: about Environment Variables
 ## Short description
 Describes how to access and manage environment variables in PowerShell.
 
-## Long description
-
 Environment variables store data that's used by the operating system and other
-programs. For example, the `WINDIR` environment variable contains the location
-of the Windows installation directory. Programs can query the value of this
-variable to determine where Windows operating system files are located.
+programs. PowerShell creates the following environment variables:
+
+- **PSExecutionPolicyPreference**
+- **PSModulePath**
+- **PSModuleAnalysisCachePath**
+- **PSDisableModuleAnalysisCacheCleanup**
+
+For full descriptions of these variables, see the
+[PowerShell environment variables][03] of this article.
+
+## Long description
 
 PowerShell can access and manage environment variables in any of the supported
 operating system platforms. The PowerShell environment provider lets you get,
@@ -140,7 +146,7 @@ Name   MemberType Definition
 Length Property   int Length {get;}
 ```
 
-For more information about variables in PowerShell, see [about_Variables][10].
+For more information about variables in PowerShell, see [about_Variables][11].
 
 ## Using the Environment provider and Item cmdlets
 
@@ -186,8 +192,14 @@ VERBOSE: Performing the operation "Remove Item" on target "Item: Foo2".
 VERBOSE: Performing the operation "Remove Item" on target "Item: Foo".
 ```
 
+Use the `Get-ChildItem` cmdlet to see a full list of environment variables:
+
+```powershell
+Get-ChildItem Env:
+```
+
 For more information on using the **Environment** provider to manage
-environment variables, see [about_Environment_Provider][03].
+environment variables, see [about_Environment_Provider][04].
 
 ## Using the System.Environment methods
 
@@ -244,7 +256,7 @@ $Env:Path += ';C:\Tools'
 ```
 
 You can get the path to your PowerShell profile with the `$PROFILE` automatic
-variable. For more information on profiles, see [about_Profiles][06].
+variable. For more information on profiles, see [about_Profiles][07].
 
 ### Saving environment variables with SetEnvironmentVariable
 
@@ -288,7 +300,7 @@ System Control Panel:
 PowerShell features can use environment variables to store user preferences.
 These variables work like preference variables, but they're inherited by child
 sessions of the sessions in which they're created. For more information about
-preference variables, see [about_Preference_Variables][05].
+preference variables, see [about_Preference_Variables][06].
 
 The environment variables that store preferences include:
 
@@ -304,7 +316,33 @@ The environment variables that store preferences include:
   - Use the `Set-ExecutionPolicy` cmdlet. Use the **Scope** parameter with
     a value of `Process`.
 
-    For more information, see [about_Execution_Policies][04].
+    For more information, see [about_Execution_Policies][05].
+
+- **PSModulePath**
+
+  The `$env:PSModulePath` environment variable contains a list of folder
+  locations that are searched to find modules and resources.
+
+  By default, the effective locations assigned to `$env:PSModulePath` are:
+
+  - System-wide locations: These folders contain modules that ship with
+    PowerShell. The modules are store in the `$PSHOME\Modules` location. Also,
+    This is the location where the Windows management modules are installed.
+
+  - User-installed modules: These are modules installed by the user.
+    `Install-Module` has a **Scope** parameter that allows you to specify
+    whether the module is installed for the current user or for all users. For
+    more information, see [Install-Module][14].
+
+    - On Windows, the location of the user-specific **CurrentUser** scope is
+      the `$HOME\Documents\PowerShell\Modules` folder. The location of the
+      **AllUsers** scope is `$env:ProgramFiles\PowerShell\Modules`.
+
+  In addition, setup programs that install modules in other directories, such
+  as the Program Files directory, can append their locations to the value of
+  `$env:PSModulePath`.
+
+  For more information, see [about_PSModulePath][08].
 
 - **PSModuleAnalysisCachePath**
 
@@ -357,32 +395,6 @@ The environment variables that store preferences include:
   Setting this environment variable takes effect immediately in the current
   process.
 
-- **PSModulePath**
-
-  The `$env:PSModulePath` environment variable contains a list of folder
-  locations that are searched to find modules and resources.
-
-  By default, the effective locations assigned to `$env:PSModulePath` are:
-
-  - System-wide locations: These folders contain modules that ship with
-    PowerShell. The modules are store in the `$PSHOME\Modules` location. Also,
-    This is the location where the Windows management modules are installed.
-
-  - User-installed modules: These are modules installed by the user.
-    `Install-Module` has a **Scope** parameter that allows you to specify
-    whether the module is installed for the current user or for all users. For
-    more information, see [Install-Module][13].
-
-    - On Windows, the location of the user-specific **CurrentUser** scope is
-      the `$HOME\Documents\PowerShell\Modules` folder. The location of the
-      **AllUsers** scope is `$env:ProgramFiles\PowerShell\Modules`.
-
-  In addition, setup programs that install modules in other directories, such
-  as the Program Files directory, can append their locations to the value of
-  `$env:PSModulePath`.
-
-  For more information, see [about_PSModulePath][07].
-
 ## Other environment variables used by PowerShell
 
 ### Path information
@@ -415,18 +427,19 @@ The environment variables that store preferences include:
 
 ## See also
 
-- [about_Environment_Provider][03]
-- [about_Profiles][06]
-- [about_Variables][10]
+- [about_Environment_Provider][04]
+- [about_Profiles][07]
+- [about_Variables][11]
 - [Environment Methods][01]
 
 <!-- link references -->
 [01]: /dotnet/api/system.environment
 [02]: /windows-server/administration/windows-commands/ftype
-[03]: about_Environment_Provider.md
-[04]: about_Execution_Policies.md
-[05]: about_preference_variables.md
-[06]: about_profiles.md
-[07]: about_PSModulePath.md
-[10]: about_variables.md
-[13]: xref:PowerShellGet.Install-Module
+[03]: #powershell-environment-variables
+[04]: about_Environment_Provider.md
+[05]: about_Execution_Policies.md
+[06]: about_preference_variables.md
+[07]: about_profiles.md
+[08]: about_PSModulePath.md
+[11]: about_variables.md
+[14]: xref:PowerShellGet.Install-Module

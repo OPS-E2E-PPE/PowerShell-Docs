@@ -1,5 +1,5 @@
 ---
-ms.date: 11/14/2022
+ms.date: 06/28/2023
 title: Differences between Windows PowerShell 5.1 and PowerShell 7.x
 description: This article summarizes the differences and breaking changes from Windows PowerShell 5.1 and the current version of PowerShell that is based on .NET Core.
 ---
@@ -22,6 +22,7 @@ article is to present the current state of PowerShell and how that is different 
 PowerShell. For a detailed discussion of changes between versions and the addition of new features,
 see the **What's New** articles for each version.
 
+- [What's new in PowerShell 7.4][35]
 - [What's new in PowerShell 7.3][34]
 - [What's new in PowerShell 7.2][33]
 - [What's new in PowerShell 7.1][27]
@@ -40,6 +41,7 @@ Core, see
 Each new release of PowerShell is built on a newer version of .NET. There can be breaking changes in
 .NET that affect PowerShell.
 
+- PowerShell 7.4 - Built on .NET 8.0
 - PowerShell 7.3 - Built on .NET 7.0
 - PowerShell 7.2 (LTS-current) - Built on .NET 6.0 (LTS-current)
 - PowerShell 7.1 - Built on .NET 5.0
@@ -1179,3 +1181,4 @@ To opt-out of this telemetry, set the environment variable `POWERSHELL_TELEMETRY
 [32]: What-s-New-in-PowerShell-70.md
 [33]: What-s-New-in-PowerShell-72.md
 [34]: What-s-New-in-PowerShell-73.md
+[35]: What-s-New-in-PowerShell-74.md

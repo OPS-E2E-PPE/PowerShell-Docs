@@ -1,7 +1,7 @@
 ---
 description: Describes the operators that perform arithmetic in PowerShell.
 Locale: en-US
-ms.date: 08/29/2022
+ms.date: 08/01/2023
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_arithmetic_operators?view=powershell-7.3&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about Arithmetic Operators
@@ -178,7 +178,7 @@ PS> [int]( 7 / 2 )  # Result is rounded up
 You can use the `[Math]` class to get different rounding behavior.
 
 ```powershell
-PS> [int][Math]::Round(5 / 2,[MidpointRounding]::AwayFromZero
+PS> [int][Math]::Round(5 / 2,[MidpointRounding]::AwayFromZero)
 3
 
 PS> [int][Math]::Ceiling(5 / 2)
@@ -341,7 +341,7 @@ examples use the `+=` assignment operator to add items to an array:
 
 ```powershell
 $array = @()
-(0..9).foreach{ $array += $_ }
+(0..2).foreach{ $array += $_ }
 $array
 ```
 
@@ -522,7 +522,7 @@ The bitwise NOT operator is a unary operator that produces the binary
 complement of the value. A bit of 1 is set to 0 and a bit of 0 is set to 1.
 
 For example, the binary complement of 0 is -1, the maximum unsigned integer
-(0xffffffff), and the binary complement of -1 is 0.
+(0xFFFFFFFF), and the binary complement of -1 is 0.
 
 ```powershell
 -bNot 10
@@ -535,18 +535,12 @@ For example, the binary complement of 0 is -1, the maximum unsigned integer
 ```
 0000 0000 0000 1010  (10)
 ------------------------- bNOT
-1111 1111 1111 0101  (-11, xfffffff5)
+1111 1111 1111 0101  (-11, 0xFFFFFFF5)
 ```
 
 In a bitwise shift-left operation, all bits are moved "n" places to the left,
 where "n" is the value of the right operand. A zero is inserted in the ones
 place.
-
-When the left operand is an Integer (32-bit) value, the lower 5 bits of the
-right operand determine how many bits of the left operand are shifted.
-
-When the left operand is a Long (64-bit) value, the lower 6 bits of the right
-operand determine how many bits of the left operand are shifted.
 
 | Expression  | Result | Binary Result |
 | ----------- | ------ | ------------- |
@@ -555,29 +549,25 @@ operand determine how many bits of the left operand are shifted.
 | `21 -shl 2` | 84     | 0101 0100     |
 
 In a bitwise shift-right operation, all bits are moved "n" places to the right,
-where "n" is specified by the right operand. The shift-right operator (-shr)
-inserts a zero in the left-most place when shifting a positive or unsigned
-value to the right.
+where "n" is specified by the right operand. The shift-right operator (`-shr`)
+copies the sign bit to the left-most place when shifting a signed value. For
+unsigned values, a zero is inserted in the left-most position.
 
-When the left operand is an Integer (32-bit) value, the lower 5 bits of the
-right operand determine how many bits of the left operand are shifted.
-
-When the left operand is a Long (64-bit) value, the lower 6 bits of the right
-operand determine how many bits of the left operand are shifted.
-
-|        Expression        |   Result    |  Binary   |    Hex     |
-| ------------------------ | ----------- | --------- | ---------- |
-| `21 -shr 0`              | 21          | 0001 0101 | 0x15       |
-| `21 -shr 1`              | 10          | 0000 1010 | 0x0A       |
-| `21 -shr 2`              | 5           | 0000 0101 | 0x05       |
-| `21 -shr 31`             | 0           | 0000 0000 | 0x00       |
-| `21 -shr 32`             | 21          | 0001 0101 | 0x15       |
-| `21 -shr 64`             | 21          | 0001 0101 | 0x15       |
-| `21 -shr 65`             | 10          | 0000 1010 | 0x0A       |
-| `21 -shr 66`             | 5           | 0000 0101 | 0x05       |
-| `[int]::MaxValue -shr 1` | 1073741823  |           | 0x3FFFFFFF |
-| `[int]::MinValue -shr 1` | -1073741824 |           | 0xC0000000 |
-| `-1 -shr 1`              | -1          |           | 0xFFFFFFFF |
+|        Expression        |   Result    |              Binary              |    Hex     |
+| :----------------------: | ----------: | -------------------------------: | ---------: |
+|       `21 -shr 0`        |          21 |                         00010101 |       0x15 |
+|       `21 -shr 1`        |          10 |                         00001010 |       0x0A |
+|       `21 -shr 2`        |           5 |                         00000101 |       0x05 |
+|       `21 -shr 31`       |           0 |                         00000000 |       0x00 |
+|       `21 -shr 32`       |          21 |                         00010101 |       0x15 |
+|       `21 -shr 64`       |          21 |                         00010101 |       0x15 |
+|       `21 -shr 65`       |          10 |                         00001010 |       0x0A |
+|       `21 -shr 66`       |           5 |                         00000101 |       0x05 |
+| `[int]::MaxValue -shr 1` |  1073741823 | 00111111111111111111111111111111 | 0x3FFFFFFF |
+| `[int]::MinValue -shr 1` | -1073741824 | 11000000000000000000000000000000 | 0xC0000000 |
+|       `-1 -shr 1`        |          -1 | 11111111111111111111111111111111 | 0xFFFFFFFF |
+|      `(-21 -shr 1)`      |         -11 | 11111111111111111111111111110101 | 0xFFFFFFF5 |
+|      `(-21 -shr 2)`      |          -6 | 11111111111111111111111111111010 | 0xFFFFFFF4 |
 
 ## See also
 

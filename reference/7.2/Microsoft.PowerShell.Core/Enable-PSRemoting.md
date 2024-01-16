@@ -2,7 +2,7 @@
 external help file: System.Management.Automation.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 11/07/2022
+ms.date: 10/06/2023
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/enable-psremoting?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Enable-PSRemoting
@@ -120,7 +120,7 @@ Use `Get-NetFirewallRule` to see a list of rules. Before enabling the firewall r
 security settings in the rule to verify that the configuration is appropriate for your environment.
 
 ```powershell
-Get-NetFirewallRule -Name 'WINRM*' | Select-Object Name
+Get-NetFirewallRule -Name 'WINRM*' | Select-Object -Property Name
 ```
 
 ```Output
@@ -302,7 +302,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You cannot pipe input to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 

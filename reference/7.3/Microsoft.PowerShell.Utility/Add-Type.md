@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 10/01/2021
+ms.date: 08/15/2023
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/add-type?view=powershell-7.3&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Add-Type
@@ -284,8 +284,6 @@ revision.
 This parameter allows you to direct the compiler to generate an executable file, embed resources, or
 set command-line options, such as the `/unsafe` option.
 
-You can't use the **CompilerOptions** and **ReferencedAssemblies** parameters in the same command.
-
 ```yaml
 Type: System.String[]
 Parameter Sets: FromSource, FromMember, FromPath, FromLiteralPath
@@ -511,8 +509,6 @@ referenced in addition to the default assemblies.
 Beginning in PowerShell 6, **ReferencedAssemblies** doesn't include the default .NET assemblies. You
 must include a specific reference to them in the value passed to this parameter.
 
-You can't use the **CompilerOptions** and **ReferencedAssemblies** parameters in the same command.
-
 ```yaml
 Type: System.String[]
 Parameter Sets: FromSource, FromMember, FromPath, FromLiteralPath
@@ -580,14 +576,18 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You can't send objects down the pipeline to `Add-Type`.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
-### None or System.Type
+### None
 
-When you use the **PassThru** parameter, `Add-Type` returns a **System.Type** object that represents
-the new type. Otherwise, this cmdlet doesn't generate any output.
+By default, this cmdlet returns no output.
+
+### System.Type
+
+When you use the **PassThru** parameter, this cmdlet returns a **System.Type** object representing
+the new type.
 
 ## NOTES
 

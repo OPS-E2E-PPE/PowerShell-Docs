@@ -1,6 +1,6 @@
 ---
 description: Update from PowerShell 5.1 to PowerShell 7 for your Windows platforms.
-ms.date: 10/22/2021
+ms.date: 10/23/2023
 title: Migrating from Windows PowerShell 5.1 to PowerShell 7
 ---
 
@@ -22,8 +22,8 @@ editions before deployment. Migration is simple, quick, and safe.
 
 PowerShell 7 is supported on the following Windows operating systems:
 
-- Windows 8.1, 10, and 11
-- Windows Server 2012, 2012 R2, 2016, and 2019
+- Windows 10, and 11
+- Windows Server 2016, 2019, and 2022
 
 PowerShell 7 also runs on macOS and several Linux distributions. For a list of supported operating
 systems and information about the support lifecycle, see the [PowerShell Support Lifecycle][04].
@@ -39,7 +39,7 @@ the following methods:
 
 > [!NOTE]
 > The MSI package can be deployed and updated with management products such as
-> [System Center Configuration Manager (SCCM)][06]. Download the packages from
+> [Microsoft Configuration Manager][06]. Download the packages from
 > [GitHub Release page][23].
 
 Deploying the MSI package requires Administrator permission. The ZIP package can be deployed by any
@@ -129,11 +129,9 @@ autoloading of modules.
 > Additional paths may exist if you have changed the PSModulePath environment variable or installed
 > custom modules or applications.
 
-For more information, see
-[about_PSModulePath][11].
+For more information, see [about_PSModulePath][11].
 
-For more information about Modules, see
-[about_Modules][09].
+For more information about Modules, see [about_Modules][09].
 
 ### Separate profiles
 
@@ -150,8 +148,10 @@ The path to the location of the profile has changed in PowerShell 7.
 The profile filenames have also changed:
 
    ```powershell
-   PS> $PROFILE | Select-Object *Host* | Format-List
+   $PROFILE | Select-Object *Host* | Format-List
+  ```
 
+  ```Output
    AllUsersAllHosts       : C:\Program Files\PowerShell\7\profile.ps1
    AllUsersCurrentHost    : C:\Program Files\PowerShell\7\Microsoft.PowerShell_profile.ps1
    CurrentUserAllHosts    : C:\Users\<user>\Documents\PowerShell\profile.ps1
@@ -313,8 +313,7 @@ For details about customizing the VSCode layout to ISE, see
 
 ## Next Steps
 
-Armed with the knowledge to effectively migrate,
-[install PowerShell 7][16] now!
+Armed with the knowledge to effectively migrate, [install PowerShell 7][16] now!
 
 <!-- link references -->
 [01]: ../install/installing-powershell-on-windows.md#msi
@@ -327,7 +326,7 @@ Armed with the knowledge to effectively migrate,
 [08]: /powershell/module/microsoft.powershell.core/about/about_logging_windows
 [09]: /powershell/module/Microsoft.PowerShell.Core/About/about_Modules
 [10]: /powershell/module/microsoft.powershell.core/about/about_profiles
-[11]: /powershell/module/microsoft.powershell.core/about/about_psmodulepath?view=powershell-7.2&preserve-view=true
+[11]: /powershell/module/microsoft.powershell.core/about/about_psmodulepath
 [12]: /powershell/module/microsoft.powershell.core/about/about_remote
 [13]: /powershell/module/microsoft.powershell.core/about/about_remote_requirements
 [14]: /powershell/module/Microsoft.PowerShell.Core/About/about_windows_powershell_compatibility

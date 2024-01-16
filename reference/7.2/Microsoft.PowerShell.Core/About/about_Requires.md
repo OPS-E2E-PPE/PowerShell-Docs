@@ -1,7 +1,7 @@
 ---
 description: Prevents a script from running without the required elements.
 Locale: en-US
-ms.date: 08/18/2022
+ms.date: 08/17/2023
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_requires?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about Requires
@@ -10,6 +10,7 @@ title: about Requires
 # about_Requires
 
 ## Short description
+
 Prevents a script from running without the required elements.
 
 ## Long description
@@ -23,10 +24,8 @@ the script or provide other runtime features, such as tab completion.
 
 ```
 #Requires -Version <N>[.<n>]
-#Requires -PSSnapin <PSSnapin-Name> [-Version <N>[.<n>]]
 #Requires -Modules { <Module-Name> | <Hashtable> }
 #Requires -PSEdition <PSEdition-Name>
-#Requires -ShellId <ShellId> -PSSnapin <PSSnapin-Name> [-Version <N>[.<n>]]
 #Requires -RunAsAdministrator
 ```
 
@@ -38,13 +37,13 @@ For more information about the syntax, see
 A script can include more than one `#Requires` statement. The `#Requires`
 statements can appear on any line in a script.
 
-Placing a `#Requires` statement inside a function does NOT limit its scope. All
+Placing a `#Requires` statement inside a function doesn't limit its scope. All
 `#Requires` statements are always applied globally, and must be met, before the
 script can execute.
 
 > [!WARNING]
 > Even though a `#Requires` statement can appear on any line in a script, its
-> position in a script does not affect the sequence of its application. The
+> position in a script doesn't affect the sequence of its application. The
 > global state the `#Requires` statement presents must be met before script
 > execution.
 
@@ -95,17 +94,6 @@ For example:
 #Requires -Version 6.0
 ```
 
-#### -PSSnapin \<PSSnapin-Name\> [-Version \<N\>[.\<n\>]]
-
-Specifies a PowerShell snap-in that the script requires. Enter the snap-in name
-and an optional version number.
-
-For example:
-
-```powershell
-#Requires -PSSnapin DiskSnapin -Version 1.2
-```
-
 #### -Modules \<Module-Name\> | \<Hashtable\>
 
 Specifies PowerShell modules that the script requires. Enter the module name
@@ -113,6 +101,11 @@ and an optional version number.
 
 If the required modules aren't in the current session, PowerShell imports them.
 If the modules can't be imported, PowerShell throws a terminating error.
+
+The `#Requires` statement doesn't load class and enumeration definitions in the
+module. Use the `using module` statement at the beginning of your script to
+import the module, including the class and enumeration definitions. For more
+information, see [about_Using](about_Using.md).
 
 For each module, type the module name (\<String\>) or a hashtable. The value
 can be a combination of strings and hashtables. The hashtable has the
@@ -187,22 +180,6 @@ For example:
 ```powershell
 #Requires -PSEdition Core
 ```
-
-#### -ShellId
-
-Specifies the shell that the script requires. Enter the shell ID. If you use
-the **ShellId** parameter, you must also include the **PSSnapin** parameter.
-You can find the current **ShellId** by querying the `$ShellId` automatic
-variable.
-
-For example:
-
-```powershell
-#Requires -ShellId MyLocalShell -PSSnapin Microsoft.PowerShell.Core
-```
-
-> [!NOTE]
-> This parameter is intended for use in mini-shells, which have been deprecated.
 
 #### -RunAsAdministrator
 

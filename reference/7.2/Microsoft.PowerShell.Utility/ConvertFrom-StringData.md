@@ -2,11 +2,12 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 05/11/2022
+ms.date: 12/12/2022
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/convertfrom-stringdata?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: ConvertFrom-StringData
 ---
+
 # ConvertFrom-StringData
 
 ## SYNOPSIS
@@ -172,7 +173,7 @@ section.
 ### Example 6: Use the pipeline operator to pass a string
 
 This example shows that you can use a pipeline operator (`|`) to send a string to
-`ConvertFrom-StringData`. The the value of the `$Here` variable is piped to `ConvertFrom-StringData`
+`ConvertFrom-StringData`. The value of the `$Here` variable is piped to `ConvertFrom-StringData`
 and the result in the `$Hash` variable.
 
 ```powershell
@@ -295,7 +296,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.String
 
-You can pipe a string containing a key-value pair to `ConvertFrom-StringData`.
+You can pipe a string containing a key-value pair to this cmdlet.
 
 ## OUTPUTS
 

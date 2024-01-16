@@ -1,7 +1,7 @@
 ---
 title: What's New in PowerShell 7.3
 description: New features and changes released in PowerShell 7.3
-ms.date: 11/28/2022
+ms.date: 02/27/2023
 ---
 
 # What's New in PowerShell 7.3
@@ -20,7 +20,7 @@ PowerShell 7.3 includes the following features, updates, and breaking changes.
   [#17018][10]
 - Add `clean` block to script block as a peer to `begin`, `process`, and `end` to allow easy
   resource cleanup ([#15177][15177])
-- Change default for `$PSStyle.OutputRendering` to **Ansi**
+- Change default for `$PSStyle.OutputRendering` to **Host**
 - Make `Out-String` and `Out-File` keep string input unchanged ([#17455][17455])
 - Move the type data definition of System.Security.AccessControl.ObjectSecurity to the
   Microsoft.PowerShell.Security module ([#16355][16355]) (Thanks @iSazonov!)
@@ -111,36 +111,45 @@ For a complete list of changes, see the [Change Log][11] in the GitHub repositor
 
 ## Experimental Features
 
+In PowerShell 7.3, following experimental features became mainstream:
+
+- `PSAnsiRenderingFileInfo` - This feature adds the `$PSStyle.FileInfo` member and enables
+  coloring of specific file types.
+- `PSCleanBlock` - Adds `clean` block to script block as a peer to `begin`, `process`, and `end`
+  to allow easy resource cleanup.
+- `PSAMSIMethodInvocationLogging` - Extends the data sent to AMSI for inspection to include all
+  invocations of .NET method members.
+- [PSNativeCommandArgumentPassing][08] - PowerShell now uses the **ArgumentList** property of the
+  **StartProcessInfo** object rather than the old mechanism of reconstructing a string when invoking
+  a native executable.
+
+  PowerShell 7.3.1 adds `sqlcmd.exe` to the list of native commands in Windows that use the `Legacy`
+  style of argument passing.
+- `PSExec` - Adds the new `Switch-Process` cmdlet (alias `exec`) to provide `exec` compatibility for
+  non-Windows systems.
+
+  PowerShell 7.3.1 changed the `exec` alias to a function that wraps `Switch-Process`. The function
+  allows you to pass parameters to the native command that might have erroneously bound to the
+  **WithCommand** parameter.
+
 PowerShell 7.3 introduces the following experimental features:
 
-- [PSExec][05] - Adds the new `Switch-Process` cmdlet (alias `exec`) to provide `exec`
-  compatibility for non-Windows systems. In PowerShell 7.3-preview.8, this feature became
-  mainstream.
-- [PSCleanBlock][04] - Adds `clean` block to script block as a peer to `begin`, `process`,
-  and `end` to allow easy resource cleanup. In PowerShell 7.3-preview.8, this feature became
-  mainstream.
-- [PSStrictModeAssignment][07] - Adds the **StrictMode** parameter to `Invoke-Command` to
-  allow specifying strict mode when invoking command locally. In PowerShell 7.3-preview.8, this
-  feature was removed.
 - [PSNativeCommandErrorActionPreference][06] - Adds the
   `$PSNativeCommandUseErrorActionPreference` variable to enable errors produced by native commands
   to be PowerShell errors.
-- [PSAMSIMethodInvocationLogging][02] - Extends the data sent to AMSI for inspection to
-  include all invocations of .NET method members. In PowerShell 7.3-preview.8, this feature became
-  mainstream.
-- Remove [PSNativePSPathResolution][03] experimental feature.
+
+PowerShell 7.3 removed the following experimental features:
+
+- `PSNativePSPathResolution` experimental feature is no longer supported.
+- `PSStrictModeAssignment` experimental feature is no longer supported.
 
 For more information about the Experimental Features, see [Using Experimental Features][01].
 
 <!-- end of content -->
 <!-- reference links -->
 [01]: ../learn/experimental-features.md
-[02]: ../learn/experimental-features.md?#psamsimethodinvocationlogging
-[03]: ../learn/experimental-features.md?#psnativepspathresolution
-[04]: ../learn/experimental-features.md#pscleanblock
-[05]: ../learn/experimental-features.md#psexec
 [06]: ../learn/experimental-features.md#psnativecommanderroractionpreference
-[07]: ../learn/experimental-features.md#psstrictmodeassignment
+[08]: ../learn/experimental-features.md#psnativecommandargumentpassing
 [09]: https://github.com/dotnet/runtime/issues/66746
 [10]: https://github.com/PowerShell/PowerShell/issues/17018
 [11]: https://github.com/PowerShell/PowerShell/releases/tag/v7.3.0

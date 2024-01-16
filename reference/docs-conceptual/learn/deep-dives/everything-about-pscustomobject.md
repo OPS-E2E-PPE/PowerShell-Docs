@@ -1,7 +1,7 @@
 ---
 description: PSCustomObject is a simple way to create structured data.
 ms.custom: contributor-KevinMarquette
-ms.date: 11/16/2022
+ms.date: 10/11/2023
 title: Everything you wanted to know about PSCustomObject
 ---
 # Everything you wanted to know about PSCustomObject
@@ -128,6 +128,10 @@ We can get this same list off of the `psobject` property too.
 ```powershell
 $myobject.psobject.properties.name
 ```
+
+> [!NOTE]
+> `Get-Member` returns the properties in alphabetical order. Using the member-access operator to
+> enumerate the property names returns the properties in the order they were defined on the object.
 
 ### Dynamically accessing properties
 
@@ -305,9 +309,8 @@ Now when my object just falls to the shell, it will only show those properties b
 
 ### Update-TypeData with DefaultPropertySet
 
-This is nice but I recently saw a better way when watching
-[PowerShell unplugged 2016 with Jeffrey Snover & Don Jones][psunplugged]. Jeffrey was using
-[Update-TypeData][Update-TypeData] to specify the default properties.
+This is nice but I recently saw a better way using [Update-TypeData][Update-TypeData] to specify
+the default properties.
 
 ```powershell
 $TypeData = @{
@@ -342,7 +345,7 @@ Update-TypeData @TypeData
 ```
 
 You can do this before your object is created or after and it will still work. This is what makes
-this different then using `Add-Member` with a script property. When you use `Add-Member` the way I
+this different than using `Add-Member` with a script property. When you use `Add-Member` the way I
 referenced earlier, it only exists on that specific instance of the object. This one applies to all
 objects with this `TypeName`.
 
@@ -407,5 +410,4 @@ something and can find a way to work this into your scripts.
 [post by /u/markekraus]: https://www.reddit.com/r/PowerShell/comments/590awc/is_it_possible_to_initialize_a_pscustoobject_with/
 [Adam Bertram]: http://www.adamtheautomator.com/
 [Mike Shepard]: https://powershellstation.com/2016/05/22/custom-objects-and-pstypename/
-[psunplugged]: https://www.youtube.com/watch?v=Ab46gHXNm8Q
 [Update-TypeData]: /powershell/module/microsoft.powershell.utility/update-typedata
