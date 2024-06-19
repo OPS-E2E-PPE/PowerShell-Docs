@@ -1,7 +1,7 @@
 ---
 title: What's New in PowerShell 7.4
 description: New features and changes released in PowerShell 7.4
-ms.date: 11/30/2023
+ms.date: 02/07/2024
 ---
 
 # What's New in PowerShell 7.4
@@ -18,8 +18,9 @@ For a complete list of changes, see the [CHANGELOG][chg] in the GitHub repositor
 - Update some PowerShell APIs to throw **ArgumentException** instead of **ArgumentNullException**
   when the argument is an empty string ([#19215][19215]) (Thanks @xtqqczze!)
 - Remove code related to `#requires -pssnapin` ([#19320][19320])
-- `Test-Json` now uses Json.Schema.Net instead of Newtonsoft.Json.Schema. With this change,
+- `Test-Json` now uses JsonSchema.Net instead of Newtonsoft.Json.Schema. With this change,
   `Test-Json` no longer supports the older Draft 4 schemas. ([#18141][18141]) (Thanks @gregsdennis!)
+  For more information about JSON schemas, see [JSON Schema][14] documentation.
 - Output from `Test-Connection` now includes more detailed information about TCP connection tests
 - .NET introduced changes that affected `Test-Connection`. The cmdlet now returns an error about
   the need to use `sudo` on Linux platforms when using a custom buffer size ([#20369][20369])
@@ -214,7 +215,7 @@ For more information about the Experimental Features, see [Using Experimental Fe
 <!-- end of content -->
 <!-- reference links -->
 [01]: ../install/installing-powershell-on-windows.md
-[02]: ../learn/application-control.md#wdac-policy-auditing
+[02]: ../security/application-control.md#wdac-policy-auditing
 [03]: ../learn/experimental-features.md
 [04]: ../learn/experimental-features.md#pscommandnotfoundsuggestion
 [05]: ../learn/experimental-features.md#pscommandwithargs
@@ -226,8 +227,9 @@ For more information about the Experimental Features, see [Using Experimental Fe
 [11]: /powershell/module/microsoft.powershell.core/about/about_redirection?view=powershell-7.4&preserve-view=true#redirecting-output-from-native-commands
 [12]: /powershell/module/microsoft.powershell.psresourceget
 [13]: /powershell/module/psreadline
+[14]: https://json-schema.org/understanding-json-schema/reference/schema
 
-[chg]: https://github.com/PowerShell/PowerShell/blob/master/CHANGELOG/preview.md
+[chg]: https://github.com/PowerShell/PowerShell/blob/master/CHANGELOG/7.4.md
 [14953]: https://github.com/PowerShell/PowerShell/pull/14953
 [17191]: https://github.com/PowerShell/PowerShell/pull/17191
 [17654]: https://github.com/PowerShell/PowerShell/pull/17654

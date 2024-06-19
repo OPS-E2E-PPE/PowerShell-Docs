@@ -1,7 +1,7 @@
 ---
 description: Variables that customize the behavior of PowerShell.
 Locale: en-US
-ms.date: 01/04/2024
+ms.date: 04/06/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about Preference Variables
@@ -247,15 +247,19 @@ debugging messages for a specific command. For more information, see
 
 The valid values are as follows:
 
+- **Break** - Enter the debugger when an error occurs or when an exception is
+  raised.
 - **Stop**: Displays the debug message and stops executing. Writes an error to
   the console.
 - **Inquire**: Displays the debug message and asks you whether you want to
-  continue. Adding the **Debug** common parameter to a command, when the
-  command is configured to generate a debugging message, changes the value of
-  the `$DebugPreference` variable to **Inquire**.
+  continue.
 - **Continue**: Displays the debug message and continues with execution.
 - **SilentlyContinue**: (Default) No effect. The debug message isn't displayed
   and execution continues without interruption.
+
+Adding the **Debug** common parameter to a command, when the command is
+configured to generate a debugging message, changes the value of the
+`$DebugPreference` variable to **Continue**.
 
 ### Examples
 
@@ -468,7 +472,7 @@ the extra object generated to the `$Error` variable.
 ```powershell
 # Change the ErrorActionPreference to 'Stop'
 $ErrorActionPreference = 'Stop'
-# Error message is is generated and script stops processing
+# Error message is generated and script stops processing
 Write-Error -Message 'Test Error' ; Write-Host 'Hello World'
 
 # Show the ActionPreferenceStopException and the error generated
@@ -735,13 +739,12 @@ The `$InformationPreference` variable takes one of the
 
 The valid values are as follows:
 
+- **Break** - Enter the debugger when you write to the Information stream.
 - **Stop**: Stops a command or script at an occurrence of the
   `Write-Information` command.
 - **Inquire**: Displays the informational message that you specify in a
   `Write-Information` command, then asks whether you want to continue.
 - **Continue**: Displays the informational message, and continues running.
-- **Suspend** is only available for workflows which aren't supported in
-  PowerShell 6 and beyond.
 - **SilentlyContinue**: (Default) No effect. The informational messages aren't
   displayed, and the script continues without interruption.
 
@@ -866,12 +869,12 @@ Remove-Variable OFS
 
 ## $OutputEncoding
 
-Determines the character encoding method that PowerShell uses when it sends
-text to other applications.
+Determines the character encoding method that PowerShell uses when piping data
+into native applications.
 
-For example, if an application returns Unicode strings to PowerShell, you might
-need to change the value to **UnicodeEncoding** to send the characters
-correctly.
+> [!NOTE]
+> In the majority of scenarios, the value for `$OutputEncoding` should align
+> to the value of `[Console]::InputEncoding`.
 
 The valid values are as follows: Objects derived from an Encoding class, such
 as [**ASCIIEncoding**][59], [**UTF7Encoding**][62], [**UTF8Encoding**][63],
@@ -881,10 +884,6 @@ as [**ASCIIEncoding**][59], [**UTF7Encoding**][62], [**UTF8Encoding**][63],
 
 ### Examples
 
-This example shows how to make the Windows `findstr.exe` command work in
-PowerShell on a computer that's localized for a language that uses Unicode
-characters, such as Chinese.
-
 The first command finds the value of `$OutputEncoding`. Because the value is an
 encoding object, display only its **EncodingName** property.
 
@@ -892,40 +891,52 @@ encoding object, display only its **EncodingName** property.
 $OutputEncoding.EncodingName
 ```
 
-In this example, a `findstr.exe` command is used to search for two Chinese
-characters that are present in the `Test.txt` file. When this `findstr.exe`
-command is run in the Windows Command Prompt (`cmd.exe`), `findstr.exe` finds
-the characters in the text file. However, when you run the same `findstr.exe`
-command in PowerShell, the characters aren't found because the PowerShell sends
-them to `findstr.exe` in ASCII text, instead of in Unicode text.
+The remaining examples use the following PowerShell script saved as
+`hexdump.ps1` to illustrate the behavior of `$OutputEncoding`.
 
 ```powershell
-findstr <Unicode-characters>
+$inputStream = [Console]::OpenStandardInput()
+try {
+    $buffer = [byte[]]::new(1024)
+    $read = $inputStream.Read($buffer, 0, $buffer.Length)
+    Format-Hex -InputObject $buffer -Count $read
+} finally {
+    $inputStream.Dispose()
+}
 ```
 
-To make the command work in PowerShell, set the value of `$OutputEncoding` to
-the value of the **OutputEncoding** property of the console, that's based on
-the locale selected for Windows. Because **OutputEncoding** is a static
-property of the console, use double-colons (`::`) in the command.
+The following example shows how the string value `café` is encoded to bytes
+when piped into `hexdump.ps1` created above. It demonstrates that the string
+value is encoded using the [**UTF8Encoding**][63] scheme.
 
 ```powershell
-$OutputEncoding = [console]::OutputEncoding
-$OutputEncoding.EncodingName
+'café' | pwsh -File ./hexdump.ps1
 ```
 
 ```Output
-OEM United States
+   Label: Byte[] (System.Byte[]) <28873E25>
+
+          Offset Bytes                                           Ascii
+                 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
+          ------ ----------------------------------------------- -----
+0000000000000000 63 61 66 C3 A9 0D 0A                            cafÃ©��
 ```
 
-After the encoding change, the `findstr.exe` command finds the Unicode
-characters.
+The following example shows how the bytes change when changing the encoding
+to [**UnicodeEncoding**][60].
 
 ```powershell
-findstr <Unicode-characters>
+$OutputEncoding = [System.Text.Encoding]::Unicode
+'café' | pwsh -File ./hexdump.ps1
 ```
 
 ```Output
-test.txt:         <Unicode-characters>
+   Label: Byte[] (System.Byte[]) <515A7DC3>
+
+          Offset Bytes                                           Ascii
+                 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
+          ------ ----------------------------------------------- -----
+0000000000000000 FF FE 63 00 61 00 66 00 E9 00 0D 00 0A 00       ÿþc a f é � �
 ```
 
 ## $ProgressPreference
@@ -941,6 +952,7 @@ enumeration values: **SilentlyContinue**, **Stop**, **Continue**, **Inquire**,
 
 The valid values are as follows:
 
+- **Break** - Enter the debugger when you write to the Progress stream.
 - **Stop**: Doesn't display the progress bar. Instead, it displays an error
   message and stops executing.
 - **Inquire**: Doesn't display the progress bar. Prompts for permission to
@@ -1221,6 +1233,7 @@ enumeration values: **SilentlyContinue**, **Stop**, **Continue**, **Inquire**,
 
 The valid values are as follows:
 
+- **Break** - Enter the debugger when you write to the Verbose stream.
 - **Stop**: Displays the verbose message and an error message and then stops
   executing.
 - **Inquire**: Displays the verbose message and then displays a prompt that
@@ -1340,6 +1353,7 @@ enumeration values: **SilentlyContinue**, **Stop**, **Continue**, **Inquire**,
 
 The valid values are as follows:
 
+- **Break** - Enter the debugger when a warning message is written.
 - **Stop**: Displays the warning message and an error message and then stops
   executing.
 - **Inquire**: Displays the warning message and then prompts for permission to

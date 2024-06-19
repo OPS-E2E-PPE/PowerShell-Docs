@@ -2,7 +2,7 @@
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 01/03/2024
+ms.date: 06/03/2024
 online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/invoke-webrequest?view=powershell-7.2&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Invoke-WebRequest
@@ -435,7 +435,9 @@ Specifies the body of the request. The body is the content of the request that f
 You can also pipe a body value to `Invoke-WebRequest`.
 
 The **Body** parameter can be used to specify a list of query parameters or specify the content of
-the response.
+the response. For query parameters, the cmdlet uses the **System.Net.WebUtility.UrlEncode** method
+method to encode the key-value pairs. For more information about encoding strings for URLs, see
+[the UrlEncode() method reference](xref:System.Net.WebUtility.UrlEncode*).
 
 When the input is a POST request and the body is a **String**, the value to the left of the first
 equals sign (`=`) is set as a key in the form data and the remaining text is set as the value. To
@@ -498,7 +500,7 @@ Certificates are used in client certificate-based authentication. Certificates c
 only to local user accounts, not domain accounts.
 
 To see the certificate thumbprint, use the `Get-Item` or `Get-ChildItem` command to find the
-certficate in `Cert:\CurrentUser\My`.
+certificate in `Cert:\CurrentUser\My`.
 
 > [!NOTE]
 > This feature is only supported on Windows OS platforms.
@@ -1313,11 +1315,11 @@ PowerShell includes the following aliases for `Invoke-WebRequest`:
 Beginning with PowerShell 6.0.0 `Invoke-WebRequest` supports basic parsing only.
 
 For more information, see
-[BasicHtmlWebResponseObject](/dotnet/api/microsoft.powershell.commands.basichtmlwebresponseobject).
+[BasicHtmlWebResponseObject](xref:Microsoft.PowerShell.Commands.BasicHtmlWebResponseObject).
 
 Because of changes in .NET Core 3.1, PowerShell 7.0 and higher use the
-[HttpClient.DefaultProxy](/dotnet/api/system.net.http.httpclient.defaultproxy?view=netcore-3.1)
-Property to determine the proxy configuration.
+[HttpClient.DefaultProxy](xref:System.Net.Http.HttpClient.DefaultProxy*)
+property to determine the proxy configuration.
 
 The value of this property is determined by your platform:
 
