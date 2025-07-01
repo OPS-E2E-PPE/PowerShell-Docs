@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 5/14/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/remove-itemproperty?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/remove-itemproperty?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Remove-ItemProperty
 ---
+
 # Remove-ItemProperty
 
 ## SYNOPSIS
@@ -18,17 +18,17 @@ Deletes the property and its value from an item.
 ### Path (Default)
 
 ```
-Remove-ItemProperty [-Path] <String[]> [-Name] <String[]> [-Force] [-Filter <String>]
- [-Include <String[]>] [-Exclude <String[]>] [-Credential <PSCredential>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Remove-ItemProperty [-Path] <String[]> [-Name] <String[]> [-Force] [-Filter <String>] [-Include <String[]>]
+ [-Exclude <String[]>] [-Credential <PSCredential>] [-InformationAction <ActionPreference>]
+ [-InformationVariable <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### LiteralPath
 
 ```
 Remove-ItemProperty -LiteralPath <String[]> [-Name] <String[]> [-Force] [-Filter <String>]
- [-Include <String[]>] [-Exclude <String[]>] [-Credential <PSCredential>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-Include <String[]>] [-Exclude <String[]>] [-Credential <PSCredential>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -285,9 +285,14 @@ You can pipe a string that contains a path, but not a literal path, to this cmdl
 
 ### None
 
-This cmdlet does not return any output.
+This cmdlet returns no output.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Remove-ItemProperty`:
+
+- All platforms:
+  - `rp`
 
 - In the PowerShell Registry provider, registry values are considered to be properties of a registry
   key or subkey. You can use the **ItemProperty** cmdlets to manage these values.

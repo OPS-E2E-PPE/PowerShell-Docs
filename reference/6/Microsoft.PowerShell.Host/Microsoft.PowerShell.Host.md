@@ -1,7 +1,6 @@
 ---
-Download Help Link: https://go.microsoft.com/fwlink/?linkid=855956
-Help Version: 6.2.5.0
-keywords: powershell,cmdlet
+Download Help Link: https://aka.ms/powershell74-help
+Help Version: 7.4.0.0
 Locale: en-US
 Module Guid: 56d66100-99a0-4ffc-a12d-eee9a6718aef
 Module Name: Microsoft.PowerShell.Host
@@ -24,3 +23,4 @@ Creates a record of all or part of a PowerShell session to a text file.
 
 ### [Stop-Transcript](Stop-Transcript.md)
 Stops a transcript.
+

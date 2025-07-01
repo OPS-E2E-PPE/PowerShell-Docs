@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Diagnostics.dll-help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Diagnostics
-ms.date: 04/29/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.diagnostics/export-counter?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 05/17/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.diagnostics/export-counter?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Export-Counter
 ---
@@ -23,9 +22,9 @@ Export-Counter [-Path] <String> [-FileFormat <String>] [-MaxSize <UInt32>]
 
 ## DESCRIPTION
 
-The `Export-Counter` cmdlet exports performance counter data (PerformanceCounterSampleSet objects)
-to log files in binary performance log (.blg), comma-separated value (.csv), or tab-separated value
-(.tsv) format. You use this cmdlet to log performance counter data.
+The `Export-Counter` cmdlet exports performance counter data (**PerformanceCounterSampleSet**
+objects) to log files in binary performance log (`.blg`), comma-separated value (`.csv`), or
+tab-separated value (`.tsv`) format. You use this cmdlet to log performance counter data.
 
 The `Export-Counter` cmdlet is designed to export data that is returned by the `Get-Counter` and
 `Import-Counter` cmdlets.
@@ -39,12 +38,12 @@ This cmdlet runs only on Windows 7, Windows Server 2008 R2, and later versions o
 This example exports counter data to a BLG file.
 
 ```powershell
-Get-Counter "\Processor(*)\% Processor Time" | Export-Counter -Path $home\Counters.blg
+Get-Counter "\Processor(*)\% Processor Time" | Export-Counter -Path $HOME\Counters.blg
 ```
 
 The command uses the `Get-Counter` cmdlet to collect processor time data. It uses a pipeline
-operator (|) to send the data to the `Export-Counter` cmdlet. The `Export-Counter` command uses the
-**Path** variable to specify the output file.
+operator (`|`) to send the data to the `Export-Counter` cmdlet. The `Export-Counter` command uses
+the **Path** variable to specify the output file.
 
 Because the data set might be very large, this example sends the data to `Export-Counter` through
 the pipeline. If the data were saved in a variable, you might use a disproportionate amount of
@@ -75,7 +74,7 @@ The first command uses the `Get-Counter` cmdlet to collect working set counter d
 remote computer. The command saves the data in the `$C` variable.
 
 The second command uses a pipeline operator (`|`) to send the data in `$C` to the `Export-Counter`
-cmdlet, which saves it in the `Workingset.blg` file in the Perf share of the Server01 computer.
+cmdlet, which saves it in the `Workingset.blg` file in the `Perf` share of the Server01 computer.
 
 ```powershell
 $C = Get-Counter -ComputerName Server01 -Counter "\Process(*)\Working Set - Private" -MaxSamples $C | Export-Counter -Path \\Server01\Perf\WorkingSet.blg
@@ -91,20 +90,19 @@ This example shows how to use the `Import-Counter` and `Export-Counter` cmdlets 
 data.
 
 The first command uses the `Import-Counter` cmdlet to import performance counter data from the
-DiskSpace.blg log. It saves the data in the `$All` variable. This file contains samples of the
+`DiskSpace.blg` log. It saves the data in the `$All` variable. This file contains samples of the
 "LogicalDisk\% Free Space" counter on more than 200 remote computers in the enterprise.
 
-The second command uses the **CounterSamples** property of the sample set object in `$All` and the
-`Where-Object` cmdlet to select objects with **CookedValues** of less than 15 (percent). The command
-saves the results in the `$LowSpace` variable.
+The second command uses the `Where-Object` cmdlet to select objects with **CookedValue** of less
+than 15 (percent). The command saves the results in the `$LowSpace` variable.
 
 The third command uses a pipeline operator (`|`) to send the data in the `$LowSpace` variable to the
 `Export-Counter` cmdlet. The command uses the **Path** parameter to indicate that the selected data
-should be logged in the LowDiskSpace.blg file.
+should be logged in the `LowDiskSpace.blg` file.
 
 ```powershell
 $All = Import-Counter DiskSpace.blg
-$LowSpace = $All.CounterSamples | where {$_.CookedValues -lt 15}
+$LowSpace = $All | Where-Object {$_.CounterSamples.CookedValue -lt 15}
 $LowSpace | Export-Counter -Path LowDiskSpace.blg
 ```
 
@@ -112,8 +110,8 @@ $LowSpace | Export-Counter -Path LowDiskSpace.blg
 
 ### -Circular
 
-Indicates that the output file is a circular log with first in, first out (FIFO) format.
-When you include this parameter, the **MaxSize** parameter is required.
+Indicates that the output file is a circular log with first in, first out (FIFO) format. When you
+include this parameter, the **MaxSize** parameter is required.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -133,11 +131,11 @@ Specifies the output format of the output log file.
 
 The acceptable values for this parameter are:
 
-- CSV
-- TSV
-- BLG
+- `CSV`
+- `TSV`
+- `BLG`
 
-The default value is BLG.
+The default value is `BLG`.
 
 ```yaml
 Type: System.String
@@ -153,7 +151,8 @@ Accept wildcard characters: False
 
 ### -Force
 
-Overwrites and replaces an existing file if one exists in the location specified by the **Path** parameter.
+Overwrites and replaces an existing file if one exists in the location specified by the **Path**
+parameter.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter

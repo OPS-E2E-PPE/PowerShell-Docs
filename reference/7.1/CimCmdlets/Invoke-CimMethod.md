@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.Management.Infrastructure.CimCmdlets.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: CimCmdlets
-ms.date: 01/21/2020
-online version: https://docs.microsoft.com/powershell/module/cimcmdlets/invoke-cimmethod?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 06/28/2023
+online version: https://learn.microsoft.com/powershell/module/cimcmdlets/invoke-cimmethod?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Invoke-CimMethod
 ---
@@ -19,63 +18,65 @@ Invokes a method of a CIM class.
 ### ClassNameComputerSet (Default)
 
 ```
-Invoke-CimMethod [-ClassName] <String> [-ComputerName <String[]>] [[-Arguments] <IDictionary>]
- [-MethodName] <String> [-Namespace <String>] [-OperationTimeoutSec <UInt32>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Invoke-CimMethod [-ClassName] <String> [-ComputerName <String[]>]
+ [[-Arguments] <IDictionary>] [-MethodName] <String> [-Namespace <String>]
+ [-OperationTimeoutSec <UInt32>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ClassNameSessionSet
 
 ```
-Invoke-CimMethod [-ClassName] <String> -CimSession <CimSession[]> [[-Arguments] <IDictionary>]
- [-MethodName] <String> [-Namespace <String>] [-OperationTimeoutSec <UInt32>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Invoke-CimMethod [-ClassName] <String> -CimSession <CimSession[]>
+ [[-Arguments] <IDictionary>] [-MethodName] <String> [-Namespace <String>]
+ [-OperationTimeoutSec <UInt32>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ResourceUriComputerSet
 
 ```
-Invoke-CimMethod -ResourceUri <Uri> [-ComputerName <String[]>] [[-Arguments] <IDictionary>]
- [-MethodName] <String> [-Namespace <String>] [-OperationTimeoutSec <UInt32>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Invoke-CimMethod -ResourceUri <Uri> [-ComputerName <String[]>]
+ [[-Arguments] <IDictionary>] [-MethodName] <String> [-Namespace <String>]
+ [-OperationTimeoutSec <UInt32>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### CimInstanceSessionSet
 
 ```
-Invoke-CimMethod [-ResourceUri <Uri>] [-InputObject] <CimInstance> -CimSession <CimSession[]>
- [[-Arguments] <IDictionary>] [-MethodName] <String> [-OperationTimeoutSec <UInt32>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+Invoke-CimMethod [-ResourceUri <Uri>] [-InputObject] <CimInstance>
+ -CimSession <CimSession[]> [[-Arguments] <IDictionary>] [-MethodName] <String>
+ [-OperationTimeoutSec <UInt32>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### CimInstanceComputerSet
 
 ```
-Invoke-CimMethod [-ResourceUri <Uri>] [-InputObject] <CimInstance> [-ComputerName <String[]>]
- [[-Arguments] <IDictionary>] [-MethodName] <String> [-OperationTimeoutSec <UInt32>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+Invoke-CimMethod [-ResourceUri <Uri>] [-InputObject] <CimInstance>
+ [-ComputerName <String[]>] [[-Arguments] <IDictionary>] [-MethodName] <String>
+ [-OperationTimeoutSec <UInt32>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ResourceUriSessionSet
 
 ```
-Invoke-CimMethod -ResourceUri <Uri> -CimSession <CimSession[]> [[-Arguments] <IDictionary>]
- [-MethodName] <String> [-Namespace <String>] [-OperationTimeoutSec <UInt32>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Invoke-CimMethod -ResourceUri <Uri> -CimSession <CimSession[]>
+ [[-Arguments] <IDictionary>] [-MethodName] <String> [-Namespace <String>]
+ [-OperationTimeoutSec <UInt32>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### CimClassComputerSet
 
 ```
-Invoke-CimMethod [-CimClass] <CimClass> [-ComputerName <String[]>] [[-Arguments] <IDictionary>]
- [-MethodName] <String> [-OperationTimeoutSec <UInt32>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Invoke-CimMethod [-CimClass] <CimClass> [-ComputerName <String[]>]
+ [[-Arguments] <IDictionary>] [-MethodName] <String> [-OperationTimeoutSec <UInt32>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### CimClassSessionSet
 
 ```
-Invoke-CimMethod [-CimClass] <CimClass> -CimSession <CimSession[]> [[-Arguments] <IDictionary>]
- [-MethodName] <String> [-OperationTimeoutSec <UInt32>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Invoke-CimMethod [-CimClass] <CimClass> -CimSession <CimSession[]>
+ [[-Arguments] <IDictionary>] [-MethodName] <String> [-OperationTimeoutSec <UInt32>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### QueryComputerSet
@@ -95,6 +96,8 @@ Invoke-CimMethod -Query <String> [-QueryDialect <String>] -CimSession <CimSessio
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `Invoke-CimMethod` cmdlet invokes a method of a CIM class or CIM instance using the name-value
 pairs specified by the **Arguments** parameter.
@@ -123,7 +126,11 @@ If the **InputObject** parameter is specified, the cmdlet works in one of the fo
 This example invokes the **Terminate** method of the **Win32_Process** class.
 
 ```powershell
-Invoke-CimMethod -Query 'select * from Win32_Process where name like "notepad%"' -MethodName "Terminate"
+$method = @{
+  Query = 'select * from Win32_Process where name like "notepad%"'
+  MethodName = "Terminate"
+}
+Invoke-CimMethod @method
 ```
 
 ### Example 2: Invoke a method using CIM instance object
@@ -149,12 +156,12 @@ Invoke-CimMethod -ClassName Win32_Process -MethodName "Create" -Arguments @{
 
 ### Example 4: Client-side validation
 
-This example performs client-side validation for the **xyz** method by passing a **CimClass** object
+This example performs client-side validation for the **Foo** method by passing a **CimClass** object
 to `Invoke-CimMethod`.
 
 ```powershell
 $c = Get-CimClass -ClassName Win32_Process
-Invoke-CimMethod -CimClass $c -MethodName "xyz" -Arguments @{ CommandLine = 'notepad.exe' }
+Invoke-CimMethod -CimClass $c -MethodName "Foo" -Arguments @{CommandLine='notepad.exe'}
 ```
 
 ## PARAMETERS
@@ -295,7 +302,7 @@ Accept wildcard characters: False
 
 ### -Namespace
 
-Specifies the namespace for the CIM operation. The default namespace is **root/cimv2**. You can use
+Specifies the namespace for the CIM operation. The default namespace is **root/CIMV2**. You can use
 tab completion to browse the list of namespaces, because PowerShell gets a list of namespaces from
 the local WMI server to provide the list of namespaces.
 
@@ -387,12 +394,12 @@ A URI consists of a prefix and a path to a resource. For example:
 By default, if you do not specify this parameter, the DMTF standard resource URI
 `http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/` is used and the class name is appended to it.
 
-**ResourceURI** can only be used with CIM sessions created using the WSMan protocol, or when
+**ResourceUri** can only be used with CIM sessions created using the WSMan protocol, or when
 specifying the **ComputerName** parameter, which creates a CIM session using WSMan.
 
 When you specify this parameter without specifying the **ComputerName** parameter, or when you
 specify a CIM session created using DCOM protocol, you get an error. The DCOM protocol does not
-support the **ResourceURI** parameter.
+support the **ResourceUri** parameter.
 
 If both the **ResourceUri** parameter and the **Filter** parameter are specified, the **Filter**
 parameter is ignored.
@@ -446,17 +453,17 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
 -WarningAction, and -WarningVariable. For more information, see
-[about_CommonParameters](../Microsoft.PowerShell.Core/About/about_CommonParameters.md).
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### CIM class
+### Microsoft.Management.Infrastructure.CimClass
 
-This cmdlet accepts a CIM class as an input object.
+You can pipe a CIM class to this cmdlet.
 
-### CIM instance
+### Microsoft.Management.Infrastructure.CimInstance
 
-This cmdlet accepts a CIM instance as an input object.
+You can pipe a CIM instance to this cmdlet.
 
 ## OUTPUTS
 
@@ -466,13 +473,19 @@ This cmdlet returns an object.
 
 ## NOTES
 
+PowerShell includes the following aliases for `Invoke-CimMethod`:
+
+- Windows:
+  - `icim`
+
+This cmdlet is only available on Windows platforms.
+
 ## RELATED LINKS
 
-[Get-CimClass](get-cimclass.md)
+[Get-CimClass](Get-CimClass.md)
 
-[Get-CimInstance](get-ciminstance.md)
+[Get-CimInstance](Get-CimInstance.md)
 
 [Get-CimSession](Get-CimSession.md)
 
 [New-CimSession](New-CimSession.md)
-

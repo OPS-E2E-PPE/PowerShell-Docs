@@ -1,14 +1,15 @@
 ---
-keywords: powershell,cmdlet
+description: Describes how to use methods to perform actions on objects in PowerShell.
 Locale: en-US
-ms.date: 04/08/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_methods?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 03/16/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_methods?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Methods
 ---
-# About methods
+# about_Methods
 
 ## Short description
+
 Describes how to use methods to perform actions on objects in PowerShell.
 
 ## Long description
@@ -91,11 +92,12 @@ results in an object (like a string in quotes).
 Starting in PowerShell 4.0, method invocation by using dynamic method names is
 supported.
 
-### Learning about methods
+## Learning about methods
 
 To find definitions of the methods of an object, go to help topic for the
-object type in MSDN and look for its methods page. For example, the following
-page describes the methods of process objects [System.Diagnostics.Process](/dotnet/api/system.diagnostics.process#methods).
+object type and look for its methods page. For example, the following page
+describes the methods of process objects
+[System.Diagnostics.Process](/dotnet/api/system.diagnostics.process#methods).
 
 To determine the arguments of a method, review the method definition, which is
 like the syntax diagram of a PowerShell cmdlet.
@@ -113,18 +115,18 @@ two method signatures:
 ```
 
 The first method signature takes the destination file name (and a path). The
-following example uses the first `CopyTo` method to copy the `Final.txt` file to
-the `C:\Bin` directory.
+following example uses the first `CopyTo` method to copy the `Final.txt` file
+to the `C:\Bin` directory.
 
 ```powershell
-(Get-ChildItem c:\final.txt).CopyTo("c:\bin\final.txt")
+(Get-ChildItem C:\final.txt).CopyTo("C:\bin\final.txt")
 ```
 
 > [!NOTE]
 > Unlike PowerShell's _argument_ mode, object methods execute in _expression_
 > mode, which is a pass-through to the .NET framework that PowerShell is built
 > on. In _expression_ mode **bareword** arguments (unquoted strings) are not
-> allowed. You can see this difference when using a the path as a parameter,
+> allowed. You can see this difference when using the path as a parameter,
 > versus the path as an argument. You can read more about parsing modes in
 > [about_Parsing](about_Parsing.md)
 
@@ -136,29 +138,16 @@ The following example uses the second `CopyTo` method to copy the `Final.txt`
 file to the `C:\Bin` directory, and to overwrite existing files.
 
 ```powershell
-(Get-ChildItem c:\final.txt).CopyTo("c:\bin\final.txt", $true)
+(Get-ChildItem C:\final.txt).CopyTo("C:\bin\final.txt", $true)
 ```
 
-### Methods of Scalar objects and Collections
+## Member-access enumeration
 
-The methods of one ("scalar") object of a particular type are often different
-from the methods of a collection of objects of the same type.
-
-For example, every process has a `Kill` method, but a collection of processes
-does not have a Kill method.
-
-Beginning in PowerShell 3.0, PowerShell tries to prevent scripting errors that
-result from the differing methods of scalar objects and collections.
-
-If you submit a collection, but request a method that exists only on single
-("scalar") objects, PowerShell invokes the method on every object in the
-collection.
-
-If the method exists on the individual objects and on the collection, only
-the collection's method is invoked.
-
-This feature also works on properties of scalar objects and collections. For
-more information, see [about_Properties](about_Properties.md).
+Starting in PowerShell 3.0, when you use the member-access operator (`.`) to
+access a method that does not exist on a list collection, PowerShell
+automatically enumerates the items in the collection and invokes the method on
+each item. For more information, see
+[about_Member-Access_Enumeration](about_Member-Access_Enumeration.md).
 
 ### Examples
 
@@ -201,7 +190,7 @@ At line:1 char:12
 l.Commands.GetProcessCommand
 ```
 
-This example is functionally equivalent to using the `Foreach-Object` cmdlet to
+This example is functionally equivalent to using the `ForEach-Object` cmdlet to
 run the method on each object in the collection.
 
 ```powershell
@@ -210,13 +199,13 @@ $p | ForEach-Object {$_.Kill()}
 
 ### ForEach and Where methods
 
-Beginning in PowerShell 4.0, collection filtering by using a method syntax is
+Beginning in PowerShell 4.0, collection filtering using a method syntax is
 supported. This allows use of two new methods when dealing with collections
 `ForEach` and `Where`.
 
-You can read more about these methods in [about_arrays](about_arrays.md)
+You can read more about these methods in [about_Arrays](about_arrays.md)
 
-### Calling a specific method when multiple overloads exist
+## Calling a specific method when multiple overloads exist
 
 Consider the following scenario when calling .NET methods. If a method takes an
 object but has an overload via an interface taking a more specific type,
@@ -246,7 +235,8 @@ Add-Type -TypeDefinition @'
 '@
 ```
 
-In this example the less specific `object` overload of the **Bar** method was chosen.
+In this example the less specific `object` overload of the **Bar** method was
+chosen.
 
 ```powershell
 [Foo]::new().Bar(1)
@@ -267,10 +257,21 @@ specific overload of the **Bar** method.
 int: 1
 ```
 
-## See Also
+## Using .NET methods that take filesystem paths
 
-[about_Objects](about_Objects.md)
+PowerShell supports multiple runspaces per process. Each runspace has its own
+_current directory_. This is not the same as the working directory of the
+current process: `[System.Environment]::CurrentDirectory`.
 
-[about_Properties](about_Properties.md)
+.NET methods use the process working directory. PowerShell cmdlets use the
+Runspace location. Also, .NET methods only work with native filesystem paths,
+not PowerShell Path objects. To use PowerShell paths with .NET methods, you
+must resolve the path to a filesystem-native path before passing it to the .NET
+method.
 
-[Get-Member](xref:Microsoft.PowerShell.Utility.Get-Member)
+## See also
+
+- [about_Objects](about_Objects.md)
+- [about_Member-Access_Enumeration](about_Member-Access_Enumeration.md)
+- [about_Properties](about_Properties.md)
+- [Get-Member](xref:Microsoft.PowerShell.Utility.Get-Member)

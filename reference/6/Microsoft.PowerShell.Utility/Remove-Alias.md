@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 10/24/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/remove-alias?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 03/07/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/remove-alias?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Remove-Alias
 ---
@@ -46,14 +45,15 @@ This example removes all aliases from the current PowerShell session, except for
 other PowerShell sessions or new PowerShell sessions.
 
 ```powershell
-Get-Alias | Where-Object { $_.Options -NE "Constant" } | Remove-Alias -Force
+Get-Alias | Where-Object { $_.Options -ne "Constant" } | Remove-Alias -Force
 ```
 
 `Get-Alias` gets all the aliases in the PowerShell session and sends the objects down the pipeline.
 `Where-Object` uses a script block, and the automatic variable (`$_`) and **Options** property
-represent the current pipeline object. The parameter **NE** (not equal), selects objects that don't
+represent the current pipeline object. The `-ne` (not equal) operator selects objects that don't
 have an **Options** value set to **Constant**. `Remove-Alias` uses the **Force** parameter to remove
-aliases, including read-only aliases, from the PowerShell session.
+aliases, including read-only aliases, from the PowerShell session. The **Force** parameter can't
+remove **Constant** aliases.
 
 ## PARAMETERS
 
@@ -98,9 +98,9 @@ information, see [about_Scopes](../microsoft.powershell.core/about/about_scopes.
 
 The acceptable values for this parameter are:
 
-- Global
-- Local
-- Script
+- `Global`
+- `Local`
+- `Script`
 - A number relative to the current scope (0 through the number of scopes, where 0 is the current
   scope and 1 is its parent)
 
@@ -127,17 +127,17 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.String[]
 
-You can pipe an alias object to **Remove-Alias**.
+You can pipe an alias object to this cmdlet.
 
 ## OUTPUTS
 
 ### None
 
-This cmdlet doesn't return any output.
+This cmdlet returns no output.
 
 ## NOTES
 
-Changes only affect the current scope. To remove an alias from all sessions, add a **Remove-Alias**
+Changes only affect the current scope. To remove an alias from all sessions, add a `Remove-Alias`
 command to your PowerShell profile.
 
 For more information, see [about_Aliases](../microsoft.powershell.core/about/about_aliases.md).

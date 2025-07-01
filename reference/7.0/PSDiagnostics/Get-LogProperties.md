@@ -1,12 +1,13 @@
 ---
 external help file: PSDiagnostics-help.xml
-Module Name: PSDiagnostics
 Locale: en-US
-ms.date: 11/27/2018
-online version: https://docs.microsoft.com/powershell/module/psdiagnostics/get-logproperties?view=powershell-7&WT.mc_id=ps-gethelp
+Module Name: PSDiagnostics
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/psdiagnostics/get-logproperties?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-LogProperties
 ---
+
 # Get-LogProperties
 
 ## SYNOPSIS
@@ -19,6 +20,8 @@ Get-LogProperties [-Name] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 This cmdlet gets the configuration settings of a Windows event log. This cmdlet is used by the
 `Enable-PSTrace` and `Disable-PSTrace` cmdlets.
@@ -69,9 +72,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.String
 
+You can pipe a string containing the name of a log provider to this cmdlet.
+
 ## OUTPUTS
 
 ### Microsoft.PowerShell.Diagnostics.LogDetails
+
+This cmdlet returns a **LogDetails** object.
 
 The **PSDiagnostics** module adds the **LogDetails** class to the
 `Microsoft.PowerShell.Diagnostics` namespace.

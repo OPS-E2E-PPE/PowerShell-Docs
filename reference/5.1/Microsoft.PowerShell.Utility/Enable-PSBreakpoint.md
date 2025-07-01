@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 10/09/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/enable-psbreakpoint?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/enable-psbreakpoint?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Enable-PSBreakpoint
 ---
@@ -42,7 +41,8 @@ Technically, this cmdlet changes the value of the **Enabled** property of a brea
 **True**.
 
 `Enable-PSBreakpoint` is one of several cmdlets designed for debugging PowerShell scripts. For more
-information about the PowerShell debugger, see [about_Debuggers](../Microsoft.PowerShell.Core/About/about_Debuggers.md).
+information about the PowerShell debugger, see
+[about_Debuggers](../Microsoft.PowerShell.Core/About/about_Debuggers.md).
 
 ## EXAMPLES
 
@@ -205,21 +205,31 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.Management.Automation.Breakpoint
 
-You can pipe a breakpoint object to `Enable-PSBreakpoint`.
+You can pipe a breakpoint object to this cmdlet.
 
 ## OUTPUTS
 
-### None or System.Management.Automation.Breakpoint
+### None
 
-When you use the **PassThru** parameter, `Enable-PSBreakpoint` returns a breakpoint object that represents that breakpoint that was enabled. Otherwise, this cmdlet doesn't generate any output.
+By default, this cmdlet returns no output.
+
+### System.Management.Automation.Breakpoint
+
+When you use the **PassThru** parameter, this cmdlet returns a breakpoint object representing the
+enabled breakpoint.
 
 ## NOTES
+
+Windows PowerShell includes the following aliases for `Enable-PSBreakpoint`:
+
+- `ebp`
 
 - The `Enable-PSBreakpoint` cmdlet doesn't generate an error if you try to enable a breakpoint that
   is already enabled. As such, you can enable all breakpoints without error, even when only a few

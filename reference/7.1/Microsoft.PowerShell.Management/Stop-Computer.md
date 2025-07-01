@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 12/11/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/stop-computer?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 05/07/2025
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/stop-computer?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Stop-Computer
 ---
@@ -30,8 +29,9 @@ The `Stop-Computer` cmdlet shuts down the local computer and remote computers.
 You can use the parameters of `Stop-Computer` to specify the authentication levels and alternate
 credentials, and to force an immediate shut down.
 
-In PowerShell 7.1, `Stop-Computer` was added for Linux and macOS. The parameters have no effect on
-these platforms. The cmdlet is just calling the native command `/sbin/shutdown`.
+In PowerShell 7.1, `Stop-Computer` was added for Linux and macOS. The non-Windows platforms only
+have the **WhatIf**, **Confirm**, and **CommonParameters** parameters. The cmdlet is just calling
+the native command `/sbin/shutdown`.
 
 ## EXAMPLES
 
@@ -119,6 +119,8 @@ comma-separated list. To specify the local computer, type the computer name or l
 This parameter doesn't rely on PowerShell remoting. You can use the **ComputerName** parameter even
 if your computer isn't configured to run remote commands.
 
+This parameter is only available on Windows platforms.
+
 ```yaml
 Type: System.String[]
 Parameter Sets: (All)
@@ -128,22 +130,6 @@ Required: False
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -162,6 +148,8 @@ object and the password is stored as a [SecureString](/dotnet/api/system.securit
 > For more information about **SecureString** data protection, see
 > [How secure is SecureString?](/dotnet/api/system.security.securestring#how-secure-is-securestring).
 
+This parameter is only available on Windows platforms.
+
 ```yaml
 Type: System.Management.Automation.PSCredential
 Parameter Sets: (All)
@@ -177,6 +165,8 @@ Accept wildcard characters: False
 ### -Force
 
 Forces an immediate shut down of the computer.
+
+This parameter is only available on Windows platforms.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -214,7 +204,8 @@ For more information about the values of this parameter, see
 > increases the security risk of the remote operation. If the remote computer is compromised, the
 > credentials that are passed to it can be used to control the network session.
 
-This parameter was introduced in PowerShell 3.0.
+This parameter was introduced in PowerShell 3.0. This parameter is only available on Windows
+platforms.
 
 ```yaml
 Type: System.String
@@ -225,6 +216,22 @@ Accepted values: Default, Basic, Negotiate, CredSSP, Digest, Kerberos
 Required: False
 Position: Named
 Default value: Default
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -256,19 +263,23 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You can't pipe input to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### None
 
+This cmdlet returns no output.
+
 ## NOTES
 
-This cmdlet uses the **Win32Shutdown** method of the **Win32_OperatingSystem** WMI class. This
-method requires the **SeShutdownPrivilege** privilege be enabled for the user account used to
-restart the machine.
+This cmdlet uses the
+[Win32Shutdown](/windows/desktop/CIMWin32Prov/win32shutdown-method-in-class-win32-operatingsystem)
+method of the [Win32_OperatingSystem](/windows/desktop/CIMWin32Prov/win32-operatingsystem) WMI
+class. This method requires the `SeShutdownPrivilege` privilege be enabled for the user account
+used to shutdown the machine.
 
-In PowerShell 7.1, `Stop-Computer` was added for Linux and macOS. For these platorms, the cmdlet
+In PowerShell 7.1, `Stop-Computer` was added for Linux and macOS. For these platforms, the cmdlet
 calls the native command `/sbin/shutdown`.
 
 ## RELATED LINKS
@@ -278,4 +289,3 @@ calls the native command `/sbin/shutdown`.
 [Restart-Computer](Restart-Computer.md)
 
 [Test-Connection](Test-Connection.md)
-

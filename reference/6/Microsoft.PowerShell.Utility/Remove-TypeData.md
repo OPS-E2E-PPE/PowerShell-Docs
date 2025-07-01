@@ -1,20 +1,19 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 04/27/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/remove-typedata?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/remove-typedata?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Remove-TypeData
 ---
 
 # Remove-TypeData
 
-## Synopsis
+## SYNOPSIS
 Deletes extended types from the current session.
 
-## Syntax
+## SYNTAX
 
 ### RemoveTypeDataSet (Default)
 
@@ -47,7 +46,7 @@ files, see [about_Types.ps1xml](../Microsoft.PowerShell.Core/about/about_Types.p
 
 This cmdlet was introduced in Windows PowerShell 3.0.
 
-## Examples
+## EXAMPLES
 
 ### Example 1: Remove type data for a specified type
 
@@ -120,7 +119,7 @@ cmdlet to remove extended type data for all CIM types in the sessions in the `$S
 Invoke-Command -Session $S {Get-TypeData -TypeName *CIM* | Remove-TypeData}
 ```
 
-## Parameters
+## PARAMETERS
 
 ### -Path
 
@@ -221,31 +220,31 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 -WarningAction, and -WarningVariable. For more information, see
 [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
-## Inputs
+## INPUTS
 
 ### System.Management.Automation.Runspaces.TypeData
 
-You can pipe **TypeData** object, such as the ones that the `Get-TypeData` cmdlet returns, to
-`Remove-TypeData`.
+You can pipe a **TypeData** object, such as the ones that the `Get-TypeData` cmdlet returns, to
+this cmdlet.
 
 ### System.String
 
-You can pipe the type names to `Remove-TypeData`. When you pipe an object to `Remove-TypeData`,
-`Remove-TypeData` gets the type name of the object and removes all type data for the object type.
+You can pipe a string containing the type name to this cmdlet. When you pipe an object to this
+cmdlet, it gets the type name of the object and removes all type data for the object type.
 
-## Outputs
+## OUTPUTS
 
 ### None
 
-This cmdlet does not generate any output.
+This cmdlet returns no output.
 
-## Notes
+## NOTES
 
 `Remove-TypeData` can remove only the extended type data in the current session. It cannot remove
 extended type data that is on the computer, but has not been added to the current session, such as
 extended types that are defined in modules that have not been imported into the current session.
 
-## Related links
+## RELATED LINKS
 
 [Get-TypeData](Get-TypeData.md)
 

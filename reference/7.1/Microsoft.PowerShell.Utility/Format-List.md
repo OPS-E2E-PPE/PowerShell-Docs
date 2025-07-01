@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 12/19/2018
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/format-list?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/format-list?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Format-List
 ---
+
 # Format-List
 
 ## SYNOPSIS
@@ -17,14 +17,14 @@ Formats the output as a list of properties in which each property appears on a n
 
 ```
 Format-List [[-Property] <Object[]>] [-GroupBy <Object>] [-View <string>] [-ShowError]
-[-DisplayError] [-Force] [-Expand <string>] [-InputObject <psobject>] [<CommonParameters>]
+ [-DisplayError] [-Force] [-Expand <string>] [-InputObject <psobject>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
 The `Format-List` cmdlet formats the output of a command as a list of properties in which each
 property is displayed on a separate line. You can use `Format-List` to format and display all or
-selected properties of an object as a list (format-list *).
+selected properties of an object as a list (`Format-List -Property *`).
 
 Because more space is available for each item in a list than in a table, PowerShell displays more
 properties of the object in the list, and the property values are less likely to be truncated.
@@ -39,7 +39,7 @@ Get-Service | Format-List
 
 This command formats information about services on the computer as a list. By default, the services
 are formatted as a table. The `Get-Service` cmdlet gets objects representing the services on the
-computer. The pipeline operator (|) passes the results through the pipeline to `Format-List`.
+computer. The pipeline operator (`|`) passes the results through the pipeline to `Format-List`.
 Then, the `Format-List` command formats the service information in a list and sends it to the
 default output cmdlet for display.
 
@@ -48,7 +48,7 @@ default output cmdlet for display.
 These commands display information about the PS1XML files in the PowerShell directory as a list.
 
 ```powershell
-$A = Get-ChildItem $pshome\*.ps1xml
+$A = Get-ChildItem $PSHOME\*.ps1xml
 Format-List -InputObject $A
 ```
 
@@ -63,26 +63,26 @@ the formatted output to the default output cmdlet for display.
 This command displays the name, base priority, and priority class of each process on the computer.
 
 ```powershell
-Get-Process | Format-List -Property name, basepriority, priorityclass
+Get-Process | Format-List -Property Name, BasePriority, PriorityClass
 ```
 
 It uses the `Get-Process` cmdlet to get an object representing each process. The pipeline operator
-(|) passes the process objects through the pipeline to `Format-List`. `Format-List` formats the
-processes as a list of the specified properties. The *Property* parameter name is optional, so you
+(`|`) passes the process objects through the pipeline to `Format-List`. `Format-List` formats the
+processes as a list of the specified properties. The **Property** parameter name is optional, so you
 can omit it.
 
 ### Example 4: Format all properties for a process
 
-This command displays all of the properties of the Winlogon process.
+This command displays all the properties of the Winlogon process.
 
 ```powershell
 Get-Process winlogon | Format-List -Property *
 ```
 
 It uses the Get-Process cmdlet to get an object representing the Winlogon process. The pipeline
-operator (|) passes the Winlogon process object through the pipeline to `Format-List`. The command
-uses the *Property* parameter to specify the properties and the \* to indicate all properties.
-Because the name of the *Property* parameter is optional, you can omit it and type the command as
+operator (`|`) passes the Winlogon process object through the pipeline to `Format-List`. The command
+uses the **Property** parameter to specify the properties and the `*` to indicate all properties.
+Because the name of the **Property** parameter is optional, you can omit it and type the command as
 `Format-List *`. `Format-List` automatically sends the results to the default output cmdlet for
 display.
 
@@ -130,12 +130,12 @@ Accept wildcard characters: False
 ### -Expand
 
 Specifies the formatted collection object, as well as the objects in the collection. This parameter
-is designed to format objects that support the ICollection (System.Collections) interface. The
-default value is EnumOnly. The acceptable values for this parameter are:
+is designed to format objects that support the **System.Collections.ICollection** interface. The
+default value is `EnumOnly`. The acceptable values for this parameter are:
 
-- EnumOnly. Displays the properties of the objects in the collection.
-- CoreOnly. Displays the properties of the collection object.
-- Both. Displays the properties of the collection object and the properties of objects in the
+- `EnumOnly`. Displays the properties of the objects in the collection.
+- `CoreOnly`. Displays the properties of the collection object.
+- `Both`. Displays the properties of the collection object and the properties of objects in the
   collection.
 
 ```yaml
@@ -153,9 +153,12 @@ Accept wildcard characters: False
 
 ### -Force
 
-Indicates that this cmdlet displays all of the error information. Use with the **DisplayError** or
+Indicates that this cmdlet displays all the error information. Use with the **DisplayError** or
 **ShowError** parameter. By default, when an error object is written to the error or display
-streams, only some of the error information is displayed.
+streams, only some error information is displayed.
+
+Also required when formatting certain .NET types. For more information, see the [Notes](#notes)
+section.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -172,14 +175,15 @@ Accept wildcard characters: False
 ### -GroupBy
 
 Specifies the output in groups based on a shared property or value. Enter an expression or a
-property of the output.
+property of the output. The **GroupBy** parameter expects that the objects are sorted. Use the
+`Sort-Object` cmdlet before using `Format-List` to group the objects.
 
 The value of the **GroupBy** parameter can be a new calculated property. The calculated property can
 be a script block or a hash table. Valid key-value pairs are:
 
-- Name (or Label) - `<string>`
-- Expression - `<string>` or `<script block>`
-- FormatString - `<string>`
+- `Name` (or `Label`) - `<string>`
+- `Expression` - `<string>` or `<script block>`
+- `FormatString` - `<string>`
 
 For more information, see
 [about_Calculated_Properties](../Microsoft.PowerShell.Core/About/about_Calculated_Properties.md).
@@ -219,15 +223,15 @@ Specifies the object properties that appear in the display and the order in whic
 Wildcards are permitted.
 
 If you omit this parameter, the properties that appear in the display depend on the object being
-displayed. The parameter name "Property" is optional. You cannot use the **Property** and **View**
+displayed. The parameter name **Property** is optional. You cannot use the **Property** and **View**
 parameters in the same command.
 
 The value of the **Property** parameter can be a new calculated property. The calculated property
 can be a script block or a hash table. Valid key-value pairs are:
 
-- Name (or Label) - `<string>`
-- Expression - `<string>` or `<script block>`
-- FormatString - `<string>`
+- `Name` (or `Label`) - `<string>`
+- `Expression` - `<string>` or `<script block>`
+- `FormatString` - `<string>`
 
 For more information, see
 [about_Calculated_Properties](../Microsoft.PowerShell.Core/About/about_Calculated_Properties.md).
@@ -290,36 +294,57 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Management.Automation.PSObject
 
-You can pipe any object to `Format-List`.
+You can pipe any object to this cmdlet.
 
 ## OUTPUTS
 
 ### Microsoft.PowerShell.Commands.Internal.Format
 
-`Format-List` returns the format objects that represent the list.
+This cmdlet returns the format objects that represent the list.
 
 ## NOTES
 
-You can also refer to Format-List by its built-in alias, FL. For more information, see
-[about_Aliases](../Microsoft.PowerShell.Core/About/about_Aliases.md).
+PowerShell includes the following aliases for `Format-List`:
+
+- All platforms:
+  - `fl`
 
 The format cmdlets, such as `Format-List`, arrange the data to be displayed but do not display it.
-The data is displayed by the output features of PowerShell and by the cmdlets that contain the Out
-verb (the Out cmdlets), such as `Out-Host` or `Out-File`.
+The data is displayed by the output features of PowerShell and by the cmdlets that contain the `Out`
+verb (the `Out` cmdlets), such as `Out-Host` or `Out-File`.
 
 If you do not use a format cmdlet, PowerShell applies that default format for each object that it
 displays.
 
-The **GroupBy** parameter assumes that the objects are sorted. Use Sort-Object before using
-`Format-List` to group the objects.
-
 The **View** parameter lets you specify an alternate format for the table. You can use the views
-defined in the `*.format.PS1XML` files in the PowerShell directory, or you can create your own views
-in new PS1XML files and use the Update-FormatData cmdlet to include them in PowerShell.
+defined in the `*.format.ps1xml` files in the PowerShell directory, or you can create your own views
+in new PS1XML files and use the `Update-FormatData` cmdlet to include them in PowerShell.
 
 The alternate view for the **View** parameter must use the list format, otherwise, the command
 fails. If the alternate view is a table, use `Format-Table`. If the alternate view is not a list or
 a table, use `Format-Custom`.
+
+If you want to use `Format-List` with the **Property** parameter, you need to include the **Force**
+parameter under any of the following conditions:
+
+- The input objects are formatted out-of-band using the `ToString()` method. This applies to
+  `[string]` and .NET primitive types that are a superset of the built-in numeric types such as
+  `[int]`, `[long]`, and others.
+
+- The input objects have no public properties.
+
+- The input objects are instances of the wrapper types PowerShell uses for output streams other
+  than the Success output stream. This applies only when these wrapper types are sent to the Success
+  output stream, which requires either having captured them via common parameters such as
+  **ErrorVariable** first or using a redirection such as `*>&1`.
+
+  - The wrapper types include:
+
+    - [System.Management.Automation.ErrorRecord](/dotnet/api/System.Management.Automation.ErrorRecord)
+    - [System.Management.Automation.WarningRecord](/dotnet/api/System.Management.Automation.WarningRecord)
+    - [System.Management.Automation.VerboseRecord](/dotnet/api/System.Management.Automation.VerboseRecord)
+    - [System.Management.Automation.DebugRecord](/dotnet/api/System.Management.Automation.DebugRecord)
+    - [System.Management.Automation.InformationRecord](/dotnet/api/System.Management.Automation.InformationRecord)
 
 ## RELATED LINKS
 

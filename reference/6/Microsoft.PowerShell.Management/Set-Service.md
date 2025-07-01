@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 10/25/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/set-service?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 03/20/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/set-service?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-Service
 ---
@@ -20,19 +19,21 @@ Starts, stops, and suspends a service, and changes its properties.
 
 ```
 Set-Service [-Name] <String> [-DisplayName <String>] [-Credential <PSCredential>]
- [-Description <String>] [-StartupType <ServiceStartupType>] [-Status <String>] [-Force] [-PassThru]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-Description <String>] [-StartupType <ServiceStartupType>] [-Status <String>]
+ [-SecurityDescriptorSddl <String>] [-Force] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### InputObject
 
 ```
 Set-Service [-InputObject] <ServiceController> [-DisplayName <String>] [-Credential <PSCredential>]
- [-Description <String>] [-StartupType <ServiceStartupType>] [-Status <String>] [-Force] [-PassThru]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-Description <String>] [-StartupType <ServiceStartupType>] [-SecurityDescriptorSddl <String>]
+ [-Status <String>] [-Force] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `Set-Service` cmdlet changes the properties of a service such as the **Status**,
 **Description**, **DisplayName**, and **StartupType**. `Set-Service` can start, stop, suspend, or
@@ -188,23 +189,38 @@ Set-Service -Name Schedule -Credential $credential
 service. The **Credential** parameter uses the `$credential` variable and updates the **Schedule**
 service.
 
-## PARAMETERS
+### Example 9: Change the SecurityDescriptor of a service
 
-### -Confirm
+This example changes a service's **SecurityDescriptor**.
 
-Prompts you for confirmation before running `Set-Service`.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
+```powershell
+$SDDL = "D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)"
+Set-Service -Name "BITS" -SecurityDescriptorSddl $SDDL
 ```
+
+The **SecurityDescriptor** is stored in the `$SDDL` variable. `Set-Service` uses the **Name**
+parameter to specify the **BITS** service. The **SecurityDescriptorSddl** parameter uses
+`$SDDL` to change the **SecurityDescriptor** for the **BITS** service.
+
+### Example 10: Set the startup type for multiple services
+
+The `Set-Service` cmdlet only accepts one service name at a time. However, you can pipe multiple
+services to `Set-Service` to change the configuration of multiple services.
+
+```powershell
+Get-Service SQLWriter,spooler |
+    Set-Service -StartupType Automatic -PassThru |
+    Select-Object Name, StartType
+```
+
+```Output
+Name      StartType
+----      ---------
+spooler   Automatic
+SQLWriter Automatic
+```
+
+## PARAMETERS
 
 ### -Credential
 
@@ -259,6 +275,10 @@ Accept wildcard characters: False
 
 Specifies a new display name for the service.
 
+> [!NOTE]
+> Typically, `Set-Service` only operates on Windows services and not drivers. However, if you
+> specify the name of a driver, `Set-Service` can target the driver.
+
 ```yaml
 Type: System.String
 Parameter Sets: (All)
@@ -312,6 +332,10 @@ Accept wildcard characters: False
 Specifies the service name of the service to be changed. Wildcard characters aren't permitted. You
 can use the pipeline to send a service name to `Set-Service`.
 
+> [!NOTE]
+> Typically, `Set-Service` only operates on Windows services and not drivers. However, if you
+> specify the name of a driver, `Set-Service` can target the driver.
+
 ```yaml
 Type: System.String
 Parameter Sets: Name
@@ -341,6 +365,25 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SecurityDescriptorSddl
+
+Specifies the **SecurityDescriptor** for the service in **Sddl** format. The account calling
+`Set-Service` with this parameter must have the WRITE_DAC and WRITE_OWNER permissions. For more
+information, see
+[Service security and access rights](/windows/win32/services/service-security-and-access-rights).
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases: sd
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -StartupType
 
 Specifies the start mode of the service.
@@ -360,7 +403,7 @@ The acceptable values for this parameter are as follows:
 ```yaml
 Type: Microsoft.PowerShell.Commands.ServiceStartupType
 Parameter Sets: (All)
-Aliases: StartMode, SM, ST
+Aliases: StartMode, SM, ST, StartType
 Accepted values: Automatic, AutomaticDelayedStart, Disabled, InvalidValue, Manual
 
 Required: False
@@ -393,6 +436,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Confirm
+
+Prompts you for confirmation before running `Set-Service`.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WhatIf
 
 Shows what would happen if `Set-Service` runs. The cmdlet isn't run.
@@ -413,23 +472,32 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### System.ServiceProcess.ServiceController, System.String
+### System.ServiceProcess.ServiceController
 
-You can use the pipeline to send a service object or a string that contains a service name to
-`Set-Service`.
+You can pipe a service object to this cmdlet.
+
+### System.String
+
+You can pipe a string that contains a service name to this cmdlet.
 
 ## OUTPUTS
 
+### None
+
+By default, this cmdlet returns no output.
+
 ### System.ServiceProcess.ServiceController
 
-By default, `Set-Service` doesn't return any objects. Use the **PassThru** parameter to output a
-**ServiceController** object.
+When you use the **PassThru** parameter, this cmdlet returns a **ServiceController** object.
 
 ## NOTES
+
+This cmdlet is only available on Windows platforms.
 
 `Set-Service` requires elevated permissions. Use the **Run as administrator** option.
 

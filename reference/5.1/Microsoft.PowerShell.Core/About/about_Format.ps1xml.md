@@ -1,13 +1,13 @@
 ---
-keywords: powershell,cmdlet
+description: The `Format.ps1xml` files in PowerShell define the default display of objects in the PowerShell console. You can create your own `Format.ps1xml` files to change the display of objects or to define default displays for new object types that you create in PowerShell.
 Locale: en-US
-ms.date: 11/27/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_format.ps1xml?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 04/25/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_format.ps1xml?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Format.ps1xml
 ---
 
-# About Format.ps1xml
+# about_Format.ps1xml
 
 ## Short description
 
@@ -149,7 +149,7 @@ The next command copies the file contents to a new file,
 `MyDotNetTypes.Format.ps1xml`.
 
 ```powershell
-Copy-Item $PSHome\DotNetTypes.format.ps1xml MyDotNetTypes.Format.ps1xml
+Copy-Item $PSHOME\DotNetTypes.format.ps1xml MyDotNetTypes.Format.ps1xml
 ```
 
 Open the `MyDotNetTypes.Format.ps1xml` file in any XML or text editor, such as
@@ -376,11 +376,16 @@ that the `<ListControl>` tag is intended to display.
 ### WideControl tag
 
 The `<WideControl>` tag typically contains a `<WideEntries>` tag. The
-`<WideEntries>` tag contains one or more `<WideEntry>` tags. A `<WideEntry>`
-tag typically contains a `<PropertyName>` tag that specifies the property to be
-displayed at the specified location in the view. The `<PropertyName>` tag can
-contain a `<FormatString>` tag that specifies how the property is to be
-displayed.
+`<WideEntries>` tag contains one or more `<WideEntry>` tags. A `<WideEntry>` tag
+contains one `<WideItem>` tag.
+
+A `<WideItem>` tag must include either a `<PropertyName>` tag or a
+`<ScriptBlock>` tag. A `<PropertyName>` tag specifies the property to display at
+the specified location in the view. A `<ScriptBlock>` tag specifies a script to
+evaluate and display at the specified location in the view.
+
+A `<WideItem>` tag can contain a `<FormatString>` tag that specifies how to
+display the property.
 
 ### CustomControl tag
 
@@ -426,7 +431,7 @@ digital signature. For more information, see
 
 The following sample creates a `Format-Table` custom view for the
 **System.IO.DirectoryInfo** and **System.IO.FileInfo** objects created by
-`Get-ChildItem`. The custom view is named **mygciview** and adds the
+`Get-ChildItem`. The custom view is named **MyGciView** and adds the
 **CreationTime** column to the table.
 
 The custom view is created from an edited version of the
@@ -446,7 +451,7 @@ $Parms = @{
   Pattern = "System.IO.DirectoryInfo"
 }
 Select-String @Parms
-Copy-Item $PSHome\FileSystem.format.ps1xml .\MyFileSystem.Format.ps1xml
+Copy-Item $PSHOME\FileSystem.format.ps1xml .\MyFileSystem.Format.ps1xml
 Update-FormatData -PrependPath $PSHOME\Format\MyFileSystem.Format.ps1xml
 ```
 
@@ -495,7 +500,7 @@ Update-FormatData -PrependPath $PSHOME\Format\MyFileSystem.Format.ps1xml
 </Controls>
 <ViewDefinitions>
     <View>
-    <Name>mygciview</Name>
+    <Name>MyGciView</Name>
     <ViewSelectedBy>
         <SelectionSetName>FileSystemTypes</SelectionSetName>
     </ViewSelectedBy>
@@ -536,14 +541,14 @@ Update-FormatData -PrependPath $PSHOME\Format\MyFileSystem.Format.ps1xml
                         </TableColumnItem>
                         <TableColumnItem>
                             <ScriptBlock>
-                                [String]::Format("{0,10}  {1,8}",
+                                [string]::Format("{0,10}  {1,8}",
                                     $_.LastWriteTime.ToString("d"),
                                     $_.LastWriteTime.ToString("t"))
                             </ScriptBlock>
                         </TableColumnItem>
                         <TableColumnItem>
                             <ScriptBlock>
-                                [String]::Format("{0,10}  {1,8}",
+                                [string]::Format("{0,10}  {1,8}",
                                     $_.CreationTime.ToString("d"),
                                     $_.LastWriteTime.ToString("t"))
                             </ScriptBlock>
@@ -565,16 +570,21 @@ Update-FormatData -PrependPath $PSHOME\Format\MyFileSystem.Format.ps1xml
 
 ## See also
 
-[Export-FormatData](xref:Microsoft.PowerShell.Utility.Export-FormatData)
+- [Trace-Command][05]
+- [Export-FormatData][02]
+- [Get-FormatData][01]
+- [Update-FormatData][03]
+- [Get-TraceSource][06]
+- [Format Schema XML Reference][09]
+- [Writing a PowerShell Formatting File][10]
 
-[Get-FormatData](xref:Microsoft.PowerShell.Utility.Get-FormatData)
+<!-- link references -->
+[01]: xref:Microsoft.PowerShell.Utility.Get-FormatData
+[02]: xref:Microsoft.PowerShell.Utility.Export-FormatData
+[03]: xref:Microsoft.PowerShell.Utility.Update-FormatData
 
-[Get-TraceSource](xref:Microsoft.PowerShell.Utility.Get-TraceSource)
+[05]: xref:Microsoft.PowerShell.Utility.Trace-Command
+[06]: xref:Microsoft.PowerShell.Utility.Get-TraceSource
 
-[Format Schema XML Reference](/powershell/scripting/developer/format/format-schema-xml-reference)
-
-[Trace-Command](xref:Microsoft.PowerShell.Utility.Trace-Command)
-
-[Update-FormatData](xref:Microsoft.PowerShell.Utility.Update-FormatData)
-
-[Writing a PowerShell Formatting File](/powershell/scripting/developer/format/writing-a-powershell-formatting-file)
+[09]: /powershell/scripting/developer/format/format-schema-xml-reference
+[10]: /powershell/scripting/developer/format/writing-a-powershell-formatting-file

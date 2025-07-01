@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 01/17/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/format-hex?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 01/19/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/format-hex?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Format-Hex
 ---
@@ -12,12 +11,11 @@ title: Format-Hex
 # Format-Hex
 
 ## SYNOPSIS
-
 Displays a file or other input as hexadecimal.
 
 ## SYNTAX
 
-### Path (Default)
+### Path
 
 ```
 Format-Hex [-Path] <String[]> [-Count <Int64>] [-Offset <Int64>] [<CommonParameters>]
@@ -30,9 +28,10 @@ Format-Hex -LiteralPath <String[]> [-Count <Int64>] [-Offset <Int64>] [<CommonPa
 ```
 
 ### ByInputObject
+
 ```
-Format-Hex -InputObject <PSObject> [-Encoding <Encoding>] [-Count <Int64>] [-Offset <Int64>] [-Raw]
- [<CommonParameters>]
+Format-Hex -InputObject <PSObject> [-Encoding <Encoding>] [-Count <Int64>]
+ [-Offset <Int64>] [-Raw] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -107,7 +106,8 @@ It will pass each object through the Pipeline and process individually. However,
 data, and the adjacent object is also numeric, it will group them into a single output block.
 
 ```powershell
-'Hello world!', 1, 1138, 'foo', 'bar', 0xdeadbeef, 1gb, 0b1101011100 , $true, $false | Format-Hex
+'Hello world!', 1, 1138, 'foo', 'bar', 0xdeadbeef, 1gb, 0b1101011100 , $true, $false |
+    Format-Hex
 ```
 
 ```Output
@@ -144,7 +144,7 @@ data, and the adjacent object is also numeric, it will group them into a single 
           Offset Bytes                                           Ascii
                  00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
           ------ ----------------------------------------------- -----
-0000000000000000 EF BE AD DE 00 00 00 40 5C 03 00 00             ï¾­Þ   @\�
+0000000000000000 EF BE AD DE 00 00 00 40 5C 03 00 00             ï¾-Þ   @\�
 
    Label: Boolean (System.Boolean) <7D8C4C1D>
 
@@ -156,6 +156,24 @@ data, and the adjacent object is also numeric, it will group them into a single 
 
 ## PARAMETERS
 
+### -Count
+
+This represents the number of bytes to include in the hex output.
+
+This parameter was introduced in PowerShell 6.2.
+
+```yaml
+Type: System.Int64
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: Int64.MaxValue
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Encoding
 
 Specifies the encoding of the input strings. This only applies to `[string]` input. The parameter
@@ -164,7 +182,10 @@ has no effect on numeric types. The output value is always `utf8NoBOM`.
 The acceptable values for this parameter are as follows:
 
 - `ascii`: Uses the encoding for the ASCII (7-bit) character set.
+- `ansi`: Uses the encoding for the for the current culture's ANSI code page. This option was added
+  in PowerShell 7.4.
 - `bigendianunicode`: Encodes in UTF-16 format using the big-endian byte order.
+- `bigendianutf32`: Encodes in UTF-32 format using the big-endian byte order.
 - `oem`: Uses the default encoding for MS-DOS and console programs.
 - `unicode`: Encodes in UTF-16 format using the little-endian byte order.
 - `utf7`: Encodes in UTF-7 format.
@@ -176,13 +197,20 @@ The acceptable values for this parameter are as follows:
 Beginning with PowerShell 6.2, the **Encoding** parameter also allows numeric IDs of registered code
 pages (like `-Encoding 1251`) or string names of registered code pages (like
 `-Encoding "windows-1251"`). For more information, see the .NET documentation for
-[Encoding.CodePage](/dotnet/api/system.text.encoding.codepage?view=netcore-2.2).
+[Encoding.CodePage](xref:System.Text.Encoding.CodePage%2A).
+
+Starting with PowerShell 7.4, you can use the `Ansi` value for the **Encoding** parameter to pass
+the numeric ID for the current culture's ANSI code page without having to specify it manually.
+
+> [!NOTE]
+> **UTF-7*** is no longer recommended to use. As of PowerShell 7.1, a warning is written if you
+> specify `utf7` for the **Encoding** parameter.
 
 ```yaml
 Type: System.Text.Encoding
 Parameter Sets: ByInputObject
 Aliases:
-Accepted values: ASCII, BigEndianUnicode, OEM, Unicode, UTF7, UTF8, UTF8BOM, UTF8NoBOM, UTF32
+Accepted values: ASCII, BigEndianUnicode, BigEndianUTF32, OEM, Unicode, UTF7, UTF8, UTF8BOM, UTF8NoBOM, UTF32
 
 Required: False
 Position: Named
@@ -193,8 +221,11 @@ Accept wildcard characters: False
 
 ### -InputObject
 
-Used for pipeline input. Pipeline input supports only certain scalar types and `[system.io.fileinfo]`
-instances for piping from `Get-ChildItem`.
+Specifies the objects to be formatted. Enter a variable that contains the objects or type a command
+or expression that gets the objects.
+
+Only certain [scalar](/powershell/scripting/learn/glossary#scalar-value) types and
+`[System.IO.FileInfo]` are supported.
 
 The supported scalar types are:
 
@@ -228,7 +259,8 @@ Specifies the complete path to a file. The value of **LiteralPath** is used exac
 This parameter does not accept wildcard characters. To specify multiple paths to files, separate the
 paths with a comma. If the **LiteralPath** parameter includes escape characters, enclose the path in
 single quotation marks. PowerShell does not interpret any characters in a single quoted string as
-escape sequences. For more information, see [about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
+escape sequences. For more information, see
+[about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
 
 ```yaml
 Type: System.String[]
@@ -238,6 +270,24 @@ Aliases: PSPath, LP
 Required: True
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Offset
+
+This represents the number of bytes to skip from being part of the hex output.
+
+This parameter was introduced in PowerShell 6.2.
+
+```yaml
+Type: System.Int64
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -277,47 +327,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Offset
-
-This represents the number of bytes to skip from being part of the hex output.
-
-This parameter was introduced in PowerShell 6.2.
-
-```yaml
-Type: System.Int64
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Count
-
-This represents the number of bytes to include in the hex output.
-
-This parameter was introduced in PowerShell 6.2.
-
-```yaml
-Type: System.Int64
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: Int64.MaxValue
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -336,6 +351,11 @@ by `Format-Hex`. The output also states they type of bytes being processed. If y
 each byte. If you pass a string, boolean, integer, etc, it will be labeled appropriately.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Format-Hex`:
+
+- All platforms:
+  - `fhx`
 
 The right-most column of output tries to render the bytes as ASCII characters:
 

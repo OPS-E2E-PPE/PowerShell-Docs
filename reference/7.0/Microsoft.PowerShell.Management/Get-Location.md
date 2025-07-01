@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 03/12/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/get-location?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-location?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Location
 ---
+
 # Get-Location
 
 ## SYNOPSIS
@@ -231,16 +231,27 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You cannot pipe input to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
-### System.Management.Automation.PathInfo or System.Management.Automation.PathInfoStack
+### System.Management.Automation.PathInfo
 
-If you use the **Stack** or **StackName** parameters, this cmdlet returns a **PathInfoStack**
-object. Otherwise, it returns a **PathInfo** object.
+By default, this cmdlet returns a **PathInfo** object.
+
+### System.Management.Automation.PathInfoStack
+
+When you use the **Stack** or **StackName** parameters, this cmdlet returns a **PathInfoStack**
+object.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Get-Location`:
+
+- All Platforms:
+
+  - `gl`
+  - `pwd`
 
 PowerShell supports multiple runspaces per process. Each runspace has its own _current directory_.
 This is not the same as `[System.Environment]::CurrentDirectory`. This behavior can be an issue

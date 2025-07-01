@@ -1,11 +1,12 @@
 ---
-keywords: powershell,cmdlet
+description: Describes how the `continue` statement immediately returns the program flow to the top of a program loop, a `switch` statement, or a `trap` statement.
+Locale: en-US
 ms.date: 06/04/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_continue?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_continue?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Continue
 ---
-# About Continue
+# about_Continue
 
 ## Short description
 
@@ -87,13 +88,13 @@ is **True** and iteration continues with the second `for` loop at `labelB`.
 ## Using continue in a switch statement
 
 An unlabeled `continue` statement within a `switch` terminates execution of the
-current `switch` iteration and transfers control to the top of the `switch` to get
-the next input item.
+current `switch` iteration and transfers control to the top of the `switch` to
+get the next input item.
 
-When there is a single input item `continue` exits the entire `switch` statement.
-When the `switch` input is a collection, the `switch` tests each element of the
-collection. The `continue` exits the current iteration and the `switch` continues
-with the next element.
+When there is a single input item `continue` exits the entire `switch`
+statement. When the `switch` input is a collection, the `switch` tests each
+element of the collection. The `continue` exits the current iteration and the
+`switch` continues with the next element.
 
 ```powershell
 switch (1,2,3) {
@@ -125,18 +126,13 @@ outside of an enclosing construct that supports it, can inadvertently terminate
 their _callers_.
 
 Using `continue` inside a pipeline, such as a `ForEach-Object` script block,
-not only exits the pipeline, tt potentially terminates the entire runspace.
+not only exits the pipeline, it potentially terminates the entire runspace.
 
 ## See also
 
-[about_Break](about_Break.md)
-
-[about_For](about_For.md)
-
-[about_Comparison_Operators](about_Comparison_Operators.md)
-
-[about_Throw](about_Throw.md)
-
-[about_Trap](about_Trap.md)
-
-[about_Try_Catch_Finally](about_Try_Catch_Finally.md)
+- [about_Break](about_Break.md)
+- [about_Comparison_Operators](about_Comparison_Operators.md)
+- [about_For](about_For.md)
+- [about_Throw](about_Throw.md)
+- [about_Trap](about_Trap.md)
+- [about_Try_Catch_Finally](about_Try_Catch_Finally.md)

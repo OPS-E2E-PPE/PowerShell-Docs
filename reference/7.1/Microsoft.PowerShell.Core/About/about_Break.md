@@ -1,17 +1,17 @@
 ---
-keywords: powershell,cmdlet
+description: Describes a statement you can use to immediately exit `foreach`, `for`, `while`, `do`, `switch`, or `trap` statements.
 Locale: en-US
-ms.date: 06/04/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_break?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 04/29/2025
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_break?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Break
 ---
-# About Break
+# about_Break
 
 ## Short description
 
-Describes a statement you can use to immediately exit `foreach`, `for`,
-`while`, `do`, `switch`, or `trap` statements.
+Describes the `break` statement, which provides a way to exit the current
+control block.
 
 ## Long description
 
@@ -20,7 +20,7 @@ Execution continues at the next statement after the control block. The
 statement supports labels. A label is a name you assign to a statement in a
 script.
 
-## Using break in loops
+## Using `break` in loops
 
 When a `break` statement appears in a loop, such as a `foreach`, `for`, `do`,
 or `while` loop, PowerShell immediately exits the loop.
@@ -65,7 +65,7 @@ variable `$i` is incremented by 1. The third time the loop is run, `$i` equals
 2, and the `$val` variable equals 30. At this point, the `break` statement
 runs, and the `foreach` loop exits.
 
-### Using a labeled break in a loop
+### Using a labeled `break` in a loop
 
 A `break` statement can include a label. If you use the `break` keyword with a
 label, PowerShell exits the labeled loop instead of exiting the current loop.
@@ -79,7 +79,7 @@ example has a `while` statement with a `for` statement:
 
 ```powershell
 :myLabel while (<condition 1>) {
-  for ($item in $items) {
+  foreach ($item in $items) {
     if (<condition 2>) {
       break myLabel
     }
@@ -121,9 +121,10 @@ loop. No label is needed.
 PowerShell does not limit how far labels can resume execution. The label can
 even pass control across script and function call boundaries.
 
-## Using break in a switch statement
+## Using `break` in a `switch` statement
 
-In a `switch`construct, `break` causes PowerShell to exit the `switch` code block.
+In a `switch`construct, `break` causes PowerShell to exit the `switch` code
+block.
 
 The `break` keyword is used to leave the `switch` construct. For example, the
 following `switch` statement uses `break` statements to test for the most
@@ -131,7 +132,7 @@ specific condition:
 
 ```powershell
 $var = "word2"
-switch -regex ($var) {
+switch -Regex ($var) {
     "word2" {
       Write-Host "Exact" $_
       break
@@ -165,12 +166,12 @@ exits. If the four `break` statements are removed from the example, all four
 conditions are met. This example uses the `break` statement to display results
 when the most specific condition is met.
 
-## Using break in a trap statement
+## Using `break` in a `trap` statement
 
 If the final statement executed in the body of a `trap` statement is `break`,
 the error object is suppressed and the exception is re-thrown.
 
-The following example create a **DivideByZeroException** exception that is
+The following example creates a **DivideByZeroException** exception that is
 trapped using the `trap` statement.
 
 ```powershell
@@ -190,8 +191,8 @@ function test {
 test
 ```
 
-Notice that execution stops at the exception. The `After loop` is never reached.
-The exception is re-thrown after the `trap` executes.
+Notice that execution stops at the exception. The `After loop` is never
+reached. The exception is re-thrown after the `trap` executes.
 
 ```Output
 Before loop
@@ -206,7 +207,7 @@ Line |
      | Attempted to divide by zero.
 ```
 
-## Do not use break outside of a loop, switch, or trap
+## Do not use `break` outside of a loop, `switch`, or `trap`
 
 When `break` is used outside of a construct that directly supports it
 (loops, `switch`, `trap`), PowerShell looks _up the call stack_ for an
@@ -223,20 +224,12 @@ runspace.
 
 ## See also
 
-[about_Comparison_Operators](about_Comparison_Operators.md)
-
-[about_Continue](about_Continue.md)
-
-[about_For](about_For.md)
-
-[about_Foreach](about_Foreach.md)
-
-[about_Switch](about_Switch.md)
-
-[about_Throw](about_Throw.md)
-
-[about_Trap](about_Trap.md)
-
-[about_Try_Catch_Finally](about_Try_Catch_Finally.md)
-
-[about_While](about_While.md)
+- [about_Comparison_Operators](about_Comparison_Operators.md)
+- [about_Continue](about_Continue.md)
+- [about_For](about_For.md)
+- [about_Foreach](about_Foreach.md)
+- [about_Switch](about_Switch.md)
+- [about_Throw](about_Throw.md)
+- [about_Trap](about_Trap.md)
+- [about_Try_Catch_Finally](about_Try_Catch_Finally.md)
+- [about_While](about_While.md)

@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/get-uiculture?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/get-uiculture?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-UICulture
 ---
+
 # Get-UICulture
 
 ## SYNOPSIS
@@ -22,12 +22,11 @@ Get-UICulture [<CommonParameters>]
 ## DESCRIPTION
 
 The `Get-UICulture` cmdlet gets information about the current user interface (UI) culture settings
-for Windows.
-The UI culture determines which text strings are used for user interface elements, such as menus and
-messages.
+for Windows. The UI culture determines which text strings are used for user interface elements, such
+as menus and messages.
 
-You can also use the `Get-Culture` cmdlet, which gets the current culture on the system.
-The culture determines the display format of items such as numbers, currency, and dates.
+You can also use the `Get-Culture` cmdlet, which gets the current culture on the system. The culture
+determines the display format of items such as numbers, currency, and dates.
 
 ## EXAMPLES
 
@@ -53,9 +52,9 @@ This command displays the values of all of the properties of the current UI cult
 (Get-UICulture).Calendar
 ```
 
-This command displays the current values for the **Calendar** property of the current UI culture.
-Calendar is just one property of UI culture.
-To see all of the properties, type `Get-UICulture | Get-Member`.
+This command displays the current values for the Calendar property of the current UI culture.
+Calendar is just one property of UI culture. To see all of the properties, type
+`Get-UICulture | Get-Member`.
 
 ### Example 4: Get the short date pattern
 
@@ -63,9 +62,9 @@ To see all of the properties, type `Get-UICulture | Get-Member`.
 (Get-UICulture).DateTimeFormat.ShortDatePattern
 ```
 
-This command displays the short date pattern for the current UI culture.
-To see all of the subproperties of the **DateTimeFormat** property of the UI culture, type
-`(Get-UICulture).DateTimeFormat | gm`.
+This command displays the short date pattern for the current UI culture. To see all of the
+subproperties of the **DateTimeFormat** property of the UI culture, type
+`(Get-UICulture).DateTimeFormat | Get-Member`.
 
 ## PARAMETERS
 
@@ -73,26 +72,30 @@ To see all of the subproperties of the **DateTimeFormat** property of the UI cul
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](../Microsoft.PowerShell.Core/About/about_CommonParameters.md).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
 
-You cannot pipe input to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
-### System.Globalization.CultureInfo, Microsoft.PowerShell.VistaCultureInfo
+### System.Globalization.CultureInfo
 
-`Get-UICulture` returns an object that represents the current UI culture.
-In Windows PowerShell 3.0, it returns a **CultureInfo** object.
-In Windows PowerShell 2.0, it returns a **VistaCultureInfo** object.
+This cmdlet returns an object representing the current UI culture. In PowerShell 3.0 and later,
+it returns a **CultureInfo** object.
+
+### Microsoft.PowerShell.VistaCultureInfo
+
+In Windows PowerShell 2.0 and earlier, this cmdlet returns a **VistaCultureInfo** object.
 
 ## NOTES
 
-- You can also use the `$PsCulture` and `$PsUICulture` variables. The `$PsCulture` variable stores
-  the name of the current culture, and the `$PsUICulture` variable stores the name of the current UI
-  culture.
+You can also use the `$PSCulture` and `$PSUICulture` variables. The `$PSCulture` variable stores the
+name of the current culture, and the `$PSUICulture` variable stores the name of the current UI
+culture.
 
 ## RELATED LINKS

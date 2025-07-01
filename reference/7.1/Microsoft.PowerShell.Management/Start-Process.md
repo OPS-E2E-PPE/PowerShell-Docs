@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 08/03/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/start-process?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 11/01/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/start-process?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Start-Process
 ---
+
 # Start-Process
 
 ## SYNOPSIS
@@ -15,22 +15,20 @@ Starts one or more processes on the local computer.
 
 ## SYNTAX
 
-### Default (Default)
-
 ```
-Start-Process [-FilePath] <String> [[-ArgumentList] <String[]>] [-Credential <PSCredential>]
- [-WorkingDirectory <String>] [-LoadUserProfile] [-NoNewWindow] [-PassThru]
- [-RedirectStandardError <String>] [-RedirectStandardInput <String>]
- [-RedirectStandardOutput <String>] [-WindowStyle <ProcessWindowStyle>] [-Wait] [-UseNewEnvironment]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Start-Process [-FilePath] <string> [[-ArgumentList] <string[]>] [-Credential <pscredential>]
+ [-WorkingDirectory <string>] [-LoadUserProfile] [-NoNewWindow] [-PassThru]
+ [-RedirectStandardError <string>] [-RedirectStandardInput <string>]
+ [-RedirectStandardOutput <string>] [-WindowStyle <ProcessWindowStyle>] [-Wait]
+ [-UseNewEnvironment] [-Environment <hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### UseShellExecute
 
 ```
-Start-Process [-FilePath] <String> [[-ArgumentList] <String[]>] [-WorkingDirectory <String>]
- [-PassThru] [-Verb <String>] [-WindowStyle <ProcessWindowStyle>] [-Wait] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Start-Process [-FilePath] <string> [[-ArgumentList] <string[]>] [-WorkingDirectory <string>]
+ [-PassThru] [-Verb <string>] [-WindowStyle <ProcessWindowStyle>] [-Wait]
+ [-Environment <hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,8 +38,8 @@ The `Start-Process` cmdlet starts one or more processes on the local computer. B
 in the current process.
 
 To specify the program that runs in the process, enter an executable file or script file, or a file
-that can be opened by using a program on the computer. If you specify a non-executable file,
-`Start-Process` starts the program that is associated with the file, similar to the `Invoke-Item`
+that can be opened using a program on the computer. If you specify a non-executable file,
+`Start-Process` starts the program that's associated with the file, similar to the `Invoke-Item`
 cmdlet.
 
 You can use the parameters of `Start-Process` to specify options, such as loading a user profile,
@@ -52,7 +50,7 @@ starting the process in a new window, or using alternate credentials.
 ### Example 1: Start a process that uses default values
 
 This example starts a process that uses the `Sort.exe` file in the current folder. The command uses
-all of the default values, including the default window style, working folder, and credentials.
+all the default values, including the default window style, working folder, and credentials.
 
 ```powershell
 Start-Process -FilePath "sort.exe"
@@ -68,15 +66,23 @@ Start-Process -FilePath "myfile.txt" -WorkingDirectory "C:\PS-Test" -Verb Print
 
 ### Example 3: Start a process to sort items to a new file
 
-This example starts a process that sorts items in the `Testsort.txt` file and returns the sorted
-items in the `Sorted.txt` files. Any errors are written to the `SortError.txt` file.
+This example starts a process that sorts items in the `TestSort.txt` file and returns the sorted
+items in the `Sorted.txt` files. Any errors are written to the `SortError.txt` file. The
+**UseNewEnvironment** parameter specifies that the process runs with its own environment variables.
 
 ```powershell
-Start-Process -FilePath "Sort.exe" -RedirectStandardInput "Testsort.txt" -RedirectStandardOutput "Sorted.txt" -RedirectStandardError "SortError.txt" -UseNewEnvironment
+$processOptions = @{
+    FilePath = "sort.exe"
+    RedirectStandardInput = "TestSort.txt"
+    RedirectStandardOutput = "Sorted.txt"
+    RedirectStandardError = "SortError.txt"
+    UseNewEnvironment = $true
+}
+Start-Process @processOptions
 ```
 
-The **UseNewEnvironment** parameter specifies that the process runs with its own environment
-variables.
+This example uses splatting to pass parameters to the cmdlet. For more information, see
+[about_Splatting](../microsoft.powershell.core/about/about_splatting.md).
 
 ### Example 4: Start a process in a maximized window
 
@@ -89,7 +95,7 @@ Start-Process -FilePath "notepad" -Wait -WindowStyle Maximized
 
 ### Example 5: Start PowerShell as an administrator
 
-This example starts PowerShell by using the **Run as administrator** option.
+This example starts PowerShell using the **Run as administrator** option.
 
 ```powershell
 Start-Process -FilePath "powershell" -Verb RunAs
@@ -101,8 +107,8 @@ This example shows how to find the verbs that can be used when starting a proces
 verbs are determined by the filename extension of the file that runs in the process.
 
 ```powershell
-$startExe = New-Object System.Diagnostics.ProcessStartInfo -Args PowerShell.exe
-$startExe.verbs
+$startExe = New-Object System.Diagnostics.ProcessStartInfo -Args powershell.exe
+$startExe.Verbs
 ```
 
 ```Output
@@ -112,9 +118,9 @@ runasuser
 ```
 
 The example uses `New-Object` to create a **System.Diagnostics.ProcessStartInfo** object for
-**PowerShell.exe**, the file that runs in the PowerShell process. The **Verbs** property of the
-**ProcessStartInfo** object shows that you can use the **Open** and **RunAs** verbs with
-`PowerShell.exe`, or with any process that runs a `.exe` file.
+`powershell.exe`, the file that runs in the PowerShell process. The **Verbs** property of the
+**ProcessStartInfo** object shows that you can use the **Open** and `RunAs` verbs with
+`powershell.exe`, or with any process that runs a `.exe` file.
 
 ### Example 7: Specifying arguments to the process
 
@@ -124,8 +130,57 @@ Note that the first command specifies a string as **ArgumentList**. The second c
 array.
 
 ```powershell
-Start-Process -FilePath "$env:comspec" -ArgumentList "/c dir `"%systemdrive%\program files`""
-Start-Process -FilePath "$env:comspec" -ArgumentList "/c","dir","`"%systemdrive%\program files`""
+Start-Process -FilePath "$Env:ComSpec" -ArgumentList "/c dir `"%SystemDrive%\Program Files`""
+Start-Process -FilePath "$Env:ComSpec" -ArgumentList "/c","dir","`"%SystemDrive%\Program Files`""
+```
+
+### Example 8: Create a detached process on Linux
+
+On Windows, `Start-Process` creates an independent process that remains running independently of the
+launching shell. On non-Windows platforms, the newly started process is attached to the shell that
+launched. If the launching shell is closed, the child process is terminated.
+
+To avoid terminating the child process on Unix-like platforms, you can combine `Start-Process` with
+`nohup`. The following example launches a background instance of PowerShell on Linux that stays
+alive even after you close the launching session. The `nohup` command collects output in file
+`nohup.out` in the current directory.
+
+```powershell
+# Runs for 2 minutes and appends output to ./nohup.out
+Start-Process nohup 'pwsh -NoProfile -c "1..120 | % { Write-Host . -NoNewline; sleep 1 }"'
+```
+
+In this example, `Start-Process` is running the Linux `nohup` command, which launches `pwsh` as a
+detached process. For more information, see the [nohup](https://wikipedia.org/wiki/Nohup) article on
+Wikipedia.
+
+### Example 9: Overriding an environment variable for a process
+
+By default, when you use `Start-Process`, the new process is created with the same environment
+variables as the current session. You can use the **Environment** parameter to override the values
+of those variables.
+
+In this example, the environment variable `FOO` is added to the session with `foo` as the value.
+
+The example runs `Start-Process` three times, returning the value of `FOO` each time. The first
+command doesn't override the environment variable. In the second command, `FOO` is set to `bar`. In
+the third command, `FOO` is set to `$null`, which removes it.
+
+```powershell
+$Env:FOO = 'foo'
+Start-Process pwsh -NoNewWindow -ArgumentList '-c', '$Env:FOO'
+Start-Process pwsh -NoNewWindow -ArgumentList '-c', '$Env:FOO' -Environment @{
+    FOO  = 'bar'
+}
+Start-Process pwsh -NoNewWindow -ArgumentList '-c', '$Env:FOO' -Environment @{
+    FOO  = $null
+}
+```
+
+```Output
+foo
+bar
+
 ```
 
 ## PARAMETERS
@@ -134,10 +189,16 @@ Start-Process -FilePath "$env:comspec" -ArgumentList "/c","dir","`"%systemdrive%
 
 Specifies parameters or parameter values to use when this cmdlet starts the process. Arguments can
 be accepted as a single string with the arguments separated by spaces, or as an array of strings
-separated by commas.
+separated by commas. The cmdlet joins the array into a single string with each element of the array
+separated by a single space.
 
-If parameters or parameter values contain a space, they need to be surrounded with escaped double
-quotes. For more information, see [about_Quoting_Rules](../Microsoft.PowerShell.Core/About/about_Quoting_Rules.md).
+The outer quotes of the PowerShell strings aren't included when the **ArgumentList** values are
+passed to the new process. If parameters or parameter values contain a space or quotes, they need to
+be surrounded with escaped double quotes. For more information, see
+[about_Quoting_Rules](../Microsoft.PowerShell.Core/About/about_Quoting_Rules.md).
+
+For the best results, use a single **ArgumentList** value containing all the arguments and any
+needed quote characters.
 
 ```yaml
 Type: System.String[]
@@ -179,13 +240,39 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Environment
+
+Specifies one or more environment variables to override for the process as a hash table. Specify
+the name of an environment variable as a key in the hash table and the desired value. To unset an
+environment variable, specify its value as `$null`.
+
+The specified variables are replaced in the process. When you specify the `PATH` environment
+variable it's replaced with the value of `$PSHOME` followed by the specified value from this
+parameter. On Windows, the command appends the values for `PATH` in the Machine and User scopes
+after the new value.
+
+This parameter was added in PowerShell 7.4.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -FilePath
 
 Specifies the optional path and filename of the program that runs in the process. Enter the name of
-an executable file or of a document, such as a `.txt` or `.doc` file, that is associated with a
+an executable file or of a document, such as a `.txt` or `.doc` file, that's associated with a
 program on the computer. This parameter is required.
 
-If you specify only a filename, use the **WorkingDirectory** parameter to specify the path.
+If you specify only a filename that does not correspond to a system command, use the
+**WorkingDirectory** parameter to specify the path.
 
 ```yaml
 Type: System.String
@@ -202,9 +289,9 @@ Accept wildcard characters: False
 ### -LoadUserProfile
 
 Indicates that this cmdlet loads the Windows user profile stored in the `HKEY_USERS` registry key
-for the current user. The parameter does not apply for non-Windows systems.
+for the current user. The parameter doesn't apply to non-Windows systems.
 
-This parameter does not affect the PowerShell profiles. For more information, see
+This parameter doesn't affect the PowerShell profiles. For more information, see
 [about_Profiles](../Microsoft.PowerShell.Core/About/about_Profiles.md).
 
 ```yaml
@@ -222,11 +309,11 @@ Accept wildcard characters: False
 ### -NoNewWindow
 
 Start the new process in the current console window. By default on Windows, PowerShell opens a new
-window. On non-Windows systems, you never get a new terminal window.
+window. On non-Windows systems, you never get a new window.
 
-You cannot use the **NoNewWindow** and **WindowStyle** parameters in the same command.
+You can't use the **NoNewWindow** and **WindowStyle** parameters in the same command.
 
-The parameter does not apply for non-Windows systems.
+The parameter doesn't apply to non-Windows systems.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -242,7 +329,7 @@ Accept wildcard characters: False
 
 ### -PassThru
 
-Returns a process object for each process that the cmdlet started. By default, this cmdlet does not
+Returns a process object for each process that the cmdlet started. By default, this cmdlet doesn't
 generate any output.
 
 ```yaml
@@ -313,6 +400,10 @@ Accept wildcard characters: False
 Indicates that this cmdlet uses new environment variables specified for the process. By default, the
 started process runs with the environment variables inherited from the parent process.
 
+On Windows, when you use **UseNewEnvironment**, the new process starts only containing the default
+environment variables defined for the **Machine** scope. This has the side effect that the
+`$Env:USERNAME` is set to **SYSTEM**. None of the variables from the **User** scope are included.
+
 ```yaml
 Type: System.Management.Automation.SwitchParameter
 Parameter Sets: Default
@@ -332,18 +423,18 @@ determined by the filename extension of the file that runs in the process.
 
 The following table shows the verbs for some common process file types.
 
-| File type |                Verbs                |
-| --------- | ----------------------------------- |
-| .cmd      | Edit, Open, Print, RunAs, RunAsUser |
-| .exe      | Open, RunAs, RunAsUser              |
-| .txt      | Open, Print, PrintTo                |
-| .wav      | Open, Play                          |
+| File type |                     Verbs                     |
+| --------- | --------------------------------------------- |
+| .cmd      | `Edit`, `Open`, `Print`, `RunAs`, `RunAsUser` |
+| .exe      | `Open`, `RunAs`, `RunAsUser`                  |
+| .txt      | `Open`, `Print`, `PrintTo`                    |
+| .wav      | `Open`, `Play`                                |
 
 To find the verbs that can be used with the file that runs in a process, use the `New-Object` cmdlet
 to create a **System.Diagnostics.ProcessStartInfo** object for the file. The available verbs are in
 the **Verbs** property of the **ProcessStartInfo** object. For details, see the examples.
 
-The parameter does not apply for non-Windows systems.
+The parameter doesn't apply to non-Windows systems.
 
 ```yaml
 Type: System.String
@@ -377,13 +468,18 @@ Accept wildcard characters: False
 
 ### -WindowStyle
 
-Specifies the state of the window that is used for the new process. The acceptable values for this
-parameter are: **Normal**, **Hidden**, **Minimized**, and **Maximized**. The default value is
-**Normal**.
+Specifies the state of the window that's used for the new process. The default value is `Normal`.
+The acceptable values for this parameter are:
 
-You cannot use the **WindowStyle** and **NoNewWindow** parameters in the same command.
+- `Normal`
+- `Hidden`
+- `Minimized`
+- `Maximized`
 
-The parameter does not apply for non-Windows systems.
+You can't use the **WindowStyle** and **NoNewWindow** parameters in the same command.
+
+The parameter doesn't apply to non-Windows systems. When using on non-Windows systems, you never
+get a new window.
 
 ```yaml
 Type: System.Diagnostics.ProcessWindowStyle
@@ -400,10 +496,14 @@ Accept wildcard characters: False
 
 ### -WorkingDirectory
 
-Specifies the location that the new process should start in. The default is the location of the
-executable file or document being started. The path provided is treated as a literal path. Wildcards
-are not supported. You must enclose the path in single quotes (`'`) if the path name contains
-characters that would be interpreted as wildcards.
+Specifies the location that the new process should start in.
+
+When not specified, the cmdlet defaults to the fully-qualified location specified in the
+**FilePath** parameter. If the value of the **FilePath** parameter is not fully-qualified, it
+defaults to the current working directory of the calling process.
+
+Wildcards aren't supported. The path must not contain characters that would be interpreted as
+wildcards.
 
 ```yaml
 Type: System.String
@@ -435,7 +535,7 @@ Accept wildcard characters: False
 
 ### -WhatIf
 
-Shows what would happen if the cmdlet runs. The cmdlet is not run.
+Shows what would happen if the cmdlet runs. The cmdlet isn't run.
 
 This parameter was introduced in PowerShell 6.0.
 
@@ -462,30 +562,57 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You cannot pipe input to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
-### None, System.Diagnostics.Process
+### None
 
-This cmdlet generates a **System.Diagnostics.Process** object, if you specify the **PassThru**
-parameter. Otherwise, this cmdlet does not return any output.
+By default, this cmdlet returns no output.
+
+### System.Diagnostics.Process
+
+When you use the **PassThru** parameter, this cmdlet returns a **Process** object.
 
 ## NOTES
 
-- This cmdlet is implemented by using the **Start** method of the **System.Diagnostics.Process**
-  class. For more information about this method, see
-  [Process.Start Method](/dotnet/api/system.diagnostics.process.start#overloads).
+PowerShell includes the following aliases for `Start-Process`:
 
-- On Windows, when you use **UseNewEnvironment**, the new process starts only containing the default
-  environment variables defined for the **Machine** scope. This has the side affect that the
-  `$env:USERNAME` is set to **SYSTEM**. None of the variables from the **User** scope are included.
+- All platforms
+  - `saps`
+- Windows
+  - `start`
 
-- On Windows, the most common use case for `Start-Process` is to use the **Wait** parameter to block
-  progress until the new process exits. On non-Windows system, this is rarely needed since the
-  default behavior for command-line applications is equivalent to `Start-Process -Wait`.
+Native commands are executable files installed in the operating system. These executables can be run
+from any command-line shell, like PowerShell. Usually you run the command exactly as you would in
+`bash` or `cmd.exe`. The `Start-Process` cmdlet can be used to run any native commands, but should
+only be used when you need to control how the command is executed.
 
-- When using `Start-Process` on non-Windows systems, you never get a new terminal window.
+`Start-Process` is useful for running GUI programs on non-Windows platforms. For example, run
+`Start-Process gedit` to launch the graphical text editor common the GNOME Desktop environments.
+
+By default, `Start-Process` launches a process _asynchronously_. Control is instantly returned to
+PowerShell even if the new process is still running.
+
+- On the local system, the launched process lives on independent from the calling process.
+- On a remote system, the new process is terminated when the remote session ends, immediately
+  following the `Start-Process` command. Therefore, you can't use `Start-Process` in a remote
+  session expecting the launched process to outlive the session.
+
+If you do need to use `Start-Process` in a remote session, invoke it with the **Wait** parameter. Or
+you could use other methods to create a new process on the remote system.
+
+When using the **Wait** parameter, `Start-Process` waits for the process tree (the process and all
+its descendants) to exit before returning control. This is different than the behavior of the
+`Wait-Process` cmdlet, which only waits for the specified processes to exit.
+
+On Windows, the most common use case for `Start-Process` is to use the **Wait** parameter to block
+progress until the new process exits. On non-Windows system, this is rarely needed since the default
+behavior for command-line applications is equivalent to `Start-Process -Wait`.
+
+This cmdlet is implemented using the **Start** method of the **System.Diagnostics.Process**
+class. For more information about this method, see
+[Process.Start Method](/dotnet/api/system.diagnostics.process.start#overloads).
 
 ## RELATED LINKS
 

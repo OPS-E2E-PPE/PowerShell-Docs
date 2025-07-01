@@ -1,20 +1,20 @@
 ---
-keywords: powershell,cmdlet
+description: Provides a brief introduction to the PowerShell Desired State Configuration (DSC) feature.
 Locale: en-US
 ms.date: 07/23/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_desiredstateconfiguration?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_desiredstateconfiguration?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_DesiredStateConfiguration
 ---
 
 # about_DesiredStateConfiguration
 
-## SHORT DESCRIPTION
+## Short description
 
 Provides a brief introduction to the PowerShell Desired State
 Configuration (DSC) feature.
 
-## LONG DESCRIPTION
+## Long description
 
 DSC is a management platform in PowerShell that enables deploying and managing
 configuration data for software services, and managing the environment in
@@ -28,15 +28,13 @@ maintain and manage existing configurations.
 DSC is introduced in PowerShell 4.0.
 
 For detailed information about DSC, see
-[PowerShell Desired State Configuration Overview](/powershell/scripting/dsc/overview/overview)
-in the TechNet Library.
+[PowerShell Desired State Configuration Overview](/powershell/scripting/dsc/overview).
 
 ## DEVELOPING DSC RESOURCES WITH CLASSES
 
 Starting in PowerShell 5.0, you can develop DSC resources by using classes.
 For more information, see [about_Classes](about_Classes.md), and
-[Writing a custom DSC resource with PowerShell classes](/previous-versions//dn948461(v=technet.10))
-on Microsoft TechNet.
+[Writing a custom DSC resource with PowerShell classes](/powershell/scripting/dsc/resources/authoringresourceclass).
 
 ## USING DSC
 
@@ -94,7 +92,7 @@ have defined (two in the example above). For example, in this case:
 
 ```powershell
 MyWebConfig -MachineName "TestMachine" -WebsiteFilePath `
-  "\\filesrv\WebFiles" -OutputPath "C:\Windows\system32\temp"
+  "\\filesrv\WebFiles" -OutputPath "C:\Windows\system32\Temp"
 # OutputPath is optional
 ```
 
@@ -105,7 +103,7 @@ configuration, and enact those configurations. Note that you do not need to
 create a separate MOF file for class-based DSC resources.
 
 ```powershell
-Start-DscConfiguration -Verbose -Wait -Path "C:\Windows\system32\temp"
+Start-DscConfiguration -Verbose -Wait -Path "C:\Windows\system32\Temp"
 ```
 
 ## USING DSC TO MAINTAIN CONFIGURATION STATE
@@ -155,7 +153,8 @@ To get a list of available DSC resources on your system, run the
 `Get-DscResource` cmdlet.
 
 > [!NOTE]
-> In PowerShell versions below 7.0, `Get-DscResource` does not find Class based DSC resources.
+> In PowerShell versions below 7.0, `Get-DscResource` does not find Class based
+> DSC resources.
 
 The example in this topic demonstrates how to use the File and WindowsFeature
 resources. To see all properties that you can use with a resource, insert the
@@ -169,10 +168,8 @@ that have been created by the PowerShell and DSC user community, and by
 Microsoft. Visit the [PowerShell Gallery](https://www.powershellgallery.com/)
 to browse and learn about available DSC resources.
 
-## SEE ALSO
+## See also
 
-[PowerShell Desired State Configuration Overview](/powershell/scripting/dsc/overview/overview)
-
-[Built-In PowerShell Desired State Configuration Resources](/powershell/scripting/dsc/resources/resources)
-
-[Build Custom PowerShell Desired State Configuration Resources](/powershell/scripting/dsc/resources/authoringResource)
+- [PowerShell Desired State Configuration Overview](/powershell/scripting/dsc/overview/)
+- [Built-In PowerShell Desired State Configuration Resources](/powershell/scripting/dsc/resources/resources)
+- [Build Custom PowerShell Desired State Configuration Resources](/powershell/scripting/dsc/resources/authoringResource)

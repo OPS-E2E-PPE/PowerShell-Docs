@@ -1,10 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 01/10/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/disable-psremoting?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 10/06/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/disable-psremoting?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Disable-PSRemoting
 ---
@@ -20,6 +19,8 @@ Disable-PSRemoting [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `Disable-PSRemoting` cmdlet blocks remote access to all PowerShell version 6 and greater session
 endpoint configurations on the local computer. It does not affect Windows PowerShell endpoint
@@ -56,7 +57,8 @@ option.
 
 ### Example 1: Prevent remote access to all PowerShell session configurations
 
-This example prevents remote access to all PowerShell session endpoint configurations on the computer.
+This example prevents remote access to all PowerShell session endpoint configurations on the
+computer.
 
 ```powershell
 Disable-PSRemoting
@@ -148,11 +150,11 @@ configurations as long as they are connecting locally (also known as loopback) a
 credentials.
 
 ```powershell
-Disable-PSRemoting -force
-Get-PSSessionConfiguration | Format-Table -Property Name, Permission -Auto
+Disable-PSRemoting -Force
+Get-PSSessionConfiguration | Format-Table -Property Name, Permission -AutoSize
 
 Enable-PSRemoting -Force
-Get-PSSessionConfiguration | Format-Table -Property Name, Permission -Auto
+Get-PSSessionConfiguration | Format-Table -Property Name, Permission -AutoSize
 ```
 
 ```Output
@@ -247,7 +249,7 @@ disabled.
 
 ```powershell
 Disable-PSRemoting -Force
-powershell.exe -command 'Get-PSSessionConfiguration'
+powershell.exe -Command 'Get-PSSessionConfiguration'
 ```
 
 ```Output
@@ -299,8 +301,8 @@ Permission    : NT AUTHORITY\NETWORK AccessDenied, NT AUTHORITY\INTERACTIVE Acce
 ```
 
 ```powershell
-powershell.exe -command 'Disable-PSRemoting -Force'
-powershell.exe -command 'Get-PSSessionConfiguration'
+powershell.exe -Command 'Disable-PSRemoting -Force'
+powershell.exe -Command 'Get-PSSessionConfiguration'
 ```
 
 ```Output
@@ -432,10 +434,10 @@ the configuration.
 
 ```powershell
 Disable-PSRemoting -Force
-Get-PSSessionConfiguration | Format-Table -Property Name, Permission -Auto
+Get-PSSessionConfiguration | Format-Table -Property Name, Permission -AutoSize
 
 Set-PSSessionConfiguration -Name PowerShell.6 -AccessMode Remote -Force
-Get-PSSessionConfiguration | Format-Table -Property Name, Permission -Auto
+Get-PSSessionConfiguration | Format-Table -Property Name, Permission -AutoSize
 ```
 
 ```Output
@@ -460,22 +462,6 @@ PowerShell.6.2.0     NT AUTHORITY\NETWORK AccessDenied, NT AUTHORITY\INTERACTIVE
 
 ## PARAMETERS
 
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Force
 
 Forces the command to run without asking for user confirmation.
@@ -488,6 +474,22 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -519,24 +521,26 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You cannot pipe any objects to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### None
 
-This cmdlet does not generate any output.
+This cmdlet returns no output.
 
 ## NOTES
+
+This cmdlet is only available on Windows platforms.
 
 - Disabling the session configurations does not undo all the changes that were made by the
   `Enable-PSRemoting` or `Enable-PSSessionConfiguration` cmdlets. You might have to undo the
   following changes manually.
 
   1. Stop and disable the WinRM service.
-  2. Delete the listener that accepts requests on any IP address.
-  3. Disable the firewall exceptions for WS-Management communications.
-  4. Restore the value of the LocalAccountTokenFilterPolicy to 0, which restricts remote access to
+  1. Delete the listener that accepts requests on any IP address.
+  1. Disable the firewall exceptions for WS-Management communications.
+  1. Restore the value of the LocalAccountTokenFilterPolicy to 0, which restricts remote access to
      members of the Administrators group on the computer.
 
 - A session endpoint configuration is a group of settings that define the environment for a session.

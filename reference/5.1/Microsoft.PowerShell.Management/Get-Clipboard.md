@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 09/21/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/get-clipboard?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 01/08/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-clipboard?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Clipboard
 ---
+
 # Get-Clipboard
 
 ## SYNOPSIS
@@ -22,7 +22,7 @@ Get-Clipboard [-Format <ClipboardFormat>] [-TextFormatType <TextDataFormat>] [-R
 ## DESCRIPTION
 
 The `Get-Clipboard` cmdlet gets the current Windows clipboard entry. Multiple lines of text are
-returned as an array of strings similar `Get-Content`.
+returned as an array of strings similar to `Get-Content`.
 
 ## EXAMPLES
 
@@ -41,7 +41,7 @@ https://en.wikipedia.org/wiki/PowerShell
 
 ### Example 2: Get the content of the clipboard in a specific format
 
-In this example we copied files to the clipboard in Windows Explorerby selecting them and pressing
+In this example we copied files to the clipboard in Windows Explorer by selecting them and pressing
 <kbd>Ctrl-C</kbd>. Using the following command, you can access the contents of the clipboard as a
 list of files:
 
@@ -132,11 +132,25 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
+
+You can't pipe objects to this cmdlet.
+
 ## OUTPUTS
 
-### System.String, System.IO.FileInfo, System.IO.Stream, System.Drawing.Image
+### System.String
+
+### System.IO.FileInfo
+
+### System.IO.Stream
+
+### System.Drawing.Image
 
 ## NOTES
+
+Windows PowerShell includes the following aliases for `Get-Clipboard`:
+
+- `gcb`
 
 ## RELATED LINKS
 

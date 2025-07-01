@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/restart-service?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 09/03/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/restart-service?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Restart-Service
 ---
+
 # Restart-Service
 
 ## SYNOPSIS
@@ -38,9 +38,13 @@ Restart-Service [-Force] [-PassThru] -DisplayName <String[]> [-Include <String[]
 
 ## DESCRIPTION
 
-The **Restart-Service** cmdlet sends a stop message and then a start message to the Windows Service Controller for a specified service.
-If a service was already stopped, it is started without notifying you of an error.
-You can specify the services by their service names or display names, or you can use the *InputObject* parameter to pass an object that represents each service that you want to restart.
+> **This cmdlet is only available on the Windows platform.**
+
+The `Restart-Service` cmdlet sends a stop message and then a start message to the Windows Service
+Controller for a specified service. If a service was already stopped, it is started without
+notifying you of an error. You can specify the services by their service names or display names, or
+you can use the **InputObject** parameter to pass an object that represents each service that you
+want to restart.
 
 ## EXAMPLES
 
@@ -50,7 +54,8 @@ You can specify the services by their service names or display names, or you can
 PS C:\> Restart-Service -Name winmgmt
 ```
 
-This command restarts the Windows Management Instrumentation service (WinMgmt) on the local computer.
+This command restarts the Windows Management Instrumentation service (WinMgmt) on the local
+computer.
 
 ### Example 2: Exclude a service
 
@@ -58,7 +63,8 @@ This command restarts the Windows Management Instrumentation service (WinMgmt) o
 PS C:\> Restart-Service -DisplayName "net*" -Exclude "net logon"
 ```
 
-This command restarts the services that have a display name that starts with Net, except for the Net Logon service.
+This command restarts the services that have a display name that starts with Net, except for the Net
+Logon service.
 
 ### Example 3: Start all stopped network services
 
@@ -68,18 +74,19 @@ PS C:\> Get-Service -Name "net*" | Where-Object {$_.Status -eq "Stopped"} | Rest
 
 This command starts all of the stopped network services on the computer.
 
-This command uses the Get-Service cmdlet to get objects that represent the services whose service name starts with net.
-The pipeline operator (|) sends the services object to the Where-Object cmdlet, which selects only the services that have a status of stopped.
-Another pipeline operator sends the selected services to **Restart-Service**.
+This command uses the `Get-Service` cmdlet to get objects that represent the services whose service
+name starts with net. The pipeline operator (`|`) sends the services object to the `Where-Object`
+cmdlet, which selects only the services that have a status of stopped. Another pipeline operator
+sends the selected services to `Restart-Service`.
 
-In practice, you would use the *WhatIf* parameter to determine the effect of the command before you run it.
+In practice, you would use the **WhatIf** parameter to determine the effect of the command before
+you run it.
 
 ## PARAMETERS
 
 ### -DisplayName
 
-Specifies the display names of services to restarted.
-Wildcard characters are permitted.
+Specifies the display names of the services to restarted. Wildcard characters are permitted.
 
 ```yaml
 Type: System.String[]
@@ -95,10 +102,8 @@ Accept wildcard characters: True
 
 ### -Exclude
 
-Specifies services that this cmdlet omits.
-The value of this parameter qualifies the *Name* parameter.
-Enter a name element or pattern, such as s*.
-Wildcard characters are permitted.
+Specifies services that this cmdlet omits. The value of this parameter qualifies the **Name**
+parameter. Enter a name element or pattern, such as s*. Wildcard characters are permitted.
 
 ```yaml
 Type: System.String[]
@@ -130,10 +135,8 @@ Accept wildcard characters: False
 
 ### -Include
 
-Specifies services that this cmdlet restarts.
-The value of this parameter qualifies the *Name* parameter.
-Enter a name element or pattern, such as s*.
-Wildcard characters are permitted.
+Specifies services that this cmdlet restarts. The value of this parameter qualifies the **Name**
+parameter. Enter a name element or pattern, such as s*. Wildcard characters are permitted.
 
 ```yaml
 Type: System.String[]
@@ -149,8 +152,8 @@ Accept wildcard characters: True
 
 ### -InputObject
 
-Specifies **ServiceController** objects that represent the services to restart.
-Enter a variable that contains the objects, or type a command or expression that gets the objects.
+Specifies **ServiceController** objects that represent the services to restart. Enter a variable
+that contains the objects, or type a command or expression that gets the objects.
 
 ```yaml
 Type: System.ServiceProcess.ServiceController[]
@@ -182,8 +185,7 @@ Accept wildcard characters: True
 
 ### -PassThru
 
-Returns an object that represents the service.
-By default, this cmdlet does not generate any output.
+Returns an object that represents the service. By default, this cmdlet does not generate any output.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -215,8 +217,7 @@ Accept wildcard characters: False
 
 ### -WhatIf
 
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -232,25 +233,41 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### System.ServiceProcess.ServiceController, System.String
+### System.ServiceProcess.ServiceController
 
-You can pipe a service object or a string that contains a service name to this cmdlet.
+You can pipe a service object to this cmdlet.
+
+### System.String
+
+You can pipe a string that contains a service name to this cmdlet.
 
 ## OUTPUTS
 
-### None, System.ServiceProcess.ServiceController
+### None
 
-This cmdlet generates a **System.ServiceProcess.ServiceController** object that represents the restarted service, if you specify the *PassThru* parameter.
-Otherwise, this cmdlet does not generate any output.
+By default, this cmdlet returns no output.
+
+### System.ServiceProcess.ServiceController
+
+When you use the **PassThru** parameter, this cmdlet returns a **ServiceController** object
+representing the restarted service.
 
 ## NOTES
 
-* **Restart-Service** can control services only when the current user has permission to do this. If a command does not work correctly, you might not have the required permissions.
-* To find the service names and display names of the services on your system, type **Get-Service**". The service names appear in the **Name** column, and the display names appear in the **DisplayName** column.
+This cmdlet is only available on Windows platforms.
+
+- `Restart-Service` can control services only when the current user has permission to do this. If a
+  command does not work correctly, you might not have the required permissions.
+- To find the service names and display names of the services on your system, type `Get-Service`".
+  The service names appear in the **Name** column, and the display names appear in the
+  **DisplayName** column.
 
 ## RELATED LINKS
 
@@ -269,4 +286,3 @@ Otherwise, this cmdlet does not generate any output.
 [Suspend-Service](Suspend-Service.md)
 
 [Remove-Service](Remove-Service.md)
-

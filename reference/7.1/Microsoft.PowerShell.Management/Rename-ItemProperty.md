@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 5/14/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/rename-itemproperty?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 02/07/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/rename-itemproperty?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Rename-ItemProperty
 ---
+
 # Rename-ItemProperty
 
 ## SYNOPSIS
@@ -149,7 +149,7 @@ Accept wildcard characters: True
 
 ### -LiteralPath
 
-Specifies a path to one or more locations. The value of **LiteralPath** is used exactly as it is
+Specifies a path to the item. The value of **LiteralPath** is used exactly as it is
 typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose
 it in single quotation marks. Single quotation marks tell PowerShell not to interpret any characters
 as escape sequences.
@@ -219,7 +219,7 @@ Accept wildcard characters: False
 
 ### -Path
 
-Specifies the path of the item to rename.
+Specifies a path to the item.
 Wildcard characters are permitted.
 
 ```yaml
@@ -282,14 +282,23 @@ You can pipe a string that contains a path, but not a literal path, to this cmdl
 
 ## OUTPUTS
 
-### None, System.Management.Automation.PSCustomObject
+### None
 
-This cmdlet generates a **PSCustomObject** that represents the renamed item property, if you specify
-the **PassThru** parameter. Otherwise, this cmdlet does not generate any output.
+By default, this cmdlet returns no output.
+
+### System.Management.Automation.PSCustomObject
+
+When you use the **PassThru** parameter, this cmdlet returns a **PSCustomObject** representing the
+renamed item property.
 
 ## NOTES
 
-`Remove-ItemProperty` is designed to work with the data exposed by any provider. To list the
+PowerShell includes the following aliases for `Rename-ItemProperty`:
+
+- All platforms:
+  - `rnp`
+
+`Rename-ItemProperty` is designed to work with the data exposed by any provider. To list the
 providers available in your session, type `Get-PSProvider`. For more information, see
 [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
@@ -312,4 +321,3 @@ providers available in your session, type `Get-PSProvider`. For more information
 [Set-ItemProperty](Set-ItemProperty.md)
 
 [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md)
-

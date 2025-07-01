@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.Management.Infrastructure.CimCmdlets.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: CimCmdlets
-ms.date: 5/15/2019
-online version: https://docs.microsoft.com/powershell/module/cimcmdlets/remove-ciminstance?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 06/28/2023
+online version: https://learn.microsoft.com/powershell/module/cimcmdlets/remove-ciminstance?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Remove-CimInstance
 ---
@@ -18,34 +17,38 @@ Removes a CIM instance from a computer.
 ### CimInstanceComputerSet (Default)
 
 ```
-Remove-CimInstance [-ResourceUri <Uri>] [-ComputerName <String[]>] [-OperationTimeoutSec <UInt32>]
- [-InputObject] <CimInstance> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CimInstance [-ResourceUri <Uri>] [-ComputerName <String[]>]
+ [-OperationTimeoutSec <UInt32>] [-InputObject] <CimInstance> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### CimInstanceSessionSet
 
 ```
-Remove-CimInstance -CimSession <CimSession[]> [-ResourceUri <Uri>] [-OperationTimeoutSec <UInt32>]
- [-InputObject] <CimInstance> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CimInstance -CimSession <CimSession[]> [-ResourceUri <Uri>]
+ [-OperationTimeoutSec <UInt32>] [-InputObject] <CimInstance> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### QuerySessionSet
 
 ```
 Remove-CimInstance -CimSession <CimSession[]> [[-Namespace] <String>]
- [-OperationTimeoutSec <UInt32>] [-Query] <String> [-QueryDialect <String>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-OperationTimeoutSec <UInt32>] [-Query] <String> [-QueryDialect <String>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ### QueryComputerSet
 
 ```
 Remove-CimInstance [-ComputerName <String[]>] [[-Namespace] <String>]
- [-OperationTimeoutSec <UInt32>] [-Query] <String> [-QueryDialect <String>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-OperationTimeoutSec <UInt32>] [-Query] <String> [-QueryDialect <String>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 This cmdlet removes a CIM instance from a CIM server. You can specify the CIM instance to remove by
 using either a CIM instance object retrieved by the `Get-CimInstance` cmdlet, or by specifying a
@@ -135,6 +138,9 @@ Accept wildcard characters: False
 Specifies a CIM instance object to be removed from the CIM server. The object passed to the cmdlet
 is not changed, only the instance in the CIM server is removed.
 
+The **InputObject** parameter doesn't enumerate over collections. If a collection is passed, an
+error is thrown. When working with collections, pipe the input to enumerate the values.
+
 ```yaml
 Type: Microsoft.Management.Infrastructure.CimInstance
 Parameter Sets: CimInstanceComputerSet, CimInstanceSessionSet
@@ -149,7 +155,7 @@ Accept wildcard characters: False
 
 ### -Namespace
 
-Specifies the namespace for the CIM operation. The default namespace is **root/cimv2**. You can use
+Specifies the namespace for the CIM operation. The default namespace is **root/CIMV2**. You can use
 tab completion to browse the list of namespaces, because PowerShell gets a list of namespaces from
 the local WMI server to provide the list of namespaces.
 
@@ -168,7 +174,7 @@ Accept wildcard characters: False
 ### -OperationTimeoutSec
 
 Specifies the amount of time that the cmdlet waits for a response from the computer. By default, the
-value of this parameter is 0, which means that the cmdlet uses the default timeout value for the
+value of this parameter is `0`, which means that the cmdlet uses the default timeout value for the
 server.
 
 If the **OperationTimeoutSec** parameter is set to a value less than the robust connection retry
@@ -195,7 +201,7 @@ Specifies a query to run on the CIM server. You can specify the query dialect us
 
 If the value specified contains double quotes (`"`), single quotes (`'`), or a backslash (`\`), you
 must escape those characters by prefixing them with the backslash (`\`) character. If the value
-specified uses the WQL LIKE operator, then you must escape the following characters by enclosing
+specified uses the WQL `LIKE` operator, then you must escape the following characters by enclosing
 them in square brackets (`[]`): percent (`%`), underscore (`_`), or opening square bracket (`[`).
 
 ```yaml
@@ -213,7 +219,7 @@ Accept wildcard characters: False
 ### -QueryDialect
 
 Specifies the query language used for the Query parameter. The acceptable values for this parameter
-are: **WQL** or **CQL**. The default value is **WQL**.
+are: `WQL` or `CQL`. The default value is `WQL`.
 
 ```yaml
 Type: System.String
@@ -240,10 +246,11 @@ A URI consists of a prefix and a path to a resource. For example:
 By default, if you do not specify this parameter, the DMTF standard resource URI
 `http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/` is used and the class name is appended to it.
 
-ResourceURI can only be used with CIM sessions created using the WSMan protocol, or when specifying
-the ComputerName parameter, which creates a CIM session using WSMan. If you specify this parameter
-without specifying the ComputerName parameter, or if you specify a CIM session created using DCOM
-protocol, you get an error, because the DCOM protocol does not support the ResourceURI parameter.
+**ResourceUri** can only be used with CIM sessions created using the WSMan protocol, or when
+specifying the **ComputerName** parameter, which creates a CIM session using WSMan. If you specify
+this parameter without specifying the **ComputerName** parameter, or if you specify a CIM session
+created using DCOM protocol, you get an error, because the DCOM protocol does not support the
+**ResourceUri** parameter.
 
 If both the **ResourceUri** parameter and the **Filter** parameter are specified, the **Filter**
 parameter is ignored.
@@ -303,21 +310,27 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-This cmdlet accepts no input objects.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### None
 
-This cmdlet produces no outputs.
+This cmdlet returns no output.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Remove-CimInstance`:
+
+- Windows:
+  - `rcim`
+
+This cmdlet is only available on Windows platforms.
 
 ## RELATED LINKS
 
 [New-CimInstance](New-CimInstance.md)
 
-[Get-CimInstance](get-ciminstance.md)
+[Get-CimInstance](Get-CimInstance.md)
 
 [Set-CimInstance](Set-CimInstance.md)
-

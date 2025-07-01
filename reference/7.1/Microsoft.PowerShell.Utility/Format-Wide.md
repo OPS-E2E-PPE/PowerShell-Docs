@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 08/10/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/format-wide?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/format-wide?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Format-Wide
 ---
+
 # Format-Wide
 
 ## SYNOPSIS
@@ -37,23 +37,23 @@ screen.
 Get-ChildItem | Format-Wide -Column 3
 ```
 
-The Get-ChildItem cmdlet gets objects representing each file in the directory. The pipeline
-operator (|) passes the file objects through the pipeline to `Format-Wide`, which formats them for
+The `Get-ChildItem` cmdlet gets objects representing each file in the directory. The pipeline
+operator (`|`) passes the file objects through the pipeline to `Format-Wide`, which formats them for
 output. The **Column** parameter specifies the number of columns.
 
 ### Example 2: Format names of registry keys
 
-This command displays the names of registry keys in the HKEY_CURRENT_USER\Software\Microsoft key.
+This command displays the names of registry keys in the `HKEY_CURRENT_USER\Software\Microsoft` key.
 
 ```powershell
-Get-ChildItem HKCU:\software\microsoft | Format-Wide -Property pschildname -AutoSize
+Get-ChildItem HKCU:\software\Microsoft | Format-Wide -Property PSChildName -AutoSize
 ```
 
-The Get-ChildItem cmdlet gets objects representing the keys. The path is specified as HKCU:, one of
-the drives exposed by the PowerShell Registry provider, followed by the key path. The pipeline
-operator (|) passes the registry key objects through the pipeline to `Format-Wide`, which formats
-them for output. The **Property** parameter specifies the name of the property, and the
-**AutoSize** parameter adjusts the columns for readability.
+The `Get-ChildItem` cmdlet gets objects representing the keys. The path is specified as `HKCU:`, one
+of the drives exposed by the PowerShell Registry provider, followed by the key path. The pipeline
+operator (`|`) passes the registry key objects through the pipeline to `Format-Wide`, which formats
+them for output. The **Property** parameter specifies the name of the property, and the **AutoSize**
+parameter adjusts the columns for readability.
 
 ### Example 3: Troubleshooting format errors
 
@@ -132,14 +132,14 @@ Accept wildcard characters: False
 ### -Expand
 
 Formats the collection object, as well as the objects in the collection. This parameter is designed
-to format objects that support the ICollection (System.Collections) interface. The default value is
-**EnumOnly**.
+to format objects that support the **System.Collections.ICollection** interface. The default value
+is `EnumOnly`.
 
 Valid values are:
 
-- EnumOnly: Displays the properties of the objects in the collection.
-- CoreOnly: Displays the properties of the collection object.
-- Both: Displays the properties of the collection object and the properties of objects in the
+- `EnumOnly`: Displays the properties of the objects in the collection.
+- `CoreOnly`: Displays the properties of the collection object.
+- `Both`: Displays the properties of the collection object and the properties of objects in the
   collection.
 
 ```yaml
@@ -177,14 +177,15 @@ Accept wildcard characters: False
 ### -GroupBy
 
 Formats the output in groups based on a shared property or value. Enter an expression or a property
-of the output.
+of the output. The **GroupBy** parameter expects that the objects are sorted. Use the `Sort-Object`
+cmdlet before using `Format-Wide` to group the objects.
 
 The value of the **GroupBy** parameter can be a new calculated property. The calculated property can
 be a script block or a hash table. Valid key-value pairs are:
 
-- Name (or Label) - `<string>`
-- Expression - `<string>` or `<script block>`
-- FormatString - `<string>`
+- `Name` (or `Label`) - `<string>`
+- `Expression` - `<string>` or `<script block>`
+- `FormatString` - `<string>`
 
 For more information, see
 [about_Calculated_Properties](../Microsoft.PowerShell.Core/About/about_Calculated_Properties.md).
@@ -220,18 +221,17 @@ Accept wildcard characters: False
 
 ### -Property
 
-Specifies the object properties that appear in the display and the order in which they appear.
-Wildcards are permitted.
+Specifies the object property that appears in the display. Wildcards are permitted.
 
 If you omit this parameter, the properties that appear in the display depend on the object being
-displayed. The parameter name "Property" is optional. You cannot use the **Property** and **View**
+displayed. The parameter name **Property** is optional. You cannot use the **Property** and **View**
 parameters in the same command.
 
-The value of the **Property** parameter can be a new calculated property. The calculated property can
-be a script block or a hash table. Valid key-value pairs are:
+The value of the **Property** parameter can be a new calculated property. The calculated property
+can be a script block or a hash table. Valid key-value pairs are:
 
-- Expression - `<string>` or `<script block>`
-- FormatString - `<string>`
+- `Expression` - `<string>` or `<script block>`
+- `FormatString` - `<string>`
 
 For more information, see
 [about_Calculated_Properties](../Microsoft.PowerShell.Core/About/about_Calculated_Properties.md).
@@ -294,28 +294,28 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Management.Automation.PSObject
 
-You can pipe any object to `Format-Wide`.
+You can pipe any object to this cmdlet.
 
 ## OUTPUTS
 
 ### Microsoft.PowerShell.Commands.Internal.Format
 
-`Format-Wide` returns format objects that represent the table.
+This cmdlet returns format objects that represent the table.
 
 ## NOTES
 
-You can also refer to `Format-Wide` by its built-in alias, `fw`. For more information, see [about_Aliases](../Microsoft.PowerShell.Core/About/about_Aliases.md).
+PowerShell includes the following aliases for `Format-Wide`:
 
-The **GroupBy** parameter assumes that the objects are sorted. Use `Sort-Object` before using
-`Format-Custom` to group the objects.
+- All platforms:
+  - `fw`
 
 The **View** parameter lets you specify an alternate format for the table. You can use the views
-defined in the `*.format.PS1XML` files in the PowerShell directory or you can create your own views
+defined in the `*.format.ps1xml` files in the PowerShell directory or you can create your own views
 in new PS1XML files and use the `Update-FormatData` cmdlet to include them in PowerShell.
 
 The alternate view for the **View** parameter must use table format; if it does not, the command
 fails. If the alternate view is a list, use `Format-List`. If the alternate view is neither a list
-nor a table, use Format-Custom.
+nor a table, use `Format-Custom`.
 
 ## RELATED LINKS
 

@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 08/10/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/group-object?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 03/10/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/group-object?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Group-Object
 ---
@@ -40,7 +39,7 @@ and output a **System.Collections.Hashtable** object.
 
 ### Example 1: Group files by extension
 
-This example recursively gets the files under `$PSHOME` and groups them by file name extension. The
+This example recursively gets the files under `$PSHOME` and groups them by filename extension. The
 output is sent to the `Sort-Object` cmdlet, which sorts them by the count files found for the given
 extension. The empty **Name** represents directories.
 
@@ -48,7 +47,9 @@ This example uses the **NoElement** parameter to omit the members of the group.
 
 ```powershell
 $files = Get-ChildItem -Path $PSHOME -Recurse
-$files | Group-Object -Property extension -NoElement | Sort-Object -Property Count -Descending
+$files |
+    Group-Object -Property Extension -NoElement |
+    Sort-Object -Property Count -Descending
 ```
 
 ```Output
@@ -84,7 +85,31 @@ Count Name                      Group
    10 1                         {1, 3, 5, 7...}
 ```
 
-### Example 3: Group event log events by EntryType
+### Example 3: Group hashtables by key value
+
+Beginning in PowerShell 6, `Group-Object` supports sorting of **hashtable** input by key values.
+The following example groups an array of hashtables by the value of each hashtable's `weight` key.
+
+This example uses the **NoElement** parameter to omit the members of the group.
+
+```powershell
+@(
+    @{ name = 'a' ; weight = 7 }
+    @{ name = 'b' ; weight = 1 }
+    @{ name = 'c' ; weight = 3 }
+    @{ name = 'd' ; weight = 7 }
+) | Group-Object -Property weight -NoElement
+```
+
+```output
+Count Name
+----- ----
+    1 1
+    1 3
+    2 7
+```
+
+### Example 4: Group event log events by EntryType
 
 This example displays the 1,000 most recent entries in the System event log, grouped by
 **EntryType**.
@@ -100,12 +125,12 @@ Get-WinEvent -LogName System -MaxEvents 1000 | Group-Object -Property LevelDispl
 ```Output
 Count Name          Group
 ----- ----          -----
-  153 Error         {System.Diagnostics.Eventing.Reader.EventLogRecord, System.Diagnostics...}
-  722 Information   {System.Diagnostics.Eventing.Reader.EventLogRecord, System.Diagnostics...}
-  125 Warning       {System.Diagnostics.Eventing.Reader.EventLogRecord, System.Diagnostics...}
+  153 Error         {System.Diagnostics.Eventing.Reader.EventLogRecord, System.Diag...}
+  722 Information   {System.Diagnostics.Eventing.Reader.EventLogRecord, System.Diag...}
+  125 Warning       {System.Diagnostics.Eventing.Reader.EventLogRecord, System.Diag...}
 ```
 
-### Example 4: Group processes by priority class
+### Example 5: Group processes by priority class
 
 This example demonstrates the effect of the **NoElement** parameter. These commands group the
 processes on the computer by priority class.
@@ -114,7 +139,7 @@ The first command uses the `Get-Process` cmdlet to get the processes on the comp
 objects down the pipeline. `Group-Object`groups the objects by the value of the **PriorityClass**
 property of the process.
 
-The second example uses the **NoElement** parameter to eliminate the members of the group from the
+The second example uses the **NoElement** parameter to remove the members of the group from the
 output. The result is a table with only the **Count** and **Name** property value.
 
 The results are shown in the following sample output.
@@ -145,7 +170,7 @@ Count Name
     2 BelowNormal
 ```
 
-### Example 5: Group processes by name
+### Example 6: Group processes by name
 
 The following example uses `Group-Object` to group multiple instances of processes running on the
 local computer. `Where-Object` displays processes with more than one instance.
@@ -163,7 +188,7 @@ Count Name
 2     wmiprvse
 ```
 
-### Example 6: Group objects in a hash table
+### Example 7: Group objects in a hash table
 
 This example uses the **AsHashTable** and **AsString** parameters to return the groups in a hash
 table, as a collection of key-value pairs.
@@ -183,7 +208,8 @@ values are **CmdletInfo** object. The **AsString** parameter doesn't convert the
 groups to strings.
 
 ```powershell
-$A = Get-Command Get-*, Set-* -CommandType cmdlet | Group-Object -Property Verb -AsHashTable -AsString
+$A = Get-Command Get-*, Set-* -CommandType Cmdlet |
+     Group-Object -Property Verb -AsHashTable -AsString
 $A
 ```
 
@@ -199,22 +225,23 @@ $A.Get
 ```
 
 ```Output
-CommandType     Name                                Version    Source
------------     ----                                -------    ------
-Cmdlet          Get-Acl                             7.0.0.0    Microsoft.PowerShell.Security
-Cmdlet          Get-Alias                           7.0.0.0    Microsoft.PowerShell.Utility
-Cmdlet          Get-AppLockerFileInformation        2.0.0.0    AppLocker
-Cmdlet          Get-AppLockerPolicy                 2.0.0.0    AppLocker
+CommandType     Name                              Version    Source
+-----------     ----                              -------    ------
+Cmdlet          Get-Acl                           7.0.0.0    Microsoft.PowerShell.Security
+Cmdlet          Get-Alias                         7.0.0.0    Microsoft.PowerShell.Utility
+Cmdlet          Get-AppLockerFileInformation      2.0.0.0    AppLocker
+Cmdlet          Get-AppLockerPolicy               2.0.0.0    AppLocker
 ...
 ```
 
-### Example 7: Create a case-sensitive hash table
+### Example 8: Create a case-sensitive hash table
 
 This example combines the **CaseSensitive** and **AsHashTable** parameters to create a
 case-sensitive hash table. The files in the example have extensions of `.txt` and `.TXT`.
 
 ```powershell
-$hash = Get-ChildItem -Path C:\Files | Group-Object -Property Extension -CaseSensitive -AsHashTable
+$hash = Get-ChildItem -Path C:\Files |
+        Group-Object -Property Extension -CaseSensitive -AsHashTable
 $hash
 ```
 
@@ -353,8 +380,10 @@ Accept wildcard characters: False
 
 ### -Property
 
-Specifies the properties for grouping. The objects are arranged into groups based on the value of
-the specified property.
+Specifies the properties for grouping. The objects are arranged into named groups based on the value
+of the specified properties. When no property is specified, objects are grouped by their value or
+the `ToString()` representation of their value. The output is sorted in ascending order by the group
+names.
 
 The value of the **Property** parameter can be a new calculated property. The calculated property
 can be a script block or a hash table. Valid key-value pairs are:
@@ -387,43 +416,54 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Management.Automation.PSObject
 
-You can pipe any object to `Group-Object`.
+You can pipe any object to this cmdlet.
 
 ## OUTPUTS
 
-### Microsoft.PowerShell.Commands.GroupInfo or System.Collections.Hashtable
+### Microsoft.PowerShell.Commands.GroupInfo
 
-When you use the **AsHashTable** parameter, `Group-Object` returns a **Hashtable** object.
-Otherwise, it returns a **GroupInfo** object.
+By default, this cmdlet returns a **GroupInfo** object.
+
+### System.Collections.Hashtable
+
+When you use the **AsHashTable** parameter, this cmdlet returns a **Hashtable** object.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Group-Object`:
+
+- All platforms:
+  - `group`
 
 You can use the **GroupBy** parameter of the formatting cmdlets, such as `Format-Table` and
 `Format-List`, to group objects. Unlike `Group-Object`, which creates a single table with a row for
 each property value, the **GroupBy** parameters create a table for each property value with a row
 for each item that has the property value.
 
-`Group-Object` doesn't require that the objects being grouped are of the same Microsoft .NET Core
-type. When grouping objects of different .NET Core types, `Group-Object` uses the following rules:
+`Group-Object` doesn't require that the objects being grouped are of the same Microsoft .NET type.
+When grouping objects of different .NET types, `Group-Object` uses the following rules:
 
 - Same Property Names and Types.
 
-  If the objects have a property with the specified name, and the property values have the same .NET
-  Core type, the property values are grouped by using the same rules that would be used for objects
+  If the objects have a property with the specified name, and the property values have the same
+  .NET type, the property values are grouped by the same rules that would be used for objects
   of the same type.
 
 - Same Property Names, Different Types.
 
   If the objects have a property with the specified name, but the property values have a different
-  .NET Core type in different objects, `Group-Object` uses the .NET Core type of the first
-  occurrence of the property as the .NET Core type for that property group. When an object has a
-  property with a different type, the property value is converted to the type for that group. If the
-  type conversion fails, the object isn't included in the group.
+  .NET type in different objects, `Group-Object` uses the .NET type of the first occurrence of the
+  property as the .NET type for that property group. When an object has a property with a different
+  type, the property value is converted to the type for that group. If the type conversion fails,
+  the object isn't included in the group.
 
 - Missing Properties.
 
   Objects that don't have a specified property can't be grouped. Objects that aren't grouped appear
   in the final **GroupInfo** object output in a group named `AutomationNull.Value`.
+
+The output is sorted in ascending order by the group names. The items belonging to each group are
+not sorted. They are listed in the order in which they were received.
 
 ## RELATED LINKS
 

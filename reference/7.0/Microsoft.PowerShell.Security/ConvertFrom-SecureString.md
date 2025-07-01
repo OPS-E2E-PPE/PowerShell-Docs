@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Security
-ms.date: 07/27/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/convertfrom-securestring?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.security/convertfrom-securestring?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: ConvertFrom-SecureString
 ---
+
 # ConvertFrom-SecureString
 
 ## SYNOPSIS
@@ -18,7 +18,8 @@ Converts a secure string to an encrypted standard string.
 ### Secure (Default)
 
 ```
-ConvertFrom-SecureString [-SecureString] <SecureString> [[-SecureKey] <SecureString>] [<CommonParameters>]
+ConvertFrom-SecureString [-SecureString] <SecureString> [[-SecureKey] <SecureString>]
+ [<CommonParameters>]
 ```
 
 ### AsPlainText
@@ -35,7 +36,7 @@ ConvertFrom-SecureString [-SecureString] <SecureString> [-Key <Byte[]>] [<Common
 
 ## DESCRIPTION
 
-The **ConvertFrom-SecureString** cmdlet converts a secure string (**System.Security.SecureString**)
+The `ConvertFrom-SecureString` cmdlet converts a secure string (**System.Security.SecureString**)
 into an encrypted standard string (**System.String**). Unlike a secure string, an encrypted standard
 string can be saved in a file for later use. The encrypted standard string can be converted back to
 its secure string format by using the `ConvertTo-SecureString` cmdlet.
@@ -47,8 +48,8 @@ key is specified, the Windows Data Protection API (DPAPI) is used to encrypt the
 representation.
 
 > [!NOTE]
-> Note that per [DotNet](/dotnet/api/system.security.securestring?view=netcore-2.1#remarks), the
-> contents of a SecureString are not encrypted on non-Windows systems.
+> For more information about **SecureString** data protection, see
+> [How secure is SecureString?](xref:System.Security.SecureString#how-secure-is-securestring).
 
 ## EXAMPLES
 
@@ -106,7 +107,7 @@ ConvertFrom-SecureString -SecureString $secureString -AsPlainText # 'Example'
 When set, `ConvertFrom-SecureString` will convert secure strings to the decrypted plaintext string
 as output.
 
-This paramater was added in PowerShell 7.0.
+This parameter was added in PowerShell 7.0.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -171,22 +172,22 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters:
-`-Debug`, `-ErrorAction`, `-ErrorVariable`, `-InformationAction`,`-InformationVariable`,
-`-OutVariable`, `-OutBuffer`, `-PipelineVariable`, `-Verbose`, `-WarningAction`, and `-WarningVariable`.
-For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.Security.SecureString
 
-You can pipe a **SecureString** object to ConvertFrom-SecureString.
+You can pipe a **SecureString** object to this cmdlet.
 
 ## OUTPUTS
 
 ### System.String
 
-ConvertFrom-SecureString returns a standard string object.
+This cmdlet returns the created plain text string.
 
 ## NOTES
 

@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 03/12/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/get-unique?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 01/23/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/get-unique?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Unique
 ---
+
 # Get-Unique
 
 ## SYNOPSIS
@@ -43,15 +43,15 @@ These commands find the number of unique words in a text file.
 
 ```powershell
 $A = $( foreach ($line in Get-Content C:\Test1\File1.txt) {
-    $line.tolower().split(" ")
+    $line.ToLower().Split(" ")
   }) | Sort-Object | Get-Unique
-$A.count
+$A.Count
 ```
 
-The first command gets the content of the File.txt file. It converts each line of text to lowercase
-letters and then splits each word onto a separate line at the space (" "). Then, it sorts the
-resulting list alphabetically (the default) and uses the `Get-Unique` cmdlet to eliminate any
-duplicate words. The results are stored in the `$A` variable.
+The first command gets the content of the `File.txt` file. It converts each line of text to
+lowercase letters and then splits each word onto a separate line at the space (`" "`). Then, it
+sorts the resulting list alphabetically (the default) and uses the `Get-Unique` cmdlet to eliminate
+any duplicate words. The results are stored in the `$A` variable.
 
 The second command uses the **Count** property of the collection of strings in `$A` to determine how
 many items are in `$A`.
@@ -87,7 +87,7 @@ includes files and directories.
 Get-ChildItem | Sort-Object {$_.GetType()} | Get-Unique -OnType
 ```
 
-The pipeline operator (|) sends the results to the `Sort-Object` cmdlet. The `$_.GetType()`
+The pipeline operator (`|`) sends the results to the `Sort-Object` cmdlet. The `$_.GetType()`
 statement applies the **GetType** method to each file or directory. Then, `Sort-Object` sorts the
 items by type. Another pipeline operator sends the results to `Get-Unique`. The **OnType** parameter
 directs `Get-Unique` to return only one object of each type.
@@ -97,14 +97,14 @@ directs `Get-Unique` to return only one object of each type.
 This command gets the names of processes running on the computer with duplicates eliminated.
 
 ```powershell
-Get-Process | Sort-Object | Select-Object processname | Get-Unique -AsString
+Get-Process | Sort-Object | Select-Object ProcessName | Get-Unique -AsString
 ```
 
-The `Get-Process` command gets all of the processes on the computer. The pipeline operator (|)
+The `Get-Process` command gets all of the processes on the computer. The pipeline operator (`|`)
 passes the result to `Sort-Object`, which, by default, sorts the processes alphabetically by
-ProcessName. The results are piped to the `Select-Object` cmdlet, which selects only the values of
-the ProcessName property of each object. The results are then piped to `Get-Unique` to eliminate
-duplicates.
+**ProcessName**. The results are piped to the `Select-Object` cmdlet, which selects only the values
+of the **ProcessName** property of each object. The results are then piped to `Get-Unique` to
+eliminate duplicates.
 
 The **AsString** parameter tells `Get-Unique` to treat the **ProcessName** values as strings.
 Without this parameter, `Get-Unique` treats the **ProcessName** values as objects and returns only
@@ -178,20 +178,24 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Management.Automation.PSObject
 
-You can pipe any type of object to `Get-Unique`.
+You can pipe any type of object to this cmdlet.
 
 ## OUTPUTS
 
 ### System.Management.Automation.PSObject
 
-The type of object that `Get-Unique` returns is determined by the input.
+This cmdlet returns its input objects without duplicates.
 
 ## NOTES
 
-You can also refer to `Get-Unique` by its built-in alias, `gu`. For more information, see [about_Aliases](../Microsoft.PowerShell.Core/About/about_Aliases.md).
+Windows PowerShell includes the following aliases for `Get-Unique`:
 
-To sort a list, use Sort-Object. You can also use the **Unique** parameter of `Sort-Object` to find
-the unique items in a list.
+- `gu`
+
+For more information, see [about_Aliases](../Microsoft.PowerShell.Core/About/about_Aliases.md).
+
+To sort a list, use `Sort-Object`. You can also use the **Unique** parameter of `Sort-Object` to
+find the unique items in a list.
 
 ## RELATED LINKS
 

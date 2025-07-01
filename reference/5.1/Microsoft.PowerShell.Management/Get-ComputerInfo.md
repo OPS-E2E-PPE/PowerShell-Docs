@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/get-computerinfo?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 01/12/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-computerinfo?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-ComputerInfo
 ---
+
 # Get-ComputerInfo
 
 ## SYNOPSIS
@@ -28,19 +28,37 @@ This cmdlet was introduced in Windows PowerShell 5.1.
 
 ### Example 1: Get all computer properties
 
+This command gets all system and operating system properties from the computer.
+
 ```powershell
 Get-ComputerInfo
 ```
 
-This command gets all system and operating system properties from the computer.
+### Example 2: Get all computer version properties
 
-### Example 2: Get all computer operating system properties
+This command gets all version properties from the computer.
 
 ```powershell
-Get-ComputerInfo -Property "os*"
+Get-ComputerInfo -Property "*Version"
 ```
 
-This command gets all operating system properties from the computer.
+```Output
+WindowsCurrentVersion              : 6.3
+WindowsVersion                     : 2009
+BiosBIOSVersion                    : {LENOVO - 1380, N1FET64W (1.38 ), Lenovo - 1380}
+BiosEmbeddedControllerMajorVersion : 1
+BiosEmbeddedControllerMinorVersion : 17
+BiosSMBIOSBIOSVersion              : N1FET64W (1.38 )
+BiosSMBIOSMajorVersion             : 2
+BiosSMBIOSMinorVersion             : 8
+BiosSystemBiosMajorVersion         : 1
+BiosSystemBiosMinorVersion         : 38
+BiosVersion                        : LENOVO - 1380
+OsVersion                          : 10.0.19043
+OsCSDVersion                       :
+OsServicePackMajorVersion          : 0
+OsServicePackMinorVersion          : 0
+```
 
 ## PARAMETERS
 
@@ -64,16 +82,25 @@ Accept wildcard characters: True
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](../Microsoft.PowerShell.Core/About/about_CommonParameters.md).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](../Microsoft.PowerShell.Core/About/about_CommonParameters.md).
 
 ## INPUTS
 
 ### System.String[]
 
+You can pipe a string containing the name of a property to this cmdlet.
+
 ## OUTPUTS
 
 ### Microsoft.PowerShell.Management.ComputerInfo
 
+This cmdlet returns a **ComputerInfo** object.
+
 ## NOTES
+
+Windows PowerShell includes the following aliases for `Get-ComputerInfo`:
+
+- `gin`
 
 ## RELATED LINKS

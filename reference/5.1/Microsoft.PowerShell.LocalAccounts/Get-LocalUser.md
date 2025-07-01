@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.Powershell.LocalAccounts.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.LocalAccounts
-ms.date: 02/10/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.localaccounts/get-localuser?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 06/28/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.localaccounts/get-localuser?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-LocalUser
 ---
@@ -69,7 +68,7 @@ Name                                    Enabled  Description
 MicrosoftAccount\username@outlook.com  True     Description of this account.
 ```
 
-### Example 3: Get an account that is connected to a Microsoft account
+### Example 3: Get an account that has the specified SID
 
 This example gets a local user account that has the specified SID.
 
@@ -127,9 +126,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String, System.Security.Principal.SecurityIdentifier
+### System.String
 
-You can pipe a string or SID to this cmdlet.
+You can pipe a string to this cmdlet.
+
+### System.Security.Principal.SecurityIdentifier
+
+You can pipe a SID to this cmdlet.
 
 ## OUTPUTS
 
@@ -139,12 +142,16 @@ This cmdlet returns local user accounts.
 
 ## NOTES
 
+Windows PowerShell includes the following aliases for `Get-LocalUser`:
+
+- `glu`
+
 The **PrincipalSource** property on **LocalUser**, **LocalGroup**, and **LocalPrincipal** objects
 describes the source of the object. The possible sources are as follows:
 
 - Local
 - Active Directory
-- Azure Active Directory group
+- Microsoft Entra group
 - Microsoft Account
 
 **PrincipalSource** is supported only by Windows 10, Windows Server 2016, and later versions of the

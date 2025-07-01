@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Workflow.ServiceCore.dll-help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: PSWorkflowUtility
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/psworkflowutility/invoke-asworkflow?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 12/13/2022
+online version: https://learn.microsoft.com/powershell/module/psworkflowutility/invoke-asworkflow?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Invoke-AsWorkflow
 ---
@@ -138,6 +137,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -InputObject
+
+Used to allows pipeline input.
+
+```yaml
+Type: System.Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### -Parameter
 
 Specifies the parameters and parameter values of the command that is specified in the `CommandName` parameter.
@@ -157,22 +172,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -InputObject
-
-Used to allows pipeline input.
-
-```yaml
-Type: System.Object
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](../Microsoft.PowerShell.Core/About/about_CommonParameters.md).
@@ -186,14 +185,13 @@ For information, see [about_WorkflowCommonParameters](../PSWorkflow/About/about_
 
 ### System.Object
 
-You can pipe any object to the `InputObject` parameter.
+You can pipe any object to this cmdlet.
 
 ## OUTPUTS
 
 ### None
 
-This command does not generate any output.
-However, it runs the workflow, which might generate output.
+This command returns no output of its own, but the workflow it runs might return output.
 
 ## NOTES
 

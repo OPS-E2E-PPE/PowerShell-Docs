@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 5/14/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/set-content?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 03/10/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/set-content?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-Content
 ---
+
 # Set-Content
 
 ## SYNOPSIS
@@ -15,7 +15,7 @@ Writes new content or replaces existing content in a file.
 
 ## SYNTAX
 
-### Path (Default)
+### Path (Default) - FileSystem provider
 
 ```
 Set-Content [-Path] <string[]> [-Value] <Object[]> [-PassThru] [-Filter <string>]
@@ -24,13 +24,29 @@ Set-Content [-Path] <string[]> [-Value] <Object[]> [-PassThru] [-Filter <string>
  [-Stream <string>] [<CommonParameters>]
 ```
 
-### LiteralPath
+### LiteralPath - FileSystem provider
 
 ```
 Set-Content [-Value] <Object[]> -LiteralPath <string[]> [-PassThru] [-Filter <string>]
  [-Include <string[]>] [-Exclude <string[]>] [-Force] [-Credential <pscredential>] [-WhatIf]
  [-Confirm] [-UseTransaction] [-NoNewline] [-Encoding <FileSystemCmdletProviderEncoding>]
  [-Stream <string>] [<CommonParameters>]
+```
+
+### Path (Default) - All providers
+
+```
+Set-Content [-Path] <string[]> [-Value] <Object[]> [-PassThru] [-Filter <string>]
+ [-Include <string[]>] [-Exclude <string[]>] [-Force] [-Credential <pscredential>] [-WhatIf]
+ [-Confirm] [-UseTransaction] [<CommonParameters>]
+```
+
+### LiteralPath - All providers
+
+```
+Set-Content [-Value] <Object[]> -LiteralPath <string[]> [-PassThru] [-Filter <string>]
+ [-Include <string[]>] [-Exclude <string[]>] [-Force] [-Credential <pscredential>] [-WhatIf]
+ [-Confirm] [-UseTransaction] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -109,7 +125,7 @@ The word Warning was replaced.
 
 ```powershell
 (Get-Content -Path .\Notice.txt) |
-    ForEach-Object {$_ -Replace 'Warning', 'Caution'} |
+    ForEach-Object {$_ -replace 'Warning', 'Caution'} |
         Set-Content -Path .\Notice.txt
 Get-Content -Path .\Notice.txt
 ```
@@ -167,6 +183,9 @@ Accept wildcard characters: False
 ```
 
 ### -Encoding
+
+This is a dynamic parameter made available by the **FileSystem** provider. For more information, see
+[about_FileSystem_Provider](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md).
 
 Specifies the type of encoding for the target file. The default value is `Default`.
 
@@ -226,11 +245,13 @@ Accept wildcard characters: True
 
 ### -Filter
 
-Specifies a filter to qualify the **Path** parameter. The [FileSystem](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md)
-provider is the only installed PowerShell provider that supports the use of filters. You can find
-the syntax for the **FileSystem** filter language in [about_Wildcards](../Microsoft.PowerShell.Core/About/about_Wildcards.md).
-Filters are more efficient than other parameters, because the provider applies them when the cmdlet
-gets the objects rather than having PowerShell filter the objects after they are retrieved.
+Specifies a filter to qualify the **Path** parameter. The
+[FileSystem](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md) provider is the only
+installed PowerShell provider that supports the use of filters. You can find the syntax for the
+**FileSystem** filter language in
+[about_Wildcards](../Microsoft.PowerShell.Core/About/about_Wildcards.md). Filters are more efficient
+than other parameters, because the provider applies them when the cmdlet gets the objects rather
+than having PowerShell filter the objects after they are retrieved.
 
 ```yaml
 Type: System.String
@@ -247,8 +268,9 @@ Accept wildcard characters: True
 ### -Force
 
 Forces the cmdlet to set the contents of a file, even if the file is read-only. Implementation
-varies from provider to provider. For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
-The **Force** parameter does not override security restrictions.
+varies from provider to provider. For more information, see
+[about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md). The **Force** parameter
+does not override security restrictions.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -305,6 +327,9 @@ Accept wildcard characters: False
 
 ### -NoNewline
 
+This is a dynamic parameter made available by the **FileSystem** provider. For more information, see
+[about_FileSystem_Provider](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md).
+
 The string representations of the input objects are concatenated to form the output. No spaces or
 newlines are inserted between the output strings. No newline is added after the last output string.
 
@@ -355,16 +380,20 @@ Accept wildcard characters: True
 
 ### -Stream
 
+This is a dynamic parameter made available by the **FileSystem** provider. This Parameter is only
+available on Windows. For more information, see
+[about_FileSystem_Provider](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md).
+
 Specifies an alternative data stream for content. If the stream does not exist, this cmdlet creates
 it. Wildcard characters are not supported.
 
 **Stream** is a dynamic parameter that the **FileSystem** provider adds to `Set-Content`. This
 parameter works only in file system drives.
 
-You can use the `Set-Content` cmdlet to change the content of the **Zone.Identifier** alternate data
-stream. However, we do not recommend this as a way to eliminate security checks that block files
-that are downloaded from the Internet. If you verify that a downloaded file is safe, use the
-`Unblock-File` cmdlet.
+You can use the `Set-Content` cmdlet to create or update the content of any alternate data stream,
+such as `Zone.Identifier`. However, we do not recommend this as a way to eliminate security checks
+that block files that are downloaded from the Internet. If you verify that a downloaded file is
+safe, use the `Unblock-File` cmdlet.
 
 This parameter was introduced in PowerShell 3.0.
 
@@ -447,32 +476,37 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: `-Debug`, `-ErrorAction`, `-ErrorVariable`,
-`-InformationAction`, `-InformationVariable`, `-OutVariable`, `-OutBuffer`, `-PipelineVariable`,
-`-Verbose`, `-WarningAction`, and `-WarningVariable`.
-For more information, see [about_CommonParameters](../Microsoft.PowerShell.Core/About/about_CommonParameters.md).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.Object
 
-You can pipe an object that contains the new value for the item to `Set-Content`.
+You can pipe an object that contains the new value for the item to this cmdlet.
 
 ## OUTPUTS
 
-### None or System.String
+### None
 
-When you use the **PassThru** parameter, `Set-Content` generates a **System.String** object that
-represents the content. Otherwise, this cmdlet does not generate any output.
+By default, this cmdlet returns no output.
+
+### System.String
+
+When you use the **PassThru** parameter, this cmdlet returns a string representing the content.
 
 ## NOTES
 
-- You can also refer to `Set-Content` by its built-in alias, `sc`.
-  For more information, see [about_Aliases](../Microsoft.PowerShell.Core/About/about_Aliases.md).
+Windows PowerShell includes the following aliases for `Set-Content`:
+
+- `sc`
+
 - `Set-Content` is designed for string processing. If you pipe non-string objects to `Set-Content`,
   it converts the object to a string before writing it. To write objects to files, use `Out-File`.
 - The `Set-Content` cmdlet is designed to work with the data exposed by any provider. To list the
-  providers available in your session, type `Get-PsProvider`. For more information, see
+  providers available in your session, type `Get-PSProvider`. For more information, see
   [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
 ## RELATED LINKS

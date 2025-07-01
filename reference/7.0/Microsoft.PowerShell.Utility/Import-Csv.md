@@ -1,17 +1,17 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 1/8/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/import-csv?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 01/09/2025
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/import-csv?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Import-Csv
 ---
+
 # Import-Csv
 
 ## SYNOPSIS
-Creates table-like custom objects from the items in a comma-separated value (CSV) file.
+Creates table-like custom objects from the items in a character-separated value (CSV) file.
 
 ## SYNTAX
 
@@ -55,8 +55,8 @@ delimiter, or direct `Import-Csv` to use the list separator for the current cult
 delimiter.
 
 You can also use the `ConvertTo-Csv` and `ConvertFrom-Csv` cmdlets to convert objects to CSV
-strings (and back). These cmdlets are the same as the `Export-CSV` and `Import-Csv` cmdlets, except
-that they do not deal with files.
+strings (and back). These cmdlets are the same as the `Export-Csv` and `Import-Csv` cmdlets, except
+that they work with data from the pipeline instead of from files.
 
 If a header row entry in a CSV file contains an empty or null value, PowerShell inserts a default
 header row name and displays a warning message.
@@ -153,7 +153,9 @@ properties in the resulting imported object.
 
 ```powershell
 Start-Job -ScriptBlock { Get-Process } | Export-Csv -Path .\Jobs.csv -NoTypeInformation
-$Header = 'State', 'MoreData', 'StatusMessage', 'Location', 'Command', 'StateInfo', 'Finished', 'InstanceId', 'Id', 'Name', 'ChildJobs', 'BeginTime', 'EndTime', 'JobType', 'Output', 'Error', 'Progress', 'Verbose', 'Debug', 'Warning', 'Information'
+$Header = 'State', 'MoreData', 'StatusMessage', 'Location', 'Command', 'StateInfo', 'Finished',
+          'InstanceId', 'Id', 'Name', 'ChildJobs', 'BeginTime', 'EndTime', 'JobType', 'Output',
+          'Error', 'Progress', 'Verbose', 'Debug', 'Warning', 'Information'
 # Delete the default header from file
 $A = Get-Content -Path .\Jobs.csv
 $A = $A[1..($A.Count - 1)]
@@ -188,14 +190,14 @@ Information   : System.Management.Automation.PSDataCollection`1[System.Managemen
 
 The `Start-Job` cmdlet starts a background job that runs `Get-Process`. A job object is sent down
 the pipeline to the `Export-Csv` cmdlet and converted to a CSV string. The **NoTypeInformation**
-parameter removes the type information header from CSV output and is optional in PowerShell Core.
-The `$Header` variable contains a custom header that replaces the following default values:
+parameter removes the type information header from CSV output and is optional in PowerShell v6 and
+higher. The `$Header` variable contains a custom header that replaces the following default values:
 **HasMoreData**, **JobStateInfo**, **PSBeginTime**, **PSEndTime**, and **PSJobTypeName**. The `$A`
 variable uses the `Get-Content` cmdlet to get the CSV string from the Jobs.csv file. The `$A`
 variable is used to remove the default header from the file. The `Out-File` cmdlet saves the new
-version of the Jobs.csv file in the `$A` variable. The `Import-Csv` cmdlet imports the Jobs.csv
-file and uses the **Header** parameter to apply the `$Header` variable. The `$J` variable contains
-the imported **PSCustomObject** and displays the object in the PowerShell console.
+version of the Jobs.csv file in the `$A` variable. The `Import-Csv` cmdlet imports the Jobs.csv file
+and uses the **Header** parameter to apply the `$Header` variable. The `$J` variable contains the
+imported **PSCustomObject** and displays the object in the PowerShell console.
 
 ### Example 5: Create a custom object using a CSV file
 
@@ -258,7 +260,7 @@ objects are stored in the `$A` variable. The `Get-Member` cmdlet shows the prope
 **Header** parameter. The `Where-Object` cmdlet selects objects with the **TopicTitle** property
 that includes **alias**.
 
-### Example 6: Import a CSV that is missing a value
+### Example 6: Import a CSV that's missing a value
 
 This example shows how the `Import-Csv` cmdlet in PowerShell responds when the header row in a CSV
 file includes a null or empty value. `Import-Csv` substitutes a default name for the missing header
@@ -280,7 +282,8 @@ Import-Csv -Path .\Projects.csv
 ```
 
 ```Output
-WARNING: One or more headers were not specified. Default names starting with "H" have been used in place of any missing headers.
+WARNING: One or more headers weren't specified. Default names starting with "H" have been used in
+place of any missing headers.
 
 ProjectID ProjectName H1      Completed
 --------- ----------- --      ---------
@@ -289,36 +292,23 @@ ProjectID ProjectName H1      Completed
 469       Marketing   Europe  False
 ```
 
-```powershell
-(Import-Csv -Path .\Projects.csv).H1
-```
-
-```Output
-WARNING: One or more headers were not specified. Default names starting with "H" have been used in place of any missing headers.
-Redmond
-FarEast
-Europe
-```
-
-To create your Projects.csv file, use the values shown in the example's `Get-Content` output.
-
-The `Get-Content` cmdlet displays the Projects.csv file. The header row is missing a value between
-**ProjectName** and **Completed**. The `Import-Csv` cmdlet imports the Projects.csv file and
-displays a warning message because **H1** is a default header name. The `(Import-Csv -Path
-.\Projects.csv).H1` command gets the **H1** property values and displays a warning.
+The `Get-Content` cmdlet displays the `Projects.csv` file. The header row is missing a value between
+**ProjectName** and **Completed**. The `Import-Csv` cmdlet imports the `Projects.csv` file and
+displays a warning message because **H1** is a default header name.
 
 ## PARAMETERS
 
 ### -Delimiter
 
-Specifies the delimiter that separates the property values in the CSV file.
-The default is a comma (,).
+Specifies the delimiter that separates the property values in the CSV file. The default is a comma
+(`,`).
 
-Enter a character, such as a colon (:).
-To specify a semicolon (;) enclose it in single quotation marks.
+Enter a character, such as a colon (`:`). To specify a semicolon (`;`) enclose it in single
+quotation marks. To specify escaped special characters such as tab (`` `t ``), enclose it in double
+quotation marks.
 
-If you specify a character other than the actual string delimiter in the file, `Import-Csv` cannot
-create the objects from the CSV strings and will return the CSV strings.
+If you specify a character other than the actual string delimiter in the file, `Import-Csv` can't
+create the objects from the CSV strings and returns the full CSV strings.
 
 ```yaml
 Type: System.Char
@@ -339,7 +329,10 @@ Specifies the encoding for the imported CSV file. The default value is `utf8NoBO
 The acceptable values for this parameter are as follows:
 
 - `ascii`: Uses the encoding for the ASCII (7-bit) character set.
+- `ansi`: Uses the encoding for the for the current culture's ANSI code page. This option was added
+  in PowerShell 7.4.
 - `bigendianunicode`: Encodes in UTF-16 format using the big-endian byte order.
+- `bigendianutf32`: Encodes in UTF-32 format using the big-endian byte order.
 - `oem`: Uses the default encoding for MS-DOS and console programs.
 - `unicode`: Encodes in UTF-16 format using the little-endian byte order.
 - `utf7`: Encodes in UTF-7 format.
@@ -353,11 +346,18 @@ pages (like `-Encoding 1251`) or string names of registered code pages (like
 `-Encoding "windows-1251"`). For more information, see the .NET documentation for
 [Encoding.CodePage](/dotnet/api/system.text.encoding.codepage?view=netcore-2.2).
 
+Starting with PowerShell 7.4, you can use the `Ansi` value for the **Encoding** parameter to pass
+the numeric ID for the current culture's ANSI code page without having to specify it manually.
+
+> [!NOTE]
+> **UTF-7*** is no longer recommended to use. As of PowerShell 7.1, a warning is written if you
+> specify `utf7` for the **Encoding** parameter.
+
 ```yaml
 Type: System.Text.Encoding
 Parameter Sets: (All)
 Aliases:
-Accepted values: ASCII, BigEndianUnicode, OEM, Unicode, UTF7, UTF8, UTF8BOM, UTF8NoBOM, UTF32
+Accepted values: ASCII, BigEndianUnicode, BigEndianUTF32, OEM, Unicode, UTF7, UTF8, UTF8BOM, UTF8NoBOM, UTF32
 
 Required: False
 Position: Named
@@ -371,7 +371,7 @@ Accept wildcard characters: False
 Specifies an alternate column header row for the imported file. The column header determines the
 property names of the objects created by `Import-Csv`.
 
-Enter column headers as a comma-separated list. Do not enclose the header string in quotation
+Enter column headers as a character-separated list. Don't enclose the header string in quotation
 marks. Enclose each column header in single quotation marks.
 
 If you enter fewer column headers than there are data columns, the remaining data columns are
@@ -396,7 +396,7 @@ Accept wildcard characters: False
 ### -LiteralPath
 
 Specifies the path to the CSV file to import. Unlike **Path**, the value of the **LiteralPath**
-parameter is used exactly as it is typed. No characters are interpreted as wildcards. If the path
+parameter is used exactly as it's typed. No characters are interpreted as wildcards. If the path
 includes escape characters, enclose it in single quotation marks. Single quotation marks tell
 PowerShell not to interpret any characters as escape sequences.
 
@@ -457,17 +457,22 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.String
 
-You can pipe a string that contains a path to `Import-Csv`.
+You can pipe a string that contains a path to this cmdlet.
 
 ## OUTPUTS
 
-### Object
+### System.Object
 
 This cmdlet returns the objects described by the content in the CSV file.
 
 ## NOTES
 
-Because the imported objects are CSV versions of the object type, they are not recognized and
+PowerShell includes the following aliases for `Import-Csv`:
+
+- All platforms:
+  - `ipcsv`
+
+Because the imported objects are CSV versions of the object type, they're not recognized and
 formatted by the PowerShell type formatting entries that format the non-CSV versions of the object
 type.
 
@@ -484,15 +489,16 @@ values than the header row, the additional values are ignored.
 If the column header row is missing a value or contains a null or empty value, `Import-Csv` uses
 **H** followed by a number for the missing column header and property name.
 
-In the CSV file, each object is represented by a comma-separated list of the property values of the
-object. The property values are converted to strings by using the **ToString()** method of the
-object, so they are represented by the name of the property value. `Export-Csv` does not export the
+In the CSV file, each object is represented by a character-separated list of the property values of
+the object. The property values are converted to strings by using the **ToString()** method of the
+object, so they're represented by the name of the property value. `Export-Csv` doesn't export the
 methods of the object.
 
-`Import-Csv` also supports the W3C Extended Log format. Lines starting with `#` are treated as
-comments and ignored unless the comment starts with `#Fields:` and contains delimited list of
-column names. In that case, the cmdlet uses those column names. This is the standard format for
-Windows IIS and other web server logs. For more information, see [Extended Log File Format](https://www.w3.org/TR/WD-logfile.html).
+`Import-Csv` also supports the W3C Extended Log format. Lines starting with the hash character (`#`)
+are treated as comments and ignored unless the comment starts with `#Fields:` and contains delimited
+list of column names. In that case, the cmdlet uses those column names. This is the standard format
+for Windows IIS and other web server logs. For more information, see
+[Extended Log File Format](https://www.w3.org/TR/WD-logfile.html).
 
 ## RELATED LINKS
 

@@ -1,7 +1,6 @@
 ---
-Download Help Link: https://go.microsoft.com/fwlink/?linkid=390785
+Download Help Link: https://aka.ms/powershell51-help
 Help Version: 5.2.0.0
-keywords: powershell,cmdlet
 Locale: en-US
 Module Guid: eefcb906-b326-4e99-9f54-8b4bb6ef3c6d
 Module Name: Microsoft.PowerShell.Management
@@ -86,7 +85,7 @@ Gets control panel items.
 Gets the events in an event log, or a list of the event logs, on the local computer or remote computers.
 
 ### [Get-HotFix](Get-HotFix.md)
-Gets the hotfixes that have been applied to the local and remote computers.
+Gets the hotfixes that are installed on local or remote computers.
 
 ### [Get-Item](Get-Item.md)
 Gets the item at the specified location.
@@ -200,7 +199,7 @@ Resets the machine account password for the computer.
 Resolves the wildcard characters in a path, and displays the path contents.
 
 ### [Restart-Computer](Restart-Computer.md)
-Restarts ("reboots") the operating system on local and remote computers.
+Restarts the operating system on local and remote computers.
 
 ### [Restart-Service](Restart-Service.md)
 Stops and then starts one or more services.
@@ -269,7 +268,7 @@ Suspends (pauses) one or more running services.
 Tests and repairs the secure channel between the local computer and its domain.
 
 ### [Test-Connection](Test-Connection.md)
-Sends ICMP echo request packets ("pings") to one or more computers.
+Sends ICMP echo request packets, or pings, to one or more computers.
 
 ### [Test-Path](Test-Path.md)
 Determines whether all elements of a path exist.

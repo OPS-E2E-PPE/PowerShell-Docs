@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Security
-ms.date: 03/25/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/get-acl?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.security/get-acl?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Acl
 ---
+
 # Get-Acl
 
 ## SYNOPSIS
@@ -66,7 +66,7 @@ Get-Acl C:\Windows\s*.log | Format-List -Property PSPath, Sddl
 
 The command uses the `Get-Acl` cmdlet to get objects representing the security descriptors of each
 log file. It uses a pipeline operator (`|`) to send the results to the `Format-List` cmdlet. The
-command uses the **Property** parameter of `Format-List` to display only the **PsPath** and **SDDL**
+command uses the **Property** parameter of `Format-List` to display only the **PSPath** and **SDDL**
 properties of each security descriptor object.
 
 Lists are often used in PowerShell, because long values appear truncated in tables.
@@ -111,6 +111,28 @@ Get-Acl -InputObject (Get-StorageSubSystem -Name S087)
 ```
 
 ## PARAMETERS
+
+### -AllCentralAccessPolicies
+
+Gets information about all central access policies that are enabled on the computer.
+
+Beginning in Windows Server 2012, administrators can use Active Directory and Group Policy to set
+central access policies for users and groups. For more information, see
+[Dynamic Access Control: Scenario Overview](/windows-server/identity/solution-guides/dynamic-access-control--scenario-overview).
+
+This parameter is introduced in Windows PowerShell 3.0.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Audit
 
@@ -181,48 +203,6 @@ Accept pipeline input: False
 Accept wildcard characters: True
 ```
 
-### -Path
-
-Specifies the path to a resource. `Get-Acl` gets the security descriptor of the resource indicated
-by the path. Wildcards are permitted. If you omit the **Path** parameter, `Get-Acl` gets the
-security descriptor of the current directory.
-
-The parameter name ("Path") is optional.
-
-```yaml
-Type: System.String[]
-Parameter Sets: ByPath
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: True
-```
-
-### -AllCentralAccessPolicies
-
-Gets information about all central access policies that are enabled on the computer.
-
-Beginning in Windows Server 2012, administrators can use Active Directory and Group Policy to set
-central access policies for users and groups. For more information, see
-[Dynamic Access Control: Scenario Overview](/windows-server/identity/solution-guides/dynamic-access-control--scenario-overview).
-
-This parameter is introduced in Windows PowerShell 3.0.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -InputObject
 
 Gets the security descriptor for the specified object. Enter a variable that contains the object or
@@ -266,11 +246,31 @@ Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
+### -Path
+
+Specifies the path to a resource. `Get-Acl` gets the security descriptor of the resource indicated
+by the path. Wildcards are permitted. If you omit the **Path** parameter, `Get-Acl` gets the
+security descriptor of the current directory.
+
+The parameter name ("Path") is optional.
+
+```yaml
+Type: System.String[]
+Parameter Sets: ByPath
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: True
+```
+
 ### -UseTransaction
 
 Includes the command in the active transaction.
 This parameter is valid only when a transaction is in progress.
-For more information, see about_Transactions.
+For more information, see [about_Transactions](../Microsoft.PowerShell.Core/About/about_Transactions.md).
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -295,14 +295,18 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.String
 
-You can pipe a string that contains a path to `Get-Acl`.
+You can pipe a string that contains a path to this cmdlet.
 
 ## OUTPUTS
 
-### System.Security.AccessControl.FileSecurity, System.Security.AccessControl.DirectorySecurity, System.Security.AccessControl.RegistrySecurity
+### System.Security.AccessControl.FileSecurity
 
-`Get-Acl` returns an object that represents the ACLs that it gets. The object type depends upon the
-ACL type.
+### System.Security.AccessControl.DirectorySecurity
+
+### System.Security.AccessControl.RegistrySecurity
+
+This cmdlet returns an object that represents the ACLs that it gets. The object type depends upon
+the ACL type.
 
 ## NOTES
 
@@ -321,7 +325,7 @@ and access list, PowerShell displays the following properties and property value
   Descriptor Definition Language format. PowerShell uses the **GetSddlForm** method of security
   descriptors to get this data.
 
-Because `Get-Acl` is supported by the file system and registry providers, you can use `Get-Acl` to
+Because `Get-Acl` is supported by the FileSystem and Registry providers, you can use `Get-Acl` to
 view the ACL of file system objects, such as files and directories, and registry objects, such as
 registry keys and entries.
 

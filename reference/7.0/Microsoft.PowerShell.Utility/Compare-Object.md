@@ -1,33 +1,33 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 08/10/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/compare-object?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 06/11/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/compare-object?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Compare-Object
 ---
+
 # Compare-Object
 
-## Synopsis
+## SYNOPSIS
 Compares two sets of objects.
 
-## Syntax
+## SYNTAX
 
 ```
 Compare-Object [-ReferenceObject] <PSObject[]> [-DifferenceObject] <PSObject[]>
- [-SyncWindow <Int32>] [-Property <Object[]>] [-ExcludeDifferent] [-IncludeEqual] [-PassThru]
- [-Culture <String>] [-CaseSensitive] [<CommonParameters>]
+ [-SyncWindow <Int32>] [-Property <Object[]>] [-ExcludeDifferent] [-IncludeEqual]
+ [-PassThru] [-Culture <String>] [-CaseSensitive] [<CommonParameters>]
 ```
 
-## Description
+## DESCRIPTION
 
 The `Compare-Object` cmdlet compares two sets of objects. One set of objects is the **reference**,
 and the other set of objects is the **difference**.
 
 `Compare-Object` checks for available methods of comparing a whole object. If it can't find a
-suitable method, it call the **ToString()** methods of the input objects and compares the string
+suitable method, it calls the **ToString()** methods of the input objects and compares the string
 results. You can provide one or more properties to be used for comparison. When properties are
 provided, the cmdlet compares the values of those properties only.
 
@@ -41,7 +41,7 @@ terminating error.
 Some examples use splatting to reduce the line length of the code samples. For more information, see
 [about_Splatting](../Microsoft.PowerShell.Core/About/about_Splatting.md).
 
-## Examples
+## EXAMPLES
 
 ### Example 1 - Compare the content of two text files
 
@@ -56,7 +56,11 @@ The output displays only the lines that are different between the files. `Testfi
 content that appear in both files aren't displayed.
 
 ```powershell
-Compare-Object -ReferenceObject (Get-Content -Path C:\Test\Testfile1.txt) -DifferenceObject (Get-Content -Path C:\Test\Testfile2.txt)
+$objects = @{
+  ReferenceObject = (Get-Content -Path C:\Test\Testfile1.txt)
+  DifferenceObject = (Get-Content -Path C:\Test\Testfile2.txt)
+}
+Compare-Object @objects
 ```
 
 ```Output
@@ -70,18 +74,19 @@ squirrel    <=
 
 ### Example 2 - Compare each line of content and exclude the differences
 
-This example uses the **IncludeEqual** and **ExcludeDifferent** parameters to compare each line of
+This example uses the **ExcludeDifferent** parameter to compare each line of
 content in two text files.
 
-Because the command uses the **ExcludeDifferent** parameter, the output only contains lines
-contained in both files, as shown by the **SideIndicator** (`==`).
+As of PowerShell 7.1, when using the **ExcludeDifferent** parameter, **IncludeEqual** is inferred
+and the output only contains lines contained in both files, as shown by the **SideIndicator**
+(`==`).
 
 ```powershell
 $objects = @{
   ReferenceObject = (Get-Content -Path C:\Test\Testfile1.txt)
   DifferenceObject = (Get-Content -Path C:\Test\Testfile2.txt)
 }
-Compare-Object @objects -IncludeEqual -ExcludeDifferent
+Compare-Object @objects -ExcludeDifferent
 ```
 
 ```Output
@@ -90,9 +95,9 @@ InputObject SideIndicator
 bird        ==
 ```
 
-<a id="ex3" />
-
 ### Example 3 - Show the difference when using the PassThru parameter
+
+<a id="ex3" ></a>
 
 Normally, `Compare-Object` returns a **PSCustomObject** type with the following properties:
 
@@ -106,7 +111,7 @@ shows which input object the output belongs to.
 The following examples shows the different output types.
 
 ```powershell
-$a = $True
+$a = $true
 Compare-Object -IncludeEqual $a $a
 (Compare-Object -IncludeEqual $a $a) | Get-Member
 ```
@@ -173,7 +178,12 @@ output displayed by the default format for **System.Boolean** objects didn't dis
 In this example, we compare two different string that have the same length.
 
 ```powershell
-Compare-Object -ReferenceObject 'abc' -DifferenceObject 'xyz' -Property Length -IncludeEqual
+$objects = @{
+  ReferenceObject = 'abc'
+  DifferenceObject = 'xyz'
+  Property = 'Length'
+}
+Compare-Object @objects -IncludeEqual
 ```
 
 ```Output
@@ -232,7 +242,7 @@ In this example, we are comparing a string to a **TimeSpan** object. In the firs
 is converted to a **TimeSpan** so the objects are equal.
 
 ```powershell
-Compare-Object ([TimeSpan]"0:0:1") "0:0:1" -IncludeEqual
+Compare-Object ([timespan]"0:0:1") "0:0:1" -IncludeEqual
 ```
 
 ```Output
@@ -242,7 +252,7 @@ InputObject SideIndicator
 ```
 
 ```powershell
-Compare-Object "0:0:1" ([TimeSpan]"0:0:1")
+Compare-Object "0:0:1" ([timespan]"0:0:1")
 ```
 
 ```Output
@@ -254,7 +264,7 @@ InputObject SideIndicator
 
 In the second case, the **TimeSpan** is converted to a string so the object are different.
 
-## Parameters
+## PARAMETERS
 
 ### -CaseSensitive
 
@@ -406,8 +416,12 @@ Accept wildcard characters: False
 
 Specifies the number of adjacent objects that `Compare-Object` inspects while looking for a match in
 a collection of objects. `Compare-Object` examines adjacent objects when it doesn't find the object
-in the same position in a collection. The default value is `[Int32]::MaxValue`, which means that
+in the same position in a collection. The default value is `[int32]::MaxValue`, which means that
 `Compare-Object` examines the entire object collection.
+
+When working with large collections, the default value might not be efficient but is accurate.
+Specifying a smaller value for **SyncWindow** can increase performance but could have lower
+accuracy.
 
 ```yaml
 Type: System.Int32
@@ -416,7 +430,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: [Int32]::MaxValue
+Default value: [int32]::MaxValue
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -428,36 +442,45 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 -WarningAction, and -WarningVariable. For more information, see
 [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
-## Inputs
+## INPUTS
 
 ### System.Management.Automation.PSObject
 
 You can send an object down the pipeline to the **DifferenceObject** parameter.
 
-## Outputs
+## OUTPUTS
 
 ### None
 
-If the **reference** object and the **difference** object are the same, there's no output, unless
-you use the **IncludeEqual** parameter.
+By default, this cmdlet returns no output when the **ReferenceObject** and the **DifferenceObject**
+are the same.
 
 ### System.Management.Automation.PSCustomObject
 
-If the objects are different, `Compare-Object` wraps the differing objects in a `PSCustomObject`
+When the objects are different, this cmdlet wraps the differing objects in a **PSCustomObject**
 wrapper with a **SideIndicator** property to reference the differences.
+
+When you use the **IncludeEqual** parameter and the objects are the same, the cmdlet returns the
+objects wrapped in a **PSCustomObject** with the **SideIndicator** property set to `==`.
 
 When you use the **PassThru** parameter, the **Type** of the object is not changed but the instance
 of the object returned has an added **NoteProperty** named **SideIndicator**. **SideIndicator**
 shows which input object the output belongs to.
 
-## Notes
+## NOTES
+
+PowerShell includes the following aliases for `Compare-Object`:
+
+- Windows:
+  - `compare`
+  - `diff`
 
 When using the **PassThru** parameter, the output displayed in the console may not include the
-**SideIndicator** property. The default format view of the for the object type output by
-`Compare-Object` does not include the **SideIndicator** property. For more information see
-[Example 3](#ex3) in this article.
+**SideIndicator** property. The default format view for the object type output by `Compare-Object`
+does not include the **SideIndicator** property. For more information see [Example 3](#ex3) in this
+article.
 
-## Related links
+## RELATED LINKS
 
 [about_Calculated_Properties](../Microsoft.PowerShell.Core/About/about_Calculated_Properties.md)
 

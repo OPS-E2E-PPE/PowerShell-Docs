@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet,markdown
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
 ms.date: 11/02/2018
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/convertfrom-markdown?view=powershell-7.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/convertfrom-markdown?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: ConvertFrom-Markdown
 ---
@@ -41,7 +40,7 @@ This cmdlet converts the specified content into a **MarkdownInfo**. When a file 
 for the **Path** parameter, the contents on the file are converted. The output object has three
 properties:
 
-- The **Token** property has the abstract syntax tree (AST) of the the converted object
+- The **Token** property has the abstract syntax tree (AST) of the converted object
 - The **Html** property has the HTML conversion of the specified input
 - The **VT100EncodedString** property has the converted string with ANSI (VT100) escape sequences if
   the **AsVT100EncodedString** parameter was specified
@@ -179,4 +178,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 [Markdown Parser](https://github.com/lunet-io/markdig)
 
 [ANSI escape code](https://wikipedia.org/wiki/ANSI_escape_code)
-

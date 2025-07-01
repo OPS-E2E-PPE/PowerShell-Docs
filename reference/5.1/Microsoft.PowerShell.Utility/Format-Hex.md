@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Utility-help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 01/17/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/format-hex?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 01/19/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/format-hex?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Format-Hex
 ---
@@ -154,8 +153,11 @@ Accept wildcard characters: False
 
 ### -InputObject
 
-Used for pipeline input. Pipeline input supports only certain scalar types and `[system.io.fileinfo]`
-instances for piping from `Get-ChildItem`.
+Specifies the objects to be formatted. Enter a variable that contains the objects or type a command
+or expression that gets the objects.
+
+Only certain [scalar](/powershell/scripting/learn/glossary#scalar-value) types and
+`[System.IO.FileInfo]` are supported.
 
 The supported scalar types are:
 
@@ -254,6 +256,10 @@ by `Format-Hex`. If you specify the **Path** or **LiteralPath** parameter, the o
 the path of the file that contains each byte.
 
 ## NOTES
+
+Windows PowerShell includes the following aliases for `Format-Hex`:
+
+- `fhx`
 
 The right-most column of output tries to render the bytes as characters:
 

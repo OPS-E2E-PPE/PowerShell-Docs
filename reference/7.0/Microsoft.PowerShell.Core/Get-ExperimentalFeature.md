@@ -1,8 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
+Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 03/01/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/get-experimentalfeature?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/04/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/get-experimentalfeature?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-ExperimentalFeature
 ---
@@ -62,25 +63,28 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.String[]
 
-Name or names of experimental features to return.
+You can pipe a string containing the name of an experimental feature to this cmdlet.
 
 ## OUTPUTS
 
-### ExperimentalFeature
+### System.Management.Automation.ExperimentalFeature
 
-Returns instances that match the requested names or all experimental features if no name is
-specified.
-
-## NOTES
+This cmdlet returns instances that match the requested names or all experimental features if no
+name is specified.
 
 ## RELATED LINKS
 
 [Disable-ExperimentalFeature](Disable-ExperimentalFeature.md)
 
 [Enable-ExperimentalFeature](Enable-ExperimentalFeature.md)
+
+[about_Experimental_Features](About/about_Experimental_Features.md)
+
+[Using Experimental Features](/powershell/scripting/learn/experimental-features)

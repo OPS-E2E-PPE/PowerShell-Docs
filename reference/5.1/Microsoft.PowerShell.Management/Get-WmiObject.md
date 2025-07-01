@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 09/27/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/get-wmiobject?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 03/10/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-wmiobject?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-WmiObject
 ---
@@ -105,7 +104,7 @@ Get-WmiObject -Class Win32_Service -ComputerName 10.1.4.62
 This example gets the WMI classes in the root or default namespace of the local computer.
 
 ```powershell
-Get-WmiObject -Namespace "root/default" -List
+Get-WmiObject -Namespace "root/DEFAULT" -List
 ```
 
 ### Example 4: Get a named service on multiple computers
@@ -114,8 +113,8 @@ This example gets the WinRM service on the computers specified by the value of t
 parameter.
 
 ```powershell
-Get-WmiObject -Query "select * from win32_service where name='WinRM'" -ComputerName Server01, Server02 |
-  Format-List -Property PSComputerName, Name, ExitCode, Name, ProcessID, StartMode, State, Status
+Get-WmiObject -Query "select * from Win32_Service where name='WinRM'" -ComputerName Server01, Server02 |
+  Format-List -Property PSComputerName, Name, ExitCode, Name, ProcessId, StartMode, State, Status
 ```
 
 ```Output
@@ -123,7 +122,7 @@ PSComputerName : SERVER01
 Name           : WinRM
 ExitCode       : 0
 Name           : WinRM
-ProcessID      : 844
+ProcessId      : 844
 StartMode      : Auto
 State          : Running
 Status         : OK
@@ -132,13 +131,13 @@ PSComputerName : SERVER02
 Name           : WinRM
 ExitCode       : 0
 Name           : WinRM
-ProcessID      : 932
+ProcessId      : 932
 StartMode      : Auto
 State          : Running
 Status         : OK
 ```
 
-A pipeline operator (|) sends the output to the `Format-List` cmdlet, which adds the
+A pipeline operator (`|`) sends the output to the `Format-List` cmdlet, which adds the
 **PSComputerName** property to the default output. **PSComputerName** is an alias of the
 **__Server** property of the objects that `Get-WmiObject` returns. This alias was introduced in
 PowerShell 3.0.
@@ -162,7 +161,7 @@ This example gets the BIOS information from the local computer. The **Property**
 only the subset of properties defined in the `Types.ps1xml` configuration file are displayed.
 
 ```powershell
-Get-WmiObject -Class Win32_Bios | Format-List -Property *
+Get-WmiObject -Class Win32_BIOS | Format-List -Property *
 ```
 
 ```Output
@@ -254,19 +253,14 @@ finish.
 
 When you use the **AsJob** parameter, the command returns an object that represents the background
 job and then displays the command prompt. You can continue to work in the session while the job
-finishes. If `Get-WmiObject` is used on a remote computer, the job is created on the local
-computer, and the results from remote computers are automatically returned to the local computer. To
-manage the job, use the cmdlets that contain the Job cmdlets. To get the job results, use the
-`Receive-Job` cmdlet.
+finishes. If `Get-WmiObject` is used with the **ComputerName** parameter, the job is created on the
+local computer, and the results from remote computers are automatically returned to the local
+computer. To manage the job, use the cmdlets that contain the `Job` noun. To get the job results,
+use the `Receive-Job` cmdlet.
 
-> [!NOTE]
-> To use this parameter with remote computers, the local and remote computers must be configured
-> for remoting. Additionally, you must start Windows PowerShell by using the "Run as administrator"
-> option in Windows Vista and later versions of Windows. For more information, see
-> [about_Remote_Requirements](../Microsoft.PowerShell.Core/about/about_Remote_Requirements.md).
-
-For more information about Windows PowerShell background jobs, see [about_Jobs](../Microsoft.PowerShell.Core/about/about_Jobs.md)
-and [about_Remote_Jobs](../Microsoft.PowerShell.Core/about/about_Remote_Jobs.md).
+For more information about Windows PowerShell background jobs, see
+[about_Jobs](../Microsoft.PowerShell.Core/about/about_Jobs.md) and
+[about_Remote_Jobs](../Microsoft.PowerShell.Core/about/about_Remote_Jobs.md).
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -285,18 +279,18 @@ Accept wildcard characters: False
 Specifies the authentication level to be used with the WMI connection.
 Valid values are:
 
-- -1: Unchanged
-- 0: Default
-- 1: None (No authentication in performed.)
-- 2: Connect (Authentication is performed only when the client establishes a relationship with the
-  application.)
-- 3: Call (Authentication is performed only at the beginning of each call when the application
+- `-1`: **Unchanged**
+- `0`: **Default**
+- `1`: **None** (No authentication in performed.)
+- `2`: **Connect** (Authentication is performed only when the client establishes a relationship with
+  the application.)
+- `3`: **Call** (Authentication is performed only at the beginning of each call when the application
   receives the request.)
-- 4: Packet (Authentication is performed on all the data that is received from the client.)
-- 5: PacketIntegrity (All the data that is transferred between the client and the application is
-  authenticated and verified.)
-- 6: PacketPrivacy (The properties of the other authentication levels are used, and all the data is
-  encrypted.)
+- `4`: **Packet** (Authentication is performed on all the data that is received from the client.)
+- `5`: **PacketIntegrity** (All the data that is transferred between the client and the application
+  is authenticated and verified.)
+- `6`: **PacketPrivacy** (The properties of the other authentication levels are used, and all the
+  data is encrypted.)
 
 ```yaml
 Type: System.Management.AuthenticationLevel
@@ -355,7 +349,10 @@ Specifies the target computer for the management operation. Enter a fully qualif
 local computer, the fully qualified domain name is required.
 
 The default is the local computer. To specify the local computer, such as in a list of computer
-names, use "localhost", the local computer name, or a dot (.).
+names, use `localhost`, the local computer name, or a dot (`.`).
+
+When specifying a remote computer, your current account or the one you specify with the
+**Credential** parameter must have appropriate permissions to access the information.
 
 This parameter does not rely on Windows PowerShell remoting, which uses WS-Management. You can use
 the **ComputerName** parameter of `Get-WmiObject` even if your computer is not configured to run
@@ -376,7 +373,7 @@ Accept wildcard characters: False
 ### -Credential
 
 Specifies a user account that has permission to perform this action. The default is the current
-user. Type a user name, such as "User01", "Domain01\User01", or User@Contoso.com. Or, enter a
+user. Type a user name, such as `User01`, `Domain01\User01`, or `User@Contoso.com`. Or, enter a
 **PSCredential** object, such as an object that is returned by the `Get-Credential` cmdlet. When you
 type a user name, you are prompted for a password. Credentials cannot be used when targeting the
 local computer.
@@ -432,12 +429,12 @@ Specifies a **Where** clause to use as a filter. Uses the syntax of the WMI Quer
 
 > [!IMPORTANT]
 > Do not include the **Where** keyword in the value of the parameter. For example, the following
-> commands return only the logical disks that have a **DeviceID** of 'c:' and services that have the
+> commands return only the logical disks that have a **DeviceID** of `C:\ and services that have the
 > name 'WinRM' without using the **Where** keyword.
 
-`Get-WmiObject Win32_LogicalDisk -filter "DeviceID = 'c:' "`
+`Get-WmiObject Win32_LogicalDisk -Filter "DeviceID = 'C:' "`
 
-`Get-WmiObject win32_service -filter "name='WinRM'"`
+`Get-WmiObject Win32_Service -Filter "name='WinRM'"`
 
 ```yaml
 Type: System.String
@@ -457,12 +454,12 @@ Specifies the impersonation level to use.
 
 The acceptable values for this parameter are:
 
-- 0: Default. Reads the local registry for the default impersonation level. The default is usually
-  set to **Impersonate**.
-- 1: Anonymous. Hides the credentials of the caller.
-- 2: Identify. Allows objects to query the credentials of the caller.
-- 3: Impersonate. Allows objects to use the credentials of the caller.
-- 4: Delegate. Allows objects to permit other objects to use the credentials of the caller.
+- `0`: **Default**. Reads the local registry for the default impersonation level. The default is
+  usually set to **Impersonate**.
+- `1`: **Anonymous**. Hides the credentials of the caller.
+- `2`: **Identify**. Allows objects to query the credentials of the caller.
+- `3`: **Impersonate**. Allows objects to use the credentials of the caller.
+- `4`: **Delegate**. Allows objects to permit other objects to use the credentials of the caller.
 
 ```yaml
 Type: System.Management.ImpersonationLevel
@@ -483,7 +480,7 @@ Gets the names of the WMI classes in the WMI repository namespace that is specif
 **Namespace** parameter.
 
 If you specify the **List** parameter, but not the **Namespace** parameter, `Get-WmiObject` uses
-the **Root\Cimv2** namespace by default. This cmdlet does not use the **Default Namespace** registry
+the **root/CIMV2** namespace by default. This cmdlet does not use the **Default Namespace** registry
 entry in the `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WBEM\Scripting` registry key to determine the
 default namespace.
 
@@ -501,8 +498,7 @@ Accept wildcard characters: False
 
 ### -Locale
 
-Specifies the preferred locale for WMI objects.
-Enter a value in MS_\<LCID\> format.
+Specifies the preferred locale for WMI objects. Enter a value in `MS_<LCID>` format.
 
 ```yaml
 Type: System.String
@@ -605,7 +601,8 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -622,12 +619,16 @@ When you use the **AsJob** parameter, the cmdlet returns a job object. Otherwise
 
 ## NOTES
 
+Windows PowerShell includes the following aliases for `Get-WmiObject`:
+
+- `gwmi`
+
 To access WMI information on a remote computer, the cmdlet must run under an account that is a
 member of the local administrators group on the remote computer. Or, the default access control on
 the WMI namespace of the remote repository can be changed to give access rights to other accounts.
 
 Only some of the properties of each WMI class are displayed by default. The set of properties that
-is displayed for each WMI class is specified in the Types.ps1xml configuration file. To get all
+is displayed for each WMI class is specified in the `Types.ps1xml` configuration file. To get all
 properties of a WMI object, use the `Get-Member` or `Format-List` cmdlets.
 
 ## RELATED LINKS

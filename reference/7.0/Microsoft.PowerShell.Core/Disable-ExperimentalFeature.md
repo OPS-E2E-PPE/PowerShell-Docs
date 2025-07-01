@@ -2,8 +2,8 @@
 external help file: System.Management.Automation.dll-Help.xml
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 03/06/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/disable-experimentalfeature?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/04/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/disable-experimentalfeature?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Disable-ExperimentalFeature
 ---
@@ -32,12 +32,12 @@ This cmdlet was introduced in PowerShell 6.2.
 
 ### Example 1: Disable an experimental feature
 
-In this example, if this experimental feature was previously enabled, then the `powershell.config.json`
-file is updated for the user to not enable that feature once PowerShell is restarted.
-Upon success nothing is output to the pipeline and only a warning message is displayed.
+In this example, if this experimental feature was previously enabled, then the
+`powershell.config.json` file is updated for the user to not enable that feature once PowerShell is
+restarted. Upon success nothing is output to the pipeline and only a warning message is displayed.
 
 ```powershell
-PS C:\> Disable-ExperimentalFeature PSImplicitRemotingBatching
+Disable-ExperimentalFeature -Name PSImplicitRemotingBatching
 ```
 
 ```Output
@@ -45,22 +45,6 @@ WARNING: Enabling and disabling experimental features do not take effect until n
 ```
 
 ## PARAMETERS
-
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 
@@ -96,6 +80,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WhatIf
 
 Shows what would happen if the cmdlet runs.
@@ -117,11 +117,12 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### ExperimentalFeature
+### System.Management.Automation.ExperimentalFeature
 
 Pipe instances of ExperimentalFeature from `Get-ExperimentalFeature` cmdlet to disable.
 
@@ -129,7 +130,7 @@ Pipe instances of ExperimentalFeature from `Get-ExperimentalFeature` cmdlet to d
 
 ### None
 
-This cmdlet does not return any output.
+This cmdlet returns no output.
 
 ## NOTES
 
@@ -140,3 +141,7 @@ Changes to state of an experimental feature only take effect on restart of Power
 [Enable-ExperimentalFeature](Enable-ExperimentalFeature.md)
 
 [Get-ExperimentalFeature](Get-ExperimentalFeature.md)
+
+[about_Experimental_Features](About/about_Experimental_Features.md)
+
+[Using Experimental Features](/powershell/scripting/learn/experimental-features)

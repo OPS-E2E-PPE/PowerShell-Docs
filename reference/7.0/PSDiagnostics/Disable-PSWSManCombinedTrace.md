@@ -1,13 +1,13 @@
 ---
 external help file: PSDiagnostics-help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: PSDiagnostics
-ms.date: 11/29/2018
-online version: https://docs.microsoft.com/powershell/module/psdiagnostics/disable-pswsmancombinedtrace?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/psdiagnostics/disable-pswsmancombinedtrace?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Disable-PSWSManCombinedTrace
 ---
+
 # Disable-PSWSManCombinedTrace
 
 ## SYNOPSIS
@@ -20,6 +20,8 @@ Disable-PSWSManCombinedTrace [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 This cmdlet stops the logging session started by `Enable-PSWSManCombinedTrace`.
 
@@ -48,9 +50,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
+You can't pipe objects to this cmdlet.
+
 ## OUTPUTS
 
 ### None
+
+This cmdlet returns no output.
 
 ## NOTES
 

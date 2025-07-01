@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.PSReadLine2.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: PSReadLine
-ms.date: 12/07/2018
-online version: https://docs.microsoft.com/powershell/module/psreadline/remove-psreadlinekeyhandler?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 12/13/2022
+online version: https://learn.microsoft.com/powershell/module/psreadline/remove-psreadlinekeyhandler?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Remove-PSReadLineKeyHandler
 ---
@@ -88,11 +87,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You cannot pipe objects to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### None
+
+This cmdlet returns no output.
 
 ## NOTES
 
@@ -105,4 +106,3 @@ You cannot pipe objects to this cmdlet.
 [Set-PSReadLineOption](Set-PSReadLineOption.md)
 
 [Set-PSReadLineKeyHandler](Set-PSReadLineKeyHandler.md)
-

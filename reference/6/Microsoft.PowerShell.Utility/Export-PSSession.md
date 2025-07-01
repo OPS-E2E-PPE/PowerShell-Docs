@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 04/23/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/export-pssession?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 03/15/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/export-pssession?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Export-PSSession
 ---
@@ -71,7 +70,7 @@ This example exports all of the `Get` and `Set` commands from a server.
 
 ```powershell
 $S = New-PSSession -ConnectionUri https://exchange.microsoft.com/mailbox -Credential exchangeadmin01@hotmail.com -Authentication Negotiate
-Export-PSSession -Session $S -Module exch* -CommandName Get-*, Set-* -FormatTypeName * -OutputModule $PSHOME\Modules\Exchange -Encoding ASCII
+Export-PSSession -Session $S -Module exch* -CommandName Get-*, Set-* -FormatTypeName * -OutputModule $PSHOME\Modules\Exchange -Encoding ascii
 ```
 
 These commands export the `Get` and `Set` commands from a Microsoft Exchange Server snap-in on a
@@ -186,7 +185,7 @@ Exports the variant of the command that results from using the specified argumen
 values).
 
 For example, to export the variant of the `Get-Item` command in the certificate (Cert:) drive in
-the PSSession in `$S`, type `Export-PSSession -Session $S -Command Get-Item -ArgumentList cert:`.
+the PSSession in `$S`, type `Export-PSSession -Session $S -Command Get-Item -ArgumentList Cert:`.
 
 ```yaml
 Type: System.Object[]
@@ -203,7 +202,7 @@ Accept wildcard characters: False
 ### -Certificate
 
 Specifies the client certificate that is used to sign the format files (*.Format.ps1xml) or script
-module files (.psm1) in the module that `Export-PSSession` creates. Enter a variable that contains
+module files (`.psm1`) in the module that `Export-PSSession` creates. Enter a variable that contains
 a certificate or a command or expression that gets the certificate.
 
 To find a certificate, use the `Get-PfxCertificate` cmdlet or use the `Get-ChildItem` cmdlet in the
@@ -254,18 +253,24 @@ Exports only the specified types of command objects. Use **CommandType** or its 
 
 The acceptable values for this parameter are as follows:
 
-- Alias. All PowerShell aliases in the current session.
-- All. All command types. It is the equivalent of `Get-Command -Name *`.
-- Application. All files other than PowerShell files in paths listed in the Path environment
-  variable (`$env:path`), including .txt, .exe, and .dll files.
-- Cmdlet. The cmdlets in the current session. Cmdlet is the default.
-- Configuration. A PowerShell configuration. For more information, see
+- `Alias`: All PowerShell aliases in the current session.
+- `All`: All command types. It is the equivalent of `Get-Command -Name *`.
+- `Application`: All files other than PowerShell files in paths listed in the PATH environment
+  variable (`$Env:PATH`), including .txt, .exe, and .dll files.
+- `Cmdlet`: The cmdlets in the current session. Cmdlet is the default.
+- `Configuration`: A PowerShell configuration. For more information, see
   [about_Session_Configurations](../Microsoft.PowerShell.Core/About/about_Session_Configurations.md).
-- ExternalScript. All .ps1 files in the paths listed in the Path environment variable
-  (`$env:path`).
-- Filter and Function. All PowerShell functions.
-- Script. Script blocks in the current session.
-- Workflow. A PowerShell workflow. For more information, see [about_Workflows](/powershell/module/psworkflow/about/about_workflows?view=powershell-5.1).
+- `ExternalScript`: All `.ps1` files in the paths listed in the PATH environment variable
+  (`$Env:PATH`).
+- `Filter` and `Function`: All PowerShell functions.
+- `Script` Script blocks in the current session.
+- `Workflow` A PowerShell workflow. For more information, see [about_Workflows](/powershell/module/PSWorkflow/About/about_Workflows).
+
+These values are defined as a flag-based enumeration. You can combine multiple values together to
+set multiple flags using this parameter. The values can be passed to the **CommandType** parameter
+as an array of values or as a comma-separated string of those values. The cmdlet will combine the
+values using a binary-OR operation. Passing values as an array is the simplest option and also
+allows you to use tab-completion on the values.
 
 ```yaml
 Type: System.Management.Automation.CommandTypes
@@ -287,7 +292,10 @@ Specifies the type of encoding for the target file. The default value is `utf8No
 The acceptable values for this parameter are as follows:
 
 - `ascii`: Uses the encoding for the ASCII (7-bit) character set.
+- `ansi`: Uses the encoding for the for the current culture's ANSI code page. This option was added
+  in PowerShell 7.4.
 - `bigendianunicode`: Encodes in UTF-16 format using the big-endian byte order.
+- `bigendianutf32`: Encodes in UTF-32 format using the big-endian byte order.
 - `oem`: Uses the default encoding for MS-DOS and console programs.
 - `unicode`: Encodes in UTF-16 format using the little-endian byte order.
 - `utf7`: Encodes in UTF-7 format.
@@ -301,11 +309,18 @@ pages (like `-Encoding 1251`) or string names of registered code pages (like
 `-Encoding "windows-1251"`). For more information, see the .NET documentation for
 [Encoding.CodePage](/dotnet/api/system.text.encoding.codepage?view=netcore-2.2).
 
+Starting with PowerShell 7.4, you can use the `Ansi` value for the **Encoding** parameter to pass
+the numeric ID for the current culture's ANSI code page without having to specify it manually.
+
+> [!NOTE]
+> **UTF-7*** is no longer recommended to use. As of PowerShell 7.1, a warning is written if you
+> specify `utf7` for the **Encoding** parameter.
+
 ```yaml
 Type: System.Text.Encoding
 Parameter Sets: (All)
 Aliases:
-Accepted values: ASCII, BigEndianUnicode, OEM, Unicode, UTF7, UTF8, UTF8BOM, UTF8NoBOM, UTF32
+Accepted values: ASCII, BigEndianUnicode, BigEndianUTF32, OEM, Unicode, UTF7, UTF8, UTF8BOM, UTF8NoBOM, UTF32
 
 Required: False
 Position: Named
@@ -360,19 +375,26 @@ Accept wildcard characters: False
 
 ### -FullyQualifiedModule
 
-Specifies modules with names that are specified in the form of **ModuleSpecification** objects.
-See the Remarks section of [ModuleSpecification Constructor (Hashtable)](/dotnet/api/microsoft.powershell.commands.modulespecification.-ctor#Microsoft_PowerShell_Commands_ModuleSpecification__ctor_System_Collections_Hashtable_).
+The value can be a module name, a full module specification, or a path to a module file.
 
-For example, the **FullyQualifiedModule** parameter accepts a module name that is specified in
-either of these formats:
+When the value is a path, the path can be fully qualified or relative. A relative path is resolved
+relative to the script that contains the using statement.
 
-`@{ModuleName = "modulename"; ModuleVersion = "version_number"}`
+When the value is a name or module specification, PowerShell searches the **PSModulePath** for the
+specified module.
 
-`@{ModuleName = "modulename"; ModuleVersion = "version_number"; Guid = "GUID"}`
+A module specification is a hashtable that has the following keys.
 
-**ModuleName** and **ModuleVersion** are required, but **Guid** is optional. You cannot specify the
-**FullyQualifiedModule** parameter in the same command as a **Module** parameter; the two
-parameters are mutually exclusive.
+- `ModuleName` - **Required** Specifies the module name.
+- `GUID` - **Optional** Specifies the GUID of the module.
+- It's also **Required** to specify at least one of the three below keys.
+  - `ModuleVersion` - Specifies a minimum acceptable version of the module.
+  - `MaximumVersion` - Specifies the maximum acceptable version of the module.
+  - `RequiredVersion` - Specifies an exact, required version of the module. This can't be used with
+    the other Version keys.
+
+You can't specify the **FullyQualifiedModule** parameter in the same command as a **Module**
+parameter. the two parameters are mutually exclusive.
 
 ```yaml
 Type: Microsoft.PowerShell.Commands.ModuleSpecification[]
@@ -409,7 +431,7 @@ Accept wildcard characters: False
 ### -OutputModule
 
 Specifies an optional path and name for the module created by `Export-PSSession`. The default path
-is `$home\Documents\WindowsPowerShell\Modules`. This parameter is required.
+is `$HOME\Documents\WindowsPowerShell\Modules`. This parameter is required.
 
 If the module subdirectory or any of the files that `Export-PSSession` creates already exist, the
 command fails. To overwrite existing files, use the **Force** parameter.
@@ -421,7 +443,7 @@ Aliases: PSPath, ModuleName
 
 Required: True
 Position: 1
-Default value: $home\Documents\WindowsPowerShell\Modules
+Default value: $HOME\Documents\WindowsPowerShell\Modules
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -455,13 +477,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You cannot pipe objects to `Export-PSSession`.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### System.IO.FileInfo
 
-`Export-PSSession` returns a list of files that comprise the module that it created.
+This cmdlet returns a list of files that comprise the module that it created.
 
 ## NOTES
 

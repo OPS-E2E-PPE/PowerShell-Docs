@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/remove-service?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/remove-service?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Remove-Service
 ---
+
 # Remove-Service
 
 ## SYNOPSIS
@@ -59,6 +59,9 @@ Get-Service -DisplayName "Test Service" | Remove-Service
 
 Specifies **ServiceController** objects that represent the services to remove. Enter a variable that
 contains the objects, or type a command or expression that gets the objects.
+
+The **InputObject** parameter doesn't enumerate collections. If a collection is passed, an error is
+thrown. When working with collections, pipe the input to enumerate the values.
 
 ```yaml
 Type: System.ServiceProcess.ServiceController
@@ -129,17 +132,23 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.ServiceProcess.ServiceController, System.String
+### System.ServiceProcess.ServiceController
 
-You can pipe a service object or a string that contains the name of a service to this cmdlet.
+You can pipe a service object to this cmdlet.
+
+### System.String
+
+You can pipe a string that contains the name of a service to this cmdlet.
 
 ## OUTPUTS
 
 ### None
 
-This cmdlet does not return any output.
+This cmdlet returns no output.
 
 ## NOTES
+
+This cmdlet is only available on Windows platforms.
 
 To run this cmdlet, start PowerShell by using the **Run as administrator** option.
 

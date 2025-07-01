@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.Powershell.LocalAccounts.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.LocalAccounts
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.localaccounts/get-localgroupmember?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 06/28/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.localaccounts/get-localgroupmember?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-LocalGroupMember
 ---
@@ -35,7 +34,8 @@ Get-LocalGroupMember [[-Member] <String>] [-SID] <SecurityIdentifier> [<CommonPa
 ```
 
 ## DESCRIPTION
-The **Get-LocalGroupMember** cmdlet gets members from a local group.
+
+The `Get-LocalGroupMember` cmdlet gets members from a local group.
 
 > [!NOTE]
 > The Microsoft.PowerShell.LocalAccounts module is not available in 32-bit PowerShell on a 64-bit
@@ -45,12 +45,8 @@ The **Get-LocalGroupMember** cmdlet gets members from a local group.
 
 ### Example 1: Get all members of the Administrators group
 
-```
-PS C:\> Get-LocalGroupMember -Group "Administrators"
-ObjectClass Name                    PrincipalSource
------------ ----                    ---------------
-User        CONTOSOPC\Administrator Local
-User        CONTOSOPC\LocalAdmin    Local
+```powershell
+Get-LocalGroupMember -Group "Administrators"
 ```
 
 This command gets all the members of the local Administrators group.
@@ -58,6 +54,7 @@ This command gets all the members of the local Administrators group.
 ## PARAMETERS
 
 ### -Group
+
 Specifies the security group from which this cmdlet gets members.
 
 ```yaml
@@ -73,13 +70,10 @@ Accept wildcard characters: False
 ```
 
 ### -Member
-Specifies a user or group that this cmdlet gets from a security group.
-You can specify users or groups by name or security ID (SID).
-Specify SID strings in S-R-I-S-S .
-. .
-format.
-You can use wildcard characters.
-If you do not specify this parameter, the cmdlet gets all members of the group.
+
+Specifies a user or group that this cmdlet gets from a security group. You can specify users or
+groups by name or security ID (SID). Specify SID strings in S-R-I-S-S . . . format. You can use
+wildcard characters. If you do not specify this parameter, the cmdlet gets all members of the group.
 
 ```yaml
 Type: System.String
@@ -94,6 +88,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
+
 Specifies the name of the security group from which this cmdlet gets members.
 
 ```yaml
@@ -109,6 +104,7 @@ Accept wildcard characters: False
 ```
 
 ### -SID
+
 Specifies the security ID of the security group from which this cmdlet gets members.
 
 ```yaml
@@ -124,28 +120,49 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### System.Management.Automation.SecurityAccountsManager.LocalGroup, System.String, System.Security.Principal.SecurityIdentifier
-You can pipe a local group, a string, or a SID to this cmdlet.
+### System.Management.Automation.SecurityAccountsManager.LocalGroup
+
+You can pipe a local group to this cmdlet.
+
+### System.String
+
+You can pipe a string to this cmdlet.
+
+### System.Security.Principal.SecurityIdentifier
+
+You can pipe a SID to this cmdlet.
 
 ## OUTPUTS
 
 ### Microsoft.SecurityAccountsManager.LocalPrincipal
+
 This cmdlet returns local principals.
 
 ## NOTES
 
-* The **PrincipalSource** property is a property on **LocalUser**, **LocalGroup**, and **LocalPrincipal** objects that describes the source of the object. The possible sources are as follows:
+Windows PowerShell includes the following aliases for `Get-LocalGroupMember`:
+
+- `glgm`
+
+The **PrincipalSource** property is a property on **LocalUser**, **LocalGroup**, and
+**LocalPrincipal** objects that describes the source of the object. The possible sources are as
+follows:
 
 - Local
 - Active Directory
-- Azure Active Directory group
+- Microsoft Entra group
 - Microsoft Account
 
-**PrincipalSource** is supported only by Windows 10, Windows Server 2016, and later versions of the Windows operating system. For earlier versions, the property is blank.
+**PrincipalSource** is supported only by Windows 10, Windows Server 2016, and later versions of the
+Windows operating system. For earlier versions, the property is blank.
 
 ## RELATED LINKS
 

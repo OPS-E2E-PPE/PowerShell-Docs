@@ -1,10 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 05/13/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/clear-history?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/09/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/clear-history?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Clear-History
 ---
@@ -26,7 +25,7 @@ Clear-History [[-Id] <int[]>] [[-Count] <int>] [-Newest] [-WhatIf] [-Confirm] [<
 
 ```
 Clear-History [[-Count] <int>] [-CommandLine <string[]>] [-Newest] [-WhatIf] [-Confirm]
-[<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -257,7 +256,8 @@ wildcards to match commands in the PowerShell session history displayed by `Get-
 enter more than one string, `Clear-History` deletes commands that match any of the strings. The
 **CommandLine** parameter can be used with **Count**.
 
-For strings with a space, use single quotations. For more information, see [about_Quoting_Rules](About/about_Quoting_Rules.md).
+For strings with a space, use single quotations. For more information, see
+[about_Quoting_Rules](About/about_Quoting_Rules.md).
 
 ```yaml
 Type: System.String[]
@@ -380,15 +380,20 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You cannot pipe objects to `Clear-History`.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### None
 
-`Clear-History` does not generate any output.
+This cmdlet returns no output.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Clear-History`:
+
+- All platforms:
+  - `clhy`
 
 The PowerShell session history is a list of the commands entered during a PowerShell session. You
 can view the history, add and delete commands, and run commands from the history. For more
@@ -396,7 +401,8 @@ information, see [about_History](About/about_History.md).
 
 The session history is managed separately from the history maintained by the **PSReadLine** module.
 Both histories are available in sessions where **PSReadLine** is loaded. This cmdlet only works with
-the session history. For more information see, [about_PSReadLine](../PSReadLine/About/about_PSReadLine.md).
+the session history. For more information see,
+[about_PSReadLine](../PSReadLine/About/about_PSReadLine.md).
 
 ## RELATED LINKS
 

@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Security
-ms.date: 03/25/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/get-acl?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 01/18/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.security/get-acl?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Acl
 ---
+
 # Get-Acl
 
 ## SYNOPSIS
@@ -18,8 +18,8 @@ Gets the security descriptor for a resource, such as a file or registry key.
 ### ByPath (Default)
 
 ```
-Get-Acl [[-Path] <String[]>] [-Audit] [-Filter <String>] [-Include <String[]>] [-Exclude <String[]>]
- [<CommonParameters>]
+Get-Acl [[-Path] <String[]>] [-Audit] [-Filter <String>] [-Include <String[]>]
+ [-Exclude <String[]>] [<CommonParameters>]
 ```
 
 ### ByInputObject
@@ -37,6 +37,8 @@ Get-Acl [-LiteralPath <String[]>] [-Audit] [-Filter <String>] [-Include <String[
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `Get-Acl` cmdlet gets objects that represent the security descriptor of a file or resource. The
 security descriptor contains the access control lists (ACLs) of the resource. The ACL specifies the
@@ -66,7 +68,7 @@ Get-Acl C:\Windows\s*.log | Format-List -Property PSPath, Sddl
 
 The command uses the `Get-Acl` cmdlet to get objects representing the security descriptors of each
 log file. It uses a pipeline operator (`|`) to send the results to the `Format-List` cmdlet. The
-command uses the **Property** parameter of `Format-List` to display only the **PsPath** and **SDDL**
+command uses the **Property** parameter of `Format-List` to display only the **PSPath** and **SDDL**
 properties of each security descriptor object.
 
 Lists are often used in PowerShell, because long values appear truncated in tables.
@@ -181,26 +183,6 @@ Accept pipeline input: False
 Accept wildcard characters: True
 ```
 
-### -Path
-
-Specifies the path to a resource. `Get-Acl` gets the security descriptor of the resource indicated
-by the path. Wildcards are permitted. If you omit the **Path** parameter, `Get-Acl` gets the
-security descriptor of the current directory.
-
-The parameter name ("Path") is optional.
-
-```yaml
-Type: System.String[]
-Parameter Sets: ByPath
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: True
-```
-
 ### -InputObject
 
 Gets the security descriptor for the specified object. Enter a variable that contains the object or
@@ -235,13 +217,33 @@ This parameter is introduced in Windows PowerShell 3.0.
 ```yaml
 Type: System.String[]
 Parameter Sets: ByLiteralPath
-Aliases: PSPath
+Aliases: PSPath, LP
 
 Required: False
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
+```
+
+### -Path
+
+Specifies the path to a resource. `Get-Acl` gets the security descriptor of the resource indicated
+by the path. Wildcards are permitted. If you omit the **Path** parameter, `Get-Acl` gets the
+security descriptor of the current directory.
+
+The parameter name ("Path") is optional.
+
+```yaml
+Type: System.String[]
+Parameter Sets: ByPath
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: True
 ```
 
 ### CommonParameters
@@ -255,16 +257,22 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.String
 
-You can pipe a string that contains a path to `Get-Acl`.
+You can pipe a string that contains a path to this cmdlet.
 
 ## OUTPUTS
 
-### System.Security.AccessControl.FileSecurity, System.Security.AccessControl.DirectorySecurity, System.Security.AccessControl.RegistrySecurity
+### System.Security.AccessControl.FileSecurity
 
-`Get-Acl` returns an object that represents the ACLs that it gets. The object type depends upon the
-ACL type.
+### System.Security.AccessControl.DirectorySecurity
+
+### System.Security.AccessControl.RegistrySecurity
+
+This cmdlet returns an object that represents the ACLs that it gets. The object type depends upon
+the ACL type.
 
 ## NOTES
+
+This cmdlet is only available on Windows platforms.
 
 By default, `Get-Acl` displays the PowerShell path to the resource (`<provider>::<resource-path>`),
 the owner of the resource, and "Access", a list (array) of the access control entries in the
@@ -281,7 +289,7 @@ and access list, PowerShell displays the following properties and property value
   Descriptor Definition Language format. PowerShell uses the **GetSddlForm** method of security
   descriptors to get this data.
 
-Because `Get-Acl` is supported by the file system and registry providers, you can use `Get-Acl` to
+Because `Get-Acl` is supported by the FileSystem and Registry providers, you can use `Get-Acl` to
 view the ACL of file system objects, such as files and directories, and registry objects, such as
 registry keys and entries.
 

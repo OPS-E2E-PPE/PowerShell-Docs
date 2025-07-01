@@ -1,10 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 03/28/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/test-pssessionconfigurationfile?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/09/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/test-pssessionconfigurationfile?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Test-PSSessionConfigurationFile
 ---
@@ -21,16 +20,19 @@ Test-PSSessionConfigurationFile [-Path] <String> [<CommonParameters>]
 
 ## DESCRIPTION
 
+> **This cmdlet is only available on the Windows platform.**
+
 This cmdlet verifies that a session configuration file contains valid keys and the values are of the
 correct type. For enumerated values, the cmdlet verifies that the specified values are valid.
 
-The cmdlet returns `$True` if the file passes all tests and `$False` if it does not. To find any
+The cmdlet returns `$true` if the file passes all tests and `$false` if it does not. To find any
 errors, use the **Verbose** parameter.
 
 `Test-PSSessionConfigurationFile` verifies the session configuration files, such as those created by
 the `New-PSSessionConfigurationFile` cmdlet. For information about session configurations, see
 [about_Session_Configurations](About/about_Session_Configurations.md). For information about session
-configuration files, see [about_Session_Configuration_Files](About/about_Session_Configuration_Files.md).
+configuration files, see
+[about_Session_Configuration_Files](About/about_Session_Configuration_Files.md).
 
 This cmdlet was introduced in PowerShell 3.0.
 
@@ -124,19 +126,22 @@ Accept wildcard characters: True
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.String
 
-You can pipe a session configuration file path to `Test-PSSessionConfigurationFile`.
+You can pipe a session configuration file path to this cmdlet.
 
 ## OUTPUTS
 
 ### System.Boolean
 
 ## NOTES
+
+This cmdlet is only available on Windows platforms.
 
 ## RELATED LINKS
 

@@ -1,10 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 12/14/2018
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/get-command?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 11/09/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/get-command?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Command
 ---
@@ -31,7 +30,7 @@ Get-Command [[-Name] <String[]>] [-Module <String[]>]
  [-FullyQualifiedModule <ModuleSpecification[]>] [-CommandType <CommandTypes>] [-TotalCount <Int32>]
  [-Syntax] [-ShowCommandInfo] [[-ArgumentList] <Object[]>] [-All] [-ListImported]
  [-ParameterName <String[]>] [-ParameterType <PSTypeName[]>] [-UseFuzzyMatching]
- [-UseAbbreviationExpansion] [<CommonParameters>]
+ [-FuzzyMinimumDistance <UInt32>] [-UseAbbreviationExpansion] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -41,14 +40,15 @@ aliases, functions, filters, scripts, and applications. `Get-Command` gets the c
 PowerShell modules and commands that were imported from other sessions. To get only commands that
 have been imported into the current session, use the **ListImported** parameter.
 
-Without parameters, `Get-Command` gets all of the cmdlets, functions, and aliases installed on the
-computer. `Get-Command *` gets all types of commands, including all of the non-PowerShell files in
-the Path environment variable (`$env:Path`), which it lists in the Application command type.
+Without parameters, `Get-Command` gets all the cmdlets, functions, and aliases installed on the
+computer. `Get-Command *` gets all types of commands, including all the non-PowerShell files in the
+PATH environment variable (`$Env:PATH`), which it lists in the Application command type.
 
 `Get-Command` that uses the exact name of the command, without wildcard characters, automatically
 imports the module that contains the command so that you can use the command immediately. To enable,
 disable, and configure automatic importing of modules, use the `$PSModuleAutoLoadingPreference`
-preference variable. For more information, see [about_Preference_Variables](About/about_Preference_Variables.md).
+preference variable. For more information, see
+[about_Preference_Variables](About/about_Preference_Variables.md).
 
 `Get-Command` gets its data directly from the command code, unlike `Get-Help`, which gets its
 information from help topics.
@@ -76,7 +76,7 @@ Get-Command -ListImported
 
 ### Example 3: Get cmdlets and display them in order
 
-This command gets all of the cmdlets, sorts them alphabetically by the noun in the cmdlet name, and
+This command gets all the cmdlets, sorts them alphabetically by the noun in the cmdlet name, and
 then displays them in noun-based groups. This display can help you find the cmdlets for a task.
 
 ```powershell
@@ -95,7 +95,7 @@ Get-Command -Module Microsoft.PowerShell.Security, Microsoft.PowerShell.Utility
 ### Example 5: Get information about a cmdlet
 
 This command gets information about the `Get-AppLockerPolicy` cmdlet. It also imports the
-**AppLocker** module, which adds all of the commands in the **AppLocker** module to the current
+**AppLocker** module, which adds all the commands in the **AppLocker** module to the current
 session.
 
 ```powershell
@@ -105,34 +105,39 @@ Get-Command Get-AppLockerPolicy
 When a module is imported automatically, the effect is the same as using the Import-Module cmdlet.
 The module can add commands, types and formatting files, and run scripts in the session. To enable,
 disable, and configuration automatic importing of modules, use the `$PSModuleAutoLoadingPreference`
-preference variable. For more information, see [about_Preference_Variables](../Microsoft.PowerShell.Core/About/about_Preference_Variables.md).
+preference variable. For more information, see
+[about_Preference_Variables](../Microsoft.PowerShell.Core/About/about_Preference_Variables.md).
 
 ### Example 6: Get the syntax of a cmdlet
 
-This command uses the **ArgumentList** and **Syntax** parameters to get the syntax of the `Get-ChildItem`
-cmdlet when it is used in the Cert: drive. The Cert: drive is a PowerShell drive that the
-Certificate Provider adds to the session.
+This command uses the **ArgumentList** and **Syntax** parameters to get the syntax of the
+`Get-ChildItem` cmdlet when it's used in the Cert: drive. The Cert: drive is a PowerShell drive that
+the Certificate Provider adds to the session.
 
 ```powershell
-Get-Command Get-Childitem -Args Cert: -Syntax
+Get-Command  -Name Get-ChildItem -Args Cert: -Syntax
 ```
 
-When you compare the syntax displayed in the output with the syntax that is displayed when you omit
-the **Args** (**ArgumentList**) parameter, you'll see that the **Certificate provider** adds a dynamic
-parameter, **CodeSigningCert**, to the `Get-ChildItem` cmdlet.
+When you compare the syntax displayed in the output with the syntax that's displayed when you omit
+the **Args** (**ArgumentList**) parameter, you'll see that the **Certificate provider** adds a
+dynamic parameter, **CodeSigningCert**, to the `Get-ChildItem` cmdlet.
 
-For more information about the Certificate provider, see [about_Certificate_Provider](../Microsoft.PowerShell.Security/About/about_Certificate_Provider.md).
+For more information about the Certificate provider, see
+[about_Certificate_Provider](../Microsoft.PowerShell.Security/About/about_Certificate_Provider.md).
 
 ### Example 7: Get dynamic parameters
 
 The command in the example uses the `Get-DynamicParameters` function to get the dynamic parameters
-that the Certificate provider adds to the `Get-ChildItem` cmdlet when it is used in the Cert: drive.
+that the Certificate provider adds to the `Get-ChildItem` cmdlet when it's used in the Cert: drive.
 
 ```powershell
 function Get-DynamicParameters
 {
     param ($Cmdlet, $PSDrive)
-    (Get-Command $Cmdlet -ArgumentList $PSDrive).ParameterSets | ForEach-Object {$_.Parameters} | Where-Object { $_.IsDynamic } | Select-Object -Property Name -Unique
+    (Get-Command -Name $Cmdlet -ArgumentList $PSDrive).ParameterSets |
+      ForEach-Object {$_.Parameters} |
+        Where-Object { $_.IsDynamic } |
+          Select-Object -Property Name -Unique
 }
 Get-DynamicParameters -Cmdlet Get-ChildItem -PSDrive Cert:
 ```
@@ -150,7 +155,7 @@ cmdlet by another cmdlet or a provider.
 ### Example 8: Get all commands of all types
 
 This command gets all commands of all types on the local computer, including executable files in the
-paths of the **Path** environment variable (`$env:path`).
+paths of the **PATH** environment variable (`$Env:PATH`).
 
 ```powershell
 Get-Command *
@@ -168,7 +173,7 @@ This command gets cmdlets that have a parameter whose name includes Auth and who
 Get-Command -ParameterName *Auth* -ParameterType AuthenticationMechanism
 ```
 
-You can use a command like this one to find cmdlets that let you specify the method that is used to
+You can use a command like this one to find cmdlets that let you specify the method that's used to
 authenticate the user.
 
 The **ParameterType** parameter distinguishes parameters that take an **AuthenticationMechanism**
@@ -179,7 +184,7 @@ value from those that take an **AuthenticationLevel** parameter, even when they 
 This example shows how to use the `Get-Command` cmdlet with an alias.
 
 ```powershell
-Get-Command dir
+Get-Command -Name dir
 ```
 
 ```Output
@@ -188,15 +193,38 @@ CommandType     Name                                               ModuleName
 Alias           dir -> Get-ChildItem
 ```
 
-Although it is typically used on cmdlets and functions, `Get-Command` also gets scripts, functions,
+Although it's typically used on cmdlets and functions, `Get-Command` also gets scripts, functions,
 aliases, and executable files.
 
 The output of the command shows the special view of the **Name** property value for aliases. The
 view shows the alias and the full command name.
 
-### Example 11: Get all instances of the Notepad command
+### Example 11: Get Syntax from an alias
 
-This example uses the **All** parameter of the `Get-Command` cmdlet to show all instances of the "Notepad" command on the local computer.
+This example shows how to get the syntax along with the standard name of an alias.
+
+The output of the command shows the labeled alias with the standard name, followed by the syntax.
+
+```powershell
+Get-Command -Name dir -Syntax
+```
+
+```Output
+dir (alias) -> Get-ChildItem
+
+dir [[-Path] <string[]>] [[-Filter] <string>] [-Include <string[]>] [-Exclude <string[]>] [-Recurse]
+[-Depth <uint>] [-Force] [-Name] [-Attributes <FlagsExpression[FileAttributes]>] [-FollowSymlink]
+[-Directory] [-File] [-Hidden] [-ReadOnly] [-System] [<CommonParameters>]
+
+dir [[-Filter] <string>] -LiteralPath <string[]> [-Include <string[]>] [-Exclude <string[]>] [-Recurse]
+[-Depth <uint>] [-Force] [-Name] [-Attributes <FlagsExpression[FileAttributes]>] [-FollowSymlink]
+[-Directory] [-File] [-Hidden] [-ReadOnly] [-System] [<CommonParameters>]
+```
+
+### Example 12: Get all instances of the Notepad command
+
+This example uses the **All** parameter of the `Get-Command` cmdlet to show all instances of the
+`Notepad` command on the local computer.
 
 ```powershell
 Get-Command Notepad -All | Format-Table CommandType, Name, Definition
@@ -218,9 +246,10 @@ the **All** parameter, `Get-Command` gets all commands with the specified name a
 execution precedence order. To run a command other than the first one in the list, type the fully
 qualified path to the command.
 
-For more information about command precedence, see [about_Command_Precedence](About/about_Command_Precedence.md).
+For more information about command precedence, see
+[about_Command_Precedence](About/about_Command_Precedence.md).
 
-### Example 12: Get the name of a module that contains a cmdlet
+### Example 13: Get the name of a module that contains a cmdlet
 
 This command gets the name of the module in which the `Get-Date` cmdlet originated.
 The command uses the **ModuleName** property of all commands.
@@ -233,26 +262,30 @@ The command uses the **ModuleName** property of all commands.
 Microsoft.PowerShell.Utility
 ```
 
-This command format works on commands in PowerShell modules, even if they are not imported into the session.
+This command format works on commands in PowerShell modules, even if they're not imported into the
+session.
 
-### Example 13: Get cmdlets and functions that have an output type
+### Example 14: Get cmdlets and functions that have an output type
 
 ```powershell
 Get-Command -Type Cmdlet | Where-Object OutputType | Format-List -Property Name, OutputType
 ```
 
-This command gets the cmdlets and functions that have an output type and the type of objects that they return.
+This command gets the cmdlets and functions that have an output type and the type of objects that
+they return.
 
-The first part of the command gets all cmdlets.
-A pipeline operator (|) sends the cmdlets to the `Where-Object` cmdlet, which selects only the ones in which the **OutputType** property is populated.
-Another pipeline operator sends the selected cmdlet objects to the `Format-List` cmdlet, which displays the name and output type of each cmdlet in a list.
+The first part of the command gets all cmdlets. A pipeline operator (`|`) sends the cmdlets to the
+`Where-Object` cmdlet, which selects only the ones in which the **OutputType** property is
+populated. Another pipeline operator sends the selected cmdlet objects to the `Format-List` cmdlet,
+which displays the name and output type of each cmdlet in a list.
 
-The **OutputType** property of a **CommandInfo** object has a non-null value only when the cmdlet code defines the **OutputType** attribute for the cmdlet.
+The **OutputType** property of a **CommandInfo** object has a non-null value only when the cmdlet
+code defines the **OutputType** attribute for the cmdlet.
 
-### Example 14: Get cmdlets that take a specific object type as input
+### Example 15: Get cmdlets that take a specific object type as input
 
 ```powershell
-Get-Command -ParameterType (((Get-NetAdapter)[0]).PSTypeNames)
+Get-Command -ParameterType (((Get-NetAdapter)[0]).pstypenames)
 ```
 
 ```Output
@@ -268,28 +301,27 @@ Function        Set-NetAdapter                                     NetAdapter
 This command finds cmdlets that take net adapter objects as input. You can use this command format
 to find the cmdlets that accept the type of objects that any command returns.
 
-The command uses the **PSTypeNames** intrinsic property of all objects, which gets the types that
-describe the object. To get the **PSTypeNames** property of a net adapter, and not the
-**PSTypeNames** property of a collection of net adapters, the command uses array notation to get the
+The command uses the **pstypenames** intrinsic property of all objects, which gets the types that
+describe the object. To get the **pstypenames** property of a net adapter, and not the
+**pstypenames** property of a collection of net adapters, the command uses array notation to get the
 first net adapter that the cmdlet returns.
 
-### Example 15: Get commands using a fuzzy match
+### Example 16: Get commands using a fuzzy match
 
-In this example, the name of the command deliberately has a typo as 'get-commnd'.
-Using the `-UseFuzzyMatching` switch, the cmdlet determined that the best match
-was `Get-Command` followed by other native commands on the system that were a
-similar match.
+In this example, the name of the command deliberately has a typo as 'get-commnd'. Using the
+`-UseFuzzyMatching` switch, the cmdlet determined that the best match was `Get-Command` followed by
+other native commands on the system that were a similar match.
 
 ```powershell
 Get-Command get-commnd -UseFuzzyMatching
 ```
 
 ```Output
-CommandType     Name                                               Version    Source
------------     ----                                               -------    ------
-Cmdlet          Get-Command                                        6.2.0.0    Microsoft.PowerShell.Core
-Application     getconf                                            0.0.0.0    /usr/bin/getconf
-Application     command                                            0.0.0.0    /usr/bin/command
+CommandType     Name             Version    Source
+-----------     ----             -------    ------
+Cmdlet          Get-Command      6.2.0.0    Microsoft.PowerShell.Core
+Application     getconf          0.0.0.0    /usr/bin/getconf
+Application     command          0.0.0.0    /usr/bin/command
 ```
 
 ## PARAMETERS
@@ -299,10 +331,10 @@ Application     command                                            0.0.0.0    /u
 Indicates that this cmdlet gets all commands, including commands of the same type that have the same
 name. By default, `Get-Command` gets only the commands that run when you type the command name.
 
-For more information about the method that PowerShell uses to select the command to run when
-multiple commands have the same name, see [about_Command_Precedence](About/about_Command_Precedence.md).
-For information about module-qualified command names and running commands that do not run by default
-because of a name conflict, see [about_Modules](About/about_Modules.md).
+For more information about the order that PowerShell searches for commands, see
+[about_Command_Precedence](About/about_Command_Precedence.md). For information about
+module-qualified command names and running commands that don't run by default because of a name
+conflict, see [about_Modules](About/about_Modules.md).
 
 This parameter was introduced in Windows PowerShell 3.0.
 
@@ -315,22 +347,22 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
 ### -ArgumentList
 
-Specifies an array of arguments. This cmdlet gets information about a cmdlet or function when it is
+Specifies an array of arguments. This cmdlet gets information about a cmdlet or function when it's
 used with the specified parameters ("arguments"). The alias for **ArgumentList** is **Args**.
 
 To detect dynamic parameters that are available only when certain other parameters are used, set the
 value of **ArgumentList** to the parameters that trigger the dynamic parameters.
 
 To detect the dynamic parameters that a provider adds to a cmdlet, set the value of the
-**ArgumentList** parameter to a path in the provider drive, such as WSMan:, HKLM:, or Cert:. When
-the command is a PowerShell provider cmdlet, enter only one path in each command. The provider
+**ArgumentList** parameter to a path in the provider drive, such as `WSMan:`, `HKLM:`, or `Cert:`.
+When the command is a PowerShell provider cmdlet, enter only one path in each command. The provider
 cmdlets return only the dynamic parameters for the first path the value of **ArgumentList**. For
 information about the provider cmdlets, see [about_Providers](About/about_Providers.md).
 
@@ -354,17 +386,31 @@ aliases.
 
 The acceptable values for this parameter are:
 
-- Alias. Gets the aliases of all PowerShell commands. For more information, see [about_Aliases](About/about_Aliases.md).
-- All. Gets all command types. This parameter value is the equivalent of `Get-Command *`.
-- Application. Gets non-PowerShell files in paths listed in the **Path** environment
-  variable ($env:path), including .txt, .exe, and .dll files. For more information about the
-  **Path** environment variable, see about_Environment_Variables.
-- Cmdlet. Gets all cmdlets.
-- ExternalScript. Gets all .ps1 files in the paths listed in the **Path** environment variable
-  ($env:path).
-- Filter and Function. Gets all PowerShell advanced and simple functions and filters.
-- Script. Gets all script blocks. To get PowerShell scripts (.ps1 files), use the ExternalScript
-  value.
+- `Alias`: Gets the aliases of all PowerShell commands. For more information, see
+  [about_Aliases](About/about_Aliases.md).
+
+- `All`: Gets all command types. This parameter value is the equivalent of `Get-Command *`.
+
+- `Application`: Searches folders in the `$Env:PATH` environment variable for non-PowerShell
+  executable files. On Windows, executable files have a file extension that is listed in the
+  `$Env:PATHEXT` environment variable. For more information, see
+  [about_Environment_Variables](About/about_Environment_Variables.md).
+
+- `Cmdlet`: Gets all cmdlets.
+
+- `ExternalScript`: Gets all `.ps1` files in the paths listed in the **PATH** environment variable
+  (`$Env:PATH`).
+
+- `Filter` and `Function`: Gets all PowerShell advanced and simple functions and filters.
+
+- `Script`: Gets all script blocks. To get PowerShell scripts (`.ps1` files), use the
+  `ExternalScript` value.
+
+These values are defined as a flag-based enumeration. You can combine multiple values together to
+set multiple flags using this parameter. The values can be passed to the **CommandType** parameter
+as an array of values or as a comma-separated string of those values. The cmdlet will combine the
+values using a binary-OR operation. Passing values as an array is the simplest option and also
+allows you to use tab-completion on the values.
 
 ```yaml
 Type: System.Management.Automation.CommandTypes
@@ -381,18 +427,30 @@ Accept wildcard characters: False
 
 ### -FullyQualifiedModule
 
-Specifies modules with names that are specified in the form of **ModuleSpecification** objects,
-described in the **Remarks** section of
-[ModuleSpecification Constructor (Hashtable)](/dotnet/api/microsoft.powershell.commands.modulespecification.-ctor?view=powershellsdk-1.1.0#Microsoft_PowerShell_Commands_ModuleSpecification__ctor_System_Collections_Hashtable_).
-For example, the **FullyQualifiedModule** parameter accepts a module name that is specified in one
-of the following formats:
+The value can be a module name, a full module specification, or a path to a module file.
 
-- `@{ModuleName = "modulename"; ModuleVersion = "version_number"}`
-- `@{ModuleName = "modulename"; ModuleVersion = "version_number"; Guid = "GUID"}`
+When the value is a path, the path can be fully qualified or relative. A relative path is resolved
+relative to the script that contains the using statement.
 
-**ModuleName** and **ModuleVersion** are required, but **Guid** is optional.
+When the value is a name or module specification, PowerShell searches the **PSModulePath** for the
+specified module.
 
-You cannot specify the **FullyQualifiedModule** parameter in the same command as a **Module**
+A module specification is a hashtable that has the following keys.
+
+- `ModuleName` - **Required** Specifies the module name.
+
+- `GUID` - **Optional** Specifies the GUID of the module.
+
+- It's also **Required** to specify at least one of the three below keys.
+
+  - `ModuleVersion` - Specifies a minimum acceptable version of the module.
+
+  - `MaximumVersion` - Specifies the maximum acceptable version of the module.
+
+  - `RequiredVersion` - Specifies an exact, required version of the module. This can't be used with
+    the other Version keys.
+
+You can't specify the **FullyQualifiedModule** parameter in the same command as a **Module**
 parameter. The two parameters are mutually exclusive.
 
 ```yaml
@@ -407,13 +465,32 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
+### -FuzzyMinimumDistance
+
+This parameter allows filtering fuzzy results to be more or less accurate. The distance is
+calculated using the Damerau Levenshtein Distance algorithm, which indicates how many steps is the
+match from the original value. A lower distance is more accurate. A distance of zero is an exact
+match.
+
+```yaml
+Type: UInt32
+Parameter Sets: AllCommandSet
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ListImported
 
 Indicates that this cmdlet gets only commands in the current session.
 
-Starting in PowerShell 3.0, by default, `Get-Command` gets all installed commands,
-including, but not limited to, the commands in the current session. In PowerShell 2.0, it
-gets only commands in the current session.
+Starting in PowerShell 3.0, by default, `Get-Command` gets all installed commands, including, but
+not limited to, the commands in the current session. In PowerShell 2.0, it gets only commands in the
+current session.
 
 This parameter was introduced in Windows PowerShell 3.0.
 
@@ -608,7 +685,7 @@ Accept wildcard characters: False
 ### -UseFuzzyMatching
 
 Indicates using a fuzzy matching algorithm when finding commands. The order of the output is from
-closest match to least likely match. Wildcards should not be used with fuzzy matching as it will
+closest match to least likely match. Wildcards shouldn't be used with fuzzy matching as it will
 attempt to match commands that may contain those wildcard characters.
 
 ```yaml
@@ -645,7 +722,8 @@ Accept wildcard characters: True
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](About/about_CommonParameters.md).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](About/about_CommonParameters.md).
 
 ## INPUTS
 
@@ -657,7 +735,7 @@ You can pipe command names to this cmdlet.
 
 ### System.Management.Automation.CommandInfo
 
-This cmdlet returns objects derived from the **CommandInfo** class. The type of object that is
+This cmdlet returns objects derived from the **CommandInfo** class. The type of object that's
 returned depends on the type of command that `Get-Command` gets.
 
 ### System.Management.Automation.AliasInfo
@@ -678,15 +756,20 @@ Represents functions and filters.
 
 ## NOTES
 
-* When more than one command that has the same name is available to the session, `Get-Command`
+PowerShell includes the following aliases for `Get-Command`:
+
+- All platforms:
+  - `gcm`
+
+- When more than one command that has the same name is available to the session, `Get-Command`
   returns the command that runs when you type the command name. To get commands that have the same
   name, listed in run order, use the **All** parameter. For more information, see
-  [about_Command_Precedence](../Microsoft.PowerShell.Core/About/about_Command_Precedence.md).
-* When a module is imported automatically, the effect is the same as using the `Import-Module`
+  [about_Command_Precedence](About/about_Command_Precedence.md).
+- When a module is imported automatically, the effect is the same as using the `Import-Module`
   cmdlet. The module can add commands, types and formatting files, and run scripts in the session.
   To enable, disable, and configuration automatic importing of modules, use the
   `$PSModuleAutoLoadingPreference` preference variable. For more information, see
-  [about_Preference_Variables](../Microsoft.PowerShell.Core/About/about_Preference_Variables.md).
+  [about_Preference_Variables](About/about_Preference_Variables.md).
 
 ## RELATED LINKS
 

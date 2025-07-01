@@ -1,11 +1,10 @@
 ---
-Download Help Link: https://go.microsoft.com/fwlink/?linkid=390782
+Download Help Link: https://aka.ms/powershell51-help
 Help Version: 5.2.0.0
-keywords: powershell,cmdlet
 Locale: en-US
 Module Guid: 00000000-0000-0000-0000-000000000000
 Module Name: Microsoft.PowerShell.Core
-ms.date: 06/09/2017
+ms.date: 05/08/2025
 schema: 2.0.0
 title: Microsoft.PowerShell.Core
 ---
@@ -13,9 +12,10 @@ title: Microsoft.PowerShell.Core
 
 ## Description
 
-This section contains the help topics for the cmdlets that are installed with PowerShell
-Microsoft.PowerShell.Core module. The Core module contains cmdlets and providers that manage the
-basic features of PowerShell.
+The **Microsoft.PowerShell.Core** snap-in contains cmdlets and providers that manage the basic
+features of PowerShell. PowerShell loads **Microsoft.PowerShell.Core** snap-in automatically at
+startup. This is not a module. You can't import it using `Import-Module` or remove it using
+`Remove-Module`.
 
 ## Microsoft.PowerShell.Core Cmdlets
 
@@ -26,7 +26,10 @@ Appends entries to the session history.
 Adds one or more Windows PowerShell snap-ins to the current session.
 
 ### [Clear-History](Clear-History.md)
-Deletes entries from the PowerShell command history.
+Deletes entries from the PowerShell session command history.
+
+### [Clear-Host](Clear-Host.md)
+Clears the display in the host program.
 
 ### [Connect-PSSession](Connect-PSSession.md)
 Reconnects to disconnected sessions.
@@ -35,7 +38,7 @@ Reconnects to disconnected sessions.
 Debugs a running background, remote, or Windows PowerShell Workflow job.
 
 ### [Disable-PSRemoting](Disable-PSRemoting.md)
-Prevents remote users from running commands on the local computer.
+Prevents PowerShell endpoints from receiving remote connections.
 
 ### [Disable-PSSessionConfiguration](Disable-PSSessionConfiguration.md)
 Disables session configurations on the local computer.
@@ -99,6 +102,9 @@ Gets the registered session configurations on the computer.
 
 ### [Get-PSSnapin](Get-PSSnapin.md)
 Gets the Windows PowerShell snap-ins on the computer.
+
+### [Get-Verb](Get-Verb.md)
+Gets approved PowerShell verbs.
 
 ### [Import-Module](Import-Module.md)
 Adds modules to the current session.
@@ -186,6 +192,10 @@ Stops a PowerShell background job.
 
 ### [Suspend-Job](Suspend-Job.md)
 Temporarily stops workflow jobs.
+
+### [TabExpansion2](TabExpansion2.md)
+A helper function that wraps the `CompleteInput()` method of the **CommandCompletion** class to
+provide tab completion for PowerShell scripts.
 
 ### [Test-ModuleManifest](Test-ModuleManifest.md)
 Verifies that a module manifest file accurately describes the contents of a module.

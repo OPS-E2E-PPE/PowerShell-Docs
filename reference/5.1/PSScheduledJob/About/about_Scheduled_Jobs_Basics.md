@@ -1,13 +1,13 @@
 ---
-keywords: powershell,cmdlet
+description: Explains how to create and manage scheduled jobs.
 Locale: en-US
 ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/psscheduledjob/about/about_scheduled_jobs_basics?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/psscheduledjob/about/about_scheduled_jobs_basics?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Scheduled_Jobs_Basics
 ---
 
-# About Scheduled Jobs Basics
+# about_Scheduled_Jobs_Basics
 
 ## Short description
 
@@ -108,7 +108,7 @@ Monday and Thursday at 5:00 AM.
 ## How to get a job trigger
 
 To get the job trigger of a scheduled job, use the `Get-JobTrigger` cmdlet. Use
-the **Name**, **ID**, and **InputObject** parameters to specify the scheduled
+the **Name**, **Id**, and **InputObject** parameters to specify the scheduled
 job, not the job trigger.
 
 `Get-JobTrigger` gets the job trigger of the **ProcessJob**.
@@ -149,7 +149,7 @@ $O = New-ScheduledJobOption -WakeToRun
 ## How to get job options
 
 To get the job options of a scheduled job, use the `Get-ScheduledJobOption`
-cmdlet. Use the **Name**, **ID**, and **InputObject** parameters to specify the
+cmdlet. Use the **Name**, **Id**, and **InputObject** parameters to specify the
 scheduled job, not the job options.
 
 `Get-ScheduledJobOption` gets the job options of the **ProcessJob**.
@@ -200,7 +200,7 @@ value of the **WakeToRun** option of the **ProcessJob** scheduledJob to
 **True**.
 
 The `Set` cmdlets in the **PSScheduledJob** module, such as the
-`Set-ScheduledJobOption` cmdlet, don't have **Name** or **ID** parameters. You
+`Set-ScheduledJobOption` cmdlet, don't have **Name** or **Id** parameters. You
 can use the **InputObject** parameter to specify the scheduled job options or
 pipe a scheduled job from `Get-ScheduledJobOption` cmdlet to
 `Set-ScheduledJobOption`.
@@ -258,11 +258,11 @@ The default display does not show the start time, which typically distinguishes
 instances of the same scheduled job.
 
 The `Get-Job` cmdlet sends objects down the pipeline. The `Format-Table` cmdlet
-displays the **Name**, **ID**, and **BeginTime** properties of the scheduled
+displays the **Name**, **Id**, and **BeginTime** properties of the scheduled
 job.
 
 ```powershell
-Get-Job ProcessJob | Format-Table -Property Name, ID, BeginTime
+Get-Job ProcessJob | Format-Table -Property Name, Id, BeginTime
 ```
 
 ```Output
@@ -294,7 +294,7 @@ This examples gets the results of the newest instance of the
 
 ```powershell
 Import-Module PSScheduledJob
-Receive-Job -ID 51 -Keep
+Receive-Job -Id 51 -Keep
 ```
 
 The results of scheduled jobs are saved on disk, so the **Keep** parameter of
@@ -305,14 +305,9 @@ window.
 
 ## See also
 
-[about_Scheduled_Jobs_Advanced](about_Scheduled_Jobs_Advanced.md)
-
-[about_Scheduled_Jobs_Troubleshooting](about_Scheduled_Jobs_Troubleshooting.md)
-
-[about_Scheduled_Jobs](about_Scheduled_Jobs.md)
-
-[about_Splatting.md](../../Microsoft.PowerShell.Core/About/about_Splatting.md)
-
-[PSScheduledJob](xref:PSScheduledJob) module cmdlets
-
-[Task Scheduler](/windows/desktop/TaskSchd/task-scheduler-reference)
+- [about_Scheduled_Jobs](about_Scheduled_Jobs.md)
+- [about_Scheduled_Jobs_Advanced](about_Scheduled_Jobs_Advanced.md)
+- [about_Scheduled_Jobs_Troubleshooting](about_Scheduled_Jobs_Troubleshooting.md)
+- [about_Splatting.md](../../Microsoft.PowerShell.Core/About/about_Splatting.md)
+- [PSScheduledJob](xref:PSScheduledJob) module cmdlets
+- [Task Scheduler](/windows/desktop/TaskSchd/task-scheduler-reference)

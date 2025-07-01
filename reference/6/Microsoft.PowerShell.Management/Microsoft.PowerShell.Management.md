@@ -1,7 +1,6 @@
 ---
-Download Help Link: https://go.microsoft.com/fwlink/?linkid=855958
-Help Version: 6.2.5.0
-keywords: powershell,cmdlet
+Download Help Link: https://aka.ms/powershell74-help
+Help Version: 7.4.0.0
 Locale: en-US
 Module Guid: eefcb906-b326-4e99-9f54-8b4bb6ef3c6d
 Module Name: Microsoft.PowerShell.Management
@@ -31,6 +30,9 @@ Clears the contents of an item, but does not delete the item.
 ### [Clear-ItemProperty](Clear-ItemProperty.md)
 Clears the value of a property but does not delete the property.
 
+### [Clear-RecycleBin](Clear-RecycleBin.md)
+Clears the contents of a recycle bin.
+
 ### [Convert-Path](Convert-Path.md)
 Converts a path from a PowerShell path to a PowerShell provider path.
 
@@ -46,11 +48,17 @@ Debugs one or more processes running on the local computer.
 ### [Get-ChildItem](Get-ChildItem.md)
 Gets the items and child items in one or more specified locations.
 
+### [Get-Clipboard](Get-Clipboard.md)
+Gets the contents of the clipboard.  [!NOTE] > On Linux, this cmdlet requires the `xclip` utility to be in the path.
+
 ### [Get-ComputerInfo](Get-ComputerInfo.md)
 Gets a consolidated object of system and operating system properties.
 
 ### [Get-Content](Get-Content.md)
 Gets the content of the item at the specified location.
+
+### [Get-HotFix](Get-HotFix.md)
+Gets the hotfixes that are installed on local or remote computers.
 
 ### [Get-Item](Get-Item.md)
 Gets the item at the specified location.
@@ -142,6 +150,9 @@ Stops and then starts one or more services.
 ### [Resume-Service](Resume-Service.md)
 Resumes one or more suspended (paused) services.
 
+### [Set-Clipboard](Set-Clipboard.md)
+Sets the contents of the clipboard.
+
 ### [Set-Content](Set-Content.md)
 Writes new content or replaces existing content in a file.
 
@@ -189,3 +200,4 @@ Determines whether all elements of a path exist.
 
 ### [Wait-Process](Wait-Process.md)
 Waits for the processes to be stopped before accepting more input.
+

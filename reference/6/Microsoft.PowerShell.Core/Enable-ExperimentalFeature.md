@@ -1,8 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
+Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 03/06/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/enable-experimentalfeature?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 12/04/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/enable-experimentalfeature?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Enable-ExperimentalFeature
 ---
@@ -45,22 +46,6 @@ WARNING: Enabling and disabling experimental features do not take effect until n
 
 ## PARAMETERS
 
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
 
 The name or names of the experimental features to enable.
@@ -95,6 +80,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WhatIf
 
 Shows what would happen if the cmdlet runs.
@@ -120,7 +121,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### ExperimentalFeature
+### System.Management.Automation.ExperimentalFeature
 
 Pipe instances of ExperimentalFeature from `Get-ExperimentalFeature` cmdlet to enable.
 
@@ -128,7 +129,7 @@ Pipe instances of ExperimentalFeature from `Get-ExperimentalFeature` cmdlet to e
 
 ### None
 
-This cmdlet does not return any output.
+This cmdlet returns no output.
 
 ## NOTES
 
@@ -139,3 +140,7 @@ Changes to state of an experimental feature only take effect on restart of Power
 [Disable-ExperimentalFeature](Disable-ExperimentalFeature.md)
 
 [Get-ExperimentalFeature](Get-ExperimentalFeature.md)
+
+[about_Experimental_Features](/powershell/module/microsoft.powershell.core/about/about_experimental_features)
+
+[Using Experimental Features](/powershell/scripting/learn/experimental-features)

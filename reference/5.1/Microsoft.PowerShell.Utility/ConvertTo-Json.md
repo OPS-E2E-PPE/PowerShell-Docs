@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/convertto-json?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/convertto-json?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: ConvertTo-Json
 ---
+
 # ConvertTo-Json
 
 ## SYNOPSIS
@@ -22,9 +22,9 @@ ConvertTo-Json [-InputObject] <Object> [-Depth <Int32>] [-Compress]
 
 ## DESCRIPTION
 
-The `ConvertTo-Json` cmdlet converts any .NET object to a string in JavaScript Object Notation (JSON)
-format. The properties are converted to field names, the field values are converted to property
-values, and the methods are removed.
+The `ConvertTo-Json` cmdlet converts any .NET object to a string in JavaScript Object Notation
+(JSON) format. The properties are converted to field names, the field values are converted to
+property values, and the methods are removed.
 
 You can then use the `ConvertFrom-Json` cmdlet to convert a JSON-formatted string to a JSON
 object, which is easily managed in PowerShell.
@@ -39,7 +39,7 @@ This cmdlet was introduced in Windows PowerShell 3.0.
 ### Example 1
 
 ```powershell
-PS C:\> (Get-UICulture).Calendar | ConvertTo-Json
+(Get-UICulture).Calendar | ConvertTo-Json
 ```
 
 ```Output
@@ -164,8 +164,9 @@ Accept wildcard characters: False
 
 ### -Depth
 
-Specifies how many levels of contained objects are included in the JSON representation. The default
-value is 2.
+Specifies how many levels of contained objects are included in the JSON representation. The value
+can be any number from `1` to `100`. The default value is `2`. `ConvertTo-Json` emits a
+warning if the number of levels in an input object exceeds this number.
 
 ```yaml
 Type: System.Int32
@@ -211,15 +212,18 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Object
 
-You can pipe any object to `ConvertTo-Json`.
+You can pipe any object to this cmdlet.
 
 ## OUTPUTS
 
 ### System.String
 
+This cmdlet returns a string representing the input object converted to a JSON string.
+
 ## NOTES
 
-The `ConvertTo-Json` cmdlet is implemented using the [JavaScriptSerializer class](/dotnet/api/system.web.script.serialization.javascriptserializer).
+The `ConvertTo-Json` cmdlet is implemented using the
+[JavaScriptSerializer class](/dotnet/api/system.web.script.serialization.javascriptserializer).
 
 ## RELATED LINKS
 

@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 03/12/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/resolve-path?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 12/18/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/resolve-path?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Resolve-Path
 ---
+
 # Resolve-Path
 
 ## SYNOPSIS
@@ -18,30 +18,32 @@ Resolves the wildcard characters in a path, and displays the path contents.
 ### Path (Default)
 
 ```
-Resolve-Path [-Path] <String[]> [-Relative] [-Credential <PSCredential>] [<CommonParameters>]
+Resolve-Path [-Path] <string[]> [-Relative] [-RelativeBasePath <string>]
+ [-Credential <pscredential>] [<CommonParameters>]
 ```
 
 ### LiteralPath
 
 ```
-Resolve-Path -LiteralPath <String[]> [-Relative] [-Credential <PSCredential>] [<CommonParameters>]
+Resolve-Path -LiteralPath <string[]> [-Relative] [-RelativeBasePath <string>]
+ [-Credential <pscredential>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
 The `Resolve-Path` cmdlet displays the items and containers that match the wildcard pattern at the
 location specified. The match can include files, folders, registry keys, or any other object
-accessible from a PSDrive provider.
+accessible from a **PSDrive** provider.
 
 ## EXAMPLES
 
 ### Example 1: Resolve the home folder path
 
-The tilde character (~) is shorthand notation for the current user's home folder. This example
+The tilde character (`~`) is shorthand notation for the current user's home folder. This example
 shows `Resolve-Path` returning the fully qualified path value.
 
 ```powershell
-PS C:\> Resolve-Path ~
+Resolve-Path ~
 ```
 
 ```Output
@@ -53,7 +55,7 @@ C:\Users\User01
 ### Example 2: Resolve the path of the Windows folder
 
 ```powershell
-PS C:\> Resolve-Path -Path "windows"
+Resolve-Path -Path "windows"
 ```
 
 ```Output
@@ -62,22 +64,22 @@ Path
 C:\Windows
 ```
 
-When run from the root of the C: drive, this command returns the path of the Windows folder in the
-C: drive.
+When run from the root of the `C:` drive, this command returns the path of the `Windows` folder in
+the `C:` drive.
 
 ### Example 3: Get all paths in the Windows folder
 
 ```powershell
-PS C:\> "C:\windows\*" | Resolve-Path
+"C:\windows\*" | Resolve-Path
 ```
 
-This command returns all of the folders in the C:\Windows folder. The command uses a pipeline
-operator (|) to send a path string to `Resolve-Path`.
+This command returns all the files and folders in the `C:\Windows` folder. The command uses a
+pipeline operator (`|`) to send a path string to `Resolve-Path`.
 
 ### Example 4: Resolve a UNC path
 
 ```powershell
-PS C:\> Resolve-Path -Path "\\Server01\public"
+Resolve-Path -Path "\\Server01\public"
 ```
 
 This command resolves a Universal Naming Convention (UNC) path and returns the shares in the path.
@@ -85,7 +87,7 @@ This command resolves a Universal Naming Convention (UNC) path and returns the s
 ### Example 5: Get relative paths
 
 ```powershell
-PS C:\> Resolve-Path -Path "c:\prog*" -Relative
+Resolve-Path -Path "C:\prog*" -Relative
 ```
 
 ```Output
@@ -94,16 +96,31 @@ PS C:\> Resolve-Path -Path "c:\prog*" -Relative
 .\programs.txt
 ```
 
-This command returns relative paths for the directories at the root of the C: drive.
+This command returns relative paths for the directories at the root of the `C:` drive.
 
 ### Example 6: Resolve a path containing brackets
 
-This example uses the **LiteralPath** parameter to resolve the path of the Test\[xml\] subfolder.
+This example uses the **LiteralPath** parameter to resolve the path of the `Test[xml]` subfolder.
 Using **LiteralPath** causes the brackets to be treated as normal characters rather than a regular
 expression.
 
 ```powershell
-PS C:\> Resolve-Path -LiteralPath 'test[xml]'
+Resolve-Path -LiteralPath 'test[xml]'
+```
+
+### Example 7: Resolve a path relative to another folder
+
+This example uses the **RelativeBasePath** parameter to resolve the path of the `pwsh` executable
+relative to `$Env:TEMP`. When the command includes the **Relative** switch parameter, it returns a
+**String** representing the relative path from `$Env:TEMP` to the `pwsh` executable.
+
+```powershell
+$ExecutablePath = Get-Command -Name pwsh | Select-Object -ExpandProperty Source
+Resolve-Path -Path $ExecutablePath -RelativeBasePath $Env:TEMP -Relative
+```
+
+```Output
+..\..\..\..\..\Program Files\PowerShell\7\pwsh.exe
 ```
 
 ## PARAMETERS
@@ -113,7 +130,7 @@ PS C:\> Resolve-Path -LiteralPath 'test[xml]'
 Specifies a user account that has permission to perform this action. The default is the current
 user.
 
-Type a user name, such as User01 or Domain01\User01, or pass a **PSCredential** object. You can
+Type a user name, such as `User01` or `Domain01\User01`, or pass a **PSCredential** object. You can
 create a **PSCredential** object using the `Get-Credential` cmdlet. If you type a user name, this
 cmdlet prompts you for a password.
 
@@ -123,6 +140,7 @@ This parameter is not supported by any providers installed with PowerShell.
 Type: System.Management.Automation.PSCredential
 Parameter Sets: (All)
 Aliases:
+Accepted values:
 
 Required: False
 Position: Named
@@ -135,13 +153,14 @@ Accept wildcard characters: False
 
 Specifies the path to be resolved. The value of the **LiteralPath** parameter is used exactly as
 typed. No characters are interpreted as wildcard characters. If the path includes escape characters,
-enclose it in single quotation marks. Single quotation marks tell PowerShell not to interpret any
-characters as escape sequences.
+enclose it in single quotation marks (`'`). Single quotation marks tell PowerShell not to interpret
+any characters as escape sequences.
 
 ```yaml
 Type: System.String[]
 Parameter Sets: LiteralPath
 Aliases: PSPath, LP
+Accepted values:
 
 Required: True
 Position: Named
@@ -159,6 +178,7 @@ string to `Resolve-Path`. Wildcard characters are permitted.
 Type: System.String[]
 Parameter Sets: Path
 Aliases:
+Accepted values:
 
 Required: True
 Position: 0
@@ -173,8 +193,32 @@ Indicates that this cmdlet returns a relative path.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
+Parameter Sets: Path, LiteralPath
+Aliases:
+Accepted values:
+
+Required: True (None) False (Path, LiteralPath)
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RelativeBasePath
+
+Specifies a path to resolve the relative path from. When you use this parameter, the cmdlet returns
+the **System.Management.Automation.PathInfo** object for the resolved path.
+
+When you use this parameter with the **Relative** switch parameter, the cmdlet returns a string
+representing the relative path from **RelativeBasePath** to **Path**.
+
+This parameter was added in PowerShell 7.4.
+
+```yaml
+Type: System.String
 Parameter Sets: (All)
 Aliases:
+Accepted values:
 
 Required: False
 Position: Named
@@ -198,18 +242,26 @@ You can pipe a string that contains a path to this cmdlet.
 
 ## OUTPUTS
 
-### System.Management.Automation.PathInfo, System.String
+### System.Management.Automation.PathInfo
 
-Returns a **PathInfo** object. Returns a string value for the resolved path if you specify the
-**Relative** parameter.
+By default, this cmdlet returns a **PathInfo** object.
+
+### System.String
+
+If you specify the **Relative** parameter, this cmdlet returns a string value for the resolved path.
 
 ## NOTES
 
-The `*-Path` cmdlets work with the FileSystem, Registry, and Certificate providers.
+PowerShell includes the following aliases for `Resolve-Path`:
+
+- All platforms:
+  - `rvpa`
+
+The `*-Path` cmdlets work with the **FileSystem**, **Registry**, and **Certificate** providers.
 
 `Resolve-Path` is designed to work with any provider. To list the providers available in your
 session, type `Get-PSProvider`. For more information, see
-[about_providers](../microsoft.powershell.core/about/about_providers.md).
+[about_Providers](../microsoft.powershell.core/about/about_providers.md).
 
 `Resolve-Path` only resolves existing paths. It cannot be used to resolve a location that does not
 exist yet.

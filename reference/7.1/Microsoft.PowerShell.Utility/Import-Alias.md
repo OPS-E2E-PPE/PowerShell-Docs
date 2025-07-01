@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/import-alias?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/import-alias?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Import-Alias
 ---
+
 # Import-Alias
 
 ## SYNOPSIS
@@ -133,7 +133,7 @@ The acceptable values for this parameter are:
 - A number relative to the current scope (0 through the number of scopes, where 0 is the current scope and 1 is its parent)
 
 The default is Local.
-For more information, see about_Scopes.
+For more information, see [about_Scopes](../Microsoft.PowerShell.Core/About/about_Scopes.md).
 
 ```yaml
 Type: System.String
@@ -188,16 +188,25 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.String
 
-You can pipe a string that contains a path to `Import-Alias`.
+You can pipe a string that contains a path to this cmdlet.
 
 ## OUTPUTS
 
-### None or System.Management.Automation.AliasInfo
+### None
 
-When you use the **Passthru** parameter, `Import-Alias` returns a **System.Management.Automation.AliasInfo** object that represents the alias.
-Otherwise, this cmdlet does not generate any output.
+By default, this cmdlet returns no output.
+
+### System.Management.Automation.AliasInfo
+
+When you use the **PassThru** parameter, this cmdlet returns an **AliasInfo** object representing
+the alias.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Import-Alias`:
+
+- All platforms:
+  - `ipal`
 
 ## RELATED LINKS
 
@@ -208,4 +217,3 @@ Otherwise, this cmdlet does not generate any output.
 [New-Alias](New-Alias.md)
 
 [Set-Alias](Set-Alias.md)
-

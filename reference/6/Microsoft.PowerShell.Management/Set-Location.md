@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 02/04/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/set-location?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/set-location?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-Location
 ---
+
 # Set-Location
 
 ## SYNOPSIS
@@ -46,7 +46,7 @@ independent from the location stack that is accessed using the **StackName** par
 
 ### Example 1: Set the current location
 
-```
+```powershell
 PS C:\> Set-Location -Path "HKLM:\"
 PS HKLM:\>
 ```
@@ -55,7 +55,7 @@ This command sets the current location to the root of the `HKLM:` drive.
 
 ### Example 2: Set the current location and display that location
 
-```
+```powershell
 PS C:\> Set-Location -Path "Env:\" -PassThru
 ```
 
@@ -87,7 +87,7 @@ To get the current location in the PSDrive use `Get-Location -PSDrive <DriveName
 
 ### Example 4: Set the current location to a named stack
 
-```
+```powershell
 PS C:\> Push-Location -Path 'C:\Program Files\PowerShell\' -StackName "Paths"
 PS C:\Program Files\PowerShell\> Set-Location -StackName "Paths"
 PS C:\Program Files\PowerShell\> Get-Location -Stack
@@ -109,7 +109,7 @@ specified in the command. For information about location stacks, see the [Notes]
 ### Example 5: Navigate location history using `+` or `-`
 
 ```
-PS C:\> Set-Location -Path $env:SystemRoot
+PS C:\> Set-Location -Path $Env:SystemRoot
 PS C:\Windows> Set-Location -Path Cert:\
 PS Cert:\> Set-Location -Path HKLM:\
 PS HKLM:\>
@@ -170,15 +170,16 @@ Accept wildcard characters: False
 ### -Path
 
 Specify the path of a new working location. If no path is provided, `Set-Location` defaults to the
-current user's home directory. When wildcards are used, the cmdlet chooses the first path that
-matches the wildcard pattern.
+current user's home directory. When wildcards are used, the cmdlet chooses the container (directory,
+registry key, certificate store) that matches the wildcard pattern. If the wildcard pattern matches
+more than one container, the cmdlet returns an error.
 
 PowerShell keeps a history of the last 20 locations you have set. If the **Path** parameter value
 is the `-` character, then the new working location will be the previous working location in history
 (if it exists). Similarly, if the value is the `+` character, then the new working location will be
 the next working location in history (if it exists). This is similar to using `Pop-Location` and
 `Push-Location` except that the history is a list, not a stack, and is implicitly tracked,
-not manually controlled. Currently, there is no way to view the history list.
+not manually controlled. There is no way to view the history list.
 
 ```yaml
 Type: System.String
@@ -194,12 +195,14 @@ Accept wildcard characters: True
 
 ### -StackName
 
-Specifies the existing location stack name that this cmdlet makes the current location stack. Enter
+Specifies an existing location stack name that this cmdlet makes the current location stack. Enter
 a location stack name. To indicate the unnamed default location stack, type `$null` or an empty
 string (`""`).
 
-The `*-Location` cmdlets act on the current stack unless you use the **StackName** parameter to
-specify a different stack. For more information about location stacks, see the [Notes](#notes).
+Using this parameter does not change the current location. It only changes the stack used by the
+`*-Location` cmdlets. The `*-Location` cmdlets act on the current stack unless you use the
+**StackName** parameter to specify a different stack. For more information about location stacks,
+see the [Notes](#notes).
 
 ```yaml
 Type: System.String
@@ -228,14 +231,28 @@ You can pipe a string that contains a path, but not a literal path, to this cmdl
 
 ## OUTPUTS
 
-### None, System.Management.Automation.PathInfo, System.Management.Automation.PathInfoStack
+### None
 
-This cmdlet does not generate any output unless you specify the **PassThru** parameter. Using
-**PassThru** with **Path** or **LiteralPath** generates a **PathInfo** object that represents the
-new location. Using **PassThru** with **StackName** generates a **PathInfoStack** object
-representing the new stack context.
+By default, this cmdlet returns no output.
+
+### System.Management.Automation.PathInfo
+
+When you use the **PassThru** parameter with **Path** or **LiteralPath**, this cmdlet returns a
+**PathInfo** object representing the new location.
+
+### System.Management.Automation.PathInfoStack
+
+When you use the **PassThru** parameter with  **StackName**, this cmdlet returns a **PathInfoStack**
+object representing the new stack context.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Set-Location`:
+
+- All Platforms:
+  - `cd`
+  - `chdir`
+  - `sl`
 
 PowerShell supports multiple runspaces per process. Each runspace has its own _current directory_.
 This is not the same as `[System.Environment]::CurrentDirectory`. This behavior can be an issue

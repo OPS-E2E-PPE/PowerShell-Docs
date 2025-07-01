@@ -1,60 +1,61 @@
 ---
-keywords: powershell,cmdlet
+description: Describes how to use object properties in PowerShell.
 Locale: en-US
-ms.date: 12/01/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_properties?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 01/03/2025
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_properties?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Properties
 ---
-# About Properties
+# about_Properties
 
 ## Short description
+
 Describes how to use object properties in PowerShell.
 
 ## Long description
 
 PowerShell uses structured collections of information called objects to
-represent the items in data stores or the state of the computer. Typically,
-you work with object that are part of the Microsoft .NET Framework, but you
-can also create custom objects in PowerShell.
+represent the items in data stores or the state of the computer. Typically, you
+work with objects that are part of the Microsoft .NET Framework, but you can
+also create custom objects in PowerShell.
 
 The association between an item and its object is very close. When you change
 an object, you usually change the item that it represents. For example, when
-you get a file in PowerShell, you do not get the actual file. Instead, you get
-a FileInfo object that represents the file. When you change the FileInfo
+you get a file in PowerShell, you don't get the actual file. Instead, you get a
+**FileInfo** object that represents the file. When you change the FileInfo
 object, the file changes too.
 
-Most objects have properties. Properties are the data that is associated with
+Most objects have properties. Properties are the data that are associated with
 an object. Different types of object have different properties. For example, a
-FileInfo object, which represents a file, has an **IsReadOnly** property that
-contains $True if the file the read-only attribute and $False if it does not.
-A DirectoryInfo object, which represents a file system directory, has a Parent
-property that contains the path to the parent directory.
+**FileInfo** object, which represents a file, has an **IsReadOnly** property
+that contains `$true` if the file has the read-only attribute and `$false` if
+it doesn't. A **DirectoryInfo** object, which represents a file system
+directory, has a **Parent** property that contains the path to the parent
+directory.
 
-### Object properties
+## Object properties
 
 To get the properties of an object, use the `Get-Member` cmdlet. For example,
 to get the properties of a **FileInfo** object, use the `Get-ChildItem` cmdlet
 to get the FileInfo object that represents a file. Then, use a pipeline
-operator (&#124;) to send the **FileInfo** object to `Get-Member`. The
-following command gets the PowerShell.exe file and sends it to `Get-Member`.
-The \$Pshome automatic variable contains the path of the PowerShell
-installation directory.
+operator (`|`) to send the **FileInfo** object to `Get-Member`. The following
+command gets the `pwsh.exe` file and sends it to `Get-Member`. The `$PSHOME`
+automatic variable contains the path of the PowerShell installation directory.
 
 ```powershell
-Get-ChildItem $pshome\PowerShell.exe | Get-Member
+Get-ChildItem $PSHOME\pwsh.exe | Get-Member
 ```
 
-The output of the command lists the members of the **FileInfo** object.
-Members include both properties and methods. When you work in PowerShell, you
-have access to all the members of the objects.
+The output of the command lists the members of the **FileInfo** object. Members
+include both properties and methods. When you work in PowerShell, you have
+access to all the members of the objects.
 
 To get only the properties of an object and not the methods, use the
-MemberType parameter of the `Get-Member` cmdlet with a value of "property", as
-shown in the following example.
+**MemberType** parameter of the `Get-Member` cmdlet with a value of `Property`,
+as shown in the following example.
 
 ```powershell
-Get-ChildItem $pshome\PowerShell.exe | Get-Member -MemberType property
+Get-ChildItem $PSHOME\pwsh.exe | Get-Member -MemberType Property
 ```
 
 ```Output
@@ -83,101 +84,99 @@ After you find the properties, you can use them in your PowerShell commands.
 
 ## Property values
 
-Although every object of a specific type has the same properties, the values
-of those properties describe the particular object. For example, every
-FileInfo object has a CreationTime property, but the value of that property
-differs for each file.
+Although every object of a specific type has the same properties, the values of
+those properties describe the particular object. For example, every
+**FileInfo** object has a **CreationTime** property, but the value of that
+property differs for each file.
 
 The most common way to get the values of the properties of an object is to use
-the dot method. Type a reference to the object, such as a variable that
-contains the object, or a command that gets the object. Then, type a dot (.)
-followed by the property name.
+the member access operator (`.`). Type a reference to the object, such as a
+variable that contains the object, or a command that gets the object. Then,
+type the operator (`.`) followed by the property name.
 
-For example, the following command displays the value of the CreationTime
-property of the PowerShell.exe file. The `Get-ChildItem` command returns a
-FileInfo object that represents the PowerShell.exe file. The command is
-enclosed in parentheses to make sure that it is executed before any properties
-are accessed. The `Get-ChildItem` command is followed by a dot and the name of
-the CreationTime property, as follows:
-
-```powershell
-(Get-ChildItem $pshome\PowerShell.exe).creationtime
-```
-
-```output
-Tuesday, March 18, 2008 12:07:52 AM
-```
-
-You can also save an object in a variable and then get its properties by using
-the dot method, as shown in the following example:
+For example, the following command displays the value of the **CreationTime**
+property of the `pwsh.exe` file. The `Get-ChildItem` command returns a
+**FileInfo** object that represents the `pwsh.exe file`. The command is
+enclosed in parentheses to make sure that it's executed before any properties
+are accessed.
 
 ```powershell
-$a = Get-ChildItem $pshome\PowerShell.exe
+(Get-ChildItem $PSHOME\pwsh.exe).CreationTime
+```
+
+```Output
+Tuesday, June 14, 2022 5:17:14 PM
+```
+
+You can also save an object in a variable and then get its properties using the
+member access (`.`) method, as shown in the following example:
+
+```powershell
+$a = Get-ChildItem $PSHOME\pwsh.exe
 $a.CreationTime
 ```
 
-```output
-Tuesday, March 18, 2008 12:07:52 AM
+```Output
+Wednesday, November 13, 2024 10:12:26 PM
 ```
 
 You can also use the `Select-Object` and `Format-List` cmdlets to display the
 property values of an object. `Select-Object` and `Format-List` each have a
 **Property** parameter. You can use the **Property** parameter to specify one
 or more properties and their values. Or, you can use the wildcard character
-(\*) to represent all the properties.
+(`*`) to represent all the properties.
 
 For example, the following command displays the values of all the properties
-of the PowerShell.exe file.
+of the pwsh.exe file.
 
 ```powershell
-Get-ChildItem $pshome\PowerShell.exe | Format-List -Property *
+Get-ChildItem $PSHOME\pwsh.exe | Format-List -Property *
 ```
 
-```output
-PSPath            : Microsoft.PowerShell.Core\FileSystem::C:\Windows\System3
-                    2\WindowsPowerShell\v1.0\PowerShell.exe
-PSParentPath      : Microsoft.PowerShell.Core\FileSystem::C:\Windows\System3
-                    2\WindowsPowerShell\v1.0
-PSChildName       : PowerShell.exe
-PSDrive           : C
-PSProvider        : Microsoft.PowerShell.Core\FileSystem
-PSIsContainer     : False
-Mode              : -a----
-VersionInfo       : File:             C:\Windows\System32\WindowsPowerShell\
-                    v1.0\PowerShell.exe
-                    InternalName:     POWERSHELL
-                    OriginalFilename: PowerShell.EXE.MUI
-                    FileVersion:      10.0.16299.15 (WinBuild.160101.0800)
-                    FileDescription:  Windows PowerShell
-                    Product:          Microsoft Windows Operating System
-                    ProductVersion:   10.0.16299.15
-                    Debug:            False
-                    Patched:          False
-                    PreRelease:       False
-                    PrivateBuild:     False
-                    SpecialBuild:     False
-                    Language:         English (United States)
-
-BaseName          : PowerShell
-Target            : {C:\Windows\WinSxS\amd64_microsoft-windows-powershell-ex
-                    e_31bf3856ad364e35_10.0.16299.15_none_8c022aa6735716ae\p
-                    owershell.exe}
-LinkType          : HardLink
-Name              : PowerShell.exe
-Length            : 449024
-DirectoryName     : C:\Windows\System32\WindowsPowerShell\v1.0
-Directory         : C:\Windows\System32\WindowsPowerShell\v1.0
-IsReadOnly        : False
-Exists            : True
-FullName          : C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell.ex
-Extension         : .exe
-CreationTime      : 9/29/2017 6:43:19 AM
-CreationTimeUtc   : 9/29/2017 1:43:19 PM
-LastAccessTime    : 9/29/2017 6:43:19 AM
-LastAccessTimeUtc : 9/29/2017 1:43:19 PM
-LastWriteTime     : 9/29/2017 6:43:19 AM
-LastWriteTimeUtc  : 9/29/2017 1:43:19 PM
-Attributes        : Archive
+```Output
+PSPath              : Microsoft.PowerShell.Core\FileSystem::C:\Program Files\PowerShell\7-preview\pwsh.exe
+PSParentPath        : Microsoft.PowerShell.Core\FileSystem::C:\Program Files\PowerShell\7-preview
+PSChildName         : pwsh.exe
+PSDrive             : C
+PSProvider          : Microsoft.PowerShell.Core\FileSystem
+PSIsContainer       : False
+Mode                : -a---
+ModeWithoutHardLink : -a---
+VersionInfo         : File:             C:\Program Files\PowerShell\7-preview\pwsh.exe
+                      InternalName:     pwsh.dll
+                      OriginalFilename: pwsh.dll
+                      FileVersion:      7.5.0.101
+                      FileDescription:  PowerShell 7
+                      Product:          PowerShell
+                      ProductVersion:   7.5.0-rc.1 SHA: c0142dde17137e436e302b3c4e93e2d6dc50c5c4+c0142dde17137e436e302b3c4e93e2d6dc50c5c4
+                      Debug:            False
+                      Patched:          False
+                      PreRelease:       False
+                      PrivateBuild:     False
+                      SpecialBuild:     False
+                      Language:         Language Neutral
+                      
+BaseName            : pwsh
+ResolvedTarget      : C:\Program Files\PowerShell\7-preview\pwsh.exe
+Target              : 
+LinkType            : 
+Name                : pwsh.exe
+Length              : 284704
+DirectoryName       : C:\Program Files\PowerShell\7-preview
+Directory           : C:\Program Files\PowerShell\7-preview
+IsReadOnly          : False
+Exists              : True
+FullName            : C:\Program Files\PowerShell\7-preview\pwsh.exe
+Extension           : .exe
+CreationTime        : 11/13/2024 10:12:26 PM
+CreationTimeUtc     : 11/14/2024 4:12:26 AM
+LastAccessTime      : 1/3/2025 1:38:13 PM
+LastAccessTimeUtc   : 1/3/2025 7:38:13 PM
+LastWriteTime       : 11/13/2024 10:12:26 PM
+LastWriteTimeUtc    : 11/14/2024 4:12:26 AM
+LinkTarget          : 
+UnixFileMode        : -1
+Attributes          : Archive
 ```
 
 ### Static properties
@@ -186,11 +185,9 @@ You can use the static properties of .NET classes in PowerShell. Static
 properties are properties of class, unlike standard properties, which are
 properties of an object.
 
-To get the static properties of an class, use the Static parameter of the
-Get-Member cmdlet.
-
-For example, the following command gets the static properties of the
-`System.DateTime` class.
+To get the static properties of a class, use the **Static** parameter of the
+`Get-Member` cmdlet. For example, the following command gets the static
+properties of the `System.DateTime` class.
 
 ```powershell
 Get-Date | Get-Member -MemberType Property -Static
@@ -210,45 +207,31 @@ UtcNow   Property   datetime UtcNow {get;}
 
 To get the value of a static property, use the following syntax.
 
-```
+```Syntax
 [<ClassName>]::<Property>
 ```
 
-For example, the following command gets the value of the UtcNow static
+For example, the following command gets the value of the **UtcNow** static
 property of the `System.DateTime` class.
 
 ```powershell
 [System.DateTime]::UtcNow
 ```
 
-### Properties of scalar objects and collections
+## Member-access enumeration
 
-The properties of one ("scalar") object of a particular type are often
-different from the properties of a collection of objects of the same type.
-For example, every service has as **DisplayName** property, but a collection
-of services does not have a **DisplayName** property.
+Starting in PowerShell 3.0, when you use the member-access operator (`.`) to
+access a property that doesn't exist, PowerShell automatically enumerates the
+items in the collection and returns the value of the property for each item.
 
-The following command gets the value of the **DisplayName** property of the
-'Audiosrv' service.
-
-```powershell
-(Get-Service Audiosrv).DisplayName
-```
-
-```output
-Windows Audio
-```
-
-Beginning in PowerShell 3.0, PowerShell tries to prevent scripting errors that
-result from the differing properties of scalar objects and collections. The
-same command returns the value of the **DisplayName** property of every service
+This command returns the value of the **DisplayName** property of every service
 that `Get-Service` returns.
 
 ```powershell
 (Get-Service).DisplayName
 ```
 
-```output
+```Output
 Application Experience
 Application Layer Gateway Service
 Windows All-User Install Agent
@@ -257,59 +240,51 @@ Application Information
 ...
 ```
 
-When you submit a collection, but request a property that exists only on
-single ("scalar") objects, PowerShell returns the value of that property
-for every object in the collection.
-
-All collections have a **Count** property that returns how many objects are in
-the collection.
+Most collections in PowerShell have a **Count** property that returns the
+number items in the collection.
 
 ```powershell
 (Get-Service).Count
 ```
 
-```output
+```Output
 176
 ```
 
-Beginning in PowerShell 3.0, if you request the Count or Length property of
-zero objects or one object, PowerShell returns the correct value.
+If a property exists on the individual objects and on the collection, only the
+collection's property is returned.
 
 ```powershell
-(Get-Service Audiosrv).Count
+PS> $collection = @(
+     [pscustomobject]@{Length = "foo"}
+     [pscustomobject]@{Length = "bar"}
+)
+
+# PowerShell returns the collection's Length.
+$collection.Length
+2
+
+# Get the Length property of each item in the collection.
+PS> $collection.GetEnumerator().Length
+foo
+bar
 ```
 
-```output
-1
-```
-
-If a property exists on the individual objects and on the collection,
-only the collection's property is returned.
-
- ```powershell
- $collection = @(
- [pscustomobject]@{length = "foo"}
- [pscustomobject]@{length = "bar"}
- )
- # PowerShell returns the collection's Length.
- $collection.length
- ```
-
- ```output
- 2
- ```
-
-This feature also works on methods of scalar objects and collections. For more
-information, see [about_Methods](about_methods.md).
+For more information, see [about_Member-Access_Enumeration][01].
 
 ## See also
 
-[about_Methods](about_Methods.md)
+- [about_Objects][03]
+- [about_Member-Access_Enumeration][01]
+- [about_Methods][02]
+- [Format-List][04]
+- [Get-Member][05]
+- [Select-Object][06]
 
-[about_Objects](about_Objects.md)
-
-[Get-Member](xref:Microsoft.PowerShell.Utility.Get-Member)
-
-[Select-Object](xref:Microsoft.PowerShell.Utility.Select-Object)
-
-[Format-List](xref:Microsoft.PowerShell.Utility.Format-List)
+<!-- link references -->
+[01]: about_Member-Access_Enumeration.md
+[02]: about_Methods.md
+[03]: about_Objects.md
+[04]: xref:Microsoft.PowerShell.Utility.Format-List
+[05]: xref:Microsoft.PowerShell.Utility.Get-Member
+[06]: xref:Microsoft.PowerShell.Utility.Select-Object

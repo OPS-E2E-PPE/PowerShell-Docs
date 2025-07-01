@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/get-timezone?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 11/11/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-timezone?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-TimeZone
 ---
@@ -35,23 +34,25 @@ Get-TimeZone [-ListAvailable] [<CommonParameters>]
 
 ## DESCRIPTION
 
-The **Get-TimeZone** cmdlet gets the current time zone or a list of available time zones.
+The `Get-TimeZone` cmdlet gets the current time zone or a list of available time zones.
 
 ## EXAMPLES
 
 ### Example 1: Get the current time zone
 
-```
-PS C:\> Get-TimeZone
-Pacific Standard Time
+```powershell
+Get-TimeZone
 ```
 
 This command gets the current time zone.
 
 ### Example 2: Get time zones that match a specified string
 
+```powershell
+Get-TimeZone -Name "*pac*"
 ```
-PS C:\> Get-TimeZone -Name "*pac*"
+
+```Output
 Pacific Standard Time (Mexico)
 
 (UTC-08:00) Pacific Time (US &amp; Canada)
@@ -71,8 +72,8 @@ This command gets all time zones that match the specified wildcard.
 
 ### Example 3: Get all available time zones
 
-```
-PS C:\> Get-TimeZone -ListAvailable
+```powershell
+Get-TimeZone -ListAvailable
 ```
 
 This command gets all available time zones.
@@ -129,7 +130,10 @@ Accept wildcard characters: True
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -140,6 +144,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### System.TimeZoneInfo[]
 
 ## NOTES
+
+Windows PowerShell includes the following aliases for `Get-TimeZone`:
+
+- `gtz`
 
 ## RELATED LINKS
 

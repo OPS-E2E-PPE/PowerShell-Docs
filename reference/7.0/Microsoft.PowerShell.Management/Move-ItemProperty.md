@@ -1,16 +1,16 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 5/14/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/move-itemproperty?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/move-itemproperty?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Move-ItemProperty
 ---
+
 # Move-ItemProperty
 
-## Synopsis
+## SYNOPSIS
 Moves a property from one location to another.
 
 ## SYNTAX
@@ -18,20 +18,20 @@ Moves a property from one location to another.
 ### Path (Default)
 
 ```
-Move-ItemProperty [-Path] <String[]> [-Name] <String[]> [-Destination] <String> [-PassThru] [-Force]
- [-Filter <String>] [-Include <String[]>] [-Exclude <String[]>] [-Credential <PSCredential>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Move-ItemProperty [-Path] <String[]> [-Name] <String[]> [-Destination] <String> [-PassThru]
+ [-Force] [-Filter <String>] [-Include <String[]>] [-Exclude <String[]>]
+ [-Credential <PSCredential>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### LiteralPath
 
 ```
-Move-ItemProperty -LiteralPath <String[]> [-Name] <String[]> [-Destination] <String> [-PassThru] [-Force]
- [-Filter <String>] [-Include <String[]>] [-Exclude <String[]>] [-Credential <PSCredential>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Move-ItemProperty -LiteralPath <String[]> [-Name] <String[]> [-Destination] <String> [-PassThru]
+ [-Force] [-Filter <String>] [-Include <String[]>] [-Exclude <String[]>]
+ [-Credential <PSCredential>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-## Description
+## DESCRIPTION
 
 The `Move-ItemProperty` cmdlet moves a property of an item from one item to another item.
 For instance, it can move a registry entry from one registry key to another registry key.
@@ -46,7 +46,12 @@ This command moves the Version registry value, and its data, from the "MyApp" su
 subkey of the `HKLM\Software\MyCompany` registry key.
 
 ```powershell
-Move-ItemProperty "HKLM:\Software\MyCompany\MyApp" -Name "Version" -Destination "HKLM:\Software\MyCompany\NewApp"
+$moveParams = @{
+    Path        = "HKLM:\Software\MyCompany\MyApp"
+    Name        = "Version"
+    Destination = "HKLM:\Software\MyCompany\NewApp"
+}
+Move-ItemProperty @moveParams
 ```
 
 ## PARAMETERS
@@ -108,11 +113,13 @@ Accept wildcard characters: True
 
 ### -Filter
 
-Specifies a filter to qualify the **Path** parameter. The [FileSystem](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md)
-provider is the only installed PowerShell provider that supports the use of filters. You can find
-the syntax for the **FileSystem** filter language in [about_Wildcards](../Microsoft.PowerShell.Core/About/about_Wildcards.md).
-Filters are more efficient than other parameters, because the provider applies them when the cmdlet
-gets the objects rather than having PowerShell filter the objects after they are retrieved.
+Specifies a filter to qualify the **Path** parameter. The
+[FileSystem](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md) provider is the only
+installed PowerShell provider that supports the use of filters. You can find the syntax for the
+**FileSystem** filter language in
+[about_Wildcards](../Microsoft.PowerShell.Core/About/about_Wildcards.md). Filters are more efficient
+than other parameters, because the provider applies them when the cmdlet gets the objects rather
+than having PowerShell filter the objects after they are retrieved.
 
 ```yaml
 Type: System.String
@@ -128,9 +135,9 @@ Accept wildcard characters: True
 
 ### -Force
 
-Forces the command to run without asking for user confirmation.
-Implementation varies from provider to provider.
-For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
+Forces the command to run without asking for user confirmation. Implementation varies from provider
+to provider. For more information, see
+[about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -171,7 +178,8 @@ typed. No characters are interpreted as wildcards. If the path includes escape c
 it in single quotation marks. Single quotation marks tell PowerShell not to interpret any characters
 as escape sequences.
 
-For more information, see [about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
+For more information, see
+[about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
 
 ```yaml
 Type: System.String[]
@@ -270,10 +278,10 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: `-Debug`, `-ErrorAction`, `-ErrorVariable`,
-`-InformationAction`, `-InformationVariable`, `-OutVariable`, `-OutBuffer`, `-PipelineVariable`,
-`-Verbose`, `-WarningAction`, and `-WarningVariable`. For more information, see
-[about_CommonParameters](../Microsoft.PowerShell.Core/About/about_CommonParameters.md).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -283,15 +291,25 @@ You can pipe a string that contains a path to this cmdlet.
 
 ## OUTPUTS
 
-### None or System.Management.Automation.PSCustomObject
+### None
 
-When you use the **PassThru** parameter, this cmdlet generates a **PSCustomObject** representing the
-moved item property. Otherwise, this cmdlet does not generate any output.
+By default, this cmdlet returns no output.
+
+### System.Management.Automation.PSCustomObject
+
+When you use the **PassThru** parameter, this cmdlet returns a **PSCustomObject** representing the
+moved item property.
 
 ## NOTES
 
+PowerShell includes the following aliases for `Move-ItemProperty`:
+
+- All platforms:
+  - `mp`
+
 This cmdlet is designed to work with the data exposed by any provider. To list the providers
-available in your session, type `Get-PSProvider`. For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
+available in your session, type `Get-PSProvider`. For more information, see
+[about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
 ## RELATED LINKS
 

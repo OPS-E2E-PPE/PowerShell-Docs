@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.WSMan.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.WSMan.Management
-ms.date: 10/02/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.wsman.management/set-wsmanquickconfig?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.wsman.management/set-wsmanquickconfig?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-WSManQuickConfig
 ---
@@ -23,6 +22,8 @@ Set-WSManQuickConfig [-UseSSL] [-Force] [-SkipNetworkProfileCheck] [<CommonParam
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `Set-WSManQuickConfig` cmdlet configures the computer to receive PowerShell remote commands that
 are sent by using the Web Services for Management (WS-Management) technology.
@@ -141,13 +142,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-This cmdlet doesn't accept any input.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
-### None
+### System.String
 
-This cmdlet doesn't generate any output.
+This cmdlet returns a message as a **String** object describing the state of the configuration after
+the operation.
 
 ## NOTES
 
