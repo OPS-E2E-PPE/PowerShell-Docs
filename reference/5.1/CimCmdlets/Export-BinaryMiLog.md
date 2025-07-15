@@ -5,6 +5,8 @@ Module Name: CimCmdlets
 ms.date: 02/20/2019
 online version: https://learn.microsoft.com/powershell/module/cimcmdlets/export-binarymilog?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
+author: xyz987
+ms.author: xyz987
 title: Export-BinaryMiLog
 ---
 
