@@ -6,6 +6,8 @@ Module Guid: fb6cc51d-c096-4b38-b78d-0fed6277096a
 Module Name: CimCmdlets
 ms.date: 02/20/2019
 schema: 2.0.0
+author: xyz987
+ms.author: xyz987
 title: CimCmdlets Module
 ---
 # CimCmdlets Module
