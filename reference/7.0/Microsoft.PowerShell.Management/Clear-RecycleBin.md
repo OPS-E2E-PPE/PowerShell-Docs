@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 10/28/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/clear-recyclebin?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 01/05/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/clear-recyclebin?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Clear-RecycleBin
 ---
@@ -12,7 +11,7 @@ title: Clear-RecycleBin
 # Clear-RecycleBin
 
 ## SYNOPSIS
-Clears the contents of a recycle bin.
+Clears the contents of the current user's recycle bin.
 
 ## SYNTAX
 
@@ -24,8 +23,10 @@ Clear-RecycleBin [[-DriveLetter] <String[]>] [-Force] [-WhatIf] [-Confirm] [<Com
 
 ## DESCRIPTION
 
-The `Clear-RecycleBin` cmdlet deletes the content of a computer's recycle bin. This action is like
-using Windows **Empty Recycle Bin**.
+> **This cmdlet is only available on the Windows platform.**
+
+The `Clear-RecycleBin` cmdlet deletes the content of the current user's recycle bin. This action is
+like using Windows **Empty Recycle Bin**.
 
 This cmdlet was readded in PowerShell 7.
 
@@ -33,7 +34,7 @@ This cmdlet was readded in PowerShell 7.
 
 ### 1: Clear all recycle bins
 
-In this example, all the local computer's recycle bins are cleared.
+In this example, the current user's recycle bins for all drives are cleared.
 
 ```powershell
 Clear-RecycleBin
@@ -46,8 +47,7 @@ Performing the operation "Clear-RecycleBin" on target "All of the contents of th
 [Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
 ```
 
-`Clear-RecycleBin` prompts the user for confirmation to clear all recycle bins on the local
-computer.
+`Clear-RecycleBin` prompts the user for confirmation.
 
 ### 2: Clear a specified recycle bin
 
@@ -57,19 +57,19 @@ This example clears the recycle bin for a specified drive letter.
 Clear-RecycleBin -DriveLetter C
 ```
 
-`Clear-RecycleBin` uses the **DriveLetter** parameter to specify the recycle bin on the **C**
+`Clear-RecycleBin` uses the **DriveLetter** parameter to specify the recycle bin on the `C`
 volume. The user is prompted for confirmation to run the command.
 
 ### 3: Clear all recycle bins without confirmation
 
-This example doesn't prompt for confirmation to clear the local computer's recycle bins.
+This example doesn't prompt for confirmation to clear the recycle bins.
 
 ```powershell
 Clear-RecycleBin -Force
 ```
 
 `Clear-RecycleBin` uses the **Force** parameter and doesn't prompt the user for confirmation to
-clear all recycle bins on the local computer.
+clear all recycle bins.
 
 An alternative is to replace `-Force` with `-Confirm:$false`.
 
@@ -93,7 +93,8 @@ Accept wildcard characters: False
 
 ### -Force
 
-Specifies that the user isn't prompted for confirmation to clear a recycle bin.
+Specifies that the user isn't prompted for confirmation to clear a recycle bin. The **Force**
+parameter also overrides the **WhatIf** and **Confirm** parameters.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -144,7 +145,8 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -152,6 +154,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
+This cmdlet returns no output.
+
 ## NOTES
+
+This cmdlet is only available on Windows platforms.
 
 ## RELATED LINKS

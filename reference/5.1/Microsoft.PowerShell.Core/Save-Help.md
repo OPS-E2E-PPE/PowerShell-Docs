@@ -1,10 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/save-help?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 03/06/2025
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/save-help?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Save-Help
 ---
@@ -19,156 +18,198 @@ Downloads and saves the newest help files to a file system directory.
 
 ```
 Save-Help [-DestinationPath] <String[]> [[-Module] <PSModuleInfo[]>]
- [-FullyQualifiedModule <ModuleSpecification[]>] [[-UICulture] <CultureInfo[]>] [-Credential <PSCredential>]
- [-UseDefaultCredentials] [-Force] [<CommonParameters>]
+ [-FullyQualifiedModule <ModuleSpecification[]>] [[-UICulture] <CultureInfo[]>]
+ [-Credential <PSCredential>] [-UseDefaultCredentials] [-Force] [<CommonParameters>]
 ```
 
 ### LiteralPath
 
 ```
-Save-Help -LiteralPath <String[]> [[-Module] <PSModuleInfo[]>] [-FullyQualifiedModule <ModuleSpecification[]>]
- [[-UICulture] <CultureInfo[]>] [-Credential <PSCredential>] [-UseDefaultCredentials] [-Force]
- [<CommonParameters>]
+Save-Help -LiteralPath <String[]> [[-Module] <PSModuleInfo[]>]
+ [-FullyQualifiedModule <ModuleSpecification[]>] [[-UICulture] <CultureInfo[]>]
+ [-Credential <PSCredential>] [-UseDefaultCredentials] [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-The **Save-Help** cmdlet downloads the newest help files for PowerShell modules and saves them to a directory that you specify.
-This feature lets you update the help files on computers that do not have access to the Internet, and makes it easier to update the help files on multiple computers.
+The `Save-Help` cmdlet downloads the newest help files for PowerShell modules and saves them to a
+directory that you specify. This feature lets you update the help files on computers that don't have
+access to the internet, and makes it easier to update the help files on multiple computers. This
+cmdlet was introduced in Windows PowerShell 3.0.
 
-In Windows PowerShell 3.0, **Save-Help** worked only for modules that are installed on the local computer.
-Although it was possible to import a module from a remote computer, or obtain a reference to a **PSModuleInfo** object from a remote computer by using PowerShell remoting, the **HelpInfoUri** property was not preserved, and **Save-Help** would not work for remote module Help.
+Beginning in Windows PowerShell 4.0, you can use `Save-Help` to download help files for modules that
+are installed on remote computers. It's also possible to save a **PSModuleInfo** object using
+`Export-Clixml` on a computer that doesn't have internet access, import the object on a computer
+that does have internet access, and then run `Save-Help` on the **PSModuleInfo** object. Once you
+have the saved help, you can copy it to the remote computer and install it by running `Update-Help`.
+This process can be used to install help on computers that don't have any kind of network access.
 
-In Windows PowerShell 4.0, the **HelpInfoUri** property is preserved over PowerShell remoting, which enables **Save-Help** to work for modules that are installed on remote computers.
-It is also possible to save a **PSModuleInfo** object to disk or removable media by running Export-Clixml on a computer that does not have Internet access, import the object on a computer that does have Internet access, and then run **Save-Help** on the **PSModuleInfo** object.
-The saved help can be transported to the remote computer by using removable storage media, such as a USB drive.
-The help can be installed on the remote computer by running **Update-Help**.
-This process can be used to install help on computers that do not have any kind of network access.
+Without parameters, a `Save-Help` command downloads the newest help for all modules in the session
+and for modules that are installed on the computer in a location listed in the **PSModulePath**
+environment variable. This action skips modules that don't support Updatable Help without warning.
 
-To install saved help files, run the Update-Help cmdlet.
-Add its *SourcePath* parameter to specify the folder in which you saved the Help files.
+The `Save-Help` cmdlet checks the version of any help files in the destination folder. If newer help
+files are available, this cmdlet downloads the newest help files from the internet, and then saves
+them in the folder. The `Save-Help` cmdlet works just like the `Update-Help` cmdlet, except that it
+saves the downloaded content, instead of extracting the help files and installing them on the
+computer.
 
-Without parameters, a **Save-Help** command downloads the newest help for all modules in the session and for modules that are installed on the computer in a location listed in the **PSModulePath** environment variable.
-This action skips modules that do not support Updatable Help without warning.
+The saved help for each module consists of one help information (HelpInfo XML) file and a cabinet
+(`.cab`) file for the help files in each language.
 
-The **Save-Help** cmdlet checks the version of any help files in the destination folder.
-If newer help files are available, this cmdlet downloads the newest help files from the Internet, and then saves them in the folder.
-The **Save-Help** cmdlet works just like the Update-Help cmdlet, except that it saves the downloaded cabinet (.cab) files, instead of extracting the help files from the cabinet files and installing them on the computer.
+To save the help files for modules in the PowerShell installation folder (`$PSHOME\Modules`), start
+PowerShell by using the **Run as administrator option**. You must be a member of the Administrators
+group on the computer to download the help files for these modules.
 
-The saved help for each module consists of one help information (HelpInfo XML) file and one cabinet (.cab) file for the help files each UI culture.
-You do not have to extract the help files from the cabinet file.
-The **Update-Help** cmdlet extracts the help files, validates the XML for safety, and then installs the help files and the help information file in a language-specific subfolder of the module folder.
-
-To save the help files for modules in the PowerShell installation folder ($pshome\Modules), start PowerShell by using the Run as administrator option.
-You must be a member of the Administrators group on the computer to download the help files for these modules.
-
-This cmdlet was introduced in Windows PowerShell 3.0.
+To install saved help files, run `Update-Help` with the **SourcePath** parameter to specify the
+folder containing the saved Help files. `Update-Help` extracts the help files from the archive and
+installs them on in the appropriate location.
 
 ## EXAMPLES
 
 ### Example 1: Save the help for the DhcpServer module
 
+This example shows three different ways to use `Save-Help` to save the help for the **DhcpServer**
+module from an internet-connected client computer, without installing the **DhcpServer** module or
+the DHCP Server role on the local computer.
+
 ```powershell
-# Option 1: Run Invoke-Command to get the PSModuleInfo object for the remote DHCP Server module, save the PSModuleInfo object in the variable $m, and then run Save-Help.
+# Option 1:
+# 1. Run Invoke-Command to get the PSModuleInfo object for the DhcpServer module,
+# 2. Save-Help on the PSModuleInfo object to save the help files to a folder on
+#    the local computer.
 
-$m = Invoke-Command -ComputerName RemoteServer -ScriptBlock { Get-Module -Name DhcpServer -ListAvailable }
-Save-Help -Module $m -DestinationPath "C:\SavedHelp"
-
-
-# Option 2: Open a PSSession--targeted at the remote computer that is running the DhcpServer module--to get the PSModuleInfo object for the remote module, and then run Save-Help.
-
-$s = New-PSSession -ComputerName "RemoteServer"
-$m = Get-Module -PSSession $s -Name "DhcpServer" -ListAvailable
-Save-Help -Module $m -DestinationPath "C:\SavedHelp"
+$mod = Invoke-Command -ComputerName RemoteServer -ScriptBlock {
+    Get-Module -Name DhcpServer -ListAvailable
+}
+Save-Help -Module $mod -DestinationPath C:\SavedHelp
 
 
-# Option 3: Open a CIM session--targeted at the remote computer that is running the DhcpServer module--to get the PSModuleInfo object for the remote module, and then run Save-Help.
+# Option 2:
+# 1. Open a PSSession to the remote computer that's running the DhcpServer module
+# 2. Get the PSModuleInfo object from the remote computer
+# 3. Save-Help on the PSModuleInfo object
 
-$c = New-CimSession -ComputerName "RemoteServer"
-$m = Get-Module -CimSession $c -Name "DhcpServer" -ListAvailable
-Save-Help -Module $m -DestinationPath "C:\SavedHelp"
+$session = New-PSSession -ComputerName "RemoteServer"
+$mod = Get-Module -PSSession $session -Name "DhcpServer" -ListAvailable
+Save-Help -Module $mod -DestinationPath C:\SavedHelp
+
+
+# Option 3:
+# 1. Open a CimSession to the remote computer that's running the DhcpServer module
+# 2. Get the PSModuleInfo object from the remote computer
+# 3. Save-Help on the PSModuleInfo object
+$cimsession = New-CimSession -ComputerName "RemoteServer"
+$mod = Get-Module -CimSession $cimsession -Name "DhcpServer" -ListAvailable
+Save-Help -Module $mod -DestinationPath "C:\SavedHelp"
 ```
-
-This example shows three different ways to use **Save-Help** to save the help for the **DhcpServer** module from an Internet-connected client computer, without installing the **DhcpServer** module or the DHCP Server role on the local computer.
 
 ### Example 2: Install help for the DhcpServer module
 
+This example shows how to install help for a computer that is not network connected. For this
+example, the first computer isn't connected to an accessible network. Files must be copied to it
+using removable media. The second computer is connected to the internet and can download the help
+files.
+
 ```powershell
-# First, run Export-CliXml to export the PSModuleInfo object to a shared folder or to removable media.
+# On the first computer, get the PSModuleInfo object for the module and save it to
+# removable media.
 
-$m = Get-Module -Name "DhcpServer" -ListAvailable
-Export-CliXml -Path "E:\UsbFlashDrive\DhcpModule.xml" -InputObject $m
+Get-Module -Name "DhcpServer" -ListAvailable |
+    Export-CliXml -Path E:\UsbFlashDrive\DhcpModule.xml
 
-# Next, transport the removable media to a computer that has Internet access, and then import the PSModuleInfo object with Import-CliXml. Run Save-Help to save the Help for the imported DhcpServer module PSModuleInfo object.
+# Move the removable media to a computer that has internet access, and then import the
+# PSModuleInfo object. Run Save-Help on the imported PSModuleInfo object and save the help
+# files to the removable media.
 
-$deserialized_m = Import-CliXml "E:\UsbFlashDrive\DhcpModule.xml"
-Save-Help -Module $deserialized_m -DestinationPath "E:\UsbFlashDrive\SavedHelp"
+$moduleInfo = Import-CliXml E:\UsbFlashDrive\DhcpModule.xml
+Save-Help -Module $moduleInfo -DestinationPath E:\UsbFlashDrive\SavedHelp
 
-# Finally, transport the removable media back to the computer that does not have network access, and then install the help by running Update-Help.
+# Finally, move the removable media back to the first computer and install the help.
 
-Update-Help -Module DhcpServer -SourcePath "E:\UsbFlashDrive\SavedHelp"
+Update-Help -Module DhcpServer -SourcePath E:\UsbFlashDrive\SavedHelp
 ```
-
-This example shows how to install help that you saved in Example 1 for the **DhcpServer** module on a computer that does not have Internet access.
 
 ### Example 3: Save help for all modules
 
-```powershell
-Save-Help -DestinationPath "\\Server01\FileShare01"
-```
+This command downloads the newest help files for all modules on the local computer. It saves the
+help files in the `\\Server01\Fileshare01` folder.
 
-This command downloads the newest help files for all modules in the UI culture set for Windows on the local computer.
-It saves the help files in the \\\\Server01\Fileshare01 folder.
+```powershell
+Save-Help -DestinationPath \\Server01\FileShare01
+```
 
 ### Example 4: Save help for a module on the computer
 
+This command downloads the newest help files for the **ServerManager** module, and then saves them
+in the `\\Server01\Fileshare01` folder.
+
 ```powershell
-Save-Help -Module ServerManager -DestinationPath "\\Server01\FileShare01" -Credential Domain01/Admin01
+$saveHelpSplat = @{
+    Module = 'ServerManager'
+    DestinationPath = '\\Server01\FileShare01'
+    Credential = 'Domain01/Admin01'
+}
+Save-Help @saveHelpSplat
 ```
 
-This command downloads the newest help files for the **ServerManager** module, and then saves them in the \\\\Server01\Fileshare01 folder.
+When a module is installed on the computer, you can type the module name as the value of the
+**Module** parameter, even if the module isn't imported into the current session.
 
-When a module is installed on the computer, you can type the module name as the value of the *Module* parameter, even if the module is not imported into the current session.
-
-The command uses the *Credential* parameter to supply the credentials of a user who has permission to write to the file share.
+The command uses the **Credential** parameter to supply the credentials of a user who has permission
+to write to the file share.
 
 ### Example 5: Save help for a module on a different computer
 
+These commands download the newest help files for the **CustomSQL** module and save them in the
+`\\Server01\Fileshare01` folder.
+
 ```powershell
-Invoke-Command -ComputerName Server02 {Get-Module -Name CustomSQL -ListAvailable} | Save-Help -DestinationPath \\Server01\FileShare01 -Credential Domain01\Admin01
+Invoke-Command -ComputerName Server02 { Get-Module -Name CustomSQL -ListAvailable } |
+    Save-Help -DestinationPath \\Server01\FileShare01 -Credential Domain01\Admin01
 ```
 
-These commands download the newest help files for the **CustomSQL** module and save them in the \\\\Server01\Fileshare01 folder.
+Because the **CustomSQL** module isn't installed on the computer, the sequence includes an
+`Invoke-Command` command that gets the module object for the CustomSQL module from the Server02
+computer and then pipes the module object to the `Save-Help` cmdlet.
 
-Because the **CustomSQL** module is not installed on the computer, the sequence includes an Invoke-Command command that gets the module object for the CustomSQL module from the Server02 computer and then pipes the module object to the **Save-Help** cmdlet.
-
-When a module is not installed on the computer, **Save-Help** needs the module object, which includes information about the location of the newest help files.
+When a module isn't installed on the computer, `Save-Help` needs the module object, which includes
+information about the location of the newest help files.
 
 ### Example 6: Save help for a module in multiple languages
 
+This command saves help for the core PowerShell modules in four different UI cultures. The language
+packs for these locales don't have to be installed on the computer.
+
 ```powershell
-Save-Help -Module Microsoft.PowerShell* -UICulture de-DE, en-US, fr-FR, ja-JP -DestinationPath "D:\Help"
+$saveHelpSplat = @{
+    Module = 'Microsoft.PowerShell*'
+    UICulture = 'de-DE', 'en-US', 'fr-FR', 'ja-JP'
+    DestinationPath = "D:\Help"
+}
+Save-Help @saveHelpSplat
 ```
 
-This command saves help for the PowerShell Core modules in four different UI cultures.
-The language packs for these locales do not have to be installed on the computer.
-
-**Save-Help** can download help files for modules in different UI cultures only when the module owner makes the translated files available on the Internet.
+`Save-Help` can download help files for modules in different UI cultures only when the module owner
+makes the translated files available on the internet.
 
 ### Example 7: Save help more than one time each day
 
+This command saves help for all modules that are installed on the computer. The command specifies
+the **Force** parameter to override the rule that prevents the `Save-Help` cmdlet from downloading
+help more than once in each 24-hour period.
+
 ```powershell
-Save-Help -Force -DestinationPath "\\Server3\AdminShare\Help"
+Save-Help -Force -DestinationPath \\Server3\AdminShare\Help
 ```
 
-This command saves help for all modules that are installed on the computer.
-The command specifies the *Force* parameter to override the rule that prevents the **Save-Help** cmdlet from downloading help more than once in each 24-hour period.
+The **Force** parameter also overrides the 1 GB restriction and circumvents version checking.
+Therefore, you can download files even if the version isn't later than the version in the
+destination folder.
 
-The *Force* parameter also overrides the 1 GB restriction and circumvents version checking.
-Therefore, you can download files even if the version is not later than the version in the destination folder.
-
-The command uses the **Save-Help** cmdlet to download and save the help files to the specified folder.
-The *Force* parameter is required when you have to run a **Save-Help** command more than one time each day.
+The command uses the `Save-Help` cmdlet to download and save the help files to the specified folder.
+The **Force** parameter is required when you have to run a `Save-Help` command more than one time
+each day.
 
 ## PARAMETERS
 
@@ -209,8 +250,8 @@ Accept wildcard characters: False
 
 ### -DestinationPath
 
-Specifies the path of the folder in which the help files are saved.
-Do not specify a file name or file name extension.
+Specifies the path of the folder in which the help files are saved. Don't specify a filename or
+filename extension.
 
 ```yaml
 Type: System.String[]
@@ -226,13 +267,19 @@ Accept wildcard characters: False
 
 ### -Force
 
-Indicates that this cmdlet does not follow the once-per-day limitation, skips version checking, and downloads files that exceed the 1 GB limit.
+Indicates that this cmdlet doesn't follow the once-per-day limitation, skips version checking, and
+downloads files that exceed the 1 GB limit.
 
-Without this parameter, only one **Save-Help** command for each module is permitted in each 24-hour period, downloads are limited to 1 GB of uncompressed content per module, and help files for a module are installed only when they are newer than the files on the computer.
+Without this parameter, only one `Save-Help` command for each module is permitted in each 24-hour
+period, downloads are limited to 1 GB of uncompressed content per module, and help files for a
+module are installed only when they're newer than the files on the computer.
 
-The once-per-day limit protects the servers that host the help files, and makes it practical for you to add a **Save-Help** command to your PowerShell profile.
+The once-per-day limit protects the servers that host the help files, and makes it practical for you
+to add a `Save-Help` command to your PowerShell profile.
 
-To save help for a module in multiple UI cultures without the *Force* parameter, include all UI cultures in the same command, such as: `Save-Help -Module PSScheduledJobs -UICulture en-US, fr-FR, pt-BR`
+To save help for a module in multiple UI cultures without the **Force** parameter, include all UI
+cultures in the same command, such as:
+`Save-Help -Module PSScheduledJobs -UICulture en-US, fr-FR, pt-BR`
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -248,12 +295,26 @@ Accept wildcard characters: False
 
 ### -FullyQualifiedModule
 
-Specifies modules with names that are specified in the form of ModuleSpecification objects.
-This is described in the Remarks section of [ModuleSpecification Constructor (Hashtable)](https://msdn.microsoft.com/library/jj136290) in the MSDN library.
-For example, the *FullyQualifiedModule* parameter accepts a module name that is specified in the format @{ModuleName = "modulename"; ModuleVersion = "version_number"} or @{ModuleName = "modulename"; ModuleVersion = "version_number"; Guid = "GUID"}.
-**ModuleName** and **ModuleVersion** are required, but **Guid** is optional.
+The value can be a module name, a full module specification, or a path to a module file.
 
-You cannot specify the *FullyQualifiedModule* parameter in the same command as a *Module* parameter.
+When the value is a path, the path can be fully qualified or relative. A relative path is resolved
+relative to the script that contains the using statement.
+
+When the value is a name or module specification, PowerShell searches the **PSModulePath** for the
+specified module.
+
+A module specification is a hashtable that has the following keys.
+
+- `ModuleName` - **Required** Specifies the module name.
+- `GUID` - **Optional** Specifies the GUID of the module.
+- It's also **Required** to specify at least one of the three below keys.
+  - `ModuleVersion` - Specifies a minimum acceptable version of the module.
+  - `MaximumVersion` - Specifies the maximum acceptable version of the module.
+  - `RequiredVersion` - Specifies an exact, required version of the module. This can't be used with
+    the other Version keys.
+
+You can't specify the **FullyQualifiedModule** parameter in the same command as a **Module**
+parameter. the two parameters are mutually exclusive.
 
 ```yaml
 Type: Microsoft.PowerShell.Commands.ModuleSpecification[]
@@ -269,11 +330,11 @@ Accept wildcard characters: False
 
 ### -LiteralPath
 
-Specifies a path of the destination folder.
-Unlike the value of the *DestinationPath* parameter, the value of the *LiteralPath* parameter is used exactly as it is typed.
-No characters are interpreted as wildcard characters.
-If the path includes escape characters, enclose it in single quotation marks.
-Single quotation marks tell PowerShell not to interpret any characters as escape sequences.
+Specifies a path of the destination folder. Unlike the value of the **DestinationPath** parameter,
+the value of the **LiteralPath** parameter is used exactly as it's typed. No characters are
+interpreted as wildcard characters. If the path includes escape characters, enclose it in single
+quotation marks. Single quotation marks tell PowerShell not to interpret any characters as escape
+sequences.
 
 ```yaml
 Type: System.String[]
@@ -289,25 +350,29 @@ Accept wildcard characters: False
 
 ### -Module
 
-Specifies modules for which this cmdlet downloads help.
-Enter one or more module names or name patters in a comma-separated list or in a file that has one module name on each line.
-Wildcard characters are permitted.
-You can also pipe module objects from the Get-Module cmdlet to **Save-Help**.
+Specifies modules for which this cmdlet downloads help. Enter one or more module names or name
+patterns in a comma-separated list or in a file that has one module name on each line. Wildcard
+characters are permitted. You can also pipe module objects from the `Get-Module` cmdlet to
+`Save-Help`.
 
-By default, **Save-Help** downloads help for all modules that support Updatable Help and are installed on the local computer in a location listed in the **PSModulePath** environment variable.
+By default, `Save-Help` downloads help for all modules that support Updatable Help and are installed
+on the local computer in a location listed in the **PSModulePath** environment variable.
 
-To save help for modules that are not installed on the computer, run a **Get-Module** command on a remote computer.
-Then pipe the resulting module objects to the **Save-Help** cmdlet or submit the module objects as the value of the *Module* or *InputObject* parameters.
+To save help for modules that aren't installed on the computer, run a `Get-Module` command on a
+remote computer. Then pipe the resulting module objects to the `Save-Help` cmdlet or submit the
+module objects as the value of the **Module** or **InputObject** parameters.
 
-If the module that you specify is installed on the computer, you can enter the module name or a module object.
-If the module is not installed on the computer, you must enter a module object, such as one returned by the **Get-Module** cmdlet.
+If the module that you specify is installed on the computer, you can enter the module name or a
+module object. If the module isn't installed on the computer, you must enter a module object, such
+as one returned by the `Get-Module` cmdlet.
 
-The *Module* parameter of the **Save-Help** cmdlet does not accept the full path of a module file or module manifest file.
-To save help for a module that is not in a **PSModulePath** location, import the module into the current session before you run the **Save-Help** command.
+The **Module** parameter of the `Save-Help` cmdlet doesn't accept the full path of a module file or
+module manifest file. To save help for a module that's not in a **PSModulePath** location, import
+the module into the current session before you run the `Save-Help` command.
 
 A value of "*" (all) attempts to update help for all modules that are installed on the computer.
-This includes modules that do not support Updatable Help.
-This value might generate errors when the command encounters modules that do not support Updatable Help.
+This includes modules that don't support Updatable Help. This value might generate errors when the
+command encounters modules that don't support Updatable Help.
 
 ```yaml
 Type: System.Management.Automation.PSModuleInfo[]
@@ -323,14 +388,15 @@ Accept wildcard characters: True
 
 ### -UICulture
 
-Specifies UI culture values for which this cmdlet gets updated help files.
-Enter one or more language codes, such as es-ES, a variable that contains culture objects, or a command that gets culture objects, such as a Get-Culture or Get-UICulture command.
+Specifies UI culture values for which this cmdlet gets updated help files. Enter one or more
+language codes, such as `es-ES`, a variable that contains culture objects, or a command that gets
+culture objects, such as a `Get-Culture` or `Get-UICulture` command.
 
-Wildcard characters are not permitted.
-Do not specify a partial language code, such as "de".
+Wildcard characters are not permitted. Do not specify a partial language code, such as "de".
 
-By default, **Save-Help** gets help files in the UI culture set for Windows or its fallback culture.
-If you specify the *UICulture* parameter, **Save-Help** looks for help only for the specified UI culture, not in any fallback culture.
+By default, `Save-Help` gets help files in the UI culture set for Windows or its fallback culture.
+If you specify the **UICulture** parameter, `Save-Help` looks for help only for the specified UI
+culture, not in any fallback culture.
 
 ```yaml
 Type: System.Globalization.CultureInfo[]
@@ -346,10 +412,11 @@ Accept wildcard characters: False
 
 ### -UseDefaultCredentials
 
-Indicates that this cmdlet runs the command, including the web download, with the credentials of the current user.
-By default, the command runs without explicit credentials.
+Indicates that this cmdlet runs the command, including the web download, with the credentials of the
+current user. By default, the command runs without explicit credentials.
 
-This parameter is effective only when the web download uses NTLM, negotiate, or Kerberos-based authentication.
+This parameter is effective only when the web download uses NTLM, negotiate, or Kerberos-based
+authentication.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -365,30 +432,49 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.Management.Automation.PSModuleInfo
 
-You can pipe a module object from the **Get-Module** cmdlet to the *Module* parameter of **Save-Help**.
+You can pipe a module object to this cmdlet.
 
 ## OUTPUTS
 
 ### None
 
-This cmdlet does not generate any output.
+This cmdlet returns no output.
 
 ## NOTES
 
-* To save help for modules in the $pshome\Modules folder, start PowerShell by using the Run as administrator option. Only members of the Administrators group on the computer can download help for modules in the $pshome\Modules folder.
-* The saved help for each module consists of one help information (HelpInfo XML) file and one cabinet (.cab) file for the help files each UI culture. You do not have to extract the help files from the cabinet file. The Update-Help cmdlet extracts the help files, validates the XML, and then installs the help files and the help information file in a language-specific subfolder of the module folder.
-* The **Save-Help** cmdlet can save help for modules that are not installed on the computer. However, because help files are installed in the module folder, the **Update-Help** cmdlet can install updated help file only for modules that are installed on the computer.
-* If **Save-Help** cannot find updated help files for a module, or cannot find updated help files in the specified language, it continues silently without displaying an error message. To see which files were saved by the command, specify the *Verbose* parameter.
-* Modules are the smallest unit of updatable help. You cannot save help for a particular cmdlet, only for all cmdlets in module. To find the module that contains a particular cmdlet, use the **ModuleName** property together with the Get-Command cmdlet, for example, `(Get-Command \<cmdlet-name\>).ModuleName`
-* **Save-Help** supports all modules and the PowerShell Core snap-ins. It does not support any other snap-ins.
-* The **Update-Help** and **Save-Help** cmdlets use the following ports to download help files: Port 80 for HTTP and port 443 for HTTPS.
-* The **Update-Help** and **Save-Help** cmdlets are not supported on Windows Preinstallation Environment (Windows PE).
+- To save help for modules in the $PSHOME\Modules folder, start PowerShell by using the Run as
+  administrator option. Only members of the Administrators group on the computer can download help
+  for modules in the $PSHOME\Modules folder.
+- The saved help for each module consists of one help information (HelpInfo XML) file and one
+  cabinet (.cab) file for the help files each UI culture. You don't have to extract the help files
+  from the cabinet file. The `Update-Help` cmdlet extracts the help files, validates the XML, and
+  then installs the help files and the help information file in a language-specific subfolder of the
+  module folder.
+- The `Save-Help` cmdlet can save help for modules that aren't installed on the computer. However,
+  because help files are installed in the module folder, the `Update-Help` cmdlet can install
+  updated help file only for modules that are installed on the computer.
+- If `Save-Help` can't find updated help files for a module, or can't find updated help files in
+  the specified language, it continues silently without displaying an error message. To see which
+  files were saved by the command, specify the **Verbose** parameter.
+- Modules are the smallest unit of updatable help. You can't save help for a particular cmdlet,
+  only for all cmdlets in module. To find the module that contains a particular cmdlet, use the
+  **ModuleName** property together with the `Get-Command` cmdlet, for example,
+  `(Get-Command \<cmdlet-name\>).ModuleName`
+- `Save-Help` supports all modules and the core PowerShell snap-ins. It doesn't support any other
+  snap-ins.
+- The `Update-Help` and `Save-Help` cmdlets use the following ports to download help files: Port 80
+  for HTTP and port 443 for HTTPS.
+- The `Update-Help` and `Save-Help` cmdlets aren't supported on Windows Preinstallation Environment
+  (Windows PE).
 
 ## RELATED LINKS
 

@@ -1,36 +1,38 @@
 ---
-keywords: powershell,cmdlet
+description: Describes how to work with command parameters in PowerShell.
 Locale: en-US
-ms.date: 02/12/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_parameters?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 09/28/2021
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_parameters?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Parameters
 ---
-# About Parameters
+# about_Parameters
 
 ## Short description
+
 Describes how to work with command parameters in PowerShell.
 
 ## Long description
 
-Most PowerShell commands, such as cmdlets, functions, and scripts,
-rely on parameters to allow users to select options or provide input. The
-parameters follow the command name and have the following form:
+Most PowerShell commands, such as cmdlets, functions, and scripts, rely on
+parameters to allow users to select options or provide input. The parameters
+follow the command name and have the following form:
 
 ```
 -<parameter_name> <parameter_value>
 -<parameter_name>:<parameter_value>
 ```
 
-The name of the parameter is preceded by a hyphen (-), which signals to PowerShell that the word
-following the hyphen is a parameter name. The parameter name and value can be separated by a space
-or a colon character. Some parameters do not require or accept a parameter value. Other parameters
-require a value, but do not require the parameter name in the command.
+The name of the parameter is preceded by a hyphen (`-`), which signals to
+PowerShell that the word following the hyphen is a parameter name. The
+parameter name and value can be separated by a space or a colon character. Some
+parameters do not require or accept a parameter value. Other parameters require
+a value, but do not require the parameter name in the command.
 
 The type of parameters and the requirements for those parameters vary. To find
 information about the parameters of a command, use the `Get-Help` cmdlet. For
-example, to find information about the parameters of the `Get-ChildItem` cmdlet,
-type:
+example, to find information about the parameters of the `Get-ChildItem`
+cmdlet, type:
 
 ```powershell
 Get-Help Get-ChildItem
@@ -40,7 +42,7 @@ To find information about the parameters of a script, use the full path to the
 script file. For example:
 
 ```powershell
-Get-Help $home\Documents\Scripts\Get-Function.ps1
+Get-Help $HOME\Documents\Scripts\Get-Function.ps1
 ```
 
 The `Get-Help` cmdlet returns various details about the command, including a
@@ -84,7 +86,7 @@ For example, the help topic for the `Get-ChildItem` cmdlet includes the
 following details about its Path parameter:
 
 ```
--path <string[]>
+-Path <string[]>
     Specifies a path of one or more locations. Wildcard characters are
     permitted. The default location is the current directory (.).
 
@@ -108,13 +110,13 @@ prompts you for a value for the parameter.
 
 #### Parameter Position
 
-If the `Position` setting is set to a positive integer, the parameter name is
-not required. This type of parameter is referred to as a positional parameter,
-and the number indicates the position in which the parameter must appear in
-relation to other positional parameters. A named parameter can be listed in any
-position after the cmdlet name. If you include the parameter name for a
-positional parameter, the parameter can be listed in any position after the
-cmdlet name.
+If the `Position` setting is set to a non-negative integer, the parameter name
+is not required. This type of parameter is referred to as a positional
+parameter, and the number indicates the position in which the parameter must
+appear in relation to other positional parameters. A named parameter can be
+listed in any position after the cmdlet name. If you include the parameter name
+for a positional parameter, the parameter can be listed in any position after
+the cmdlet name.
 
 For example, the `Get-ChildItem` cmdlet has Path and Exclude parameters. The
 `Position` setting for **Path** is **0**, which means that it is a positional
@@ -129,10 +131,10 @@ As a result of the `Position` settings for these two parameters, you can use
 any of the following commands:
 
 ```powershell
-Get-ChildItem -Path c:\techdocs -Exclude *.ppt
-Get-ChildItem c:\techdocs -Exclude *.ppt
-Get-ChildItem -Exclude *.ppt -Path c:\techdocs
-Get-ChildItem -Exclude *.ppt c:\techdocs
+Get-ChildItem -Path C:\techdocs -Exclude *.ppt
+Get-ChildItem C:\techdocs -Exclude *.ppt
+Get-ChildItem -Exclude *.ppt -Path C:\techdocs
+Get-ChildItem -Exclude *.ppt C:\techdocs
 ```
 
 If you were to include another positional parameter without including the
@@ -143,9 +145,9 @@ parameter name, that parameter must be placed in the order specified by the
 
 This setting specifies the Microsoft .NET Framework type of the parameter
 value. For example, if the type is **Int32**, the parameter value must be an
-integer. If the type is string, the parameter value must be a character
-string. If the string contains spaces, the value must be enclosed in quotation
-marks, or the spaces must be preceded by the escape character ( ` ).
+integer. If the type is string, the parameter value must be a character string.
+If the string contains spaces, the value must be enclosed in quotation marks,
+or the spaces must be preceded by the escape character (`` ` ``).
 
 #### Default Value
 
@@ -163,22 +165,22 @@ as the value of the parameter in the command, or save a comma-separated list
 (an array) in a variable, and then specify the variable as the parameter
 value.
 
-For example, the ServiceName parameter of the `Get-Service` cmdlet accepts
+For example, the **Name** parameter of the `Get-Service` cmdlet accepts
 multiple values. The following commands are both valid:
 
 ```powershell
-Get-Service -servicename winrm, netlogon
+Get-Service -Name winrm, netlogon
 ```
 
 ```powershell
 $s = "winrm", "netlogon"
-Get-Service -servicename $s
+Get-Service -Name $s
 ```
 
 #### Accepts Pipeline Input
 
-This setting indicates whether you can use the pipeline operator ( `|` ) to
-send a value to the parameter.
+This setting indicates whether you can use the pipeline operator (`|`) to send
+a value to the parameter.
 
 ```
 Value                    Description
@@ -209,7 +211,8 @@ has a property called **Name**.
 
 > [!NOTE]
 > A typed parameter that accepts pipeline input (`by Value`) or
-> (`by PropertyName`) enables use of **delay-bind** script blocks on the parameter.
+> (`by PropertyName`) enables use of **delay-bind** script blocks on the
+> parameter.
 >
 > The **delay-bind** script block is run automatically during
 > **ParameterBinding**. The result is bound to the parameter. Delay binding
@@ -217,7 +220,8 @@ has a property called **Name**.
 > `System.Object`, the script block is passed through
 > **without** being invoked.
 >
-> You can read about **delay-bind** script blocks here [about_Script_Blocks.md](about_Script_Blocks.md)
+> You can read about **delay-bind** script blocks here
+> [about_Script_Blocks.md](about_Script_Blocks.md)
 
 #### Accepts Wildcard Characters
 
@@ -228,19 +232,14 @@ existing item in the target container.
 #### Common Parameters
 
 Common parameters are parameters that you can use with any cmdlet. For more
-information about common parameters, see [about_CommonParameters](about_CommonParameters.md).
+information about common parameters, see
+[about_CommonParameters](about_CommonParameters.md).
 
 ## See also
 
-[about_Command_syntax](about_Command_syntax.md)
-
-[about_Comment_Based_Help](about_Comment_Based_Help.md)
-
-[about_Functions_Advanced](about_Functions_Advanced.md)
-
-[about_Parameters_Default_Values](about_Parameters_Default_Values.md)
-
-[about_Pipelines](about_Pipelines.md)
-
-[about_Wildcards](about_Wildcards.md)
-
+- [about_Command_Syntax](about_Command_Syntax.md)
+- [about_Comment_Based_Help](about_Comment_Based_Help.md)
+- [about_Functions_Advanced](about_Functions_Advanced.md)
+- [about_Parameters_Default_Values](about_Parameters_Default_Values.md)
+- [about_Pipelines](about_Pipelines.md)
+- [about_Wildcards](about_Wildcards.md)

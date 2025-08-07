@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 5/14/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/set-itemproperty?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 02/16/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/set-itemproperty?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-ItemProperty
 ---
+
 # Set-ItemProperty
 
 ## SYNOPSIS
@@ -15,35 +15,67 @@ Creates or changes the value of a property of an item.
 
 ## SYNTAX
 
-### propertyValuePathSet (Default)
+### propertyValuePathSet (Default) - All providers
 
 ```
-Set-ItemProperty [-Path] <String[]> [-Name] <String> [-Value] <Object> [-PassThru] [-Force] [-Filter <String>]
- [-Include <String[]>] [-Exclude <String[]>] [-Credential <PSCredential>]
+Set-ItemProperty [-Path] <string[]> [-Name] <string> [-Value] <Object> [-PassThru] [-Force]
+ [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Credential <pscredential>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### propertyPSObjectPathSet - All providers
+
+```
+Set-ItemProperty [-Path] <string[]> -InputObject <psobject> [-PassThru] [-Force]
+ [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Credential <pscredential>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### propertyValueLiteralPathSet - All providers
+
+```
+Set-ItemProperty [-Name] <string> [-Value] <Object> -LiteralPath <string[]> [-PassThru] [-Force]
+ [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Credential <pscredential>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### propertyPSObjectLiteralPathSet - All providers
+
+```
+Set-ItemProperty -LiteralPath <string[]> -InputObject <psobject> [-PassThru] [-Force]
+ [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Credential <pscredential>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### propertyValuePathSet (Default) - Registry provider
+
+```
+Set-ItemProperty [-Path] <string[]> [-Name] <string> [-Value] <Object> [-PassThru] [-Force]
+ [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Credential <pscredential>]
  [-WhatIf] [-Confirm] [-Type <RegistryValueKind>] [<CommonParameters>]
 ```
 
-### propertyPSObjectPathSet
+### propertyPSObjectPathSet - Registry provider
 
 ```
-Set-ItemProperty [-Path] <String[]> -InputObject <PSObject> [-PassThru] [-Force] [-Filter <String>]
- [-Include <String[]>] [-Exclude <String[]>] [-Credential <PSCredential>]
+Set-ItemProperty [-Path] <string[]> -InputObject <psobject> [-PassThru] [-Force]
+ [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Credential <pscredential>]
  [-WhatIf] [-Confirm] [-Type <RegistryValueKind>] [<CommonParameters>]
 ```
 
-### propertyValueLiteralPathSet
+### propertyValueLiteralPathSet - Registry provider
 
 ```
-Set-ItemProperty -LiteralPath <String[]> [-Name] <String> [-Value] <Object> [-PassThru] [-Force]
- [-Filter <String>] [-Include <String[]>] [-Exclude <String[]>] [-Credential <PSCredential>]
+Set-ItemProperty [-Name] <string> [-Value] <Object> -LiteralPath <string[]> [-PassThru] [-Force]
+ [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Credential <pscredential>]
  [-WhatIf] [-Confirm] [-Type <RegistryValueKind>] [<CommonParameters>]
 ```
 
-### propertyPSObjectLiteralPathSet
+### propertyPSObjectLiteralPathSet - Registry provider
 
 ```
-Set-ItemProperty -LiteralPath <String[]> -InputObject <PSObject> [-PassThru] [-Force] [-Filter <String>]
- [-Include <String[]>] [-Exclude <String[]>] [-Credential <PSCredential>]
+Set-ItemProperty -LiteralPath <string[]> -InputObject <psobject> [-PassThru] [-Force]
+ [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Credential <pscredential>]
  [-WhatIf] [-Confirm] [-Type <RegistryValueKind>] [<CommonParameters>]
 ```
 
@@ -52,7 +84,7 @@ Set-ItemProperty -LiteralPath <String[]> -InputObject <PSObject> [-PassThru] [-F
 The `Set-ItemProperty` cmdlet changes the value of the property of the specified item.
 You can use the cmdlet to establish or change the properties of items.
 For example, you can use `Set-ItemProperty` to set the value of the **IsReadOnly** property of a
-file object to `$True`.
+file object to `$true`.
 
 You also use `Set-ItemProperty` to create and change registry values and data.
 For example, you can add a new registry entry to a key and establish or change its value.
@@ -69,8 +101,8 @@ The file is a **System.IO.FileInfo** object and **IsReadOnly** is just one of it
 To see all of the properties, type `Get-Item C:\GroupFiles\final.doc | Get-Member -MemberType
 Property`.
 
-The `$true` automatic variable represents a value of "TRUE".
-For more information, see [about_Automatic_Variables](../Microsoft.PowerShell.Core/About/about_Automatic_Variables.md).
+The `$true` automatic variable represents a value of "TRUE". For more information, see
+[about_Automatic_Variables](../Microsoft.PowerShell.Core/About/about_Automatic_Variables.md).
 
 ```powershell
 Set-ItemProperty -Path C:\GroupFiles\final.doc -Name IsReadOnly -Value $true
@@ -116,7 +148,7 @@ NoOfEmployees : 824
 ```
 
 The first command creates the registry entry.
-It uses **Path** to specify the path of the `HKLM:` drive and the "Software\MyCompany" key.
+It uses **Path** to specify the path of the `HKLM:` drive and the `Software\MyCompany` key.
 The command uses **Name** to specify the entry name and **Value** to specify a value.
 
 The second command uses the `Get-ItemProperty` cmdlet to see the new registry entry.
@@ -133,18 +165,12 @@ For more information about how to use PowerShell to manage the registry, type `G
 
 ### Example 3: Modify an item by using the pipeline
 
-These commands show how to use a pipeline operator (`|`) to send an item to `Set-ItemProperty`.
-
-The first part of the command uses `Get-ChildItem` to get an object that represents the "Weekly.txt"
-file. The command uses a pipeline operator to send the file object to `Set-ItemProperty`.
-The `Set-ItemProperty` command uses the **Name** and **Value** parameters to specify the property
-and its new value.
-
-This command is equivalent to using the **InputObject** parameter to specify the object that
-`Get-ChildItem` gets.
+Th example uses `Get-ChildItem` to get the `weekly.txt` file. The file object is piped to
+`Set-ItemProperty`. The `Set-ItemProperty` command uses the **Name** and **Value** parameters to
+specify the property and its new value.
 
 ```powershell
-Get-ChildItem weekly.txt | Set-ItemProperty -Name IsReadOnly -Value $True
+Get-ChildItem weekly.txt | Set-ItemProperty -Name IsReadOnly -Value $true
 ```
 
 ## PARAMETERS
@@ -190,11 +216,13 @@ Accept wildcard characters: True
 
 ### -Filter
 
-Specifies a filter to qualify the **Path** parameter. The [FileSystem](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md)
-provider is the only installed PowerShell provider that supports the use of filters. You can find
-the syntax for the **FileSystem** filter language in [about_Wildcards](../Microsoft.PowerShell.Core/About/about_Wildcards.md).
-Filters are more efficient than other parameters, because the provider applies them when the cmdlet
-gets the objects rather than having PowerShell filter the objects after they are retrieved.
+Specifies a filter to qualify the **Path** parameter. The
+[FileSystem](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md) provider is the only
+installed PowerShell provider that supports the use of filters. You can find the syntax for the
+**FileSystem** filter language in
+[about_Wildcards](../Microsoft.PowerShell.Core/About/about_Wildcards.md). Filters are more efficient
+than other parameters, because the provider applies them when the cmdlet gets the objects rather
+than having PowerShell filter the objects after they are retrieved.
 
 ```yaml
 Type: System.String
@@ -211,8 +239,8 @@ Accept wildcard characters: True
 ### -Force
 
 Forces the cmdlet to set a property on items that cannot otherwise be accessed by the user.
-Implementation varies from provider to provider.
-For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
+Implementation varies by provider. For more information, see
+[about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -270,7 +298,8 @@ typed. No characters are interpreted as wildcards. If the path includes escape c
 it in single quotation marks. Single quotation marks tell PowerShell not to interpret any characters
 as escape sequences.
 
-For more information, see [about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
+For more information, see
+[about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
 
 ```yaml
 Type: System.String[]
@@ -336,22 +365,21 @@ Accept wildcard characters: True
 
 ### -Type
 
-**Type** is a dynamic parameter that the Registry provider adds to the `Set-ItemProperty` cmdlet.
-This parameter only works in the registry drives.
+This is a dynamic parameter made available by the **Registry** provider. The **Registry** provider
+and this parameter are only available on Windows.
 
-Specifies the type of property that this cmdlet adds.
-The acceptable values for this parameter are:
+Specifies the type of property that this cmdlet adds. The acceptable values for this parameter are:
 
-- **String**: Specifies a null-terminated string. Equivalent to **REG_SZ**.
-- **ExpandString**: Specifies a null-terminated string that contains unexpanded references to
-  environment variables that are expanded when the value is retrieved. Equivalent to
-  **REG_EXPAND_SZ**.
-- **Binary**: Specifies binary data in any form. Equivalent to **REG_BINARY**.
-- **DWord**: Specifies a 32-bit binary number. Equivalent to **REG_DWORD**.
-- **MultiString**: Specifies an array of null-terminated strings terminated by two null characters.
-  Equivalent to **REG_MULTI_SZ**.
-- **Qword**: Specifies a 64-bit binary number. Equivalent to **REG_QWORD**.
-- **Unknown**: Indicates an unsupported registry data type, such as **REG_RESOURCE_LIST**.
+- `String`: Specifies a null-terminated string. Used for **REG_SZ** values.
+- `ExpandString`: Specifies a null-terminated string that contains unexpanded references to
+  environment variables that are expanded when the value is retrieved. Used for **REG_EXPAND_SZ**
+  values.
+- `Binary`: Specifies binary data in any form. Used for **REG_BINARY** values.
+- `DWord`: Specifies a 32-bit binary number. Used for **REG_DWORD** values.
+- `MultiString`: Specifies an array of null-terminated strings terminated by two null characters.
+  Used for **REG_MULTI_SZ** values.
+- `Qword`: Specifies a 64-bit binary number. Used for **REG_QWORD** values.
+- `Unknown`: Indicates an unsupported registry data type, such as **REG_RESOURCE_LIST** values.
 
 ```yaml
 Type: Microsoft.Win32.RegistryValueKind
@@ -416,9 +444,9 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: `-Debug`, `-ErrorAction`, `-ErrorVariable`,
-`-InformationAction`, `-InformationVariable`, `-OutVariable`, `-OutBuffer`, `-PipelineVariable`,
-`-Verbose`, `-WarningAction`, and `-WarningVariable`. For more information, see
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
+-WarningAction, and -WarningVariable. For more information, see
 [about_CommonParameters](../Microsoft.PowerShell.Core/About/about_CommonParameters.md).
 
 ## INPUTS
@@ -429,16 +457,25 @@ You can pipe objects to this cmdlet.
 
 ## OUTPUTS
 
-### None, System.Management.Automation.PSCustomObject
+### None
 
-This cmdlet generates a **PSCustomObject** object that represents the item that was changed and its
-new property value, if you specify the **PassThru** parameter.
-Otherwise, this cmdlet does not generate any output.
+By default, this cmdlet returns no output.
+
+### System.Management.Automation.PSCustomObject
+
+When you use the **PassThru** parameter, this cmdlet returns a **PSCustomObject** object
+representing the item that was changed and its new property value.
 
 ## NOTES
 
+PowerShell includes the following aliases for `Set-ItemProperty`:
+
+- All platforms:
+  - `sp`
+
 `Set-ItemProperty` is designed to work with the data exposed by any provider. To list the providers
-available in your session, type `Get-PSProvider`. For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
+available in your session, type `Get-PSProvider`. For more information, see
+[about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
 ## RELATED LINKS
 
@@ -457,4 +494,3 @@ available in your session, type `Get-PSProvider`. For more information, see [abo
 [Rename-ItemProperty](Rename-ItemProperty.md)
 
 [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md)
-

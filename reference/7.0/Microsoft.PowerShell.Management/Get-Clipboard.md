@@ -1,20 +1,17 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 09/21/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/get-clipboard?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 08/30/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-clipboard?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Clipboard
 ---
+
 # Get-Clipboard
 
 ## SYNOPSIS
 Gets the contents of the clipboard.
-
-[!NOTE]
-> On Linux, this cmdlet requires the `xclip` utility to be in the path.
 
 ## SYNTAX
 
@@ -25,7 +22,11 @@ Get-Clipboard [-Raw] [<CommonParameters>]
 ## DESCRIPTION
 
 The `Get-Clipboard` cmdlet gets the contents of the clipboard as text. Multiple lines of text are
-returned as an array of strings similar `Get-Content`.
+returned as an array of strings similar to `Get-Content`.
+
+> [!NOTE]
+> On Linux, this cmdlet requires the `xclip` utility to be in the path. On macOS, this cmdlet uses
+> the `pbpaste` utility.
 
 ## EXAMPLES
 
@@ -69,11 +70,24 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
+
+You can't pipe objects to this cmdlet.
+
 ## OUTPUTS
 
 ### System.String
 
+This cmdlet returns a string containing the contents of the clipboard.
+
 ## NOTES
+
+PowerShell includes the following aliases for `Get-Clipboard`:
+
+- All platforms:
+  - `gcb`
+
+Support for this cmdlet on macOS was added in the PowerShell 7.0.0 release.
 
 ## RELATED LINKS
 

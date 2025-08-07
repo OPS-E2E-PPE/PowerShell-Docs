@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 08/10/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/format-custom?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/format-custom?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Format-Custom
 ---
+
 # Format-Custom
 
 ## SYNOPSIS
@@ -16,9 +16,9 @@ Uses a customized view to format the output.
 ## SYNTAX
 
 ```
-Format-Custom [[-Property] <Object[]>] [-Depth <Int32>] [-GroupBy <Object>] [-View <String>]
- [-ShowError] [-DisplayError] [-Force] [-Expand <String>] [-InputObject <PSObject>]
- [<CommonParameters>]
+Format-Custom [[-Property] <Object[]>] [-Depth <Int32>] [-GroupBy <Object>]
+ [-View <String>] [-ShowError] [-DisplayError] [-Force] [-Expand <String>]
+ [-InputObject <PSObject>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -64,7 +64,6 @@ class DateTime
   DayOfWeek = Friday
    $_ / $null  = #ERR
 }
-
 
 PC /> Get-Date | Format-Custom DayOfWeek,{ $_ / $null } -ShowError
 
@@ -161,7 +160,8 @@ Accept wildcard characters: False
 ### -GroupBy
 
 Formats the output in groups based on a shared property or value. Enter an expression or a property
-of the output.
+of the output. The **GroupBy** parameter expects that the objects are sorted. Use the `Sort-Object`
+cmdlet before using `Format-Custom` to group the objects.
 
 The value of the **GroupBy** parameter can be a new calculated property. The calculated property can
 be a script block or a hash table. Valid key-value pairs are:
@@ -279,21 +279,23 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Management.Automation.PSObject
 
-You can pipe any object to `Format-Custom`.
+You can pipe any object to this cmdlet.
 
 ## OUTPUTS
 
 ### Microsoft.PowerShell.Commands.Internal.Format
 
-`Format-Custom` returns the format objects that represent the display.
+This cmdlet returns the format objects that represent the display.
 
 ## NOTES
 
+PowerShell includes the following aliases for `Format-Custom`:
+
+- All platforms:
+  - `fc`
+
 `Format-Custom` is designed to display views that are not just tables or just lists. To display an
 alternate table view, use `Format-Table`. To display an alternate list view, use `Format-List`.
-
-You can also refer to `Format-Custom` by its built-in alias, `fc`. For more information, see
-[about_Aliases](../Microsoft.PowerShell.Core/About/about_Aliases.md).
 
 The **GroupBy** parameter assumes that the objects are sorted. Before using `Format-Custom` to
 group the objects, use `Sort-Object` to sort them.

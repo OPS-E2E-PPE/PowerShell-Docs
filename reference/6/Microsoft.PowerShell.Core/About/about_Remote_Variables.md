@@ -1,12 +1,12 @@
 ---
-keywords: powershell,cmdlet
+description: Explains how to use local and remote variables in remote commands.
 Locale: en-US
 ms.date: 03/13/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_remote_variables?view=powershell-6&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_remote_variables?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Remote_Variables
 ---
-# About Remote Variables
+# about_Remote_Variables
 
 ## Short description
 
@@ -49,17 +49,17 @@ Invoke-Command -Session $s -ScriptBlock {Get-WinEvent -LogName $ps}
 You can use local variables in remote commands, but the variable must be
 defined in the local session.
 
-Beginning in PowerShell 3.0, you can use the `Using` scope modifier to identify
-a local variable in a remote command.
+Beginning in PowerShell 3.0, you can use the `Using:` scope modifier to
+identify a local variable in a remote command.
 
-The syntax of `Using` is as follows:
+The syntax of `Using:` is as follows:
 
 ```
 $Using:<VariableName>
 ```
 
 In the following example, the `$ps` variable is created in the local session,
-but is used in the session in which the command runs. The `Using` scope
+but is used in the session in which the command runs. The `Using:` scope
 modifier identifies `$ps` as a local variable.
 
 ```powershell
@@ -69,7 +69,7 @@ Invoke-Command -ComputerName S1 -ScriptBlock {
 }
 ```
 
-The `Using` scope modifier can be used in a **PSSession**.
+The `Using:` scope modifier can be used in a **PSSession**.
 
 ```powershell
 $s = New-PSSession -ComputerName S1
@@ -77,10 +77,11 @@ $ps = "*PowerShell*"
 Invoke-Command -Session $s -ScriptBlock {Get-WinEvent -LogName $Using:ps}
 ```
 
-A variable reference such as `$using:var` expands to the value of variable `$var`
-from the caller's context. You do not get access to the caller's variable object.
-The `Using` scope modifier cannot be used to modify a local variable within the
-**PSSession**. For example, the following code does not work:
+A variable reference such as `$Using:var` expands to the value of variable
+`$var` from the caller's context. You do not get access to the caller's
+variable object. The `Using:` scope modifier cannot be used to modify a local
+variable within the **PSSession**. For example, the following code does not
+work:
 
 ```powershell
 $s = New-PSSession -ComputerName S1
@@ -88,7 +89,7 @@ $ps = "*PowerShell*"
 Invoke-Command -Session $s -ScriptBlock {$Using:ps = 'Cannot assign new value'}
 ```
 
-For more information about `Using`, see [about_Scopes](./about_Scopes.md)
+For more information about `Using:`, see [about_Scopes](./about_Scopes.md)
 
 ### Using splatting
 
@@ -97,7 +98,7 @@ command. For more information, see [about_Splatting](about_Splatting.md).
 
 In this example, the splatting variable, `$Splat` is a hash table that is set
 up on the local computer. The `Invoke-Command` connects to a remote computer
-session. The **ScriptBlock** uses the `Using` scope modifier with the At (`@`)
+session. The **ScriptBlock** uses the `Using:` scope modifier with the At (`@`)
 symbol to represent the splatted variable.
 
 ```powershell
@@ -105,18 +106,19 @@ $Splat = @{ Name = "Win*"; Include = "WinRM" }
 Invoke-Command -Session $s -ScriptBlock { Get-Service @Using:Splat }
 ```
 
-### Other situations where the 'Using' scope modifier is needed
+### Other situations where the `Using:` scope modifier is needed
 
-For any script or command that executes out of session, you need the `Using`
+For any script or command that executes out of session, you need the `Using:`
 scope modifier to embed variable values from the calling session scope, so that
-out of session code can access them. The `Using` scope modifier is supported in
-the following contexts:
+out of session code can access them. The `Using:` scope modifier is supported
+in the following contexts:
 
 - Remotely executed commands, started with `Invoke-Command` using the
   **ComputerName**, **HostName**, **SSHConnection** or **Session** parameters
   (remote session)
 - Background jobs, started with `Start-Job` (out-of-process session)
-- Thread jobs started via `Start-ThreadJob` (separate thread session)
+- Thread jobs, started via `Start-ThreadJob` or `ForEach-Object -Parallel`
+  (separate thread session)
 
 Depending on the context, embedded variable values are either independent
 copies of the data in the caller's scope or references to it. In remote and
@@ -138,7 +140,7 @@ It has the type properties and methods. For simple types, such as
 imperfect. For example, rehydrated certificate objects do not include the
 private key.
 
-Instances of all other types are **PSObject** instances. The **PSTypeNames**
+Instances of all other types are **PSObject** instances. The **pstypenames**
 property contains the original type name prefixed with **Deserialized**, for
 example, **Deserialized.System.Data.DataTable**
 
@@ -158,33 +160,26 @@ cmdlet to specify the local variable as the parameter value.
   the local variable as the parameter value.
 
 For example, the following commands define the `$ps` variable in the local
-session and then use it in a remote command. The command uses `$log` as the
+session and then use it in a remote command. The command uses `$Log` as the
 parameter name and the local variable, `$ps`, as its value.
 
 ```powershell
 $ps = "*PowerShell*"
 Invoke-Command -ComputerName S1 -ScriptBlock {
-  param($log)
-  Get-WinEvent -LogName $log
+  param($Log)
+  Get-WinEvent -LogName $Log
 } -ArgumentList $ps
 ```
 
 ## See also
 
-[about_PSSessions](about_PSSessions.md)
-
-[about_Remote](about_Remote.md)
-
-[about_Scopes](about_Scopes.md)
-
-[about_Splatting](about_Splatting.md)
-
-[about_Variables](about_Variables.md)
-
-[Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
-
-[Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
-
-[New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
-
-[Start-ThreadJob](xref:ThreadJob.Start-ThreadJob)
+- [about_PSSessions](about_PSSessions.md)
+- [about_Remote](about_Remote.md)
+- [about_Scopes](about_Scopes.md)
+- [about_Splatting](about_Splatting.md)
+- [about_Variables](about_Variables.md)
+- [Invoke-Command](xref:Microsoft.PowerShell.Core.Invoke-Command)
+- [ForEach-Object](xref:Microsoft.PowerShell.Core.ForEach-Object)
+- [Enter-PSSession](xref:Microsoft.PowerShell.Core.Enter-PSSession)
+- [New-PSSession](xref:Microsoft.PowerShell.Core.New-PSSession)
+- [Start-ThreadJob](xref:ThreadJob.Start-ThreadJob)

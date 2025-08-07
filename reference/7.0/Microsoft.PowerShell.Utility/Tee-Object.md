@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/tee-object?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 04/25/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/tee-object?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Tee-Object
 ---
+
 # Tee-Object
 
 ## SYNOPSIS
@@ -18,13 +18,13 @@ Saves command output in a file or variable and also sends it down the pipeline.
 ### File (Default)
 
 ```
-Tee-Object [-InputObject <PSObject>] [-FilePath] <String> [-Append] [<CommonParameters>]
+Tee-Object [-InputObject <PSObject>] [-FilePath] <String> [-Append] [[-Encoding] <Encoding>] [<CommonParameters>]
 ```
 
 ### LiteralFile
 
 ```
-Tee-Object [-InputObject <PSObject>] -LiteralPath <String> [<CommonParameters>]
+Tee-Object [-InputObject <PSObject>] -LiteralPath <String> [[-Encoding] <Encoding>] [<CommonParameters>]
 ```
 
 ### Variable
@@ -67,7 +67,7 @@ This example gets a list of the processes running on the computer, saves them to
 variable, and pipes them to `Select-Object`.
 
 ```powershell
-Get-Process notepad | Tee-Object -Variable proc | Select-Object processname,handles
+Get-Process notepad | Tee-Object -Variable proc | Select-Object ProcessName, Handles
 ```
 
 ```Output
@@ -88,14 +88,66 @@ This example saves a list of system files in a two log files, a cumulative file 
 
 ```powershell
 Get-ChildItem -Path D: -File -System -Recurse |
-  Tee-Object -FilePath "c:\test\AllSystemFiles.txt" -Append |
-    Out-File c:\test\NewSystemFiles.txt
+  Tee-Object -FilePath "C:\test\AllSystemFiles.txt" -Append |
+    Out-File C:\test\NewSystemFiles.txt
 ```
 
 The command uses the `Get-ChildItem` cmdlet to do a recursive search for system files on the D:
-drive. A pipeline operator (|) sends the list to `Tee-Object`, which appends the list to the
+drive. A pipeline operator (`|`) sends the list to `Tee-Object`, which appends the list to the
 AllSystemFiles.txt file and passes the list down the pipeline to the `Out-File` cmdlet, which saves
-the list in the NewSystemFiles.txt file.
+the list in the `NewSystemFiles.txt file`.
+
+### Example 4: Print output to console and use in the pipeline
+
+This example gets the files in a folder, prints them to the console, then filters the files for
+those that have a defined front matter metadata block. Finally, it lists the names of the articles
+that have front matter.
+
+```powershell
+$consoleDevice = if ($IsWindows) {
+    '\\.\CON'
+} else {
+    '/dev/tty'
+}
+$frontMatterPattern = '(?s)^---(?<FrontMatter>.+)---'
+
+$articles = Get-ChildItem -Path .\reference\7.4\PSReadLine\About\ |
+    Tee-Object -FilePath $consoleDevice |
+    Where-Object {
+        (Get-Content $_ -Raw) -match $frontMatterPattern
+    }
+
+$articles.Name
+```
+
+```Output
+    Directory: C:\code\docs\PowerShell-Docs\reference\7.4\PSReadLine\About
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          12/13/2022 11:37 AM            384 .markdownlint.yaml
+-a---           4/25/2023 11:28 AM          40194 about_PSReadLine_Functions.md
+-a---           4/25/2023 10:58 AM          10064 about_PSReadLine.md
+
+about_PSReadLine_Functions.md
+about_PSReadLine.md
+```
+
+The example sets the `$consoleDevice` variable to the value of the current terminal's console
+device. On Windows, you can write to the current console device by redirecting your output to the
+`\\.\CON` filepath. On non-Windows systems, you use the `/dev/tty` filepath.
+
+Then it sets the `$frontMatterPattern` variable to a regular expression that matches when a string
+starts with three dashes (`---`) and has any content before another three dashes. When this pattern
+matches an article's content, the article has a defined front matter metadata block.
+
+Next, the example uses `Get-ChildItem` to retrieve every file in the `About` folder. `Tee-Object`
+prints the piped results to the console using the **FileName** parameter. `Where-Object` filters
+the files by getting their content as a single string with the **Raw** parameter of `Get-Content`
+and comparing that string to `$frontMatterPattern`.
+
+Finally, the example prints the names of the files in the folder that have a defined front matter
+metadata block.
 
 ## PARAMETERS
 
@@ -118,10 +170,60 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Encoding
+
+Specifies the type of encoding for the target file. The default value is `utf8NoBOM`.
+
+The acceptable values for this parameter are as follows:
+
+- `ascii`: Uses the encoding for the ASCII (7-bit) character set.
+- `ansi`: Uses the encoding for the for the current culture's ANSI code page. This option was added
+  in PowerShell 7.4.
+- `bigendianunicode`: Encodes in UTF-16 format using the big-endian byte order.
+- `oem`: Uses the default encoding for MS-DOS and console programs.
+- `unicode`: Encodes in UTF-16 format using the little-endian byte order.
+- `utf7`: Encodes in UTF-7 format.
+- `utf8`: Encodes in UTF-8 format.
+- `utf8BOM`: Encodes in UTF-8 format with Byte Order Mark (BOM)
+- `utf8NoBOM`: Encodes in UTF-8 format without Byte Order Mark (BOM)
+- `utf32`: Encodes in UTF-32 format.
+
+Beginning with PowerShell 6.2, the **Encoding** parameter also allows numeric IDs of registered code
+pages (like `-Encoding 1251`) or string names of registered code pages (like
+`-Encoding "windows-1251"`). For more information, see the .NET documentation for
+[Encoding.CodePage](/dotnet/api/system.text.encoding.codepage?view=netcore-2.2).
+
+Starting with PowerShell 7.4, you can use the `Ansi` value for the **Encoding** parameter to pass
+the numeric ID for the current culture's ANSI code page without having to specify it manually.
+
+This parameter was introduced in PowerShell 7.2.
+
+> [!NOTE]
+> **UTF-7*** is no longer recommended to use. As of PowerShell 7.1, a warning is written if you
+> specify `utf7` for the **Encoding** parameter.
+
+```yaml
+Type: System.Text.Encoding
+Parameter Sets: (All)
+Aliases:
+Accepted values: ASCII, BigEndianUnicode, OEM, Unicode, UTF7, UTF8, UTF8BOM, UTF8NoBOM, UTF32
+
+Required: False
+Position: 1
+Default value: UTF8NoBOM
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -FilePath
 
 Specifies a file that this cmdlet saves the object to Wildcard characters are permitted, but must
 resolve to a single file.
+
+Starting in PowerShell 7, when you specify the **FilePath** as `\\.\CON` on Windows or `/dev/tty`
+on non-Windows systems, the **InputObject** is printed in the console. Those file paths correspond
+to the current terminal's console device on the system, enabling you to print the **InputObject**
+and send it to the output stream with one command.
 
 ```yaml
 Type: System.String
@@ -202,15 +304,20 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Management.Automation.PSObject
 
-You can pipe objects to `Tee-Object`.
+You can pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### System.Management.Automation.PSObject
 
-`Tee-Object` returns the object that it redirects.
+This cmdlet returns the object that it redirects.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Tee-Object`:
+
+- Windows:
+  - `tee`
 
 You can also use the `Out-File` cmdlet or the redirection operator, both of which save the output in
 a file but do not send it down the pipeline.

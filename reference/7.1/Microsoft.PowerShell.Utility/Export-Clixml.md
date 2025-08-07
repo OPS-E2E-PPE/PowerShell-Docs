@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 08/19/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/export-clixml?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 01/31/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/export-clixml?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Export-Clixml
 ---
@@ -32,13 +31,13 @@ Export-Clixml [-Depth <Int32>] -LiteralPath <String> -InputObject <PSObject> [-F
 
 ## DESCRIPTION
 
-The `Export-Clixml` cmdlet creates a Common Language Infrastructure (CLI) XML-based representation
-of an object or objects and stores it in a file. You can then use the `Import-Clixml` cmdlet to
-recreate the saved object based on the contents of that file.
-For more information about CLI, see [Language independence](/dotnet/standard/language-independence).
+The `Export-Clixml` cmdlet serialized an object into a Common Language Infrastructure (CLI)
+XML-based representation stores it in a file. You can then use the `Import-Clixml` cmdlet to
+recreate the saved object based on the contents of that file. For more information about CLI, see
+[Language independence](/dotnet/standard/language-independence).
 
 This cmdlet is similar to `ConvertTo-Xml`, except that `Export-Clixml` stores the resulting XML in a
-file. `ConvertTo-XML` returns the XML, so you can continue to process it in PowerShell.
+file. `ConvertTo-Xml` returns the XML, so you can continue to process it in PowerShell.
 
 A valuable use of `Export-Clixml` on Windows computers is to export credentials and secure strings
 securely as XML. For an example, see Example 3.
@@ -85,9 +84,9 @@ In this example, given a credential that you've stored in the `$Credential` vari
 > array. This provides some obfuscation but does not provide encryption.
 
 ```powershell
-$Credxmlpath = Join-Path (Split-Path $Profile) TestScript.ps1.credential
+$Credxmlpath = Join-Path (Split-Path $PROFILE) TestScript.ps1.credential
 $Credential | Export-Clixml $Credxmlpath
-$Credxmlpath = Join-Path (Split-Path $Profile) TestScript.ps1.credential
+$Credxmlpath = Join-Path (Split-Path $PROFILE) TestScript.ps1.credential
 $Credential = Import-Clixml $Credxmlpath
 ```
 
@@ -151,22 +150,6 @@ Unicode character array as proven by `Format-Hex`. So the value is encoded but n
 
 ## PARAMETERS
 
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Depth
 
 Specifies how many levels of contained objects are included in the XML representation. The default
@@ -194,6 +177,8 @@ Specifies the type of encoding for the target file. The default value is `utf8No
 The acceptable values for this parameter are as follows:
 
 - `ascii`: Uses the encoding for the ASCII (7-bit) character set.
+- `ansi`: Uses the encoding for the for the current culture's ANSI code page. This option was added
+  in 7.4.
 - `bigendianunicode`: Encodes in UTF-16 format using the big-endian byte order.
 - `bigendianutf32`: Encodes in UTF-32 format using the big-endian byte order.
 - `oem`: Uses the default encoding for MS-DOS and console programs.
@@ -209,8 +194,11 @@ pages (like `-Encoding 1251`) or string names of registered code pages (like
 `-Encoding "windows-1251"`). For more information, see the .NET documentation for
 [Encoding.CodePage](/dotnet/api/system.text.encoding.codepage?view=netcore-2.2).
 
+Starting with PowerShell 7.4, you can use the `Ansi` value for the **Encoding** parameter to pass
+the numeric ID for the current culture's ANSI code page without having to specify it manually.
+
 > [!NOTE]
-> **UTF-7*** is no longer recommended to use. In PowerShell 7.1, a warning is written if you
+> **UTF-7*** is no longer recommended to use. As of PowerShell 7.1, a warning is written if you
 > specify `utf7` for the **Encoding** parameter.
 
 ```yaml
@@ -314,6 +302,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WhatIf
 
 Shows what would happen if the cmdlet runs. The cmdlet isn't run.
@@ -334,19 +338,20 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.Management.Automation.PSObject
 
-You can pipeline any object to `Export-Clixml`.
+You can pipeline any object to this cmdlet.
 
 ## OUTPUTS
 
 ### System.IO.FileInfo
 
-`Export-Clixml` creates a file that contains the XML.
+This cmdlet returns a **FileInfo** object representing the created file with the stored data.
 
 ## NOTES
 

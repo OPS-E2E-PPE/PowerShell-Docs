@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 10/03/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/rename-item?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/rename-item?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Rename-Item
 ---
+
 # Rename-Item
 
 ## SYNOPSIS
@@ -44,7 +44,7 @@ name. To move and rename an item, use the `Move-Item` cmdlet.
 This command renames the file `daily_file.txt` to `monday_file.txt`.
 
 ```powershell
-Rename-Item -Path "c:\logfiles\daily_file.txt" -NewName "monday_file.txt"
+Rename-Item -Path "C:\logfiles\daily_file.txt" -NewName "monday_file.txt"
 ```
 
 ### Example 2: Rename and move an item
@@ -53,25 +53,27 @@ You can't use `Rename-Item` to both rename and move an item. Specifically, you c
 for the value of the **NewName** parameter, unless the path is identical to the path specified in
 the **Path** parameter. Otherwise, only a new name is permitted.
 
-This example attempts to rename the `project.txt` file in the current directory to `old-project.txt`
-in the `D:\Archive` directory. The result is the error shown in the output.
-
 ```powershell
-Rename-Item -Path "project.txt" -NewName "d:\archive\old-project.txt"
+Rename-Item -Path "project.txt" -NewName "D:\archive\old-project.txt"
 ```
 
 ```Output
 Rename-Item : can't rename because the target specified represents a path or device name.
 At line:1 char:12
-+ Rename-Item <<<<  -path project.txt -NewName d:\archive\old-project.txt
++ Rename-Item <<<<  -Path project.txt -NewName D:\archive\old-project.txt
 + CategoryInfo          : InvalidArgument: (:) [Rename-Item], PS>  Move-Item -Path "project.txt" -De
-stination "d:\archive\old-project.txt"
+stination "D:\archive\old-project.txt"
 ```
+
+This example attempts to rename the `project.txt` file in the current directory to `old-project.txt`
+in the `D:\Archive` directory. The result is the error shown in the output.
+
+Use the `Move-Item` cmdlet, instead.
 
 ### Example 3: Rename a registry key
 
-This example renames a registry key from **Advertising** to **Marketing**. When the command is complete,
-the key is renamed, but the registry entries in the key are unchanged.
+This example renames a registry key from **Advertising** to **Marketing**. When the command is
+complete, the key is renamed, but the registry entries in the key are unchanged.
 
 ```powershell
 Rename-Item -Path "HKLM:\Software\MyCompany\Advertising" -NewName "Marketing"
@@ -125,7 +127,8 @@ sensitive.
 
 > [!NOTE]
 > This parameter is not supported by any providers installed with PowerShell. To impersonate another
-> user, or elevate your credentials when running this cmdlet, use [Invoke-Command](../Microsoft.PowerShell.Core/Invoke-Command.md).
+> user, or elevate your credentials when running this cmdlet, use
+> [Invoke-Command](../Microsoft.PowerShell.Core/Invoke-Command.md).
 
 ```yaml
 Type: System.Management.Automation.PSCredential
@@ -143,7 +146,8 @@ Accept wildcard characters: False
 
 Forces the cmdlet to rename items that can't otherwise be changed, such as hidden or read-only files
 or read-only aliases or variables. The cmdlet can't change constant aliases or variables.
-Implementation varies from provider to provider. For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
+Implementation varies from provider to provider. For more information, see
+[about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
 Even using the **Force** parameter, the cmdlet can't override security restrictions.
 
@@ -166,7 +170,8 @@ typed. No characters are interpreted as wildcards. If the path includes escape c
 it in single quotation marks. Single quotation marks tell PowerShell not to interpret any characters
 as escape sequences.
 
-For more information, see [about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
+For more information, see
+[about_Quoting_Rules](../Microsoft.Powershell.Core/About/about_Quoting_Rules.md).
 
 ```yaml
 Type: System.String
@@ -187,8 +192,9 @@ differs from the path that is specified in the **Path** parameter, `Rename-Item`
 To rename and move an item, use `Move-Item`.
 
 You can't use wildcard characters in the value of the **NewName** parameter. To specify a name for
-multiple files, use the **Replace** operator in a regular expression. For more information about the
-Replace operator, see [about_Comparison_Operators](../Microsoft.PowerShell.Core/About/about_Comparison_Operators.md).
+multiple files, use the `-replace` operator in a regular expression. For more information about the
+`-replace` operator, see
+[about_Comparison_Operators](../Microsoft.PowerShell.Core/About/about_Comparison_Operators.md).
 
 ```yaml
 Type: System.String
@@ -272,7 +278,8 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](../Microsoft.PowerShell.Core/About/about_CommonParameters.md).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -282,15 +289,26 @@ You can pipe a string that contains a path to this cmdlet.
 
 ## OUTPUTS
 
-### None or an object that represents the renamed item.
+### None
 
-This cmdlet generates an object that represents the renamed item, if you specify the **PassThru**
-parameter. Otherwise, this cmdlet does not generate any output.
+By default, this cmdlet returns no output.
+
+### System.Management.Automation.PSObject
+
+When you use the **PassThru** parameter, this cmdlet returns an object representing the renamed
+item.
 
 ## NOTES
 
+PowerShell includes the following aliases for `Rename-Item`:
+
+- All platforms:
+  - `ren`
+  - `rni`
+
 `Rename-Item` is designed to work with the data exposed by any provider. To list the providers
-available in your session, type `Get-PsProvider`. For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
+available in your session, type `Get-PSProvider`. For more information, see
+[about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
 ## RELATED LINKS
 

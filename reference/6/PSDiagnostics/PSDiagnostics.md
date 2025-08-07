@@ -1,7 +1,6 @@
 ---
-Download Help Link: https://go.microsoft.com/fwlink/?linkid=855965
-Help Version: 6.2.5.0
-keywords: powershell,cmdlet
+Download Help Link: https://aka.ms/powershell74-help
+Help Version: 7.4.0.0
 Locale: en-US
 Module Guid: c61d6278-02a3-4618-ae37-a524d40a7f44
 Module Name: PSDiagnostics
@@ -15,6 +14,8 @@ title: PSDiagnostics Module
 
 The PowerShell Diagnostics Module contains a set of cmdlets that enables the use of ETW
 tracing in PowerShell on Windows.
+
+This module is only available on the Windows platform.
 
 ## PSDiagnostics Cmdlets
 
@@ -47,3 +48,4 @@ Start an Event Trace logging session.
 
 ### [Stop-Trace](Stop-Trace.md)
 Stop an Event Trace logging session.
+

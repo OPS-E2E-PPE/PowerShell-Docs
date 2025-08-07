@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 03/20/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/sort-object?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/sort-object?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Sort-Object
 ---
@@ -19,35 +18,35 @@ Sorts objects by property values.
 ### Default (Default)
 
 ```
-Sort-Object [-Stable] [-Descending] [-Unique] [-InputObject <PSObject>] [[-Property] <Object[]>]
- [-Culture <String>] [-CaseSensitive] [<CommonParameters>]
+Sort-Object [-Stable] [-Descending] [-Unique] [-InputObject <PSObject>]
+ [[-Property] <Object[]>] [-Culture <String>] [-CaseSensitive] [<CommonParameters>]
 ```
 
 ### Top
 
 ```
-Sort-Object [-Descending] [-Unique] -Top <Int32> [-InputObject <PSObject>] [[-Property] <Object[]>]
- [-Culture <String>] [-CaseSensitive] [<CommonParameters>]
+Sort-Object [-Descending] [-Unique] -Top <Int32> [-InputObject <PSObject>]
+ [[-Property] <Object[]>] [-Culture <String>] [-CaseSensitive] [<CommonParameters>]
 ```
 
 ### Bottom
 
 ```
-Sort-Object [-Descending] [-Unique] -Bottom <Int32> [-InputObject <PSObject>] [[-Property] <Object[]>]
- [-Culture <String>] [-CaseSensitive] [<CommonParameters>]
+Sort-Object [-Descending] [-Unique] -Bottom <Int32> [-InputObject <PSObject>]
+ [[-Property] <Object[]>] [-Culture <String>] [-CaseSensitive] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
 The `Sort-Object` cmdlet sorts objects in ascending or descending order based on object property
-values. If sort properties are not included in a command, PowerShell uses default sort properties
-of the first input object. If the type of the input object has no default sort properties,
+values. If sort properties aren't included in a command, PowerShell uses default sort properties
+of the first input object. If the input object's type has no default sort properties,
 PowerShell attempts to compare the objects themselves. For more information, see the [Notes](#notes)
 section.
 
 You can sort objects by a single property or multiple properties. Multiple properties use hash
 tables to sort in ascending order, descending order, or a combination of sort orders. Properties are
-sorted as case-sensitive or case-insensitive. Use the **Unique** parameter to eliminate duplicates
+sorted as case-sensitive or case-insensitive. Use the **Unique** parameter to remove duplicates
 from the output.
 
 ## EXAMPLES
@@ -56,9 +55,11 @@ from the output.
 
 This example sorts the files and subdirectories in a directory.
 
+```powershell
+Get-ChildItem -Path C:\Test | Sort-Object
 ```
-PS> Get-ChildItem -Path C:\Test | Sort-Object
 
+```Output
     Directory: C:\Test
 
 Mode                LastWriteTime         Length Name
@@ -74,17 +75,19 @@ d-----        2/25/2019     18:24                Logs
 ```
 
 The `Get-ChildItem` cmdlet gets the files and subdirectories from the directory specified by the
-**Path** parameter, **C:\Test**. The objects are sent down the pipeline to the `Sort-Object` cmdlet.
-`Sort-Object` does not specify a property so the output is sorted by the default sort property,
+**Path** parameter, `C:\Test`. The objects are sent down the pipeline to the `Sort-Object` cmdlet.
+`Sort-Object` doesn't specify a property so the output is sorted by the default sort property,
 **Name**.
 
 ### Example 2: Sort the current directory by file length
 
 This command displays the files in the current directory by length in ascending order.
 
+```powershell
+Get-ChildItem -Path C:\Test -File | Sort-Object -Property Length
 ```
-PS> Get-ChildItem -Path C:\Test -File | Sort-Object -Property Length
 
+```Output
     Directory: C:\Test
 
 Mode                LastWriteTime         Length Name
@@ -106,9 +109,11 @@ the files by length in ascending order.
 
 This example displays processes with the highest memory usage based on their working set (WS) size.
 
+```powershell
+Get-Process | Sort-Object -Property WS | Select-Object -Last 5
 ```
-PS> Get-Process | Sort-Object -Property WS | Select-Object -Last 5
 
+```Output
  NPM(K)    PM(M)      WS(M)     CPU(s)      Id  SI ProcessName
  ------    -----      -----     ------      --  -- -----------
     136   193.92     217.11     889.16   87492   8 OUTLOOK
@@ -132,9 +137,11 @@ example, `Get-Process | Sort-Object -Property WS -Bottom 5`.
 This command sorts the PowerShell session's **HistoryInfo** objects using the **Id** property. Each
 PowerShell session has its own command history.
 
+```powershell
+Get-History | Sort-Object -Property Id -Descending
 ```
-PS> Get-History | Sort-Object -Property Id -Descending
 
+```Output
   Id CommandLine
   -- -----------
   10 Get-Command Sort-Object -Syntax
@@ -142,8 +149,8 @@ PS> Get-History | Sort-Object -Property Id -Descending
    8 Get-Command Sort-Object -Syntax
    7 Get-Command Sort-Object -ShowCommandInfo
    6 Get-ChildItem -Path C:\Test | Sort-Object -Property Length
-   5 Get-Help Clear-History -online
-   4 Get-Help Clear-History -full
+   5 Get-Help Clear-History -Online
+   4 Get-Help Clear-History -Full
    3 Get-ChildItem | Get-Member
    2 Get-Command Sort-Object -Syntax
    1 Set-Location C:\Test\
@@ -163,12 +170,16 @@ A hash table is used to specify the **Property** parameter's value. The hash tab
 expression to specify the property names and sort orders. For more information about hash tables,
 see [about_Hash_Tables](../Microsoft.PowerShell.Core/About/about_Hash_Tables.md).
 
-The **Status** property used in the hash table is an enumerated property.
-For more information, see [ServiceControllerStatus](/dotnet/api/system.serviceprocess.servicecontrollerstatus).
+The **Status** property used in the hash table is an enumerated property. For more information, see
+[ServiceControllerStatus](/dotnet/api/system.serviceprocess.servicecontrollerstatus).
 
+```powershell
+Get-Service |
+    Sort-Object -Property @{Expression = "Status"; Descending = $true},
+                          @{Expression = "DisplayName"; Descending = $false}
 ```
-PS C:\> Get-Service | Sort-Object -Property @{Expression = "Status"; Descending = $True}, @{Expression = "DisplayName"; Descending = $False}
 
+```Output
 Status   Name               DisplayName
 ------   ----               -----------
 Running  Appinfo            Application Information
@@ -197,8 +208,8 @@ hash table to specify the property names and sort orders. The **Property** param
 two properties, **Status** in descending order and **DisplayName** in ascending order.
 
 **Status** is an enumerated property. **Stopped** has a value of **1** and **Running** has a value
-of **4**. The **Descending** parameter is set to `$True` so that **Running** processes are displayed
-before **Stopped** processes. **DisplayName** sets the **Descending** parameter to `$False` to sort
+of **4**. The **Descending** parameter is set to `$true` so that **Running** processes are displayed
+before **Stopped** processes. **DisplayName** sets the **Descending** parameter to `$false` to sort
 the display names in alphabetical order.
 
 ### Example 6: Sort text files by time span
@@ -206,9 +217,13 @@ the display names in alphabetical order.
 This command sorts text files in descending order by the time span between **CreationTime** and
 **LastWriteTime**.
 
+```powershell
+Get-ChildItem -Path C:\Test\*.txt |
+    Sort-Object -Property {$_.CreationTime - $_.LastWriteTime} |
+    Format-Table CreationTime, LastWriteTime, FullName
 ```
-PS> Get-ChildItem -Path C:\Test\*.txt | Sort-Object -Property @{Expression = {$_.CreationTime - $_.LastWriteTime}; Descending = $False} | Format-Table CreationTime, LastWriteTime, FullName
 
+```Output
 CreationTime          LastWriteTime        FullName
 ------------          -------------        --------
 11/21/2018 12:39:01   2/26/2019 08:59:36   C:\Test\test2.txt
@@ -222,11 +237,10 @@ CreationTime          LastWriteTime        FullName
 2/26/2019 08:46:59    2/26/2019 12:12:19   C:\Test\LogFile3.txt
 ```
 
-The `Get-ChildItem` cmdlet uses the **Path** parameter to specify the directory **C:\Test** and all
+The `Get-ChildItem` cmdlet uses the **Path** parameter to specify the directory `C:\Test` and all
 of the `*.txt` files. The objects are sent down the pipeline to the `Sort-Object` cmdlet.
-`Sort-Object` uses the **Property** parameter with a hash table to determine each files time span
-between **CreationTime** and **LastWriteTime**. The **Descending** parameter is set to `$False` to
-sort in the order of longest to shortest time span.
+`Sort-Object` uses the **Property** parameter with a scriptblock to determine each files time span
+between **CreationTime** and **LastWriteTime**.
 
 ### Example 7: Sort names in a text file
 
@@ -234,8 +248,12 @@ This example shows how to sort a list from a text file. The original file is dis
 unsorted list. `Sort-Object` sorts the contents and then sorts the contents with the **Unique**
 parameter that removes duplicates.
 
+```powershell
+# All items unsorted
+Get-Content -Path C:\Test\ServerNames.txt
 ```
-PS> Get-Content -Path C:\Test\ServerNames.txt
+
+```Output
 localhost
 server01
 server25
@@ -243,8 +261,11 @@ LOCALHOST
 Server19
 server3
 localhost
+```
 
-PS> Get-Content -Path C:\Test\ServerNames.txt | Sort-Object
+```powershell
+# All items sorted
+Get-Content -Path C:\Test\ServerNames.txt | Sort-Object
 localhost
 LOCALHOST
 localhost
@@ -252,8 +273,14 @@ server01
 Server19
 server25
 server3
+```
 
-PS> Get-Content -Path C:\Test\ServerNames.txt | Sort-Object -Unique
+```powershell
+# Unique filtered items sorted
+Get-Content -Path C:\Test\ServerNames.txt | Sort-Object -Unique
+```
+
+```Output
 localhost
 server01
 Server19
@@ -261,15 +288,15 @@ server25
 server3
 ```
 
-The `Get-Content` cmdlet uses the **Path** parameter to specify the directory and file name. The
-file **ServerNames.txt** contains an unsorted list of computer names.
+The `Get-Content` cmdlet uses the **Path** parameter to specify the directory and filename. The
+file `ServerNames.txt` contains an unsorted list of computer names.
 
-The `Get-Content` cmdlet uses the **Path** parameter to specify the directory and file name. The
-file **ServerNames.txt** contains an unsorted list of computer names. The objects are sent down the
+The `Get-Content` cmdlet uses the **Path** parameter to specify the directory and filename. The
+file `ServerNames.txt` contains an unsorted list of computer names. The objects are sent down the
 pipeline to the `Sort-Object` cmdlet. `Sort-Object` sorts the list in the default order, ascending.
 
-The `Get-Content` cmdlet uses the **Path** parameter to specify the directory and file name. The
-file **ServerNames.txt** contains an unsorted list of computer names. The objects are sent down the
+The `Get-Content` cmdlet uses the **Path** parameter to specify the directory and filename. The
+file `ServerNames.txt` contains an unsorted list of computer names. The objects are sent down the
 pipeline to the `Sort-Object` cmdlet. `Sort-Object` uses the **Unique** parameter to remove
 duplicate computer names. The list is sorted in the default order, ascending.
 
@@ -282,8 +309,12 @@ integers. For these examples, the `ProductId.txt` file contains an unsorted list
 In the first example, `Get-Content` gets the contents of the file and pipes lines to the
 `Sort-Object` cmdlet. `Sort-Object` sorts the string objects in ascending order.
 
+```powershell
+# String sorted
+Get-Content -Path C:\Test\ProductId.txt | Sort-Object
 ```
-PS> Get-Content -Path C:\Test\ProductId.txt | Sort-Object
+
+```Output
 0
 1
 12345
@@ -297,8 +328,14 @@ PS> Get-Content -Path C:\Test\ProductId.txt | Sort-Object
 77
 88
 99999
+```
 
-PS> Get-Content -Path C:\Test\ProductId.txt | Sort-Object {[int]$_}
+```powershell
+# Integer sorted
+Get-Content -Path C:\Test\ProductId.txt | Sort-Object {[int]$_}
+```
+
+```Output
 0
 1
 2
@@ -328,7 +365,10 @@ are sorting the numbers one through 20 by the their value 'modulo 3'. The modulo
 zero to two.
 
 ```powershell
-PS> 1..20 |Sort-Object {$_ % 3}
+1..20 |Sort-Object {$_ % 3}
+```
+
+```Output
 18
 3
 15
@@ -349,8 +389,13 @@ PS> 1..20 |Sort-Object {$_ % 3}
 17
 2
 20
+```
 
-PS> 1..20 |Sort-Object {$_ % 3} -Stable
+```powershell
+1..20 |Sort-Object {$_ % 3} -Stable
+```
+
+```Output
 3
 6
 9
@@ -374,8 +419,67 @@ PS> 1..20 |Sort-Object {$_ % 3} -Stable
 ```
 
 The output from the first sort is correctly grouped by the modulus value but the individual items
-are not sorted within the modulus range. The second sort uses the **Stable** option to return a
+aren't sorted within the modulus range. The second sort uses the **Stable** option to return a
 stable sort.
+
+### Example 10: Sort by multiple properties
+
+If you want to sort by multiple properties, separate the properties by commas.
+
+```powershell
+Get-ChildItem -Path C:\Test | Sort-Object Length,Name
+```
+
+```Output
+    Directory: C:\Test
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          13/10/2021    22:16              2 File01.txt
+-a---          13/10/2021    22:16              2 File03.txt
+-a---          13/10/2021    22:18             64 File02.txt
+-a---          13/10/2021    22:18             64 File04.txt
+```
+
+The `Get-ChildItem` cmdlet gets the files from the directory specified by the **Path** parameter.
+The objects are sent down the pipeline to the `Sort-Object` cmdlet. `Sort-Object` uses the
+**Length** and **Name** parameter to sort the files by length in ascending order. Since
+`File01.txt` and `File03.txt` have the same length, they're further sorted by their property
+**Name**.
+
+### Example 11: Sort hashtables by key value
+
+Beginning in PowerShell 6, `Sort-Object` supports sorting of **hashtable** input by key values. The
+following example sorts an array of hashtables by the value of each hashtable's `weight` key.
+
+```powershell
+@(
+    @{ name = 'a' ; weight = 7 }
+    @{ name = 'b' ; weight = 1 }
+    @{ name = 'c' ; weight = 3 }
+    @{ name = 'd' ; weight = 7 }
+) | Sort-Object -Property weight -OutVariable Sorted
+
+$Sorted | ForEach-Object -Process { "{0}: {1}" -f $_.name, $_.weight }
+```
+
+```output
+Name                           Value
+----                           -----
+Weight                         1
+Name                           b
+Weight                         3
+Name                           c
+Weight                         7
+Name                           a
+Weight                         7
+Name                           d
+
+b: 1
+c: 3
+a: 7
+d: 7
+```
 
 ## PARAMETERS
 
@@ -400,7 +504,7 @@ Accept wildcard characters: False
 
 ### -CaseSensitive
 
-Indicates that the sort is case-sensitive. By default, sorts are not case-sensitive.
+Indicates that the sort is case-sensitive. By default, sorts aren't case-sensitive.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -454,7 +558,7 @@ Accept wildcard characters: False
 
 To sort objects, send them down the pipeline to `Sort-Object`. If you use the **InputObject**
 parameter to submit a collection of items, `Sort-Object` receives one object that represents the
-collection. Because one object cannot be sorted, `Sort-Object` returns the entire collection
+collection. Because one object can't be sorted, `Sort-Object` returns the entire collection
 unchanged.
 
 ```yaml
@@ -472,22 +576,22 @@ Accept wildcard characters: False
 ### -Property
 
 Specifies the property names that `Sort-Object` uses to sort the objects. Wildcards are permitted.
-Objects are sorted based on the property values. If you do not specify a property, `Sort-Object`
+Objects are sorted based on the property values. If you don't specify a property, `Sort-Object`
 sorts based on default properties for the object type or the objects themselves.
 
-Multiple properties can be sorted in ascending order, descending order, or a combination of sort
-orders. When you specify multiple properties, the objects are sorted by the first property. If
-multiple objects have the same value for the first property, those objects are sorted by the second
-property. This process continues until there are no more specified properties or no groups of
-objects.
+Use commas to separate multiple properties. Multiple properties can be sorted in ascending order,
+descending order, or a combination of sort orders. When you specify multiple properties, the
+objects are sorted by the first property. If multiple objects have the same value for the first
+property, those objects are sorted by the second property. This process continues until there are
+no more specified properties or no groups of objects.
 
 The **Property** parameter's value can be a calculated property. To create a calculated property,
-use a hash table.
+use a scriptblock or a hashtable.
 
 Valid keys for a hash table are as follows:
 
-- `expression` - `<string>` or `<script block>`
-- `ascending` or `descending` - `<boolean>`
+- `Expression` - `<string>` or `<script block>`
+- `Ascending` or `Descending` - `<boolean>`
 
 For more information, see
 [about_Calculated_Properties](../Microsoft.PowerShell.Core/About/about_Calculated_Properties.md).
@@ -502,6 +606,24 @@ Position: 0
 Default value: Default properties
 Accept pipeline input: False
 Accept wildcard characters: True
+```
+
+### -Stable
+
+The sorted objects are delivered in the order they were received when the sort criteria are equal.
+
+This parameter was added in PowerShell v6.2.0.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: Default
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
 ### -Top
@@ -543,54 +665,42 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Stable
-
-The sorted objects are delivered in the order they were received when the sort criteria are equal.
-
-This parameter was added in PowerShell v6.2.0.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: Default
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.Management.Automation.PSObject
 
-You can pipe the objects to be sorted to `Sort-Object`.
+You can pipe the objects to be sorted to this cmdlet.
 
 ## OUTPUTS
 
 ### System.Management.Automation.PSObject
 
-`Sort-Object` returns the sorted objects.
+This cmdlet returns the sorted objects.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Sort-Object`:
+
+- Windows:
+  - `sort`
 
 The `Sort-Object` cmdlet sorts objects based on properties specified in the command or the default
 sort properties for the object type. Default sort properties are defined using the `PropertySet`
 named `DefaultKeyPropertySet` in a `types.ps1xml` file. For more information, see
 [about_Types.ps1xml](/powershell/module/Microsoft.PowerShell.Core/About/about_Types.ps1xml).
 
-If an object does not have one of the specified properties, the property value for that object is
+If an object doesn't have one of the specified properties, the property value for that object is
 interpreted by `Sort-Object` as **Null** and placed at the end of the sort order.
 
 When no sort properties are available, PowerShell attempts to compare the objects themselves.
-`Sort-Object` uses the **Compare** method for each property. If a property does not implement
+`Sort-Object` uses the **Compare** method for each property. If a property doesn't implement
 **IComparable**, the cmdlet converts the property value to a string and uses the **Compare** method
 for **System.String**. For more information, see
 [PSObject.CompareTo(Object) Method](/dotnet/api/system.management.automation.psobject.compareto).

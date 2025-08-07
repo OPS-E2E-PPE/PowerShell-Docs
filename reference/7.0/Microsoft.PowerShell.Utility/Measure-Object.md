@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 08/10/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/measure-object?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/measure-object?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Measure-Object
 ---
+
 # Measure-Object
 
 ## SYNOPSIS
@@ -57,7 +57,7 @@ This command displays the **Minimum**, **Maximum**, and **Sum** of the sizes of 
 current directory, and the average size of a file in the directory.
 
 ```powershell
-Get-ChildItem | Measure-Object -Property length -Minimum -Maximum -Average
+Get-ChildItem | Measure-Object -Property Length -Minimum -Maximum -Sum -Average
 ```
 
 ### Example 3: Measure text in a text file
@@ -124,7 +124,7 @@ You can use `Measure-Object` to calculate the values of these properties, just l
 property of an object.
 
 ```powershell
-Import-Csv d:\test\serviceyrs.csv | Measure-Object -Property years -Minimum -Maximum -Average
+Import-Csv D:\test\serviceyrs.csv | Measure-Object -Property Years -Minimum -Maximum -Average
 ```
 
 ### Example 6: Measure Boolean values
@@ -134,7 +134,7 @@ In this case, it uses the **PSIsContainer** **Boolean** property to measure the 
 folders (vs. files) in the current directory.
 
 ```powershell
-Get-ChildItem | Measure-Object -Property psiscontainer -Maximum -Sum -Minimum -Average
+Get-ChildItem | Measure-Object -Property PSIsContainer -Maximum -Sum -Minimum -Average
 ```
 
 ```Output
@@ -243,8 +243,8 @@ Property          : num
 
 ### Example 11: Measure the Standard Deviation
 
-Beginning in PowerShell 6, `Measure-Object` supports the `-StandardDeviation` parameter. The
-following example determines the *standard deviation* for the CPU used by all processes. A large
+Beginning in PowerShell 6, `Measure-Object` supports the **StandardDeviation** parameter. The
+following example determines the _standard deviation_ for the CPU used by all processes. A large
 deviation would indicate a small number of processes consuming the most CPU.
 
 ```powershell
@@ -307,6 +307,22 @@ Property          : PeakPagedMemorySize
 
 ## PARAMETERS
 
+### -AllStats
+
+Indicates that the cmdlet displays all the statistics of the specified properties.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: GenericMeasure
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Average
 
 Indicates that the cmdlet displays the average value of the specified properties.
@@ -328,7 +344,7 @@ Accept wildcard characters: False
 Indicates that the cmdlet counts the number of characters in the input objects.
 
 > [!NOTE]
-> The **Word**, **Char** and **Line** switches count *inside* each input object, as well as *across*
+> The **Word**, **Char** and **Line** switches count _inside_ each input object, as well as _across_
 > input objects. See Example 7.
 
 ```yaml
@@ -388,7 +404,7 @@ Accept wildcard characters: False
 Indicates that the cmdlet counts the number of lines in the input objects.
 
 > [!NOTE]
-> The **Word**, **Char** and **Line** switches count *inside* each input object, as well as *across*
+> The **Word**, **Char** and **Line** switches count _inside_ each input object, as well as _across_
 > input objects. See Example 7.
 
 ```yaml
@@ -488,28 +504,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -AllStats
-
-Indicates that the cmdlet displays all the statistics of the specified properties.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: GenericMeasure
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Word
 
 Indicates that the cmdlet counts the number of words in the input objects.
 
 > [!NOTE]
-> The **Word**, **Char** and **Line** switches count *inside* each input object, as well as *across*
+> The **Word**, **Char** and **Line** switches count _inside_ each input object, as well as _across_
 > input objects. See Example 7.
 
 ```yaml
@@ -534,18 +534,30 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Management.Automation.PSObject
 
-You can pipe objects to `Measure-Object`.
+You can pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### Microsoft.PowerShell.Commands.GenericMeasureInfo
 
+By default, this cmdlet returns a **GenericMeasureInfo** object.
+
 ### Microsoft.PowerShell.Commands.TextMeasureInfo
 
-If you use the **Word** parameter, `Measure-Object` returns a **TextMeasureInfo** object.
-Otherwise, it returns a **GenericMeasureInfo** object.
+When you use the **Word** parameter, this cmdlet returns a **TextMeasureInfo** object.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Measure-Object`:
+
+- All platforms:
+  - `measure`
+
+Starting in PowerShell 7.3, `Measure-Object` no longer returns an error when
+processing an object that is missing the property being measured unless you are
+running in **StrictMode**. In **StrictMode**, `Measure-Object` returns a
+`System.Management.Automation.PSArgumentException` when processing an object
+that is missing the specified property.
 
 ## RELATED LINKS
 

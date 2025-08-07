@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Security.dll-help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Security
-ms.date: 04/27/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/convertfrom-securestring?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.security/convertfrom-securestring?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: ConvertFrom-SecureString
 ---
+
 # ConvertFrom-SecureString
 
 ## SYNOPSIS
@@ -29,7 +29,7 @@ ConvertFrom-SecureString [-SecureString] <SecureString> [-Key <Byte[]>] [<Common
 
 ## DESCRIPTION
 
-The **ConvertFrom-SecureString** cmdlet converts a secure string (**System.Security.SecureString**)
+The `ConvertFrom-SecureString` cmdlet converts a secure string (**System.Security.SecureString**)
 into an encrypted standard string (**System.String**). Unlike a secure string, an encrypted standard
 string can be saved in a file for later use. The encrypted standard string can be converted back to
 its secure string format by using the `ConvertTo-SecureString` cmdlet.
@@ -136,20 +136,19 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see about_CommonParameters
-(https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.Security.SecureString
 
-You can pipe a **SecureString** object to ConvertFrom-SecureString.
+You can pipe a **SecureString** object to this cmdlet.
 
 ## OUTPUTS
 
 ### System.String
 
-ConvertFrom-SecureString returns a standard string object.
+This cmdlet returns the created plain text string.
 
 ## NOTES
 

@@ -1,10 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 03/28/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/disable-pssessionconfiguration?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 12/09/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/disable-pssessionconfiguration?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Disable-PSSessionConfiguration
 ---
@@ -21,6 +20,8 @@ Disable-PSSessionConfiguration [[-Name] <String[]>] [-Force] [-NoServiceRestart]
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `Disable-PSSessionConfiguration` cmdlet disables session configurations on the local computer,
 which prevents all users from using the session configurations to create a user-managed sessions
@@ -44,7 +45,7 @@ To disable all session configurations on the computer, use `Disable-PSRemoting`.
 
 ### Example 1: Disable the default configuration
 
-This example disables the Microsoft.PowerShell session configuration.
+This example disables the **Microsoft.PowerShell** session configuration.
 
 ```powershell
 Disable-PSSessionConfiguration
@@ -60,7 +61,7 @@ Disable-PSSessionConfiguration -Name *
 
 ### Example 3: Disable session configurations by name
 
-This example disables all session configurations that have names that begin with Microsoft. The
+This example disables all session configurations that have names that begin with `Microsoft`. The
 **Force** parameter suppresses all user prompts from the cmdlet.
 
 ```powershell
@@ -70,7 +71,7 @@ Disable-PSSessionConfiguration -Name Microsoft* -Force
 ### Example 4: Disable session configurations by using the pipeline
 
 This example disables the **MaintenanceShell** and **AdminShell** session configurations. The
-pipeline operator (|) sends the results of a `Get-PSSessionConfiguration` to
+pipeline operator (`|`) sends the results of a `Get-PSSessionConfiguration` to
 `Disable-PSSessionConfiguration`.
 
 ```powershell
@@ -136,7 +137,7 @@ Specifies an array of names of session configurations to disable. Enter one or m
 names. Wildcard characters are permitted. You can also pipe a string that contains a configuration
 name or a session configuration object to `Disable-PSSessionConfiguration`.
 
-If you omit this parameter, `Disable-PSSessionConfiguration` disables the Microsoft.PowerShell
+If you omit this parameter, `Disable-PSSessionConfiguration` disables the **Microsoft.PowerShell**
 session configuration.
 
 ```yaml
@@ -204,22 +205,28 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### Microsoft.PowerShell.Commands.PSSessionConfigurationCommands#PSSessionConfiguration, System.String
+### Microsoft.PowerShell.Commands.PSSessionConfigurationCommands#PSSessionConfiguration
 
-You can pipe a session configuration object or a string that contains the name of a session
-configuration to this cmdlet.
+You can pipe a session configuration object to this cmdlet.
+
+### System.String
+
+You can pipe a string that contains the name of a session configuration to this cmdlet.
 
 ## OUTPUTS
 
 ### None
 
-This cmdlet does not return any objects.
+This cmdlet returns no output.
 
 ## NOTES
+
+This cmdlet is only available on Windows platforms.
 
 To run this cmdlet you must start PowerShell by using the **Run as administrator** option.
 
@@ -244,4 +251,3 @@ To run this cmdlet you must start PowerShell by using the **Run as administrator
 [about_Session_Configurations](About/about_Session_Configurations.md)
 
 [about_Session_Configuration_Files](About/about_Session_Configuration_Files.md)
-

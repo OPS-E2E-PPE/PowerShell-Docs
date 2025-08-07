@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.PSReadLine2.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: PSReadLine
-ms.date: 12/07/2018
-online version: https://docs.microsoft.com/powershell/module/psreadline/get-psreadlinekeyhandler?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 12/13/2022
+online version: https://learn.microsoft.com/powershell/module/psreadline/get-psreadlinekeyhandler?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-PSReadLineKeyHandler
 ---
@@ -12,7 +11,7 @@ title: Get-PSReadLineKeyHandler
 # Get-PSReadLineKeyHandler
 
 ## SYNOPSIS
-Gets the bound key functions for the PSReadLine module.
+Gets the key bindings for the PSReadLine module.
 
 ## SYNTAX
 
@@ -146,22 +145,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Unbound
-
-Indicates that this cmdlet returns functions that are unbound.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: FullListing
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Chord
 
 Return only functions bound to specific keys or sequences.
@@ -178,22 +161,39 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Unbound
+
+Indicates that this cmdlet returns functions that are unbound.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: FullListing
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see
-[about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
 
-You cannot pipe objects to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### Microsoft.PowerShell.KeyHandler
+
+This cmdlet returns a **KeyHandler** object.
 
 ## NOTES
 
@@ -206,4 +206,3 @@ You cannot pipe objects to this cmdlet.
 [Set-PSReadLineOption](Set-PSReadLineOption.md)
 
 [Set-PSReadLineKeyHandler](Set-PSReadLineKeyHandler.md)
-

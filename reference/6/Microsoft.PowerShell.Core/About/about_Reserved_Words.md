@@ -1,18 +1,18 @@
 ---
-keywords: powershell,cmdlet
+description: Lists the reserved words that cannot be used as identifiers because they have a special meaning in PowerShell.
 Locale: en-US
-ms.date: 07/23/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_reserved_words?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 07/02/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_reserved_words?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Reserved_Words
 ---
-# About Reserved Words
+# about_Reserved_Words
 
-## SHORT DESCRIPTION
+## Short description
 Lists the reserved words that cannot be used as identifiers because they
 have a special meaning in PowerShell.
 
-## LONG DESCRIPTION
+## Long description
 
 There are certain words that have special meaning in PowerShell. When these
 words appear without quotation marks, PowerShell attempts to apply their
@@ -44,15 +44,15 @@ enum             private
 (*) These keywords are reserved for future use.
 ```
 
-Several language keywords, including `Foreach`, `If`, `For`, and `While`, have
+Several language keywords, including `foreach`, `if`, `for`, and `while`, have
 their own help articles. To view them, type `Get-Help about_` and add the
-keyword. For example, to get information about the `Foreach` statement, type:
+keyword. For example, to get information about the `foreach` statement, type:
 
 ```powershell
-Get-Help about_ForEach
+Get-Help about_Foreach
 ```
 
-For information about the `Filter` statement or the `Return` statement syntax,
+For information about the `filter` statement or the `return` statement syntax,
 type:
 
 ```powershell
@@ -74,7 +74,7 @@ Get-Help <Reserved_Word>
 > Get-Help <Reserved_Word> -Category:HelpFile
 > ```
 
-## SEE ALSO
+## See also
 
 - [about_Command_Syntax](about_Command_Syntax.md)
 - [about_Language_Keywords](about_Language_Keywords.md)

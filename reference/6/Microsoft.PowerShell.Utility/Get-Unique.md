@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 03/12/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/get-unique?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 08/18/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/get-unique?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Unique
 ---
+
 # Get-Unique
 
 ## SYNOPSIS
@@ -18,13 +18,13 @@ Returns unique items from a sorted list.
 ### AsString (Default)
 
 ```
-Get-Unique [-InputObject <PSObject>] [-AsString] [<CommonParameters>]
+Get-Unique [-InputObject <PSObject>] [-AsString] [-CaseInsensitive] [<CommonParameters>]
 ```
 
 ### UniqueByType
 
 ```
-Get-Unique [-InputObject <PSObject>] [-OnType] [<CommonParameters>]
+Get-Unique [-InputObject <PSObject>] [-OnType] [-CaseInsensitive] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,8 +32,8 @@ Get-Unique [-InputObject <PSObject>] [-OnType] [<CommonParameters>]
 The `Get-Unique` cmdlet compares each item in a sorted list to the next item, eliminates duplicates,
 and returns only one instance of each item. The list must be sorted for the cmdlet to work properly.
 
-`Get-Unique` is case-sensitive. As a result, strings that differ only in character casing are
-considered to be unique.
+By default, `Get-Unique` is case-sensitive. As a result, strings that differ only in character
+casing are considered to be unique.
 
 ## EXAMPLES
 
@@ -43,15 +43,15 @@ These commands find the number of unique words in a text file.
 
 ```powershell
 $A = $( foreach ($line in Get-Content C:\Test1\File1.txt) {
-    $line.tolower().split(" ")
+    $line.ToLower().Split(" ")
   }) | Sort-Object | Get-Unique
-$A.count
+$A.Count
 ```
 
-The first command gets the content of the File.txt file. It converts each line of text to lowercase
-letters and then splits each word onto a separate line at the space (" "). Then, it sorts the
-resulting list alphabetically (the default) and uses the `Get-Unique` cmdlet to eliminate any
-duplicate words. The results are stored in the `$A` variable.
+The first command gets the content of the `File.txt` file. It converts each line of text to
+lowercase letters and then splits each word onto a separate line at the space (`" "`). Then, it
+sorts the resulting list alphabetically (the default) and uses the `Get-Unique` cmdlet to eliminate
+any duplicate words. The results are stored in the `$A` variable.
 
 The second command uses the **Count** property of the collection of strings in `$A` to determine how
 many items are in `$A`.
@@ -87,7 +87,7 @@ includes files and directories.
 Get-ChildItem | Sort-Object {$_.GetType()} | Get-Unique -OnType
 ```
 
-The pipeline operator (|) sends the results to the `Sort-Object` cmdlet. The `$_.GetType()`
+The pipeline operator (`|`) sends the results to the `Sort-Object` cmdlet. The `$_.GetType()`
 statement applies the **GetType** method to each file or directory. Then, `Sort-Object` sorts the
 items by type. Another pipeline operator sends the results to `Get-Unique`. The **OnType** parameter
 directs `Get-Unique` to return only one object of each type.
@@ -97,18 +97,46 @@ directs `Get-Unique` to return only one object of each type.
 This command gets the names of processes running on the computer with duplicates eliminated.
 
 ```powershell
-Get-Process | Sort-Object | Select-Object processname | Get-Unique -AsString
+Get-Process | Sort-Object | Select-Object ProcessName | Get-Unique -AsString
 ```
 
-The `Get-Process` command gets all of the processes on the computer. The pipeline operator (|)
+The `Get-Process` command gets all of the processes on the computer. The pipeline operator (`|`)
 passes the result to `Sort-Object`, which, by default, sorts the processes alphabetically by
-ProcessName. The results are piped to the `Select-Object` cmdlet, which selects only the values of
-the ProcessName property of each object. The results are then piped to `Get-Unique` to eliminate
-duplicates.
+**ProcessName**. The results are piped to the `Select-Object` cmdlet, which selects only the values
+of the **ProcessName** property of each object. The results are then piped to `Get-Unique` to
+eliminate duplicates.
 
 The **AsString** parameter tells `Get-Unique` to treat the **ProcessName** values as strings.
 Without this parameter, `Get-Unique` treats the **ProcessName** values as objects and returns only
 one instance of the object, that is, the first process name in the list.
+
+### Example 5: Use case-sensitive comparisons to get unique strings
+
+This example uses case-insensitive comparisons to get unique strings from an array of strings.
+
+```powershell
+"aa", "Aa", "Bb", "bb", "aa" | Sort-Object -CaseSensitive | Get-Unique
+```
+
+```Output
+aa
+Aa
+bb
+Bb
+```
+
+### Example 6: Use case-insensitive comparisons to get unique strings
+
+This example uses case-insensitive comparisons to get unique strings from an array of strings.
+
+```powershell
+"aa", "Aa", "Bb", "bb", "aa" | Sort-Object | Get-Unique -CaseInsensitive
+```
+
+```Output
+aa
+Bb
+```
 
 ## PARAMETERS
 
@@ -126,7 +154,26 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CaseInsensitive
+
+By default, `Get-Unique` is case-sensitive. When you use this parameter, the cmdlet uses
+case-insensitive comparisons.
+
+This parameter was added in PowerShell 7.4.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -136,9 +183,9 @@ Accept wildcard characters: False
 Specifies input for `Get-Unique`. Enter a variable that contains the objects or type a command or
 expression that gets the objects.
 
-This cmdlet treats the input submitted by using **InputObject** as a collection. it does not
+This cmdlet treats the input submitted using **InputObject** as a collection. It doesn't
 enumerate individual items in the collection. Because the collection is a single item, input
-submitted by using **InputObject** is always returned unchanged.
+submitted using **InputObject** is always returned unchanged.
 
 ```yaml
 Type: System.Management.Automation.PSObject
@@ -172,26 +219,32 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.Management.Automation.PSObject
 
-You can pipe any type of object to `Get-Unique`.
+You can pipe any type of object to this cmdlet.
 
 ## OUTPUTS
 
 ### System.Management.Automation.PSObject
 
-The type of object that `Get-Unique` returns is determined by the input.
+This cmdlet returns its input objects without duplicates.
 
 ## NOTES
 
-You can also refer to `Get-Unique` by its built-in alias, `gu`. For more information, see [about_Aliases](../Microsoft.PowerShell.Core/About/about_Aliases.md).
+PowerShell includes the following aliases for `Get-Unique`:
 
-To sort a list, use Sort-Object. You can also use the **Unique** parameter of `Sort-Object` to find
-the unique items in a list.
+- All platforms:
+  - `gu`
+
+For more information, see [about_Aliases](../Microsoft.PowerShell.Core/About/about_Aliases.md).
+
+To sort a list, use `Sort-Object`. You can also use the **Unique** parameter of `Sort-Object` to
+find the unique items in a list.
 
 ## RELATED LINKS
 

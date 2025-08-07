@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 04/24/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/set-psbreakpoint?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 01/20/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/set-psbreakpoint?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-PSBreakpoint
 ---
+
 # Set-PSBreakpoint
 
 ## SYNOPSIS
@@ -19,20 +19,21 @@ Sets a breakpoint on a line, command, or variable.
 
 ```
 Set-PSBreakpoint [-Action <ScriptBlock>] [[-Column] <Int32>] [-Line] <Int32[]> [-Script] <String[]>
- [<CommonParameters>]
+ [-Runspace <Runspace>] [<CommonParameters>]
 ```
 
 ### Command
 
 ```
-Set-PSBreakpoint [-Action <ScriptBlock>] -Command <String[]> [[-Script] <String[]>] [<CommonParameters>]
+Set-PSBreakpoint [-Action <ScriptBlock>] -Command <String[]> [[-Script] <String[]>] [-Runspace <Runspace>]
+ [<CommonParameters>]
 ```
 
 ### Variable
 
 ```
 Set-PSBreakpoint [-Action <ScriptBlock>] [[-Script] <String[]>] -Variable <String[]>
- [-Mode <VariableAccessMode>] [<CommonParameters>]
+ [-Mode <VariableAccessMode>] [-Runspace <Runspace>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -59,7 +60,8 @@ you can use the **Action** parameter to specify an alternate response, such as c
 breakpoint or instructions to perform additional tasks such as logging or diagnostics.
 
 The `Set-PSBreakpoint` cmdlet is one of several cmdlets designed for debugging PowerShell scripts.
-For more information about the PowerShell debugger, see [about_Debuggers](../Microsoft.PowerShell.Core/About/about_Debuggers.md).
+For more information about the PowerShell debugger, see
+[about_Debuggers](../Microsoft.PowerShell.Core/About/about_Debuggers.md).
 
 ## EXAMPLES
 
@@ -130,8 +132,8 @@ Set-PSBreakpoint -Script Sample.ps1 -Command "write*"
 
 ### Example 5: Set a breakpoint depending on the value of a variable
 
-This example stops execution at the `DiskTest` function in the Test.ps1 script only when the value of
-the `$Disk` variable is greater than 2.
+This example stops execution at the `DiskTest` function in the `Test.ps1` script only when the value
+of the `$Disk` variable is greater than 2.
 
 ```powershell
 Set-PSBreakpoint -Script "test.ps1" -Command "DiskTest" -Action { if ($Disk -gt 2) { break } }
@@ -158,8 +160,8 @@ HitCount : 0
 Action   :
 
 function CheckLog {
->> get-eventlog -log Application |
->> where {($_.source -like "TestApp") -and ($_.Message -like "*failed*")}
+>> Get-EventLog -Log Application |
+>> Where-Object {($_.Source -like "TestApp") -and ($_.Message -like "*failed*")}
 >>}
 >>
 PS> Checklog
@@ -208,6 +210,21 @@ Script     : C:\ps-test\sample.ps1
 ScriptName : C:\ps-test\sample.ps1
 ```
 
+### Example 8: Set a breakpoint in a runspace
+
+In this example, a job is started. The runspace is stored in a variable and passed to the
+`Set-PSBreakpoint` command with the **Runspace** parameter.
+
+```powershell
+Start-Job -ScriptBlock {
+    Start-Sleep -Seconds 10
+}
+
+$runspace = Get-Runspace -Id 1
+
+Set-PSBreakpoint -Command Start-Sleep -Runspace $runspace
+```
+
 ## PARAMETERS
 
 ### -Action
@@ -219,9 +236,9 @@ tasks, such as testing or logging.
 If this parameter is omitted, or no action is specified, execution stops at the breakpoint, and the
 debugger starts.
 
-When the **Action** parameter is used, the Action script block runs at each breakpoint. Execution does
-not stop unless the script block includes the Break keyword. If you use the Continue keyword in the
-script block, execution resumes until the next breakpoint.
+When the **Action** parameter is used, the Action script block runs at each breakpoint. Execution
+does not stop unless the script block includes the `break` keyword. If you use the `continue`
+keyword in the script block, execution resumes until the next breakpoint.
 
 For more information, see [about_Script_Blocks](../Microsoft.PowerShell.Core/About/about_Script_Blocks.md),
 [about_Break](../Microsoft.PowerShell.Core/About/about_Break.md), and
@@ -244,10 +261,10 @@ Accept wildcard characters: False
 Specifies the column number of the column in the script file on which execution stops. Enter only
 one column number. The default is column 1.
 
-The Column value is used with the value of the **Line** parameter to specify the breakpoint. If the **Line**
-parameter specifies multiple lines, the **Column** parameter sets a breakpoint at the specified column
-on each of the specified lines. PowerShell stops executing before the statement or expression that
-includes the character at the specified line and column position.
+The Column value is used with the value of the **Line** parameter to specify the breakpoint. If the
+**Line** parameter specifies multiple lines, the **Column** parameter sets a breakpoint at the
+specified column on each of the specified lines. PowerShell stops executing before the statement or
+expression that includes the character at the specified line and column position.
 
 Columns are counted from the top left margin beginning with column number 1 (not 0). If you specify
 a column that does not exist in the script, an error is not declared, but the breakpoint is never
@@ -271,7 +288,7 @@ Sets a command breakpoint. Enter cmdlet names, such as `Get-Process`, or functio
 are permitted.
 
 Execution stops just before each instance of each command is executed. If the command is a function,
-execution stops each time the function is called and at each BEGIN, PROCESS, and END section.
+execution stops each time the function is called and at each `begin`, `process`, and `end` block.
 
 ```yaml
 Type: System.String[]
@@ -332,6 +349,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Runspace
+Specifies the Id of a **Runspace** object so you can interact with breakpoints in the specified
+runspace.
+
+This parameter was added in PowerShell 7.2.
+
+```yaml
+Type: Runspace
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Script
 
 Specifies an array of script files that this cmdlet sets a breakpoint in. Enter the paths and file
@@ -377,20 +412,31 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
-You cannot pipe input to `Set-PSBreakpoint`.
+
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
-### Breakpoint object (System.Management.Automation.LineBreakpoint, System.Management.Automation.VariableBreakpoint, System.Management.Automation.CommandBreakpoint)
+### System.Management.Automation.CommandBreakpoint
+
+### System.Management.Automation.LineBreakpoint
+
+### System.Management.Automation.VariableBreakpoint
 
 `Set-PSBreakpoint` returns an object that represents each breakpoint that it sets.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Set-PSBreakpoint`:
+
+- All platforms:
+  - `sbp`
 
 - `Set-PSBreakpoint` cannot set a breakpoint on a remote computer. To debug a script on a remote
   computer, copy the script to the local computer and then debug it locally.

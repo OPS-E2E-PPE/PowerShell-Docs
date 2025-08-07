@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 5/1/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/rename-computer?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/rename-computer?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Rename-Computer
 ---
+
 # Rename-Computer
 
 ## SYNOPSIS
@@ -17,14 +17,16 @@ Renames a computer.
 
 ```
 Rename-Computer [-ComputerName <String>] [-PassThru] [-DomainCredential <PSCredential>]
- [-LocalCredential <PSCredential>] [-NewName] <String> [-Force] [-Restart] [-WsmanAuthentication <String>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-LocalCredential <PSCredential>] [-NewName] <String> [-Force] [-Restart]
+ [-WsmanAuthentication <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-The `Rename-Computer` cmdlet renames the local computer or a remote computer.
-It renames one computer in each command.
+> **This cmdlet is only available on the Windows platform.**
+
+The `Rename-Computer` cmdlet renames the local computer or a remote computer. It renames one
+computer in each command.
 
 This cmdlet was introduced in Windows PowerShell 3.0.
 
@@ -49,7 +51,13 @@ computers in the domain.
 The **Force** parameter suppresses the confirmation prompt.
 
 ```powershell
-Rename-Computer -ComputerName "Srv01" -NewName "Server001" -DomainCredential Domain01\Admin01 -Force
+$renameParams = @{
+    ComputerName = "Srv01"
+    NewName = "Server001"
+    DomainCredential = "Domain01\Admin01"
+    Force = $true
+}
+Rename-Computer @renameParams
 ```
 
 ## PARAMETERS
@@ -213,7 +221,8 @@ WSMan protocol. The acceptable values for this parameter are:
 
 The default value is **Default**.
 
-For more information about the values of this parameter, see [AuthenticationMechanism Enumeration](/dotnet/api/system.management.automation.runspaces.authenticationmechanism).
+For more information about the values of this parameter, see
+[AuthenticationMechanism Enumeration](xref:System.Management.Automation.Runspaces.AuthenticationMechanism).
 
 > [!WARNING]
 > Credential Security Service Provider (CredSSP) authentication, in which the user
@@ -275,24 +284,29 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](../Microsoft.PowerShell.Core/About/about_CommonParameters.md).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
 
-This cmdlet does not have parameters that take input by value.
-However, you can pipe the values of the **ComputerName** and **NewName** properties of objects to
-this cmdlet.
+This cmdlet has no parameters that take input by value. However, you can pipe the values of
+the **ComputerName** and **NewName** properties of objects to this cmdlet.
 
 ## OUTPUTS
 
-### Microsoft.PowerShell.Commands.ComputerChangeInfo
+### None
 
-This cmdlet returns a **ComputerChangeInfo** object, if you specify the **PassThru** parameter.
-Otherwise, it does not return any output.
+By default, this cmdlet doesn't return any output.
+
+### Microsoft.PowerShell.Commands.RenameComputerChangeInfo
+
+When you use the **PassThru** parameter, this cmdlet returns a **RenameComputerChangeInfo** object.
 
 ## NOTES
+
+This cmdlet is only available on Windows platforms.
 
 ## RELATED LINKS
 

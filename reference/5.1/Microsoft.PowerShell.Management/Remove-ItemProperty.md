@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 10/18/2018
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/remove-itemproperty?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/remove-itemproperty?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Remove-ItemProperty
 ---
+
 # Remove-ItemProperty
 
 ## SYNOPSIS
@@ -232,7 +232,7 @@ Accept wildcard characters: True
 
 Includes the command in the active transaction.
 This parameter is valid only when a transaction is in progress.
-For more information, see about_Transactions.
+For more information, see [about_Transactions](../Microsoft.PowerShell.Core/About/about_Transactions.md).
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -293,13 +293,17 @@ You can pipe a string that contains a path, but not a literal path, to this cmdl
 
 ### None
 
-This cmdlet does not return any output.
+This cmdlet returns no output.
 
 ## NOTES
 
+Windows PowerShell includes the following aliases for `Remove-ItemProperty`:
+
+- `rp`
+
 In the PowerShell Registry provider, registry values are considered to be properties of a registry key or subkey. You can use the **ItemProperty** cmdlets to manage these values.
 
-`Remove-ItemProperty` is designed to work with the data exposed by any provider. To list the providers available in your session, type `Get-PSProvider`. For more information, see about_Providers.
+`Remove-ItemProperty` is designed to work with the data exposed by any provider. To list the providers available in your session, type `Get-PSProvider`. For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
 ## RELATED LINKS
 

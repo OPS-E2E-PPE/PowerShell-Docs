@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Security
 ms.date: 02/03/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/get-cmsmessage?view=powershell-7.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.security/get-cmsmessage?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-CmsMessage
 ---
@@ -170,4 +169,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 [Protect-CmsMessage](Protect-CmsMessage.md)
 
 [Unprotect-CmsMessage](Unprotect-CmsMessage.md)
-

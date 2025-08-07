@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/convertto-json?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 05/16/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/convertto-json?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: ConvertTo-Json
 ---
+
 # ConvertTo-Json
 
 ## SYNOPSIS
@@ -17,21 +17,32 @@ Converts an object to a JSON-formatted string.
 
 ```
 ConvertTo-Json [-InputObject] <Object> [-Depth <Int32>] [-Compress]
-[-EnumsAsStrings] [-AsArray] [-EscapeHandling <StringEscapeHandling>]
-[<CommonParameters>]
+ [-EnumsAsStrings] [-AsArray] [-EscapeHandling <StringEscapeHandling>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-The `ConvertTo-Json` cmdlet converts any .NET object to a string in JavaScript Object Notation (JSON)
-format. The properties are converted to field names, the field values are converted to property
-values, and the methods are removed.
+The `ConvertTo-Json` cmdlet converts any .NET object to a string in JavaScript Object Notation
+(JSON) format. The properties are converted to field names, the field values are converted to
+property values, and the methods are removed.
+
+> [!NOTE]
+> As of PowerShell 7.2, Extended Type System properties of **DateTime** and
+> **String** objects are no longer serialized and only the simple object is
+> converted to JSON format
 
 You can then use the `ConvertFrom-Json` cmdlet to convert a JSON-formatted string to a JSON
 object, which is easily managed in PowerShell.
 
 Many web sites use JSON instead of XML to serialize data for communication between servers and
 web-based apps.
+
+As of PowerShell 7.1, `ConvertTo-Json` emits a warning if the depth of the input object exceeds
+the depth specified for the command. This prevents unwanted data loss when converting objects.
+
+As of PowerShell 7.5-preview.3, `ConvertTo-Json` can serialize **BigInteger** values as raw JSON
+numbers.
 
 This cmdlet was introduced in Windows PowerShell 3.0.
 
@@ -67,17 +78,9 @@ Get-Date | ConvertTo-Json; Get-Date | ConvertTo-Json -AsArray
 ```
 
 ```Output
-{
-  "value": "2018-10-12T23:07:18.8450248-05:00",
-  "DisplayHint": 2,
-  "DateTime": "October 12, 2018 11:07:18 PM"
-}
+"2021-08-05T16:13:05.6394416-07:00"
 [
-  {
-    "value": "2018-10-12T23:07:18.8480668-05:00",
-    "DisplayHint": 2,
-    "DateTime": "October 12, 2018 11:07:18 PM"
-  }
+  "2021-08-05T16:13:05.6421709-07:00"
 ]
 ```
 
@@ -205,8 +208,9 @@ Accept wildcard characters: False
 
 ### -Depth
 
-Specifies how many levels of contained objects are included in the JSON representation. The default
-value is 2.
+Specifies how many levels of contained objects are included in the JSON representation. The value
+can be any number from `0` to `100`. The default value is `2`. `ConvertTo-Json` emits a
+warning if the number of levels in an input object exceeds this number.
 
 ```yaml
 Type: System.Int32
@@ -267,8 +271,9 @@ Specifies the objects to convert to JSON format. Enter a variable that contains 
 a command or expression that gets the objects. You can also pipe an object to `ConvertTo-Json`.
 
 The **InputObject** parameter is required, but its value can be null (`$null`) or an empty string.
-When the input object is `$null`, `ConvertTo-Json` does not generate any output. When the input
-object is an empty string, `ConvertTo-Json` returns an empty string.
+When the input object is `$null`, `ConvertTo-Json` returns the JSON representation of `null`. When
+the input object is an empty string, `ConvertTo-Json` returns the JSON representation of an empty
+string.
 
 ```yaml
 Type: System.Object
@@ -293,11 +298,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Object
 
-You can pipe any object to `ConvertTo-Json`.
+You can pipe any object to this cmdlet.
 
 ## OUTPUTS
 
 ### System.String
+
+This cmdlet returns a string representing the input object converted to a JSON string.
 
 ## NOTES
 
@@ -319,4 +326,3 @@ The `ConvertTo-Json` cmdlet is implemented using
 [Invoke-RestMethod](Invoke-RestMethod.md)
 
 [NewtonSoft.Json.StringEscapeHandling](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_StringEscapeHandling.htm)
-

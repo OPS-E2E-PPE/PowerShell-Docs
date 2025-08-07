@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.Management.Infrastructure.CimCmdlets.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: CimCmdlets
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/cimcmdlets/get-cimclass?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 09/11/2023
+online version: https://learn.microsoft.com/powershell/module/cimcmdlets/get-cimclass?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-CimClass
 ---
@@ -19,20 +18,22 @@ Gets a list of CIM classes in a specific namespace.
 ### ComputerSet (Default)
 
 ```
-Get-CimClass [[-ClassName] <String>] [[-Namespace] <String>] [-OperationTimeoutSec <UInt32>]
- [-ComputerName <String[]>] [-MethodName <String>] [-PropertyName <String>]
- [-QualifierName <String>] [<CommonParameters>]
+Get-CimClass [[-ClassName] <string>] [[-Namespace] <string>] [-Amended]
+ [-OperationTimeoutSec <uint>] [-ComputerName <string[]>] [-MethodName <string>]
+ [-PropertyName <string>] [-QualifierName <string>] [<CommonParameters>]
 ```
 
 ### SessionSet
 
 ```
-Get-CimClass [[-ClassName] <String>] [[-Namespace] <String>] [-OperationTimeoutSec <UInt32>]
- -CimSession <CimSession[]> [-MethodName <String>] [-PropertyName <String>]
- [-QualifierName <String>] [<CommonParameters>]
+Get-CimClass [[-ClassName] <string>] [[-Namespace] <string>] -CimSession <CimSession[]>
+ [-Amended] [-OperationTimeoutSec <uint>] [-MethodName <string>] [-PropertyName <string>]
+ [-QualifierName <string>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `Get-CimClass` cmdlet retrieves a list of CIM classes in a specific namespace. If there is no
 class name supplied, then the cmdlet returns all the classes in the namespace. Unlike a CIM
@@ -42,7 +43,7 @@ instance, CIM classes do not contain the CIM session or computer name from which
 
 ### Example 1: Get all the class definitions
 
-This example gets all the class definitions under the namespace **root/cimv2**.
+This example gets all the class definitions under the namespace **root/CIMV2**.
 
 ```powershell
 Get-CimClass
@@ -50,10 +51,10 @@ Get-CimClass
 
 ### Example 2: Get the classes with a specific name
 
-This example gets the classes that contain the word **disk** in their names.
+This example gets the classes that contain the word **Disk** in their names.
 
 ```powershell
-Get-CimClass -ClassName *disk*
+Get-CimClass -ClassName *Disk*
 ```
 
 ### Example 3: Get the classes with a specific method name
@@ -86,32 +87,52 @@ Get-CimClass -ClassName Win32*Disk* -QualifierName Association
 ### Example 6: Get the class definitions from a specific namespace
 
 This example gets the class definitions that contain the word **Net** in their names from the
-specified namespace **root/standardCimv2**.
+specified namespace **root/StandardCimv2**.
 
 ```powershell
-Get-CimClass -Namespace root/standardCimv2 -ClassName *Net*
+Get-CimClass -Namespace root/StandardCimv2 -ClassName *Net*
 ```
 
 ### Example 7: Get the class definitions from a remote server
 
-This example gets the class definitions that contain the word **disk** in their names from the
+This example gets the class definitions that contain the word **Disk** in their names from the
 specified remote servers **Server01** and **Server02**.
 
 ```powershell
-Get-CimClass -ClassName *disk* -ComputerName Server01, Server02
+Get-CimClass -ClassName *Disk* -ComputerName Server01, Server02
 ```
 
 ### Example 8: Get the classes by using a CIM session
 
 ```powershell
 $s = New-CimSession -ComputerName Server01, Server02
-Get-CimClass -ClassName *disk* -CimSession $s
+Get-CimClass -ClassName *Disk* -CimSession $s
 ```
 
 This set of commands creates a session with multiple computers and stores it into a variable `$s`
 using the `New-CimSession` cmdlet, and then gets the classes using the `Get-CimClass` cmdlet.
 
 ## PARAMETERS
+
+### -Amended
+
+Indicates that objects returned from the CIM query should contain amended information. Typically,
+amended information is localizable information, such as object and property descriptions that are
+attached to the CIM object. This is useful for translating numeric values to human-readable values.
+
+This parameter was added in PowerShell 7.3.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -CimSession
 
@@ -194,7 +215,7 @@ Accept wildcard characters: True
 
 ### -Namespace
 
-Specifies the namespace for CIM operation. The default namespace is **root/cimv2**. You can use tab
+Specifies the namespace for CIM operation. The default namespace is **root/CIMV2**. You can use tab
 completion to browse the list of namespaces, because PowerShell gets a list of namespaces from the
 local WMI server to provide the list of namespaces.
 
@@ -247,7 +268,7 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
 
 ### -QualifierName
@@ -278,7 +299,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-This cmdlet accepts no input objects.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
@@ -288,7 +309,13 @@ This cmdlet returns a CIM class object.
 
 ## NOTES
 
+PowerShell includes the following aliases for `Get-CimClass`:
+
+- Windows:
+  - `gcls`
+
+This cmdlet is only available on Windows platforms.
+
 ## RELATED LINKS
 
 [New-CimSession](New-CimSession.md)
-

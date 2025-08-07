@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 11/12/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/get-error?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 01/23/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/get-error?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Error
 ---
@@ -48,7 +47,7 @@ In this example, `Get-Error` displays the details of the most recent error that 
 current session.
 
 ```powershell
-Get-Childitem -path /NoRealDirectory
+Get-ChildItem -Path /NoRealDirectory
 Get-Error
 ```
 
@@ -87,11 +86,11 @@ InvocationInfo        :
     ScriptLineNumber : 1
     OffsetInLine     : 1
     HistoryId        : 57
-    Line             : Get-Childitem -path c:\NoRealDirectory
+    Line             : Get-ChildItem -Path C:\NoRealDirectory
     PositionMessage  : At line:1 char:1
-                       + Get-Childitem -path c:\NoRealDirectory
+                       + Get-ChildItem -Path C:\NoRealDirectory
                        + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    InvocationName   : Get-Childitem
+    InvocationName   : Get-ChildItem
     CommandOrigin    : Internal
 ScriptStackTrace      : at <ScriptBlock>, <No file>: line 1
 PipelineIterationInfo :
@@ -120,22 +119,6 @@ $Error | Get-Error
 
 ## PARAMETERS
 
-### -Newest
-
-Specifies the number of errors to display that have occurred in the current session.
-
-```yaml
-Type: System.Int32
-Parameter Sets: Newest
-Aliases: Last
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -InputObject
 
 This parameter is used for pipeline input.
@@ -152,6 +135,22 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -Newest
+
+Specifies the number of errors to display that have occurred in the current session.
+
+```yaml
+Type: System.Int32
+Parameter Sets: Newest
+Aliases: Last
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
@@ -162,16 +161,21 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### PSObject
 
-Supports input from any **PSObject**, but results vary unless either an **ErrorRecord** or
-**Exception** object are supplied.
+You can pipe any **PSObject** to this cmdlet, but results vary unless either an **ErrorRecord** or
+**Exception** object is supplied.
 
 ## OUTPUTS
 
 ### System.Management.Automation.ErrorRecord#PSExtendedError
 
-Output in a **PSExtendedError** object.
+This cmdlet returns a **PSExtendedError** object.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Get-Error`:
+
+- All platforms:
+  - `gerr`
 
 `Get-Error` accepts pipeline input. For example, `$Error | Get-Error`.
 

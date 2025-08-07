@@ -1,10 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 05/13/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/add-history?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 09/15/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/add-history?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Add-History
 ---
@@ -17,7 +16,7 @@ Appends entries to the session history.
 ## SYNTAX
 
 ```
-Add-History [[-InputObject] <PSObject[]>] [-Passthru] [<CommonParameters>]
+Add-History [[-InputObject] <PSObject[]>] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,7 +31,8 @@ about the session history, see [about_History](About/about_History.md).
 
 The session history is managed separately from the history maintained by the **PSReadLine** module.
 Both histories are available in sessions where **PSReadLine** is loaded. This cmdlet only works with
-the session history. For more information see, [about_PSReadLine](../PSReadLine/About/about_PSReadLine.md).
+the session history. For more information see,
+[about_PSReadLine](../PSReadLine/About/about_PSReadLine.md).
 
 You can use the `Get-History` cmdlet to get the commands and pass them to `Add-History`, or you can
 export the commands to a CSV or XML file, then import the commands, and pass the imported file to
@@ -47,8 +47,8 @@ This example add the commands typed in one PowerShell session to the history of 
 PowerShell session.
 
 ```powershell
-Get-History | Export-Csv c:\testing\history.csv -IncludeTypeInformation
-Import-Csv c:\testing\history.csv | Add-History
+Get-History | Export-Csv -Path C:\testing\history.csv -IncludeTypeInformation
+Import-Csv -Path C:\testing\history.csv | Add-History
 ```
 
 The first command gets objects representing the commands in the history and exports them to the
@@ -65,7 +65,7 @@ This example imports commands from the `History.xml` file, adds them to the curr
 and then runs the commands in the combined history.
 
 ```powershell
-Import-Clixml c:\temp\history.xml | Add-History -PassThru | ForEach-Object -Process {Invoke-History}
+Import-Clixml -Path C:\temp\history.xml | Add-History -PassThru | ForEach-Object -Process {Invoke-History}
 ```
 
 The first command uses the `Import-Clixml` cmdlet to import a command history that was exported to
@@ -95,7 +95,7 @@ pipeline with the **InputObject** parameter of `Add-History`.
 This example add the commands in the `History.csv` file to the current session history.
 
 ```powershell
-$a = Import-Csv c:\testing\history.csv
+$a = Import-Csv -Path C:\testing\history.csv
 Add-History -InputObject $a -PassThru
 ```
 
@@ -112,7 +112,7 @@ current session history. It uses the **InputObject** parameter to specify the `$
 This example adds the commands in the `history.xml` file to the current session history.
 
 ```powershell
-Add-History -InputObject (Import-Clixml c:\temp\history.xml)
+Add-History -InputObject (Import-Clixml -Path C:\temp\history.xml)
 ```
 
 The **InputObject** parameter passes the results of the command in parentheses to the `Add-History`
@@ -123,9 +123,9 @@ PowerShell. The `Add-History` cmdlet then adds the commands in the file to the s
 
 ### -InputObject
 
-Specifies an array of entries to add to the history as **HistoryInfo** object to the session history.
-You can use this parameter to submit a **HistoryInfo** object, such as the ones that are returned by
-the `Get-History`, `Import-Clixml`, or `Import-Csv` cmdlets, to `Add-History`.
+Specifies an array of entries to add to the history as **HistoryInfo** object to the session
+history. You can use this parameter to submit a **HistoryInfo** object, such as the ones that are
+returned by the `Get-History`, `Import-Clixml`, or `Import-Csv` cmdlets, to `Add-History`.
 
 ```yaml
 Type: System.Management.Automation.PSObject[]
@@ -139,7 +139,7 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Passthru
+### -PassThru
 
 Indicates that this cmdlet returns a **HistoryInfo** object for each history entry. By default, this
 cmdlet does not generate any output.
@@ -171,10 +171,13 @@ You can pipe a **HistoryInfo** object to this cmdlet.
 
 ## OUTPUTS
 
-### None or Microsoft.PowerShell.Commands.HistoryInfo
+### None
 
-This cmdlet returns a **HistoryInfo** object if you specify the **PassThru** parameter. Otherwise,
-this cmdlet does not generate any output.
+By default, this cmdlet returns no output.
+
+### Microsoft.PowerShell.Commands.HistoryInfo
+
+When you use the **PassThru** parameter, this cmdlet returns a **HistoryInfo** object.
 
 ## NOTES
 

@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 01/27/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/get-formatdata?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/get-formatdata?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-FormatData
 ---
+
 # Get-FormatData
 
 ## SYNOPSIS
@@ -69,7 +69,7 @@ HelpInfoShort   {help , TableControl}
 ```
 
 ```powershell
-$F.FormatViewDefinition[0].control
+$F.FormatViewDefinition[0].Control
 ```
 
 ```Output
@@ -85,7 +85,7 @@ OutOfBand        : False
 ```
 
 ```powershell
-$F.FormatViewDefinition[0].control.Headers
+$F.FormatViewDefinition[0].Control.Headers
 ```
 
 ```Output
@@ -104,7 +104,7 @@ data that is added by a module.
 
 ```powershell
 $A = Get-FormatData
-Import-Module bitstransfer
+Import-Module BitsTransfer
 $B = Get-FormatData
 Compare-Object $A $B
 ```
@@ -116,8 +116,8 @@ Microsoft.BackgroundIntelligentTransfer.Management.BitsJob =>
 ```
 
 ```powershell
-Get-FormatData *bits* | Export-FormatData -FilePath c:\test\bits.format.ps1xml
-Get-Content c:\test\bits.format.ps1xml
+Get-FormatData *bits* | Export-FormatData -FilePath C:\test\Bits.format.ps1xml
+Get-Content C:\test\Bits.format.ps1xml
 ```
 
 ```Output
@@ -132,7 +132,7 @@ identify the format type that the **BitsTransfer** module adds to the session.
 The fifth command uses the `Get-FormatData` cmdlet to get the format type that the **BitsTransfer**
 module adds. It uses a pipeline operator (`|`) to send the format type object to the
 `Export-FormatData` cmdlet, which converts it back to XML and saves it in the specified
-`format.ps1xml` file.
+`Bits.format.ps1xml` file.
 
 The final command shows an excerpt of the `format.ps1xml` file content.
 
@@ -205,7 +205,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You cannot pipe input to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 

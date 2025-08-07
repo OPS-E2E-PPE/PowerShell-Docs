@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/start-service?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 10/15/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/start-service?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Start-Service
 ---
+
 # Start-Service
 
 ## SYNOPSIS
@@ -37,6 +37,8 @@ Start-Service [-PassThru] -DisplayName <String[]> [-Include <String[]>] [-Exclud
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `Start-Service` cmdlet sends a start message to the Windows Service Controller for each of the
 specified services. If a service is already running, the message is ignored without error. You can
@@ -79,9 +81,9 @@ Start-Service -InputObject $s -PassThru | Format-List >> services.txt
 
 First we use `Get-Service` to get an object that represent the WMI service and store it in the `$s`
 variable. Next, we start the service. Without the **PassThru** parameter, `Start-Service` does not
-create any output. The pipeline operator (|) passes the object output by `Start-Service` to the
+create any output. The pipeline operator (`|`) passes the object output by `Start-Service` to the
 `Format-List` cmdlet to format the object as a list of its properties. The append redirection
-operator (\>\>) redirects the output to the services.txt file. The output is added to the end of the
+operator (`>>`) redirects the output to the services.txt file. The output is added to the end of the
 existing file.
 
 ### Example 4: Start a disabled service
@@ -94,7 +96,7 @@ Start-Service : Service 'Telnet (TlntSvr)' cannot be started due to the followin
 At line:1 char:14
 + Start-Service  <<<< tlntsvr
 
-PS> Get-CimInstance win32_service | Where-Object Name -eq "tlntsvr"
+PS> Get-CimInstance Win32_Service | Where-Object Name -EQ "tlntsvr"
 ExitCode  : 0
 Name      : TlntSvr
 ProcessId : 0
@@ -256,33 +258,46 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.ServiceProcess.ServiceController, System.String
+### System.ServiceProcess.ServiceController
 
-You can pipe objects that represent the services or strings that contain the service names to this
-cmdlet.
+You can pipe a service object to this cmdlet.
+
+### System.String
+
+You can pipe a string that contains the service name to this cmdlet.
 
 ## OUTPUTS
 
-### None, System.ServiceProcess.ServiceController
+### None
 
-This cmdlet generates a **System.ServiceProcess.ServiceController** object that represents the
-service, if you specify **PassThru**. Otherwise, this cmdlet does not generate any output.
+By default, this cmdlet returns no output.
+
+### System.ServiceProcess.ServiceController
+
+When you use the **PassThru** parameter, this cmdlet returns a **ServiceController** object
+representing the service.
 
 ## NOTES
 
-* You can also refer to `Start-Service` by its built-in alias, `sasv`. For more information, see
-  [about_Aliases](../Microsoft.PowerShell.Core/About/about_Aliases.md).
-* `Start-Service` can control services only if the current user has permission to do this. If a
-  command does not work correctly, you might not have the required permissions.
-* To find the service names and display names of the services on your system, type `Get-Service`.
+PowerShell includes the following aliases for `Start-Service`:
+
+- Windows:
+  - `sasv`
+
+This cmdlet is only available on Windows platforms.
+
+- By default, only members of the Administrators group can start, stop, pause, resume, or restart a
+  service. If you are a member of the Administrators group, you need to run `Start-Service` from an
+  elevated PowerShell session. Use the **Run as Administrator** option to start PowerShell.
+- To find the service names and display names of the services on your system, type `Get-Service`.
   The service names appear in the **Name** column, and the display names appear in the
   **DisplayName** column.
-* You can start only the services that have a start type of Manual, Automatic, or Automatic (Delayed
+- You can start only the services that have a start type of Manual, Automatic, or Automatic (Delayed
   Start). You cannot start the services that have a start type of Disabled. If a `Start-Service`
   command fails with the message `Cannot start service \<service-name\> on computer`, use
   `Get-CimInstance` to find the start type of the service and, if you have to, use the `Set-Service`
   cmdlet to change the start type of the service.
-* Some services, such as Performance Logs and Alerts (SysmonLog) stop automatically if they have no
+- Some services, such as Performance Logs and Alerts (SysmonLog) stop automatically if they have no
   work to do. When PowerShell starts a service that stops itself almost immediately, it displays the
   following message: `Service \<display-name\> start failed.`
 
@@ -303,4 +318,3 @@ service, if you specify **PassThru**. Otherwise, this cmdlet does not generate a
 [Suspend-Service](Suspend-Service.md)
 
 [Remove-Service](Remove-Service.md)
-

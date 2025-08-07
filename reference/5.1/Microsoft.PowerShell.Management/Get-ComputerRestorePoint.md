@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
 ms.date: 08/13/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/get-computerrestorepoint?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-computerrestorepoint?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-ComputerRestorePoint
 ---
@@ -37,7 +36,7 @@ You can use the information from `Get-ComputerRestorePoint` to select a restore 
 use a sequence number to identify a restore point for the `Restore-Computer` cmdlet.
 
 System restore points and the `Get-ComputerRestorePoint` cmdlet are supported only on client
-operating systems such as Windows 10, Windows 7, Windows Vista, and Windows XP.
+operating systems such as Windows 10.
 
 ## EXAMPLES
 

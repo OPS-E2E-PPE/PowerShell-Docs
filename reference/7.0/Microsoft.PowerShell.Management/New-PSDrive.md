@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 10/22/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/new-psdrive?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 01/18/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/new-psdrive?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: New-PSDrive
 ---
@@ -12,7 +11,7 @@ title: New-PSDrive
 # New-PSDrive
 
 ## SYNOPSIS
-Creates temporary and persistent mapped network drives.
+Creates temporary and persistent drives that are associated with a location in an item data store.
 
 ## SYNTAX
 
@@ -40,7 +39,7 @@ by using `Set-Location`, and access the contents of the drive by using `Get-Item
 
 Because temporary drives are known only to PowerShell, you can't access them by using File Explorer,
 Windows Management Instrumentation (WMI), Component Object Model (COM), Microsoft .NET Framework, or
-with tools such as **net use**.
+with tools such as `net use`.
 
 The following features were added to `New-PSDrive` in PowerShell 3.0:
 
@@ -67,6 +66,10 @@ specified in the value of the **Credential** parameter is used to create the **P
 
 Some code samples use splatting to reduce the line length and improve readability. For more
 information, see [about_Splatting](../Microsoft.PowerShell.Core/About/about_Splatting.md).
+
+> [!NOTE]
+> Unless you use the **Scope** parameter, PSDrives are created in the scope in which the
+> `New-PSDrive` command is run.
 
 ## EXAMPLES
 
@@ -202,7 +205,7 @@ Get-PSDrive -Name "PSDrive", "X"
 Name       Provider      Root
 ----       --------      ----
 
-PsDrive    FileSystem    \\Server01\public
+PSDrive    FileSystem    \\Server01\public
 X          FileSystem    X:\
 ```
 
@@ -248,23 +251,20 @@ LocalName    RemoteName              ConnectionState          Status
 X:           \\products\public       Disconnected             Unavailable
 ```
 
-## PARAMETERS
+### Example 6: Create persistent drive in a script
 
-### -Confirm
+PSDrives are created in the scope in which the `New-PSDrive` command is run. When the command is run
+within a script, the drive mapping is local to the script. When the script exits, the drive is no
+longer available.
 
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
+```powershell
+New-PSDrive -Persist -Name "X" -PSProvider "FileSystem" -Root "\\Server01\Public" -Scope Global
 ```
+
+To ensure that the drive is available outside of the script you must use the **Scope** parameter to
+create the drive in the **Global** scope.
+
+## PARAMETERS
 
 ### -Credential
 
@@ -437,6 +437,22 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WhatIf
 
 Shows what would happen if the cmdlet runs. The cmdlet isn't run.
@@ -464,13 +480,22 @@ This cmdlet supports the common parameters: `-Debug`, `-ErrorAction`, `-ErrorVar
 
 ### None
 
-You can't pipeline input to this cmdlet.
+You can't pipe objects to this cmdlet
 
 ## OUTPUTS
 
 ### System.Management.Automation.PSDriveInfo
 
+This cmdlet returns a **PSDriveInfo** object representing the created drive.
+
 ## NOTES
+
+PowerShell includes the following aliases for `Get-PSDrive`:
+
+- All platforms:
+  - `ndr`
+- Windows:
+  - `mount`
 
 `New-PSDrive` is designed to work with the data exposed by any provider. To list the providers
 available in your session, use `Get-PSProvider`. For more information about providers, see

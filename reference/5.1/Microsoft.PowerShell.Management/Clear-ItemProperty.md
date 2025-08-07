@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 10/18/2018
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/clear-itemproperty?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/clear-itemproperty?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Clear-ItemProperty
 ---
+
 # Clear-ItemProperty
 
 ## SYNOPSIS
@@ -222,7 +222,7 @@ Accept wildcard characters: True
 
 Includes the command in the active transaction.
 This parameter is valid only when a transaction is in progress.
-For more information, see about_Transactions.
+For more information, see [about_Transactions](../Microsoft.PowerShell.Core/About/about_Transactions.md).
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -271,7 +271,10 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: `-Debug`, `-ErrorAction`, `-ErrorVariable`, `-InformationAction`, `-InformationVariable`, `-OutVariable`, `-OutBuffer`, `-PipelineVariable`, `-Verbose`, `-WarningAction`, and `-WarningVariable`. For more information, see [about_CommonParameters](../Microsoft.PowerShell.Core/About/about_CommonParameters.md).
+This cmdlet supports the common parameters: `-Debug`, `-ErrorAction`, `-ErrorVariable`,
+`-InformationAction`, `-InformationVariable`, `-OutVariable`, `-OutBuffer`, `-PipelineVariable`,
+`-Verbose`, `-WarningAction`, and `-WarningVariable`. For more information, see
+[about_CommonParameters](../Microsoft.PowerShell.Core/About/about_CommonParameters.md).
 
 ## INPUTS
 
@@ -281,16 +284,24 @@ You can pipe a path string to this cmdlet.
 
 ## OUTPUTS
 
-### None or System.Management.Automation.PSCustomObject
+### None
 
-When you use the *PassThru* parameter, `Clear-ItemProperty` generates a **PSCustomObject** object that represents the cleared item property.
-Otherwise, this cmdlet does not generate any output.
+By default, this cmdlet returns no output.
+
+### System.Management.Automation.PSCustomObject
+
+When you use the **PassThru** parameter, this cmdlet returns a **PSCustomObject** object
+representing the cleared item property.
 
 ## NOTES
 
+Windows PowerShell includes the following aliases for `Clear-ItemProperty`:
+
+- `clp`
+
 You can use `Clear-ItemProperty` to delete the data in registry values without deleting the value. If the data type of the value is Binary or DWORD, clearing the data sets the value to zero. Otherwise, the value is empty.
 
-The `Clear-ItemProperty` cmdlet is designed to work with the data exposed by any provider. To list the providers available in your session, type `Get-PSProvider`. For more information, see about_Providers.
+The `Clear-ItemProperty` cmdlet is designed to work with the data exposed by any provider. To list the providers available in your session, type `Get-PSProvider`. For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
 ## RELATED LINKS
 

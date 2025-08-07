@@ -1,13 +1,13 @@
 ---
-keywords: powershell,cmdlet
+description: Describes scheduled jobs and explains how to use and manage scheduled jobs in PowerShell and in Task Scheduler.
 Locale: en-US
 ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/psscheduledjob/about/about_scheduled_jobs?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/psscheduledjob/about/about_scheduled_jobs?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Scheduled_Jobs
 ---
 
-# About Scheduled Jobs
+# about_Scheduled_Jobs
 
 ## Short description
 
@@ -96,7 +96,7 @@ This example uses the **ContinueIfGoingOnBattery** parameter of the
 
 ```powershell
 Get-ScheduledJob -Name ProcessJob | Set-ScheduledJobOption `
--ContinueIfGoingOnBattery -Passthru
+-ContinueIfGoingOnBattery -PassThru
 ```
 
 ```Output
@@ -156,7 +156,7 @@ The `Receive-Job` cmdlet gets the results of the most recent instance of the
 **ProcessJob** scheduled job (ID = 51).
 
 ```powershell
-Receive-Job -ID 51
+Receive-Job -Id 51
 ```
 
 Even though the `Receive-Job` command did not include the **Keep** parameter,
@@ -211,7 +211,7 @@ job cmdlets to view and manage the job instance.
 
 Scheduled jobs are saved to disk and use the cmdlet verb, `Register`, instead
 of `New`. The XML files are located on the local computer in the directory
-`$home\AppData\Local\Microsoft\Windows\PowerShell\ScheduledJobs`.
+`$HOME\AppData\Local\Microsoft\Windows\PowerShell\ScheduledJobs`.
 
 PowerShell creates a directory for each scheduled job and saves the job
 commands, job triggers, job options and job results in the scheduled job
@@ -235,12 +235,8 @@ job to which any job trigger or job option is associated.
 
 ## See also
 
-[about_Scheduled_Jobs_Basics](about_Scheduled_Jobs_Basics.md)
-
-[about_Scheduled_Jobs_Advanced](about_Scheduled_Jobs_Advanced.md)
-
-[about_Scheduled_Jobs_Troubleshooting](about_Scheduled_Jobs_Troubleshooting.md)
-
-[PSScheduledJob](xref:PSScheduledJob) module cmdlets
-
-[Task Scheduler](/windows/desktop/TaskSchd/task-scheduler-reference)
+- [about_Scheduled_Jobs_Basics](about_Scheduled_Jobs_Basics.md)
+- [about_Scheduled_Jobs_Advanced](about_Scheduled_Jobs_Advanced.md)
+- [about_Scheduled_Jobs_Troubleshooting](about_Scheduled_Jobs_Troubleshooting.md)
+- [PSScheduledJob](xref:PSScheduledJob) module cmdlets
+- [Task Scheduler](/windows/desktop/TaskSchd/task-scheduler-reference)

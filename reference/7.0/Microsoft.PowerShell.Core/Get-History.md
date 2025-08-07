@@ -1,10 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 05/13/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/get-history?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 09/15/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/get-history?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-History
 ---
@@ -32,7 +31,8 @@ features in PowerShell, see [about_History](About/about_History.md).
 
 The session history is managed separately from the history maintained by the **PSReadLine** module.
 Both histories are available in sessions where **PSReadLine** is loaded. This cmdlet only works with
-the session history. For more information see, [about_PSReadLine](../PSReadLine/About/about_PSReadLine.md).
+the session history. For more information, see
+[about_PSReadLine](../PSReadLine/About/about_PSReadLine.md).
 
 ## EXAMPLES
 
@@ -55,7 +55,7 @@ gets all entries in the session history. The pipeline operator (`|`) passes the 
 Get-History | Where-Object {$_.CommandLine -like "*Service*"}
 ```
 
-### Example 3: Export at most seven entries
+### Example 3: Export history entries up to a specific ID
 
 This example gets the five most recent history entries ending with entry 7. The pipeline operator
 passes the result to the `Export-Csv` cmdlet, which formats the history as comma-separated text and
@@ -63,7 +63,7 @@ saves it in the History.csv file. The file includes the data that is displayed w
 history as a list. This includes the status and start and end times of the command.
 
 ```powershell
-Get-History -ID 7 -Count 5 | Export-Csv History.csv
+Get-History -Id 7 -Count 5 | Export-Csv -Path History.csv
 ```
 
 ### Example 4: Display the most recent command
@@ -138,7 +138,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Int64
+### System.Int64
 
 You can pipe a history ID to this cmdlet.
 
@@ -150,6 +150,13 @@ This cmdlet returns a history object for each history item that it gets.
 
 ## NOTES
 
+PowerShell includes the following aliases for `Get-History`:
+
+- All platforms:
+  - `h`
+  - `history`
+  - `ghy`
+
 The session history is a list of the commands entered during the session. The session history
 represents the run order, the status, and the start and end times of the command. As you enter each
 command, PowerShell adds it to the history so that you can reuse it. For more information about the
@@ -157,7 +164,8 @@ command history, see [about_History](About/about_History.md).
 
 Starting in Windows PowerShell 3.0, the default value of the `$MaximumHistoryCount` preference
 variable is `4096`. In Windows PowerShell 2.0, the default value is `64`. For more information about
-the `$MaximumHistoryCount` variable, see [about_Preference_Variables](About/about_Preference_Variables.md).
+the `$MaximumHistoryCount` variable, see
+[about_Preference_Variables](About/about_Preference_Variables.md).
 
 ## RELATED LINKS
 

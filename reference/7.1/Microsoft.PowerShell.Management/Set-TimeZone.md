@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 09/18/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/set-timezone?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 06/28/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/set-timezone?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-TimeZone
 ---
+
 # Set-TimeZone
 
 ## SYNOPSIS
@@ -35,45 +35,59 @@ Set-TimeZone [-InputObject] <TimeZoneInfo> [-PassThru] [-WhatIf] [-Confirm] [<Co
 
 ## DESCRIPTION
 
+> **This cmdlet is only available on the Windows platform.**
+
 The `Set-TimeZone` cmdlet sets the system time zone to a specified time zone.
 
 ## EXAMPLES
 
 ### Example 1: Set the time zone by Id
 
-This example sets the time zone on the local computer to Russian Standard Time.
+This example sets the time zone on the local computer to UTC.
 
 ```powershell
-Set-TimeZone -Id "Russian Standard Time" -PassThru
+Set-TimeZone -Id "UTC"
 ```
 
 ```Output
-Id                         : Russian Standard Time
-DisplayName                : (UTC+03:00) Moscow, St. Petersburg
-StandardName               : Russia TZ 2 Standard Time
-DaylightName               : Russia TZ 2 Daylight Time
-BaseUtcOffset              : 03:00:00
-SupportsDaylightSavingTime : True
+Id                         : UTC
+HasIanaId                  : True
+DisplayName                : (UTC) Coordinated Universal Time
+StandardName               : Coordinated Universal Time
+DaylightName               : Coordinated Universal Time
+BaseUtcOffset              : 00:00:00
+SupportsDaylightSavingTime : False
 ```
 
 ### Example 2: Set the time zone by name
 
-This example sets the time zone on the local computer to Russian Standard Time.
+This example sets the time zone on the local computer to UTC.
 
 ```powershell
-Set-TimeZone -Name "Russia TZ 2 Standard Time"
+Set-TimeZone -Name 'Coordinated Universal Time' -PassThru
 ```
 
 As we saw in the previous example, the **Id** and the **Name** of the Time Zone do not always match.
 The **Name** parameter must match the **StandardName** or **DaylightName** properties of the
 **TimeZoneInfo** object.
 
+> [!NOTE]
+> The time zone names can vary based on the Culture settings in Windows. This example shows the
+> values for a system set to `en-US`.
+
+### Example 3 - List all available time zones
+
+A full list of Time Zone IDs can be obtained by running the following command:
+
+```powershell
+Get-TimeZone -ListAvailable
+```
+
 ## PARAMETERS
 
 ### -Id
 
-Specifies the ID of the time zone that this cmdlet sets. A full list of Time Zone IDs can be
-obtained by running the following command: `Get-TimeZone -ListAvailable`.
+Specifies the ID of the time zone that this cmdlet sets.
 
 ```yaml
 Type: System.String
@@ -173,17 +187,34 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### System.String, System.TimeZoneInfo, System.String
+### System.String
+
+### System.TimeZoneInfo
 
 ## OUTPUTS
 
+### None
+
+By default, this cmdlet returns no output.
+
+### System.TimeZoneInfo
+
+When you use the **PassThru** parameter, this cmdlet returns a **TimeZoneInfo** object.
+
 ## NOTES
+
+PowerShell includes the following aliases for `Set-TimeZone`:
+
+- Windows:
+  - `stz`
+
+This cmdlet is only available on Windows platforms.
 
 ## RELATED LINKS
 
 [Get-TimeZone](Get-TimeZone.md)
-

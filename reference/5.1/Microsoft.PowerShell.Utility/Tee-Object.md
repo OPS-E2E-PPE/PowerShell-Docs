@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/tee-object?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/tee-object?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Tee-Object
 ---
+
 # Tee-Object
 
 ## SYNOPSIS
@@ -67,7 +67,7 @@ This example gets a list of the processes running on the computer, saves them to
 variable, and pipes them to `Select-Object`.
 
 ```powershell
-Get-Process notepad | Tee-Object -Variable proc | Select-Object processname,handles
+Get-Process notepad | Tee-Object -Variable proc | Select-Object ProcessName, Handles
 ```
 
 ```Output
@@ -88,14 +88,14 @@ This example saves a list of system files in a two log files, a cumulative file 
 
 ```powershell
 Get-ChildItem -Path D: -File -System -Recurse |
-  Tee-Object -FilePath "c:\test\AllSystemFiles.txt" -Append |
-    Out-File c:\test\NewSystemFiles.txt
+  Tee-Object -FilePath "C:\test\AllSystemFiles.txt" -Append |
+    Out-File C:\test\NewSystemFiles.txt
 ```
 
 The command uses the `Get-ChildItem` cmdlet to do a recursive search for system files on the D:
-drive. A pipeline operator (|) sends the list to `Tee-Object`, which appends the list to the
+drive. A pipeline operator (`|`) sends the list to `Tee-Object`, which appends the list to the
 AllSystemFiles.txt file and passes the list down the pipeline to the `Out-File` cmdlet, which saves
-the list in the NewSystemFiles.txt file.
+the list in the `NewSystemFiles.txt file`.
 
 ## PARAMETERS
 
@@ -202,15 +202,19 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Management.Automation.PSObject
 
-You can pipe objects to `Tee-Object`.
+You can pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### System.Management.Automation.PSObject
 
-`Tee-Object` returns the object that it redirects.
+This cmdlet returns the object that it redirects.
 
 ## NOTES
+
+Windows PowerShell includes the following aliases for `Tee-Object`:
+
+  - `tee`
 
 You can also use the `Out-File` cmdlet or the redirection operator, both of which save the output in
 a file but do not send it down the pipeline.

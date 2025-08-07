@@ -1,16 +1,16 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 5/14/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/move-itemproperty?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/move-itemproperty?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Move-ItemProperty
 ---
+
 # Move-ItemProperty
 
-## Synopsis
+## SYNOPSIS
 Moves a property from one location to another.
 
 ## SYNTAX
@@ -31,7 +31,7 @@ Move-ItemProperty -LiteralPath <String[]> [-Name] <String[]> [-Destination] <Str
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-## Description
+## DESCRIPTION
 
 The `Move-ItemProperty` cmdlet moves a property of an item from one item to another item.
 For instance, it can move a registry entry from one registry key to another registry key.
@@ -283,12 +283,21 @@ You can pipe a string that contains a path to this cmdlet.
 
 ## OUTPUTS
 
-### None or System.Management.Automation.PSCustomObject
+### None
 
-When you use the **PassThru** parameter, this cmdlet generates a **PSCustomObject** representing the
-moved item property. Otherwise, this cmdlet does not generate any output.
+By default, this cmdlet returns no output.
+
+### System.Management.Automation.PSCustomObject
+
+When you use the **PassThru** parameter, this cmdlet returns a **PSCustomObject** representing the
+moved item property.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Move-ItemProperty`:
+
+- All platforms:
+  - `mp`
 
 This cmdlet is designed to work with the data exposed by any provider. To list the providers
 available in your session, type `Get-PSProvider`. For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).

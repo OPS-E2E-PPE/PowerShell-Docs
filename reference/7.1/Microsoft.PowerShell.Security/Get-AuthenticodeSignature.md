@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Security
-ms.date: 04/10/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/get-authenticodesignature?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 01/18/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.security/get-authenticodesignature?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-AuthenticodeSignature
 ---
+
 # Get-AuthenticodeSignature
 
 ## SYNOPSIS
@@ -35,8 +35,13 @@ Get-AuthenticodeSignature -SourcePathOrExtension <String[]> -Content <Byte[]> [<
 
 ## DESCRIPTION
 
+> **This cmdlet is only available on the Windows platform.**
+
 The `Get-AuthenticodeSignature` cmdlet gets information about the Authenticode signature for a
-file or file content as a byte array. If the file is not signed, the information is retrieved, but
+file or file content as a byte array.
+If the file is both embedded signed and Windows catalog signed,
+the Windows catalog signature is used.
+If the file is not signed, the information is retrieved, but
 the fields are blank.
 
 ## EXAMPLES
@@ -62,7 +67,9 @@ command line. In this example, the name of the **FilePath** parameter, which is 
 ### Example 3: Get only valid Authenticode signatures for multiple files
 
 ```powershell
-Get-ChildItem $PSHOME\*.* | ForEach-object {Get-AuthenticodeSignature $_} | Where-Object {$_.status -eq "Valid"}
+Get-ChildItem $PSHOME\*.* |
+    ForEach-Object {Get-AuthenticodeSignature $_} |
+    Where-Object {$_.Status -eq "Valid"}
 ```
 
 This command lists all of the files in the `$PSHOME` directory that have a valid Authenticode
@@ -92,9 +99,9 @@ example, the file extension is specified along with the content of the file.
 
 ### -Content
 
-Contents of a file as a byte array for which the Authenticode signature is retrieved. This parameter
-must be used with **SourcePathOrExtension** parameter. The contents of the file must be in Unicode
-(UTF-16LE) format.
+Contents of a file as a byte array for which the Authenticode signature is retrieved. This
+parameter must be used with **SourcePathOrExtension** parameter. Prior to PowerShell 7.4, the
+contents of the file must be in Unicode (UTF-16LE) format.
 
 ```yaml
 Type: System.Byte[]
@@ -136,7 +143,7 @@ PowerShell not to interpret any characters as escape characters.
 ```yaml
 Type: System.String[]
 Parameter Sets: ByLiteralPath
-Aliases: PSPath
+Aliases: PSPath, LP
 
 Required: True
 Position: Named
@@ -173,15 +180,17 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.String
 
-You can pipe a string that contains a file path to `Get-AuthenticodeSignature`.
+You can pipe a string that contains a file path to this cmdlet.
 
 ## OUTPUTS
 
 ### System.Management.Automation.Signature
 
-`Get-AuthenticodeSignature` returns a signature object for each signature that it gets.
+This cmdlet returns a signature object for each signature that it gets.
 
 ## NOTES
+
+This cmdlet is only available on Windows platforms.
 
 For information about Authenticode signatures in PowerShell, see
 [about_Signing](../Microsoft.PowerShell.Core/About/about_Signing.md).
@@ -197,4 +206,3 @@ For information about Authenticode signatures in PowerShell, see
 [about_Execution_Policies](../Microsoft.PowerShell.Core/About/about_Execution_Policies.md)
 
 [about_Signing](../Microsoft.PowerShell.Core/About/about_Signing.md)
-

@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Diagnostics.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Diagnostics
-ms.date: 11/06/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.diagnostics/get-counter?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 05/08/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.diagnostics/get-counter?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Counter
 ---
@@ -31,6 +30,8 @@ Get-Counter [-ListSet] <String[]> [-ComputerName <String[]>] [<CommonParameters>
 
 ## DESCRIPTION
 
+> **This cmdlet is only available on the Windows platform.**
+
 The `Get-Counter` cmdlet gets performance counter data directly from the performance monitoring
 instrumentation in the Windows family of operating systems. `Get-Counter` gets performance data from
 a local computer or remote computers.
@@ -44,6 +45,11 @@ Many counter sets are protected by access control lists (ACL). To see all counte
 PowerShell with the **Run as administrator** option.
 
 This cmdlet was reintroduced in PowerShell 7.
+
+> [!NOTE]
+> Performance counter names are localized. The examples shown here use the English names of the
+> performance objects, counters, and instances. The names will be different on a system that uses
+> another language. Use the `Get-Counter -ListSet` command to see the localized names.
 
 ## EXAMPLES
 
@@ -190,10 +196,10 @@ $DiskReads | Get-Counter -ComputerName Server01, Server02 -MaxSamples 10
 ```Output
 Timestamp                 CounterSamples
 ---------                 --------------
-6/21/2019 10:51:04        \\Server01\logicaldisk(c:)\disk reads/sec :
+6/21/2019 10:51:04        \\Server01\logicaldisk(C:)\disk reads/sec :
                           0
 
-                          \\Server02\logicaldisk(c:)\disk reads/sec :
+                          \\Server02\logicaldisk(C:)\disk reads/sec :
                           0.983050344269146
 ```
 
@@ -411,7 +417,7 @@ Path                                         InstanceName        CookedValue
 `Get-Counter` uses the **Counter** parameter to specify the counter
 `\Processor(*)\% Processor Time`. The values are stored in the `$Counter` variable. The objects
 stored in `$Counter.CounterSamples` are sent down the pipeline. `Where-Object` uses a script block
-to compare each objects value against a specified value of 20. The `$_.CookedValue` is a variable
+to compare each objects value against a specified value of `20`. The `$_.CookedValue` is a variable
 for the current object in the pipeline. Counters with a **CookedValue** that is less than 20 are
 displayed.
 
@@ -475,7 +481,7 @@ Accept wildcard characters: False
 
 ### -Continuous
 
-When the **Continuous** is specified, `Get-Counter` gets samples until you press
+When **Continuous** is specified, `Get-Counter` gets samples until you press
 <kbd>CTRL</kbd>+<kbd>C</kbd>. Samples are obtained every second for each specified performance
 counter. Use the **SampleInterval** parameter to increase the interval between continuous samples.
 
@@ -603,7 +609,8 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -613,16 +620,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### Microsoft.PowerShell.Commands.GetCounter.CounterSet, Microsoft.PowerShell.Commands.GetCounter.PerformanceCounterSampleSet, Microsoft.PowerShell.Commands.GetCounter.PerformanceCounterSample
+### Microsoft.PowerShell.Commands.GetCounter.CounterSet
 
-To view an object's properties, send the output down the pipeline to `Get-Member`. The object types
-that are output are as follows:
+With the **ListSet** parameter, this cmdlet returns **CounterSet** objects.
 
-**ListSet** parameter: **Microsoft.PowerShell.Commands.GetCounter.CounterSet**
+### Microsoft.PowerShell.Commands.GetCounter.PerformanceCounterSampleSet
 
-**Counter** parameter: **Microsoft.PowerShell.Commands.GetCounter.PerformanceCounterSampleSet**
-
-**CounterSamples** property: **Microsoft.PowerShell.Commands.GetCounter.PerformanceCounterSample**
+By default and with the **Counter** parameter, this cmdlet returns **PerformanceCounterSampleSet**
+objects.
 
 ## NOTES
 
@@ -655,4 +660,3 @@ In PowerShell 7, when using the **ListSet** parameter, `Get-Counter` can't retri
 [Start-Job](../Microsoft.PowerShell.Core/Start-Job.md)
 
 [Where-Object](..//Microsoft.PowerShell.Core/Where-Object.md)
-

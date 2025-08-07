@@ -1,13 +1,13 @@
 ---
-keywords: powershell,cmdlet
+description: Describes how variables store values that can be used in PowerShell.
 Locale: en-US
-ms.date: 03/19/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_variables?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 01/02/2025
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_variables?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Variables
 ---
 
-# About Variables
+# about_Variables
 
 ## Short description
 
@@ -26,7 +26,7 @@ such as `$a`, `$process`, or `$my_var`.
 Variable names aren't case-sensitive, and can include spaces and special
 characters. But, variable names that include special characters and spaces are
 difficult to use and should be avoided. For more information, see
-[Variable names that include special characters](#variable-names-that-include-special-characters).
+[Variable names that include special characters][01].
 
 There are several different types of variables in PowerShell.
 
@@ -44,7 +44,7 @@ There are several different types of variables in PowerShell.
   PowerShell installation directory.
 
   For more information, a list, and a description of the automatic variables,
-  see [about_Automatic_Variables](about_Automatic_Variables.md).
+  see [about_Automatic_Variables][04].
 
 - Preference variables: Preference variables store user preferences for
   PowerShell. These variables are created by PowerShell and are populated with
@@ -53,7 +53,7 @@ There are several different types of variables in PowerShell.
   in the session history.
 
   For more information, a list, and a description of the preference variables,
-  see [about_Preference_Variables](about_Preference_Variables.md).
+  see [about_Preference_Variables][08].
 
 ## Working with variables
 
@@ -142,8 +142,7 @@ Clear-Variable -Name MyVariable
 $MyVariable = $null
 ```
 
-To delete the variable, use [Remove-Variable](xref:Microsoft.PowerShell.Utility.Remove-Variable)
-or [Remove-Item](xref:Microsoft.PowerShell.Management.Remove-Item).
+To delete the variable, use [Remove-Variable][16] or [Remove-Item][14].
 
 ```powershell
 Remove-Variable -Name MyVariable
@@ -152,6 +151,23 @@ Remove-Variable -Name MyVariable
 ```powershell
 Remove-Item -Path Variable:\MyVariable
 ```
+
+It is also possible to assign values to multiple variables with one statement.
+The following examples assigns the same value to multiple variables:
+
+```powershell
+$a = $b = $c = 0
+```
+
+The next example assigns multiple values to multiple variables.
+
+```powershell
+$i,$j,$k = 10, "red", $true    # $i is 10, $j is "red", $k is True
+$i,$j = 10, "red", $true       # $i is 10, $j is [Object[]], Length 2
+```
+
+For more detailed information, see the **Assigning multiple variables** section
+of [about_Assignment_Operators][03].
 
 ## Types of variables
 
@@ -164,7 +180,7 @@ a particular type of object. A single variable can even contain a collection,
 or array, of different types of objects at the same time.
 
 The data type of a variable is determined by the .NET types of the values of
-the variable. To view a variable's object type, use [Get-Member](xref:Microsoft.PowerShell.Utility.Get-Member).
+the variable. To view a variable's object type, use [Get-Member][15].
 
 For example:
 
@@ -194,8 +210,8 @@ $number = "Hello"
 ```
 
 ```Output
-Cannot convert value "Hello" to type "System.Int32". Error: "Input string was
- not in a correct format."
+Cannot convert value "Hello" to type "System.Int32". Error: "Input string
+was not in a correct format."
 At line:1 char:1
 + $number = "Hello"
 + ~~~~~~~~~~~~~~~~~
@@ -245,7 +261,8 @@ used in the command or expression.
 If the variable name and dollar sign are enclosed in single quotation (`'`)
 marks, the variable name is used in the expression.
 
-For more information about using quotation marks in PowerShell, see [about_Quoting_Rules](about_Quoting_Rules.md).
+For more information about using quotation marks in PowerShell, see
+[about_Quoting_Rules][10].
 
 This example gets the value of the `$PROFILE` variable, which is the path to
 the PowerShell user profile file in the PowerShell console.
@@ -304,15 +321,16 @@ Alphanumeric variable names can contain these characters:
 - Underscore (`_`) character.
 - Question mark (`?`) character.
 
-The following list contains the Unicode category descriptions. For more
-information, see [UnicodeCategory](/dotnet/api/system.globalization.unicodecategory).
+The following list contains the .NET names of the Unicode categories with a
+description. For more information, see [UnicodeCategory][17].
 
-- **Lu** - UppercaseLetter
-- **Ll** - LowercaseLetter
-- **Lt** - TitlecaseLetter
-- **Lm** - ModifierLetter
-- **Lo** - OtherLetter
-- **Nd** - DecimalDigitNumber
+- **Lu** - UppercaseLetter - an uppercase letter
+- **Ll** - LowercaseLetter - a lowercase letter
+- **Lt** - TitlecaseLetter - a digraph encoded as a single character with the
+  first part uppercase
+- **Lm** - ModifierLetter - a modifier letter
+- **Lo** - OtherLetter - other letters, including syllables and ideographs
+- **Nd** - DecimalDigitNumber - a decimal digit
 
 To create or display a variable name that includes spaces or special
 characters, enclose the variable name with the curly braces (`{}`) characters.
@@ -327,7 +345,8 @@ Special character variable names can contain these characters:
     Unicode characters so they're treated as literals.
 
 PowerShell has reserved variables such as `$$`, `$?`, `$^`, and `$_` that
-contain alphanumeric and special characters. For more information, see [about_Automatic_Variables](about_automatic_variables.md).
+contain alphanumeric and special characters. For more information, see
+[about_Automatic_Variables][04].
 
 For example, the following command creates the variable named `save-items`. The
 curly braces (`{}`) are needed because variable name includes a hyphen (`-`)
@@ -348,7 +367,7 @@ The following command gets the child items in the directory that is represented
 by the `ProgramFiles(x86)` environment variable.
 
 ```powershell
-Get-ChildItem ${env:ProgramFiles(x86)}
+Get-ChildItem ${Env:ProgramFiles(x86)}
 ```
 
 To reference a variable name that includes braces, enclose the variable name in
@@ -371,7 +390,7 @@ By default, variables are only available in the scope in which they're created.
 For example, a variable that you create in a function is available only within
 the function. A variable that you create in a script is available only within
 the script. If you dot-source the script, the variable is added to the current
-scope. For more information, see [about_Scopes](about_Scopes.md).
+scope. For more information, see [about_Scopes][12].
 
 You can use a scope modifier to change the default scope of the variable. The
 following expression creates a variable named `Computers`. The variable has a
@@ -381,11 +400,11 @@ global scope, even when it's created in a script or function.
 $Global:Computers = "Server01"
 ```
 
-For any script or command that executes out of session, you need the `Using`
+For any script or command that executes out of session, you need the `Using:`
 scope modifier to embed variable values from the calling session scope, so that
 out of session code can access them.
 
-For more information, see [about_Remote_Variables](about_Remote_Variables.md).
+For more information, see [about_Remote_Variables][11].
 
 ## Saving variables
 
@@ -404,7 +423,7 @@ $VerbosePreference = "Continue"
 
 You can add this command to your PowerShell profile by opening the `$PROFILE`
 file in a text editor, such as **notepad.exe**. For more information about
-PowerShell profiles, see [about_Profiles](about_Profiles.md).
+PowerShell profiles, see [about_Profiles][09].
 
 ## The Variable: drive
 
@@ -449,16 +468,15 @@ Get-Help Variable
 ## Variable syntax with provider paths
 
 You can prefix a provider path with the dollar (`$`) sign, and access the
-content of any provider that implements the
-[IContentCmdletProvider](/dotnet/api/system.management.automation.provider.icontentcmdletprovider)
+content of any provider that implements the [IContentCmdletProvider][18]
 interface.
 
 The following built-in PowerShell providers support this notation:
 
-- [about_Environment_Provider](about_Environment_Provider.md)
-- [about_Variable_Provider](about_Variable_Provider.md)
-- [about_Function_Provider](about_Function_Provider.md)
-- [about_Alias_Provider](about_Alias_Provider.md)
+- [about_Environment_Provider][05]
+- [about_Variable_Provider][13]
+- [about_Function_Provider][07]
+- [about_Alias_Provider][02]
 
 ## The variable cmdlets
 
@@ -476,8 +494,8 @@ To get help for a specific cmdlet, type:
 Get-Help <cmdlet-name>
 ```
 
-| Cmdlet Name       | Description                                |
-| ---------------   | ------------------------------------------ |
+|    Cmdlet Name    |                Description                 |
+| ----------------- | ------------------------------------------ |
 | `Clear-Variable`  | Deletes the value of a variable.           |
 | `Get-Variable`    | Gets the variables in the current console. |
 | `New-Variable`    | Creates a new variable.                    |
@@ -486,16 +504,30 @@ Get-Help <cmdlet-name>
 
 ## See also
 
-[about_Automatic_Variables](about_Automatic_Variables.md)
+- [about_Automatic_Variables][04]
+- [about_Environment_Variables][06]
+- [about_Preference_Variables][08]
+- [about_Profiles][09]
+- [about_Quoting_Rules][10]
+- [about_Remote_Variables][11]
+- [about_Scopes][12]
 
-[about_Environment_Variables](about_Environment_Variables.md)
-
-[about_Preference_Variables](about_Preference_Variables.md)
-
-[about_Profiles](about_Profiles.md)
-
-[about_Quoting_Rules](about_Quoting_Rules.md)
-
-[about_Scopes](about_Scopes.md)
-
-[about_Remote_Variables](about_Remote_Variables.md)
+<!-- link references -->
+[01]: #variable-names-that-include-special-characters
+[02]: about_Alias_Provider.md
+[03]: about_Assignment_Operators.md#assigning-multiple-variables
+[04]: about_Automatic_Variables.md
+[05]: about_Environment_Provider.md
+[06]: about_Environment_Variables.md
+[07]: about_Function_Provider.md
+[08]: about_Preference_Variables.md
+[09]: about_Profiles.md
+[10]: about_Quoting_Rules.md
+[11]: about_Remote_Variables.md
+[12]: about_Scopes.md
+[13]: about_Variable_Provider.md
+[14]: xref:Microsoft.PowerShell.Management.Remove-Item
+[15]: xref:Microsoft.PowerShell.Utility.Get-Member
+[16]: xref:Microsoft.PowerShell.Utility.Remove-Variable
+[17]: xref:System.Globalization.UnicodeCategory
+[18]: xref:System.Management.Automation.Provider.IContentCmdletProvider

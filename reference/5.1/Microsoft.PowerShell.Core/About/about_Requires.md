@@ -1,28 +1,28 @@
 ---
-keywords: powershell,cmdlet
+description: Prevents a script from running without the required elements.
 Locale: en-US
-ms.date: 07/01/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_requires?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 08/17/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_requires?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Requires
 ---
 
-# About Requires
+# about_Requires
 
 ## Short description
+
 Prevents a script from running without the required elements.
 
 ## Long description
 
 The `#Requires` statement prevents a script from running unless the PowerShell
-version, modules (and version), or snap-ins (and version), and edition
-prerequisites are met. If the prerequisites aren't met, PowerShell doesn't run
-the script.
+version, modules (and version), and edition prerequisites are met. If the
+prerequisites aren't met, PowerShell doesn't run the script or provide other
+runtime features, such as tab completion.
 
 ### Syntax
 
 ```
-#Requires -Assembly { <Path to .dll> | <.NET assembly specification> }
 #Requires -Version <N>[.<n>]
 #Requires -PSSnapin <PSSnapin-Name> [-Version <N>[.<n>]]
 #Requires -Modules { <Module-Name> | <Hashtable> }
@@ -39,13 +39,13 @@ For more information about the syntax, see
 A script can include more than one `#Requires` statement. The `#Requires`
 statements can appear on any line in a script.
 
-Placing a `#Requires` statement inside a function does NOT limit its scope. All
+Placing a `#Requires` statement inside a function doesn't limit its scope. All
 `#Requires` statements are always applied globally, and must be met, before the
 script can execute.
 
 > [!WARNING]
 > Even though a `#Requires` statement can appear on any line in a script, its
-> position in a script does not affect the sequence of its application. The
+> position in a script doesn't affect the sequence of its application. The
 > global state the `#Requires` statement presents must be met before script
 > execution.
 
@@ -64,6 +64,11 @@ script invalidated the required state.
 ### Parameters
 
 #### -Assembly \<Assembly path> | \<.NET assembly specification>
+
+> [!IMPORTANT]
+> The `-Assembly` syntax is deprecated. It serves no function. The syntax was
+> added in PowerShell 5.1 but the supporting code was never implemented. The
+> syntax is still accepted for backward compatibility.
 
 Specifies the path to the assembly DLL file or a .NET assembly name. The
 **Assembly** parameter was introduced in PowerShell 5.0. For more information
@@ -110,17 +115,22 @@ and an optional version number.
 If the required modules aren't in the current session, PowerShell imports them.
 If the modules can't be imported, PowerShell throws a terminating error.
 
-For each module, type the module name (\<String\>) or a hash table. The value
-can be a combination of strings and hash tables. The hash table has the
+The `#Requires` statement doesn't load class and enumeration definitions in the
+module. Use the `using module` statement at the beginning of your script to
+import the module, including the class and enumeration definitions. For more
+information, see [about_Using](about_Using.md).
+
+For each module, type the module name (\<String\>) or a hashtable. The value
+can be a combination of strings and hashtables. The hashtable has the
 following keys.
 
 - `ModuleName` - **Required** Specifies the module name.
 - `GUID` - **Optional** Specifies the GUID of the module.
-- It's also **Required** to specify one of the three below keys. These keys
-  can't be used together.
+- It's also **Required** to specify at least one of the three below keys.
   - `ModuleVersion` - Specifies a minimum acceptable version of the module.
-  - `RequiredVersion` - Specifies an exact, required version of the module.
   - `MaximumVersion` - Specifies the maximum acceptable version of the module.
+  - `RequiredVersion` - Specifies an exact, required version of the module.
+    This can't be used with the other Version keys.
 
 > [!NOTE]
 > `RequiredVersion` was added in Windows PowerShell 5.0.
@@ -175,7 +185,7 @@ The following example fails because **2.0.0** doesn't exactly match
 #### -PSEdition \<PSEdition-Name\>
 
 Specifies a PowerShell edition that the script requires. Valid values are
-**Core** for PowerShell Core and **Desktop** for Windows PowerShell.
+**Core** for PowerShell and **Desktop** for Windows PowerShell.
 
 For example:
 
@@ -222,10 +232,10 @@ specified in both statements aren't met, the script doesn't run. Each
 ```powershell
 #Requires -Modules PSWorkflow
 #Requires -Version 3
-Param
+param
 (
-    [parameter(Mandatory=$true)]
-    [String[]]
+    [Parameter(Mandatory=$true)]
+    [string[]]
     $Path
 )
 ...
@@ -233,10 +243,7 @@ Param
 
 ## See also
 
-[about_Automatic_Variables](about_Automatic_Variables.md)
-
-[about_Language_Keywords](about_Language_Keywords.md)
-
-[about_PSSnapins](about_PSSnapins.md)
-
-[Get-PSSnapin](xref:Microsoft.PowerShell.Core.Get-PSSnapin)
+- [about_Automatic_Variables](about_Automatic_Variables.md)
+- [about_Language_Keywords](about_Language_Keywords.md)
+- [about_PSSnapins](about_PSSnapins.md)
+- [Get-PSSnapin](xref:Microsoft.PowerShell.Core.Get-PSSnapin)

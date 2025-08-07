@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 12/11/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/stop-computer?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 05/15/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/stop-computer?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Stop-Computer
 ---
@@ -160,22 +159,6 @@ Required: False
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -357,6 +340,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WhatIf
 
 Shows what would happen if the cmdlet runs. The cmdlet isn't run.
@@ -384,20 +383,25 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You can't pipe input to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
-### None or System.Management.Automation.RemotingJob
+### None
 
-The cmdlet returns a **System.Management.Automation.RemotingJob** object, if you specify the
-**AsJob** parameter. Otherwise, it doesn't generate any output.
+By default, this cmdlet returns no output.
+
+### System.Management.Automation.RemotingJob
+
+When you use the **AsJob** parameter, this cmdlet returns a **RemotingJob** object.
 
 ## NOTES
 
-This cmdlet uses the **Win32Shutdown** method of the **Win32_OperatingSystem** WMI class. This
-method requires the **SeShutdownPrivilege** privilege be enabled for the user account used to
-restart the machine.
+This cmdlet uses the
+[Win32Shutdown](/windows/desktop/CIMWin32Prov/win32shutdown-method-in-class-win32-operatingsystem)
+method of the [Win32_OperatingSystem](/windows/desktop/CIMWin32Prov/win32-operatingsystem) WMI
+class. This method requires the `SeShutdownPrivilege` privilege be enabled for the user account
+used to shutdown the machine.
 
 ## RELATED LINKS
 

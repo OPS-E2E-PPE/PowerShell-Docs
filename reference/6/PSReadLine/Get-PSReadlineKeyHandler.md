@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.PSReadLine2.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: PSReadLine
-ms.date: 12/07/2018
-online version: https://docs.microsoft.com/powershell/module/psreadline/get-psreadlinekeyhandler?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 12/13/2022
+online version: https://learn.microsoft.com/powershell/module/psreadline/get-psreadlinekeyhandler?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-PSReadLineKeyHandler
 ---
@@ -16,13 +15,23 @@ Gets the key bindings for the PSReadLine module.
 
 ## SYNTAX
 
+### FullListing (default)
+
 ```
 Get-PSReadLineKeyHandler [-Bound] [-Unbound] [<CommonParameters>]
 ```
 
+### SpecificBindings
+
+```
+Get-PSReadLineKeyHandler [-Chord] <String[]> [<CommonParameters>]
+```
+
 ## DESCRIPTION
 
-The **Get-PSReadLineKeyHandler** cmdlet returns the currently bound key bindings.
+If no parameter is specified, returns the currently bound key functions for the PSReadLine module.
+
+If **Chord** parameter is specified, the cmdlet returns the specific bound keys.
 
 ## EXAMPLES
 
@@ -102,6 +111,22 @@ Tab                   TabCompleteNext         Complete the input using the next 
 ...
 ```
 
+### Example 3: Get specific key bindings
+
+This command returns only the bindings for the specified keys.
+
+```powershell
+Get-PSReadLineKeyHandler -Chord Enter, Shift+Enter
+```
+
+```Output
+Key         Function   Description
+---         --------   -----------
+Enter       AcceptLine Accept the input or move to the next line if input is missing a closing token.
+Shift+Enter AddLine    Move the cursor to the next line without attempting to execute the input
+...
+```
+
 ## PARAMETERS
 
 ### -Bound
@@ -110,12 +135,28 @@ Indicates that this cmdlet returns functions that are bound.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
+Parameter Sets: FullListing
 Aliases:
 
 Required: False
 Position: Named
 Default value: True
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Chord
+
+Return only functions bound to specific keys or sequences.
+
+```yaml
+Type: System.String[]
+Parameter Sets: SpecificBindings
+Aliases: Key
+
+Required: True
+Position: 0
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -126,12 +167,12 @@ Indicates that this cmdlet returns functions that are unbound.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
+Parameter Sets: FullListing
 Aliases:
 
 Required: False
 Position: Named
-Default value: True
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -140,18 +181,19 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see
-[about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
 
-You cannot pipe objects to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### Microsoft.PowerShell.KeyHandler
+
+This cmdlet returns a **KeyHandler** object.
 
 ## NOTES
 

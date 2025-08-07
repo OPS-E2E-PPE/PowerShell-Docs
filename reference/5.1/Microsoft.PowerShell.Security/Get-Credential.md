@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Security
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/get-credential?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 05/15/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.security/get-credential?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Credential
 ---
+
 # Get-Credential
 
 ## SYNOPSIS
@@ -61,34 +61,7 @@ the **Credential** parameter.
 ### Example 2
 
 ```powershell
-$c = Get-Credential
-Get-CimInstance Win32_DiskDrive -ComputerName Server01 -Credential $c
-```
-
-These commands use a credential object that the `Get-Credential` cmdlet returns to authenticate a
-user on a remote computer so they can use Windows Management Instrumentation (WMI) to manage the
-computer.
-
-The first command gets a credential object and saves it in the `$c` variable. The second command
-uses the credential object in a `Get-CimInstance` command. This command gets information about the
-disk drives on the Server01 computer.
-
-### Example 3
-
-```powershell
-Get-CimInstance Win32_BIOS -ComputerName Server01 -Credential (Get-Credential -Credential Domain01\User01)
-```
-
-This command shows how to include a `Get-Credential` command in a  `Get-CimInstance` command.
-
-This command uses the `Get-CimInstance` cmdlet to get information about the BIOS on the Server01
-computer. It uses the **Credential** parameter to authenticate the user, Domain01\User01, and a
-`Get-Credential` command as the value of the **Credential** parameter.
-
-### Example 4
-
-```powershell
-$c = Get-Credential -credential User01
+$c = Get-Credential -Credential User01
 $c.Username
 User01
 ```
@@ -99,10 +72,10 @@ The first command gets a credential with the user name User01 and stores it in t
 The second command displays the value of the **Username** property of the resulting credential
 object.
 
-### Example 5
+### Example 3
 
 ```powershell
-$Credential = $host.ui.PromptForCredential("Need credentials", "Please enter your user name and password.", "", "NetBiosUserName")
+$Credential = $Host.UI.PromptForCredential("Need credentials", "Please enter your user name and password.", "", "NetBiosUserName")
 ```
 
 This command uses the **PromptForCredential** method to prompt the user for their user name and
@@ -112,7 +85,11 @@ The **PromptForCredential** method is an alternative to using the `Get-Credentia
 use **PromptForCredential**, you can specify the caption, messages, and user name that appear in the
 message box.
 
-### Example 6
+For more information, see the
+[PromptForCredential](/dotnet/api/system.management.automation.host.pshostuserinterface.promptforcredential)
+documentation in the SDK.
+
+### Example 4
 
 ```powershell
 Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\PowerShell\1\ShellIds" -Name ConsolePrompting -Value $true
@@ -130,29 +107,28 @@ the `Remove-ItemProperty` cmdlet to delete it.
 The ConsolePrompting registry entry works in some host programs, such as the PowerShell console. It
 might not work in all host programs.
 
-### Example 7
+### Example 5
 
-This example shows how to create a credential object that is identical to the object that
-`Get-Credential` returns without prompting the user. This method requires a plain text password,
-which might violate the security standards in some enterprises.
+This example demonstrates how to create a credential object identical to the one returned by
+`Get-Credential`.
 
 ```powershell
 $User = "Domain01\User01"
-$PWord = ConvertTo-SecureString -String "P@sSwOrd" -AsPlainText -Force
+$PWord = Read-Host -Prompt 'Enter a Password' -AsSecureString
 $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
 ```
 
-The first command saves the user account name in the `$User` parameter. The value must have the
-"Domain\User" or "ComputerName\User" format.
+The first command assigns the username to the `$User` variable. Ensure the value follows
+the "Domain\User" or "ComputerName\User" format.
 
-The second command uses the `ConvertTo-SecureString` cmdlet to create a secure string from a plain
-text password. The command uses the **AsPlainText** parameter to indicate that the string is plain
-text and the **Force** parameter to confirm that you understand the risks of using plain text.
+The second command uses the `Read-Host` cmdlet to create a secure string from user input. The
+**Prompt** parameter requests user input, and the **AsSecureString** parameter masks the input and
+converts it to a secure string.
 
 The third command uses the `New-Object` cmdlet to create a **PSCredential** object from the values
-in the `$User` and `$PWord` variables.
+stored in the `$User` and `$PWord` variables.
 
-### Example 8
+### Example 6
 
 ```powershell
 Get-Credential -Message "Credential are required for access to the \\Server1\Scripts file share." -User Server01\PowerUser
@@ -168,7 +144,7 @@ This command uses the **Message** and **UserName** parameters of the `Get-Creden
 command format is designed for shared scripts and functions. In this case, the message tells the
 user why credentials are needed and gives them confidence that the request is legitimate.
 
-### Example 9
+### Example 7
 
 ```powershell
 Invoke-Command -ComputerName Server01 {Get-Credential Domain01\User02}
@@ -279,13 +255,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You cannot pipe input to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### System.Management.Automation.PSCredential
 
-`Get-Credential` returns a credential object.
+This cmdlet returns a credential object.
 
 ## NOTES
 
@@ -306,7 +282,9 @@ information about the effect of the **ConsolePrompting** registry entry, see the
 host program.
 
 The **Credential** parameter is not supported by all providers that are installed with PowerShell.
-Beginning in PowerShell 3.0, it is supported on selected cmdlet, such as the `Get-WmiObject`
+Beginning in PowerShell 3.0, it is supported on select cmdlets, such as the `Get-Content`
 and `New-PSDrive` cmdlets.
 
 ## RELATED LINKS
+
+[PromptForCredential](/dotnet/api/system.management.automation.host.pshostuserinterface.promptforcredential)

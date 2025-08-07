@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 08/17/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/convertfrom-json?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 01/30/2025
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/convertfrom-json?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: ConvertFrom-Json
 ---
@@ -17,26 +16,30 @@ Converts a JSON-formatted string to a custom object or a hash table.
 ## SYNTAX
 
 ```
-ConvertFrom-Json [-InputObject] <String> [-AsHashtable] [-Depth <Int32>] [<CommonParameters>]
+ConvertFrom-Json [-InputObject] <String> [-AsHashtable] [-Depth <Int32>] [-NoEnumerate] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
 The `ConvertFrom-Json` cmdlet converts a JavaScript Object Notation (JSON) formatted string to a
-custom **PSCustomObject** object that has a property for each field in the JSON string. JSON is
-commonly used by web sites to provide a textual representation of objects. The JSON standard does
-not prohibit usage that is prohibited with a **PSCustomObject**. For example, if the JSON string
-contains duplicate keys, only the last key is used by this cmdlet. See other examples below.
+custom **PSObject** or **Hashtable** object that has a property for each field in the JSON string.
+JSON is commonly used by web sites to provide a textual representation of objects. The cmdlet adds
+the properties to the new object as it processes each line of the JSON string.
+
+The JSON standard allows duplicate key names, which are prohibited in **PSObject** and **Hashtable**
+types. For example, if the JSON string contains duplicate keys, only the last key is used by this
+cmdlet. See other examples below.
 
 To generate a JSON string from any object, use the `ConvertTo-Json` cmdlet.
 
 This cmdlet was introduced in PowerShell 3.0.
 
 > [!NOTE]
-> Beginning with PowerShell 6, this cmdlet supports JSON with comments. Accepted comments are
-> started with two forward slashes (`//`). The comment will not be represented in the data and can
-> be written in the file without corrupting the data or throwing an error as it did in PowerShell
-> 5.1.
+> In Windows PowerShell 5.1, `ConvertFrom-Json` returned an error when it encountered a JSON
+> comment. In PowerShell 6 and higher, the cmdlet supports JSON with comments. JSON comments aren't
+> captured in the objects output by the cmdlet. For more information, see the _JSON comments_
+> section of the
+> [about_Comments](/powershell/module/microsoft.powershell.core/about/about_comments) article.
 
 ## EXAMPLES
 
@@ -93,12 +96,12 @@ This example shows how to use the `ConvertFrom-Json` cmdlet to convert a JSON fi
 custom object.
 
 ```powershell
-Get-Content JsonFile.JSON | ConvertFrom-Json
+Get-Content -Raw JsonFile.json | ConvertFrom-Json
 ```
 
-The command uses Get-Content cmdlet to get the strings in a JSON file. Then it uses the pipeline
-operator to send the delimited string to the `ConvertFrom-Json` cmdlet, which converts it to a
-custom object.
+The command uses Get-Content cmdlet to get the strings in a JSON file. The **Raw** parameter
+returns the whole file as a single JSON object. Then it uses the pipeline operator to send the
+delimited string to the `ConvertFrom-Json` cmdlet, which converts it to a custom object.
 
 ### Example 4: Convert a JSON string to a hash table
 
@@ -112,18 +115,41 @@ command.
 The JSON string contains two key value pairs with keys that differ only in casing. Without the
 switch, the command would have thrown an error.
 
+### Example 5: Round-trip a single element array
+
+This command shows an example where the `-NoEnumerate` switch is used to round-trip a single element
+JSON array.
+
+```powershell
+Write-Output "With -NoEnumerate: $('[1]' | ConvertFrom-Json -NoEnumerate | ConvertTo-Json -Compress)"
+Write-Output "Without -NoEnumerate: $('[1]' | ConvertFrom-Json | ConvertTo-Json -Compress)"
+```
+
+```Output
+With -NoEnumerate: [1]
+Without -NoEnumerate: 1
+```
+
+The JSON string contains an array with a single element. Without the switch, converting the JSON to
+a PSObject and then converting it back with the `ConvertTo-Json` command results in a single
+integer.
+
 ## PARAMETERS
 
 ### -AsHashtable
 
-Converts the JSON to a hash table object. This switch was introduced in PowerShell 6.0. There are
-several scenarios where it can overcome some limitations of the `ConvertFrom-Json` cmdlet.
+Converts the JSON to a hash table object. This switch was introduced in PowerShell 6.0. Starting
+with PowerShell 7.3, the object is an **OrderedHashtable** and preserves the ordering of the keys
+from the JSON. In prior versions, the object is a **Hashtable**.
 
-- If the JSON contains a list with keys that only differ in casing. Without the switch, those keys
-  would be seen as identical keys and therefore only the last one would get used.
-- If the JSON contains a key that is an empty string. Without the switch, the cmdlet would throw an
-  error since a `PSCustomObject` does not allow for that but a hash table does. An example use case
-  where this can occurs are `project.lock.json` files.
+There are several scenarios where it can overcome some limitations of the `ConvertFrom-Json` cmdlet.
+
+- Without this switch, when two or more keys in a JSON object are case-insensitively identical, they
+  are treated as identical keys. In that case, only the last of those case-insensitively identical
+  keys is included in the converted object.
+- Without this switch, the cmdlet throws an error whenever the JSON contains a key that's an empty
+  string. **PSCustomObject** can't have property names that are empty strings. For example, this can
+  occur in `project.lock.json` files.
 - Hash tables can be processed faster for certain data structures.
 
 ```yaml
@@ -140,7 +166,7 @@ Accept wildcard characters: False
 
 ### -Depth
 
-Gets or sets the maximum depth the JSON input is allowed to have. By default, it is 1024.
+Gets or sets the maximum depth the JSON input is allowed to have. The default is 1024.
 
 This parameter was introduced in PowerShell 6.2.
 
@@ -158,12 +184,13 @@ Accept wildcard characters: False
 
 ### -InputObject
 
-Specifies the JSON strings to convert to JSON objects. Enter a variable that contains the string, or
-type a command or expression that gets the string. You can also pipe a string to `ConvertFrom-Json`.
+Specifies the JSON strings to convert to JSON objects. Enter a variable that contains the string,
+or type a command or expression that gets the string. You can also pipe a string to
+`ConvertFrom-Json`.
 
 The **InputObject** parameter is required, but its value can be an empty string. When the input
-object is an empty string, `ConvertFrom-Json` does not generate any output. The **InputObject**
-value cannot be `$null`.
+object is an empty string, `ConvertFrom-Json` doesn't generate any output. The **InputObject**
+value can't be `$null`.
 
 ```yaml
 Type: System.String
@@ -174,6 +201,25 @@ Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -NoEnumerate
+
+Specifies that output isn't enumerated.
+
+Setting this parameter causes arrays to be sent as a single object instead of sending every element
+separately. This guarantees that JSON can be round-tripped via `ConvertTo-Json`.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -194,11 +240,26 @@ You can pipe a JSON string to `ConvertFrom-Json`.
 
 ### PSCustomObject
 
-### System.Collections.Hashtable
+### System.Management.Automation.OrderedHashtable
 
 ## NOTES
 
-The `ConvertFrom-Json` cmdlet is implemented using [Newtonsoft Json.NET](https://www.newtonsoft.com/json).
+This cmdlet is implemented using [Newtonsoft Json.NET](https://www.newtonsoft.com/json).
+
+Beginning in PowerShell 6, `ConvertTo-Json` attempts to convert strings formatted as timestamps to
+**DateTime** values. The converted value is a `[datetime]` instance with a `Kind` property set as
+follows:
+
+- `Unspecified`, if there is no time zone information in the input string.
+- `Utc`, if the time zone information is a trailing `Z`.
+- `Local`, if the time zone information is given as a trailing UTC _offset_ like `+02:00`. The
+  offset is properly converted to the caller's configured time zone. The default output formatting
+  doesn't indicate the original time zone offset.
+
+The **PSObject** type maintains the order of the properties as presented in the JSON string.
+Beginning with PowerShell 7.3, The **AsHashtable** parameter creates an **OrderedHashtable**. The
+key-value pairs are added in the order presented in the JSON string. The **OrderedHashtable**
+preserves that order.
 
 ## RELATED LINKS
 

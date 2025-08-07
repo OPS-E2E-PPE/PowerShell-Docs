@@ -1,13 +1,13 @@
 ---
-keywords: powershell,cmdlet
+description: Describes the special character sequences that control how PowerShell interprets the next characters in the sequence.
 Locale: en-US
-ms.date: 04/04/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_special_characters?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 05/06/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_special_characters?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Special_Characters
 ---
 
-# About Special Characters
+# about_Special_Characters
 
 ## Short description
 
@@ -29,28 +29,30 @@ strings.
 
 PowerShell recognizes these escape sequences:
 
-|  Sequence   |       Description       |
-| ----------- | ----------------------- |
-| `` `0 ``    | Null                    |
-| `` `a ``    | Alert                   |
-| `` `b ``    | Backspace               |
-| `` `e ``    | Escape                  |
-| `` `f ``    | Form feed               |
-| `` `n ``    | New line                |
-| `` `r ``    | Carriage return         |
-| `` `t ``    | Horizontal tab          |
-| `` `u{x} `` | Unicode escape sequence |
-| `` `v ``    | Vertical tab            |
+|  Sequence   |                   Description                   |
+| :---------: | :---------------------------------------------- |
+|  `` `0 ``   | Null                                            |
+|  `` `a ``   | Alert                                           |
+|  `` `b ``   | Backspace                                       |
+|  `` `e ``   | Escape (added in PowerShell 6)                  |
+|  `` `f ``   | Form feed                                       |
+|  `` `n ``   | New line                                        |
+|  `` `r ``   | Carriage return                                 |
+|  `` `t ``   | Horizontal tab                                  |
+| `` `u{x} `` | Unicode escape sequence (added in PowerShell 6) |
+|  `` `v ``   | Vertical tab                                    |
 
 PowerShell also has a special token to mark where you want parsing to stop. All
 characters that follow this token are used as literal values that aren't
 interpreted.
 
-Special parsing token:
+Special parsing tokens:
 
-| Sequence |            Description             |
-| -------- | ---------------------------------- |
-| `--%`    | Stop parsing anything that follows |
+| Sequence |                      Description                       |
+| -------- | ------------------------------------------------------ |
+| `--`     | Treat the remaining values as arguments not parameters |
+| `--%`    | Stop parsing anything that follows                     |
+| `~`      | Tilde                                                  |
 
 ## Null (`0)
 
@@ -88,6 +90,9 @@ back out
 
 ## Escape (`e)
 
+> [!NOTE]
+> This special character was added in PowerShell 6.0.
+
 The escape (`` `e ``) character is most commonly used to specify a virtual
 terminal sequence (ANSI escape sequence) that modifies the color of text and
 other text attributes such as bolding and underlining. These sequences can also
@@ -96,8 +101,8 @@ virtual terminal sequences. You can check the boolean value of
 `$Host.UI.SupportsVirtualTerminal` to determine if these ANSI sequences are
 supported.
 
-For more information about ANSI escape sequences, see
-[ANSI_escape_code](https://en.wikipedia.org/wiki/ANSI_escape_code).
+For more information about ANSI escape sequences, see the
+[ANSI escape code][05] article in Wikipedia.
 
 The following example outputs text with a green foreground color.
 
@@ -146,7 +151,7 @@ In this example, the text before the carriage return is overwritten.
 Write-Host "These characters are overwritten.`rI want this text instead "
 ```
 
-Notice that the text before the `` `r `` character is not deleted, it is
+Notice that the text before the `` `r `` character isn't deleted, it's
 overwritten.
 
 ```Output
@@ -171,6 +176,9 @@ Column1         Column2         Column3
 
 ## Unicode character (`u{x})
 
+> [!NOTE]
+> This special character was added in PowerShell 6.0.
+
 The Unicode escape sequence (`` `u{x} ``) allows you to specify any Unicode
 character by the hexadecimal representation of its code point. This includes
 Unicode characters above the Basic Multilingual Plane (> `0xFFFF`) which
@@ -187,21 +195,63 @@ This example outputs the **up down arrow** (&#x2195;) symbol.
 
 ## Vertical tab (`v)
 
-The horizontal tab (`` `v ``) character advances to the next vertical tab stop
-and writes the remaining output at that point. This has no effect in the
-default Windows console.
+The vertical tab (`` `v ``) character advances to the next vertical tab stop
+and writes the remaining output at that point. The rendering of the
+vertical tab is device and terminal dependent.
 
 ```powershell
 Write-Host "There is a vertical tab`vbetween the words."
 ```
 
-The following example shows the output you would get on a printer or in a
-different console host.
+The following examples show the rendered output of the vertical tab in some
+common environments.
+
+The Windows Console host application interprets (`` `v ``) as a special
+character with no extra spacing added.
+
+```Output
+There is a vertical tab♂between the words.
+```
+
+The [Windows Terminal][06] renders the vertical tab character as a carriage
+return and line feed. The rest of the output is printed at the beginning of the
+next line.
+
+```Output
+There is a vertical tab
+between the words.
+```
+
+On printers or in a Unix-based console, the vertical tab character advances to
+the next line and writes the remaining output at that point.
 
 ```Output
 There is a vertical tab
                        between the words.
 ```
+
+## Line continuation
+
+The backtick character can also be used at the end of a line as a signal to the
+PowerShell parser that the command continues on the next line. For more
+information, see [about_Parsing][01].
+
+## The end-of-parameters token (`--`)
+
+The end-of-parameters token (`--`) indicates that all arguments following it
+are to be passed in their actual form as though double quotes were placed
+around them. For example, using `--` you can output the string `-InputObject`
+without using quotes or having it interpreted as a parameter:
+
+```powershell
+Write-Output -- -InputObject
+```
+
+```Output
+-InputObject
+```
+
+This is a convention specified in the POSIX Shell and Utilities specification.
 
 ## Stop-parsing token (--%)
 
@@ -224,29 +274,41 @@ PowerShell sends the following string to `Icacls`.
 X:\VMS /grant Dom\HVAdmin:(CI)(OI)F
 ```
 
-Here is another example. The **showArgs** function outputs the values passed to
-it. In this example, we pass the variable named `$HOME` to the function twice.
+In this second example, we pass the variable `$HOME` to the `cmd.exe /c echo`
+command twice.
 
 ```powershell
-function showArgs {
-  "`$args = " + ($args -join '|')
-}
-
-showArgs $HOME --% $HOME
+cmd.exe /c echo $HOME --% $HOME
 ```
 
-You can see in the output that, for the first parameter, the variable `$HOME`
-is interpreted by PowerShell so that the value of the variable is passed to the
-function. The second use of `$HOME` comes after the stop-parsing token, so the
-string "$HOME" is passed to the function without interpretation.
+The output shows that the first instance of `$HOME` is interpreted by
+PowerShell so that the value of the variable is passed to `cmd`. The second
+instance of `$HOME` comes after the stop-parsing token, so it is passed as a
+literal string.
 
 ```Output
-$args = C:\Users\username|--%|$HOME
+C:\Users\username  $HOME
 ```
 
-For more information about the stop-parsing token, see
-[about_Parsing](about_Parsing.md).
+For more information about the stop-parsing token, see [about_Parsing][02].
+
+## Tilde (~)
+
+The tilde character (`~`) has special meaning in PowerShell. When it's used
+with PowerShell commands at the beginning of a path, PowerShell expands the
+tilde character to the user's home directory. If you use the tilde character
+anywhere else in a path, it's treated as a literal character.
+
+For more information about the stop-parsing token, see [about_Parsing][03].
 
 ## See also
 
-[about_Quoting_Rules](about_Quoting_Rules.md)
+- [about_Quoting_Rules][04]
+
+<!-- link references -->
+[01]: about_Parsing.md#line-continuation
+[02]: about_Parsing.md#the-stop-parsing-token
+[03]: about_Parsing.md#tilde-
+[04]: about_Quoting_Rules.md
+[05]: https://wikipedia.org/wiki/ANSI_escape_code
+[06]: https://www.microsoft.com/p/windows-terminal/9n0dx20hk701

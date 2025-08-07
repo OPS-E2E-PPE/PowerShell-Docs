@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 05/16/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/get-filehash?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/get-filehash?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-FileHash
 ---
+
 # Get-FileHash
 
 ## SYNOPSIS
@@ -90,14 +90,18 @@ Path      : C:\Users\user1\Downloads\Contoso8_1_ENT.iso
 
 ### Example 3: Compute the hash value of a stream
 
-For this example, we get are using **System.Net.WebClient** to download a package from the
-[Powershell release page](https://github.com/PowerShell/PowerShell/releases/tag/v6.2.4). The release
+For this example, we are using **System.Net.WebClient** to download a package from the
+[PowerShell release page](https://github.com/PowerShell/PowerShell/releases/tag/v6.2.4). The release
 page also documents the SHA256 hash of each package file. We can compare the published hash value
 with the one we calculate with `Get-FileHash`.
 
 ```powershell
 $wc = [System.Net.WebClient]::new()
-$pkgurl = 'https://github.com/PowerShell/PowerShell/releases/download/v6.2.4/powershell_6.2.4-1.debian.9_amd64.deb'
+
+$baseurl = 'https://github.com/PowerShell/PowerShell/releases/download/v6.2.4/'
+$pkgname = 'powershell_6.2.4-1.debian.9_amd64.deb'
+$pkgurl = $baseurl + $pkgname
+
 $publishedHash = '8E28E54D601F0751922DE24632C1E716B4684876255CF82304A9B19E89A9CCAC'
 $FileHash = Get-FileHash -InputStream ($wc.OpenRead($pkgurl))
 $FileHash.Hash -eq $publishedHash
@@ -115,7 +119,7 @@ string to a stream and use the **InputStream** parameter of `Get-FileHash` to ge
 ```powershell
 $stringAsStream = [System.IO.MemoryStream]::new()
 $writer = [System.IO.StreamWriter]::new($stringAsStream)
-$writer.write("Hello world")
+$writer.Write("Hello world")
 $writer.Flush()
 $stringAsStream.Position = 0
 Get-FileHash -InputStream $stringAsStream | Select-Object Hash
@@ -156,7 +160,7 @@ Accepted values: SHA1, SHA256, SHA384, SHA512, MD5
 
 Required: False
 Position: 1
-Default value: None
+Default value: SHA256
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -223,13 +227,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.String
 
-You can pipe a string to the `Get-FileHash` cmdlet that contains a path to one or more files.
+You can pipe a string containing a path to a file to this cmdlet.
 
 ## OUTPUTS
 
-### Microsoft.Powershell.Utility.FileHash
+### Microsoft.PowerShell.Utility.FileHash
 
-`Get-FileHash` returns an object that represents the path to the specified file, the value of the
+This cmdlet returns an object representing the path to the specified file, the value of the
 computed hash, and the algorithm used to compute the hash.
 
 ## NOTES

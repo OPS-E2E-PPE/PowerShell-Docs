@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.Powershell.LocalAccounts.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.LocalAccounts
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.localaccounts/rename-localuser?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 12/13/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.localaccounts/rename-localuser?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Rename-LocalUser
 ---
@@ -35,7 +34,8 @@ Rename-LocalUser [-NewName] <String> [-SID] <SecurityIdentifier> [-WhatIf] [-Con
 ```
 
 ## DESCRIPTION
-The **Rename-LocalUser** cmdlet renames a local user account.
+
+The `Rename-LocalUser` cmdlet renames a local user account.
 
 > [!NOTE]
 > The Microsoft.PowerShell.LocalAccounts module is not available in 32-bit PowerShell on a 64-bit
@@ -45,8 +45,8 @@ The **Rename-LocalUser** cmdlet renames a local user account.
 
 ### Example 1: Rename a user account
 
-```
-PS C:\> Rename-LocalUser -Name "Admin02" -NewName "AdminContoso02"
+```powershell
+Rename-LocalUser -Name "Admin02" -NewName "AdminContoso02"
 ```
 
 This command renames the user account named Admin02.
@@ -54,8 +54,9 @@ This command renames the user account named Admin02.
 ## PARAMETERS
 
 ### -InputObject
-Specifies the user account that this cmdlet renames.
-To obtain a user account, use the Get-LocalUser cmdlet.
+
+Specifies the user account that this cmdlet renames. To obtain a user account, use the Get-LocalUser
+cmdlet.
 
 ```yaml
 Type: Microsoft.PowerShell.Commands.LocalUser
@@ -70,6 +71,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
+
 Specifies the name of the user account that this cmdlet renames.
 
 ```yaml
@@ -85,6 +87,7 @@ Accept wildcard characters: False
 ```
 
 ### -NewName
+
 Specifies a new name for the user account.
 
 ```yaml
@@ -100,6 +103,7 @@ Accept wildcard characters: False
 ```
 
 ### -SID
+
 Specifies the security ID (SID) of a user accounts that this cmdlet renames.
 
 ```yaml
@@ -115,6 +119,7 @@ Accept wildcard characters: False
 ```
 
 ### -Confirm
+
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
@@ -130,8 +135,8 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+
+Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -146,28 +151,48 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
+-WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### System.Management.Automation.SecurityAccountsManager.LocalUser, System.String, System.Security.Principal.SecurityIdentifier
-You can pipe a local user, a string, or a SID to this cmdlet.
+### System.Management.Automation.SecurityAccountsManager.LocalUser
+
+You can pipe a local user to this cmdlet.
+
+### System.String
+
+You can pipe a string to this cmdlet.
+
+### System.Security.Principal.SecurityIdentifier
+
+You can pipe a SID to this cmdlet.
 
 ## OUTPUTS
 
 ### None
-This cmdlet does not generate any output.
+
+This cmdlet returns no output.
 
 ## NOTES
 
-* The **PrincipalSource** property is a property on **LocalUser**, **LocalGroup**, and **LocalPrincipal** objects that describes the source of the object. The possible sources are as follows:
+Windows PowerShell includes the following aliases for `Rename-LocalUser`:
+
+- `rnlu`
+
+The **PrincipalSource** property is a property on **LocalUser**, **LocalGroup**, and
+**LocalPrincipal** objects that describes the source of the object. The possible sources are as
+follows:
 
 - Local
 - Active Directory
-- Azure Active Directory group
+- Microsoft Entra group
 - Microsoft Account
 
-**PrincipalSource** is supported only by Windows 10, Windows Server 2016, and later versions of the Windows operating system. For earlier versions, the property is blank.
+**PrincipalSource** is supported only by Windows 10, Windows Server 2016, and later versions of the
+Windows operating system. For earlier versions, the property is blank.
 
 ## RELATED LINKS
 

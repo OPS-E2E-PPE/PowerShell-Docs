@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 06/27/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/register-objectevent?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/register-objectevent?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Register-ObjectEvent
 ---
+
 # Register-ObjectEvent
 
 ## SYNOPSIS
@@ -106,7 +106,7 @@ function  Enable-ProcessCreationEvent {
         EventName = 'EventArrived'
         SourceIdentifier = 'WMI.ProcessCreated'
         MessageData = 'Test'
-        Forward = $True
+        Forward = $true
     }
     Register-ObjectEvent @objectEventArgs
 }
@@ -141,7 +141,7 @@ variable.
 ```powershell
 $Timer = New-Object Timers.Timer
 $Timer.Interval = 500
-$Timer.Enabled = $True
+$Timer.Enabled = $true
 $objectEventArgs = @{
     InputObject = $Timer
     EventName = 'Elapsed'
@@ -150,8 +150,8 @@ $objectEventArgs = @{
 }
 $Job = Register-ObjectEvent @objectEventArgs
 $Job | Format-List -Property *
-& $Job.module {$Random}
-& $Job.module {$Random}
+& $Job.Module {$Random}
+& $Job.Module {$Random}
 ```
 
 ```Output
@@ -196,7 +196,7 @@ raised, instead of sending the event to the event queue. Enclose the commands in
 create a script block.
 
 The value of the **Action** parameter can include the `$Event`, `$EventSubscriber`, `$Sender`,
-`$EventArgs`, and `$Args` automatic variables. These variables provide information about the event
+`$EventArgs`, and `$args` automatic variables. These variables provide information about the event
 to the **Action** script block. For more information, see [about_Automatic_Variables](../Microsoft.PowerShell.Core/About/about_Automatic_Variables.md).
 
 When you specify an action, `Register-ObjectEvent` returns an event job object that represents
@@ -352,14 +352,17 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You cannot pipe objects to `Register-ObjectEvent`.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
-### None or System.Management.Automation.PSEventJob
+### None
 
-When you use the **Action** parameter, `Register-ObjectEvent` returns a
-**System.Management.Automation.PSEventJob** object. Otherwise, it does not generate any output.
+By default, this cmdlet returns no output.
+
+### System.Management.Automation.PSEventJob
+
+When you use the **Action** parameter, this cmdlet returns a **PSEventJob** object.
 
 ## NOTES
 

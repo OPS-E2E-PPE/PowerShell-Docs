@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Security.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Security
-ms.date: 02/03/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.security/unprotect-cmsmessage?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 10/18/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.security/unprotect-cmsmessage?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Unprotect-CmsMessage
 ---
+
 # Unprotect-CmsMessage
 
 ## SYNOPSIS
@@ -18,33 +18,35 @@ Decrypts content that has been encrypted by using the Cryptographic Message Synt
 ### ByWinEvent (Default)
 
 ```
-Unprotect-CmsMessage [-EventLogRecord] <PSObject> [-IncludeContext] [[-To] <CmsMessageRecipient[]>]
- [<CommonParameters>]
+Unprotect-CmsMessage [-EventLogRecord] <EventLogRecord> [[-To] <CmsMessageRecipient[]>]
+ [-IncludeContext] [<CommonParameters>]
 ```
 
 ### ByContent
 
 ```
-Unprotect-CmsMessage [-Content] <String> [-IncludeContext] [[-To] <CmsMessageRecipient[]>] [<CommonParameters>]
+Unprotect-CmsMessage [-Content] <string> [[-To] <CmsMessageRecipient[]>] [-IncludeContext]
+ [<CommonParameters>]
 ```
 
 ### ByPath
 
 ```
-Unprotect-CmsMessage [-Path] <String> [-IncludeContext] [[-To] <CmsMessageRecipient[]>] [<CommonParameters>]
+Unprotect-CmsMessage [-Path] <string> [[-To] <CmsMessageRecipient[]>] [-IncludeContext]
+ [<CommonParameters>]
 ```
 
 ### ByLiteralPath
 
 ```
-Unprotect-CmsMessage [-LiteralPath] <String> [-IncludeContext] [[-To] <CmsMessageRecipient[]>]
+Unprotect-CmsMessage [-LiteralPath] <string> [[-To] <CmsMessageRecipient[]>] [-IncludeContext]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-The `Unprotect-CmsMessage` cmdlet decrypts content that has been encrypted by using the
-Cryptographic Message Syntax (CMS) format.
+The `Unprotect-CmsMessage` cmdlet decrypts content that has been encrypted using the Cryptographic
+Message Syntax (CMS) format.
 
 The CMS cmdlets support encryption and decryption of content using the IETF standard format for
 cryptographically protecting messages, as documented by
@@ -52,7 +54,7 @@ cryptographically protecting messages, as documented by
 
 The CMS encryption standard uses public key cryptography, where the keys used to encrypt content
 (the public key) and the keys used to decrypt content (the private key) are separate. Your public
-key can be shared widely, and is not sensitive data. If any content is encrypted with this public
+key can be shared widely, and isn't sensitive data. If any content is encrypted with this public
 key, only your private key can decrypt it. For more information, see
 [Public-key cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography).
 
@@ -62,14 +64,13 @@ can specify content that you want to decrypt as a string, by the encryption even
 number, or by path to the encrypted content. The `Unprotect-CmsMessage` cmdlet returns the decrypted
 content.
 
-> [!NOTE]
-> This cmdlet is only available on Windows.
+Support for Linux and macOS was added in PowerShell 7.1.
 
 ## EXAMPLES
 
 ### Example 1: Decrypt a message
 
-In the following example, you decrypt content that is located at the literal path
+In the following example, you decrypt content that's located at the literal path
 `C:\Users\Test\Documents\PowerShell`. For the value of the required **To** parameter, this example
 uses the thumbprint of the certificate that was used to perform the encryption. The decrypted
 message, "Try the new Break All command," is the result.
@@ -84,6 +85,28 @@ Unprotect-CmsMessage -LiteralPath @parameters
 
 ```Output
 Try the new Break All command
+```
+
+### Example 2: Decrypt an encrypted event log message
+
+The following example gets an encrypted event from the PowerShell event log and decrypts it using
+`Unprotect-CmsMessage`.
+
+```powershell
+$event = Get-WinEvent Microsoft-Windows-PowerShell/Operational -MaxEvents 1 |
+    Where-Object Id -EQ 4104
+Unprotect-CmsMessage -EventLogRecord $event
+```
+
+### Example 3: Decrypt encrypted event log messages using the pipeline
+
+The following example gets all encrypted events from the PowerShell event log and decrypts them
+using `Unprotect-CmsMessage`.
+
+```powershell
+Get-WinEvent Microsoft-Windows-PowerShell/Operational |
+    Where-Object Id -EQ 4104 |
+    Unprotect-CmsMessage
 ```
 
 ## PARAMETERS
@@ -106,7 +129,7 @@ Accept wildcard characters: False
 
 ### -EventLogRecord
 
-Specifies an event log record ID that represents a CMS encryption operation.
+Specifies an event log record that contains a CMS encrypted message.
 
 ```yaml
 Type: System.Management.Automation.PSObject
@@ -121,6 +144,8 @@ Accept wildcard characters: False
 ```
 
 ### -IncludeContext
+
+Test
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -137,9 +162,9 @@ Accept wildcard characters: False
 ### -LiteralPath
 
 Specifies the path to encrypted content that you want to decrypt. Unlike **Path**, the value of
-**LiteralPath** is used exactly as it is typed. No characters are interpreted as wildcard
-characters. If the path includes escape characters, enclose it in single quotation marks. Single
-quotation marks tell PowerShell not to interpret any characters as escape sequences.
+**LiteralPath** is used exactly as it's typed. No characters are interpreted as wildcard characters.
+If the path includes escape characters, enclose it in single quotation marks. Single quotation marks
+tell PowerShell not to interpret any characters as escape sequences.
 
 ```yaml
 Type: System.String
@@ -173,7 +198,7 @@ Accept wildcard characters: False
 
 Specifies one or more CMS message recipients, identified in any of the following formats:
 
-- An actual certificate (as retrieved from the certificate provider).
+- An actual certificate (as retrieved from the Certificate provider).
 - Path to the a file containing the certificate.
 - Path to a directory containing the certificate.
 - Thumbprint of the certificate (used to look in the certificate store).
@@ -200,15 +225,17 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.Diagnostics.Eventing.Reader.EventLogRecord or System.String
+### System.Diagnostics.Eventing.Reader.EventLogRecord
 
-You can pipe an object containing encrypted content to `Unprotect-CmsMessage`.
+### System.String
+
+You can pipe an object containing encrypted content to this cmdlet.
 
 ## OUTPUTS
 
 ### System.String
 
-The unencrypted message.
+This cmdlet returns the unencrypted message.
 
 ## NOTES
 

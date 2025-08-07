@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 10/29/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/show-command?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 01/21/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/show-command?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Show-Command
 ---
@@ -22,6 +21,8 @@ Show-Command [[-Name] <String>] [-Height <Double>] [-Width <Double>] [-NoCommonP
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `Show-Command` cmdlet lets you create a PowerShell command in a command window. You can use the
 features of the command window to run the command or have it return the command to you.
@@ -48,7 +49,7 @@ In the PowerShell Integrated Scripting Environment (ISE), a variation of the `Sh
 is displayed by default. For information about using this command window, see the PowerShell ISE
 Help topics.
 
-This cmdlet was reintroduced in PowerShell 7. 
+This cmdlet was reintroduced in PowerShell 7.
 
 Because this cmdlet requires a user interface, it does not work on Windows Server Core or Windows
 Nano Server. This cmdlet is only available on Windows systems that support the Windows Desktop.
@@ -96,7 +97,7 @@ the **Height**, **Width**, and **ErrorPopup** parameters of the `Show-Command` c
 $PSDefaultParameterValues = @{
     "Show-Command:Height" = 700
     "Show-Command:Width" = 1000
-    "Show-Command:ErrorPopup" = $True
+    "Show-Command:ErrorPopup" = $true
 }
 ```
 
@@ -308,19 +309,31 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You cannot pipe input to `Show-Command`.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
-### None, System.String, System.Object
+### None
 
-When you use the **PassThru** parameter, `Show-Command` returns a command string. When you use the
-**ErrorPopup** parameter, `Show-Command` returns the command output (any object). Otherwise,
-`Show-Command` does not generate any output.
+By default, this cmdlet returns no output.
+
+### System.String
+
+When you use the **PassThru** parameter, this cmdlet returns a command string.
+
+### System.Object
+
+When you use the **ErrorPopup** parameter, this cmdlet returns the command output (any object).
 
 ## NOTES
+
+PowerShell includes the following aliases for `Show-Command`:
+
+- Windows:
+  - `shcm`
+
+This cmdlet is only available on Windows platforms.
 
 `Show-Command` does not work in remote sessions.
 
 ## RELATED LINKS
-

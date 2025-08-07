@@ -1,10 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 04/14/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/new-modulemanifest?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 12/09/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/new-modulemanifest?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: New-ModuleManifest
 ---
@@ -19,19 +18,22 @@ Creates a new module manifest.
 ### All
 
 ```
-New-ModuleManifest [-Path] <String> [-NestedModules <Object[]>] [-Guid <Guid>] [-Author <String>]
- [-CompanyName <String>] [-Copyright <String>] [-RootModule <String>] [-ModuleVersion <Version>]
- [-Description <String>] [-ProcessorArchitecture <ProcessorArchitecture>]
- [-PowerShellVersion <Version>] [-CLRVersion <Version>] [-DotNetFrameworkVersion <Version>]
- [-PowerShellHostName <String>] [-PowerShellHostVersion <Version>] [-RequiredModules <Object[]>]
- [-TypesToProcess <String[]>] [-FormatsToProcess <String[]>] [-ScriptsToProcess <String[]>]
- [-RequiredAssemblies <String[]>] [-FileList <String[]>] [-ModuleList <Object[]>]
- [-FunctionsToExport <String[]>] [-AliasesToExport <String[]>] [-VariablesToExport <String[]>]
- [-CmdletsToExport <String[]>] [-DscResourcesToExport <String[]>] [-CompatiblePSEditions <String[]>]
- [-PrivateData <Object>] [-Tags <String[]>] [-ProjectUri <Uri>] [-LicenseUri <Uri>] [-IconUri <Uri>]
- [-ReleaseNotes <String>] [-Prerelease <String>] [-RequireLicenseAcceptance]
- [-ExternalModuleDependencies <String[]>] [-HelpInfoUri <String>] [-PassThru]
- [-DefaultCommandPrefix <String>] [-WhatIf] [-Confirm]  [<CommonParameters>]
+New-ModuleManifest [-Path] <String> [-NestedModules <Object[]>] [-Guid <Guid>]
+ [-Author <String>] [-CompanyName <String>] [-Copyright <String>] [-RootModule <String>]
+ [-ModuleVersion <Version>] [-Description <String>]
+ [-ProcessorArchitecture <ProcessorArchitecture>] [-PowerShellVersion <Version>]
+ [-CLRVersion <Version>] [-DotNetFrameworkVersion <Version>]
+ [-PowerShellHostName <String>] [-PowerShellHostVersion <Version>]
+ [-RequiredModules <Object[]>] [-TypesToProcess <String[]>] [-FormatsToProcess <String[]>]
+ [-ScriptsToProcess <String[]>] [-RequiredAssemblies <String[]>] [-FileList <String[]>]
+ [-ModuleList <Object[]>] [-FunctionsToExport <String[]>] [-AliasesToExport <String[]>]
+ [-VariablesToExport <String[]>] [-CmdletsToExport <String[]>]
+ [-DscResourcesToExport <String[]>] [-CompatiblePSEditions <String[]>]
+ [-PrivateData <Object>] [-Tags <String[]>] [-ProjectUri <Uri>] [-LicenseUri <Uri>]
+ [-IconUri <Uri>] [-ReleaseNotes <String>] [-Prerelease <String>]
+ [-RequireLicenseAcceptance] [-ExternalModuleDependencies <String[]>]
+ [-HelpInfoUri <String>] [-PassThru] [-DefaultCommandPrefix <String>]
+ [-WhatIf] [-Confirm]  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -59,7 +61,7 @@ aren't specified in the command, in addition to required parameter values. Begin
 
 If you are planning to publish your module in the PowerShell Gallery, the manifest must contain
 values for certain properties. For more information, see
-[Required metadata for items published to the PowerShell Gallery](/powershell/scripting/gallery/how-to/publishing-packages/publishing-a-package#required-metadata-for-items-published-to-the-powershell-gallery)
+[Required metadata for items published to the PowerShell Gallery](/powershell/gallery/how-to/publishing-packages/publishing-a-package#required-metadata-for-items-published-to-the-powershell-gallery)
 in the Gallery documentation.
 
 ## EXAMPLES
@@ -215,7 +217,16 @@ This example creates a new module manifest. It uses the **PowerShellVersion** an
 **AliasesToExport** parameters to add values to the corresponding manifest keys.
 
 ```powershell
-New-ModuleManifest -PowerShellVersion 1.0 -AliasesToExport JKBC, DRC, TAC -Path C:\ps-test\ManifestTest.psd1
+$moduleSettings = @{
+    PowerShellVersion = 1.0
+    Path   = 'C:\ps-test\ManifestTest.psd1'
+    AliasesToExport   = @(
+      'JKBC'
+      'DRC'
+      'TAC'
+    )
+}
+New-ModuleManifest @moduleSettings
 ```
 
 ### Example 3 - Create a manifest that requires other modules
@@ -358,6 +369,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ClrVersion
+
+Specifies the minimum version of the Common Language Runtime (CLR) of the Microsoft .NET Framework
+that the module requires.
+
+> [!NOTE]
+> This setting is valid for the PowerShell Desktop edition only, such as Windows PowerShell 5.1,
+> and only applies to .NET Framework versions lower than 4.5. This requirement has no effect for
+> newer versions of PowerShell or the .NET Framework.
+
+```yaml
+Type: System.Version
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -CmdletsToExport
 
 Specifies the cmdlets that the module exports. Wildcards are permitted.
@@ -402,7 +435,7 @@ Accept wildcard characters: False
 ### -CompatiblePSEditions
 
 Specifies the module's compatible PSEditions. For information about PSEdition, see
-[Modules with compatible PowerShell Editions](/powershell/scripting/gallery/concepts/module-psedition-support).
+[Modules with compatible PowerShell Editions](/powershell/gallery/concepts/module-psedition-support).
 
 ```yaml
 Type: System.String[]
@@ -479,6 +512,11 @@ Accept wildcard characters: False
 ### -DotNetFrameworkVersion
 
 Specifies the minimum version of the Microsoft .NET Framework that the module requires.
+
+> [!NOTE]
+> This setting is valid for the PowerShell Desktop edition only, such as Windows PowerShell 5.1,
+> and only applies to .NET Framework versions lower than 4.5. This requirement has no effect for
+> newer versions of PowerShell or the .NET Framework.
 
 ```yaml
 Type: System.Version
@@ -617,7 +655,8 @@ contains information about the location of downloadable help files for the modul
 numbers of the newest help files for each supported locale.
 
 For information about Updatable Help, see [about_Updatable_Help](./About/about_Updatable_Help.md).
-For information about the HelpInfo XML file, see [Supporting Updatable Help](/powershell/scripting/developer/module/supporting-updatable-help).
+For information about the HelpInfo XML file, see
+[Supporting Updatable Help](/powershell/scripting/developer/module/supporting-updatable-help).
 
 This parameter was introduced in PowerShell 3.0.
 
@@ -762,7 +801,7 @@ Accept wildcard characters: False
 ### -Path
 
 Specifies the path and file name of the new module manifest. Enter a path and file name with a
-`.psd1` file name extension, such as `$pshome\Modules\MyModule\MyModule.psd1`. The **Path**
+`.psd1` file name extension, such as `$PSHOME\Modules\MyModule\MyModule.psd1`. The **Path**
 parameter is required.
 
 If you specify the path to an existing file, `New-ModuleManifest` replaces the file without warning
@@ -827,7 +866,8 @@ Accept wildcard characters: False
 ### -PowerShellVersion
 
 Specifies the minimum version of PowerShell that works with this module. For example, you can enter
-1.0, 2.0, or 3.0 as the parameter's value.
+1.0, 2.0, or 3.0 as the parameter's value. It must be in an X.X format. For example, if you submit
+`5`, PowerShell will throw an error.
 
 ```yaml
 Type: System.Version
@@ -977,7 +1017,7 @@ Accept wildcard characters: False
 
 ### -RequireLicenseAcceptance
 
-Flag to indicate whether the module requires explicit user acceptance for install, update, orsave.
+Flag to indicate whether the module requires explicit user acceptance for install, update, or save.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -1130,38 +1170,29 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ClrVersion
-
-Specifies the minimum version of the Common Language Runtime (CLR) of the Microsoft .NET Framework
-that the module requires.
-
-```yaml
-Type: System.Version
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
 
-You can't pipe input to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
-### None or System.String
+### None
 
-By default, `New-ModuleManifest` doesn't generate any output. However, if you use the **PassThru**
-parameter, it generates a **System.String** object representing the module manifest.
+By default, this cmdlet returns no output.
+
+### System.String
+
+When you use the **PassThru** parameter, this cmdlet returns a string representing the module
+manifest.
 
 ## NOTES
 
@@ -1171,8 +1202,14 @@ files encoded as **UTF8NoBOM**.
 Module manifests are usually optional. However, a module manifest is required to export an assembly
 that is installed in the global assembly cache.
 
-To add or change files in the `$pshome\Modules` directory, start PowerShell with the **Run as
+To add or change files in the `$PSHOME\Modules` directory, start PowerShell with the **Run as
 administrator** option.
+
+> [!NOTE]
+> Beginning in PowerShell 6.2, PowerShell attempts to load all the DLL files listed in **FileList**
+> property of the module manifest. Native DLLs is in the **FileList** fail to load in the process
+> and the error is ignored. All managed DLLs are loaded in the process. This behavior was removed in
+> PowerShell 7.1.
 
 In PowerShell 2.0, many parameters of `New-ModuleManifest` were mandatory, even though they weren't
 required in a module manifest. Beginning in PowerShell 3.0, only the **Path** parameter is
@@ -1202,4 +1239,3 @@ module and the caller's session state is the module's session state.
 [Test-ModuleManifest](Test-ModuleManifest.md)
 
 [about_Modules](./About/about_Modules.md)
-

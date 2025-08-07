@@ -1,10 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 03/26/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/enable-pssessionconfiguration?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 12/09/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/enable-pssessionconfiguration?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Enable-PSSessionConfiguration
 ---
@@ -21,6 +20,8 @@ Enable-PSSessionConfiguration [[-Name] <String[]>] [-Force] [-SecurityDescriptor
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `Enable-PSSessionConfiguration` cmdlet enables registered session configurations that have been
 disabled, such as by using the `Disable-PSSessionConfiguration` or `Disable-PSRemoting` cmdlets, or
@@ -232,18 +233,23 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Microsoft.PowerShell.Commands.PSSessionConfigurationCommands#PSSessionConfiguration, System.String
+### Microsoft.PowerShell.Commands.PSSessionConfigurationCommands#PSSessionConfiguration
 
-You can pipe a session configuration object or a string that contains the name of a session
-configuration to this cmdlet.
+You can pipe a session configuration object to this cmdlet.
+
+### System.String
+
+You can pipe a string that contains the name of a session configuration to this cmdlet.
 
 ## OUTPUTS
 
 ### None
 
-This cmdlet does not return any objects.
+This cmdlet returns no output.
 
 ## NOTES
+
+This cmdlet is only available on Windows platforms.
 
 To use this cmdlet, you must start PowerShell by using the **Run as administrator** option.
 
@@ -270,4 +276,3 @@ To use this cmdlet, you must start PowerShell by using the **Run as administrato
 [about_Session_Configurations](About/about_Session_Configurations.md)
 
 [about_Session_Configuration_Files](About/about_Session_Configuration_Files.md)
-

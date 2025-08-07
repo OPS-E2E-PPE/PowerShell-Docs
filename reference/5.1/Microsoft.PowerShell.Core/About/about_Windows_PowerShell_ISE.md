@@ -1,25 +1,25 @@
 ---
-keywords: powershell,cmdlet
+description: Describes the features and system requirements of Windows PowerShell Integrated Scripting Environment (ISE).
 Locale: en-US
 ms.date: 01/03/2018
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_windows_powershell_ise?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_windows_powershell_ise?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: about_Windows_PowerShell_ISE
 ---
 
-# About Windows PowerShell ISE
+# about_Windows_PowerShell_ISE
 
-## SHORT DESCRIPTION
+## Short description
 
 Describes the features and system requirements of Windows PowerShell
 Integrated Scripting Environment (ISE).
 
-## LONG DESCRIPTION
+## Long description
 
 Windows PowerShell ISE is a graphical host application for Windows PowerShell.
 In Windows PowerShell ISE, you can run commands and write, test, and debug
 scripts in a single Windows-based graphical user interface. Its features
-include Intellisense, multiline editing, tab completion, auto-save, syntax
+include IntelliSense, multiline editing, tab completion, auto-save, syntax
 coloring, selective execution, context-sensitive help, Show Command (compose
 commands in a window) and support for double-byte character sets and
 right-to-left languages.
@@ -38,7 +38,7 @@ Windows PowerShell ISE introduces two new features in Windows PowerShell 4.0.
 
 - Windows PowerShell ISE now supports both Windows PowerShell Workflow
   debugging and remote script debugging. For more Information, see
-  about_Debuggers.
+  [about_Debuggers][02].
 
 - IntelliSense support has been added for Windows PowerShell Desired State
   Configuration providers and configurations.
@@ -48,20 +48,13 @@ Windows PowerShell ISE introduces two new features in Windows PowerShell 4.0.
 Windows PowerShell ISE is installed, enabled, and ready to use in all
 supported versions of Windows.
 
-- In Windows 8.1, Windows 8, Windows Server 2012 R2, and Windows Server 2012,
-  on the Start screen, type PowerShell_ISE, and then click PowerShell_ISE or
+- In the Start menu, type PowerShell_ISE, and then click PowerShell_ISE or
   Windows PowerShell ISE.
 
-- In Windows Server 2012 R2 and Windows Server 2012, in Server Manager, on the
-  Tools menu, click Windows PowerShell ISE.
-
-- In earlier versions of Windows, click Start, All Programs, Accessories,
-  Windows PowerShell, and then click Windows PowerShell ISE.
-
 - In a Windows PowerShell console, Cmd.exe, or the Run or Search box in
-  Windows, type "PowerShell_ise.exe". You can also use the command-line
+  Windows, type `powershell_ise.exe`. You can also use the command-line
   parameters, including the NoProfile switch. For more information, see
-  [PowerShell_ISE.exe Console Help](about_powershell_ise_exe.md).
+  [about_PowerShell_ISE_exe][03].
 
 ## Running Interactive Commands
 
@@ -184,9 +177,9 @@ are in any Windows PowerShell host program. However, the items in your Windows
 PowerShell console profiles are not available in Windows PowerShell ISE.
 
 Instructions for moving and reconfiguring your profiles are available in
-Windows PowerShell ISE Help and in about_Profiles.
+Windows PowerShell ISE Help and in [about_Profiles][04].
 
-## NOTES
+## Notes
 
 Windows PowerShell ISE is an optional Windows Feature that is turned on by
 default on client and server versions of Windows. To enable and disable
@@ -203,28 +196,33 @@ a GUI.
 Windows PowerShell ISE is built on the Windows Presentation Foundation (WPF).
 If the graphical elements of Windows PowerShell ISE do not render correctly on
 your system, you might resolve the problem by adding or adjusting the "Disable
-WPF Hardware acceleration" graphics rendering settings on your system. For
-more information, see [Graphics Rendering Registry Settings](/dotnet/framework/wpf/graphics-multimedia/graphics-rendering-registry-settings)
-in the MSDN library.
+WPF Hardware acceleration" graphics rendering settings on your system. For more
+information, see
+[Graphics Rendering Registry Settings][01].
 
-## SEE ALSO
+## See also
 
-[about_Debuggers](about_Debuggers.md)
+- [about_Debuggers][02]
+- [about_Profiles][04]
+- [about_Updatable_Help][05]
+- [Show-Command][12]
+- [Get-Help][09]
+- [Save-Help][10]
+- [Update-Help][11]
+- [Get-IseSnippet][06]
+- [Import-IseSnippet][07]
+- [New-IseSnippet][08]
 
-[about_Profiles](about_Profiles.md)
-
-[about_Updatable_Help](about_Updatable_Help.md)
-
-[Get-Help](xref:Microsoft.PowerShell.Core.Get-Help)
-
-[Get-IseSnippet](xref:ISE.Get-IseSnippet)
-
-[Import-IseSnippet](xref:ISE.Import-IseSnippet)
-
-[New-IseSnippet](xref:ISE.New-IseSnippet)
-
-[Save-Help](xref:Microsoft.PowerShell.Core.Save-Help)
-
-[Show-Command](xref:Microsoft.PowerShell.Utility.Show-Command)
-
-[Update-Help](xref:Microsoft.PowerShell.Core.Update-Help)
+<!-- link references -->
+[01]: /dotnet/framework/wpf/graphics-multimedia/graphics-rendering-registry-settings
+[02]: about_Debuggers.md
+[03]: about_PowerShell_ISE_exe.md
+[04]: about_Profiles.md
+[05]: about_Updatable_Help.md
+[06]: xref:ISE.Get-IseSnippet
+[07]: xref:ISE.Import-IseSnippet
+[08]: xref:ISE.New-IseSnippet
+[09]: xref:Microsoft.PowerShell.Core.Get-Help
+[10]: xref:Microsoft.PowerShell.Core.Save-Help
+[11]: xref:Microsoft.PowerShell.Core.Update-Help
+[12]: xref:Microsoft.PowerShell.Utility.Show-Command

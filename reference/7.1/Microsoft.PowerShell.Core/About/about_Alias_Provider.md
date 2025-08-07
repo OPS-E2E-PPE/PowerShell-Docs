@@ -1,14 +1,16 @@
 ---
-keywords: powershell,cmdlet
+description: Alias
 Locale: en-US
 ms.date: 10/18/2018
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_alias_provider?view=powershell-7.1&WT.mc_id=ps-gethelp
+no-loc: [Alias, Definition, AllScope, Option, None, Constant, Private]
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_alias_provider?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
-title: Alias Provider
+title: about_Alias_Provider
 ---
-# Alias provider
+# about_Alias_Provider
 
 ## Provider name
+
 Alias
 
 ## Drives
@@ -38,28 +40,28 @@ The aliases have no child items.
 The **Alias** provider supports the following cmdlets, which are covered
 in this article.
 
-- [Get-Location](xref:Microsoft.PowerShell.Management.Get-Location)
-- [Set-Location](xref:Microsoft.PowerShell.Management.Set-Location)
-- [Get-Item](xref:Microsoft.PowerShell.Management.Get-Item)
-- [New-Item](xref:Microsoft.PowerShell.Management.New-Item)
-- [Remove-Item](xref:Microsoft.PowerShell.Management.Remove-Item)
-- [Clear-Item](xref:Microsoft.PowerShell.Management.Clear-Item)
+- [Get-Location][01]
+- [Set-Location][02]
+- [Get-Item][03]
+- [New-Item][04]
+- [Remove-Item][05]
+- [Clear-Item][06]
 
 PowerShell includes a set of cmdlets that are designed to view and to change
 aliases. When you use **Alias** cmdlets, you do not need to specify the
 `Alias:` drive in the name. This article does not cover working with **Alias**
 cmdlets.
 
-- [Export-Alias](xref:Microsoft.PowerShell.Utility.Export-Alias)
-- [Get-Alias](xref:Microsoft.PowerShell.Utility.Get-Alias)
-- [Import-Alias](xref:Microsoft.PowerShell.Utility.Import-Alias)
-- [New-Alias](xref:Microsoft.PowerShell.Utility.New-Alias)
-- [Set-Alias](xref:Microsoft.PowerShell.Utility.Set-Alias)
+- [Export-Alias][07]
+- [Get-Alias][08]
+- [Import-Alias][09]
+- [New-Alias][10]
+- [Set-Alias][11]
 
 ## Types exposed by this provider
 
-Each alias is an instance of the
-[System.Management.Automation.AliasInfo](/dotnet/api/system.management.automation.aliasinfo) class.
+Each alias is an instance of the [System.Management.Automation.AliasInfo][12]
+class.
 
 ## Navigating the Alias drive
 
@@ -83,10 +85,9 @@ path.
 
 > [!NOTE]
 > PowerShell uses aliases to allow you a familiar way to work with provider
-> paths. Commands such as `dir` and `ls` are now aliases for
-> [Get-ChildItem](xref:Microsoft.PowerShell.Management.Get-ChildItem),
-> `cd` is an alias for [Set-Location](xref:Microsoft.PowerShell.Management.Set-Location). and `pwd` is
-> an alias for [Get-Location](xref:Microsoft.PowerShell.Management.Get-Location).
+> paths. Commands such as `dir` and `ls` are now aliases on Windows and `dir`
+> on Linux and macOS for [Get-ChildItem][13], `cd` is an alias for
+> [Set-Location][02] and `pwd` is an alias for [Get-Location][01].
 
 ### Displaying the Contents of the Alias: drive
 
@@ -131,8 +132,8 @@ $Alias:ls
 ### Get all aliases for a specific cmdlet
 
 This command gets a list of the aliases that are associated with the
-`Get-ChildItem` cmdlet. It uses the **Definition** property, which stores
-the cmdlet name.
+`Get-ChildItem` cmdlet. It uses the **Definition** property, which stores the
+cmdlet name.
 
 ```powershell
 Get-Item -Path Alias:* | Where-Object {$_.Definition -eq "Get-ChildItem"}
@@ -143,13 +144,12 @@ Get-Item -Path Alias:* | Where-Object {$_.Definition -eq "Get-ChildItem"}
 ### Create an alias from the Alias: drive
 
 This command creates the `serv` alias for the `Get-Service` cmdlet. Because the
-current location is in the `Alias:` drive, the `-Path` parameter is not
-needed.
+current location is in the `Alias:` drive, the `-Path` parameter is not needed.
 
 This command also uses the `-Options` dynamic parameter to set the **AllScope**
-option on the alias. The `-Options` parameter is available in
-the `New-Item` cmdlet only when you are in the `Alias:` drive. The dot (`.`)
-indicates the current directory, which is the alias drive.
+option on the alias. The `-Options` parameter is available in the `New-Item`
+cmdlet only when you are in the `Alias:` drive. The dot (`.`) indicates the
+current directory, which is the `Alias:` drive.
 
 ```
 PS Alias:\> New-Item -Path . -Name serv -Value Get-Service -Options "AllScope"
@@ -161,7 +161,7 @@ You can create an alias for any item that invokes a command.
 This command creates the `np` alias for `Notepad.exe`.
 
 ```powershell
-New-Item -Path Alias:np -Value c:\windows\notepad.exe
+New-Item -Path Alias:np -Value C:\windows\notepad.exe
 ```
 
 ### Create an alias to a new function
@@ -177,7 +177,7 @@ When the command is complete, you can use either `CD32` or `go` to invoke the
 function.
 
 ```powershell
-function CD32 {Set-Location -Path c:\windows\system32}
+function CD32 {Set-Location -Path C:\windows\system32}
 Set-Item -Path Alias:go -Value CD32
 ```
 
@@ -194,7 +194,7 @@ cmdlet. The `-Options` parameter is available in `Set-Item` when you use it
 with the **Alias** or **Function** provider.
 
 ```powershell
-Set-Item -Path Alias:dir -Options "AllScope,ReadOnly"
+Set-Item -Path Alias:dir -Options "AllScope, ReadOnly"
 ```
 
 ### Change an aliases referenced command
@@ -249,8 +249,8 @@ You can use this command in any PowerShell drive.
 Remove-Item -Path Alias:serv
 ```
 
-This command deletes aliases that begin with "s".
-It does not delete read-only aliases.
+This command deletes aliases that begin with "s". It does not delete read-only
+aliases.
 
 ```powershell
 Clear-Item -Path Alias:s*
@@ -259,9 +259,9 @@ Clear-Item -Path Alias:s*
 ### Delete read-only aliases
 
 This command deletes all aliases from the current session, except those with a
-value of `Constant` for their **Options** property. The `-Force`
-parameter allows the command to delete aliases whose **Options** property has a
-value of `ReadOnly`.
+value of `Constant` for their **Options** property. The `-Force` parameter
+allows the command to delete aliases whose **Options** property has a value of
+`ReadOnly`.
 
 ```powershell
 Remove-Item Alias:* -Force
@@ -278,19 +278,19 @@ provider-enabled drive.
 Determines the value of the **Options** property of an alias.
 
 - **None**: No options. This value is the default.
-- **Constant**:The alias cannot be deleted and its properties cannot be changed.
-  **Constant** is available only when you create an alias. You cannot change the
-  option of an existing alias to **Constant**.
+- **Constant**:The alias cannot be deleted and its properties cannot be
+  changed. **Constant** is available only when you create an alias. You cannot
+  change the option of an existing alias to **Constant**.
 - **Private**:The alias is visible only in the current scope, not in the child
-   scopes.
-- **ReadOnly**:The properties of the alias cannot be changed except by using the
-  `-Force` parameter. You can use `Remove-Item` to delete the alias.
+  scopes.
+- **ReadOnly**:The properties of the alias cannot be changed except by using
+  the `-Force` parameter. You can use `Remove-Item` to delete the alias.
 - **AllScope**:The alias is copied to any new scopes that are created.
 
 #### Cmdlets supported
 
-- [New-Item](xref:Microsoft.PowerShell.Management.New-Item)
-- [Set-Item](xref:Microsoft.PowerShell.Management.Set-Item)
+- [New-Item][04]
+- [Set-Item][14]
 
 ## Using the pipeline
 
@@ -305,20 +305,37 @@ Beginning in Windows PowerShell 3.0, you can get customized help topics for
 provider cmdlets that explain how those cmdlets behave in a file system drive.
 
 To get the help topics that are customized for the file system drive, run a
-[Get-Help](xref:Microsoft.PowerShell.Core.Get-Help) command in a file system drive or use the `-Path`
-parameter of [Get-Help](xref:Microsoft.PowerShell.Core.Get-Help) to specify a file system drive.
+[Get-Help][15] command in a file system drive or use the `-Path` parameter of
+[Get-Help][15] to specify a file system drive.
 
 ```powershell
 Get-Help Get-ChildItem
 ```
 
 ```powershell
-Get-Help Get-ChildItem -Path alias:
+Get-Help Get-ChildItem -Path Alias:
 ```
 
 ## See also
 
-[about_Aliases](../About/about_Aliases.md)
+- [about_Aliases][16]
+- [about_Providers][17]
 
-[about_Providers](../About/about_Providers.md)
-
+<!-- External links -->
+[01]: xref:Microsoft.PowerShell.Management.Get-Location
+[02]: xref:Microsoft.PowerShell.Management.Set-Location
+[03]: xref:Microsoft.PowerShell.Management.Get-Item
+[04]: xref:Microsoft.PowerShell.Management.New-Item
+[05]: xref:Microsoft.PowerShell.Management.Remove-Item
+[06]: xref:Microsoft.PowerShell.Management.Clear-Item
+[07]: xref:Microsoft.PowerShell.Utility.Export-Alias
+[08]: xref:Microsoft.PowerShell.Utility.Get-Alias
+[09]: xref:Microsoft.PowerShell.Utility.Import-Alias
+[10]: xref:Microsoft.PowerShell.Utility.New-Alias
+[11]: xref:Microsoft.PowerShell.Utility.Set-Alias
+[12]: /dotnet/api/system.management.automation.aliasinfo
+[13]: xref:Microsoft.PowerShell.Management.Get-ChildItem
+[14]: xref:Microsoft.PowerShell.Management.Set-Item
+[15]: xref:Microsoft.PowerShell.Core.Get-Help
+[16]: about_Aliases.md
+[17]: about_Providers.md

@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 10/09/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/enable-psbreakpoint?view=powershell-7.1&WT.mc_id=ps-gethelp
+ms.date: 01/20/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/enable-psbreakpoint?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Enable-PSBreakpoint
 ---
@@ -16,16 +15,17 @@ Enables the breakpoints in the current console.
 
 ## SYNTAX
 
-### Id (Default)
-
-```
-Enable-PSBreakpoint [-PassThru] [-Id] <Int32[]> [-WhatIf] [-Confirm] [<CommonParameters>]
-```
-
-### Breakpoint
+### Breakpoint (Default)
 
 ```
 Enable-PSBreakpoint [-PassThru] [-Breakpoint] <Breakpoint[]> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
+```
+
+### Id
+
+```
+Enable-PSBreakpoint [-PassThru] [-Id] <Int32[]> [-Runspace <Runspace>] [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
@@ -42,7 +42,8 @@ Technically, this cmdlet changes the value of the **Enabled** property of a brea
 **True**.
 
 `Enable-PSBreakpoint` is one of several cmdlets designed for debugging PowerShell scripts. For more
-information about the PowerShell debugger, see [about_Debuggers](../Microsoft.PowerShell.Core/About/about_Debuggers.md).
+information about the PowerShell debugger, see
+[about_Debuggers](../Microsoft.PowerShell.Core/About/about_Debuggers.md).
 
 ## EXAMPLES
 
@@ -114,6 +115,25 @@ Enable-PSBreakpoint -Breakpoint $B
 
 This example is equivalent to running `Enable-PSBreakpoint -Id 3, 5`.
 
+### Example 5: Enable a breakpoint in a runspace
+
+In this example, a job is started with a breakpoint is set to break then disabled. The runspace is
+stored in a variable and passed to the `Get-PSBreakpoint` command with the **Runspace** parameter.
+The output of `Get-PSBreakpoint` is piped to `Enable-PSBreakpoint` to enable the breakpoint in the
+runspace.
+
+```powershell
+Start-Job -ScriptBlock {
+    $bp = Set-PSBreakpoint -Command Start-Sleep
+    Disable-PSBreakpoint $bp
+    Start-Sleep -Seconds 10
+}
+
+$runspace = Get-Runspace -Id 1
+
+Get-PSBreakpoint -Runspace $runspace | Enable-Breakpoint -Runspace $runspace
+```
+
 ## PARAMETERS
 
 ### -Breakpoint
@@ -169,6 +189,25 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Runspace
+
+Specifies the Id of a **Runspace** object so you can interact with breakpoints in the specified
+runspace.
+
+This parameter was added in PowerShell 7.2.
+
+```yaml
+Type: Runspace
+Parameter Sets: Id
+Aliases: RunspaceId
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
 ### -Confirm
 
 Prompts you for confirmation before running the cmdlet.
@@ -205,21 +244,32 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.Management.Automation.Breakpoint
 
-You can pipe a breakpoint object to `Enable-PSBreakpoint`.
+You can pipe a breakpoint object to this cmdlet.
 
 ## OUTPUTS
 
-### None or System.Management.Automation.Breakpoint
+### None
 
-When you use the **PassThru** parameter, `Enable-PSBreakpoint` returns a breakpoint object that represents that breakpoint that was enabled. Otherwise, this cmdlet doesn't generate any output.
+By default, this cmdlet returns no output.
+
+### System.Management.Automation.Breakpoint
+
+When you use the **PassThru** parameter, this cmdlet returns a breakpoint object representing the
+enabled breakpoint.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Enable-PSBreakpoint`:
+
+- All platforms:
+  - `ebp`
 
 - The `Enable-PSBreakpoint` cmdlet doesn't generate an error if you try to enable a breakpoint that
   is already enabled. As such, you can enable all breakpoints without error, even when only a few
@@ -239,4 +289,3 @@ When you use the **PassThru** parameter, `Enable-PSBreakpoint` returns a breakpo
 [Remove-PSBreakpoint](Remove-PSBreakpoint.md)
 
 [Set-PSBreakpoint](Set-PSBreakpoint.md)
-

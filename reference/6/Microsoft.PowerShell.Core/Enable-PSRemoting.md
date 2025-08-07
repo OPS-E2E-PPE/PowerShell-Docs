@@ -1,10 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 07/16/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/enable-psremoting?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 11/25/2024
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/enable-psremoting?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Enable-PSRemoting
 ---
@@ -16,10 +15,13 @@ Configures the computer to receive remote commands.
 ## SYNTAX
 
 ```
-Enable-PSRemoting [-Force] [-SkipNetworkProfileCheck] [-WhatIf] [-Confirm] [<CommonParameters>]
+Enable-PSRemoting [-Force] [-SkipNetworkProfileCheck] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
+> **This cmdlet is only available on the Windows platform.**
 
 The `Enable-PSRemoting` cmdlet configures the computer to receive PowerShell remote commands that
 are sent by using the WS-Management technology. WS-Management based PowerShell remoting is currently
@@ -29,9 +31,9 @@ PowerShell remoting is enabled by default on Windows Server platforms. You can u
 `Enable-PSRemoting` to enable PowerShell remoting on other supported versions of Windows and to
 re-enable remoting if it becomes disabled.
 
-You have to run this command only one time on each computer that will receive commands. You do not
-have to run it on computers that only send commands. Because the configuration starts listeners to
-accept remote connections, it is prudent to run it only where it is needed.
+You need to run this command only one time on each computer that receive commands. You don't need to
+run it on computers that only send commands. Because the configuration starts listeners, it's
+prudent to run it only where it's needed.
 
 Enabling PowerShell remoting on client versions of Windows when the computer is on a public network
 is normally disallowed, but you can skip this restriction by using the **SkipNetworkProfileCheck**
@@ -44,14 +46,14 @@ remoting endpoint will be configured that runs PowerShell 6.2. If you run `Enabl
 running PowerShell 7-preview, a remoting endpoint will be configured that runs PowerShell 7-preview.
 
 `Enable-PSRemoting` creates two remoting endpoint configurations as needed. If the endpoint
-configurations already exist, then they are simply ensured to be enabled. The created configurations
-are identical but have different names. One will have a simple name corresponding to the PowerShell
-version that hosts the session. The other configuration name contains more detailed information
-about the PowerShell version which hosts the session. For example, when running `Enable-PSRemoting`
-in PowerShell 6.2, you will get two configured endpoints named **PowerShell.6**, **PowerShell.6.2.2**.
-This allows you to create a connection to the latest PowerShell 6 host version by using the simple
-name **PowerShell.6**. Or you can connect to a specific PowerShell host version by using the longer
-name **PowerShell.6.2.2**.
+configurations already exist, then they are simply ensured to be enabled. The created
+configurations are identical but have different names. One will have a simple name corresponding to
+the PowerShell version that hosts the session. The other configuration name contains more detailed
+information about the PowerShell version which hosts the session. For example, when running
+`Enable-PSRemoting` in PowerShell 6.2, you will get two configured endpoints named
+**PowerShell.6**, **PowerShell.6.2.2**. This allows you to create a connection to the latest
+PowerShell 6 host version by using the simple name **PowerShell.6**. Or you can connect to a
+specific PowerShell host version by using the longer name **PowerShell.6.2.2**.
 
 To use the newly enabled remoting endpoints, you must specify them by name with the
 **ConfigurationName** parameter when creating a remote connection using the
@@ -71,13 +73,18 @@ The `Enable-PSRemoting` cmdlet performs the following operations:
 - Restarts the WinRM service to make the preceding changes effective.
 
 To run this cmdlet on the Windows platform, start PowerShell by using the Run as administrator
-option. This cmdlet is not available on Linux or MacOS versions of PowerShell.
+option. This cmdlet is not available on Linux or macOS versions of PowerShell.
 
 > [!CAUTION]
 > This cmdlet does not affect remote endpoint configurations created by Windows PowerShell.
 > It only affects endpoints created with PowerShell version 6 and greater. To enable and
 > disable PowerShell remoting endpoints that are hosted by Windows PowerShell, run the
 > `Enable-PSRemoting` cmdlet from within a Windows PowerShell session.
+
+For more information about using PowerShell remoting, see the following articles:
+
+- [about_Remote_Requirements](about/about_Remote_Requirements.md)
+- [about_Remote](about/about_Remote.md)
 
 ## EXAMPLES
 
@@ -90,9 +97,9 @@ Enable-PSRemoting
 ```
 
 ```Output
-WARNING: PowerShell remoting has been enabled only for PowerShell Core configurations and does not
-affect Windows PowerShell remoting configurations. Run this cmdlet in Windows PowerShell to affect
-all PowerShell remoting configurations.
+WARNING: PowerShell remoting has been enabled only for PowerShell Core configurations and
+does not affect Windows PowerShell remoting configurations. Run this cmdlet in Windows
+PowerShell to affect all PowerShell remoting configurations.
 ```
 
 ### Example 2: Configure a computer to receive remote commands without a confirmation prompt
@@ -105,9 +112,9 @@ Enable-PSRemoting -Force
 ```
 
 ```Output
-WARNING: PowerShell remoting has been enabled only for PowerShell Core configurations and does not
-affect Windows PowerShell remoting configurations. Run this cmdlet in Windows PowerShell to affect
-all PowerShell remoting configurations.
+WARNING: PowerShell remoting has been enabled only for PowerShell Core configurations and
+does not affect Windows PowerShell remoting configurations. Run this cmdlet in Windows
+PowerShell to affect all PowerShell remoting configurations.
 ```
 
 ### Example 3: Allow remote access on clients
@@ -118,7 +125,7 @@ Use `Get-NetFirewallRule` to see a list of rules. Before enabling the firewall r
 security settings in the rule to verify that the configuration is appropriate for your environment.
 
 ```powershell
-Get-NetFirewallRule -Name 'WINRM*' | Select-Object Name
+Get-NetFirewallRule -Name 'WINRM*' | Select-Object -Property Name
 ```
 
 ```Output
@@ -157,8 +164,8 @@ The first command enables PowerShell remoting on the computer.
 The second command lists the endpoint configurations.
 
 The third command creates a remote PowerShell session to the same machine, specifying the
-**PowerShell.6** endpoint by name. The remote session will be hosted with the latest PowerShell 6
-version (6.2.2).
+**PowerShell.7** endpoint by name. The remote session will be hosted with the latest PowerShell 7
+version (7.3.0).
 
 The last command accesses the `$PSVersionTable` variable in the remote session to display the
 PowerShell version that is hosting the session.
@@ -168,28 +175,30 @@ Enable-PSRemoting -Force
 
 Get-PSSessionConfiguration
 
-$session = New-PSSession -ComputerName localhost -ConfigurationName PowerShell.6
+$session = New-PSSession -ComputerName localhost -ConfigurationName PowerShell.7
 
 Invoke-Command -Session $session -ScriptBlock { $PSVersionTable }
 ```
 
 ```Output
-WARNING: PowerShell remoting has been enabled only for PowerShell Core configurations and does not
-affect Windows PowerShell remoting configurations. Run this cmdlet in Windows PowerShell to affect
-all PowerShell remoting configurations.
+WARNING: PowerShell remoting has been enabled only for PowerShell Core configurations and
+does not affect Windows PowerShell remoting configurations. Run this cmdlet in Windows
+PowerShell to affect all PowerShell remoting configurations.
 
-Name          : PowerShell.6
-PSVersion     : 6.2
+Name          : PowerShell.7
+PSVersion     : 7.3
 StartupScript :
 RunAsUser     :
-Permission    : NT AUTHORITY\INTERACTIVE AccessAllowed, BUILTIN\Administrators AccessAllowed,
+Permission    : NT AUTHORITY\INTERACTIVE AccessAllowed,
+                BUILTIN\Administrators AccessAllowed,
                 BUILTIN\Remote Management Users AccessAllowed
 
-Name          : PowerShell.6.2.2
-PSVersion     : 6.2
+Name          : PowerShell.7.3.0
+PSVersion     : 7.3
 StartupScript :
 RunAsUser     :
-Permission    : NT AUTHORITY\INTERACTIVE AccessAllowed, BUILTIN\Administrators AccessAllowed,
+Permission    : NT AUTHORITY\INTERACTIVE AccessAllowed,
+                BUILTIN\Administrators AccessAllowed,
                 BUILTIN\Remote Management Users AccessAllowed
 
 Name                           Value
@@ -210,22 +219,6 @@ OS                             Microsoft Windows 10.0.18363
 > `Get-NetFirewallRule` cmdlet to list the names of the rules on your system.
 
 ## PARAMETERS
-
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Force
 
@@ -249,7 +242,7 @@ Indicates that this cmdlet enables remoting on client versions of the Windows op
 the computer is on a public network. This parameter enables a firewall rule for public networks that
 allows remote access only from computers in the same local subnet.
 
-This parameter does not affect server versions of the Windows operating system, which, by default,
+This parameter doesn't affect server versions of the Windows operating system, which, by default,
 have a local subnet firewall rule for public networks. If the local subnet firewall rule is disabled
 on a server version, `Enable-PSRemoting` re-enables it, regardless of the value of this parameter.
 
@@ -270,10 +263,25 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WhatIf
 
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+Shows what would happen if the cmdlet runs. The cmdlet isn't run.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -291,13 +299,14 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
 
-You cannot pipe input to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
@@ -306,6 +315,8 @@ You cannot pipe input to this cmdlet.
 This cmdlet returns strings that describe its results.
 
 ## NOTES
+
+This cmdlet is only available on Windows platforms.
 
 On server versions of the Windows operating system, `Enable-PSRemoting` creates firewall rules for
 private and domain networks that allow remote access, and creates a firewall rule for public
@@ -322,7 +333,7 @@ networks that removes the local subnet restriction and allows remote access , us
 `Set-NetFirewallRule -Name "WINRM-HTTP-In-TCP-PUBLIC" -RemoteAddress Any`
 
 `Enable-PSRemoting` enables all session configurations by setting the value of the **Enabled**
-property of all session configurations to `$True`.
+property of all session configurations to `$true`.
 
 `Enable-PSRemoting` removes the **Deny_All** and **Network_Deny_All** settings. This provides remote
 access to session configurations that were reserved for local use.

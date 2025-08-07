@@ -1,10 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 01/10/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/disable-psremoting?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 10/06/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/disable-psremoting?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Disable-PSRemoting
 ---
@@ -130,11 +129,11 @@ configurations as long as they are connecting locally (also known as loopback) a
 credentials.
 
 ```powershell
-Disable-PSRemoting -force
-Get-PSSessionConfiguration | Format-Table -Property Name, Permission -Auto
+Disable-PSRemoting -Force
+Get-PSSessionConfiguration | Format-Table -Property Name, Permission -AutoSize
 
 Enable-PSRemoting -Force
-Get-PSSessionConfiguration | Format-Table -Property Name, Permission -Auto
+Get-PSSessionConfiguration | Format-Table -Property Name, Permission -AutoSize
 ```
 
 ```Output
@@ -288,10 +287,10 @@ the configuration.
 
 ```powershell
 Disable-PSRemoting -Force
-Get-PSSessionConfiguration | Format-Table -Property Name, Permission -Auto
+Get-PSSessionConfiguration | Format-Table -Property Name, Permission -AutoSize
 
 Set-PSSessionConfiguration -Name Microsoft.ServerManager -AccessMode Remote -Force
-Get-PSSessionConfiguration | Format-Table -Property Name, Permission -Auto
+Get-PSSessionConfiguration | Format-Table -Property Name, Permission -AutoSize
 ```
 
 ```Output
@@ -322,6 +321,21 @@ WithProfile                   NT AUTHORITY\NETWORK AccessDenied, BUILTIN\Adminis
 
 ## PARAMETERS
 
+### -Force
+Forces the command to run without asking for user confirmation.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Confirm
 
 Prompts you for confirmation before running the cmdlet.
@@ -334,21 +348,6 @@ Aliases: cf
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Force
-Forces the command to run without asking for user confirmation.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -380,13 +379,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-You cannot pipe any objects to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### None
 
-This cmdlet does not generate any output.
+This cmdlet returns no output.
 
 ## NOTES
 

@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.ODataUtils-help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.ODataUtils
 ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.odatautils/export-odataendpointproxy?view=powershell-5.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.odatautils/export-odataendpointproxy?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Export-ODataEndpointProxy
 ---
@@ -215,7 +214,7 @@ commands.
 
 This cmdlet copies a binary module, module manifest, and formatting file, if applicable, to the
 specified folder. If you specify only the name of the module, `Export-ODataEndpointProxy` saves the
-module in the `$home\Documents\WindowsPowerShell\Modules` folder. If you specify a path, the cmdlet
+module in the `$HOME\Documents\WindowsPowerShell\Modules` folder. If you specify a path, the cmdlet
 creates the module folder in that path.
 
 ```yaml
@@ -336,7 +335,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[OData Library](https://technet.microsoft.com/windowsserver/hh525392(v=vs.85).aspx?f=255&MSPPError=-2147217396)
+[OData Library](/previous-versions/dotnet/wcf-data-services/hh525392(v=vs.103))
 
 [What is the OData Protocol?](https://www.odata.org/)
 

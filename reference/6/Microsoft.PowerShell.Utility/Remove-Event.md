@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/remove-event?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/remove-event?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Remove-Event
 ---
@@ -29,10 +28,11 @@ Remove-Event [-EventIdentifier] <Int32> [-WhatIf] [-Confirm] [<CommonParameters>
 ```
 
 ## DESCRIPTION
-The **Remove-Event** cmdlet deletes events from the event queue in the current session.
 
-This cmdlet deletes only the events currently in the queue.
-To cancel event registrations or unsubscribe, use the Unregister-Event cmdlet.
+The `Remove-Event` cmdlet deletes events from the event queue in the current session.
+
+This cmdlet deletes only the events currently in the queue. To cancel event registrations or
+unsubscribe, use the `Unregister-Event` cmdlet.
 
 ## EXAMPLES
 
@@ -63,8 +63,9 @@ This command deletes all events from the event queue.
 ## PARAMETERS
 
 ### -EventIdentifier
-Specifies the event identifier for which the cmdlet deletes.
-An *EventIdentifier* or *SourceIdentifier* parameter is required in every command.
+
+Specifies the event identifier for which the cmdlet deletes. An **EventIdentifier** or
+**SourceIdentifier** parameter is required in every command.
 
 ```yaml
 Type: System.Int32
@@ -79,9 +80,9 @@ Accept wildcard characters: False
 ```
 
 ### -SourceIdentifier
-Specifies the source identifier for which this cmdlet deletes events from.
-Wildcards are not permitted.
-An *EventIdentifier* or *SourceIdentifier* parameter is required in every command.
+
+Specifies the source identifier for which this cmdlet deletes events from. Wildcards are not
+permitted. An **EventIdentifier** or **SourceIdentifier** parameter is required in every command.
 
 ```yaml
 Type: System.String
@@ -96,6 +97,7 @@ Accept wildcard characters: False
 ```
 
 ### -Confirm
+
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
@@ -111,8 +113,8 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+
+Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -127,23 +129,30 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.Management.Automation.PSEventArgs
-You can pipe events from Get-Event to **Remove-Event**.
+
+You can pipe events from `Get-Event` to this cmdlet.
 
 ## OUTPUTS
 
 ### None
-The cmdlet does not generate any output.
+
+This cmdlet returns no output.
 
 ## NOTES
 
-* Events, event subscriptions, and the event queue exist only in the current session. If you close the current session, the event queue is discarded and the event subscription is canceled.
+No event sources available on the Linux or macOS platforms.
 
-*
+Events, event subscriptions, and the event queue exist only in the current session. If you close the
+current session, the event queue is discarded and the event subscription is canceled.
 
 ## RELATED LINKS
 

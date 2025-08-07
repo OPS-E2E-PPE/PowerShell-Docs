@@ -1,10 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 08/22/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/set-psdebug?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 12/09/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/set-psdebug?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Set-PSDebug
 ---
@@ -196,25 +195,26 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
 
-You can't pipeline input to this cmdlet.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### None
 
-This cmdlet doesn't return any output.
+This cmdlet returns no output.
 
 ## NOTES
 
 ## RELATED LINKS
 
-[about_Debuggers](./About/about_Debuggers.md)
+[about_Debuggers](About/about_Debuggers.md)
 
 [Debug-Process](../Microsoft.PowerShell.Management/Debug-Process.md)
 

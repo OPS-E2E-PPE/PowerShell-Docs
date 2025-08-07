@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Management.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Management
-ms.date: 08/25/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.management/copy-item?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 11/04/2024
+Yuponline version: https://learn.microsoft.com/powershell/module/microsoft.powershell.management/copy-item?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Copy-Item
 ---
@@ -16,22 +15,41 @@ Copies an item from one location to another.
 
 ## SYNTAX
 
-### Path (Default)
+### Path (Default) - FileSystem provider
 
 ```
-Copy-Item [-Path] <String[]> [[-Destination] <String>] [-Container] [-Force] [-Filter <String>]
- [-Include <String[]>] [-Exclude <String[]>] [-Recurse] [-PassThru] [-Credential <PSCredential>]
- [-WhatIf] [-Confirm] [-UseTransaction] [-FromSession <PSSession>] [-ToSession <PSSession>]
+Copy-Item [-Path] <String[]> [[-Destination] <String>] [-Container] [-Force]
+ [-Filter <String>] [-Include <String[]>] [-Exclude <String[]>] [-Recurse]
+ [-PassThru] [-Credential <PSCredential>] [-WhatIf] [-Confirm] [-UseTransaction]
+ [-FromSession <PSSession>] [-ToSession <PSSession>] [<CommonParameters>]
+```
+
+### LiteralPath - FileSystem provider
+
+```
+Copy-Item -LiteralPath <String[]> [[-Destination] <String>] [-Container]
+ [-Force] [-Filter <String>] [-Include <String[]>] [-Exclude <String[]>]
+ [-Recurse] [-PassThru] [-Credential <PSCredential>] [-WhatIf] [-Confirm]
+ [-UseTransaction] [-FromSession <PSSession>] [-ToSession <PSSession>]
  [<CommonParameters>]
 ```
 
-### LiteralPath
+### Path (Default) - All providers
 
 ```
-Copy-Item -LiteralPath <String[]> [[-Destination] <String>] [-Container] [-Force] [-Filter <String>]
- [-Include <String[]>] [-Exclude <String[]>] [-Recurse] [-PassThru] [-Credential <PSCredential>]
- [-WhatIf] [-Confirm] [-UseTransaction] [-FromSession <PSSession>] [-ToSession <PSSession>]
+Copy-Item [-Path] <String[]> [[-Destination] <String>] [-Container] [-Force]
+ [-Filter <String>] [-Include <String[]>] [-Exclude <String[]>] [-Recurse]
+ [-PassThru] [-Credential <PSCredential>] [-WhatIf] [-Confirm] [-UseTransaction]
  [<CommonParameters>]
+```
+
+### LiteralPath - All providers
+
+```
+Copy-Item -LiteralPath <String[]> [[-Destination] <String>] [-Container]
+ [-Force] [-Filter <String>] [-Include <String[]>] [-Exclude <String[]>]
+ [-Recurse] [-PassThru] [-Credential <PSCredential>] [-WhatIf] [-Confirm]
+ [-UseTransaction] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -63,19 +81,17 @@ Copy-Item "C:\Wabash\Logfiles\mar1604.log.txt" -Destination "C:\Presentation"
 This example copies the contents of the `C:\Logfiles` directory into the existing `C:\Drawings`
 directory. The `Logfiles` directory isn't copied.
 
-If the `Logfiles` directory contains files in subdirectories, those subdirectories are copied with
-their file trees intact. By default, the **Container** parameter is set to **True**, which preserves
-the directory structure.
+If the `Logfiles` directory has files in subdirectories, those subdirectories are copied with their
+file trees intact. By default, the **Container** parameter is set to **True**, which preserves the
+directory structure.
 
 ```powershell
 Copy-Item -Path "C:\Logfiles\*" -Destination "C:\Drawings" -Recurse
 ```
 
 > [!NOTE]
-> If you need to include the `Logfiles` directory in the copy, remove the `\*` from the **Path**.
-> For example:
->
-> `Copy-Item -Path "C:\Logfiles" -Destination "C:\Drawings" -Recurse`
+> If the path `C:\Drawings` doesn't exist the cmdlet copies all the files from the `Logfiles`
+> folder tree into a single folder `C:\Drawings`, overwriting any files with the same name.
 
 ### Example 3: Copy directory and contents to a new directory
 
@@ -100,7 +116,7 @@ Copy-Item -Path "C:\Logfiles" -Destination "C:\Drawings\Logs" -Recurse
 This example uses the `Copy-Item` cmdlet to copy the `Get-Widget.ps1` script from the
 `\\Server01\Share` directory to the `\\Server12\ScriptArchive` directory. As part of the copy
 operation, the command changes the item name from `Get-Widget.ps1` to `Get-Widget.ps1.txt`, so it
-can be attached to email messages.
+can be safely attached to email messages.
 
 ```powershell
 Copy-Item "\\Server01\Share\Get-Widget.ps1" -Destination "\\Server12\ScriptArchive\Get-Widget.ps1.txt"
@@ -125,10 +141,10 @@ Copy-Item "D:\Folder001\test.log" -Destination "C:\Folder001_Copy\" -ToSession $
 A session is created to the remote computer named **Server01** with the credential of
 `Contoso\User01` and stores the results in the variable named `$Session`.
 
-The `Copy-Item` cmdlet copies the `D:\Folder002` folder to the
-`C:\Folder002_Copy` directory on the remote computer using the session information stored in the
-`$Session` variable. Any subfolders or files are not copied without using the **Recurse** switch.
-The operation creates the `Folder002_Copy` folder if it doesn't already exist.
+The `Copy-Item` cmdlet copies the `D:\Folder002` folder to the `C:\Folder002_Copy` directory on the
+remote computer using the session information stored in the `$Session` variable. Any subfolders or
+files aren't copied without using the **Recurse** switch. The operation creates the `Folder002_Copy`
+folder if it doesn't already exist.
 
 ```powershell
 $Session = New-PSSession -ComputerName "Server02" -Credential "Contoso\User01"
@@ -157,9 +173,7 @@ A session is created to the remote computer named **Server01** with the credenti
 
 The `Copy-Item` cmdlet copies `scriptingexample.ps1` from the `D:\Folder004` folder to the
 `C:\Folder004_Copy` folder on the remote computer using the session information stored in the
-`$Session` variable. As part of the copy operation, the command changes the item name from
-`scriptingexample.ps1` to `scriptingexample_copy.ps1`, so it can be attached to email messages. The
-original file isn't deleted.
+`$Session` variable. The original file isn't deleted.
 
 ```powershell
 $Session = New-PSSession -ComputerName "Server04" -Credential "Contoso\User01"
@@ -187,7 +201,7 @@ A session is created to the remote computer named **Server01** with the credenti
 
 The `Copy-Item` cmdlet copies the entire contents from the remote `C:\MyRemoteData\scripts` folder
 to the local `D:\MyLocalData` folder using the session information stored in the `$Session`
-variable. If the scripts folder contains files in subfolders, those subfolders are copied with their
+variable. If the scripts folder has files in subfolders, those subfolders are copied with their
 file trees intact.
 
 ```powershell
@@ -203,7 +217,7 @@ A session is created to the remote computer named **Server01** with the credenti
 The `Copy-Item` cmdlet copies the entire contents from the remote `C:\MyRemoteData\scripts` folder
 to the local `D:\MyLocalData\scripts` folder using the session information stored in the `$Session`
 variable. Because the **Recurse** parameter is used, the operation creates the scripts folder if it
-doesn't already exist. If the scripts folder contains files in subfolders, those subfolders are
+doesn't already exist. If the scripts folder has files in subfolders, those subfolders are
 copied with their file trees intact.
 
 ```powershell
@@ -247,26 +261,116 @@ This is file3.txt in the subfolder
 ```
 
 The `Copy-Item` cmdlet has the **Container** parameter set to `$false`. This causes the contents of
-the source folder to be copied but does not preserve the folder structure. Notice that files with
+the source folder to be copied but doesn't preserve the folder structure. Notice that files with
 the same name are overwritten in the destination folder.
 
-## PARAMETERS
+### Example 13: Using filters to copy items without recursion
 
-### -Confirm
+This example shows the results using the **Include** parameter to select the items to be copied.
 
-Prompts you for confirmation before running the cmdlet.
+This example uses the following folder structure containing the files to be copied:
 
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
+- `D:\temp\tree\example.ps1`
+- `D:\temp\tree\example.txt`
+- `D:\temp\tree\examples\`
+- `D:\temp\tree\examples\example_1.txt`
+- `D:\temp\tree\examples\example_2.txt`
+- `D:\temp\tree\examples\subfolder\`
+- `D:\temp\tree\examples\subfolder\test.txt`
 
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
+In this example, `Copy-Item` is called with a wildcard for both the **Path** and **Include**
+parameters. Specifying a wildcard for the **Path** parameter ensures that it processes all files and
+folders that match `D:\temp\tree\*`. The **Include** parameter filters the list of items to process,
+limiting the operation to only those paths that begin with `ex`.
+
+```powershell
+PS D:\temp\test\out> Copy-Item -Path D:\temp\tree\* -Include ex*
+PS D:\temp\test\out> (Get-ChildItem -Recurse).FullName
+D:\temp\out\examples
+D:\temp\out\example.ps1
+D:\temp\out\example.txt
 ```
+
+The **Include** parameter is applied to the contents of `D:\temp\tree` folder to copy all items that
+match `ex*`. Notice that, without recursion, the `D:\temp\out\examples` folder is copied, but none
+of its contents are copied.
+
+### Example 14: Using filters to copy items with recursion
+
+This example shows the results using the **Include** parameter to select the items to be copied.
+
+This example uses the following folder structure containing the files to be copied:
+
+- `D:\temp\tree\example.ps1`
+- `D:\temp\tree\example.txt`
+- `D:\temp\tree\examples\`
+- `D:\temp\tree\examples\example_1.txt`
+- `D:\temp\tree\examples\example_2.txt`
+- `D:\temp\tree\examples\subfolder\`
+- `D:\temp\tree\examples\subfolder\test.txt`
+
+In this example, `Copy-Item` is called with a wildcard for both the **Path** and **Include**
+parameters. Specifying a wildcard for the **Path** parameter ensures that it processes all the files
+and folders that match `D:\temp\tree\*`. The **Include** parameter filters the list of items to
+process, limiting the operation to only those paths that begin with `ex`.
+
+```powershell
+D:\temp\out> Copy-Item -Path D:\temp\tree\* -Include ex* -Recurse
+D:\temp\out> (Get-ChildItem -Recurse).FullName
+D:\temp\out\examples
+D:\temp\out\example.ps1
+D:\temp\out\example.txt
+D:\temp\out\examples\subfolder
+D:\temp\out\examples\example_1.txt
+D:\temp\out\examples\example_2.txt
+D:\temp\out\examples\subfolder\test.txt
+```
+
+The **Include** parameter is applied to the contents of `D:\temp\tree` folder to copy all items that
+match `ex*`. Notice that, with recursion, the `D:\temp\out\examples` folder is copied along with all
+the files and subfolders. The copy includes files that _do not_ match the include filter. When using
+`Copy-Item`, the filters only apply to the top-level specified by the **Path** parameter. Then
+recursion is applied to those matching items.
+
+> [!NOTE]
+> The behavior of the **Exclude** parameter is the same as described in this example, except that
+> it limits the operation to only those paths that don't match the pattern.
+
+### Example 15: Limit the files to recursively copy from a wildcard-specified path
+
+This example shows how to limit the files recursively copied from a wildcard-matching path into
+another folder. Example 13 shows that, because the **Include** parameter only filters on the paths
+resolved for a wildcard-specifying **Path**, the **Include** parameter can't be used to limit the
+files recursively copied from a folder. Instead, you can use `Get-ChildItem` to find the items you
+want to copy and pass those items to `Copy-Item`.
+
+This example uses the following folder structure containing the files to be copied:
+
+- `D:\temp\tree\example.ps1`
+- `D:\temp\tree\example.txt`
+- `D:\temp\tree\examples\`
+- `D:\temp\tree\examples\example_1.txt`
+- `D:\temp\tree\examples\example_2.txt`
+- `D:\temp\tree\examples\subfolder\`
+- `D:\temp\tree\examples\subfolder\test.txt`
+
+To copy all items that begin with `ex*`, use `Get-ChildItem` with the **Recurse** and **Filter**
+parameters and pipe the results to `Copy-Item`.
+
+```powershell
+D:\temp\out> Get-ChildItem -Path D:\temp\tree -Recurse -Filter ex* | Copy-Item
+D:\temp\out> (Get-ChildItem -Recurse).FullName
+D:\temp\out\examples
+D:\temp\out\example_1.txt
+D:\temp\out\example_2.txt
+D:\temp\out\example.ps1
+D:\temp\out\example.txt
+```
+
+Unlike the `Copy-Item`, the **Filter** parameter for `Get-ChildItem` applies to the items discovered
+during recursion. This enables you to find, filter, and then copy items recursively.
+
+## PARAMETERS
 
 ### -Container
 
@@ -288,7 +392,7 @@ Accept wildcard characters: False
 ### -Credential
 
 > [!NOTE]
-> This parameter is not supported by any providers installed with PowerShell.
+> This parameter isn't supported by any providers installed with PowerShell.
 > To impersonate another user, or elevate your credentials when running this cmdlet,
 > use [Invoke-Command](../Microsoft.PowerShell.Core/Invoke-Command.md).
 
@@ -324,11 +428,12 @@ Accept wildcard characters: False
 
 ### -Exclude
 
-Specifies, as a string array, an item or items that this cmdlet excludes in the operation. The value
-of this parameter qualifies the **Path** parameter. Enter a path element or pattern, such as
-`*.txt`. Wildcard characters are permitted. The **Exclude** parameter is effective only when the
-command includes the contents of an item, such as `C:\Windows\*`, where the wildcard character
-specifies the contents of the `C:\Windows` directory.
+Specifies one or more path elements or patterns, such as `"*.txt"`, to limit this cmdlet's
+operation. The value of this parameter filters against the wildcard-matching result of the **Path**
+parameter, not the final results. This parameter is only effective when the **Path** is specified
+with one or more wildcards. Since this parameter only filters on the paths resolved for the **Path**
+parameter, it doesn't filter any items discovered when recursing through child folders with the
+**Recurse** parameter.
 
 ```yaml
 Type: System.String[]
@@ -344,11 +449,13 @@ Accept wildcard characters: True
 
 ### -Filter
 
-Specifies a filter to qualify the **Path** parameter. The [FileSystem](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md)
-provider is the only installed PowerShell provider that supports the use of filters. You can find
-the syntax for the **FileSystem** filter language in [about_Wildcards](../Microsoft.PowerShell.Core/About/about_Wildcards.md).
-Filters are more efficient than other parameters, because the provider applies them when the cmdlet
-gets the objects rather than having PowerShell filter the objects after they're retrieved.
+Specifies a filter to qualify the **Path** parameter. The
+[FileSystem](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md) provider is the only
+installed PowerShell provider that supports the use of filters. You can find the syntax for the
+**FileSystem** filter language in
+[about_Wildcards](../Microsoft.PowerShell.Core/About/about_Wildcards.md). Filters are more efficient
+than other parameters, because the provider applies them when the cmdlet gets the objects rather
+than having PowerShell filter the objects after they're retrieved.
 
 ```yaml
 Type: System.String
@@ -381,9 +488,14 @@ Accept wildcard characters: False
 
 ### -FromSession
 
-Specifies the **PSSession** object from which a remote file is being copied. When you use this
+This is a dynamic parameter made available by the **FileSystem** provider.
+
+Specify the **PSSession** object from which a remote file is being copied. When you use this
 parameter, the **Path** and **LiteralPath** parameters refer to the local path on the remote
 machine.
+
+For more information, see
+[about_FileSystem_Provider](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md).
 
 ```yaml
 Type: System.Management.Automation.Runspaces.PSSession
@@ -399,11 +511,12 @@ Accept wildcard characters: False
 
 ### -Include
 
-Specifies, as a string array, an item or items that this cmdlet includes in the operation. The value
-of this parameter qualifies the **Path** parameter. Enter a path element or pattern, such as
-`"*.txt"`. Wildcard characters are permitted. The **Include** parameter is effective only when the
-command includes the contents of an item, such as `C:\Windows\*`, where the wildcard character
-specifies the contents of the `C:\Windows` directory.
+Specifies one or more path elements or patterns, such as `"*.txt"`, to limit this cmdlet's
+operation. The value of this parameter filters against the wildcard-matching result of the **Path**
+parameter, not the final results. This parameter is only effective when the **Path** is specified
+with one or more wildcards. Since this parameter only filters on the paths resolved for the **Path**
+parameter, it doesn't filter any items discovered when recursing through child folders with the
+**Recurse** parameter.
 
 ```yaml
 Type: System.String[]
@@ -489,9 +602,13 @@ Accept wildcard characters: False
 
 ### -ToSession
 
-Specifies the **PSSession** object to which a remote file is being copied. When you use this
-parameter, the **Destination** parameter refers to the local path on the remote
-machine.
+This is a dynamic parameter made available by the **FileSystem** provider.
+
+Specify the **PSSession** object to which a remote file is being copied. When you use this
+parameter, the **Destination** parameter refers to the local path on the remote machine.
+
+For more information, see
+[about_FileSystem_Provider](../Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md).
 
 ```yaml
 Type: System.Management.Automation.Runspaces.PSSession
@@ -508,12 +625,29 @@ Accept wildcard characters: False
 ### -UseTransaction
 
 Includes the command in the active transaction. This parameter is valid only when a transaction is
-in progress. For more information, see [about_Transactions](../Microsoft.PowerShell.Core/About/about_Transactions.md).
+in progress. For more information, see
+[about_Transactions](../Microsoft.PowerShell.Core/About/about_Transactions.md).
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: usetx
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
 
 Required: False
 Position: Named
@@ -540,9 +674,10 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: `-Debug`, `-ErrorAction`, `-ErrorVariable`,
-`-InformationAction`, `-InformationVariable`, `-OutVariable`, `-OutBuffer`, `-PipelineVariable`,
-`-Verbose`, `-WarningAction`, and `-WarningVariable`. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -552,15 +687,26 @@ You can pipe a string that contains a path to this cmdlet.
 
 ## OUTPUTS
 
-### None or an object representing the copied item
+### None
 
-When you use the **PassThru** parameter, this cmdlet returns an object that represents the copied
-item. Otherwise, this cmdlet doesn't generate any output.
+By default, this cmdlet returns no output.
+
+### System.Management.Automation.PSObject
+
+When you use the **PassThru** parameter, this cmdlet returns an object representing the copied
+item.
 
 ## NOTES
 
+Windows PowerShell includes the following aliases for `Copy-Item`:
+
+- `copy`
+- `cp`
+- `cpi`
+
 This cmdlet is designed to work with the data exposed by any provider. To list the providers
-available in your session, type `Get-PSProvider`. For more information, see [about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
+available in your session, type `Get-PSProvider`. For more information, see
+[about_Providers](../Microsoft.PowerShell.Core/About/about_Providers.md).
 
 ## RELATED LINKS
 

@@ -1,7 +1,6 @@
 ---
-Download Help Link: https://go.microsoft.com/fwlink/?linkid=855961
-Help Version: 6.2.5.0
-keywords: powershell,cmdlet
+Download Help Link: https://aka.ms/powershell74-help
+Help Version: 7.4.0.0
 Locale: en-US
 Module Guid: 766204a6-330e-4263-a7ab-46c87afc366c
 Module Name: Microsoft.WSMan.Management
@@ -16,6 +15,8 @@ title: Microsoft.WSMan.Management
 This section contains the help topics for the cmdlets that are installed with PowerShell
 Microsoft.WSMan.Management module. The WSMan module contains cmdlets and providers that manage the
 WS-Management protocol in PowerShell.
+
+This module is only available on the Windows platform.
 
 ## Microsoft.WSMan.Management Cmdlets
 
@@ -57,3 +58,4 @@ Configures the local computer for remote management.
 
 ### [Test-WSMan](Test-WSMan.md)
 Tests whether the WinRM service is running on a local or remote computer.
+

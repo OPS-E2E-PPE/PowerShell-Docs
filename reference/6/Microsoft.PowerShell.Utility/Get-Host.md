@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/get-host?view=powershell-6&WT.mc_id=ps-gethelp
+ms.date: 08/02/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/get-host?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Get-Host
 ---
+
 # Get-Host
 
 ## SYNOPSIS
@@ -33,8 +33,11 @@ features of the host program user interface, such as the text and background col
 
 ### Example 1: Get information about the PowerShell console host
 
+```powershell
+Get-Host
 ```
-PS C:\> Get-Host
+
+```Output
 Name             : ConsoleHost
 Version          : 2.0
 InstanceId       : e4e0ab54-cc5e-4261-9117-4081f20ce7a2
@@ -46,49 +49,53 @@ IsRunspacePushed : False
 Runspace         : System.Management.Automation.Runspaces.LocalRunspace
 ```
 
-This command displays information about the Windows PowerShell console, which is the current host
-program for Windows PowerShell in this example. It includes the name of the host, the version of
-Windows PowerShell that is running in the host, and current culture and UI culture.
+This command displays information about the PowerShell console, which is the current host program
+for PowerShell in this example. It includes the name of the host, the version of PowerShell that is
+running in the host, and current culture and UI culture.
 
-The Version, UI, CurrentCulture, CurrentUICulture, PrivateData, and Runspace properties each contain
-an object with very useful properties. Later examples examine these properties.
+The **Version**, **UI**, **CurrentCulture**, **CurrentUICulture**, **PrivateData**, and **Runspace**
+properties each contain an object with other useful properties. Later examples examine these
+properties.
 
 ### Example 2: Resize the PowerShell window
 
 ```powershell
-PS C:\> $H = Get-Host
-PS C:\> $Win = $H.UI.RawUI.WindowSize
-PS C:\> $Win.Height = 10
-PS C:\> $Win.Width  = 10
-PS C:\> $H.UI.RawUI.Set_WindowSize($Win)
+$H = Get-Host
+$Win = $H.UI.RawUI.WindowSize
+$Win.Height = 10
+$Win.Width  = 10
+$H.UI.RawUI.Set_WindowSize($Win)
 ```
 
-This command resizes the Windows PowerShell window to 10 pixels by 10 pixels.
+This command resizes the Windows PowerShell window to 10 lines by 10 characters.
 
 ### Example 3: Get the PowerShell version for the host
 
 ```powershell
-PS C:\> (Get-Host).Version | Format-List -Property *
-Major         : 2
-Minor         : 0
-Build         : -1
-Revision      : -1
-MajorRevision : -1
-MinorRevision : -1
+(Get-Host).Version
+```
+
+```Output
+Major  Minor  Build  Revision PSSemVerPreReleaseLabel    PSSemVerBuildLabel
+-----  -----  -----  -------- -----------------------    ------------------
+7      4      0      -1       preview.1
 ```
 
 This command gets detailed information about the version of Windows PowerShell running in the host.
 You can view, but not change, these values.
 
-The Version property of `Get-Host` contains a **System.Version** object. This command uses a
-pipeline operator (|) to send the version object to the `Format-List` cmdlet. The `Format-List`
-command uses the *Property* parameter with a value of all (*) to display all of the properties and
-property values of the version object.
+The **Version** property of `Get-Host` contains a **System.Version** object. This command uses a
+pipeline operator (`|`) to send the version object to the `Format-List` cmdlet. The `Format-List`
+command uses the **Property** parameter with a value of all (`*`) to display all of the properties
+and property values of the version object.
 
 ### Example 4: Get the current culture for the host
 
 ```powershell
-PS C:\> (Get-Host).CurrentCulture | Format-List -Property *
+(Get-Host).CurrentCulture | Format-List
+```
+
+```Output
 Parent                         : en
 LCID                           : 1033
 KeyboardLayoutId               : 1033
@@ -100,16 +107,16 @@ EnglishName                    : English (United States)
 TwoLetterISOLanguageName       : en
 ThreeLetterISOLanguageName     : eng
 ThreeLetterWindowsLanguageName : ENU
-CompareInfo                    : CompareInfo - 1033
-TextInfo                       : TextInfo - 1033
+CompareInfo                    : CompareInfo - en-US
+TextInfo                       : TextInfo - en-US
 IsNeutralCulture               : False
-CultureTypes                   : SpecificCultures, InstalledWin32Cultures, FrameworkCultures
+CultureTypes                   : SpecificCultures, InstalledWin32Cultures
 NumberFormat                   : System.Globalization.NumberFormatInfo
 DateTimeFormat                 : System.Globalization.DateTimeFormatInfo
 Calendar                       : System.Globalization.GregorianCalendar
-OptionalCalendars              : {System.Globalization.GregorianCalendar, System.Globalization.GregorianCalendar}
+OptionalCalendars              : {System.Globalization.GregorianCalendar}
 UseUserOverride                : True
-IsReadOnly                     : False
+IsReadOnly                     : True
 ```
 
 This command gets detailed information about the current culture set for Windows PowerShell running
@@ -118,14 +125,17 @@ in the host. This is the same information that is returned by the `Get-Culture` 
 Similarly, the **CurrentUICulture** property returns the same object that `Get-UICulture` returns.
 
 The **CurrentCulture** property of the host object contains a **System.Globalization.CultureInfo**
-object. This command uses a pipeline operator (|) to send the **CultureInfo** object to the
-`Format-List` cmdlet. The `Format-List` command uses the *Property* parameter with a value of all
-(*) to display all of the properties and property values of the **CultureInfo** object.
+object. This command uses a pipeline operator (`|`) to send the **CultureInfo** object to the
+`Format-List` cmdlet. The `Format-List` command uses the **Property** parameter with a value of all
+(`*`) to display all of the properties and property values of the **CultureInfo** object.
 
 ### Example 5: Get the DateTimeFormat for the current culture
 
 ```powershell
-PS C:\> (Get-Host).CurrentCulture.DateTimeFormat | Format-List -Property *
+(Get-Host).CurrentCulture.DateTimeFormat | Format-List
+```
+
+```Output
 AMDesignator                     : AM
 Calendar                         : System.Globalization.GregorianCalendar
 DateSeparator                    : /
@@ -166,53 +176,30 @@ display the property values of the object, use the `Format-List` cmdlet.
 
 ### Example 6: Get the RawUI property for the host
 
-```
-PS C:\> (Get-Host).UI.RawUI | Format-List -Property *
-ForegroundColor       : DarkYellow
-BackgroundColor       : DarkBlue
-CursorPosition        : 0,390
-WindowPosition        : 0,341
-CursorSize            : 25
-BufferSize            : 120,3000
-WindowSize            : 120,50
-MaxWindowSize         : 120,81
-MaxPhysicalWindowSize : 182,81
-KeyAvailable          : False
-WindowTitle           : Windows PowerShell 2.0 (04/11/2008 00:08:14)
-```
-
 This command displays the properties of the **RawUI** property of the host object. By changing these
 values, you can change the appearance of the host program.
 
-### Example 7: Set the background color for the PowerShell console
-
 ```powershell
-PS C:\> (Get-Host).UI.RawUI.BackgroundColor = "Black"
-PS C:\> cls
+(Get-Host).UI.RawUI
 ```
 
-These commands change the background color of the Windows PowerShell console to black. The **cls**
-command is an alias for the `Clear-Host` function, which clears the screen and changes the whole
-screen to the new color.
-
-This change is effective only in the current session. To change the background color of the console
-for all sessions, add the command to your Windows PowerShell profile.
-
-### Example 8: Set the background color for error messages
-
+```Output
+ForegroundColor       : Gray
+BackgroundColor       : Black
+CursorPosition        : 0,28
+WindowPosition        : 0,0
+CursorSize            : 25
+BufferSize            : 120,29
+WindowSize            : 120,29
+MaxWindowSize         : 120,29
+MaxPhysicalWindowSize : 1904,69
+KeyAvailable          : True
+WindowTitle           : PowerShell 7.3.3
 ```
-PS C:\> $Host.PrivateData.ErrorBackgroundColor = "white"
-```
 
-This command changes the background color of error messages to white.
-
-This command uses the `$Host` automatic variable, which contains the host object for the current
-host program. `Get-Host` returns the same object that `$Host` contains, so you can use them
-interchangeably.
-
-This command uses the **PrivateData** property of `$Host` as its ErrorBackgroundColor property. To
-see all of the properties of the object in the `$Host`.PrivateData property, type
-`$host.privatedata | format-list *`.
+> [!NOTE]
+> On non-Windows platforms, **ForegroundColor** and **BackgroundColor** default to `-1` because
+> there is no consistent way to get these on non-Windows platforms.
 
 ## PARAMETERS
 
@@ -226,13 +213,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-You cannot pipe input to this cmdlet.
+
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### System.Management.Automation.Internal.Host.InternalHost
 
-`Get-Host` returns a **System.Management.Automation.Internal.Host.InternalHost** object.
+This cmdlet returns an **InternalHost** object.
 
 ## NOTES
 
@@ -240,6 +228,11 @@ The `$Host` automatic variable contains the same object that `Get-Host` returns,
 in the same way. Similarly, the `$PSCulture` and `$PSUICulture` automatic variables contain the same
 objects that the CurrentCulture and CurrentUICulture properties of the host object contain. You can
 use these features interchangeably.
+
+> [!NOTE]
+> The color settings in `$Host.PrivateData` have been replaced by the `$PSStyle` preference
+> variable. For more information, see
+> [about_ANSI_Terminals](../Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md).
 
 For more information, see [about_Automatic_Variables](../Microsoft.PowerShell.Core/About/about_Automatic_Variables.md).
 

@@ -1,13 +1,13 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 5/10/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/measure-object?view=powershell-5.1&WT.mc_id=ps-gethelp
+ms.date: 12/12/2022
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/measure-object?view=powershell-5.1&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Measure-Object
 ---
+
 # Measure-Object
 
 ## SYNOPSIS
@@ -57,7 +57,7 @@ This command displays the **Minimum**, **Maximum**, and **Sum** of the sizes of 
 current directory, and the average size of a file in the directory.
 
 ```powershell
-Get-ChildItem | Measure-Object -Property length -Minimum -Maximum -Average
+Get-ChildItem | Measure-Object -Property Length -Minimum -Maximum -Sum -Average
 ```
 
 ### Example 3: Measure text in a text file
@@ -124,7 +124,7 @@ You can use `Measure-Object` to calculate the values of these properties, just l
 property of an object.
 
 ```powershell
-Import-Csv d:\test\serviceyrs.csv | Measure-Object -Property years -Minimum -Maximum -Average
+Import-Csv D:\test\serviceyrs.csv | Measure-Object -Property Years -Minimum -Maximum -Average
 ```
 
 ### Example 6: Measure Boolean values
@@ -134,7 +134,7 @@ In this case, it uses the **PSIsContainer** **Boolean** property to measure the 
 folders (vs. files) in the current directory.
 
 ```powershell
-Get-ChildItem | Measure-Object -Property psiscontainer -Maximum -Sum -Minimum -Average
+Get-ChildItem | Measure-Object -Property PSIsContainer -Maximum -Sum -Minimum -Average
 ```
 
 ```Output
@@ -386,18 +386,23 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Management.Automation.PSObject
 
-You can pipe objects to `Measure-Object`.
+You can pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### Microsoft.PowerShell.Commands.GenericMeasureInfo
 
+By default, this cmdlet returns a **GenericMeasureInfo** object.
+
 ### Microsoft.PowerShell.Commands.TextMeasureInfo
 
-If you use the **Word** parameter, `Measure-Object` returns a **TextMeasureInfo** object.
-Otherwise, it returns a **GenericMeasureInfo** object.
+When you use the **Word** parameter, this cmdlet returns a **TextMeasureInfo** object.
 
 ## NOTES
+
+Windows PowerShell includes the following aliases for `Measure-Object`:
+
+- `measure`
 
 ## RELATED LINKS
 

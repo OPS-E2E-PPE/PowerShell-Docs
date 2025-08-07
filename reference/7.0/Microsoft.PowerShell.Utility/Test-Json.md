@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
-ms.date: 09/19/2019
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/test-json?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 04/29/2025
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/test-json?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Test-Json
 ---
@@ -16,8 +15,64 @@ Tests whether a string is a valid JSON document
 
 ## SYNTAX
 
+### JsonString (Default)
+
 ```
-Test-Json [-Json] <string> [[-Schema] <string>] [<CommonParameters>]
+Test-Json [-Json] <String> [-Options <String[]>] [<CommonParameters>]
+```
+
+### JsonStringWithSchemaString
+
+```
+Test-Json [-Json] <String> [-Schema] <String> [-Options <String[]>]
+ [<CommonParameters>]
+```
+
+### JsonStringWithSchemaFile
+
+```
+Test-Json [-Json] <String> -SchemaFile <String> [-Options <String[]>]
+ [<CommonParameters>]
+```
+
+### JsonPath
+
+```
+Test-Json -Path <String> [-Options <String[]>] [<CommonParameters>]
+```
+
+### JsonPathWithSchemaString
+
+```
+Test-Json -Path <String> [-Schema] <String> [-Options <String[]>]
+ [<CommonParameters>]
+```
+
+### JsonPathWithSchemaFile
+
+```
+Test-Json -Path <String> -SchemaFile <String> [-Options <String[]>]
+ [<CommonParameters>]
+```
+
+### JsonLiteralPath
+
+```
+Test-Json -LiteralPath <String> [-Options <String[]>] [<CommonParameters>]
+```
+
+### JsonLiteralPathWithSchemaString
+
+```
+Test-Json -LiteralPath <String> [-Schema] <String> [-Options <String[]>]
+ [<CommonParameters>]
+```
+
+### JsonLiteralPathWithSchemaFile
+
+```
+Test-Json -LiteralPath <String> -SchemaFile <String> [-Options <String[]>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -41,7 +96,7 @@ This cmdlet was introduced in PowerShell 6.1
 This example tests whether the input string is a valid JSON document.
 
 ```powershell
-"{'name': 'Ashley', 'age': 25}" | Test-Json
+'{"name": "Ashley", "age": 25}' | Test-Json
 ```
 
 ```Output
@@ -87,23 +142,76 @@ $schema = @'
   }
 }
 '@
-"{'name': 'Ashley', 'age': '25'}" | Test-Json -Schema $schema
+'{"name": "Ashley", "age": "25"}' | Test-Json -Schema $schema -ErrorAction SilentlyContinue
 ```
 
 ```Output
-Test-Json : IntegerExpected: #/age
-At line:1 char:37
-+ "{'name': 'Ashley', 'age': '25'}" | Test-Json -Schema $schema
-+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~
-+ CategoryInfo          : InvalidData: (:) [Test-Json], Exception
-+ FullyQualifiedErrorId : InvalidJsonAgainstSchema,Microsoft.PowerShell.Commands.TestJsonCommand
 False
 ```
 
-In this example, we get an error because the schema expects an integer for **age** but the JSON
-input we tested uses a string value instead.
+In this example, we use the **ErrorAction** parameter to suppres the error message. Without this
+parameter the command also outputs an error because the schema expects an integer for **age** but
+the JSON input we tested uses a string value instead.
 
 For more information, see [JSON Schema](https://json-schema.org/).
+
+### Example 3: Test an object against a schema from file
+
+JSON schema can reference definitions using `$ref` keyword. The `$ref` can resolve to a URI that
+references another file. The **SchemaFile** parameter accepts literal path to the JSON schema file
+and allows JSON files to be validated against such schemas.
+
+In this example the `schema.json` file references `definitions.json`.
+
+```powershell
+Get-Content schema.json
+```
+
+```Output
+{
+  "description":"A person",
+  "type":"object",
+  "properties":{
+    "name":{
+      "$ref":"definitions.json#/definitions/name"
+    },
+    "hobbies":{
+      "$ref":"definitions.json#/definitions/hobbies"
+    }
+  }
+}
+```
+
+```powershell
+Get-Content definitions.json
+```
+
+```Output
+{
+  "definitions":{
+    "name":{
+      "type":"string"
+    },
+    "hobbies":{
+      "type":"array",
+      "items":{
+        "type":"string"
+      }
+    }
+  }
+}
+```
+
+```powershell
+'{"name": "James", "hobbies": [".NET", "Blogging"]}' | Test-Json -SchemaFile 'schema.json'
+```
+
+```Output
+True
+```
+
+For more information, see
+[Structuring a complex schema](https://json-schema.org/understanding-json-schema/structuring.html).
 
 ## PARAMETERS
 
@@ -116,31 +224,114 @@ The **Json** parameter is required.
 
 ```yaml
 Type: System.String
-Parameter Sets: (All)
+Parameter Sets: JsonString, JsonStringWithSchemaString, JsonStringWithSchemaFile
 Aliases:
 
 Required: True
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -LiteralPath
+
+Specifies a path to a JSON file. The value of **LiteralPath** is used exactly as it's typed. No
+characters are interpreted as wildcards. If the path includes escape characters, enclose it in
+single quotation marks. Single quotation marks tell PowerShell not to interpret any characters as
+escape sequences.
+
+This parameter was added in PowerShell 7.4.
+
+```yaml
+Type: System.String
+Parameter Sets: JsonLiteralPath, JsonLiteralPathWithSchemaString, JsonLiteralPathWithSchemaFile
+Aliases: PSPath, LP
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -Options
+
+By default, `Test-Json` doesn't support JSON containing comments or trailing commas. This parameter
+allows you to specify options to change the default behavior. The following options are available:
+
+- `IgnoreComments`
+- `AllowTrailingCommas`
+
+This parameter was added in PowerShell 7.5.0-preview.4.
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+Accepted values: IgnoreComments, AllowTrailingCommas
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Path
+
+Specifies the path to a JSON file. This cmdlet gets the item at the specified location. Wildcard
+characters are permitted but the pattern must resolve to a single file.
+
+This parameter was added in PowerShell 7.4.
+
+```yaml
+Type: System.String
+Parameter Sets: JsonPath, JsonPathWithSchemaString, JsonPathWithSchemaFile
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: True
+```
+
 ### -Schema
 
-Specifies a Schema to validate the JSON input against. If passed `Test-Json` will validate that the
-Json input conforms to the spec specified by the **Schema** parameter and return `$True` only if the
-input conforms to the provided Schema.
+Specifies a schema to validate the JSON input against. If passed, `Test-Json` validates that the
+JSON input conforms to the spec specified by the **Schema** parameter and return `$true` only if the
+input conforms to the provided schema.
 
 For more information, see [JSON Schema](https://json-schema.org/).
 
 ```yaml
 Type: System.String
-Parameter Sets: (All)
+Parameter Sets: JsonStringWithSchemaString, JsonLiteralPathWithSchemaString, JsonPathWithSchemaString
 Aliases:
 
-Required: False
-Position: 2
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SchemaFile
+
+Specifies a schema file used to validate the JSON input. When used, the `Test-Json` returns `$true`
+only if the JSON input conforms to the schema defined in the file specified by the **SchemaFile**
+parameter.
+
+For more information, see [JSON Schema](https://json-schema.org/).
+
+```yaml
+Type: System.String
+Parameter Sets: JsonStringWithSchemaFile, JsonLiteralPathWithSchemaFile, JsonPathWithSchemaFile
+Aliases:
+
+Required: True
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -148,23 +339,43 @@ Accept wildcard characters: False
 
 ### CommonParameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction,
--InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and
--WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
+-InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.String
 
-You can pipe a JSON string to `Test-Json`.
+You can pipe a JSON string to this cmdlet.
 
 ## OUTPUTS
 
 ### Boolean
 
+This cmdlet returns `$true` if the JSON is valid and otherwise `$false`.
+
 ## NOTES
 
-The `Test-Json` cmdlet is implemented by using the [NJsonSchema Class](https://github.com/RSuter/NJsonSchema).
+Since PowerShell 6, PowerShell uses the Newtonsoft.Json assemblies for JSON functions. Newtonsoft's
+implementation includes several extensions to the JSON standard, such as support for comments and
+use of single quotes. For a full list of features, see the Newtonsoft documentation at
+[https://www.newtonsoft.com/json](https://www.newtonsoft.com/json).
+
+Beginning in PowerShell 7.4, `Test-Json` uses [System.Text.Json](xref:System.Text.Json) for JSON
+parsing and [JsonSchema.NET](https://www.nuget.org/packages/JsonSchema.Net) for schema validation.
+With these changes, `Test-Json`:
+
+- No longer supports Draft 4 schemas
+- Only supports strictly conformant JSON
+
+For a complete list of differences between Newtonsoft.Json and System.Text.Json, see the
+_Table of differences_ in
+[Migrate from Newtonsoft.Json to System.Text.Json](/dotnet/standard/serialization/system-text-json/migrate-from-newtonsoft?pivots=dotnet-8-0#table-of-differences).
+
+For more information about JSON schema specifications, see the documentation at
+[JSON-Schema.org](https://json-schema.org/specification.html).
 
 ## RELATED LINKS
 

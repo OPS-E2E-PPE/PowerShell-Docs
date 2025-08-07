@@ -1,10 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Core
-ms.date: 04/08/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/start-job?view=powershell-7&WT.mc_id=ps-gethelp
+ms.date: 09/29/2023
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/start-job?view=powershell-7.5&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Start-Job
 ---
@@ -60,11 +59,11 @@ finish. You can continue to work in the session without interruption while the j
 
 The job object contains useful information about the job, but it doesn't contain the job results.
 When the job finishes, use the `Receive-Job` cmdlet to get the results of the job. For more
-information about background jobs, see [about_Jobs](./About/about_Jobs.md).
+information about background jobs, see [about_Jobs](About/about_Jobs.md).
 
 To run a background job on a remote computer, use the **AsJob** parameter that is available on many
 cmdlets, or use the `Invoke-Command` cmdlet to run a `Start-Job` command on the remote computer. For
-more information, see [about_Remote_Jobs](./About/about_Remote_Jobs.md).
+more information, see [about_Remote_Jobs](About/about_Remote_Jobs.md).
 
 Starting in PowerShell 3.0, `Start-Job` can start instances of custom job types, such as scheduled
 jobs. For information about how to use `Start-Job` to start jobs with custom types, see the help
@@ -73,7 +72,7 @@ documents for the job type feature.
 Beginning in PowerShell 6.0, you can start jobs using the ampersand (`&`) background operator. The
 functionality of the background operator is similar to `Start-Job`. Both methods to start a job
 create a **PSRemotingJob** job object. For more information about using the ampersand (`&`), see
-[about_Operators](./about/about_operators.md#background-operator-).
+[about_Operators](About/about_Operators.md#background-operator-).
 
 PowerShell 7 introduced the **WorkingDirectory** parameter that specifies a background job's initial
 working directory. If the parameter isn't specified, `Start-Job` defaults to the current working
@@ -88,7 +87,8 @@ directory of the caller that started the job.
 > PowerShell, it's directly using the PowerShell NuGet SDK packages and won't have `pwsh` shipped
 > along.
 >
-> The substitute in that scenario is `Start-ThreadJob` from the module **[ThreadJob](https://www.powershellgallery.com/packages/ThreadJob)**.
+> The substitute in that scenario is `Start-ThreadJob` from the module
+> **[ThreadJob](https://www.powershellgallery.com/packages/ThreadJob)**.
 
 ## EXAMPLES
 
@@ -209,11 +209,11 @@ computer.
 This example uses a background job to get a specified process by name.
 
 ```powershell
-Start-Job -Name PShellJob -ScriptBlock { Get-Process -Name PowerShell }
+Start-Job -Name PShellJob -ScriptBlock { Get-Process -Name powershell }
 ```
 
 `Start-Job` uses the **Name** parameter to specify a friendly job name, **PShellJob**. The
-**ScriptBlock** parameter specifies `Get-Process` to get processes with the name **PowerShell**.
+**ScriptBlock** parameter specifies `Get-Process` to get processes with the name `powershell`.
 
 ### Example 7: Collect and save data by using a background job
 
@@ -221,7 +221,7 @@ This example starts a job that collects a large amount of map data and then save
 file.
 
 ```powershell
-Start-Job -Name GetMappingFiles -InitializationScript {Import-Module MapFunctions} -ScriptBlock {
+Start-Job -Name GetMappingFiles -InitializationScript {Import-Module -Name MapFunctions} -ScriptBlock {
    Get-Map -Name * | Set-Content -Path D:\Maps.tif }
 ```
 
@@ -236,7 +236,7 @@ This example uses the `$input` automatic variable to process an input object. Us
 view the job's output.
 
 ```powershell
-Start-Job -ScriptBlock { Get-Content $input } -InputObject "C:\Servers.txt"
+Start-Job -ScriptBlock { Get-Content -Path $input } -InputObject "C:\Servers.txt"
 Receive-Job -Name Job45 -Keep
 ```
 
@@ -258,7 +258,7 @@ The **WorkingDirectory** allows you to specify an alternate directory for a job 
 run scripts or open files. In this example, the background job specifies a working directory that's
 different than the current directory location.
 
-```
+```powershell
 PS C:\Test> Start-Job -WorkingDirectory C:\Test\Scripts { $PWD } | Receive-Job -AutoRemoveJob -Wait
 
 Path
@@ -310,8 +310,8 @@ Major  Minor  Patch  PreReleaseLabel BuildLabel
 ```
 
 ```powershell
-$job = Start-Job { $PSVersionTable.PSVersion } -PSVersion 5.1
-Receive-Job $job
+$job = Start-Job -ScriptBlock { $PSVersionTable.PSVersion } -PSVersion 5.1
+Receive-Job -Job $job
 ```
 
 ```Output
@@ -329,7 +329,7 @@ Specifies an array of arguments, or parameter values, for the script that is spe
 
 Arguments must be passed to **ArgumentList** as single-dimension array argument. For example, a
 comma-separated list. For more information about the behavior of **ArgumentList**, see
-[about_Splatting](about/about_Splatting.md#splatting-with-arrays).
+[about_Splatting](About/about_Splatting.md#splatting-with-arrays).
 
 ```yaml
 Type: System.Object[]
@@ -445,7 +445,7 @@ qualified path of the job definition. Use this parameter to start custom job typ
 definition path, such as scheduled jobs.
 
 For scheduled jobs, the value of the **DefinitionPath** parameter is
-`$home\AppData\Local\Windows\PowerShell\ScheduledJob`.
+`$HOME\AppData\Local\Windows\PowerShell\ScheduledJob`.
 
 This parameter was introduced in PowerShell 3.0.
 
@@ -656,9 +656,9 @@ caller that started the job.
 
 This parameter was introduced in PowerShell 7.
 
-```yaml
+ ```yaml
 Type: System.String
-Parameter Sets: All
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -672,22 +672,28 @@ Accept wildcard characters: False
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
 -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
+-WarningAction, and -WarningVariable. For more information, see
+[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.String
 
-You can use the pipeline to send an object with the **Name** property to the **Name** parameter. For
-example, you can pipeline a **FileInfo** object from `Get-ChildItem` to `Start-Job`.
+You can pipe an object with the **Name** property to the **Name** parameter to this cmdlet. For
+example, you can pipe a **FileInfo** object from `Get-ChildItem`.
 
 ## OUTPUTS
 
 ### System.Management.Automation.PSRemotingJob
 
-`Start-Job` returns a **PSRemotingJob** object that represents the job that it started.
+This cmdlet returns a **PSRemotingJob** object representing the job that it started.
 
 ## NOTES
+
+PowerShell includes the following aliases for `Start-Job`:
+
+- All platforms:
+  - `sajb`
 
 To run in the background, `Start-Job` runs in its own session in the current session. When you use
 the `Invoke-Command` cmdlet to run a `Start-Job` command in a session on a remote computer,
@@ -695,15 +701,15 @@ the `Invoke-Command` cmdlet to run a `Start-Job` command in a session on a remot
 
 ## RELATED LINKS
 
-[about_Arrays](./about/about_arrays.md)
+[about_Arrays](About/about_Arrays.md)
 
-[about_Automatic_Variables](./about/about_automatic_variables.md)
+[about_Automatic_Variables](About/about_Automatic_Variables.md)
 
-[about_Jobs](./About/about_Jobs.md)
+[about_Jobs](About/about_Jobs.md)
 
-[about_Job_Details](./About/about_Job_Details.md)
+[about_Job_Details](About/about_Job_Details.md)
 
-[about_Remote_Jobs](./About/about_Remote_Jobs.md)
+[about_Remote_Jobs](About/about_Remote_Jobs.md)
 
 [Get-Job](Get-Job.md)
 

@@ -1,10 +1,9 @@
 ---
 external help file: Microsoft.PowerShell.Commands.Utility.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
 Module Name: Microsoft.PowerShell.Utility
 ms.date: 03/16/2020
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/new-temporaryfile?view=powershell-7.1&WT.mc_id=ps-gethelp
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/new-temporaryfile?view=powershell-7.6&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: New-TemporaryFile
 ---
@@ -103,4 +102,3 @@ This cmdlet returns a **FileInfo** object that represents the temporary file.
 ## NOTES
 
 ## RELATED LINKS
-

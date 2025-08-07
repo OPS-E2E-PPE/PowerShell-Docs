@@ -1,10 +1,9 @@
 ---
 external help file: System.Management.Automation.dll-Help.xml
-keywords: powershell,cmdlet
 Locale: en-US
-Module Name:
-ms.date: 06/09/2017
-online version: https://docs.microsoft.com/powershell/module/microsoft.powershell.core/clear-host?view=powershell-6&WT.mc_id=ps-gethelp
+Module Name: Microsoft.PowerShell.Core
+ms.date: 04/29/2025
+online version: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/clear-host?view=powershell-7.4&WT.mc_id=ps-gethelp
 schema: 2.0.0
 title: Clear-Host
 ---
@@ -18,7 +17,7 @@ Clears the display in the host program.
 ## SYNTAX
 
 ```
-Clear-Host [<CommonParameters>]
+Clear-Host
 ```
 
 ## DESCRIPTION
@@ -38,10 +37,8 @@ might work differently in different host programs.
 
 ### Example 1
 
-```
-# Before
-
-PS C:\> Get-Process
+```powershell
+PS> Get-Process | Select-Object -First 5
 
 Handles  NPM(K)    PM(K)      WS(K) VM(M)   CPU(s)     Id ProcessName
 -------  ------    -----      ----- -----   ------     -- -----------
@@ -50,54 +47,34 @@ Handles  NPM(K)    PM(K)      WS(K) VM(M)   CPU(s)     Id ProcessName
     646      12     2332       4896    49     1.12    388 csrss
     189      11     2860       7084   114     0.66   2896 csrss
      78      11     1876       4008    42     0.22   4000 csrss
-     76       7     1848       5064    54     0.08   1028 dwm
-    610      41    23952      44048   208     4.40   2080 explorer
-      0       0        0         24     0               0 Idle
-    182      32     7692      15980    91     0.23   3056 LogonUI
-    186      25     7832      16068    91     0.27   3996 LogonUI
-   1272      32    11512      20432    58    25.07    548 lsass
-    267      10     3536       6736    34     0.80    556 lsm
-    137      17     3520       7472    61     0.05   1220 msdtc
-    447      31    70316      84476   201 1,429.67    836 MsMpEng
-    265      18     7136      15628   134     2.20   3544 msseces
-    248      16     6476       4076    76     0.22   1592 NisSrv
-    368      25    61312      65508   614     1.78    848 powershell
-    101       8     2304       6624    70     0.64   3648 rdpclip
-    258      15     6804      12156    50     2.65    536 services
-...
 
-PS C:\> cls
-#After
-
-PS C:>
+PS> Clear-Host
 ```
-
-This command uses the `cls` alias of `Clear-Host` to clear the current display.
-
-## PARAMETERS
-
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable,
--InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose,
--WarningAction, and -WarningVariable. For more information, see
-[about_CommonParameters](https://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
 
-You cannot pipe input to `Clear-Host`.
+You can't pipe objects to this cmdlet.
 
 ## OUTPUTS
 
 ### None
 
-`Clear-Host` does not generate any output
+This cmdlet returns no output.
 
 ## NOTES
 
-`Clear-Host` is a simple function, not an advanced function. As such, you cannot use common
-parameters, such as **Debug**, in a `Clear-Host` command.
+PowerShell includes the following aliases for `Clear-Host`:
+
+- Windows:
+  - `clear`
+  - `cls`
+
+- Linux and macOS:
+  - `cls`
+
+`Clear-Host` is a simple function, not an advanced function. There are no parameters.
 
 ## RELATED LINKS
 
